@@ -1,0 +1,26 @@
+For learning CSS
+1. Understand order of CSS elements
+2. Understand how to properly do fonts (google fonts)
+
+
+
+Features to implement into the task planner
+A. Per topic view
+- Have topics and subtopics show up - DONE
+- Have tasks show up under the right topic - DONE
+- Allow the topics to drop down and collapse - DONE
+- Add icon (> of V) for drop down and collapse - DONE
+- Edit task name - DONE
+
+- Gitify this project
+- Delete task button
+- Delete task icon
+- Add task button
+- Add task icon
+- Add task completion
+- 
+- Animate collapse and dropdown
+
+
+B. Weekly view
+C. Daily view
