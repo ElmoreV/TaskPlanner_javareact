@@ -1,9 +1,8 @@
 import {useState} from 'react';
 
 const Task = (props) => {
-    const {taskName,setTaskName} = props;
+    const {taskName,setTaskName,deleteTask} = props;
     const [isEditing,setIsEditing] = useState(false);
-
     const handleChange=(e)=>{
         console.log(e.target.value);
         setTaskName(e.target.value);
@@ -27,6 +26,7 @@ const Task = (props) => {
             onBlur={handleBlur}/>:
      <span>{taskName}</span>
      }
+     <button className='taskDelete' onClick={deleteTask && deleteTask}>Delete</button>
      </div>);
 }
  

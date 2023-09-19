@@ -10,15 +10,27 @@ A. Per topic view
 - Have tasks show up under the right topic - DONE
 - Allow the topics to drop down and collapse - DONE
 - Add icon (> of V) for drop down and collapse - DONE
-- Edit task name - DONE
+- Editable task name - DONE
+- Gitify this project - DONE
+- Delete task button - DONE
+- New task button - DONE
+- Add task completion button
 
-- Gitify this project
-- Delete task button
+- when Text Input is asked: set focus on text input
+- Prettify the text input for tasks
+- When Enter is pressed: finish editing
+- Improve collapse and dropdown icon
+
 - Delete task icon
-- Add task button
-- Add task icon
-- Add task completion
-- 
+- New task icon
+
+- Make topic name editable (doubleclick)
+- Make tasks draggeable
+(1. Make it draggeable to another topic)
+(2. Make it draggeable for a different order in a sorted task list)
+
+- Make tasks duplicatable
+
 - Animate collapse and dropdown
 
 

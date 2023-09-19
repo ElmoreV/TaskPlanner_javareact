@@ -7,7 +7,6 @@ function App() {
       <div className="contents">
         <ViewSelector/>
         <TaskList/>
-        {/* <Task/> */}
       </div>
     </div>
   );
