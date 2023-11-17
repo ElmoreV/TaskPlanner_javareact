@@ -1,3 +1,46 @@
+# TaskPlanner
+
+> This React App allows you to plan tasks in a by-topic view, a weekly view and a daily view simultaneously.
+
+
+![Example of a per topic view](Example_1.png)
+
+## Usage
+
+Download the code or fork the repository and git clone it to your computer.
+
+Then run:
+``` 
+npm run build
+```
+
+to collect all the npm/node packages to get started. Subsequently, to run the server on the localhost, use:
+
+```
+npm run start
+```
+
+## Features
+
+- A by-topic view of all tasks. Tasks can be in multiple topic. Tasks can have subtasks. Topics can have subtopics.
+- A weekly view, where you can collect all tasks to be done this week. Can support tasks that are not visible in the by-topic view.
+- A daily view, where you can collect all tasks in a timed fashion. Can also support tasks not visible in the weekly and by-topic view.
+
+
+## Future plans
+
+- [ ] Make tasks draggeable/moveable
+- [ ] Add database interaction
+- [ ] Add weekly view
+- [ ] Add daily view
+- [ ] Animate collapse and dropdown
+
+
+
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
