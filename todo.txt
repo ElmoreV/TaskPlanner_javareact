@@ -14,7 +14,16 @@ A. Per topic view
 - Gitify this project - DONE
 - Delete task button - DONE
 - New task button - DONE
-- Add task completion button
+- Add task completion button - DONE
+
+
+
+- Make topic name editable (doubleclick)
+- Make tasks draggeable
+(1. Make it draggeable to another topic)
+(2. Make it draggeable for a different order in a sorted task list)
+
+- Make tasks duplicatable
 
 - when Text Input is asked: set focus on text input
 - Prettify the text input for tasks
@@ -24,15 +33,12 @@ A. Per topic view
 - Delete task icon
 - New task icon
 
-- Make topic name editable (doubleclick)
-- Make tasks draggeable
-(1. Make it draggeable to another topic)
-(2. Make it draggeable for a different order in a sorted task list)
-
-- Make tasks duplicatable
-
 - Animate collapse and dropdown
 
+- Add new topics and subtopics
 
-B. Weekly view
-C. Daily view
+B. DB (local) interaction
+
+C. Weekly view
+
+D. Daily view

@@ -38,10 +38,10 @@ const TaskList = () => {
 
     
     const [tasks,setTasks] = useState([
-        {taskName:"Fiets repareren",key:0,topics:["Repareren"]},
-        {taskName:"Outer Wilds",key:1, topics:["Gamen","Onderhoud"]},
-        {taskName:"Badkamer",key:2,topics:["Onderhoud"]},
-        {taskName:"Backup opruimen",key:3,topics:["Onderhoud"]},
+        {taskName:"Fiets repareren",key:0,topics:["Repareren"],completed:true},
+        {taskName:"Outer Wilds",key:1, topics:["Gamen","Onderhoud"],completed:false},
+        {taskName:"Badkamer",key:2,topics:["Onderhoud"],completed:true},
+        {taskName:"Backup opruimen",key:3,topics:["Onderhoud"],completed:false},
     ])
 
     const getFreeTaskKey=()=>{
@@ -71,6 +71,27 @@ const TaskList = () => {
         }
         return deleteTask;
     }
+
+    const getCompleteTask = (key)=>{
+        const completeTask = ()=>{
+            const newTasks = [...tasks]
+            const task_to_change = newTasks.find((task)=>task.key===key);
+            task_to_change.completed = !task_to_change.completed;
+            setTasks(newTasks);
+        }
+        return completeTask;
+    }
+
+    // const getCompleteTask = (key)=>{
+    //     const completeTask = ()=>
+    //     {
+    //         let newTasks = [...tasks]
+    //         newTasks = newTasks.filter((task)=>task.key!==key);
+    //         setTasks(newTasks);
+
+    //     }
+    //     return deleteTask;
+    // }
 
 
 
@@ -130,7 +151,9 @@ const TaskList = () => {
                 (task.topics.includes(topic.title))?
                 <li><Task taskName={task.taskName} 
                 setTaskName={getSetTaskNameFunc(task.key)}
-                deleteTask = {getDeleteTask(task.key)}/></li>:null))}
+                deleteTask = {getDeleteTask(task.key)}
+                completed = {task.completed} 
+                completeTask = {getCompleteTask(task.key)}/></li>:null))}
             </ul></div>
         )
     }

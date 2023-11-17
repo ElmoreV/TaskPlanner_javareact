@@ -1,7 +1,7 @@
 import {useState} from 'react';
 
 const Task = (props) => {
-    const {taskName,setTaskName,deleteTask} = props;
+    const {taskName,setTaskName,deleteTask,completed,completeTask} = props;
     const [isEditing,setIsEditing] = useState(false);
     const handleChange=(e)=>{
         console.log(e.target.value);
@@ -16,8 +16,10 @@ const Task = (props) => {
     const handleBlur = () => {
         setIsEditing(false);
     }
-
-    return ( <div className='task' 
+    let class_str = 'task'
+    if (completed)
+    {class_str = 'taskCompleted'}
+    return ( <div className={class_str} 
     onDoubleClick={toggleEdit}>
         {isEditing?
         <input type='text' 
@@ -27,6 +29,9 @@ const Task = (props) => {
      <span>{taskName}</span>
      }
      <button className='taskDelete' onClick={deleteTask && deleteTask}>Delete</button>
+     {!completed?
+     <button className='taskComplete' onClick={completeTask && completeTask}>Complete</button>:
+     <button className='taskComplete' onClick={completeTask && completeTask}>Decomplete</button>}
      </div>);
 }
  
