@@ -61,6 +61,37 @@ const TaskList = () => {
 
     }
 
+    const getSetTopicNameFunc= (id)=>{
+        const setTopicName = (newTopicName)=>{
+            const newTopics = [...topics];
+            const topic_to_change = find_topic_by_key(id);
+            topic_to_change.title = newTopicName;
+            setTopics(newTopics);
+        }
+        return setTopicName;
+
+    }
+
+    const getUpdateTaskTopics = (topic_name)=>{
+        const updateTaskTopics = (newTopicName)=>{
+
+            const newTasks = tasks.map((task) => {
+                if (task.topics.includes(topic_name)){
+                    return{
+                        ...task,
+                        topics: task.topics.map((topic) => topic === topic_name ? newTopicName : topic)
+                    }
+                }
+                console.log(task);
+                return task;
+            });
+
+            console.log(newTasks);
+            setTasks(newTasks);
+        }
+        return updateTaskTopics;
+    }
+
     const getDeleteTask = (key)=>{
         const deleteTask = ()=>
         {
@@ -81,20 +112,6 @@ const TaskList = () => {
         }
         return completeTask;
     }
-
-    // const getCompleteTask = (key)=>{
-    //     const completeTask = ()=>
-    //     {
-    //         let newTasks = [...tasks]
-    //         newTasks = newTasks.filter((task)=>task.key!==key);
-    //         setTasks(newTasks);
-
-    //     }
-    //     return deleteTask;
-    // }
-
-
-
 
     const addTask = (topic_key)=>{
         let newTasks = [...tasks];
@@ -139,6 +156,8 @@ const TaskList = () => {
         // Do not show subtopics when Topic is folded
 
         return (<div><li><Topic title={topic.title} 
+                            setTopicName = {getSetTopicNameFunc(topic.id)}
+                            updateTaskTopics = {getUpdateTaskTopics(topic.title)}
                             id={topic.id} 
                             toggleFold = {toggleFold} 
                             unfold={topic.unfold}
