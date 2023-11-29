@@ -15,10 +15,7 @@ A. Per topic view
 - Delete task button - DONE
 - New task button - DONE
 - Add task completion button - DONE
-
-
-
-- Make topic name editable (doubleclick)
+- Make topic name editable (doubleclick) - DONE
 - Make tasks draggeable
 (1. Make it draggeable to another topic)
 (2. Make it draggeable for a different order in a sorted task list)

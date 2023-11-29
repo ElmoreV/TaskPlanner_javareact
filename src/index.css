@@ -85,6 +85,16 @@ ul{
   z-index:50;
 }
 
+.task[draggedOver=true]{
+  /* padding-left:100px; */
+  border-top-width: 20px;
+  border-top-color: white;
+  border-top-style:solid;
+  padding-top:5px;
+  box-shadow: 10px 5px 5px 0px rgba(0,0,0,0.4);
+  
+}
+
 .taskCompleted{
   max-width:400px;
   padding:10px;
@@ -101,7 +111,13 @@ ul{
 
 }
 
+span.green {
+  color : green;
+}
 
+span.blue {
+  color: blue;
+}
 
 button.taskDelete{
   float:right;

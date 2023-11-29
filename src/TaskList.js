@@ -6,13 +6,13 @@ import Topic from './Topic';
 
 const TaskList = () => {
     const [topics,setTopics] = useState([
-        {title:"Onderhoud",id:1,unfold:false,subtopics:[
-            {title:"Vervangen",id:11,unfold:false,subtopics:[]},
-            {title:"Repareren",id:12,unfold:false,subtopics:[]},
+        {title:"Onderhoud",id:1,unfolded:false,subtopics:[
+            {title:"Vervangen",id:11,unfolded:false,subtopics:[]},
+            {title:"Repareren",id:12,unfolded:false,subtopics:[]},
             
         ]},
-        {title:"Ontspanning",id:2,unfold:false,subtopics:[
-            {title:"Gamen",id:21,unfold:false,subtopics:[]}
+        {title:"Ontspanning",id:2,unfolded:false,subtopics:[
+            {title:"Gamen",id:21,unfolded:false,subtopics:[]}
         ]}
 
     ]);
@@ -41,13 +41,11 @@ const TaskList = () => {
         {taskName:"Fiets repareren",key:0,topics:["Repareren"],completed:true},
         {taskName:"Outer Wilds",key:1, topics:["Gamen","Onderhoud"],completed:false},
         {taskName:"Badkamer",key:2,topics:["Onderhoud"],completed:true},
-        {taskName:"Backup opruimen",key:3,topics:["Onderhoud"],completed:false},
+        {taskName:"Backup opruimen",key:5,topics:["Onderhoud"],completed:false},
     ])
 
     const getFreeTaskKey=()=>{
-        let max_key = 0;
-        tasks.map(t=>max_key=Math.max(max_key,t.key));
-        return max_key+1;
+        return 1+tasks.reduce((max_key,task)=>Math.max(max_key,task.key),0);
     }
 
     const getSetTaskNameFunc= (key)=>{
@@ -132,7 +130,7 @@ const TaskList = () => {
     const toggleFold_r = (topics,id)=>{
         for (let topic of topics){
             if (topic.id === id)
-            {topic.unfold = !topic.unfold; return true;}
+            {topic.unfolded = !topic.unfolded; return true;}
             if (toggleFold_r(topic.subtopics,id))
             {return true;}
         }
@@ -160,19 +158,20 @@ const TaskList = () => {
                             updateTaskTopics = {getUpdateTaskTopics(topic.title)}
                             id={topic.id} 
                             toggleFold = {toggleFold} 
-                            unfold={topic.unfold}
+                            unfolded={topic.unfolded}
                             addTask = {()=>(addTask(topic.id))} /></li>
-        <ul>{topic.unfold && topic.subtopics.map((subtopic)=>(
+        <ul>{topic.unfolded && topic.subtopics.map((subtopic)=>(
             recursiveShowTopic(subtopic)
             ))}</ul>
             <ul>                
-                {topic.unfold && tasks.map((task)=>(
+                {topic.unfolded && tasks.map((task)=>(
                 (task.topics.includes(topic.title))?
                 <li><Task taskName={task.taskName} 
                 setTaskName={getSetTaskNameFunc(task.key)}
                 deleteTask = {getDeleteTask(task.key)}
                 completed = {task.completed} 
-                completeTask = {getCompleteTask(task.key)}/></li>:null))}
+                completeTask = {getCompleteTask(task.key)}
+                currentTopic = {topic.title}/></li>:null))}
             </ul></div>
         )
     }

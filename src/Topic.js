@@ -1,8 +1,9 @@
 import {useState} from 'react';
+import PropTypes from 'prop-types';
 
 const Topic = (props) => {
-    const {title,updateTaskTopics,setTopicName,id,toggleFold,unfold,addTask} = props;
- 
+    const {title,updateTaskTopics,setTopicName,id,toggleFold,unfolded,addTask} = props;
+
     const folded_symbol = '>';
     const unfolded_symbol = 'v';
 
@@ -31,25 +32,38 @@ const Topic = (props) => {
     const handleBlur = () => {
         setIsEditing(false);
     }
+    const handleAddTaskClick = (e) => {
+        e.stopPropagation();
+        addTask();
+    };
+
     // const fn = 
 /*onClick={()=>(toggleCollapse(id))}*/
     // If isEditing: disallow the onclick
     // 
 
 
-    return ( <div className='topic' onClick={handleToggleFold} >
-        {unfold?unfolded_symbol:folded_symbol}
-        {isEditing?
-        (<input type='text' 
-            value ={title}
-            onChange={handleChange}
-            onBlur={handleBlur}/>):
-     (<span onDoubleClick={toggleEdit}>{title}</span>)
-     }
-        
-        <button className='topicAddTask'
-        onClick={(e)=>(e.stopPropagation(),addTask())}>Add task</button>
+    return (<div className='topic' onClick={handleToggleFold} >
+            {unfolded?unfolded_symbol:folded_symbol}
+            {isEditing?
+                (<input type='text' 
+                value ={title}
+                onChange={handleChange}
+                onBlur={handleBlur}/>):
+                (<span onDoubleClick={toggleEdit}>{title}</span>)
+            }
+            <button className='topicAddTask'
+                onClick={handleAddTaskClick}>Add task</button>
          </div>);
 }
+
+Topic.propTypes = {
+    title: PropTypes.string.isRequired,
+    setTopicName: PropTypes.func.isRequired,
+    id: PropTypes.number.isRequired,
+    toggleFold: PropTypes.func.isRequired,
+    unfolded: PropTypes.bool.isRequired,
+    addTask: PropTypes.func.isRequired
+};
 
 export default Topic;
