@@ -48,6 +48,26 @@ const TaskList = () => {
         return 1+tasks.reduce((max_key,task)=>Math.max(max_key,task.key),0);
     }
 
+    const getChangeTaskTopic = ()=>{
+        const changeTaskTopic = (key,oldTopic,newTopic)=>{
+            const newTasks = tasks.map((task) => {
+                if (task.key == key) //cannot be ===?
+                {
+                    if (task.topics.includes(oldTopic)){
+                    return{
+                        ...task,
+                        topics: task.topics.map((topic) => topic == oldTopic ? newTopic : topic)
+                    }
+                }}
+                return task;
+            });
+            setTasks(newTasks);
+        }
+
+        return changeTaskTopic
+
+    }
+
     const getSetTaskNameFunc= (key)=>{
         const setTaskName = (newTaskName)=>{
             const newTasks = [...tasks]
@@ -167,11 +187,13 @@ const TaskList = () => {
                 {topic.unfolded && tasks.map((task)=>(
                 (task.topics.includes(topic.title))?
                 <li><Task taskName={task.taskName} 
+                taskKey = {task.key}
                 setTaskName={getSetTaskNameFunc(task.key)}
                 deleteTask = {getDeleteTask(task.key)}
                 completed = {task.completed} 
                 completeTask = {getCompleteTask(task.key)}
-                currentTopic = {topic.title}/></li>:null))}
+                currentTopic = {topic.title}
+                changeTopic = {getChangeTaskTopic()}/></li>:null))}
             </ul></div>
         )
     }
