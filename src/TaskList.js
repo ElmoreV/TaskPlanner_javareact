@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef} from 'react';
 import Task from './Task'
 import Topic from './Topic';
 
@@ -46,6 +46,18 @@ const TaskList = () => {
 
     const getFreeTaskKey=()=>{
         return 1+tasks.reduce((max_key,task)=>Math.max(max_key,task.key),0);
+    }
+
+    const getLargestTopicKey=(topic)=>{
+        let max_id  = Math.max(topic.id,
+            topic.subtopics.reduce((max_key,topic)=>Math.max(max_key,getLargestTopicKey(topic)),0)); 
+        console.log(max_id,topic.title)
+        return max_id;
+    }
+    const getFreeTopicKey=()=>{
+        let max_id = 1+topics.reduce((max_key,topic)=>Math.max(max_key,getLargestTopicKey(topic)),0);
+        console.log(max_id)
+        return max_id;
     }
 
     const getChangeTaskTopic = ()=>{
@@ -131,6 +143,44 @@ const TaskList = () => {
         return completeTask;
     }
 
+    const addTopic = ()=>
+    {
+        let newTopics = [...topics];
+        const addedTopic = {title:`New Topic ${getFreeTopicKey()}`,id:getFreeTopicKey(),unfolded:false,subtopics:[]}
+        newTopics.push(addedTopic);
+        console.log(newTopics);
+        setTopics(newTopics);
+    }
+
+    const addSubtopic_r = (topic,superTopic,newSubTopic)=>{
+        if (topic.id==superTopic.id)
+        {
+            //Add subtopic here
+            topic.subtopics =[...topic.subtopics,
+            newSubTopic];
+            return topic;
+        }else{
+            //recurse through all subtopics
+            return {...topic,
+                subtopics:topic.subtopics.map((topic)=>addSubtopic_r(topic,superTopic,newSubTopic))}
+        }
+    }
+    const addSubtopic = (topic)=>
+    {
+        console.log('In AddSubTopic')
+        console.log(topic);
+        let newTopics = [...topics]
+        const addedTopic = {title:`New Topic ${getFreeTopicKey()}`,id:getFreeTopicKey(),unfolded:false,subtopics:[]}
+        console.log(addedTopic)
+        console.log('start recursion')
+        // now add this topic at the exact right spot
+        // recurse through newTopics
+        // and return the changed topic if it is the right topic
+        newTopics= newTopics.map((topic_r)=>addSubtopic_r(topic_r,topic,addedTopic));
+
+        setTopics(newTopics);
+    }
+
     const addTask = (topic_key)=>{
         let newTasks = [...tasks];
         console.log(topic_key);
@@ -179,7 +229,8 @@ const TaskList = () => {
                             id={topic.id} 
                             toggleFold = {toggleFold} 
                             unfolded={topic.unfolded}
-                            addTask = {()=>(addTask(topic.id))} /></li>
+                            addTask = {()=>(addTask(topic.id))}
+                            addSubTopic = {()=>(addSubtopic(topic))} /></li>
         <ul>{topic.unfolded && topic.subtopics.map((subtopic)=>(
             recursiveShowTopic(subtopic)
             ))}</ul>
@@ -199,16 +250,68 @@ const TaskList = () => {
     }
 
 
-
+    const exportjson=()=>{
+        const jsonContent = JSON.stringify({topics,tasks});
+        const blob = new Blob([jsonContent], {type: "application/json"});
+        var a = document.createElement("a");
+        a.href = window.URL.createObjectURL(blob);
+        a.download = "tasks_topics.json";
+        a.click();
+    }
     // console.log(tasks[0].topics.includes(topics[0].title))
+    const importjson=(file)=>{
+
+    };
+    // const [file,setFile] = useState(null);
+    const fileInputRef = useRef(null);
 
 
+    const handleFileToUpload=(e)=>{
+        console.log('upload start')
+        if (e.target.files) {
+            // setFile(e.target.files[0]);
+            var file = e.target.files[0];
+          }
+          console.log('file?')
+          console.log()
+          if (file){
+            const reader = new FileReader();
+            reader.onload = (evt)=>{
+                console.log('file loaded now parsing')
+                try{
+                    const uploadedData = JSON.parse(evt.target.result);
+                    console.log(uploadedData.topics);
+                    console.log(uploadedData.tasks);
+                    
+                    setTopics(uploadedData.topics);
+                    setTasks(uploadedData.tasks);
+                }catch(e){
+                    console.error('Uploaded file is not JSON enough.',e);
+                }
+            }
+            console.log('start reading')
 
-    return ( <div className='task-list'>
+            reader.readAsText(file);
+        }
+    }
+
+    
+
+    return ( 
+    // <div>
+        <div className='task-list'>
+        <button onClick = {addTopic}> Add New Root topic</button>
         <ul>
         {topics.map((topic)=>(recursiveShowTopic(topic)))}
         </ul>
-    </div> );
+        <button onClick = {exportjson}>Export Tasks</button>
+         <input type="file" 
+                 ref={fileInputRef}
+         onChange={handleFileToUpload}/>
+
+    </div>
+    
+    );
 }
  
 export default TaskList;

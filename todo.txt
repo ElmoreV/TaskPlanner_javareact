@@ -17,11 +17,32 @@ A. Per topic view
 - Add task completion button - DONE
 - Make topic name editable (doubleclick) - DONE
 - Make tasks draggeable
-(1. Make it draggeable to another topic)
+(1. Make it draggeable to another topic - DONE)
+(1b. Make it draggable to another topic by dropping onto a topic)
+- Allow export of the tasks as JSON - DONE
+- Allow import of the tasks as Json - DONE
+
+- Allow new subtopics to be created - Done
+- Allow new roottopics to be created - Done
+(- Understand useRef)
+(- Understand FileReader)
+
+B. DB (local) interaction
+
+- Initialize database to a template (for testing it is useful)
+- Load in local tasks/topics
+- Store local tasks/topics when modified
+- Only locally store tasks/topics
+
+C. Weekly view
+
+D. Daily view
+
+A2. Per topic view - advanced
+
+- Make Tasks draggable - advanced
 (2. Make it draggeable for a different order in a sorted task list)
-
-- Make tasks duplicatable
-
+- Make tasks duplicatable to multiple topics
 - when Text Input is asked: set focus on text input
 - Prettify the text input for tasks
 - When Enter is pressed: finish editing
@@ -32,10 +53,10 @@ A. Per topic view
 
 - Animate collapse and dropdown
 
-- Add new topics and subtopics
-
-B. DB (local) interaction
-
-C. Weekly view
-
-D. Daily view
+alpha. Advanced: 
+- Allow subtasks
+- Have a search engine for tasks/topics
+- Create a history of updates (so you can e.g. undo)
+- Add comments to the tasks/topics to be expandable
+- Add link support to the tasks/topics
+- Reduce the JSON save-file system (don't save the foldedness of the topics)

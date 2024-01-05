@@ -2,7 +2,7 @@ import {useState} from 'react';
 import PropTypes from 'prop-types';
 
 const Topic = (props) => {
-    const {title,updateTaskTopics,setTopicName,id,toggleFold,unfolded,addTask} = props;
+    const {title,updateTaskTopics,setTopicName,id,toggleFold,unfolded,addTask,addSubTopic} = props;
 
     const folded_symbol = '>';
     const unfolded_symbol = 'v';
@@ -36,7 +36,10 @@ const Topic = (props) => {
         e.stopPropagation();
         addTask();
     };
-
+    const handleAddTopicClick = (e) => {
+        e.stopPropagation();
+        addSubTopic();
+    };
     // const fn = 
 /*onClick={()=>(toggleCollapse(id))}*/
     // If isEditing: disallow the onclick
@@ -54,6 +57,8 @@ const Topic = (props) => {
             }
             <button className='topicAddTask'
                 onClick={handleAddTaskClick}>Add task</button>
+            <button className='topicAddTopic'
+                onClick={handleAddTopicClick}>Add topic</button>
          </div>);
 }
 
