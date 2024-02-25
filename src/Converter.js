@@ -45,36 +45,56 @@
     //topic_hierarchy
     // topic_obj = [name, id, subtopics=[subtopic_obj_1,subtopic_obj_2], tasks = [task_id_1, task_id_2]]
     // tasks = [{id,name,completed},...]
-const convert_old_topic_tasks_to_new_topic_tasks=(topic,tasks)=>{
-    // const find_topic_by_name=(name)=>{}
-    // const find_topic_by_id = (id)=>{}
+const convert_old_topic_tasks_to_new_topic_tasks=(topics,tasks)=>{
+
+    console.log('Old to new conversion')
     let new_topics = []
     let new_tasks = []
-    let topics_table ={names:[],id:[]}
+    let topics_table ={name:[],id:[]}
     /*
     // Recurse through topics
     // for every topic, save it in the topics_table (topic_name, topic_id)
     // copy over topic.title to topic.name
-    // copy over topic.id
-    // copy over topic.unfolded
+    // copy over topic.id and topic.unfolded
     */
     const recurse_topics =(subtopic)=>{
-        let new_topic = {name:subtopic.title,
+        var new_topic = {name:subtopic.title,
                 id:subtopic.id,
-                unfolded:subtopic.unfolded}
+                unfolded:subtopic.unfolded,
+                subtopics:[]}
         topics_table.name = topics_table.name.concat(subtopic.title)
         topics_table.id = topics_table.id.concat(subtopic.id)
+        new_topic.subtopics =subtopic.subtopics.map((t)=>{return recurse_topics(t)})
+        return new_topic
    }
+   new_topics = topics.map((t)=>{return recurse_topics(t)})
+
     /*
     // every task:
     // copy over taskName to name
     // copy over key to id
     // copy over completed
     // find the topic_id for every topic_name in topics 
-
-
     */
-
+   const get_topic_id=(tt)=>
+   {
+    //idx= topics_table.name.findIndex(tt)
+    let idx = topics_table.name.findIndex((ttt)=>ttt==tt)
+    return topics_table.id[idx]
+    // return topics_table.id[idx]
+   }
+   const handle_task=(t)=>{
+    let new_t = {name : t.taskName,
+            id: t.key,
+            completed:t.completed,
+            topics:t.topics.map((tt)=>get_topic_id(tt))}
+    console.log(new_t)
+    console.log(t)
+    return new_t
+   }
+   new_tasks = tasks.map((t)=>(handle_task(t)))
+   console.log(new_tasks)
+   return [new_topics,new_tasks]
 }
 
 const convert_new_topic_tasks_to_old_topic_tasks=(topic,tasks)=>{
@@ -88,19 +108,60 @@ const convert_relational_to_topic_tasks=(topic_table,topic_subtopic_table,
 }
 
 
-// const convert_topic_tasks_to_relational=(topic,tasks)=>{
+const convert_topic_tasks_to_relational=(topics,tasks)=>{
 //     // new_topic_tasks to relational
 
-//     topic_table = new Array();
-//     topic_subtopic_table = new Array();
-//     task_table = {id:[],name:[],completed:[]}
-//     tasks.map((t)=>{
-//         task_table.id = task_table.id.concat(t.id)
-//         task_table.name = task_table.id.concat(t.name)
-//         task_table.completed = task_table.id.concat(t.completed)
-//     })
+    let topic_table = {id:[],name:[], unfolded:[]}
+    let topic_subtopic_table = {topic_id:[],subtopic_id:[]};
+    let task_table = {id:[],name:[],completed:[]} //Done
+    let topic_task_table = {topic_id:[],task_id:[]};
+    tasks.map((t)=>{
+        task_table.id = task_table.id.concat(t.id)
+        task_table.name = task_table.name.concat(t.name)
+        task_table.completed = task_table.completed.concat(t.completed)
+    })
 
-//     topic_task_table = new Array();
+    const recurse_topics =(subtopic)=>{
+        var new_topic = {name:subtopic.name,
+                id:subtopic.id,
+                // unfolded:subtopic.unfolded,
+                // subtopics:[]
+            }
+        topic_table.name = topic_table.name.concat(subtopic.name)
+        topic_table.id = topic_table.id.concat(subtopic.id)
+        topic_table.unfolded = topic_table.unfolded.concat(subtopic.unfolded)
+        let subtopics =subtopic.subtopics.map((t)=>{return recurse_topics(t)})
+        console.log(subtopics)
+        subtopics.map((st)=>{
+            console.log(st)
+            topic_subtopic_table.topic_id = topic_subtopic_table.topic_id.concat(subtopic.id);
+            topic_subtopic_table.subtopic_id = topic_subtopic_table.subtopic_id.concat(st.id);
+         })
+        return new_topic
+   }
+   topics.map((t)=>recurse_topics(t))
+   const get_topic_id=(topic_name)=>
+   {
+    //idx= topics_table.name.findIndex(tt)
+    console.log(topic_name)
+    console.log(topic_table.name)
+    let idx = topic_table.name.findIndex((ttt)=>ttt==topic_name)
+    return topic_table.id[idx]
+    // return topics_table.id[idx]
+   }
+   tasks.map((task)=>{
+    // go through t.topics
+    // find relevant topic_id
+    // add task_id:topic_id
+    task.topics.map((topic_id)=>{
+        topic_task_table.topic_id =  topic_task_table.topic_id.concat(topic_id)
+        topic_task_table.task_id =  topic_task_table.task_id.concat(task.id)
+    })
+    
+
+    
+
+   })
 
 //     const parse_topics_r=()=>{
 //         // add topic to system
@@ -110,9 +171,9 @@ const convert_relational_to_topic_tasks=(topic_table,topic_subtopic_table,
 
     
 
-//     return [topic_table,topic_subtopic_table,task_table,topic_task_interaction_table]
+    return [topic_table,topic_subtopic_table,task_table,topic_task_table]
 
-// }
+}
 
 // const convert_topic_tasks_to_hierarchical=(topic,tasks)=>{
 //     // new_topic_tasks to hierarchical
@@ -128,3 +189,5 @@ const convert_relational_to_topic_tasks=(topic_table,topic_subtopic_table,
 
 // export default Converter
 export default convert_old_topic_tasks_to_new_topic_tasks;
+export {convert_topic_tasks_to_relational};
+export {convert_old_topic_tasks_to_new_topic_tasks};

@@ -34,6 +34,13 @@ A. Per topic view
 B. DB (local) interaction
 
 - Convert (tasks,topics)-schema into (topic + subtasks/topics) schema into (tasks, task_id, topic_id, topics)-schema
+    - (tasks,topics).v0 to (task,topics).v1 - DONE
+    - (tasks,topics).v1 to (relational.tasks/topics) - DONE
+    - (tasks,topics).v1 to (hierarchical.topics+tasks)
+    - (relational.tasks/topics) to (tasks,topics).v1
+    - (hierarchical.topics+tasks) to (tasks,topics).v1
+    - (task,topics).v1 to (tasks,topics).v0
+    
 
 - Export data to JSON - DONE
 - Export data to YAML - DONE

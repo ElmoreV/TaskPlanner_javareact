@@ -1,7 +1,8 @@
 import { useState} from 'react';
 import Task from './Task'
 import Topic from './Topic';
-import convert_old_topic_tasks_to_new_topic_tasks from './Converter';
+import {convert_old_topic_tasks_to_new_topic_tasks,
+ convert_topic_tasks_to_relational} from './Converter';
 import ImportExport from './ImportExport';
 
 const TaskList = () => {
@@ -328,6 +329,8 @@ const TaskList = () => {
         // Do not show subtopics when Topic is folded
         console.log(topics)
         console.log(topic)
+        // let [topics,tasks] = convert_old_topic_tasks_to_new_topic_tasks(topics,tasks)
+
         return (<div><li key={topic.title}>
                         <Topic title={topic.title} 
                             setTopicName = {getSetTopicNameFunc(topic.id)}
@@ -359,7 +362,14 @@ const TaskList = () => {
         )
     }
 
-
+    const converter_callback = ()=>{
+        let [topics2,tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics,tasks)
+        let tables = convert_topic_tasks_to_relational(topics2,tasks2)
+        console.log('res')
+        console.log(topics2)
+        console.log(tasks2)
+        console.log(tables)
+    }
     return ( 
     // <div>
         <div className='task-list'>
@@ -372,7 +382,7 @@ const TaskList = () => {
             topics = {topics}
             setTasks = {setTasks}
             setTopics = {setTopics}/>
-        <button onClick = {convert_old_topic_tasks_to_new_topic_tasks(topics,tasks)}>Export Tasks [YAML]</button>
+        <button onClick = {converter_callback}>Test Converter</button>
 
     </div>
     
