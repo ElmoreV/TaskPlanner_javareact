@@ -1,0 +1,74 @@
+Features:
+    - []
+    - Database interaction:
+        - []
+        - Migration to schema.v1:
+            - Rendering
+            - Export/Import
+            - Adding/deleting/modifying tasks
+            - Task.js
+            - Adding/deleting/modifying topics
+            - Topic.js
+            - Default example
+        - Importing/Exporting:
+            - Allow export of tasks as JSON
+            - Allow import of tasks as JSON
+            - Allow export of tasks as YAML
+            - Allow import of tasks as YAML
+            - Detection of JSON or YAML
+        - Data structure conversion:
+            - (tasks,topics).v1 to (relational.tasks/topics)
+            - (tasks,topics).v1 to (hierarchical.topics+tasks)
+            - (tasks,topics).v0 to (task,topics).v1
+            - (relational.tasks/topics) to (tasks,topics).v1
+            -  (hierarchical.topics+tasks) to (tasks,topics).v1
+            - (task,topics).v1 to (tasks,topics).v0
+    - Per Topic View:
+        - Have topics and subtopics show up
+        - Have tasks show up under the right topic
+        - Allow the topics to drop down and collapse
+        - Add icon (> or V) for drop down and collapse
+        - Editable task names
+        - Delete task button
+        - Add task button
+        - Task completion button
+        - Make topic name editable
+        - Make tasks draggeable to other task lists
+        - Make tasks draggeable to topics
+        - Make topics draggable to other topics
+        - Allow deletion of Topics
+        - Hide completed tasks
+        - Make the tasks to have a good width. Automatic? Multiline? Text cut-off?
+        - Future:
+            - Drag tasks to change the order in task list
+            - When text doubleclicked: focus immediately on text input
+            - Prettify text input for tasks
+            - When enter is pressed: finish editing
+            - Improve collapse and dropdown icon
+            - Delete task icon
+            - New task icon
+            - Animate collapse and dropdown
+            - Allow tasks to serve two purposes (here: Future+Bugs?)
+    - Weekly Tasks View:
+        - Make tasks importable from Per Topic View
+    - Daily Task View:
+        - Make tasks importable from Weekly View
+    - General:
+        - Gitify this project
+        - Understand useRef
+        - Understand FileReader
+        - Change schema terminology to id,name,...
+        - Allow keyboard-only mode
+        - Future2:
+            - Allow subtasks
+            - Search engine for tasks/topics
+            - Create a history of updates (create undo button)
+            - Add comments to tasks/topics
+            - Open tasks/topics to have a task/topic card
+            - Add hyperlink suport to tasks/topics
+            - Save output in markdown
+Constraints:
+    - Text edit should not lag, but it does now
+Bugs:
+    - Do not allow two topics to have the same name
+    - Test tasks with empty string
