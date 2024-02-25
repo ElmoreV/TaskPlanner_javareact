@@ -1,8 +1,8 @@
-import { useState, useRef} from 'react';
+import { useState} from 'react';
 import Task from './Task'
 import Topic from './Topic';
-
-
+import convert_old_topic_tasks_to_new_topic_tasks from './Converter';
+import ImportExport from './ImportExport';
 
 const TaskList = () => {
     const [topics,setTopics] = useState([
@@ -122,6 +122,110 @@ const TaskList = () => {
         return updateTaskTopics;
     }
 
+    function isEqual(a,b)
+    {
+        if (a.length !== b.length)
+        {
+            return false;
+        }
+        let map = new Map();
+        for (let elem of a)
+        {
+            map.set(elem,(map.get(elem)||0)+1)
+
+        }
+        for (let elem of b)
+        {
+            if (!map.has(elem)){
+                return false;
+            }
+            map.set(elem,map.get(elem)-1);
+            if (map.get(elem)<0){
+                return false;
+            }
+        }
+        return true;
+    }
+
+//    const collectTopics (topic,task)
+
+
+    const topicCompletelyContainsTasks= (topic,task)=>{
+        // Check all topics and if the task is only contained in topic
+        // and/or its subtopics, we can return true
+        // We check this by checking the topics in the task, and seeing if all the topics are contained within
+        // the topic and its subtopics (recursively)
+        let included_topics = []
+        if (task.topics.includes(topic.title))
+        {
+            included_topics.append(topic.title)
+            if (isEqual(task.topics, included_topics))
+            {return true;}
+        }
+    // try all subtopics
+
+    included_topics.append(topic.subtopics.map((topic)=>topicCompletelyContainsTasks(topic,task)))
+    console.log(included_topics)
+    if (isEqual(task.topics, included_topics))
+    {return true;}
+    return false;
+    }
+
+    const filter_by_name_r = (topics,topic_name)=>{
+        // 1. enumerate all subtopics that do not match name, and filter their subtopics
+        // 2. filter all subtopics that do match name
+        // 3. return the topics object as is, just with all topics with title==topic_name filtered out,
+        // and all subtopics (or subsubtopics) with title==topic_name filtered out
+        console.log(topics)
+        return topics.filter((topic)=>topic.title !== topic_name).map(
+            (topic)=>{return {...topic,subtopics:filter_by_name_r(topic.subtopics,topic_name)}}
+        )
+
+
+        // return topic.subtopics
+    }
+
+    const get_all_subtopics = (topic)=>
+    {
+
+        return topic.subtopics.map((subtopic)=>get_all_subtopics(subtopic)).concat(topic);
+    }
+
+    const isTaskInAnyTopic = (task,topics)=>
+    {
+        // check if the topic of the task in the
+        task.topics = task.topics.filter((t)=>find_topic_by_key(t))
+        if (task.topics)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
+    const getDeleteTopic = (id)=>{
+        console.log('Creating delete topic thingy')
+        const deleteTopic = ()=>
+        {
+
+            let newTopics = [...topics]
+            // filter recursively
+            newTopics = filter_by_name_r(newTopics,id);
+            
+            // Find any orphan tasks (tasks without a topic)
+            // and filter them
+            // TODO: this is slow and not scalable. Fix when necessary.
+
+            let newTasks = [...tasks]
+            // all_subtopics = newTopics.
+            newTasks = newTasks.filter((task)=>isTaskInAnyTopic(task,newTopics))
+
+            setTopics(newTopics);           
+            setTasks(newTasks);
+        }
+        return deleteTopic;
+    }
+
     const getDeleteTask = (key)=>{
         const deleteTask = ()=>
         {
@@ -222,92 +326,53 @@ const TaskList = () => {
         // 3. Show all tasks
 
         // Do not show subtopics when Topic is folded
-
-        return (<div><li><Topic title={topic.title} 
+        console.log(topics)
+        console.log(topic)
+        return (<div><li key={topic.title}>
+                        <Topic title={topic.title} 
                             setTopicName = {getSetTopicNameFunc(topic.id)}
                             updateTaskTopics = {getUpdateTaskTopics(topic.title)}
                             id={topic.id} 
                             toggleFold = {toggleFold} 
                             unfolded={topic.unfolded}
                             addTask = {()=>(addTask(topic.id))}
-                            addSubTopic = {()=>(addSubtopic(topic))} /></li>
-        <ul>{topic.unfolded && topic.subtopics.map((subtopic)=>(
+                            addSubTopic = {()=>(addSubtopic(topic))}
+                            deleteTopic = {getDeleteTopic(topic.title)} />
+                    </li>
+        <ul key={topic.title+'_topics'}>{topic.unfolded && topic.subtopics.map((subtopic)=>(
             recursiveShowTopic(subtopic)
             ))}</ul>
-            <ul>                
+            <ul key={topic.title+'_tasks'}>                
                 {topic.unfolded && tasks.map((task)=>(
                 (task.topics.includes(topic.title))?
-                <li><Task taskName={task.taskName} 
-                taskKey = {task.key}
-                setTaskName={getSetTaskNameFunc(task.key)}
-                deleteTask = {getDeleteTask(task.key)}
-                completed = {task.completed} 
-                completeTask = {getCompleteTask(task.key)}
-                currentTopic = {topic.title}
-                changeTopic = {getChangeTaskTopic()}/></li>:null))}
+                <li key={topic.title +' - '+task.taskName}>
+                    <Task taskName={task.taskName} 
+                    taskKey = {task.key}
+                    setTaskName={getSetTaskNameFunc(task.key)}
+                    deleteTask = {getDeleteTask(task.key)}
+                    completed = {task.completed} 
+                    completeTask = {getCompleteTask(task.key)}
+                    currentTopic = {topic.title}
+                    changeTopic = {getChangeTaskTopic()}/>
+                </li>:null))}
             </ul></div>
         )
     }
 
 
-    const exportjson=()=>{
-        const jsonContent = JSON.stringify({topics,tasks});
-        const blob = new Blob([jsonContent], {type: "application/json"});
-        var a = document.createElement("a");
-        a.href = window.URL.createObjectURL(blob);
-        a.download = "tasks_topics.json";
-        a.click();
-    }
-    // console.log(tasks[0].topics.includes(topics[0].title))
-    const importjson=(file)=>{
-
-    };
-    // const [file,setFile] = useState(null);
-    const fileInputRef = useRef(null);
-
-
-    const handleFileToUpload=(e)=>{
-        console.log('upload start')
-        if (e.target.files) {
-            // setFile(e.target.files[0]);
-            var file = e.target.files[0];
-          }
-          console.log('file?')
-          console.log()
-          if (file){
-            const reader = new FileReader();
-            reader.onload = (evt)=>{
-                console.log('file loaded now parsing')
-                try{
-                    const uploadedData = JSON.parse(evt.target.result);
-                    console.log(uploadedData.topics);
-                    console.log(uploadedData.tasks);
-                    
-                    setTopics(uploadedData.topics);
-                    setTasks(uploadedData.tasks);
-                }catch(e){
-                    console.error('Uploaded file is not JSON enough.',e);
-                }
-            }
-            console.log('start reading')
-
-            reader.readAsText(file);
-        }
-    }
-
-    
-
     return ( 
     // <div>
         <div className='task-list'>
         <button onClick = {addTopic}> Add New Root topic</button>
-        <ul>
+        <ul key='root_topics'>
         {topics.map((topic)=>(recursiveShowTopic(topic)))}
         </ul>
-        <button onClick = {exportjson}>Export Tasks</button>
-         <input type="file" 
-                 ref={fileInputRef}
-         onChange={handleFileToUpload}/>
+        <ImportExport
+            tasks={tasks}
+            topics = {topics}
+            setTasks = {setTasks}
+            setTopics = {setTopics}/>
+        <button onClick = {convert_old_topic_tasks_to_new_topic_tasks(topics,tasks)}>Export Tasks [YAML]</button>
 
     </div>
     

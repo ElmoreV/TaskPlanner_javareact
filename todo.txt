@@ -22,17 +22,29 @@ A. Per topic view
 - Allow export of the tasks as JSON - DONE
 - Allow import of the tasks as Json - DONE
 
-- Allow new subtopics to be created - Done
-- Allow new roottopics to be created - Done
+- Allow new subtopics to be created - DONE
+- Allow new roottopics to be created - DONE
+- Allow deletion of Topics - WIP
 (- Understand useRef)
 (- Understand FileReader)
 
+- Change terminology to id, name, ...
+- Allow dragging of 
+
 B. DB (local) interaction
 
+- Convert (tasks,topics)-schema into (topic + subtasks/topics) schema into (tasks, task_id, topic_id, topics)-schema
+
+- Export data to JSON - DONE
+- Export data to YAML - DONE
+- Import JSON data - DONE
+- Import YAML data - DONE
+- Detect if it's JSON or YAML - DONE
 - Initialize database to a template (for testing it is useful)
 - Load in local tasks/topics
 - Store local tasks/topics when modified
 - Only locally store tasks/topics
+
 
 C. Weekly view
 
