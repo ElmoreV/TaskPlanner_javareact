@@ -320,47 +320,7 @@ const TaskList = () => {
         }
     }
 
-    const recursiveShowTopic = (topic)=>
-    {
-        // 1. Show topic
-        // 2. Show all subtopics (and their subtopics and tasks)
-        // 3. Show all tasks
 
-        // Do not show subtopics when Topic is folded
-        console.log(topics)
-        console.log(topic)
-        // let [topics,tasks] = convert_old_topic_tasks_to_new_topic_tasks(topics,tasks)
-
-        return (<div><li key={topic.title}>
-                        <Topic title={topic.title} 
-                            setTopicName = {getSetTopicNameFunc(topic.id)}
-                            updateTaskTopics = {getUpdateTaskTopics(topic.title)}
-                            id={topic.id} 
-                            toggleFold = {toggleFold} 
-                            unfolded={topic.unfolded}
-                            addTask = {()=>(addTask(topic.id))}
-                            addSubTopic = {()=>(addSubtopic(topic))}
-                            deleteTopic = {getDeleteTopic(topic.title)} />
-                    </li>
-        <ul key={topic.title+'_topics'}>{topic.unfolded && topic.subtopics.map((subtopic)=>(
-            recursiveShowTopic(subtopic)
-            ))}</ul>
-            <ul key={topic.title+'_tasks'}>                
-                {topic.unfolded && tasks.map((task)=>(
-                (task.topics.includes(topic.title))?
-                <li key={topic.title +' - '+task.taskName}>
-                    <Task taskName={task.taskName} 
-                    taskKey = {task.key}
-                    setTaskName={getSetTaskNameFunc(task.key)}
-                    deleteTask = {getDeleteTask(task.key)}
-                    completed = {task.completed} 
-                    completeTask = {getCompleteTask(task.key)}
-                    currentTopic = {topic.title}
-                    changeTopic = {getChangeTaskTopic()}/>
-                </li>:null))}
-            </ul></div>
-        )
-    }
 
     const converter_callback = ()=>{
         let [topics2,tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics,tasks)
@@ -370,12 +330,63 @@ const TaskList = () => {
         console.log(tasks2)
         console.log(tables)
     }
+
+    const recursiveShowTopic = (topic,tasks)=>
+    {
+        // 1. Show topic
+        // 2. Show all subtopics (and their subtopics and tasks)
+        // 3. Show all tasks
+
+        // Do not show subtopics when Topic is folded
+        console.log('Hello2')
+        console.log(topics)
+        console.log(topic)
+        
+
+        return (<div><li key={topic.name}>
+                        <Topic title={topic.name} 
+                            setTopicName = {getSetTopicNameFunc(topic.id)}
+                            updateTaskTopics = {getUpdateTaskTopics(topic.name)}
+                            id={topic.id} 
+                            toggleFold = {toggleFold} 
+                            unfolded={topic.unfolded}
+                            addTask = {()=>(addTask(topic.id))}
+                            addSubTopic = {()=>(addSubtopic(topic))}
+                            deleteTopic = {getDeleteTopic(topic.name)} />
+                    </li>
+        <ul key={topic.name+'_topics'}>{topic.unfolded && topic.subtopics.map((subtopic)=>(
+            recursiveShowTopic(subtopic,tasks)
+            ))}</ul>
+            <ul key={topic.name+'_tasks'}>                
+                {topic.unfolded && tasks.map((task)=>(
+                (task.topics.includes(topic.id))?
+                <li key={topic.name +' - '+task.name}>
+                    <Task taskName={task.name} 
+                    taskKey = {task.id}
+                    setTaskName={getSetTaskNameFunc(task.id)}
+                    deleteTask = {getDeleteTask(task.id)}
+                    completed = {task.completed} 
+                    completeTask = {getCompleteTask(task.id)}
+                    currentTopic = {topic.name}
+                    changeTopic = {getChangeTaskTopic()}/>
+                </li>:null))}
+            </ul></div>
+        )
+    }
+
+
+    const showTopics= ()=>
+    {
+        console.log('Hello')
+        let [topics2,tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics,tasks);
+        return topics2.map((topic)=>( recursiveShowTopic(topic,tasks2)))
+    }
     return ( 
     // <div>
         <div className='task-list'>
         <button onClick = {addTopic}> Add New Root topic</button>
         <ul key='root_topics'>
-        {topics.map((topic)=>(recursiveShowTopic(topic)))}
+        {showTopics()}
         </ul>
         <ImportExport
             tasks={tasks}

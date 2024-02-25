@@ -40,7 +40,16 @@ B. DB (local) interaction
     - (relational.tasks/topics) to (tasks,topics).v1
     - (hierarchical.topics+tasks) to (tasks,topics).v1
     - (task,topics).v1 to (tasks,topics).v0
-    
+
+- Convert codebase to use (task,topics).v1  
+    - Rendering: DONE
+    - Export
+    - Import
+    - Adding/deleting/modifying tasks
+    - Task.js
+    - Adding/deleting/modifying topics
+    - Topic.js
+    - Default example
 
 - Export data to JSON - DONE
 - Export data to YAML - DONE
