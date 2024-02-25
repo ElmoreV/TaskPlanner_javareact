@@ -105,7 +105,6 @@ const TaskList = () => {
 
     const getUpdateTaskTopics = (topic_name)=>{
         const updateTaskTopics = (newTopicName)=>{
-
             const newTasks = tasks.map((task) => {
                 if (task.topics.includes(topic_name)){
                     return{
@@ -113,11 +112,8 @@ const TaskList = () => {
                         topics: task.topics.map((topic) => topic === topic_name ? newTopicName : topic)
                     }
                 }
-                console.log(task);
                 return task;
             });
-
-            console.log(newTasks);
             setTasks(newTasks);
         }
         return updateTaskTopics;
@@ -343,7 +339,7 @@ const TaskList = () => {
         console.log(topic)
         
 
-        return (<div><li key={topic.name}>
+        return (<div><li key={topic.id}>
                         <Topic title={topic.name} 
                             setTopicName = {getSetTopicNameFunc(topic.id)}
                             updateTaskTopics = {getUpdateTaskTopics(topic.name)}
@@ -354,13 +350,13 @@ const TaskList = () => {
                             addSubTopic = {()=>(addSubtopic(topic))}
                             deleteTopic = {getDeleteTopic(topic.name)} />
                     </li>
-        <ul key={topic.name+'_topics'}>{topic.unfolded && topic.subtopics.map((subtopic)=>(
+        <ul key={topic.id+'_topics'}>{topic.unfolded && topic.subtopics.map((subtopic)=>(
             recursiveShowTopic(subtopic,tasks)
             ))}</ul>
-            <ul key={topic.name+'_tasks'}>                
+            <ul key={topic.id+'_tasks'}>                
                 {topic.unfolded && tasks.map((task)=>(
                 (task.topics.includes(topic.id))?
-                <li key={topic.name +' - '+task.name}>
+                <li key={topic.id +' - '+task.id}>
                     <Task taskName={task.name} 
                     taskKey = {task.id}
                     setTaskName={getSetTaskNameFunc(task.id)}
