@@ -17,6 +17,10 @@
             - 'Detection of JSON or YAML at import '
             - 'Find a way to add task/topic id into the YAML'
             - 'Prettify the output JSON to make it more git-friendly'
+            - 'Sanitize input':
+                - 'Check against duplicate keys'
+                - 'Check against missing optional parameters (completed etc.)'
+                - 'Check against missing required parameters (taskName, key)'
         - 'Data structure conversion':
             - '(tasks,topics).v1 to (relational.tasks/topics)'
             - '(tasks,topics).v1 to (hierarchical.topics+tasks)'

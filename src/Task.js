@@ -64,9 +64,10 @@ const Task = (props) => {
 
     }
     let class_str = 'task'
+    // Completion has precedence over planned
     if (completed)
     {class_str = 'taskCompleted'}
-    if (planned)
+    else if (planned)
     {class_str = 'taskPlanned'}
 
     const dragHandlers = isDraggingAllowed?{draggable:true,onDragStart:handleDragStart,onDragEnd:handleDragEnd}:{};

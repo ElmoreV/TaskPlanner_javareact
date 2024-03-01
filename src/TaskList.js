@@ -31,6 +31,25 @@ const TaskList = (props) => {
         return find_topic_by_key_r(topics,topic_key);
     }
 
+    const find_topic_by_name_r=(topics,topic_name)=>
+    {
+        console.log(topics);
+        for (let topic of topics)
+        {
+            console.log(topic.name);
+            if (topic.title === topic_name)
+            {console.log('Fount it!');
+                return topic;}
+            let topic_res =  find_topic_by_name_r(topic.subtopics,topic_name);
+            if (topic_res)
+                {console.log('Bubble up');return topic_res;}
+        }
+        return null;
+    }
+    const find_topic_by_name=(topics,topic_name)=>
+    {
+        return find_topic_by_name_r(topics,topic_name);
+    }
     
     const getFreeTaskKey=()=>{
         return 1+tasks.reduce((max_key,task)=>Math.max(max_key,task.key),0);
@@ -178,8 +197,16 @@ const TaskList = (props) => {
     const isTaskInAnyTopic = (task,topics)=>
     {
         // check if the topic of the task in the
-        task.topics = task.topics.filter((t)=>find_topic_by_key(t))
-        if (task.topics)
+        console.log(task.topics)
+        task.topics = task.topics.filter((topic_name)=>{
+            console.log('Is topic .. in non-deleted topics ...')
+            console.log(topic_name)
+            console.log(topics)
+            return find_topic_by_name(topics,topic_name)})
+        console.log('Resulting task.topics')
+        console.log(task.topics)
+        console.log(task.topics.length)
+        if (task.topics.length>0)
         {
             return true;
         }
@@ -203,6 +230,8 @@ const TaskList = (props) => {
             let newTasks = [...tasks]
             // all_subtopics = newTopics.
             newTasks = newTasks.filter((task)=>isTaskInAnyTopic(task,newTopics))
+            console.log('Length of tasks before deletion/length of tasks after deletion')
+            console.log(tasks.length+' / '+newTasks.length)
 
             setTopics(newTopics);           
             setTasks(newTasks);

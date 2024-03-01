@@ -116,21 +116,7 @@ button.topicDelete{
   
 }
 
-.taskCompleted{
-  max-width:800px;
-  padding:10px;
-  padding-left:20px;
-  margin: 1px 0;
-  background: linear-gradient(
-    to right,
-    rgb(168, 255, 50) 0%,
-    rgb(168, 255, 50) 60%,
-    rgb(131, 255, 100) 70%,
-    rgb(131, 255, 100) 100%
-  );
-  border-radius:3px 3px 3px 20px;
 
-}
 
 .taskPlanned{
   max-width:800px;
@@ -147,7 +133,21 @@ button.topicDelete{
   border-radius:3px 3px 3px 20px;
 
 }
+.taskCompleted{
+  max-width:800px;
+  padding:10px;
+  padding-left:20px;
+  margin: 1px 0;
+  background: linear-gradient(
+    to right,
+    rgb(168, 255, 50) 0%,
+    rgb(168, 255, 50) 60%,
+    rgb(131, 255, 100) 70%,
+    rgb(131, 255, 100) 100%
+  );
+  border-radius:3px 3px 3px 20px;
 
+}
 
 span.green {
   color : green;

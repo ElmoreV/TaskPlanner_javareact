@@ -20,12 +20,19 @@
               "title": "Importing/Exporting",
               "id": 9,
               "unfolded": true,
-              "subtopics": []
+              "subtopics": [
+                {
+                  "title": "Sanitize input",
+                  "id": 14,
+                  "unfolded": true,
+                  "subtopics": []
+                }
+              ]
             },
             {
               "title": "Data structure conversion",
               "id": 13,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             }
           ]
@@ -38,7 +45,7 @@
             {
               "title": "Future",
               "id": 10,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             }
           ]
@@ -52,18 +59,18 @@
         {
           "title": "Daily Task View",
           "id": 6,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         },
         {
           "title": "General",
           "id": 7,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "title": "Future2",
               "id": 11,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             }
           ]
@@ -73,13 +80,13 @@
     {
       "title": "Constraints",
       "id": 2,
-      "unfolded": true,
+      "unfolded": false,
       "subtopics": []
     },
     {
       "title": "Bugs/issues",
       "id": 12,
-      "unfolded": true,
+      "unfolded": false,
       "subtopics": []
     }
   ],
@@ -223,7 +230,9 @@
       "key": 18,
       "topics": [
         "Per Topic View"
-      ]
+      ],
+      "thisWeek": true,
+      "completed": true
     },
     {
       "taskName": "Understand useRef",
@@ -631,6 +640,27 @@
         "Importing/Exporting"
       ],
       "completed": true
+    },
+    {
+      "taskName": "Check against duplicate keys",
+      "key": 75,
+      "topics": [
+        "Sanitize input"
+      ]
+    },
+    {
+      "taskName": "Check against missing optional parameters (completed etc.)",
+      "key": 76,
+      "topics": [
+        "Sanitize input"
+      ]
+    },
+    {
+      "taskName": "Check against missing required parameters (taskName, key)",
+      "key": 77,
+      "topics": [
+        "Sanitize input"
+      ]
     }
   ]
 }
