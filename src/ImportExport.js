@@ -8,14 +8,13 @@ const ImportExport =(props) => {
     const fileInputRef = useRef(null);
 
 
-    const exportjson=()=>{
-        const jsonContent = JSON.stringify({topics,tasks});
-        const blob = new Blob([jsonContent], {type: "application/json"});
-        var a = document.createElement("a");
-        a.href = window.URL.createObjectURL(blob);
-        a.download = "tasks_topics.json";
-        a.click();
-    }
+
+    /*
+    /////////////
+    ///// YAML
+    ////////////////////
+    */
+
 
     const buildYAML_r=(subtopics,tasks,indent_level)=>{
         let YAMLstr = ''
@@ -27,22 +26,23 @@ const ImportExport =(props) => {
             if (indent_level ==0){
                 // console.log(subtopics)
                 // console.log('@ indent level 0')
-                YAMLstr = YAMLstr.concat(' '.repeat(4*indent_level) ,`${topic.title}:\n`)
+                YAMLstr = YAMLstr.concat(' '.repeat(4*indent_level) ,`'${topic.title}':\n`)
 
             }else{
-                YAMLstr = YAMLstr.concat(' '.repeat(4*indent_level) ,'- ' ,`${topic.title}:\n`)
+                YAMLstr = YAMLstr.concat(' '.repeat(4*indent_level) ,'- ' ,`'${topic.title}':\n`)
             }
             // Add all tasks in this subtopic to the YAML
             let relevant_tasks = tasks.filter((t)=>t.topics.includes(topic.title))
             for (let j=0;j<relevant_tasks.length;j++)
             {
                 let task = relevant_tasks[j]
-                YAMLstr = YAMLstr.concat(' '.repeat(4*(indent_level+1)),`- ${task.taskName}\n`)
+                YAMLstr = YAMLstr.concat(' '.repeat(4*(indent_level+1)),`- '${task.taskName}'\n`)
             }
-            if (relevant_tasks.length ==0)
-            {
-                YAMLstr = YAMLstr.concat(' '.repeat(4*(indent_level+1)),'- []\n')
-            }
+            // No need to add an empty task list
+            // if (relevant_tasks.length ==0)
+            // {
+            //     YAMLstr = YAMLstr.concat(' '.repeat(4*(indent_level+1)),'- []\n')
+            // }
             
             // Do the same for all the subtopics
             // Add
@@ -204,6 +204,21 @@ const ImportExport =(props) => {
         setTopics(res2);
         setTasks(importedTasks);
     }
+    /*
+    ///////////////////////////////////
+    ///////////// JSON
+    //////////////////////////////////////
+    */
+    const exportjson=()=>{
+        // Pretty print json (with 2 spaces as space parameter)
+        const jsonContent = JSON.stringify({topics,tasks},null,2);
+        const blob = new Blob([jsonContent], {type: "application/json"});
+        var a = document.createElement("a");
+        a.href = window.URL.createObjectURL(blob);
+        a.download = "tasks_topics.json";
+        a.click();
+    }
+
 
 
     // console.log(tasks[0].topics.includes(topics[0].title))

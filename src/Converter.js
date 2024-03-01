@@ -87,6 +87,7 @@ const convert_old_topic_tasks_to_new_topic_tasks=(topics,tasks)=>{
     let new_t = {name : t.taskName,
             id: t.key,
             completed:t.completed,
+            thisWeek:t.thisWeek,
             topics:t.topics.map((tt)=>get_topic_id(tt))}
     console.log(new_t)
     console.log(t)

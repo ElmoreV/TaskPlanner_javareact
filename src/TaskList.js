@@ -1,22 +1,16 @@
 import { useState} from 'react';
 import Task from './Task'
 import Topic from './Topic';
+// import Checkbox from './Checkbox'
 import {convert_old_topic_tasks_to_new_topic_tasks,
  convert_topic_tasks_to_relational} from './Converter';
 import ImportExport from './ImportExport';
 
-const TaskList = () => {
-    const [topics,setTopics] = useState([
-        {title:"Onderhoud",id:1,unfolded:false,subtopics:[
-            {title:"Vervangen",id:11,unfolded:false,subtopics:[]},
-            {title:"Repareren",id:12,unfolded:false,subtopics:[]},
-            
-        ]},
-        {title:"Ontspanning",id:2,unfolded:false,subtopics:[
-            {title:"Gamen",id:21,unfolded:false,subtopics:[]}
-        ]}
+const TaskList = (props) => {
+    const {tasks,setTasks,topics,setTopics} = props;
 
-    ]);
+
+    const [hideCompletedItems,setHideCompletedItems] = useState(false)
     const find_topic_by_key_r=(topics,topic_key)=>
     {
         console.log(topics);
@@ -38,13 +32,6 @@ const TaskList = () => {
     }
 
     
-    const [tasks,setTasks] = useState([
-        {taskName:"Fiets repareren",key:0,topics:["Repareren"],completed:true},
-        {taskName:"Outer Wilds",key:1, topics:["Gamen","Onderhoud"],completed:false},
-        {taskName:"Badkamer",key:2,topics:["Onderhoud"],completed:true},
-        {taskName:"Backup opruimen",key:5,topics:["Onderhoud"],completed:false},
-    ])
-
     const getFreeTaskKey=()=>{
         return 1+tasks.reduce((max_key,task)=>Math.max(max_key,task.key),0);
     }
@@ -244,6 +231,17 @@ const TaskList = () => {
         return completeTask;
     }
 
+    const getPlanTaskForWeek = (id)=>{
+        const planTaskForWeek = ()=>{
+            const newTasks = [...tasks]
+            const task_to_change = newTasks.find((task)=>task.key===id);
+            task_to_change.thisWeek = true;
+            setTasks(newTasks);
+        }
+        return planTaskForWeek
+    }
+
+
     const addTopic = ()=>
     {
         let newTopics = [...topics];
@@ -355,21 +353,28 @@ const TaskList = () => {
             ))}</ul>
             <ul key={topic.id+'_tasks'}>                
                 {topic.unfolded && tasks.map((task)=>(
-                (task.topics.includes(topic.id))?
+                (!(task.completed && hideCompletedItems) && task.topics.includes(topic.id))?
                 <li key={topic.id +' - '+task.id}>
                     <Task taskName={task.name} 
                     taskKey = {task.id}
+                    completed = {task.completed} 
+                    currentTopic = {topic.name}
                     setTaskName={getSetTaskNameFunc(task.id)}
                     deleteTask = {getDeleteTask(task.id)}
-                    completed = {task.completed} 
                     completeTask = {getCompleteTask(task.id)}
-                    currentTopic = {topic.name}
-                    changeTopic = {getChangeTaskTopic()}/>
+                    plan = {getPlanTaskForWeek(task.id)}
+                    planned = {task.thisWeek}
+                    changeTopic = {getChangeTaskTopic()}
+                    />
                 </li>:null))}
             </ul></div>
         )
     }
-
+    
+    
+    const onHideCompletedItemsChange=() =>{
+        setHideCompletedItems(!hideCompletedItems)
+    }
 
     const showTopics= ()=>
     {
@@ -380,7 +385,13 @@ const TaskList = () => {
     return ( 
     // <div>
         <div className='task-list'>
-        <button onClick = {addTopic}> Add New Root topic</button>
+        <button onClick = {addTopic}> Add New Root topic</button><br/>
+        <label><input
+        type="checkbox"
+        name='HideCompletedItems'
+        onChange={onHideCompletedItemsChange}
+        className="form-check-input"
+      />Hide completed tasks</label>
         <ul key='root_topics'>
         {showTopics()}
         </ul>

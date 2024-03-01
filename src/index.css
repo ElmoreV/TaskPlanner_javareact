@@ -26,6 +26,16 @@
   grid-row:2/4;
   
 }
+
+
+.planned-list{
+  max-width:1000px;
+  padding: 10px;
+  grid-column:2 / 13;
+  grid-row:2/4;
+  
+}
+
 ul{
   list-style-type:none;
   padding-left:20px;
@@ -66,7 +76,7 @@ button.topicDelete{
 }
 
 .task{
-  max-width:500px;
+  max-width:800px;
   padding:10px;
   padding-left:20px;
   margin: 1px 0;
@@ -107,7 +117,7 @@ button.topicDelete{
 }
 
 .taskCompleted{
-  max-width:500px;
+  max-width:800px;
   padding:10px;
   padding-left:20px;
   margin: 1px 0;
@@ -122,6 +132,23 @@ button.topicDelete{
 
 }
 
+.taskPlanned{
+  max-width:800px;
+  padding:10px;
+  padding-left:20px;
+  margin: 1px 0;
+  background: linear-gradient(
+    to right,
+    rgb(105, 205, 255) 0%,
+    rgb(155, 243, 255) 60%,
+    rgb(151, 234, 255) 70%,
+    rgb(0, 166, 255) 100%
+  );
+  border-radius:3px 3px 3px 20px;
+
+}
+
+
 span.green {
   color : green;
 }
@@ -131,6 +158,9 @@ span.blue {
 }
 
 button.taskDelete{
+  float:right;
+}
+button.moveToWeek{
   float:right;
 }
 button.taskComplete{

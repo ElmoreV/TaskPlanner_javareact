@@ -2,11 +2,13 @@ import {useState} from 'react';
 import PropTypes from 'prop-types';
 
 const Task = (props) => {
-    const {taskKey,taskName,setTaskName,deleteTask,completed,completeTask,currentTopic,changeTopic} = props;
+    const {taskKey,taskName,setTaskName,deleteTask,completed,completeTask,currentTopic,changeTopic,planned,plan} = props;
+    
     const [isEditing,setIsEditing] = useState(false);
     const [color,setColor] = useState('green');
     const [isDragging,setIsDragging] = useState(false);
     const [isDraggingAllowed,setIsDraggingAllowed]=useState(true);
+    
     const handleChange=(e)=>{
         console.log(e.target.value);
         setTaskName(e.target.value);
@@ -37,7 +39,8 @@ const Task = (props) => {
         setColor('yellow')
         var key = e.dataTransfer.getData("Text")
         var oldTopic = e.dataTransfer.getData("Text2")
-        changeTopic(key,oldTopic,currentTopic)
+        if (changeTopic){
+        changeTopic(key,oldTopic,currentTopic)}
     }
     const handleDragOver = (e)=>{
         e.preventDefault();
@@ -51,6 +54,10 @@ const Task = (props) => {
         setColor('gray');        
     }
 
+    const moveToWeek = ()=>{
+        plan()
+    }
+
     const handleBlur = () => {
         setIsDraggingAllowed(true);
         setIsEditing(false);
@@ -59,9 +66,12 @@ const Task = (props) => {
     let class_str = 'task'
     if (completed)
     {class_str = 'taskCompleted'}
+    if (planned)
+    {class_str = 'taskPlanned'}
 
     const dragHandlers = isDraggingAllowed?{draggable:true,onDragStart:handleDragStart,onDragEnd:handleDragEnd}:{};
     const dropHandlers = isDragging?{}:{onDrop:handleDrop,onDragOver:handleDragOver, onDragLeave:handleDragLeave};
+
 
     return ( <div className={class_str} 
     onDoubleClick={toggleEdit} 
@@ -72,21 +82,22 @@ const Task = (props) => {
             value ={taskName}
             onChange={handleChange}
             onBlur={handleBlur}/>:
+    //  <span style={{color : color}}>{taskName}</span>
      <span style={{color : color}}>{taskName}</span>
      }
-     <button className='taskDelete' onClick={deleteTask && deleteTask}>Delete</button>
-     {!completed?
-     <button className='taskComplete' onClick={completeTask && completeTask}>Complete</button>:
-     <button className='taskComplete' onClick={completeTask && completeTask}>Decomplete</button>}
+     {deleteTask && (<button className='taskDelete' onClick={deleteTask && deleteTask}>Delete</button>)}
+    {!completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Complete</button>)}
+    {completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Decomplete</button>)} 
+     {plan && (<button className='moveToWeek' onClick={moveToWeek}> Plan for this week </button>)}
      </div>);
 }
 
 Task.propTypes = {
     taskName: PropTypes.string.isRequired,
-    setTaskName: PropTypes.func.isRequired,
-    deleteTask: PropTypes.func.isRequired,
+    setTaskName: PropTypes.func,
+    deleteTask: PropTypes.func,
     completed: PropTypes.bool.isRequired,
-    completeTask: PropTypes.func.isRequired
+    completeTask: PropTypes.func
 };
 
 
