@@ -3,7 +3,8 @@ import Task from './Task'
 import Topic from './Topic';
 // import Checkbox from './Checkbox'
 import {convert_old_topic_tasks_to_new_topic_tasks,
- convert_topic_tasks_to_relational} from './Converter';
+ convert_topic_tasks_to_relational,
+ convert_new_topic_tasks_to_old_topic_tasks} from './Converter';
 import ImportExport from './ImportExport';
 
 const TaskList = (props) => {
@@ -347,11 +348,20 @@ const TaskList = (props) => {
 
     const converter_callback = ()=>{
         let [topics2,tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics,tasks)
-        let tables = convert_topic_tasks_to_relational(topics2,tasks2)
-        console.log('res')
-        console.log(topics2)
-        console.log(tasks2)
-        console.log(tables)
+        let [topics3,tasks3] = convert_new_topic_tasks_to_old_topic_tasks(topics2,tasks2)
+        console.log(tasks,tasks3)
+        console.log('Boy oh boy')
+        for (let i=0;i<tasks.length;i++)
+        {
+            console.log(tasks[i])
+            console.log(tasks2[i])
+            console.log(tasks3[i])
+        }
+        // let tables = convert_topic_tasks_to_relational(topics2,tasks2)
+        // console.log('res')
+        // console.log(topics2)
+        // console.log(tasks2)
+        // console.log(tables)
     }
 
     const recursiveShowTopic = (topic,tasks)=>

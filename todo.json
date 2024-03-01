@@ -1,28 +1,28 @@
 {
   "topics": [
     {
-      "title": "Features",
+      "name": "Features",
       "id": 1,
       "unfolded": true,
       "subtopics": [
         {
-          "title": "Database interaction",
+          "name": "Database interaction",
           "id": 3,
           "unfolded": true,
           "subtopics": [
             {
-              "title": "Migration to schema.v1",
+              "name": "Migration to schema.v1",
               "id": 8,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
-              "title": "Importing/Exporting",
+              "name": "Importing/Exporting",
               "id": 9,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": [
                 {
-                  "title": "Sanitize input",
+                  "name": "Sanitize input",
                   "id": 14,
                   "unfolded": true,
                   "subtopics": []
@@ -30,7 +30,7 @@
               ]
             },
             {
-              "title": "Data structure conversion",
+              "name": "Data structure conversion",
               "id": 13,
               "unfolded": true,
               "subtopics": []
@@ -38,12 +38,12 @@
           ]
         },
         {
-          "title": "Per Topic View",
+          "name": "Per Topic View",
           "id": 4,
           "unfolded": true,
           "subtopics": [
             {
-              "title": "Future",
+              "name": "Future",
               "id": 10,
               "unfolded": true,
               "subtopics": []
@@ -51,26 +51,26 @@
           ]
         },
         {
-          "title": "Weekly Tasks View",
+          "name": "Weekly Tasks View",
           "id": 5,
           "unfolded": true,
           "subtopics": []
         },
         {
-          "title": "Daily Task View",
+          "name": "Daily Task View",
           "id": 6,
           "unfolded": true,
           "subtopics": []
         },
         {
-          "title": "General",
+          "name": "General",
           "id": 7,
           "unfolded": true,
           "subtopics": [
             {
-              "title": "Future2",
+              "name": "Future2",
               "id": 11,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             }
           ]
@@ -78,13 +78,13 @@
       ]
     },
     {
-      "title": "Constraints",
+      "name": "Constraints",
       "id": 2,
       "unfolded": false,
       "subtopics": []
     },
     {
-      "title": "Bugs/issues",
+      "name": "Bugs/issues",
       "id": 12,
       "unfolded": false,
       "subtopics": []
@@ -92,574 +92,576 @@
   ],
   "tasks": [
     {
-      "taskName": "Have topics and subtopics show up",
-      "key": 1,
+      "name": "Have topics and subtopics show up",
+      "id": 1,
+      "completed": true,
       "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Have tasks show up under the right topic",
-      "key": 2,
-      "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Allow the topics to drop down and collapse",
-      "key": 3,
-      "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Add icon (> or V) for drop down and collapse",
-      "key": 4,
-      "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Editable task names",
-      "key": 5,
-      "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Gitify this project",
-      "key": 6,
-      "topics": [
-        "General"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "\"Delete task\" button",
-      "key": 7,
-      "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "\"Add task\" button",
-      "key": 8,
-      "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "\"Task completion\" button",
-      "key": 9,
-      "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Make topic name editable (doubleclick)",
-      "key": 10,
-      "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Make tasks draggeable to other task lists",
-      "key": 11,
-      "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Make tasks draggeable to topics",
-      "key": 12,
-      "topics": [
-        "Per Topic View"
+        4
       ]
     },
     {
-      "taskName": "Make topics draggable to other topics",
-      "key": 13,
+      "name": "Have tasks show up under the right topic",
+      "id": 2,
+      "completed": true,
       "topics": [
-        "Per Topic View"
+        4
       ]
     },
     {
-      "taskName": "Allow export of tasks as JSON",
-      "key": 14,
+      "name": "Allow the topics to drop down and collapse",
+      "id": 3,
+      "completed": true,
       "topics": [
-        "Importing/Exporting"
-      ],
-      "completed": true
+        4
+      ]
     },
     {
-      "taskName": "Allow import of tasks as JSON",
-      "key": 15,
+      "name": "Add icon (> or V) for drop down and collapse",
+      "id": 4,
+      "completed": true,
       "topics": [
-        "Importing/Exporting"
-      ],
-      "completed": true
+        4
+      ]
     },
     {
-      "taskName": "Allow export of tasks as YAML",
-      "key": 16,
+      "name": "Editable task names",
+      "id": 5,
+      "completed": true,
       "topics": [
-        "Importing/Exporting"
-      ],
-      "completed": true
+        4
+      ]
     },
     {
-      "taskName": "Allow import of tasks as YAML",
-      "key": 17,
+      "name": "Gitify this project",
+      "id": 6,
+      "completed": true,
       "topics": [
-        "Importing/Exporting"
-      ],
-      "completed": true
+        7
+      ]
     },
     {
-      "taskName": "Allow deletion of Topics",
-      "key": 18,
+      "name": "\"Delete task\" button",
+      "id": 7,
+      "completed": true,
       "topics": [
-        "Per Topic View"
-      ],
+        4
+      ]
+    },
+    {
+      "name": "\"Add task\" button",
+      "id": 8,
+      "completed": true,
+      "topics": [
+        4
+      ]
+    },
+    {
+      "name": "\"Task completion\" button",
+      "id": 9,
+      "completed": true,
+      "topics": [
+        4
+      ]
+    },
+    {
+      "name": "Make topic name editable (doubleclick)",
+      "id": 10,
+      "completed": true,
+      "topics": [
+        4
+      ]
+    },
+    {
+      "name": "Make tasks draggeable to other task lists",
+      "id": 11,
+      "completed": true,
+      "topics": [
+        4
+      ]
+    },
+    {
+      "name": "Make tasks draggeable to topics",
+      "id": 12,
+      "topics": [
+        4
+      ]
+    },
+    {
+      "name": "Make topics draggable to other topics",
+      "id": 13,
+      "topics": [
+        4
+      ]
+    },
+    {
+      "name": "Allow export of tasks as JSON",
+      "id": 14,
+      "completed": true,
+      "topics": [
+        9
+      ]
+    },
+    {
+      "name": "Allow import of tasks as JSON",
+      "id": 15,
+      "completed": true,
+      "topics": [
+        9
+      ]
+    },
+    {
+      "name": "Allow export of tasks as YAML",
+      "id": 16,
+      "completed": true,
+      "topics": [
+        9
+      ]
+    },
+    {
+      "name": "Allow import of tasks as YAML",
+      "id": 17,
+      "completed": true,
+      "topics": [
+        9
+      ]
+    },
+    {
+      "name": "Allow deletion of Topics",
+      "id": 18,
+      "completed": true,
       "thisWeek": true,
-      "completed": true
-    },
-    {
-      "taskName": "Understand useRef",
-      "key": 19,
       "topics": [
-        "General"
+        4
       ]
     },
     {
-      "taskName": "Understand FileReader",
-      "key": 20,
+      "name": "Understand useRef",
+      "id": 19,
       "topics": [
-        "General"
+        7
       ]
     },
     {
-      "taskName": "Change schema terminology to id,name,...",
-      "key": 21,
+      "name": "Understand FileReader",
+      "id": 20,
       "topics": [
-        "General"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "(tasks,topics).v1 to (relational.tasks/topics)",
-      "key": 22,
-      "topics": [
-        "Data structure conversion"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "(tasks,topics).v1 to (hierarchical.topics+tasks)",
-      "key": 23,
-      "topics": [
-        "Data structure conversion"
+        7
       ]
     },
     {
-      "taskName": "(tasks,topics).v0 to (task,topics).v1",
-      "key": 24,
+      "name": "Change schema terminology to id,name,...",
+      "id": 21,
+      "completed": true,
       "topics": [
-        "Data structure conversion"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "(relational.tasks/topics) to (tasks,topics).v1",
-      "key": 25,
-      "topics": [
-        "Data structure conversion"
+        7
       ]
     },
     {
-      "taskName": " (hierarchical.topics+tasks) to (tasks,topics).v1",
-      "key": 26,
+      "name": "(tasks,topics).v1 to (relational.tasks/topics)",
+      "id": 22,
+      "completed": true,
       "topics": [
-        "Data structure conversion"
+        13
       ]
     },
     {
-      "taskName": "(task,topics).v1 to (tasks,topics).v0",
-      "key": 27,
+      "name": "(tasks,topics).v1 to (hierarchical.topics+tasks)",
+      "id": 23,
       "topics": [
-        "Data structure conversion"
+        13
       ]
     },
     {
-      "taskName": "Rendering",
-      "key": 28,
+      "name": "(tasks,topics).v0 to (task,topics).v1",
+      "id": 24,
+      "completed": true,
       "topics": [
-        "Migration to schema.v1"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Export/Import",
-      "key": 29,
-      "topics": [
-        "Migration to schema.v1"
+        13
       ]
     },
     {
-      "taskName": "Adding/deleting/modifying tasks",
-      "key": 30,
+      "name": "(relational.tasks/topics) to (tasks,topics).v1",
+      "id": 25,
       "topics": [
-        "Migration to schema.v1"
+        13
       ]
     },
     {
-      "taskName": "Task.js",
-      "key": 31,
+      "name": " (hierarchical.topics+tasks) to (tasks,topics).v1",
+      "id": 26,
       "topics": [
-        "Migration to schema.v1"
+        13
       ]
     },
     {
-      "taskName": "Adding/deleting/modifying topics",
-      "key": 32,
+      "name": "(task,topics).v1 to (tasks,topics).v0",
+      "id": 27,
+      "completed": true,
       "topics": [
-        "Migration to schema.v1"
+        13
       ]
     },
     {
-      "taskName": "Topic.js",
-      "key": 33,
+      "name": "Rendering",
+      "id": 28,
+      "completed": true,
       "topics": [
-        "Migration to schema.v1"
+        8
       ]
     },
     {
-      "taskName": "Default example",
-      "key": 34,
+      "name": "Export/Import",
+      "id": 29,
+      "completed": true,
       "topics": [
-        "Migration to schema.v1"
+        8
       ]
     },
     {
-      "taskName": "Detection of JSON or YAML at import ",
-      "key": 35,
+      "name": "Adding/deleting/modifying tasks",
+      "id": 30,
       "topics": [
-        "Importing/Exporting"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Drag tasks to change the order in task list",
-      "key": 36,
-      "topics": [
-        "Future"
+        8
       ]
     },
     {
-      "taskName": "When text doubleclicked: focus immediately on text input",
-      "key": 37,
+      "name": "Task.js",
+      "id": 31,
       "topics": [
-        "Future"
+        8
       ]
     },
     {
-      "taskName": "Prettify text input for tasks",
-      "key": 38,
+      "name": "Adding/deleting/modifying topics",
+      "id": 32,
       "topics": [
-        "Future"
+        8
       ]
     },
     {
-      "taskName": "When enter is pressed: finish editing",
-      "key": 39,
+      "name": "Topic.js",
+      "id": 33,
       "topics": [
-        "Future"
+        8
       ]
     },
     {
-      "taskName": "Improve collapse and dropdown icon",
-      "key": 40,
+      "name": "Default example",
+      "id": 34,
       "topics": [
-        "Future"
+        8
       ]
     },
     {
-      "taskName": "\"Delete task\" icon",
-      "key": 41,
+      "name": "Detection of JSON or YAML at import ",
+      "id": 35,
+      "completed": true,
       "topics": [
-        "Future"
+        9
       ]
     },
     {
-      "taskName": "\"Add task\" icon",
-      "key": 42,
+      "name": "Drag tasks to change the order in task list",
+      "id": 36,
       "topics": [
-        "Future"
+        10
       ]
     },
     {
-      "taskName": "Animate collapse and dropdown",
-      "key": 43,
+      "name": "When text doubleclicked: focus immediately on text input",
+      "id": 37,
       "topics": [
-        "Future"
+        10
       ]
     },
     {
-      "taskName": "Allow subtasks",
-      "key": 44,
+      "name": "Prettify text input for tasks",
+      "id": 38,
       "topics": [
-        "Future2"
+        10
       ]
     },
     {
-      "taskName": "Do not allow two topics to have the same name",
-      "key": 45,
+      "name": "When enter is pressed: finish editing",
+      "id": 39,
       "topics": [
-        "Bugs/issues"
+        10
       ]
     },
     {
-      "taskName": "Text edit should not lag, but it does now",
-      "key": 46,
+      "name": "Improve collapse and dropdown icon",
+      "id": 40,
       "topics": [
-        "Constraints"
+        10
       ]
     },
     {
-      "taskName": "Search engine for tasks/topics",
-      "key": 47,
+      "name": "\"Delete task\" icon",
+      "id": 41,
       "topics": [
-        "Future2"
+        10
       ]
     },
     {
-      "taskName": "Create a history of updates (create undo button)",
-      "key": 48,
+      "name": "\"Add task\" icon",
+      "id": 42,
       "topics": [
-        "Future2"
+        10
       ]
     },
     {
-      "taskName": "Add comments to tasks/topics",
-      "key": 49,
+      "name": "Animate collapse and dropdown",
+      "id": 43,
       "topics": [
-        "Future2"
+        10
       ]
     },
     {
-      "taskName": "Open tasks/topics to have a task/topic card",
-      "key": 50,
+      "name": "Allow subtasks",
+      "id": 44,
       "topics": [
-        "Future2"
+        11
       ]
     },
     {
-      "taskName": "Add hyperlink suport to tasks/topics",
-      "key": 51,
+      "name": "Do not allow two topics to have the same name",
+      "id": 45,
       "topics": [
-        "Future2"
+        12
       ]
     },
     {
-      "taskName": "Save output in markdown",
-      "key": 52,
+      "name": "Text edit should not lag, but it does now",
+      "id": 46,
       "topics": [
-        "Future2"
+        2
       ]
     },
     {
-      "taskName": "List all the tasks that are planned for this week",
-      "key": 53,
+      "name": "Search engine for tasks/topics",
+      "id": 47,
       "topics": [
-        "Weekly Tasks View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Make tasks importable from Weekly View",
-      "key": 54,
-      "topics": [
-        "Daily Task View"
+        11
       ]
     },
     {
-      "taskName": "Hide completed tasks",
-      "key": 55,
+      "name": "Create a history of updates (create undo button)",
+      "id": 48,
       "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Allow keyboard-only mode",
-      "key": 56,
-      "topics": [
-        "General"
+        11
       ]
     },
     {
-      "taskName": "Test tasks with empty string",
-      "key": 57,
+      "name": "Add comments to tasks/topics",
+      "id": 49,
       "topics": [
-        "Bugs/issues"
+        11
       ]
     },
     {
-      "taskName": "Make Tasks duplicatable to multiple topics",
-      "key": 58,
+      "name": "Open tasks/topics to have a task/topic card",
+      "id": 50,
       "topics": [
-        "Future"
+        11
       ]
     },
     {
-      "taskName": "Make the tasks to have a good width. Automatic? Multiline? Text cut-off?",
-      "key": 59,
+      "name": "Add hyperlink suport to tasks/topics",
+      "id": 51,
       "topics": [
-        "Per Topic View"
+        11
       ]
     },
     {
-      "taskName": "Allow new subtopics to be created",
-      "key": 60,
+      "name": "Save output in markdown",
+      "id": 52,
       "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Allow root topics to be created",
-      "key": 61,
-      "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Create simple example tasks/topics",
-      "key": 62,
-      "topics": [
-        "Database interaction"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Create this Todo-list in the TaskPlanner",
-      "key": 63,
-      "topics": [
-        "General"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Remove the empty lists from the YAML-export",
-      "key": 64,
-      "topics": [
-        "Bugs/issues"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Find a way to add task/topic id into the YAML",
-      "key": 65,
-      "topics": [
-        "Importing/Exporting"
+        11
       ]
     },
     {
-      "taskName": "Properly handle escaped characters in YAML",
-      "key": 66,
+      "name": "List all the tasks that are planned for this week",
+      "id": 53,
+      "completed": true,
       "topics": [
-        "Bugs/issues"
+        5
       ]
     },
     {
-      "taskName": "List the topic(s) +subtopic(s) that the task belongs to",
-      "key": 67,
+      "name": "Make tasks importable from Weekly View",
+      "id": 54,
       "topics": [
-        "Weekly Tasks View"
+        6
       ]
     },
     {
-      "taskName": "Add a way to add the task to the current Weekly View",
-      "key": 68,
+      "name": "Hide completed tasks",
+      "id": 55,
+      "completed": true,
       "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Add a way to remove the task from the weekly view",
-      "key": 69,
-      "topics": [
-        "Weekly Tasks View"
+        4
       ]
     },
     {
-      "taskName": "Allow reordering the weekly view tasks",
-      "key": 70,
+      "name": "Allow keyboard-only mode",
+      "id": 56,
       "topics": [
-        "Weekly Tasks View"
+        7
       ]
     },
     {
-      "taskName": "Add button the clear weekly view",
-      "key": 71,
+      "name": "Test tasks with empty string",
+      "id": 57,
       "topics": [
-        "Weekly Tasks View"
+        12
       ]
     },
     {
-      "taskName": "Add button to clear all completed items",
-      "key": 72,
+      "name": "Make Tasks duplicatable to multiple topics",
+      "id": 58,
       "topics": [
-        "Weekly Tasks View"
+        10
       ]
     },
     {
-      "taskName": "Make visible which Tasks are planned for this week",
-      "key": 73,
+      "name": "Make the tasks to have a good width. Automatic? Multiline? Text cut-off?",
+      "id": 59,
       "topics": [
-        "Per Topic View"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Prettify the output JSON to make it more git-friendly",
-      "key": 74,
-      "topics": [
-        "Importing/Exporting"
-      ],
-      "completed": true
-    },
-    {
-      "taskName": "Check against duplicate keys",
-      "key": 75,
-      "topics": [
-        "Sanitize input"
+        4
       ]
     },
     {
-      "taskName": "Check against missing optional parameters (completed etc.)",
-      "key": 76,
+      "name": "Allow new subtopics to be created",
+      "id": 60,
+      "completed": true,
       "topics": [
-        "Sanitize input"
+        4
       ]
     },
     {
-      "taskName": "Check against missing required parameters (taskName, key)",
-      "key": 77,
+      "name": "Allow root topics to be created",
+      "id": 61,
+      "completed": true,
       "topics": [
-        "Sanitize input"
+        4
+      ]
+    },
+    {
+      "name": "Create simple example tasks/topics",
+      "id": 62,
+      "completed": true,
+      "topics": [
+        3
+      ]
+    },
+    {
+      "name": "Create this Todo-list in the TaskPlanner",
+      "id": 63,
+      "completed": true,
+      "topics": [
+        7
+      ]
+    },
+    {
+      "name": "Remove the empty lists from the YAML-export",
+      "id": 64,
+      "completed": true,
+      "topics": [
+        12
+      ]
+    },
+    {
+      "name": "Find a way to add task/topic id into the YAML",
+      "id": 65,
+      "topics": [
+        9
+      ]
+    },
+    {
+      "name": "Properly handle escaped characters in YAML",
+      "id": 66,
+      "topics": [
+        12
+      ]
+    },
+    {
+      "name": "List the topic(s) +subtopic(s) that the task belongs to",
+      "id": 67,
+      "topics": [
+        5
+      ]
+    },
+    {
+      "name": "Add a way to add the task to the current Weekly View",
+      "id": 68,
+      "completed": true,
+      "topics": [
+        4
+      ]
+    },
+    {
+      "name": "Add a way to remove the task from the weekly view",
+      "id": 69,
+      "topics": [
+        5
+      ]
+    },
+    {
+      "name": "Allow reordering the weekly view tasks",
+      "id": 70,
+      "topics": [
+        5
+      ]
+    },
+    {
+      "name": "Add button the clear weekly view",
+      "id": 71,
+      "topics": [
+        5
+      ]
+    },
+    {
+      "name": "Add button to clear all completed items",
+      "id": 72,
+      "topics": [
+        5
+      ]
+    },
+    {
+      "name": "Make visible which Tasks are planned for this week",
+      "id": 73,
+      "completed": true,
+      "topics": [
+        4
+      ]
+    },
+    {
+      "name": "Prettify the output JSON to make it more git-friendly",
+      "id": 74,
+      "completed": true,
+      "topics": [
+        9
+      ]
+    },
+    {
+      "name": "Check against duplicate keys",
+      "id": 75,
+      "topics": [
+        14
+      ]
+    },
+    {
+      "name": "Check against missing optional parameters (completed etc.)",
+      "id": 76,
+      "topics": [
+        14
+      ]
+    },
+    {
+      "name": "Check against missing required parameters (taskName, key)",
+      "id": 77,
+      "topics": [
+        14
       ]
     }
   ]

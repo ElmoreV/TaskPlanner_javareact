@@ -98,8 +98,57 @@ const convert_old_topic_tasks_to_new_topic_tasks=(topics,tasks)=>{
    return [new_topics,new_tasks]
 }
 
-const convert_new_topic_tasks_to_old_topic_tasks=(topic,tasks)=>{
-    return
+const convert_new_topic_tasks_to_old_topic_tasks=(topics,tasks)=>{
+
+    console.log('New to old conversion')
+    let old_topics = []
+    let old_tasks = []
+    let topics_table ={name:[],id:[]}
+    /*
+    // Recurse through topics
+    // for every topic, save it in the topics_table (topic_name, topic_id)
+    // copy over topic.title to topic.name
+    // copy over topic.id and topic.unfolded
+    */
+    const recurse_topics =(subtopic)=>{
+        var old_topic = {title:subtopic.name,
+                id:subtopic.id,
+                unfolded:subtopic.unfolded,
+                subtopics:[]}
+        topics_table.name = topics_table.name.concat(subtopic.name)
+        topics_table.id = topics_table.id.concat(subtopic.id)
+        old_topic.subtopics =subtopic.subtopics.map((t)=>{return recurse_topics(t)})
+        return old_topic
+   }
+   old_topics = topics.map((t)=>{return recurse_topics(t)})
+
+    /*
+    // every task:
+    // copy over taskName to name
+    // copy over key to id
+    // copy over completed
+    // find the topic_id for every topic_name in topics 
+    */
+   const get_topic_name=(tt)=>
+   {
+    //idx= topics_table.name.findIndex(tt)
+    let idx = topics_table.id.findIndex((ttt)=>ttt==tt)
+    return topics_table.name[idx]
+    // return topics_table.id[idx]
+   }
+   const handle_task=(t)=>{
+    let old_t = {taskName : t.name,
+            key: t.id,
+            completed:t.completed,
+            thisWeek:t.thisWeek,
+            topics:t.topics.map((tt)=>get_topic_name(tt))}
+    console.log(old_t)
+    console.log(t)
+    return old_t
+   }
+   old_tasks = tasks.map((t)=>(handle_task(t)))
+   console.log(old_tasks)
+   return [old_topics,old_tasks]
 }
 
 const convert_relational_to_topic_tasks=(topic_table,topic_subtopic_table,
@@ -192,3 +241,4 @@ const convert_topic_tasks_to_relational=(topics,tasks)=>{
 export default convert_old_topic_tasks_to_new_topic_tasks;
 export {convert_topic_tasks_to_relational};
 export {convert_old_topic_tasks_to_new_topic_tasks};
+export {convert_new_topic_tasks_to_old_topic_tasks};

@@ -1,5 +1,7 @@
 import { useState, useRef} from 'react';
 import YAML from 'yaml';
+import {convert_old_topic_tasks_to_new_topic_tasks,
+    convert_new_topic_tasks_to_old_topic_tasks} from './Converter';
 
 
 const ImportExport =(props) => {
@@ -210,8 +212,12 @@ const ImportExport =(props) => {
     //////////////////////////////////////
     */
     const exportjson=()=>{
+
+        // Remove this line to output in the old format
+        let [new_topics,new_tasks] = convert_old_topic_tasks_to_new_topic_tasks(topics,tasks)
+
         // Pretty print json (with 2 spaces as space parameter)
-        const jsonContent = JSON.stringify({topics,tasks},null,2);
+        const jsonContent = JSON.stringify({topics: new_topics,tasks:new_tasks},null,2);
         const blob = new Blob([jsonContent], {type: "application/json"});
         var a = document.createElement("a");
         a.href = window.URL.createObjectURL(blob);
@@ -224,11 +230,20 @@ const ImportExport =(props) => {
     // console.log(tasks[0].topics.includes(topics[0].title))
     const importjson=(jsonStr)=>{
         const uploadedData = JSON.parse(jsonStr);
-        console.log(uploadedData.topics);
-        console.log(uploadedData.tasks);
+        // As loaded (may be new format, may be old format)
+        // setTopics(uploadedData.topics);
+        // setTasks(uploadedData.tasks);
+
+        // Load as old format
+        let [old_topics,old_tasks] = convert_new_topic_tasks_to_old_topic_tasks(uploadedData.topics,
+            uploadedData.tasks)
+        console.log('Imported topics/tasks')
+        console.log(old_topics);
+        console.log(old_tasks);
         
-        setTopics(uploadedData.topics);
-        setTasks(uploadedData.tasks);
+        setTopics(old_topics)
+        setTasks(old_tasks)
+
     };
     // const [file,setFile] = useState(null);
 
