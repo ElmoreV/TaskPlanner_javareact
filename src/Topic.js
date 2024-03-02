@@ -13,7 +13,7 @@ const Topic = (props) => {
         // If the value of the topic title is update:
         // update all tasks to be a member of the new topic name
         // update the topic name
-        console.log(e.target.value);
+        console.info(e.target.value);
         updateTaskTopics(e.target.value);
         setTopicName(e.target.value);
         
@@ -42,7 +42,7 @@ const Topic = (props) => {
     };
 
     const handleDeleteClick = (e) => {
-        console.log('clock')
+        console.info('clock')
         e.stopPropagation();
         deleteTopic();
     };

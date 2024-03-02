@@ -14,16 +14,16 @@ const TaskList = (props) => {
     const [hideCompletedItems,setHideCompletedItems] = useState(false)
     const find_topic_by_key_r=(topics,topic_key)=>
     {
-        console.log(topics);
+        console.debug(topics);
         for (let topic of topics)
         {
-            console.log(topic.id);
+            console.debug(topic.id);
             if (topic.id === topic_key)
-            {console.log('Fount it!');
+            {console.debug('Fount it!');
                 return topic;}
             let topic_res =  find_topic_by_key_r(topic.subtopics,topic_key);
             if (topic_res)
-                {console.log('Bubble up');return topic_res;}
+                {console.debug('Bubble up');return topic_res;}
         }
         return null;
     }
@@ -34,16 +34,16 @@ const TaskList = (props) => {
 
     const find_topic_by_name_r=(topics,topic_name)=>
     {
-        console.log(topics);
+        console.debug(topics);
         for (let topic of topics)
         {
-            console.log(topic.name);
+            console.debug(topic.name);
             if (topic.title === topic_name)
-            {console.log('Fount it!');
+            {console.debug('Fount it!');
                 return topic;}
             let topic_res =  find_topic_by_name_r(topic.subtopics,topic_name);
             if (topic_res)
-                {console.log('Bubble up');return topic_res;}
+                {console.debug('Bubble up');return topic_res;}
         }
         return null;
     }
@@ -216,7 +216,7 @@ const TaskList = (props) => {
 
 
     const getDeleteTopic = (id)=>{
-        console.log('Creating delete topic thingy')
+        console.debug('Creating delete topic thingy')
         const deleteTopic = ()=>
         {
 
@@ -231,8 +231,8 @@ const TaskList = (props) => {
             let newTasks = [...tasks]
             // all_subtopics = newTopics.
             newTasks = newTasks.filter((task)=>isTaskInAnyTopic(task,newTopics))
-            console.log('Length of tasks before deletion/length of tasks after deletion')
-            console.log(tasks.length+' / '+newTasks.length)
+            console.info('Length of tasks before deletion/length of tasks after deletion')
+            console.info(tasks.length+' / '+newTasks.length)
 
             setTopics(newTopics);           
             setTasks(newTasks);
@@ -277,7 +277,7 @@ const TaskList = (props) => {
         let newTopics = [...topics];
         const addedTopic = {title:`New Topic ${getFreeTopicKey()}`,id:getFreeTopicKey(),unfolded:false,subtopics:[]}
         newTopics.push(addedTopic);
-        console.log(newTopics);
+        console.debug(newTopics);
         setTopics(newTopics);
     }
 
@@ -371,9 +371,9 @@ const TaskList = (props) => {
         // 3. Show all tasks
 
         // Do not show subtopics when Topic is folded
-        console.log('Hello2')
-        console.log(topics)
-        console.log(topic)
+        console.debug('Hello2')
+        console.debug(topics)
+        console.debug(topic)
         
 
         return (<div><li key={topic.id}>
@@ -417,7 +417,7 @@ const TaskList = (props) => {
 
     const showTopics= ()=>
     {
-        console.log('Hello')
+        console.info('Re-rendering task list')
         let [topics2,tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics,tasks);
         return topics2.map((topic)=>( recursiveShowTopic(topic,tasks2)))
     }

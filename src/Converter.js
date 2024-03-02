@@ -89,12 +89,12 @@ const convert_old_topic_tasks_to_new_topic_tasks=(topics,tasks)=>{
             completed:t.completed,
             thisWeek:t.thisWeek,
             topics:t.topics.map((tt)=>get_topic_id(tt))}
-    console.log(new_t)
-    console.log(t)
+    console.debug(new_t)
+    console.debug(t)
     return new_t
    }
    new_tasks = tasks.map((t)=>(handle_task(t)))
-   console.log(new_tasks)
+   console.debug(new_tasks)
    return [new_topics,new_tasks]
 }
 
@@ -142,12 +142,12 @@ const convert_new_topic_tasks_to_old_topic_tasks=(topics,tasks)=>{
             completed:t.completed,
             thisWeek:t.thisWeek,
             topics:t.topics.map((tt)=>get_topic_name(tt))}
-    console.log(old_t)
-    console.log(t)
+    console.debug(old_t)
+    console.debug(t)
     return old_t
    }
    old_tasks = tasks.map((t)=>(handle_task(t)))
-   console.log(old_tasks)
+   console.debug(old_tasks)
    return [old_topics,old_tasks]
 }
 
@@ -193,8 +193,8 @@ const convert_topic_tasks_to_relational=(topics,tasks)=>{
    const get_topic_id=(topic_name)=>
    {
     //idx= topics_table.name.findIndex(tt)
-    console.log(topic_name)
-    console.log(topic_table.name)
+    console.debug(topic_name)
+    console.debug(topic_table.name)
     let idx = topic_table.name.findIndex((ttt)=>ttt==topic_name)
     return topic_table.id[idx]
     // return topics_table.id[idx]

@@ -10,7 +10,7 @@ const Task = (props) => {
     const [isDraggingAllowed,setIsDraggingAllowed]=useState(true);
     
     const handleChange=(e)=>{
-        console.log(e.target.value);
+        console.info(e.target.value);
         setTaskName(e.target.value);
     }
 
@@ -35,7 +35,7 @@ const Task = (props) => {
     const handleDrop = (e)=>{
         e.preventDefault()
         e.target.setAttribute('draggedOver',false)
-        console.log('drop')
+        console.info('drop')
         setColor('yellow')
         var key = e.dataTransfer.getData("Text")
         var oldTopic = e.dataTransfer.getData("Text2")
