@@ -20,7 +20,7 @@ const ImportExport =(props) => {
 
     const buildYAML_r=(subtopics,tasks,indent_level)=>{
         let YAMLstr = ''
-        console.log(YAMLstr)
+        console.debug(YAMLstr)
         // console.log(subtopics)
         for (let i =0;i<subtopics.length; i++){
             // Add topic name as key
@@ -81,9 +81,9 @@ const ImportExport =(props) => {
         // Expected:
         // - Name: '
         console.log('Parsing YAML')
-        console.log(YAMLstr)
+        console.info(YAMLstr)
         let res = YAML.parse(YAMLstr)
-        console.log(res)
+        console.info(res)
         let importedTasks = []
         let importedTopics = []
         const getFreeImportedTaskKey=()=>{
@@ -110,8 +110,8 @@ const ImportExport =(props) => {
             // Go through all objects in list
             // if mapping: is subtopic
             // if scalar/item: is tasks
-            console.log('New call of import')
-            console.log(node)
+            console.debug('New call of import')
+            console.debug(node)
             let newTopics = []
             // let newTopic = {
             //     id:getFreeImportedTopicKey(),
@@ -120,7 +120,7 @@ const ImportExport =(props) => {
             //     subtopics:[]
             // }
             // let importedTopics = []
-            console.log('Enumerate properties')
+            console.debug('Enumerate properties')
             for (var key in node)
             {
                 let newTopic = {
@@ -130,61 +130,61 @@ const ImportExport =(props) => {
                     subtopics:[]
                 }
                 let importedTopics = []
-                console.log('Key: ')
-                console.log(key)
+                console.debug('Key: ')
+                console.debug(key)
                 newTopic.title=key            
                 let val = node[key]
-                console.log('Val:')
-                console.log(val)
+                console.debug('Val:')
+                console.debug(val)
                 if (typeof val === 'string')
                 {
                     // Add new tasks
-                    console.log('New task found head'+val)
+                    console.debug('New task found head'+val)
                     importNewTask(val,key)
                 }else {
                     if (val instanceof Array) 
                     {
                         // It's an empty task list, ignore
-                        console.log('List found head')
+                        console.debug('List found head')
                         for (let i =0; i<val.length;i++)
                         {
                             let subnode = val[i]
-                            console.log('Subnode is')
-                            console.log(subnode)
+                            console.debug('Subnode is')
+                            console.debug(subnode)
                             if (typeof subnode === 'string')
                             {
                                 // Add new tasks
-                                console.log('New task found loop'+subnode)
+                                console.debug('New task found loop'+subnode)
                                 importNewTask(subnode,key)
                             }else if (subnode instanceof Array) {
                                 // It's an empty task list, ignore
-                                console.log('Empty list found  loop')
+                                console.debug('Empty list found  loop')
                             }else{
                                 // It's an object/subtopic
-                                console.log(typeof subnode)
-                                console.log(subnode+'  loop')
+                                console.debug(typeof subnode)
+                                console.debug(subnode+'  loop')
                                 importedTopics = importedTopics.concat(importNewTopic_r(subnode))
-                                console.log('End recurse loop')
+                                console.debug('End recurse loop')
                             }
                         }
                     }
                     else{
                         // It's an object/subtopic
-                        console.log(typeof val)
-                        console.log(val+ ' head')
+                        console.debug(typeof val)
+                        console.debug(val+ ' head')
                         importedTopics = importedTopics.concat(importNewTopic_r(val))
-                        console.log('End recurse head')
+                        console.debug('End recurse head')
                     } 
                     
                 }
                 newTopic.subtopics = importedTopics
-                console.log('new topic:')
-                console.log(newTopic)
+                console.debug('new topic:')
+                console.debug(newTopic)
     
                 newTopics = newTopics.concat(newTopic)
             }
-            console.log('new topics/ret_obj:')
-            console.log(newTopics)
+            console.debug('new topics/ret_obj:')
+            console.debug(newTopics)
             return newTopics
 
             // newTopic.subtopics = importedTopics
@@ -194,9 +194,9 @@ const ImportExport =(props) => {
             
         }
         let res2 = importNewTopic_r(res)
-        console.log('Result')
-        console.log(res2)
-        console.log(importedTasks)
+        console.debug('Result')
+        console.debug(res2)
+        console.debug(importedTasks)
         // Extract topics?
         // Go through the YAML tree
         
@@ -213,8 +213,13 @@ const ImportExport =(props) => {
     */
     const exportjson=()=>{
 
-        // Remove this line to output in the old format
-        let [new_topics,new_tasks] = convert_old_topic_tasks_to_new_topic_tasks(topics,tasks)
+        let [new_topics,new_tasks] = [topics,tasks]
+        // Check if v0 format, or v1 format
+        if ((tasks.length>0 && 'taskName' in tasks[0]) ||(topics.length>0 && 'title' in topics[0]))
+        {
+            console.log('Converting internal v0 format to v1');
+            [new_topics,new_tasks] = convert_old_topic_tasks_to_new_topic_tasks(topics,tasks)
+        }
 
         // Pretty print json (with 2 spaces as space parameter)
         const jsonContent = JSON.stringify({topics: new_topics,tasks:new_tasks},null,2);
@@ -233,16 +238,25 @@ const ImportExport =(props) => {
         // As loaded (may be new format, may be old format)
         // setTopics(uploadedData.topics);
         // setTasks(uploadedData.tasks);
-
-        // Load as old format
-        let [old_topics,old_tasks] = convert_new_topic_tasks_to_old_topic_tasks(uploadedData.topics,
-            uploadedData.tasks)
-        console.log('Imported topics/tasks')
-        console.log(old_topics);
-        console.log(old_tasks);
+        let [old_topics,old_tasks] = [uploadedData.topics,uploadedData.tasks]
+        // Sanitize input
+        // Check if v0 or v1 is expected
+        // Check if v0 format, or v1 format
+        console.debug(old_tasks.length)
+        console.debug('taskName' in old_tasks[0])
+        console.debug(old_topics.length)
+        console.debug('title' in old_topics[0])
+        if (!((old_tasks.length>0 && 'taskName' in old_tasks[0]) ||(old_topics.length>0 && 'title' in old_topics[0])))
+        {
+            console.log("converting imported v1 to v0 format");
+            [old_topics,old_tasks] = convert_new_topic_tasks_to_old_topic_tasks(
+                uploadedData.topics,
+                uploadedData.tasks)
+        }
         
         setTopics(old_topics)
         setTasks(old_tasks)
+        return 'succesful import'
 
     };
     // const [file,setFile] = useState(null);
@@ -264,7 +278,7 @@ const ImportExport =(props) => {
                 console.log(file.type)
                 if (file.type=='application/json'){
                     try{
-                        console.log(importjson(evt.target.result))
+                        console.info(importjson(evt.target.result))
     
                     }catch(e){
                         console.error('Uploaded file is not JSON enough.',e);
@@ -278,8 +292,8 @@ const ImportExport =(props) => {
                     }
 
                 }else{
-                    console.log('File Type not recognized')
-                    console.log(file.name.split('.').at(-1))
+                    console.warning('File Type not recognized')
+                    console.warning(file.name.split('.').at(-1))
                 }
             }
             console.log('start reading')

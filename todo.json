@@ -13,13 +13,13 @@
             {
               "name": "Migration to schema.v1",
               "id": 8,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             },
             {
               "name": "Importing/Exporting",
               "id": 9,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": [
                 {
                   "name": "Sanitize input",
@@ -32,7 +32,7 @@
             {
               "name": "Data structure conversion",
               "id": 13,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             }
           ]
@@ -53,13 +53,13 @@
         {
           "name": "Weekly Tasks View",
           "id": 5,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
           "name": "Daily Task View",
           "id": 6,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
@@ -70,7 +70,7 @@
             {
               "name": "Future2",
               "id": 11,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             }
           ]
@@ -81,7 +81,14 @@
       "name": "Constraints",
       "id": 2,
       "unfolded": false,
-      "subtopics": []
+      "subtopics": [
+        {
+          "name": "UX/UI",
+          "id": 15,
+          "unfolded": true,
+          "subtopics": []
+        }
+      ]
     },
     {
       "name": "Bugs/issues",
@@ -662,6 +669,42 @@
       "id": 77,
       "topics": [
         14
+      ]
+    },
+    {
+      "name": "Add the completion of a task into the YAML",
+      "id": 78,
+      "topics": [
+        9
+      ]
+    },
+    {
+      "name": "Make the lists more readable",
+      "id": 79,
+      "topics": [
+        15
+      ]
+    },
+    {
+      "name": "Choose better color schemes",
+      "id": 80,
+      "topics": [
+        15
+      ]
+    },
+    {
+      "name": "Refactor the TaskList.js into smaller files",
+      "id": 81,
+      "topics": [
+        7
+      ]
+    },
+    {
+      "name": "Add detection of JSON.v0 and JSON.v1 format",
+      "id": 82,
+      "completed": true,
+      "topics": [
+        9
       ]
     }
   ]

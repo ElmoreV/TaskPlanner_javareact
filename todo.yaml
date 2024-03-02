@@ -17,6 +17,8 @@
             - 'Detection of JSON or YAML at import '
             - 'Find a way to add task/topic id into the YAML'
             - 'Prettify the output JSON to make it more git-friendly'
+            - 'Add the completion of a task into the YAML'
+            - 'Add detection of JSON.v0 and JSON.v1 format'
             - 'Sanitize input':
                 - 'Check against duplicate keys'
                 - 'Check against missing optional parameters (completed etc.)'
@@ -74,6 +76,7 @@
         - 'Change schema terminology to id,name,...'
         - 'Allow keyboard-only mode'
         - 'Create this Todo-list in the TaskPlanner'
+        - 'Refactor the TaskList.js into smaller files'
         - 'Future2':
             - 'Allow subtasks'
             - 'Search engine for tasks/topics'
@@ -84,6 +87,9 @@
             - 'Save output in markdown'
 'Constraints':
     - 'Text edit should not lag, but it does now'
+    - 'UX/UI':
+        - 'Make the lists more readable'
+        - 'Choose better color schemes'
 'Bugs/issues':
     - 'Do not allow two topics to have the same name'
     - 'Test tasks with empty string'
