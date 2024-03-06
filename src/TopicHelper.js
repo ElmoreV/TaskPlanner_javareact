@@ -122,6 +122,58 @@ const getFreeTopicKey = (topics) => {
     return max_id;
 }
 
+const getTopicTree_by_id_r = (topic, topic_id) => {
+    let found_topic_id = false;
+    let next_string = "";
+    if (topic.id == topic_id) {
+        next_string = topic.title
+        found_topic_id = true;
+    } else {
+        let strings = topic.subtopics.map((t) => getTopicTree_by_id_r(t, topic_id)).filter((s) => s.length > 0)
+        if (strings.length > 0) {
+            next_string = topic.title + '/' + strings[0]
+            found_topic_id = true;
+        }
+    }
+    if (!found_topic_id) {
+        return ""
+    } else {
+        return next_string
+    }
+}
+const getTopicTree_by_id = (topics, topic_id) => {
+    let strings = topics.map((t) => {
+        let s = getTopicTree_by_id_r(t, topic_id)
+        if (s.length > 0) { return t.title + '/' + s } else { return "" }
+    }).filter((s) => s.length > 0)
+    if (strings.length > 0) { return strings[0] } else { return "" }
+
+}
+const getTopicTree_by_name_r = (topic, topic_name) => {
+    let found_topic_id = false;
+    let next_string = "";
+    if (topic.title == topic_name) {
+        next_string = topic.title
+        found_topic_id = true;
+    } else {
+        let strings = topic.subtopics.map((t) => getTopicTree_by_name_r(t, topic_name)).filter((s) => s.length > 0)
+        if (strings.length > 0) {
+            next_string = topic.title + '/' + strings[0]
+            found_topic_id = true;
+        }
+    }
+    if (!found_topic_id) {
+        return ""
+    } else {
+        return next_string
+    }
+}
+const getTopicTree_by_name = (topics, topic_name) => {
+    let strings = topics.map((t) =>
+        getTopicTree_by_name_r(t, topic_name)).filter((s) => s.length > 0)
+    if (strings.length > 0) { return strings[0] } else { return "" }
+
+}
 
 export default find_topic_by_key_r;
 export { find_topic_by_key };
@@ -130,3 +182,4 @@ export { getFreeTaskKey };
 export { isTaskInAnyTopic };
 export { filter_by_name_r };
 export { getFreeTopicKey };
+export { getTopicTree_by_name }

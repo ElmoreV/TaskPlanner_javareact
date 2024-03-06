@@ -631,6 +631,7 @@
     {
       "name": "List the topic(s) +subtopic(s) that the task belongs to",
       "id": 67,
+      "completed": true,
       "thisWeek": true,
       "topics": [
         5

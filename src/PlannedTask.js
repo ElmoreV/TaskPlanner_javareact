@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { find_topic_by_key_r } from './TopicHelper';
+import { getTopicTree_by_name } from './TopicHelper';
 
 const PlannedTask = (props) => {
     const { taskKey, taskName, setTaskName, deleteTask, completed, completeTask, currentTopic, changeTopic, planned, plan, topics, taskTopics } = props;
@@ -75,6 +75,8 @@ const PlannedTask = (props) => {
     const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
 
+    let topicPath = getTopicTree_by_name(topics, taskTopics[0])
+
 
     return (<div className={class_str}
         onDoubleClick={toggleEdit}
@@ -92,6 +94,7 @@ const PlannedTask = (props) => {
         {!completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Complete</button>)}
         {completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Decomplete</button>)}
         {plan && (<button className='moveToWeek' onClick={moveToWeek}> Plan for this week </button>)}
+        <span className="topicPath">{topicPath}</span>
     </div>);
 }
 
