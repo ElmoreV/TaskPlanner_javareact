@@ -76,7 +76,6 @@
         - 'Change schema terminology to id,name,...'
         - 'Allow keyboard-only mode'
         - 'Create this Todo-list in the TaskPlanner'
-        - 'Refactor the TaskList.js into smaller files'
         - 'Future2':
             - 'Allow subtasks'
             - 'Search engine for tasks/topics'
@@ -90,6 +89,7 @@
         - 'Make the lists more readable'
         - 'Choose better color schemes'
     - 'Maintainability':
+        - 'Enable autoformatting'
         - 'Error handling':
         - 'Documentation/logging':
         - 'Testing':
@@ -97,6 +97,8 @@
             - 'Conversion'
             - 'Add/deleting/modifying task'
             - 'Add/delete/modify topic'
+        - 'Refactoring':
+            - 'Refactor the TaskList.js into smaller files'
     - 'Performance':
         - 'Text edit should not lag, but it does now'
 'Bugs/issues':

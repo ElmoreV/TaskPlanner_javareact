@@ -13,6 +13,9 @@ const find_topic_by_key_r = (topics, topic_key) => {
     }
     return null;
 }
+const find_topic_by_key = (topics, topic_key) => {
+    return find_topic_by_key_r(topics, topic_key);
+}
 const find_topic_by_name_r = (topics, topic_name) => {
     console.debug(topics);
     for (let topic of topics) {
@@ -80,18 +83,15 @@ const filter_by_name_r = (topics, topic_name) => {
     return topics.filter((topic) => topic.title !== topic_name).map(
         (topic) => { return { ...topic, subtopics: filter_by_name_r(topic.subtopics, topic_name) } }
     )
-
-
-    // return topic.subtopics
-}
-
-const get_all_subtopics = (topic) => {
-
-    return topic.subtopics.map((subtopic) => get_all_subtopics(subtopic)).concat(topic);
 }
 const find_topic_by_name = (topics, topic_name) => {
     return find_topic_by_name_r(topics, topic_name);
 }
+const get_all_subtopics = (topic) => {
+
+    return topic.subtopics.map((subtopic) => get_all_subtopics(subtopic)).concat(topic);
+}
+
 
 const isTaskInAnyTopic = (task, topics) => {
     // check if the topic of the task in the
@@ -110,11 +110,23 @@ const isTaskInAnyTopic = (task, topics) => {
     }
     return false;
 }
+const getLargestTopicKey = (topic) => {
+    let max_id = Math.max(topic.id,
+        topic.subtopics.reduce((max_key, topic) => Math.max(max_key, getLargestTopicKey(topic)), 0));
+    console.log(max_id, topic.title)
+    return max_id;
+}
+const getFreeTopicKey = (topics) => {
+    let max_id = 1 + topics.reduce((max_key, topic) => Math.max(max_key, getLargestTopicKey(topic)), 0);
+    console.log(max_id)
+    return max_id;
+}
 
 
 export default find_topic_by_key_r;
-export { find_topic_by_key_r };
+export { find_topic_by_key };
 export { find_topic_by_name_r };
 export { getFreeTaskKey };
 export { isTaskInAnyTopic };
 export { filter_by_name_r };
+export { getFreeTopicKey };

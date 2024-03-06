@@ -13,7 +13,7 @@
             {
               "name": "Migration to schema.v1",
               "id": 8,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             },
             {
@@ -40,7 +40,7 @@
         {
           "name": "Per Topic View",
           "id": 4,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Future",
@@ -108,6 +108,12 @@
             {
               "name": "Testing",
               "id": 19,
+              "unfolded": true,
+              "subtopics": []
+            },
+            {
+              "name": "Refactoring",
+              "id": 21,
               "unfolded": true,
               "subtopics": []
             }
@@ -728,8 +734,10 @@
     {
       "name": "Refactor the TaskList.js into smaller files",
       "id": 81,
+      "completed": false,
+      "thisWeek": true,
       "topics": [
-        7
+        21
       ]
     },
     {
@@ -766,6 +774,14 @@
       "id": 88,
       "topics": [
         19
+      ]
+    },
+    {
+      "name": "Enable autoformatting",
+      "id": 89,
+      "completed": true,
+      "topics": [
+        16
       ]
     }
   ]

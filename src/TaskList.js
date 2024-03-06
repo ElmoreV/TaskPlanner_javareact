@@ -9,9 +9,9 @@ import {
 } from './Converter';
 import ImportExport from './ImportExport';
 import {
-    find_topic_by_key_r,
-    find_topic_by_name_r,
+    find_topic_by_key,
     getFreeTaskKey,
+    getFreeTopicKey,
     isTaskInAnyTopic,
     filter_by_name_r
 } from './TopicHelper';
@@ -21,26 +21,6 @@ const TaskList = (props) => {
     const { tasks, setTasks, topics, setTopics } = props;
 
     const [hideCompletedItems, setHideCompletedItems] = useState(false)
-
-    const find_topic_by_key = (topic_key) => {
-        return find_topic_by_key_r(topics, topic_key);
-    }
-
-
-
-
-
-    const getLargestTopicKey = (topic) => {
-        let max_id = Math.max(topic.id,
-            topic.subtopics.reduce((max_key, topic) => Math.max(max_key, getLargestTopicKey(topic)), 0));
-        console.log(max_id, topic.title)
-        return max_id;
-    }
-    const getFreeTopicKey = () => {
-        let max_id = 1 + topics.reduce((max_key, topic) => Math.max(max_key, getLargestTopicKey(topic)), 0);
-        console.log(max_id)
-        return max_id;
-    }
 
     // Below
     // Function generators
@@ -79,7 +59,7 @@ const TaskList = (props) => {
     const getSetTopicNameFunc = (id) => {
         const setTopicName = (newTopicName) => {
             const newTopics = [...topics];
-            const topic_to_change = find_topic_by_key(id);
+            const topic_to_change = find_topic_by_key(topics, id);
             topic_to_change.title = newTopicName;
             setTopics(newTopics);
         }
@@ -167,12 +147,13 @@ const TaskList = (props) => {
 
     const addTopic = () => {
         let newTopics = [...topics];
-        const addedTopic = { title: `New Topic ${getFreeTopicKey()}`, id: getFreeTopicKey(), unfolded: false, subtopics: [] }
+        const addedTopic = { title: `New Topic ${getFreeTopicKey(topics)}`, id: getFreeTopicKey(topics), unfolded: false, subtopics: [] }
         newTopics.push(addedTopic);
         console.debug(newTopics);
         setTopics(newTopics);
     }
 
+    // This one might be separated
     const addSubtopic_r = (topic, superTopic, newSubTopic) => {
         if (topic.id == superTopic.id) {
             //Add subtopic here
@@ -191,7 +172,7 @@ const TaskList = (props) => {
         console.log('In AddSubTopic')
         console.log(topic);
         let newTopics = [...topics]
-        const addedTopic = { title: `New Topic ${getFreeTopicKey()}`, id: getFreeTopicKey(), unfolded: false, subtopics: [] }
+        const addedTopic = { title: `New Topic ${getFreeTopicKey(topics)}`, id: getFreeTopicKey(topics), unfolded: false, subtopics: [] }
         console.log(addedTopic)
         console.log('start recursion')
         // now add this topic at the exact right spot
@@ -205,7 +186,7 @@ const TaskList = (props) => {
     const addTask = (topic_key) => {
         let newTasks = [...tasks];
         console.log(topic_key);
-        const topic = find_topic_by_key(topic_key);
+        const topic = find_topic_by_key(topics, topic_key);
         if (topic) {
             const addedTask = { taskName: `New Task ${getFreeTaskKey(tasks)}!`, key: getFreeTaskKey(tasks), topics: [topic.title] }
             newTasks.push(addedTask);
