@@ -1,31 +1,33 @@
-import { useState} from 'react';
-import Task from './Task';
+import { useState } from 'react';
+import PlannedTask from './PlannedTask';
 
-const PlannedList= (props)=>
-{
-    const {tasks,setTasks,topics,setTopics} = props;
+// TODO: add the topic name to the bar
+
+const PlannedList = (props) => {
+    const { tasks, setTasks, topics, setTopics } = props;
 
     return (
-        <div className = 'planned-list'>
+        <div className='planned-list'>
             <ul key='root_topics'>
-            {tasks.map(
-            (task)=>
-        {
-            return (<li>{task.thisWeek &&<Task
-                taskName={task.taskName} 
-                taskKey = {task.key}
-                // setTaskName={getSetTaskNameFunc(task.id)}
-                // deleteTask = {getDeleteTask(task.id)}
-                completed = {task.completed} 
-                // completeTask = {getCompleteTask(task.id)}
-                currentTopic = {"blegh"}
-                // changeTopic = {getChangeTaskTopic()}
-            />}</li>)
-        }
-        )}
-        </ul>
+                {tasks.map(
+                    (task) => {
+                        return (<li>{task.thisWeek && <PlannedTask
+                            taskName={task.taskName}
+                            taskKey={task.key}
+                            // setTaskName={getSetTaskNameFunc(task.id)}
+                            // deleteTask = {getDeleteTask(task.id)}
+                            completed={task.completed}
+                            // completeTask = {getCompleteTask(task.id)}
+                            // currentTopic = {task.topics[0]}
+                            topics={topics}
+                            taskTopics={task.topics}
+                        // changeTopic = {getChangeTaskTopic()}
+                        />} </li>)
+                    }
+                )}
+            </ul>
         </div>
-    )  ;
+    );
 }
 
 

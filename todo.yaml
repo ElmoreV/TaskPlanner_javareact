@@ -86,10 +86,19 @@
             - 'Add hyperlink suport to tasks/topics'
             - 'Save output in markdown'
 'Constraints':
-    - 'Text edit should not lag, but it does now'
     - 'UX/UI':
         - 'Make the lists more readable'
         - 'Choose better color schemes'
+    - 'Maintainability':
+        - 'Error handling':
+        - 'Documentation/logging':
+        - 'Testing':
+            - 'Import/export'
+            - 'Conversion'
+            - 'Add/deleting/modifying task'
+            - 'Add/delete/modify topic'
+    - 'Performance':
+        - 'Text edit should not lag, but it does now'
 'Bugs/issues':
     - 'Do not allow two topics to have the same name'
     - 'Test tasks with empty string'

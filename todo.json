@@ -13,18 +13,18 @@
             {
               "name": "Migration to schema.v1",
               "id": 8,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
               "name": "Importing/Exporting",
               "id": 9,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": [
                 {
                   "name": "Sanitize input",
                   "id": 14,
-                  "unfolded": true,
+                  "unfolded": false,
                   "subtopics": []
                 }
               ]
@@ -40,7 +40,7 @@
         {
           "name": "Per Topic View",
           "id": 4,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Future",
@@ -53,7 +53,7 @@
         {
           "name": "Weekly Tasks View",
           "id": 5,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         },
         {
@@ -80,11 +80,42 @@
     {
       "name": "Constraints",
       "id": 2,
-      "unfolded": false,
+      "unfolded": true,
       "subtopics": [
         {
           "name": "UX/UI",
           "id": 15,
+          "unfolded": true,
+          "subtopics": []
+        },
+        {
+          "name": "Maintainability",
+          "id": 16,
+          "unfolded": true,
+          "subtopics": [
+            {
+              "name": "Error handling",
+              "id": 17,
+              "unfolded": false,
+              "subtopics": []
+            },
+            {
+              "name": "Documentation/logging",
+              "id": 18,
+              "unfolded": false,
+              "subtopics": []
+            },
+            {
+              "name": "Testing",
+              "id": 19,
+              "unfolded": true,
+              "subtopics": []
+            }
+          ]
+        },
+        {
+          "name": "Performance",
+          "id": 20,
           "unfolded": true,
           "subtopics": []
         }
@@ -441,7 +472,7 @@
       "name": "Text edit should not lag, but it does now",
       "id": 46,
       "topics": [
-        2
+        20
       ]
     },
     {
@@ -594,6 +625,7 @@
     {
       "name": "List the topic(s) +subtopic(s) that the task belongs to",
       "id": 67,
+      "thisWeek": true,
       "topics": [
         5
       ]
@@ -609,6 +641,7 @@
     {
       "name": "Add a way to remove the task from the weekly view",
       "id": 69,
+      "thisWeek": true,
       "topics": [
         5
       ]
@@ -705,6 +738,34 @@
       "completed": true,
       "topics": [
         9
+      ]
+    },
+    {
+      "name": "Import/export",
+      "id": 85,
+      "topics": [
+        19
+      ]
+    },
+    {
+      "name": "Conversion",
+      "id": 86,
+      "topics": [
+        19
+      ]
+    },
+    {
+      "name": "Add/deleting/modifying task",
+      "id": 87,
+      "topics": [
+        19
+      ]
+    },
+    {
+      "name": "Add/delete/modify topic",
+      "id": 88,
+      "topics": [
+        19
       ]
     }
   ]
