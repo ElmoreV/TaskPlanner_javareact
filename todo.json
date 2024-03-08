@@ -45,7 +45,7 @@
             {
               "name": "Aesthetic",
               "id": 23,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
@@ -56,7 +56,7 @@
                 {
                   "name": "Relaying information",
                   "id": 25,
-                  "unfolded": false,
+                  "unfolded": true,
                   "subtopics": []
                 },
                 {
@@ -72,7 +72,7 @@
         {
           "name": "Weekly Tasks View",
           "id": 5,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         },
         {
@@ -87,9 +87,21 @@
           "unfolded": true,
           "subtopics": [
             {
-              "name": "Future2",
-              "id": 11,
+              "name": "Project management",
+              "id": 27,
               "unfolded": false,
+              "subtopics": []
+            },
+            {
+              "name": "Unknowns",
+              "id": 28,
+              "unfolded": false,
+              "subtopics": []
+            },
+            {
+              "name": "Functionality2",
+              "id": 29,
+              "unfolded": true,
               "subtopics": []
             }
           ]
@@ -104,7 +116,7 @@
         {
           "name": "UX/UI",
           "id": 15,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
@@ -127,7 +139,7 @@
             {
               "name": "Testing",
               "id": 19,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             },
             {
@@ -147,7 +159,7 @@
         {
           "name": "Reliability",
           "id": 22,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         }
       ]
@@ -155,7 +167,7 @@
     {
       "name": "Bugs/issues",
       "id": 12,
-      "unfolded": false,
+      "unfolded": true,
       "subtopics": []
     }
   ],
@@ -205,7 +217,7 @@
       "id": 6,
       "completed": true,
       "topics": [
-        7
+        27
       ]
     },
     {
@@ -310,14 +322,14 @@
       "name": "Understand useRef",
       "id": 19,
       "topics": [
-        7
+        28
       ]
     },
     {
       "name": "Understand FileReader",
       "id": 20,
       "topics": [
-        7
+        28
       ]
     },
     {
@@ -444,7 +456,7 @@
       "name": "When text doubleclicked: focus immediately on text input",
       "id": 37,
       "topics": [
-        24
+        29
       ]
     },
     {
@@ -458,7 +470,7 @@
       "name": "When enter is pressed: finish editing",
       "id": 39,
       "topics": [
-        24
+        29
       ]
     },
     {
@@ -490,13 +502,6 @@
       ]
     },
     {
-      "name": "Allow subtasks",
-      "id": 44,
-      "topics": [
-        11
-      ]
-    },
-    {
       "name": "Do not allow two topics to have the same name",
       "id": 45,
       "topics": [
@@ -514,42 +519,42 @@
       "name": "Search engine for tasks/topics",
       "id": 47,
       "topics": [
-        11
+        29
       ]
     },
     {
       "name": "Create a history of updates (create undo button)",
       "id": 48,
       "topics": [
-        11
+        29
       ]
     },
     {
       "name": "Add comments to tasks/topics",
       "id": 49,
       "topics": [
-        11
+        29
       ]
     },
     {
       "name": "Open tasks/topics to have a task/topic card",
       "id": 50,
       "topics": [
-        11
+        29
       ]
     },
     {
       "name": "Add hyperlink suport to tasks/topics",
       "id": 51,
       "topics": [
-        11
+        29
       ]
     },
     {
       "name": "Save output in markdown",
       "id": 52,
       "topics": [
-        11
+        9
       ]
     },
     {
@@ -579,7 +584,7 @@
       "name": "Allow keyboard-only mode",
       "id": 56,
       "topics": [
-        7
+        15
       ]
     },
     {
@@ -633,7 +638,7 @@
       "id": 63,
       "completed": true,
       "topics": [
-        7
+        27
       ]
     },
     {
@@ -676,9 +681,9 @@
       ]
     },
     {
-      "name": "Add a way to remove the task from the weekly view",
+      "name": "Add a way to remove the task from the weekly view on the weekly view",
       "id": 69,
-      "thisWeek": true,
+      "thisWeek": false,
       "topics": [
         5
       ]
@@ -756,7 +761,7 @@
       ]
     },
     {
-      "name": "Choose better color schemes",
+      "name": "Choose better color schemes for tasks and topics",
       "id": 80,
       "topics": [
         15
@@ -766,7 +771,7 @@
       "name": "Refactor the TaskList.js into smaller files",
       "id": 81,
       "completed": false,
-      "thisWeek": true,
+      "thisWeek": false,
       "topics": [
         21
       ]
@@ -820,6 +825,43 @@
       "id": 90,
       "topics": [
         25
+      ]
+    },
+    {
+      "name": "Allow for subtasks",
+      "id": 91,
+      "topics": [
+        29
+      ]
+    },
+    {
+      "name": "Convert to TypeScript",
+      "id": 92,
+      "topics": [
+        16
+      ]
+    },
+    {
+      "name": "Choose better color schemes for the feedback (drag/drop) events",
+      "id": 93,
+      "topics": [
+        15
+      ]
+    },
+    {
+      "name": "Allow hovering over topics to unfold them",
+      "id": 94,
+      "topics": [
+        15
+      ]
+    },
+    {
+      "name": "Create a way to remove task from weekly View",
+      "id": 95,
+      "completed": true,
+      "thisWeek": false,
+      "topics": [
+        26
       ]
     }
   ]

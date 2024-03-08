@@ -2,7 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const Task = (props) => {
-    const { taskKey, taskName, setTaskName, deleteTask, completed, completeTask, currentTopic, changeTopic, planned, plan } = props;
+    const { taskKey, taskName, setTaskName, deleteTask, completed, completeTask, currentTopic, changeTopic, planned, plan, unplan } = props;
 
     const [isEditing, setIsEditing] = useState(false);
     const [color, setColor] = useState('green');
@@ -58,6 +58,9 @@ const Task = (props) => {
     const moveToWeek = () => {
         plan()
     }
+    const moveOutOfWeek = () => {
+        unplan()
+    }
 
     const handleBlur = () => {
         setIsDraggingAllowed(true);
@@ -88,7 +91,8 @@ const Task = (props) => {
         {deleteTask && (<button className='taskDelete' onClick={deleteTask && deleteTask}>Delete</button>)}
         {!completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Complete</button>)}
         {completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Decomplete</button>)}
-        {plan && (<button className='moveToWeek' onClick={moveToWeek}> Plan for this week </button>)}
+        {plan && planned && (<button className='moveToWeek' onClick={moveOutOfWeek}> Unplan for this week </button>)}
+        {plan && !planned && (<button className='moveToWeek' onClick={moveToWeek}> Plan for this week </button>)}
     </div>);
 }
 

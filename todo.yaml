@@ -15,6 +15,7 @@
             - 'Allow export of tasks as YAML'
             - 'Allow import of tasks as YAML'
             - 'Detection of JSON or YAML at import '
+            - 'Save output in markdown'
             - 'Find a way to add task/topic id into the YAML'
             - 'Prettify the output JSON to make it more git-friendly'
             - 'Add the completion of a task into the YAML'
@@ -39,8 +40,6 @@
             - 'Animate collapse and dropdown'
             - 'Make the tasks to have a good width. Automatic? Multiline? Text cut-off?'
         - 'Functionality':
-            - 'When text doubleclicked: focus immediately on text input'
-            - 'When enter is pressed: finish editing'
             - 'Relaying information':
                 - 'Have topics and subtopics show up'
                 - 'Have tasks show up under the right topic'
@@ -64,36 +63,43 @@
                 - 'Allow new subtopics to be created'
                 - 'Allow root topics to be created'
                 - 'Add a way to add the task to the current Weekly View'
+                - 'Create a way to remove task from weekly View'
     - 'Weekly Tasks View':
         - 'List all the tasks that are planned for this week'
         - 'List the topic(s) +subtopic(s) that the task belongs to'
-        - 'Add a way to remove the task from the weekly view'
+        - 'Add a way to remove the task from the weekly view on the weekly view'
         - 'Allow reordering the weekly view tasks'
         - 'Add button the clear weekly view'
         - 'Add button to clear all completed items'
     - 'Daily Task View':
         - 'Make tasks importable from Weekly View'
     - 'General':
-        - 'Gitify this project'
-        - 'Understand useRef'
-        - 'Understand FileReader'
         - 'Change schema terminology to id,name,...'
-        - 'Allow keyboard-only mode'
-        - 'Create this Todo-list in the TaskPlanner'
-        - 'Future2':
-            - 'Allow subtasks'
+        - 'Project management':
+            - 'Gitify this project'
+            - 'Create this Todo-list in the TaskPlanner'
+        - 'Unknowns':
+            - 'Understand useRef'
+            - 'Understand FileReader'
+        - 'Functionality2':
+            - 'When text doubleclicked: focus immediately on text input'
+            - 'When enter is pressed: finish editing'
             - 'Search engine for tasks/topics'
             - 'Create a history of updates (create undo button)'
             - 'Add comments to tasks/topics'
             - 'Open tasks/topics to have a task/topic card'
             - 'Add hyperlink suport to tasks/topics'
-            - 'Save output in markdown'
+            - 'Allow for subtasks'
 'Constraints':
     - 'UX/UI':
+        - 'Allow keyboard-only mode'
         - 'Make the lists more readable'
-        - 'Choose better color schemes'
+        - 'Choose better color schemes for tasks and topics'
+        - 'Choose better color schemes for the feedback (drag/drop) events'
+        - 'Allow hovering over topics to unfold them'
     - 'Maintainability':
         - 'Enable autoformatting'
+        - 'Convert to TypeScript'
         - 'Error handling':
         - 'Documentation/logging':
         - 'Testing':

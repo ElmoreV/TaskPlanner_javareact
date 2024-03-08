@@ -153,6 +153,16 @@ const TaskList = (props) => {
         return planTaskForWeek
     }
 
+    const getUnplanTask = (id) => {
+        const unplanTask = () => {
+            const newTasks = [...tasks]
+            const task_to_change = newTasks.find((task) => task.key === id);
+            task_to_change.thisWeek = false;
+            setTasks(newTasks);
+        }
+        return unplanTask
+    }
+
 
     const addTopic = () => {
         let newTopics = [...topics];
@@ -280,6 +290,7 @@ const TaskList = (props) => {
                                 deleteTask={getDeleteTask(task.id)}
                                 completeTask={getCompleteTask(task.id)}
                                 plan={getPlanTaskForWeek(task.id)}
+                                unplan={getUnplanTask(task.id)}
                                 planned={task.thisWeek}
                                 changeTopic={getChangeTaskTopic()}
                             />
