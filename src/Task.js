@@ -24,7 +24,7 @@ const Task = (props) => {
     const handleDragStart = (e) => {
         setIsDragging(true)
         e.dataTransfer.setData('Text', taskKey)
-        e.dataTransfer.setData('Text2', currentTopic)
+        e.dataTransfer.setData('Text2', currentTopic) //also name
         setColor('blue')
     }
     const handleDragEnd = () => {

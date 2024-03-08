@@ -56,13 +56,13 @@
                 {
                   "name": "Relaying information",
                   "id": 25,
-                  "unfolded": true,
+                  "unfolded": false,
                   "subtopics": []
                 },
                 {
                   "name": "Modifying information",
                   "id": 26,
-                  "unfolded": false,
+                  "unfolded": true,
                   "subtopics": []
                 }
               ]
@@ -251,6 +251,7 @@
     {
       "name": "Make tasks draggeable to topics",
       "id": 12,
+      "completed": true,
       "thisWeek": true,
       "topics": [
         26

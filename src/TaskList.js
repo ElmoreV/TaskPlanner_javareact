@@ -25,16 +25,25 @@ const TaskList = (props) => {
     // Below
     // Function generators
     const getChangeTaskTopic = () => {
+        // Key here is the key of the task
+        // oldTopic is the topic-object where the task came from
+        // newTopic is the topic-object where the task is going to
+
         const changeTaskTopic = (key, oldTopic, newTopic) => {
+            console.debug('Inside change task topic')
+            console.debug(key)
             const newTasks = tasks.map((task) => {
                 if (task.key == key) //cannot be ===?
                 {
+                    console.debug('relevant task')
+                    console.debug(task)
                     if (task.topics.includes(oldTopic)) {
                         return {
                             ...task,
                             topics: task.topics.map((topic) => topic == oldTopic ? newTopic : topic)
                         }
                     }
+                    console.debug(task)
                 }
                 return task;
             });
@@ -252,7 +261,9 @@ const TaskList = (props) => {
                 unfolded={topic.unfolded}
                 addTask={() => (addTask(topic.id))}
                 addSubTopic={() => (addSubtopic(topic))}
-                deleteTopic={getDeleteTopic(topic.name)} />
+                deleteTopic={getDeleteTopic(topic.name)}
+                changeTopic={getChangeTaskTopic()}
+            />
         </li>
             <ul key={topic.id + '_topics'}>{topic.unfolded && topic.subtopics.map((subtopic) => (
                 recursiveShowTopic(subtopic, tasks)
