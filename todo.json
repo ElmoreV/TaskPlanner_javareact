@@ -43,17 +43,36 @@
           "unfolded": true,
           "subtopics": [
             {
-              "name": "Future",
-              "id": 10,
-              "unfolded": true,
+              "name": "Aesthetic",
+              "id": 23,
+              "unfolded": false,
               "subtopics": []
+            },
+            {
+              "name": "Functionality",
+              "id": 24,
+              "unfolded": true,
+              "subtopics": [
+                {
+                  "name": "Relaying information",
+                  "id": 25,
+                  "unfolded": true,
+                  "subtopics": []
+                },
+                {
+                  "name": "Modifying information",
+                  "id": 26,
+                  "unfolded": false,
+                  "subtopics": []
+                }
+              ]
             }
           ]
         },
         {
           "name": "Weekly Tasks View",
           "id": 5,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
@@ -124,6 +143,12 @@
           "id": 20,
           "unfolded": true,
           "subtopics": []
+        },
+        {
+          "name": "Reliability",
+          "id": 22,
+          "unfolded": true,
+          "subtopics": []
         }
       ]
     },
@@ -140,7 +165,7 @@
       "id": 1,
       "completed": true,
       "topics": [
-        4
+        25
       ]
     },
     {
@@ -148,7 +173,7 @@
       "id": 2,
       "completed": true,
       "topics": [
-        4
+        25
       ]
     },
     {
@@ -156,7 +181,7 @@
       "id": 3,
       "completed": true,
       "topics": [
-        4
+        25
       ]
     },
     {
@@ -164,7 +189,7 @@
       "id": 4,
       "completed": true,
       "topics": [
-        4
+        25
       ]
     },
     {
@@ -172,7 +197,7 @@
       "id": 5,
       "completed": true,
       "topics": [
-        4
+        26
       ]
     },
     {
@@ -188,7 +213,7 @@
       "id": 7,
       "completed": true,
       "topics": [
-        4
+        26
       ]
     },
     {
@@ -196,7 +221,7 @@
       "id": 8,
       "completed": true,
       "topics": [
-        4
+        26
       ]
     },
     {
@@ -204,7 +229,7 @@
       "id": 9,
       "completed": true,
       "topics": [
-        4
+        26
       ]
     },
     {
@@ -212,7 +237,7 @@
       "id": 10,
       "completed": true,
       "topics": [
-        4
+        26
       ]
     },
     {
@@ -220,21 +245,23 @@
       "id": 11,
       "completed": true,
       "topics": [
-        4
+        26
       ]
     },
     {
       "name": "Make tasks draggeable to topics",
       "id": 12,
+      "thisWeek": true,
       "topics": [
-        4
+        26
       ]
     },
     {
       "name": "Make topics draggable to other topics",
       "id": 13,
+      "thisWeek": true,
       "topics": [
-        4
+        26
       ]
     },
     {
@@ -275,7 +302,7 @@
       "completed": true,
       "thisWeek": true,
       "topics": [
-        4
+        26
       ]
     },
     {
@@ -407,57 +434,58 @@
     {
       "name": "Drag tasks to change the order in task list",
       "id": 36,
+      "thisWeek": true,
       "topics": [
-        10
+        26
       ]
     },
     {
       "name": "When text doubleclicked: focus immediately on text input",
       "id": 37,
       "topics": [
-        10
+        24
       ]
     },
     {
       "name": "Prettify text input for tasks",
       "id": 38,
       "topics": [
-        10
+        23
       ]
     },
     {
       "name": "When enter is pressed: finish editing",
       "id": 39,
       "topics": [
-        10
+        24
       ]
     },
     {
       "name": "Improve collapse and dropdown icon",
       "id": 40,
       "topics": [
-        10
+        23
       ]
     },
     {
       "name": "\"Delete task\" icon",
       "id": 41,
       "topics": [
-        10
+        23
       ]
     },
     {
       "name": "\"Add task\" icon",
       "id": 42,
       "topics": [
-        10
+        23
       ]
     },
     {
       "name": "Animate collapse and dropdown",
       "id": 43,
       "topics": [
-        10
+        23
       ]
     },
     {
@@ -543,7 +571,7 @@
       "id": 55,
       "completed": true,
       "topics": [
-        4
+        25
       ]
     },
     {
@@ -563,15 +591,16 @@
     {
       "name": "Make Tasks duplicatable to multiple topics",
       "id": 58,
+      "thisWeek": true,
       "topics": [
-        10
+        26
       ]
     },
     {
       "name": "Make the tasks to have a good width. Automatic? Multiline? Text cut-off?",
       "id": 59,
       "topics": [
-        4
+        23
       ]
     },
     {
@@ -579,7 +608,7 @@
       "id": 60,
       "completed": true,
       "topics": [
-        4
+        26
       ]
     },
     {
@@ -587,7 +616,7 @@
       "id": 61,
       "completed": true,
       "topics": [
-        4
+        26
       ]
     },
     {
@@ -642,7 +671,7 @@
       "id": 68,
       "completed": true,
       "topics": [
-        4
+        26
       ]
     },
     {
@@ -679,7 +708,7 @@
       "id": 73,
       "completed": true,
       "topics": [
-        4
+        25
       ]
     },
     {
@@ -783,6 +812,13 @@
       "completed": true,
       "topics": [
         16
+      ]
+    },
+    {
+      "name": "Show how many tasks are completed/planned/open in a topic",
+      "id": 90,
+      "topics": [
+        25
       ]
     }
   ]

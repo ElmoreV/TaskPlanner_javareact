@@ -20,6 +20,8 @@ to collect all the npm/node packages to get started. Subsequently, to run the se
 npm run start
 ```
 
+and it will start a server on localhost:3000
+
 ## Features
 
 - A by-topic view of all tasks. Tasks can be in multiple topic. Tasks can have subtasks. Topics can have subtopics.
@@ -29,11 +31,13 @@ npm run start
 
 ## Future plans
 
-- [ ] Make tasks draggeable/moveable
-- [ ] Add database interaction
-- [ ] Add weekly view
+The todo-list is self-hosted in the problem. In the future it will output a markdown file, that will be automatically shown in the GitHub pages. For now, it is:
+- [x] Make tasks draggeable/moveable
+- [x] Add loading/saving interaction
+- [x] Add weekly view
 - [ ] Add daily view
 - [ ] Animate collapse and dropdown
+
 
 
 
