@@ -92,12 +92,12 @@ const convert_old_topic_tasks_to_new_topic_tasks = (topics, tasks) => {
             thisWeek: t.thisWeek,
             topics: t.topics.map((tt) => get_topic_id(tt))
         }
-        console.debug(new_t)
-        console.debug(t)
+        // console.debug(new_t)
+        // console.debug(t)
         return new_t
     }
     new_tasks = tasks.map((t) => (handle_task(t)))
-    console.debug(new_tasks)
+    // console.debug(new_tasks)
     return [new_topics, new_tasks]
 }
 
@@ -148,12 +148,12 @@ const convert_new_topic_tasks_to_old_topic_tasks = (topics, tasks) => {
             thisWeek: t.thisWeek,
             topics: t.topics.map((tt) => get_topic_name(tt))
         }
-        console.debug(old_t)
-        console.debug(t)
+        // console.debug(old_t)
+        // console.debug(t)
         return old_t
     }
     old_tasks = tasks.map((t) => (handle_task(t)))
-    console.debug(old_tasks)
+    // console.debug(old_tasks)
     return [old_topics, old_tasks]
 }
 

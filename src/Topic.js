@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const Topic = (props) => {
@@ -82,20 +82,13 @@ const Topic = (props) => {
         setColor('gray');
     }
 
-    const toggleEdit = () => {
-        setIsDraggingAllowed(false);
-        setIsEditing(true);
 
-    }
     const handleToggleFold = () => {
         if (!isEditing) {
             toggleFold(id);
         }
     };
-    const handleBlur = () => {
-        setIsDraggingAllowed(true);
-        setIsEditing(false);
-    }
+
     const handleAddTaskClick = (e) => {
         e.stopPropagation();
         addTask();
@@ -118,6 +111,34 @@ const Topic = (props) => {
 
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
 
+    const handleKeyDown = (event) => {
+        // Check if the Enter key was pressed
+        if (event.key === 'Enter') {
+            // Call handleBlur or directly implement logic to finish editing
+            handleBlur();
+            // Prevents the form from being submitted if your input is part of one
+            event.preventDefault();
+        }
+    };
+    const toggleEdit = () => {
+        setIsDraggingAllowed(false);
+        setIsEditing(true);
+
+    }
+    const handleBlur = () => {
+        setIsDraggingAllowed(true);
+        setIsEditing(false);
+    }
+
+    const inputRef = useRef(null);
+    useEffect(() => {
+        if (isEditing && inputRef.current) {
+            inputRef.current.focus();
+            inputRef.current.select();
+        }
+    }, [isEditing]); // Dependency array ensures this runs only when isEditing changes
+
+
 
     return (<div
         className='topic'
@@ -130,7 +151,10 @@ const Topic = (props) => {
             (<input type='text'
                 value={title}
                 onChange={handleChange}
-                onBlur={handleBlur} />) :
+                onBlur={handleBlur}
+                onKeyDown={handleKeyDown}
+                ref={inputRef}
+            />) :
             (<span style={{ color: color }} onDoubleClick={toggleEdit}>{title}</span>)
         }
         <button className='topicAddTask'

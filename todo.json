@@ -45,7 +45,7 @@
             {
               "name": "Aesthetic",
               "id": 23,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             },
             {
@@ -116,7 +116,7 @@
         {
           "name": "UX/UI",
           "id": 15,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         },
         {
@@ -456,6 +456,7 @@
     {
       "name": "When text doubleclicked: focus immediately on text input",
       "id": 37,
+      "completed": true,
       "topics": [
         29
       ]
@@ -470,6 +471,7 @@
     {
       "name": "When enter is pressed: finish editing",
       "id": 39,
+      "completed": true,
       "topics": [
         29
       ]
@@ -870,6 +872,13 @@
       "id": 96,
       "topics": [
         26
+      ]
+    },
+    {
+      "name": "YAML cannot handle single quotes",
+      "id": 97,
+      "topics": [
+        12
       ]
     }
   ]

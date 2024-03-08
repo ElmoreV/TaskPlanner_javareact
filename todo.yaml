@@ -118,3 +118,4 @@
     - 'Test tasks with empty string'
     - 'Remove the empty lists from the YAML-export'
     - 'Properly handle escaped characters in YAML'
+    - 'YAML cannot handle single quotes'

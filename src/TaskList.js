@@ -132,7 +132,7 @@ const TaskList = (props) => {
 
 
     const getDeleteTopic = (id) => {
-        console.debug('Creating delete topic thingy')
+        // console.debug('Creating delete topic thingy')
         const deleteTopic = () => {
 
             let newTopics = [...topics]
@@ -290,9 +290,9 @@ const TaskList = (props) => {
         // 3. Show all tasks
 
         // Do not show subtopics when Topic is folded
-        console.debug('Hello2')
-        console.debug(topics)
-        console.debug(topic)
+        // console.debug('Hello2')
+        // console.debug(topics)
+        // console.debug(topic)
 
 
         return (<div><li key={topic.id}>

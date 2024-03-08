@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const Task = (props) => {
@@ -14,12 +14,6 @@ const Task = (props) => {
         setTaskName(e.target.value);
     }
 
-    const toggleEdit = () => {
-        setIsEditing(true);
-        setIsDraggingAllowed(false);
-        // TODO: set focus on text edit box
-
-    }
 
     const handleDragStart = (e) => {
         setIsDragging(true)
@@ -68,11 +62,7 @@ const Task = (props) => {
         unplan()
     }
 
-    const handleBlur = () => {
-        setIsDraggingAllowed(true);
-        setIsEditing(false);
 
-    }
     let class_str = 'task'
     // Completion has precedence over planned
     if (completed) { class_str = 'taskCompleted' }
@@ -80,6 +70,38 @@ const Task = (props) => {
 
     const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
+
+
+    const toggleEdit = () => {
+        setIsEditing(true);
+        setIsDraggingAllowed(false);
+        // inputRef.current.focus()
+        // TODO: set focus on text edit box
+
+    }
+
+    const handleKeyDown = (event) => {
+        // Check if the Enter key was pressed
+        if (event.key === 'Enter') {
+            // Call handleBlur or directly implement logic to finish editing
+            handleBlur();
+            // Prevents the form from being submitted if your input is part of one
+            event.preventDefault();
+        }
+    };
+    const handleBlur = () => {
+        setIsDraggingAllowed(true);
+        setIsEditing(false);
+
+    }
+    const inputRef = useRef(null);
+    useEffect(() => {
+        if (isEditing && inputRef.current) {
+            inputRef.current.focus();
+            inputRef.current.select();
+        }
+    }, [isEditing]); // Dependency array ensures this runs only when isEditing changes
+
 
 
     return (<div className={class_str}
@@ -90,7 +112,10 @@ const Task = (props) => {
             <input type='text'
                 value={taskName}
                 onChange={handleChange}
-                onBlur={handleBlur} /> :
+                onBlur={handleBlur}
+                onKeyDown={handleKeyDown}
+                ref={inputRef}
+            /> :
             //  <span style={{color : color}}>{taskName}</span>
             <span style={{ color: color }}>{taskName}</span>
         }
