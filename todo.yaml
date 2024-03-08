@@ -64,6 +64,7 @@
                 - 'Allow root topics to be created'
                 - 'Add a way to add the task to the current Weekly View'
                 - 'Create a way to remove task from weekly View'
+                - 'Make Topics draggeable to the Root Topic list'
     - 'Weekly Tasks View':
         - 'List all the tasks that are planned for this week'
         - 'List the topic(s) +subtopic(s) that the task belongs to'

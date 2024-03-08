@@ -272,6 +272,7 @@
     {
       "name": "Make topics draggable to other topics",
       "id": 13,
+      "completed": true,
       "thisWeek": true,
       "topics": [
         26
@@ -860,6 +861,13 @@
       "id": 95,
       "completed": true,
       "thisWeek": false,
+      "topics": [
+        26
+      ]
+    },
+    {
+      "name": "Make Topics draggeable to the Root Topic list",
+      "id": 96,
       "topics": [
         26
       ]

@@ -16,6 +16,30 @@ const find_topic_by_key_r = (topics, topic_key) => {
 const find_topic_by_key = (topics, topic_key) => {
     return find_topic_by_key_r(topics, topic_key);
 }
+const find_supertopic_by_id_r = (topic, subtopic_id) => {
+    console.debug(topic);
+    for (let subtopic of topic.subtopics) {
+        console.debug(subtopic.id);
+        if (subtopic.id === subtopic_id) {
+            console.info('Found subtopic id in a topic');
+            return topic;
+        }
+        let topic_res = topic.subtopics.map((t) => find_supertopic_by_id_r(t, subtopic_id)).filter((s) => (s));
+        console.debug(topic_res)
+        if (topic_res.length > 0) { console.debug('Bubble up'); return topic_res[0]; }
+    }
+    return null;
+}
+const find_supertopic_by_id = (topics, subtopic_id) => {
+    // Assumptions: ids are unique
+    console.debug(topics)
+    console.debug(subtopic_id)
+    let topic_res = topics.map((topic) => find_supertopic_by_id_r(topic, subtopic_id)).filter((s) => s)
+    console.debug(topic_res)
+    if (topic_res) { return topic_res[0] }
+    return null;
+}
+
 const find_topic_by_name_r = (topics, topic_name) => {
     console.debug(topics);
     for (let topic of topics) {
@@ -183,3 +207,4 @@ export { isTaskInAnyTopic };
 export { filter_by_name_r };
 export { getFreeTopicKey };
 export { getTopicTree_by_name }
+export { find_supertopic_by_id }

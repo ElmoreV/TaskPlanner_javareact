@@ -23,6 +23,7 @@ const Task = (props) => {
 
     const handleDragStart = (e) => {
         setIsDragging(true)
+        e.dataTransfer.setData('Type', "Task")
         e.dataTransfer.setData('Text', taskKey)
         e.dataTransfer.setData('Text2', currentTopic) //also name
         setColor('blue')
@@ -37,10 +38,15 @@ const Task = (props) => {
         e.target.setAttribute('draggedOver', false)
         console.info('drop')
         setColor('yellow')
-        var key = e.dataTransfer.getData("Text")
-        var oldTopic = e.dataTransfer.getData("Text2")
-        if (changeTopic) {
-            changeTopic(key, oldTopic, currentTopic)
+        var type = e.dataTransfer.getData("Type")
+        if (type == "Task") {
+            var key = e.dataTransfer.getData("Text")
+            var oldTopic = e.dataTransfer.getData("Text2")
+            if (changeTopic) {
+                changeTopic(key, oldTopic, currentTopic)
+            }
+        } else {
+            console.info("On a task, you can only drop another task (not a topic)")
         }
     }
     const handleDragOver = (e) => {

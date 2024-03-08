@@ -13,7 +13,8 @@ import {
     getFreeTaskKey,
     getFreeTopicKey,
     isTaskInAnyTopic,
-    filter_by_name_r
+    filter_by_name_r,
+    find_supertopic_by_id
 } from './TopicHelper';
 
 
@@ -54,6 +55,38 @@ const TaskList = (props) => {
 
     }
 
+    const getMoveTopic = () => {
+        const moveTopic = (source_id, target_id) => {
+            console.info(`Moving topic ${source_id} to ${target_id}`)
+            // Cannot move a topic into one of its sub(sub)topics
+            let source_topic = find_topic_by_key(topics, source_id)
+            console.info(source_topic)
+            let is_sub_topic = find_topic_by_key(source_topic.subtopics, target_id)
+            if (is_sub_topic) {
+                console.log("Cannot move a topic to its own subtopic")
+                return
+            }
+            // If the target topic is the sources topic direct supertopic, also don't do it
+            // Find the super topic of the source topic
+            const newTopics = [...topics];
+            let source_supertopic = find_supertopic_by_id(newTopics, source_id)
+            if (source_supertopic.id == target_id) {
+                console.log("Will not move a topic to its direct supertopic. It does nothing")
+                return
+
+            }
+            let target_topic = find_topic_by_key(newTopics, target_id)
+            console.info(target_topic)
+            console.info(source_supertopic)
+            // Copy the topic into the new topic
+            target_topic.subtopics.push(source_topic)
+            // Delete the topic out of its current spot
+            source_supertopic.subtopics = source_supertopic.subtopics.filter((t) => t.id != source_topic.id)
+            setTopics(newTopics)
+        }
+        return moveTopic
+    }
+
     const getSetTaskNameFunc = (key) => {
         const setTaskName = (newTaskName) => {
             const newTasks = [...tasks]
@@ -62,7 +95,6 @@ const TaskList = (props) => {
             setTasks(newTasks);
         }
         return setTaskName;
-
     }
 
     const getSetTopicNameFunc = (id) => {
@@ -106,6 +138,7 @@ const TaskList = (props) => {
             let newTopics = [...topics]
             // filter recursively
             newTopics = filter_by_name_r(newTopics, id);
+
 
             // Find any orphan tasks (tasks without a topic)
             // and filter them
@@ -273,6 +306,7 @@ const TaskList = (props) => {
                 addSubTopic={() => (addSubtopic(topic))}
                 deleteTopic={getDeleteTopic(topic.name)}
                 changeTopic={getChangeTaskTopic()}
+                moveTopic={getMoveTopic()}
             />
         </li>
             <ul key={topic.id + '_topics'}>{topic.unfolded && topic.subtopics.map((subtopic) => (

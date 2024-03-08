@@ -2,21 +2,37 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 const Topic = (props) => {
-    const { title, updateTaskTopics, setTopicName, id, toggleFold, unfolded, addTask, addSubTopic, deleteTopic, changeTopic } = props;
+    const { title, updateTaskTopics, setTopicName, id, toggleFold, unfolded, addTask, addSubTopic, deleteTopic, changeTopic, moveTopic } = props;
 
     const folded_symbol = '>';
     const unfolded_symbol = 'v';
 
     const [isEditing, setIsEditing] = useState(false);
-    const [color, setColor] = useState('green');
+    const [color, setColor] = useState('purple');
 
     const [isDragging, setIsDragging] = useState(false);
     const [isDraggingAllowed, setIsDraggingAllowed] = useState(true);
 
     // Dragging
+    // purple = initial state
+    // blue = being dragged
+    // green = stopped being dragged
     // yellow = dropped onto
     // red = dragged over
     // gray = dragged over but left
+
+    const handleDragStart = (e) => {
+        setIsDragging(true)
+        e.dataTransfer.setData('Type', "Topic")
+        e.dataTransfer.setData("id", id)
+        // e.dataTransfer.setData('Text', taskKey)
+        // e.dataTransfer.setData('Text2', currentTopic) //also name
+        setColor('blue')
+    }
+    const handleDragEnd = () => {
+        setIsDragging(false)
+        setColor('green')
+    }
 
     const handleChange = (e) => {
         // If the value of the topic title is update:
@@ -34,13 +50,23 @@ const Topic = (props) => {
         console.info('drop')
         setColor('yellow')
         console.debug(e.target)
-        var key = e.dataTransfer.getData("Text")
-        var oldTopic = e.dataTransfer.getData("Text2")
-        console.debug(key)
-        console.debug(oldTopic) // title???
-        console.debug(title)
-        if (changeTopic) {
-            changeTopic(key, oldTopic, title)
+        var type = e.dataTransfer.getData("Type")
+        if (type == "Task") {
+            var key = e.dataTransfer.getData("Text")
+            var oldTopic = e.dataTransfer.getData("Text2")
+            console.debug(key)
+
+            console.debug(oldTopic) // title???
+            console.debug(title)
+            if (changeTopic) {
+                changeTopic(key, oldTopic, title)
+            }
+        } else if (type == "Topic") {
+            let source_id = Number(e.dataTransfer.getData("id"))
+            console.info(`Dropped topic with id ${source_id} on this topic with id ${id}`)
+            moveTopic(source_id, id)
+        } else {
+            console.info("On a topic, you can only drop another topic or a task (not something else)")
         }
     }
     const handleDragOver = (e) => {
@@ -57,6 +83,7 @@ const Topic = (props) => {
     }
 
     const toggleEdit = () => {
+        setIsDraggingAllowed(false);
         setIsEditing(true);
 
     }
@@ -66,6 +93,7 @@ const Topic = (props) => {
         }
     };
     const handleBlur = () => {
+        setIsDraggingAllowed(true);
         setIsEditing(false);
     }
     const handleAddTaskClick = (e) => {
@@ -86,12 +114,15 @@ const Topic = (props) => {
     /*onClick={()=>(toggleCollapse(id))}*/
     // If isEditing: disallow the onclick
     // 
+    const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
+
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
 
 
     return (<div
         className='topic'
         onClick={handleToggleFold}
+        {...dragHandlers}
         {...dropHandlers}
     >
         {unfolded ? unfolded_symbol : folded_symbol}
