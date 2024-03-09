@@ -8,12 +8,12 @@
         {
           "name": "Database interaction",
           "id": 3,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Migration to schema.v1",
               "id": 8,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
@@ -411,6 +411,7 @@
     {
       "name": "Adding/deleting/modifying tasks",
       "id": 30,
+      "completed": true,
       "topics": [
         8
       ]
@@ -425,6 +426,7 @@
     {
       "name": "Adding/deleting/modifying topics",
       "id": 32,
+      "completed": true,
       "topics": [
         8
       ]
