@@ -45,13 +45,13 @@
             {
               "name": "Aesthetic",
               "id": 23,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
               "name": "Functionality",
               "id": 24,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": [
                 {
                   "name": "Relaying information",
@@ -72,7 +72,7 @@
         {
           "name": "Weekly Tasks View",
           "id": 5,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
@@ -101,7 +101,13 @@
             {
               "name": "Functionality2",
               "id": 29,
-              "unfolded": true,
+              "unfolded": false,
+              "subtopics": []
+            },
+            {
+              "name": "Aesthetics 30",
+              "id": 30,
+              "unfolded": false,
               "subtopics": []
             }
           ]
@@ -116,13 +122,13 @@
         {
           "name": "UX/UI",
           "id": 15,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
           "name": "Maintainability",
           "id": 16,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Error handling",
@@ -153,7 +159,7 @@
         {
           "name": "Performance",
           "id": 20,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
@@ -514,6 +520,7 @@
     {
       "name": "Text edit should not lag, but it does now",
       "id": 46,
+      "completed": true,
       "topics": [
         20
       ]
@@ -606,7 +613,7 @@
       ]
     },
     {
-      "name": "Make the tasks to have a good width. Automatic? Multiline? Text cut-off?",
+      "name": "Make the tasks to have a good width. Naive: text-cutoff",
       "id": 59,
       "topics": [
         23
@@ -879,6 +886,41 @@
       "id": 97,
       "topics": [
         12
+      ]
+    },
+    {
+      "name": "Create minimal layout (dense/packed/not pretty)",
+      "id": 98,
+      "topics": [
+        30
+      ]
+    },
+    {
+      "name": "Enable dark mode",
+      "id": 99,
+      "topics": [
+        30
+      ]
+    },
+    {
+      "name": "Dragging: make outline of dragged-over-task/topic fat",
+      "id": 100,
+      "topics": [
+        23
+      ]
+    },
+    {
+      "name": "Design good task width method",
+      "id": 101,
+      "topics": [
+        23
+      ]
+    },
+    {
+      "name": "Create a new text-based output, that is based on YAML",
+      "id": 102,
+      "topics": [
+        9
       ]
     }
   ]

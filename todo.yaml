@@ -20,6 +20,7 @@
             - 'Prettify the output JSON to make it more git-friendly'
             - 'Add the completion of a task into the YAML'
             - 'Add detection of JSON.v0 and JSON.v1 format'
+            - 'Create a new text-based output, that is based on YAML'
             - 'Sanitize input':
                 - 'Check against duplicate keys'
                 - 'Check against missing optional parameters (completed etc.)'
@@ -38,7 +39,9 @@
             - '"Delete task" icon'
             - '"Add task" icon'
             - 'Animate collapse and dropdown'
-            - 'Make the tasks to have a good width. Automatic? Multiline? Text cut-off?'
+            - 'Make the tasks to have a good width. Naive: text-cutoff'
+            - 'Dragging: make outline of dragged-over-task/topic fat'
+            - 'Design good task width method'
         - 'Functionality':
             - 'Relaying information':
                 - 'Have topics and subtopics show up'
@@ -91,6 +94,9 @@
             - 'Open tasks/topics to have a task/topic card'
             - 'Add hyperlink suport to tasks/topics'
             - 'Allow for subtasks'
+        - 'Aesthetics 30':
+            - 'Create minimal layout (dense/packed/not pretty)'
+            - 'Enable dark mode'
 'Constraints':
     - 'UX/UI':
         - 'Allow keyboard-only mode'
