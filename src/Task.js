@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const Task = (props) => {
-    const { taskKey, taskName, setTaskName, deleteTask,
+    const { id, name, setTaskName, deleteTask,
         completed, completeTask,
         currentTopicName, currentTopicId, changeTopic,
         planned, plan, unplan,
@@ -24,7 +24,7 @@ const Task = (props) => {
         if (isDuplicateDragging) { return; }
         setIsDragging(true)
         e.dataTransfer.setData('Type', "Task")
-        e.dataTransfer.setData('TaskId', taskKey)
+        e.dataTransfer.setData('TaskId', id)
         e.dataTransfer.setData('TopicName', currentTopicName) //also name
         e.dataTransfer.setData('TopicId', currentTopicId) //also name
         console.info('Dragging task')
@@ -43,7 +43,7 @@ const Task = (props) => {
         setIsDragging(true)
         isDuplicateDragging = true;
         e.dataTransfer.setData("Type", "TaskDuplicate")
-        e.dataTransfer.setData('TaskId', taskKey)
+        e.dataTransfer.setData('TaskId', id)
         console.info('Duplicate dragging task')
         setColor('pink')
     }
@@ -149,14 +149,14 @@ const Task = (props) => {
         {...dropHandlers}>
         {isEditing ?
             <input type='text'
-                value={taskName}
+                value={name}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
                 ref={inputRef}
             /> :
-            //  <span style={{color : color}}>{taskName}</span>
-            <><span style={{ color: color }}>{taskName}</span>
+            //  <span style={{color : color}}>{name}</span>
+            <><span style={{ color: color }}>{name}</span>
                 <span className='buttonDuplicate' {...duplicateDragHandlers}>+ Duplicate +</span></>
         }
         {deleteTask && (<button className='taskDelete' onClick={deleteTask && deleteTask}>Delete</button>)}
@@ -168,7 +168,7 @@ const Task = (props) => {
 }
 
 Task.propTypes = {
-    taskName: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     setTaskName: PropTypes.func,
     deleteTask: PropTypes.func,
     completed: PropTypes.bool.isRequired,

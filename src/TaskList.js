@@ -82,8 +82,8 @@ const TaskList = (props) => {
                 {topic.unfolded && tasks.map((task) => (
                     (!(task.completed && hideCompletedItems) && task.topics.includes(topic.title)) ?
                         <li key={topic.id + ' - ' + task.key}>
-                            <Task taskName={task.taskName}
-                                taskKey={task.key}
+                            <Task name={task.taskName}
+                                id={task.key}
                                 completed={task.completed}
                                 currentTopicName={topic.title}
                                 currentTopicId={topic.id}
@@ -135,8 +135,8 @@ const TaskList = (props) => {
                 {topic.unfolded && tasks.map((task) => (
                     (!(task.completed && hideCompletedItems) && task.topics.includes(topic.id)) ?
                         <li key={topic.id + ' - ' + task.id}>
-                            <Task taskName={task.name}
-                                taskKey={task.id}
+                            <Task name={task.name}
+                                id={task.id}
                                 completed={task.completed}
                                 currentTopicName={topic.name}
                                 currentTopicId={topic.id}
