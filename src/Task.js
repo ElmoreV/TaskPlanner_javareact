@@ -71,6 +71,8 @@ const Task = (props) => {
     const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
 
+    const duplicateDragHandlers = isDraggingAllowed? {draggable:true}:{}
+
 
     const toggleEdit = () => {
         setIsEditing(true);
@@ -117,7 +119,8 @@ const Task = (props) => {
                 ref={inputRef}
             /> :
             //  <span style={{color : color}}>{taskName}</span>
-            <span style={{ color: color }}>{taskName}</span>
+            <><span style={{ color: color }}>{taskName}</span>
+            <span className='buttonDuplicate' {...duplicateDragHandlers}>+ Duplicate +</span></>
         }
         {deleteTask && (<button className='taskDelete' onClick={deleteTask && deleteTask}>Delete</button>)}
         {!completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Complete</button>)}
