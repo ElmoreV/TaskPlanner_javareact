@@ -106,6 +106,7 @@
         - 'Choose better color schemes for tasks and topics'
         - 'Choose better color schemes for the feedback (drag/drop) events'
         - 'Allow hovering over topics to unfold them'
+        - 'When creating a new topic, leave it unfolded'
     - 'Maintainability':
         - 'Enable autoformatting'
         - 'Convert to TypeScript'
@@ -127,3 +128,4 @@
     - 'Remove the empty lists from the YAML-export'
     - 'Properly handle escaped characters in YAML'
     - 'YAML cannot handle single quotes'
+    - 'When creating a new topic, leave it unfolded'

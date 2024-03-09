@@ -128,7 +128,22 @@ const TaskList = (props) => {
     //    const collectTopics (topic,task)
 
 
-
+    const getDuplicateTask = () => {
+        const duplicateTask = (task_id, topic_id) => {
+            // Copy tasks
+            let newTasks = [...tasks]
+            const task_to_change = newTasks.find((task) => task.key == task_id);
+            console.debug(task_to_change)
+            const topic_to_add = find_topic_by_key(topics, topic_id)
+            if (task_to_change.topics.includes(topic_to_add.title)) {
+                console.info("Task is already in topic")
+                return;
+            }
+            task_to_change.topics.push(topic_to_add.title)
+            setTasks(newTasks)
+        }
+        return duplicateTask
+    }
 
 
     const getDeleteTopic = (id) => {
@@ -307,6 +322,7 @@ const TaskList = (props) => {
                 deleteTopic={getDeleteTopic(topic.name)}
                 changeTopic={getChangeTaskTopic()}
                 moveTopic={getMoveTopic()}
+                duplicateTask={getDuplicateTask()}
             />
         </li>
             <ul key={topic.id + '_topics'}>{topic.unfolded && topic.subtopics.map((subtopic) => (
@@ -319,7 +335,8 @@ const TaskList = (props) => {
                             <Task taskName={task.name}
                                 taskKey={task.id}
                                 completed={task.completed}
-                                currentTopic={topic.name}
+                                currentTopicName={topic.name}
+                                currentTopicId={topic.id}
                                 setTaskName={getSetTaskNameFunc(task.id)}
                                 deleteTask={getDeleteTask(task.id)}
                                 completeTask={getCompleteTask(task.id)}
@@ -327,6 +344,8 @@ const TaskList = (props) => {
                                 unplan={getUnplanTask(task.id)}
                                 planned={task.thisWeek}
                                 changeTopic={getChangeTaskTopic()}
+                                duplicateTask={getDuplicateTask()}
+
                             />
                         </li> : null))}
             </ul></div>

@@ -2,7 +2,10 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const Topic = (props) => {
-    const { title, updateTaskTopics, setTopicName, id, toggleFold, unfolded, addTask, addSubTopic, deleteTopic, changeTopic, moveTopic } = props;
+    const { title, updateTaskTopics, setTopicName, id,
+        toggleFold, unfolded,
+        addTask, addSubTopic, deleteTopic, changeTopic,
+        moveTopic, duplicateTask } = props;
 
     const folded_symbol = '>';
     const unfolded_symbol = 'v';
@@ -47,10 +50,11 @@ const Topic = (props) => {
     const handleDrop = (e) => {
         e.preventDefault()
         e.target.setAttribute('draggedOver', false)
-        console.info('drop')
+        console.info('Drop on Topic')
         setColor('yellow')
         console.debug(e.target)
         var type = e.dataTransfer.getData("Type")
+        console.info(type)
         if (type == "Task") {
             var key = e.dataTransfer.getData("Text")
             var oldTopic = e.dataTransfer.getData("Text2")
@@ -65,8 +69,13 @@ const Topic = (props) => {
             let source_id = Number(e.dataTransfer.getData("id"))
             console.info(`Dropped topic with id ${source_id} on this topic with id ${id}`)
             moveTopic(source_id, id)
+        } else if (type == "TaskDuplicate") {
+            var task_id = e.dataTransfer.getData("Text")
+            console.info(`Duplicate dropped task with id ${task_id} on this topic with id ${id}`)
+            duplicateTask(task_id, id)
         } else {
             console.info("On a topic, you can only drop another topic or a task (not something else)")
+
         }
     }
     const handleDragOver = (e) => {

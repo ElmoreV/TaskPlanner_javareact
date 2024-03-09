@@ -2,12 +2,17 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const Task = (props) => {
-    const { taskKey, taskName, setTaskName, deleteTask, completed, completeTask, currentTopic, changeTopic, planned, plan, unplan } = props;
+    const { taskKey, taskName, setTaskName, deleteTask,
+        completed, completeTask,
+        currentTopicName, currentTopicId, changeTopic,
+        planned, plan, unplan,
+        duplicateTask } = props;
 
     const [isEditing, setIsEditing] = useState(false);
     const [color, setColor] = useState('green');
     const [isDragging, setIsDragging] = useState(false);
     const [isDraggingAllowed, setIsDraggingAllowed] = useState(true);
+    let isDuplicateDragging = false;
 
     const handleChange = (e) => {
         console.info(e.target.value);
@@ -16,16 +21,39 @@ const Task = (props) => {
 
 
     const handleDragStart = (e) => {
+        if (isDuplicateDragging) { return; }
         setIsDragging(true)
         e.dataTransfer.setData('Type', "Task")
         e.dataTransfer.setData('Text', taskKey)
-        e.dataTransfer.setData('Text2', currentTopic) //also name
+        e.dataTransfer.setData('Text2', currentTopicName) //also name
+        console.info('Dragging task')
         setColor('blue')
     }
     const handleDragEnd = () => {
+        //TODO: how is this event still called when dropping duplicate?
+        if (isDuplicateDragging) { return; }
+        console.info("Stop dragging task")
         setIsDragging(false)
         setColor('green')
     }
+
+    const handleDuplicateDragStart = (e) => {
+        // How to prevent the normal drag to happen?
+        setIsDragging(true)
+        isDuplicateDragging = true;
+        e.dataTransfer.setData("Type", "TaskDuplicate")
+        e.dataTransfer.setData('Text', taskKey)
+        // e.dataTransfer.setData('Text2', currentTopicName) //do not need this
+        console.info('Duplicate dragging task')
+        setColor('pink')
+    }
+    const handleDuplicateDragEnd = () => {
+        isDuplicateDragging = false;
+        console.info("Stop duplicate dragging task")
+        setIsDragging(false)
+        setColor('violet')
+    }
+
 
     const handleDrop = (e) => {
         e.preventDefault()
@@ -37,8 +65,12 @@ const Task = (props) => {
             var key = e.dataTransfer.getData("Text")
             var oldTopic = e.dataTransfer.getData("Text2")
             if (changeTopic) {
-                changeTopic(key, oldTopic, currentTopic)
+                changeTopic(key, oldTopic, currentTopicName)
             }
+        } else if (type == "TaskDuplicate") {
+            var task_id = e.dataTransfer.getData("Text")
+            console.info(`Duplicate dropped task with id ${task_id} on this topic with id ${currentTopicId}`)
+            duplicateTask(task_id, currentTopicId)
         } else {
             console.info("On a task, you can only drop another task (not a topic)")
         }
@@ -71,7 +103,11 @@ const Task = (props) => {
     const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
 
-    const duplicateDragHandlers = isDraggingAllowed? {draggable:true}:{}
+    const duplicateDragHandlers = isDraggingAllowed ? {
+        draggable: true,
+        onDragStart: handleDuplicateDragStart,
+        onDragEnd: handleDuplicateDragEnd
+    } : {}
 
 
     const toggleEdit = () => {
@@ -120,7 +156,7 @@ const Task = (props) => {
             /> :
             //  <span style={{color : color}}>{taskName}</span>
             <><span style={{ color: color }}>{taskName}</span>
-            <span className='buttonDuplicate' {...duplicateDragHandlers}>+ Duplicate +</span></>
+                <span className='buttonDuplicate' {...duplicateDragHandlers}>+ Duplicate +</span></>
         }
         {deleteTask && (<button className='taskDelete' onClick={deleteTask && deleteTask}>Delete</button>)}
         {!completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Complete</button>)}

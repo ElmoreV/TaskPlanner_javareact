@@ -117,12 +117,12 @@
     {
       "name": "Constraints",
       "id": 2,
-      "unfolded": false,
+      "unfolded": true,
       "subtopics": [
         {
           "name": "UX/UI",
           "id": 15,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         },
         {
@@ -607,6 +607,7 @@
     {
       "name": "Make Tasks duplicatable to multiple topics",
       "id": 58,
+      "completed": true,
       "thisWeek": true,
       "topics": [
         26
@@ -935,6 +936,16 @@
       "id": 104,
       "topics": [
         7
+      ]
+    },
+    {
+      "name": "When creating a new topic, leave it unfolded",
+      "id": 105,
+      "completed": false,
+      "thisWeek": true,
+      "topics": [
+        12,
+        15
       ]
     }
   ]
