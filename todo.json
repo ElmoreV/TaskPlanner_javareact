@@ -419,6 +419,7 @@
     {
       "name": "Task.js",
       "id": 31,
+      "completed": true,
       "topics": [
         8
       ]
@@ -441,6 +442,7 @@
     {
       "name": "Default example",
       "id": 34,
+      "completed": true,
       "topics": [
         8
       ]

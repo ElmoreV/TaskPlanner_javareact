@@ -32,9 +32,6 @@ const TaskList = (props) => {
 
     const [hideCompletedItems, setHideCompletedItems] = useState(false)
 
-
-
-
     const converter_callback = () => {
         let [topics2, tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
         let [topics3, tasks3] = convert_new_topic_tasks_to_old_topic_tasks(topics2, tasks2)
@@ -64,7 +61,7 @@ const TaskList = (props) => {
 
 
         return (<div><li key={topic.id}>
-            <Topic title={topic.title}
+            <Topic name={topic.title}
                 id={topic.id}
                 unfolded={topic.unfolded}
                 updateTaskTopics={getUpdateTaskTopics(setTasks, tasks, topic.title)}
@@ -117,7 +114,7 @@ const TaskList = (props) => {
 
 
         return (<div><li key={topic.id}>
-            <Topic title={topic.name}
+            <Topic name={topic.name}
                 setTopicName={getSetTopicNameFunc(setTopics, topics, topic.id)}
                 updateTaskTopics={getUpdateTaskTopics(setTasks, tasks, topic.name)}
                 id={topic.id}

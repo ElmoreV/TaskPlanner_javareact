@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const Topic = (props) => {
-    const { title, updateTaskTopics, setTopicName, id,
+    const { name, updateTaskTopics, setTopicName, id,
         toggleFold, unfolded,
         addTask, addSubTopic, deleteTopic, changeTopic,
         moveTopic, duplicateTask } = props;
@@ -38,7 +38,7 @@ const Topic = (props) => {
     }
 
     const handleChange = (e) => {
-        // If the value of the topic title is update:
+        // If the value of the topic name is update:
         // update all tasks to be a member of the new topic name
         // update the topic name
         console.info(e.target.value);
@@ -61,10 +61,10 @@ const Topic = (props) => {
             var oldTopicId = e.dataTransfer.getData("TopicId")
             console.debug(key)
 
-            console.debug(oldTopicName) // title???
-            console.debug(title)
+            console.debug(oldTopicName) // name???
+            console.debug(name)
             if (changeTopic) {
-                changeTopic(key, oldTopicName, title)
+                changeTopic(key, oldTopicName, name)
             }
         } else if (type == "Topic") {
             let source_id = Number(e.dataTransfer.getData("id"))
@@ -159,13 +159,13 @@ const Topic = (props) => {
         {unfolded ? unfolded_symbol : folded_symbol}
         {isEditing ?
             (<input type='text'
-                value={title}
+                value={name}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 onKeyDown={handleKeyDown}
                 ref={inputRef}
             />) :
-            (<span style={{ color: color }} onDoubleClick={toggleEdit}>{title}</span>)
+            (<span style={{ color: color }} onDoubleClick={toggleEdit}>{name}</span>)
         }
         <button className='topicAddTask'
             onClick={handleAddTaskClick}>Add task</button>
@@ -178,7 +178,7 @@ const Topic = (props) => {
 }
 
 Topic.propTypes = {
-    title: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
     setTopicName: PropTypes.func.isRequired,
     id: PropTypes.number.isRequired,
     toggleFold: PropTypes.func.isRequired,
