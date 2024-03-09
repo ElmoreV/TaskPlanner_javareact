@@ -51,6 +51,7 @@
                 - 'Hide completed tasks'
                 - 'Make visible which Tasks are planned for this week'
                 - 'Show how many tasks are completed/planned/open in a topic'
+                - 'Minimize empty topics'
             - 'Modifying information':
                 - 'Editable task names'
                 - '"Delete task" button'
@@ -79,6 +80,7 @@
         - 'Make tasks importable from Weekly View'
     - 'General':
         - 'Change schema terminology to id,name,...'
+        - 'Show if the loaded json file has meaninfully changed'
         - 'Project management':
             - 'Gitify this project'
             - 'Create this Todo-list in the TaskPlanner'
