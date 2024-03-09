@@ -941,7 +941,7 @@
     {
       "name": "When creating a new topic, leave it unfolded",
       "id": 105,
-      "completed": false,
+      "completed": true,
       "thisWeek": true,
       "topics": [
         12,

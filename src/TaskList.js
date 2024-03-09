@@ -214,7 +214,7 @@ const TaskList = (props) => {
 
     const addTopic = () => {
         let newTopics = [...topics];
-        const addedTopic = { title: `New Topic ${getFreeTopicKey(topics)}`, id: getFreeTopicKey(topics), unfolded: false, subtopics: [] }
+        const addedTopic = { title: `New Topic ${getFreeTopicKey(topics)}`, id: getFreeTopicKey(topics), unfolded: true, subtopics: [] }
         newTopics.push(addedTopic);
         console.debug(newTopics);
         setTopics(newTopics);
