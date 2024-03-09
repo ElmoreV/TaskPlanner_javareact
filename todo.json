@@ -128,7 +128,7 @@
         {
           "name": "Maintainability",
           "id": 16,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Error handling",
@@ -946,6 +946,13 @@
       "topics": [
         12,
         15
+      ]
+    },
+    {
+      "name": "Standardize variable, function and classnames (underscore,etc.)",
+      "id": 106,
+      "topics": [
+        16
       ]
     }
   ]

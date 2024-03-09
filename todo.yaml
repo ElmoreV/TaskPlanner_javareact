@@ -110,6 +110,7 @@
     - 'Maintainability':
         - 'Enable autoformatting'
         - 'Convert to TypeScript'
+        - 'Standardize variable, function and classnames (underscore,etc.)'
         - 'Error handling':
         - 'Documentation/logging':
         - 'Testing':

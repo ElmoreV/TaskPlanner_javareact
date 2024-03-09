@@ -24,8 +24,9 @@ const Task = (props) => {
         if (isDuplicateDragging) { return; }
         setIsDragging(true)
         e.dataTransfer.setData('Type', "Task")
-        e.dataTransfer.setData('Text', taskKey)
-        e.dataTransfer.setData('Text2', currentTopicName) //also name
+        e.dataTransfer.setData('TaskId', taskKey)
+        e.dataTransfer.setData('TopicName', currentTopicName) //also name
+        e.dataTransfer.setData('TopicId', currentTopicId) //also name
         console.info('Dragging task')
         setColor('blue')
     }
@@ -42,8 +43,7 @@ const Task = (props) => {
         setIsDragging(true)
         isDuplicateDragging = true;
         e.dataTransfer.setData("Type", "TaskDuplicate")
-        e.dataTransfer.setData('Text', taskKey)
-        // e.dataTransfer.setData('Text2', currentTopicName) //do not need this
+        e.dataTransfer.setData('TaskId', taskKey)
         console.info('Duplicate dragging task')
         setColor('pink')
     }
@@ -62,13 +62,14 @@ const Task = (props) => {
         setColor('yellow')
         var type = e.dataTransfer.getData("Type")
         if (type == "Task") {
-            var key = e.dataTransfer.getData("Text")
-            var oldTopic = e.dataTransfer.getData("Text2")
+            var key = e.dataTransfer.getData("TaskId")
+            var oldTopicName = e.dataTransfer.getData("TopicName")
+            var oldTopicId = e.dataTransfer.getData("TopicId")
             if (changeTopic) {
-                changeTopic(key, oldTopic, currentTopicName)
+                changeTopic(key, oldTopicName, currentTopicName)
             }
         } else if (type == "TaskDuplicate") {
-            var task_id = e.dataTransfer.getData("Text")
+            var task_id = e.dataTransfer.getData("TaskId")
             console.info(`Duplicate dropped task with id ${task_id} on this topic with id ${currentTopicId}`)
             duplicateTask(task_id, currentTopicId)
         } else {

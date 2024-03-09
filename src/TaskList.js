@@ -25,12 +25,43 @@ const TaskList = (props) => {
 
     // Below
     // Function generators
+
+    // Can be used for v1 mode. 
+    const getChangeTaskTopicById = () => {
+        // Key here is the key of the task
+        // oldTopic is the topic-object where the task came from
+        // newTopic is the topic-object where the task is going to
+
+        const changeTaskTopic = (key, oldTopicId, newTopicId) => {
+            console.debug('Inside change task topic (by id)')
+            const newTasks = tasks.map((task) => {
+                if (task.id == key) //cannot be ===?
+                {
+                    if (task.topics.includes(oldTopicId)) {
+                        return {
+                            ...task,
+                            topics: task.topics.map((topic) => topic == oldTopicId ? newTopicId : topic)
+                        }
+                    }
+                }
+                return task;
+            });
+            setTasks(newTasks);
+        }
+
+        return changeTaskTopic
+
+    }
+
+    // Below
+    // Function generators
+    // For v0 data
     const getChangeTaskTopic = () => {
         // Key here is the key of the task
         // oldTopic is the topic-object where the task came from
         // newTopic is the topic-object where the task is going to
 
-        const changeTaskTopic = (key, oldTopic, newTopic) => {
+        const changeTaskTopic = (key, oldTopicName, newTopicName) => {
             console.debug('Inside change task topic')
             console.debug(key)
             const newTasks = tasks.map((task) => {
@@ -38,10 +69,10 @@ const TaskList = (props) => {
                 {
                     console.debug('relevant task')
                     console.debug(task)
-                    if (task.topics.includes(oldTopic)) {
+                    if (task.topics.includes(oldTopicName)) {
                         return {
                             ...task,
-                            topics: task.topics.map((topic) => topic == oldTopic ? newTopic : topic)
+                            topics: task.topics.map((topic) => topic == oldTopicName ? newTopicName : topic)
                         }
                     }
                     console.debug(task)
@@ -54,7 +85,7 @@ const TaskList = (props) => {
         return changeTaskTopic
 
     }
-
+    // Both for v0 and v1 data
     const getMoveTopic = () => {
         const moveTopic = (source_id, target_id) => {
             console.info(`Moving topic ${source_id} to ${target_id}`)
@@ -87,6 +118,18 @@ const TaskList = (props) => {
         return moveTopic
     }
 
+    // For v1 data
+    const getSetTaskNameFuncV1 = (id) => {
+        const setTaskName = (newTaskName) => {
+            const newTasks = [...tasks]
+            const task_to_change = newTasks.find((task) => task.id === id);
+            task_to_change.taskName = newTaskName;
+            setTasks(newTasks);
+        }
+        return setTaskName;
+    }
+
+    // For v0 data
     const getSetTaskNameFunc = (key) => {
         const setTaskName = (newTaskName) => {
             const newTasks = [...tasks]
@@ -97,6 +140,18 @@ const TaskList = (props) => {
         return setTaskName;
     }
 
+    // For v1 data
+    const getSetTopicNameFuncV1 = (id) => {
+        const setTopicName = (newTopicName) => {
+            const newTopics = [...topics];
+            const topic_to_change = find_topic_by_key(topics, id);
+            topic_to_change.name = newTopicName;
+            setTopics(newTopics);
+        }
+        return setTopicName;
+    }
+
+    // For v0 data
     const getSetTopicNameFunc = (id) => {
         const setTopicName = (newTopicName) => {
             const newTopics = [...topics];
@@ -105,9 +160,26 @@ const TaskList = (props) => {
             setTopics(newTopics);
         }
         return setTopicName;
-
     }
 
+    // For v1 data
+    const getUpdateTaskTopicsV1 = (topic_id) => {
+        const updateTaskTopics = (newTopicId) => {
+            const newTasks = tasks.map((task) => {
+                if (task.topics.includes(topic_id)) {
+                    return {
+                        ...task,
+                        topics: task.topics.map((topic) => topic === topic_id ? newTopicId : topic_id)
+                    }
+                }
+                return task;
+            });
+            setTasks(newTasks);
+        }
+        return updateTaskTopics;
+    }
+
+    // For v0 data
     const getUpdateTaskTopics = (topic_name) => {
         const updateTaskTopics = (newTopicName) => {
             const newTasks = tasks.map((task) => {
@@ -126,8 +198,26 @@ const TaskList = (props) => {
 
 
     //    const collectTopics (topic,task)
+    // For v1 data
+    const getDuplicateTaskV1 = () => {
+        const duplicateTask = (task_id, topic_id) => {
+            // Copy tasks
+            let newTasks = [...tasks]
+            const task_to_change = newTasks.find((task) => task.id == task_id);
+            console.debug(task_to_change)
+            const topic_to_add = find_topic_by_key(topics, topic_id)
+            if (task_to_change.topics.includes(topic_to_add.title)) {
+                console.info("Task is already in topic")
+                return;
+            }
+            task_to_change.topics.push(topic_to_add.title)
+            setTasks(newTasks)
+        }
+        return duplicateTask
+    }
 
 
+    // For v0 data
     const getDuplicateTask = () => {
         const duplicateTask = (task_id, topic_id) => {
             // Copy tasks
@@ -145,20 +235,19 @@ const TaskList = (props) => {
         return duplicateTask
     }
 
-
-    const getDeleteTopic = (id) => {
+    // For v1 data
+    const getDeleteTopicV1 = (id) => {
         // console.debug('Creating delete topic thingy')
         const deleteTopic = () => {
 
             let newTopics = [...topics]
             // filter recursively
+            // TODO: create filter_by_id
+            // newTopics = filter_by_id(newTopics, id);
             newTopics = filter_by_name_r(newTopics, id);
-
-
             // Find any orphan tasks (tasks without a topic)
             // and filter them
             // TODO: this is slow and not scalable. Fix when necessary.
-
             let newTasks = [...tasks]
             // all_subtopics = newTopics.
             newTasks = newTasks.filter((task) => isTaskInAnyTopic(task, newTopics))
@@ -171,6 +260,42 @@ const TaskList = (props) => {
         return deleteTopic;
     }
 
+    // For v0 data
+    const getDeleteTopic = (name) => {
+        // console.debug('Creating delete topic thingy')
+        const deleteTopic = () => {
+
+            let newTopics = [...topics]
+            // filter recursively
+            newTopics = filter_by_name_r(newTopics, name);
+            // Find any orphan tasks (tasks without a topic)
+            // and filter them
+            // TODO: this is slow and not scalable. Fix when necessary.
+            let newTasks = [...tasks]
+            // all_subtopics = newTopics.
+            newTasks = newTasks.filter((task) => isTaskInAnyTopic(task, newTopics))
+            console.info('Length of tasks before deletion/length of tasks after deletion')
+            console.info(tasks.length + ' / ' + newTasks.length)
+
+            setTopics(newTopics);
+            setTasks(newTasks);
+        }
+        return deleteTopic;
+    }
+
+    // For v1 data
+    const getDeleteTaskV1 = (id) => {
+        const deleteTask = () => {
+            let newTasks = [...tasks]
+            newTasks = newTasks.filter((task) => task.id !== id);
+            setTasks(newTasks);
+
+        }
+        return deleteTask;
+    }
+
+
+    // For v0 data    
     const getDeleteTask = (key) => {
         const deleteTask = () => {
             let newTasks = [...tasks]
@@ -181,6 +306,18 @@ const TaskList = (props) => {
         return deleteTask;
     }
 
+    // For v1 data
+    const getCompleteTaskV1 = (id) => {
+        const completeTask = () => {
+            const newTasks = [...tasks]
+            const task_to_change = newTasks.find((task) => task.id === id);
+            task_to_change.completed = !task_to_change.completed;
+            setTasks(newTasks);
+        }
+        return completeTask;
+    }
+
+    // For v0 data
     const getCompleteTask = (key) => {
         const completeTask = () => {
             const newTasks = [...tasks]
@@ -191,6 +328,18 @@ const TaskList = (props) => {
         return completeTask;
     }
 
+    // For v1 data
+    const getPlanTaskForWeekV1 = (id) => {
+        const planTaskForWeek = () => {
+            const newTasks = [...tasks]
+            const task_to_change = newTasks.find((task) => task.id === id);
+            task_to_change.thisWeek = true;
+            setTasks(newTasks);
+        }
+        return planTaskForWeek
+    }
+
+    // For v0 data
     const getPlanTaskForWeek = (id) => {
         const planTaskForWeek = () => {
             const newTasks = [...tasks]
