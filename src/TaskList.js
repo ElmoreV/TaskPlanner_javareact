@@ -23,7 +23,7 @@ import {
     getAddTask,
     getAddSubtopic,
     getAddTopic,
-} from './ModifyFuncGenerators'
+} from './ModifyFuncGeneratorsV1'
 import ImportExport from './ImportExport';
 
 
@@ -49,7 +49,7 @@ const TaskList = (props) => {
         // console.log(tables)
     }
 
-    const recursiveShowTopic = (topic, tasks) => {
+    const recursiveShowTopicV0 = (topic, tasks) => {
         // 1. Show topic
         // 2. Show all subtopics (and their subtopics and tasks)
         // 3. Show all tasks
@@ -102,7 +102,7 @@ const TaskList = (props) => {
         )
     }
 
-    const recursiveShowTopicV1 = (topic, tasks) => {
+    const recursiveShowTopic = (topic, tasks) => {
         // 1. Show topic
         // 2. Show all subtopics (and their subtopics and tasks)
         // 3. Show all tasks
@@ -115,17 +115,17 @@ const TaskList = (props) => {
 
         return (<div><li key={topic.id}>
             <Topic name={topic.name}
-                setTopicName={getSetTopicNameFunc(setTopics, topics, topic.id)}
-                updateTaskTopics={getUpdateTaskTopics(setTasks, tasks, topic.name)}
                 id={topic.id}
-                toggleFold={getToggleFold(setTopics, topics)}
                 unfolded={topic.unfolded}
-                addTask={getAddTask(setTasks, tasks, topics, topic.id)}
+                setTopicName={getSetTopicNameFunc(setTopics, topics, topic.id)}
+                toggleFold={getToggleFold(setTopics, topics)}
                 addSubTopic={getAddSubtopic(setTopics, topics, topic)}
-                deleteTopic={getDeleteTopic(setTopics, topic.name)}
-                changeTopic={getChangeTaskTopic(setTasks, tasks)}
                 moveTopic={getMoveTopic(setTopics, topics)}
+                addTask={getAddTask(setTasks, tasks, topics, topic.id)}
+                changeTopic={getChangeTaskTopic(setTasks, tasks)}
+                updateTaskTopics={getUpdateTaskTopics(setTasks, tasks, topic.name)}
                 duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
+                deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}
             />
         </li>
             <ul key={topic.id + '_topics'}>{topic.unfolded && topic.subtopics.map((subtopic) => (
@@ -160,11 +160,11 @@ const TaskList = (props) => {
         setHideCompletedItems(!hideCompletedItems)
     }
 
-    const showTopicsV1 = () => {
-        console.info('Re-rendering task list')
-        let [topics2, tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks);
-        return topics2.map((topic) => (recursiveShowTopic(topic, tasks2)))
-    }
+    // const showTopics = () => {
+    //     console.info('Re-rendering task list')
+    //     let [topics2, tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks);
+    //     return topics2.map((topic) => (recursiveShowTopic(topic, tasks2)))
+    // }
 
     const showTopics = () => {
         console.info('Re-rendering task list')

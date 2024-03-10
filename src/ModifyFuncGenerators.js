@@ -103,7 +103,11 @@ const getAddTask = (setTasks, tasks, topics, topic_key) => {
         console.log(topic_key);
         const topic = find_topic_by_key(topics, topic_key);
         if (topic) {
-            const addedTask = { taskName: `New Task ${getFreeTaskKey(tasks)}!`, key: getFreeTaskKey(tasks), topics: [topic.title] }
+            const addedTask = {
+                taskName: `New Task ${getFreeTaskKey(tasks)}!`,
+                key: getFreeTaskKey(tasks),
+                topics: [topic.title]
+            }
             newTasks.push(addedTask);
             console.log(newTasks);
             setTasks(newTasks);
@@ -213,7 +217,12 @@ const getAddTopic = (setTopics, topics) => {
 
     const addTopic = () => {
         let newTopics = [...topics];
-        const addedTopic = { title: `New Topic ${getFreeTopicKey(topics)}`, id: getFreeTopicKey(topics), unfolded: true, subtopics: [] }
+        const addedTopic = {
+            title: `New Topic ${getFreeTopicKey(topics)}`,
+            id: getFreeTopicKey(topics),
+            unfolded: true,
+            subtopics: []
+        }
         newTopics.push(addedTopic);
         console.debug(newTopics);
         setTopics(newTopics);
@@ -245,7 +254,12 @@ const getAddSubtopic = (setTopics, topics, topic) => {
         console.log(topic);
         console.log(topics)
         let newTopics = [...topics]
-        const addedTopic = { title: `New Topic ${getFreeTopicKey(topics)}`, id: getFreeTopicKey(topics), unfolded: false, subtopics: [] }
+        const addedTopic = {
+            title: `New Topic ${getFreeTopicKey(topics)}`,
+            id: getFreeTopicKey(topics),
+            unfolded: false,
+            subtopics: []
+        }
         console.log(addedTopic)
         console.log('start recursion')
         // now add this topic at the exact right spot

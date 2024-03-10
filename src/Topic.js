@@ -56,22 +56,25 @@ const Topic = (props) => {
         var type = e.dataTransfer.getData("Type")
         console.info(type)
         if (type == "Task") {
-            var key = e.dataTransfer.getData("TaskId")
+            var task_id = Number(e.dataTransfer.getData("TaskId"))
             var oldTopicName = e.dataTransfer.getData("TopicName")
-            var oldTopicId = e.dataTransfer.getData("TopicId")
-            console.debug(key)
+            var oldTopicId = Number(e.dataTransfer.getData("TopicId"))
+            console.debug(task_id)
 
             console.debug(oldTopicName) // name???
             console.debug(name)
+            console.info(`Dropped task with id ${task_id} with old topic id ${oldTopicId} on topic with id ${id}`)
+
             if (changeTopic) {
-                changeTopic(key, oldTopicName, name)
+                // changeTopic(key, oldTopicName, name) //v0
+                changeTopic(task_id, oldTopicId, id) //v0
             }
         } else if (type == "Topic") {
             let source_id = Number(e.dataTransfer.getData("id"))
             console.info(`Dropped topic with id ${source_id} on this topic with id ${id}`)
             moveTopic(source_id, id)
         } else if (type == "TaskDuplicate") {
-            var task_id = e.dataTransfer.getData("TaskId")
+            var task_id = Number(e.dataTransfer.getData("TaskId"))
             console.info(`Duplicate dropped task with id ${task_id} on this topic with id ${id}`)
             duplicateTask(task_id, id)
         } else {

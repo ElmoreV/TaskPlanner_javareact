@@ -62,14 +62,17 @@ const Task = (props) => {
         setColor('yellow')
         var type = e.dataTransfer.getData("Type")
         if (type == "Task") {
-            var key = e.dataTransfer.getData("TaskId")
+            var task_id = Number(e.dataTransfer.getData("TaskId"))
             var oldTopicName = e.dataTransfer.getData("TopicName")
-            var oldTopicId = e.dataTransfer.getData("TopicId")
+            var oldTopicId = Number(e.dataTransfer.getData("TopicId"))
+            console.info(`Dropped task with id ${task_id} with old topic id ${oldTopicId} on task within topic with id ${currentTopicId}`)
+            console.info(changeTopic)
             if (changeTopic) {
-                changeTopic(key, oldTopicName, currentTopicName)
+                // changeTopic(key, oldTopicName, currentTopicName) //v0
+                changeTopic(task_id, oldTopicId, currentTopicId)
             }
         } else if (type == "TaskDuplicate") {
-            var task_id = e.dataTransfer.getData("TaskId")
+            var task_id = Number(e.dataTransfer.getData("TaskId"))
             console.info(`Duplicate dropped task with id ${task_id} on this topic with id ${currentTopicId}`)
             duplicateTask(task_id, currentTopicId)
         } else {

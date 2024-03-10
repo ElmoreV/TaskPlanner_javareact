@@ -11,6 +11,15 @@ const ImportExport = (props) => {
 
     const fileInputRef = useRef(null);
 
+    const inputVersion = (tasks, topics) => {
+        console.debug(tasks.length)
+        console.debug('taskName' in tasks[0])
+        console.debug(topics.length)
+        console.debug('title' in topics[0])
+        if ((tasks.length > 0 && 'taskName' in tasks[0])
+            || (topics.length > 0 && 'title' in topics[0])) { return 'v0' }
+        else { return 'v1' }
+    }
 
 
     /*
@@ -212,11 +221,10 @@ const ImportExport = (props) => {
 
         let [new_topics, new_tasks] = [topics, tasks]
         // Check if v0 format, or v1 format
-        if ((tasks.length > 0 && 'taskName' in tasks[0]) || (topics.length > 0 && 'title' in topics[0])) {
-            console.log('Converting internal v0 format to v1');
-            [new_topics, new_tasks] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
-        }
-
+        // if (inputVersion(new_topics, new_tasks) == 'v0') {
+        //     console.log('Converting internal v0 format to v1');
+        //     [new_topics, new_tasks] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
+        // }
         // Pretty print json (with 2 spaces as space parameter)
         const jsonContent = JSON.stringify({ topics: new_topics, tasks: new_tasks }, null, 2);
         const blob = new Blob([jsonContent], { type: "application/json" });
@@ -236,15 +244,13 @@ const ImportExport = (props) => {
         // setTasks(uploadedData.tasks);
         let [old_topics, old_tasks] = [uploadedData.topics, uploadedData.tasks]
         // Sanitize input
-        // Check if v0 or v1 is expected
-        // Check if v0 format, or v1 format
-        console.debug(old_tasks.length)
-        console.debug('taskName' in old_tasks[0])
-        console.debug(old_topics.length)
-        console.debug('title' in old_topics[0])
-        if (!((old_tasks.length > 0 && 'taskName' in old_tasks[0]) || (old_topics.length > 0 && 'title' in old_topics[0]))) {
-            console.log("converting imported v1 to v0 format");
-            [old_topics, old_tasks] = convert_new_topic_tasks_to_old_topic_tasks(
+
+        // Version rectification
+        let version = inputVersion(old_tasks, old_topics)
+        console.log("Version of input is " + version.toString())
+        if (version == "v0") {
+            console.log("converting imported v0 to v1 format");
+            [old_topics, old_tasks] = convert_old_topic_tasks_to_new_topic_tasks(
                 uploadedData.topics,
                 uploadedData.tasks)
         }

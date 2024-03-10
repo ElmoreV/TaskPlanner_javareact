@@ -54,6 +54,11 @@ const find_topic_by_name_r = (topics, topic_name) => {
     return null;
 }
 
+const getFreeTaskId = (tasks) => {
+    return 1 + tasks.reduce((max_id, task) => Math.max(max_id, task.id), 0);
+}
+
+
 const getFreeTaskKey = (tasks) => {
     return 1 + tasks.reduce((max_key, task) => Math.max(max_key, task.key), 0);
 }
@@ -98,6 +103,17 @@ const topicCompletelyContainsTasks = (topic, task) => {
     return false;
 }
 
+const filterTopicsById_r = (topics, topicId) => {
+    // 1. enumerate all subtopics that do not match name, and filter their subtopics
+    // 2. filter all subtopics that do match name
+    // 3. return the topics object as is, just with all topics with title==topic_name filtered out,
+    // and all subtopics (or subsubtopics) with title==topic_name filtered out
+    console.log(topics)
+    return topics.filter((topic) => topic.id !== topicId).map(
+        (topic) => { return { ...topic, subtopics: filterTopicsById_r(topic.subtopics, topicId) } }
+    )
+}
+
 const filter_by_name_r = (topics, topic_name) => {
     // 1. enumerate all subtopics that do not match name, and filter their subtopics
     // 2. filter all subtopics that do match name
@@ -116,7 +132,23 @@ const get_all_subtopics = (topic) => {
     return topic.subtopics.map((subtopic) => get_all_subtopics(subtopic)).concat(topic);
 }
 
-
+const isTaskInAnyTopicV1 = (task, topics) => {
+    // check if the topic of the task in the
+    console.log(task.topics)
+    task.topics = task.topics.filter((topicId) => {
+        console.log('Is topic .. in non-deleted topics ...')
+        console.log(topicId)
+        console.log(topics)
+        return find_topic_by_key(topics, topicId)
+    })
+    console.log('Resulting task.topics')
+    console.log(task.topics)
+    console.log(task.topics.length)
+    if (task.topics.length > 0) {
+        return true;
+    }
+    return false;
+}
 const isTaskInAnyTopic = (task, topics) => {
     // check if the topic of the task in the
     console.log(task.topics)
@@ -203,8 +235,11 @@ export default find_topic_by_key_r;
 export { find_topic_by_key };
 export { find_topic_by_name_r };
 export { getFreeTaskKey };
+export { getFreeTaskId };
 export { isTaskInAnyTopic };
+export { isTaskInAnyTopicV1 };
 export { filter_by_name_r };
 export { getFreeTopicKey };
 export { getTopicTree_by_name }
 export { find_supertopic_by_id }
+export { filterTopicsById_r }
