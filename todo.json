@@ -40,7 +40,7 @@
         {
           "name": "Per Topic View",
           "id": 4,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Aesthetic",
@@ -51,7 +51,7 @@
             {
               "name": "Functionality",
               "id": 24,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": [
                 {
                   "name": "Relaying information",
@@ -101,8 +101,15 @@
             {
               "name": "Functionality",
               "id": 29,
-              "unfolded": true,
-              "subtopics": []
+              "unfolded": false,
+              "subtopics": [
+                {
+                  "name": "Dependencies",
+                  "id": 37,
+                  "unfolded": false,
+                  "subtopics": []
+                }
+              ]
             },
             {
               "name": "Aesthetics",
@@ -111,6 +118,37 @@
               "subtopics": []
             }
           ]
+        },
+        {
+          "name": "Timing",
+          "id": 31,
+          "unfolded": false,
+          "subtopics": [
+            {
+              "name": "Impossibilities",
+              "id": 32,
+              "unfolded": true,
+              "subtopics": []
+            },
+            {
+              "name": "Duration (estimated?)",
+              "id": 34,
+              "unfolded": true,
+              "subtopics": []
+            },
+            {
+              "name": "Repetition",
+              "id": 35,
+              "unfolded": true,
+              "subtopics": []
+            }
+          ]
+        },
+        {
+          "name": "Priority module",
+          "id": 36,
+          "unfolded": true,
+          "subtopics": []
         }
       ]
     },
@@ -785,7 +823,7 @@
     {
       "name": "Refactor the TaskList.js into smaller files",
       "id": 81,
-      "completed": false,
+      "completed": true,
       "thisWeek": false,
       "topics": [
         21
@@ -973,6 +1011,91 @@
       "topics": [
         19
       ]
+    },
+    {
+      "name": "Not before, not during, not after (deadline)",
+      "id": 109,
+      "topics": [
+        32
+      ]
+    },
+    {
+      "name": "Instant",
+      "id": 110,
+      "topics": [
+        34
+      ]
+    },
+    {
+      "name": "Time span",
+      "id": 111,
+      "topics": [
+        34
+      ]
+    },
+    {
+      "name": "Scheduling",
+      "id": 112,
+      "topics": [
+        35
+      ]
+    },
+    {
+      "name": "Formally enabling all possibilities",
+      "id": 113,
+      "topics": [
+        35
+      ]
+    },
+    {
+      "name": "Prioritize (order control)",
+      "id": 114,
+      "topics": [
+        36
+      ]
+    },
+    {
+      "name": "Automatic promotion (more important, deadline nears)",
+      "id": 115,
+      "topics": [
+        36
+      ]
+    },
+    {
+      "name": "Automatic demotion (less important, was too long ago)",
+      "id": 116,
+      "topics": [
+        36
+      ]
+    },
+    {
+      "name": "Allow tasks to have dependencies",
+      "id": 117,
+      "topics": [
+        37
+      ]
+    },
+    {
+      "name": "Allow tasks to have multiplpe dependenceis",
+      "id": 118,
+      "topics": [
+        37
+      ]
+    },
+    {
+      "name": "Multiple dependencies can be OR or AND dependencies",
+      "id": 119,
+      "topics": [
+        37
+      ]
+    },
+    {
+      "name": "Refactor ModifyingFunctionGenerators into smaller files",
+      "id": 120,
+      "topics": [
+        21
+      ],
+      "thisWeek": false
     }
   ]
 }
