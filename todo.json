@@ -8,12 +8,12 @@
         {
           "name": "Database interaction",
           "id": 3,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Migration to schema.v1",
               "id": 8,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             },
             {
@@ -145,7 +145,7 @@
             {
               "name": "Testing",
               "id": 19,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
@@ -821,7 +821,7 @@
       ]
     },
     {
-      "name": "Add/delete/modify topic",
+      "name": "Add/modify topic",
       "id": 88,
       "topics": [
         19
@@ -957,6 +957,21 @@
       "id": 106,
       "topics": [
         16
+      ]
+    },
+    {
+      "name": "Understand testing framework (jest)",
+      "id": 107,
+      "topics": [
+        19
+      ],
+      "completed": true
+    },
+    {
+      "name": "Delete topic",
+      "id": 108,
+      "topics": [
+        19
       ]
     }
   ]

@@ -246,20 +246,20 @@ const addSubtopic_r = (topic, superTopic, newSubTopic) => {
     }
 }
 
-const getAddSubtopic = (setTopics, topics, topic) => {
+const getAddSubtopic = (setTopics, topics, superTopic) => {
     // console.log("Creating add subtopic")
     // console.log(topic);
     // console.log(topics)
 
     const addSubtopic = () => {
         console.log('In AddSubTopic')
-        console.log(topic);
+        console.log(superTopic);
         console.log(topics)
         let newTopics = [...topics]
         const addedTopic = {
             name: `New Topic ${getFreeTopicKey(topics)}`,
             id: getFreeTopicKey(topics),
-            unfolded: false,
+            unfolded: true,
             subtopics: []
         }
         console.log(addedTopic)
@@ -267,7 +267,7 @@ const getAddSubtopic = (setTopics, topics, topic) => {
         // now add this topic at the exact right spot
         // recurse through newTopics
         // and return the changed topic if it is the right topic
-        newTopics = newTopics.map((topic_r) => addSubtopic_r(topic_r, topic, addedTopic));
+        newTopics = newTopics.map((topic_r) => addSubtopic_r(topic_r, superTopic, addedTopic));
         setTopics(newTopics);
     }
     return addSubtopic
@@ -300,13 +300,10 @@ const getToggleFold = (setTopics, topics) => {
 
 // For v1 data
 const getDeleteTopic = (setTopics, topics, setTasks, tasks, topicId) => {
-    // console.debug('Creating delete topic thingy')
     const deleteTopic = () => {
-
         let newTopics = [...topics]
-        // filter recursively
-        // TODO: create filter_by_id
-        // newTopics = filter_by_id(newTopics, id);
+
+        // Filter out any topic that is a subtopic of topicId, recursively
         newTopics = filterTopicsById_r(newTopics, topicId);
         // Find any orphan tasks (tasks without a topic)
         // and filter them

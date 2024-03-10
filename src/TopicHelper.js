@@ -1,15 +1,18 @@
 
 
 const find_topic_by_key_r = (topics, topic_key) => {
-    console.debug(topics);
+    // console.debug(topics);
     for (let topic of topics) {
-        console.debug(topic.id);
+        // console.debug(topic.id);
         if (topic.id === topic_key) {
-            console.debug('Fount it!');
+            // console.debug('Fount it!');
             return topic;
         }
         let topic_res = find_topic_by_key_r(topic.subtopics, topic_key);
-        if (topic_res) { console.debug('Bubble up'); return topic_res; }
+        if (topic_res) {
+            // console.debug('Bubble up'); 
+            return topic_res;
+        }
     }
     return null;
 }
@@ -134,16 +137,15 @@ const get_all_subtopics = (topic) => {
 
 const isTaskInAnyTopicV1 = (task, topics) => {
     // check if the topic of the task in the
-    console.log(task.topics)
+    // console.log("Before task.topics")
+    // console.log(task.topics)
     task.topics = task.topics.filter((topicId) => {
-        console.log('Is topic .. in non-deleted topics ...')
-        console.log(topicId)
-        console.log(topics)
+        console.log(`Is topic ${topicId} in non-deleted topics ${topics}`)
         return find_topic_by_key(topics, topicId)
     })
-    console.log('Resulting task.topics')
-    console.log(task.topics)
-    console.log(task.topics.length)
+    // console.log(`Resulting task.topics: ${task.topics}`)
+    // console.log(task.topics)
+    // console.log(task.topics.length)
     if (task.topics.length > 0) {
         return true;
     }
