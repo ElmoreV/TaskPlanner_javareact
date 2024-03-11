@@ -8,18 +8,18 @@
         {
           "name": "Database interaction",
           "id": 3,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Migration to schema.v1",
               "id": 8,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
               "name": "Importing/Exporting",
               "id": 9,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": [
                 {
                   "name": "Sanitize input",
@@ -32,7 +32,7 @@
             {
               "name": "Data structure conversion",
               "id": 13,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             }
           ]
@@ -51,18 +51,18 @@
             {
               "name": "Functionality",
               "id": 24,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": [
                 {
                   "name": "Relaying information",
                   "id": 25,
-                  "unfolded": true,
+                  "unfolded": false,
                   "subtopics": []
                 },
                 {
                   "name": "Modifying information",
                   "id": 26,
-                  "unfolded": true,
+                  "unfolded": false,
                   "subtopics": []
                 }
               ]
@@ -72,13 +72,32 @@
         {
           "name": "Weekly Tasks View",
           "id": 5,
-          "unfolded": false,
-          "subtopics": []
+          "unfolded": true,
+          "subtopics": [
+            {
+              "name": "Aesthetic",
+              "id": 38,
+              "unfolded": true,
+              "subtopics": []
+            },
+            {
+              "name": "Modifying information",
+              "id": 39,
+              "unfolded": true,
+              "subtopics": []
+            },
+            {
+              "name": "Relaying information",
+              "id": 40,
+              "unfolded": true,
+              "subtopics": []
+            }
+          ]
         },
         {
           "name": "Daily Task View",
           "id": 6,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         },
         {
@@ -89,19 +108,19 @@
             {
               "name": "Project management",
               "id": 27,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
               "name": "Unknowns",
               "id": 28,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
               "name": "Functionality",
               "id": 29,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": [
                 {
                   "name": "Dependencies",
@@ -114,7 +133,7 @@
             {
               "name": "Aesthetics",
               "id": 30,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             }
           ]
@@ -122,7 +141,7 @@
         {
           "name": "Timing",
           "id": 31,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Impossibilities",
@@ -166,7 +185,7 @@
         {
           "name": "Maintainability",
           "id": 16,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Error handling",
@@ -197,13 +216,13 @@
         {
           "name": "Performance",
           "id": 20,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         },
         {
           "name": "Reliability",
           "id": 22,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         }
       ]
@@ -475,7 +494,8 @@
       "id": 33,
       "topics": [
         8
-      ]
+      ],
+      "completed": true
     },
     {
       "name": "Default example",
@@ -553,11 +573,12 @@
       ]
     },
     {
-      "name": "Do not allow two topics to have the same name",
+      "name": "Topics with the same name give weird bugs",
       "id": 45,
       "topics": [
         12
-      ]
+      ],
+      "completed": true
     },
     {
       "name": "Text edit should not lag, but it does now",
@@ -614,7 +635,7 @@
       "id": 53,
       "completed": true,
       "topics": [
-        5
+        40
       ]
     },
     {
@@ -660,7 +681,8 @@
       "id": 59,
       "topics": [
         23
-      ]
+      ],
+      "completed": true
     },
     {
       "name": "Allow new subtopics to be created",
@@ -722,7 +744,7 @@
       "completed": true,
       "thisWeek": true,
       "topics": [
-        5
+        40
       ]
     },
     {
@@ -738,28 +760,28 @@
       "id": 69,
       "thisWeek": false,
       "topics": [
-        5
+        39
       ]
     },
     {
       "name": "Allow reordering the weekly view tasks",
       "id": 70,
       "topics": [
-        5
+        39
       ]
     },
     {
       "name": "Add button the clear weekly view",
       "id": 71,
       "topics": [
-        5
+        39
       ]
     },
     {
       "name": "Add button to clear all completed items",
       "id": 72,
       "topics": [
-        5
+        39
       ]
     },
     {
@@ -1104,6 +1126,29 @@
         12
       ],
       "completed": true
+    },
+    {
+      "name": "PlannedTask.js",
+      "id": 122,
+      "topics": [
+        8
+      ],
+      "thisWeek": true
+    },
+    {
+      "name": "Add a way to hide the completed items",
+      "id": 123,
+      "topics": [
+        40
+      ],
+      "thisWeek": true
+    },
+    {
+      "name": "Add Ability to unfold a topic and all its subtopics in one go",
+      "id": 124,
+      "topics": [
+        23
+      ]
     }
   ]
 }

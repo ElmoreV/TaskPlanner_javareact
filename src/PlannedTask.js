@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { getTopicTree_by_name } from './TopicHelper';
+import { getTopicTreeById } from './TopicHelper';
 
 const PlannedTask = (props) => {
     const { taskKey, taskName, setTaskName, deleteTask, completed, completeTask, currentTopic, changeTopic, planned, plan, topics, taskTopics } = props;
@@ -75,7 +75,7 @@ const PlannedTask = (props) => {
     const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
 
-    let topicPath = getTopicTree_by_name(topics, taskTopics[0])
+    let topicPath = getTopicTreeById(topics, taskTopics[0])
 
 
     return (<div className={class_str}

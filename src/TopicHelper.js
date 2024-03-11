@@ -210,13 +210,13 @@ const getTopicTree_by_id = (topics, topic_id) => {
 const getTopicTree_by_name_r = (topic, topic_name) => {
     let found_topic_id = false;
     let next_string = "";
-    if (topic.title == topic_name) {
-        next_string = topic.title
+    if (topic.name == topic_name) {
+        next_string = topic.name
         found_topic_id = true;
     } else {
         let strings = topic.subtopics.map((t) => getTopicTree_by_name_r(t, topic_name)).filter((s) => s.length > 0)
         if (strings.length > 0) {
-            next_string = topic.title + '/' + strings[0]
+            next_string = topic.name + '/' + strings[0]
             found_topic_id = true;
         }
     }
@@ -233,6 +233,34 @@ const getTopicTree_by_name = (topics, topic_name) => {
 
 }
 
+const getTopicTreeByIdRecursive = (topic, topicId) => {
+    let foundTopicId = false;
+    let nextString = "";
+    if (topic.id == topicId) {
+        nextString = topic.name
+        foundTopicId = true;
+    } else {
+        let strings = topic.subtopics.map((t) => getTopicTreeByIdRecursive(t, topicId)).filter((s) => s.length > 0)
+        if (strings.length > 0) {
+            nextString = topic.name + '/' + strings[0]
+            foundTopicId = true;
+        }
+    }
+    if (!foundTopicId) {
+        return ""
+    } else {
+        return nextString
+    }
+}
+
+const getTopicTreeById = (topics, topicId) => {
+    let strings = topics.map((t) =>
+        getTopicTreeByIdRecursive(t, topicId)).filter((s) => s.length > 0)
+    if (strings.length > 0) { return strings[0] } else { return "" }
+
+}
+
+
 export default find_topic_by_key_r;
 export { find_topic_by_key };
 export { find_topic_by_name_r };
@@ -243,5 +271,6 @@ export { isTaskInAnyTopicV1 };
 export { filter_by_name_r };
 export { getFreeTopicKey };
 export { getTopicTree_by_name }
+export { getTopicTreeById }
 export { find_supertopic_by_id }
 export { filterTopicsById_r }
