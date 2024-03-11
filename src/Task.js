@@ -150,23 +150,29 @@ const Task = (props) => {
         onDoubleClick={toggleEdit}
         {...dragHandlers}
         {...dropHandlers}>
-        {isEditing ?
-            <input type='text'
-                value={name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                onKeyDown={handleKeyDown}
-                ref={inputRef}
-            /> :
-            //  <span style={{color : color}}>{name}</span>
-            <><span style={{ color: color }}>{name}</span>
-                <span className='buttonDuplicate' {...duplicateDragHandlers}>+ Duplicate +</span></>
-        }
-        {deleteTask && (<button className='taskDelete' onClick={deleteTask && deleteTask}>Delete</button>)}
-        {!completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Complete</button>)}
-        {completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Decomplete</button>)}
-        {plan && planned && (<button className='moveToWeek' onClick={moveOutOfWeek}> Unplan for this week </button>)}
-        {plan && !planned && (<button className='moveToWeek' onClick={moveToWeek}> Plan for this week </button>)}
+        <span className="taskText">
+            {isEditing ?
+                <input type='text'
+                    value={name}
+                    width="430px"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    onKeyDown={handleKeyDown}
+                    ref={inputRef}
+                /> :
+                //  <span style={{color : color}}>{name}</span>
+                <span style={{ color: color }}>{name}</span>
+
+            }
+        </span>
+        <>
+            {deleteTask && (<button className='taskDelete' onClick={deleteTask && deleteTask}>Delete</button>)}
+            {!completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Complete</button>)}
+            {completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Decomplete</button>)}
+            {plan && planned && (<button className='moveToWeek' onClick={moveOutOfWeek}> Unplan for this week </button>)}
+            {plan && !planned && (<button className='moveToWeek' onClick={moveToWeek}> Plan for this week </button>)}
+            <span className='buttonDuplicate' {...duplicateDragHandlers}>+ Duplicate +</span>
+        </>
     </div>);
 }
 

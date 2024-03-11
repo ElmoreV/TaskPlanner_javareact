@@ -102,6 +102,19 @@ span.buttonDuplicate {
   cursor: copy;
 }
 
+span.taskText {
+  display: inline-block;
+  max-width: 400px;
+  word-wrap: break-word;
+  /* overflow-wrap: break-word; */
+}
+
+span.taskText input[type="text"] {
+  width: 400px;
+  /* max-width: 100px; */
+  box-sizing: border-box;
+}
+
 .task {
   max-width: 800px;
   padding: 10px;
