@@ -1141,7 +1141,8 @@
       "topics": [
         40
       ],
-      "thisWeek": true
+      "thisWeek": true,
+      "completed": true
     },
     {
       "name": "Add Ability to unfold a topic and all its subtopics in one go",
