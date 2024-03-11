@@ -12,8 +12,8 @@ const PlannedList = (props) => {
                 {tasks.map(
                     (task) => {
                         return (<li>{task.thisWeek && <PlannedTask
-                            taskName={task.taskName}
-                            taskKey={task.key}
+                            taskName={task.name}
+                            taskKey={task.id}
                             // setTaskName={getSetTaskNameFunc(task.id)}
                             // deleteTask = {getDeleteTask(task.id)}
                             completed={task.completed}
