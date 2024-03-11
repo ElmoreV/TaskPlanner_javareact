@@ -628,7 +628,8 @@
       "id": 52,
       "topics": [
         9
-      ]
+      ],
+      "completed": true
     },
     {
       "name": "List all the tasks that are planned for this week",
@@ -1149,6 +1150,13 @@
       "id": 124,
       "topics": [
         23
+      ]
+    },
+    {
+      "name": "Create different settings for the text/markdown based output (keep indent, show completed, show planned, and more?)",
+      "id": 125,
+      "topics": [
+        9
       ]
     }
   ]

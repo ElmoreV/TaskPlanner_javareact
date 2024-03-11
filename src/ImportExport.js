@@ -39,23 +39,17 @@ const ImportExport = (props) => {
             if (indent_level == 0) {
                 // console.log(subtopics)
                 // console.log('@ indent level 0')
-                YAMLstr = YAMLstr.concat(' '.repeat(4 * indent_level), `'${topic.title}':\n`)
+                YAMLstr = YAMLstr.concat(' '.repeat(4 * indent_level), `'${topic.name}':\n`)
 
             } else {
-                YAMLstr = YAMLstr.concat(' '.repeat(4 * indent_level), '- ', `'${topic.title}':\n`)
+                YAMLstr = YAMLstr.concat(' '.repeat(4 * indent_level), '- ', `'${topic.name}':\n`)
             }
             // Add all tasks in this subtopic to the YAML
-            let relevant_tasks = tasks.filter((t) => t.topics.includes(topic.title))
+            let relevant_tasks = tasks.filter((t) => t.topics.includes(topic.id))
             for (let j = 0; j < relevant_tasks.length; j++) {
                 let task = relevant_tasks[j]
-                YAMLstr = YAMLstr.concat(' '.repeat(4 * (indent_level + 1)), `- '${task.taskName}'\n`)
+                YAMLstr = YAMLstr.concat(' '.repeat(4 * (indent_level + 1)), `- '${task.name}'\n`)
             }
-            // No need to add an empty task list
-            // if (relevant_tasks.length ==0)
-            // {
-            //     YAMLstr = YAMLstr.concat(' '.repeat(4*(indent_level+1)),'- []\n')
-            // }
-
             // Do the same for all the subtopics
             // Add
             if (topic.subtopics.length > 0) { YAMLstr = YAMLstr.concat(buildYAML_r(topic.subtopics, tasks, indent_level + 1)) }
@@ -212,6 +206,59 @@ const ImportExport = (props) => {
         setTopics(res2);
         setTasks(importedTasks);
     }
+
+    /*
+    /////////////////////////////////////
+    //////////// Markdown
+    ////////////////////////////////////
+    */
+
+    const buildMarkdownRecursive = (subtopics, tasks, indent_level) => {
+        let MarkdownStr = ''
+        console.debug(MarkdownStr)
+        // console.log(subtopics)
+        for (let i = 0; i < subtopics.length; i++) {
+            // Add topic name as key
+            let topic = subtopics[i]
+            if (indent_level == 0) {
+                // console.log(subtopics)
+                // console.log('@ indent level 0')
+                MarkdownStr = MarkdownStr.concat('\n', '#'.repeat(indent_level + 1), ` ${topic.name}:\n\n`)
+
+            } else {
+                MarkdownStr = MarkdownStr.concat('\n', '#'.repeat(indent_level + 1), ` ${topic.name}:\n\n`)
+            }
+            // Add all tasks in this subtopic to the Markdown
+            let relevant_tasks = tasks.filter((t) => t.topics.includes(topic.id))
+            for (let j = 0; j < relevant_tasks.length; j++) {
+                let task = relevant_tasks[j]
+                let completedSymbol = task.completed ? '[x]' : '[ ]'
+                MarkdownStr = MarkdownStr.concat(`- ${completedSymbol} ${task.name}\n`)
+            }
+            // Do the same for all the subtopics
+            // Add
+            if (topic.subtopics.length > 0) {
+                MarkdownStr = MarkdownStr.concat(buildMarkdownRecursive(topic.subtopics,
+                    tasks, indent_level + 1))
+            }
+        }
+
+        return MarkdownStr
+    }
+
+
+    const exportMarkdown = () => {
+        let [new_topics, new_tasks] = [topics, tasks]
+        const MarkdownContent = buildMarkdownRecursive(topics, tasks, 0)
+        const blob = new Blob([MarkdownContent], { type: "text/markdown" });
+        var a = document.createElement("a");
+        a.href = window.URL.createObjectURL(blob);
+        a.download = "tasks_topics.md";
+        a.click();
+
+    }
+
+
     /*
     ///////////////////////////////////
     ///////////// JSON
@@ -309,6 +356,7 @@ const ImportExport = (props) => {
         <div>
             <button onClick={exportjson}>Export Tasks [JSON]</button>
             <button onClick={exportYAML}>Export Tasks [YAML]</button>
+            <button onClick={exportMarkdown}> Export Tasks [Markdown]</button>
             <input type="file"
                 ref={fileInputRef}
                 onChange={handleFileToUpload} />
