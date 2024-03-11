@@ -51,7 +51,7 @@ const Topic = (props) => {
         e.preventDefault()
         e.target.setAttribute('draggedOver', false)
         console.info('Drop on Topic')
-        setColor('yellow')
+        setColor('maroon')
         console.debug(e.target)
         var type = e.dataTransfer.getData("Type")
         console.info(type)

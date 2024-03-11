@@ -40,12 +40,12 @@
         {
           "name": "Per Topic View",
           "id": 4,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Aesthetic",
               "id": 23,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
@@ -166,7 +166,7 @@
         {
           "name": "Maintainability",
           "id": 16,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Error handling",
@@ -953,7 +953,7 @@
       ]
     },
     {
-      "name": "Design good task width method",
+      "name": "Design good way to limit task text in the task box",
       "id": 101,
       "topics": [
         23
@@ -1096,6 +1096,14 @@
         21
       ],
       "thisWeek": false
+    },
+    {
+      "name": "Remove the yellow from the color-scheme for drag and drop (unreadable)",
+      "id": 121,
+      "topics": [
+        12
+      ],
+      "completed": true
     }
   ]
 }

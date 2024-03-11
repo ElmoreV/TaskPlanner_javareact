@@ -59,7 +59,7 @@ const Task = (props) => {
         e.preventDefault()
         e.target.setAttribute('draggedOver', false)
         console.info('drop')
-        setColor('yellow')
+        setColor('maroon')
         var type = e.dataTransfer.getData("Type")
         if (type == "Task") {
             var task_id = Number(e.dataTransfer.getData("TaskId"))
