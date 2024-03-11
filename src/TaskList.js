@@ -49,59 +49,6 @@ const TaskList = (props) => {
         // console.log(tables)
     }
 
-    const recursiveShowTopicV0 = (topic, tasks) => {
-        // 1. Show topic
-        // 2. Show all subtopics (and their subtopics and tasks)
-        // 3. Show all tasks
-
-        // Do not show subtopics when Topic is folded
-        // console.debug('Hello2')
-        // console.debug(topics)
-        // console.debug(topic)
-
-
-        return (<div><li key={topic.id}>
-            <Topic name={topic.title}
-                id={topic.id}
-                unfolded={topic.unfolded}
-                updateTaskTopics={getUpdateTaskTopics(setTasks, tasks, topic.title)}
-                changeTopic={getChangeTaskTopic(setTasks, tasks)}
-                addTask={getAddTask(setTasks, tasks, topics, topic.id)}
-                setTopicName={getSetTopicNameFunc(setTopics, topics, topic.id)}
-                toggleFold={getToggleFold(setTopics, topics)}
-                moveTopic={getMoveTopic(setTopics, topics)}
-                addSubTopic={getAddSubtopic(setTopics, topics, topic)}
-                deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.title)}
-                duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
-            />
-        </li>
-            <ul key={topic.id + '_topics'}>{topic.unfolded && topic.subtopics.map((subtopic) => (
-                recursiveShowTopic(subtopic, tasks)
-            ))}</ul>
-            <ul key={topic.id + '_tasks'}>
-                {topic.unfolded && tasks.map((task) => (
-                    (!(task.completed && hideCompletedItems) && task.topics.includes(topic.title)) ?
-                        <li key={topic.id + ' - ' + task.key}>
-                            <Task name={task.taskName}
-                                id={task.key}
-                                completed={task.completed}
-                                currentTopicName={topic.title}
-                                currentTopicId={topic.id}
-                                setTaskName={getSetTaskNameFunc(setTasks, tasks, task.key)}
-                                deleteTask={getDeleteTask(setTasks, tasks, task.key)}
-                                completeTask={getCompleteTask(setTasks, tasks, task.key)}
-                                plan={getPlanTaskForWeek(setTasks, tasks, task.key)}
-                                unplan={getUnplanTask(setTasks, tasks, task.key)}
-                                changeTopic={getChangeTaskTopic(setTasks, tasks)}
-                                duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
-                                planned={task.thisWeek}
-
-                            />
-                        </li> : null))}
-            </ul></div>
-        )
-    }
-
     const recursiveShowTopic = (topic, tasks) => {
         // 1. Show topic
         // 2. Show all subtopics (and their subtopics and tasks)
