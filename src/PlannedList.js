@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import PlannedTask from './PlannedTask';
-
+import { getCompleteTask } from './ModifyFuncGeneratorsV1';
 // TODO: add the topic name to the bar
 
 const PlannedList = (props) => {
@@ -32,7 +32,7 @@ const PlannedList = (props) => {
                                         // setTaskName={getSetTaskNameFunc(task.id)}
                                         // deleteTask = {getDeleteTask(task.id)}
                                         completed={task.completed}
-                                        // completeTask = {getCompleteTask(task.id)}
+                                        completeTask={getCompleteTask(setTasks, tasks, task.id)}
                                         // currentTopic = {task.topics[0]}
                                         topics={topics}
                                         taskTopics={task.topics}

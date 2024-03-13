@@ -83,6 +83,7 @@
             - 'Allow reordering the weekly view tasks'
             - 'Add button the clear weekly view'
             - 'Add button to clear all completed items'
+            - 'Add a button to mark the task as completed'
         - 'Relaying information':
             - 'List all the tasks that are planned for this week'
             - 'List the topic(s) +subtopic(s) that the task belongs to'
@@ -137,6 +138,9 @@
         - 'Choose better color schemes for the feedback (drag/drop) events'
         - 'Allow hovering over topics to unfold them'
         - 'When creating a new topic, leave it unfolded'
+        - 'Add a way to easier move/duplicate tasks to far-away topics (better drag handling or cut/copy/paste)'
+        - 'Add ability to peek into a list of folded topics'
+        - 'Remember the name of the loaded file (so that it does not need to be renamed on every save)'
     - 'Maintainability':
         - 'Enable autoformatting'
         - 'Convert to TypeScript'

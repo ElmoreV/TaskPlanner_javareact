@@ -72,7 +72,7 @@
         {
           "name": "Weekly Tasks View",
           "id": 5,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Aesthetic",
@@ -83,13 +83,13 @@
             {
               "name": "Modifying information",
               "id": 39,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             },
             {
               "name": "Relaying information",
               "id": 40,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             }
           ]
@@ -179,7 +179,7 @@
         {
           "name": "UX/UI",
           "id": 15,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
@@ -1198,6 +1198,35 @@
         26
       ],
       "thisWeek": true
+    },
+    {
+      "name": "Add a button to mark the task as completed",
+      "id": 131,
+      "topics": [
+        39
+      ],
+      "completed": true
+    },
+    {
+      "name": "Add a way to easier move/duplicate tasks to far-away topics (better drag handling or cut/copy/paste)",
+      "id": 132,
+      "topics": [
+        15
+      ]
+    },
+    {
+      "name": "Add ability to peek into a list of folded topics",
+      "id": 133,
+      "topics": [
+        15
+      ]
+    },
+    {
+      "name": "Remember the name of the loaded file (so that it does not need to be renamed on every save)",
+      "id": 134,
+      "topics": [
+        15
+      ]
     }
   ]
 }
