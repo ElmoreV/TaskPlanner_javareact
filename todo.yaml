@@ -23,6 +23,8 @@
             - 'Add detection of JSON.v0 and JSON.v1 format'
             - 'Create a new text-based output, that is based on YAML'
             - 'Create different settings for the text/markdown based output (keep indent, show completed, show planned, and more?)'
+            - 'Export the weekly list as a txt file (without topic information)'
+            - 'Export the weekly list as a txt file (with condensed topic information)'
             - 'Sanitize input':
                 - 'Check against duplicate keys'
                 - 'Check against missing optional parameters (completed etc.)'

@@ -24,12 +24,15 @@
 - [x] Allow export of tasks as YAML
 - [x] Allow import of tasks as YAML
 - [x] Detection of JSON or YAML at import 
-- [ ] Save output in markdown
+- [x] Save output in markdown
 - [ ] Find a way to add task/topic id into the YAML
 - [x] Prettify the output JSON to make it more git-friendly
 - [ ] Add the completion of a task into the YAML
 - [x] Add detection of JSON.v0 and JSON.v1 format
 - [ ] Create a new text-based output, that is based on YAML
+- [ ] Create different settings for the text/markdown based output (keep indent, show completed, show planned, and more?)
+- [ ] Export the weekly list as a txt file (without topic information)
+- [ ] Export the weekly list as a txt file (with condensed topic information)
 
 #### Sanitize input:
 

@@ -24,7 +24,7 @@
                 {
                   "name": "Sanitize input",
                   "id": 14,
-                  "unfolded": false,
+                  "unfolded": true,
                   "subtopics": []
                 }
               ]
@@ -56,13 +56,13 @@
                 {
                   "name": "Relaying information",
                   "id": 25,
-                  "unfolded": false,
+                  "unfolded": true,
                   "subtopics": []
                 },
                 {
                   "name": "Modifying information",
                   "id": 26,
-                  "unfolded": false,
+                  "unfolded": true,
                   "subtopics": []
                 }
               ]
@@ -190,13 +190,13 @@
             {
               "name": "Error handling",
               "id": 17,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
               "name": "Documentation/logging",
               "id": 18,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
@@ -516,7 +516,7 @@
     {
       "name": "Drag tasks to change the order in task list",
       "id": 36,
-      "thisWeek": true,
+      "thisWeek": false,
       "topics": [
         26
       ]
@@ -1155,6 +1155,21 @@
     {
       "name": "Create different settings for the text/markdown based output (keep indent, show completed, show planned, and more?)",
       "id": 125,
+      "topics": [
+        9
+      ]
+    },
+    {
+      "name": "Export the weekly list as a txt file (without topic information)",
+      "id": 126,
+      "topics": [
+        9
+      ],
+      "thisWeek": true
+    },
+    {
+      "name": "Export the weekly list as a txt file (with condensed topic information)",
+      "id": 127,
       "topics": [
         9
       ]
