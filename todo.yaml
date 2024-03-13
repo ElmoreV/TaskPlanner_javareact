@@ -57,6 +57,7 @@
                 - 'Make visible which Tasks are planned for this week'
                 - 'Show how many tasks are completed/planned/open in a topic'
                 - 'Minimize empty topics'
+                - 'Enable filtering on repeated tasks (to uncomplete them manually)'
             - 'Modifying information':
                 - 'Editable task names'
                 - '"Delete task" button'
@@ -74,6 +75,7 @@
                 - 'Add a way to add the task to the current Weekly View'
                 - 'Create a way to remove task from weekly View'
                 - 'Make Topics draggeable to the Root Topic list'
+                - 'Add 'Is Repeated Task' button'
     - 'Weekly Tasks View':
         - 'Aesthetic':
         - 'Modifying information':
@@ -120,7 +122,9 @@
             - 'Time span'
         - 'Repetition':
             - 'Scheduling'
-            - 'Formally enabling all possibilities'
+            - 'Formally enabling all possibilities (what are all possibilities of repetition?)'
+            - 'Add a repeated tag to tasks'
+            - 'Enable filtering on repeated tasks (to uncomplete them manually)'
     - 'Priority module':
         - 'Prioritize (order control)'
         - 'Automatic promotion (more important, deadline nears)'

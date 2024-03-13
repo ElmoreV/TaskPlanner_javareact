@@ -72,7 +72,7 @@
         {
           "name": "Weekly Tasks View",
           "id": 5,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Aesthetic",
@@ -97,13 +97,13 @@
         {
           "name": "Daily Task View",
           "id": 6,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
           "name": "General",
           "id": 7,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Project management",
@@ -146,13 +146,13 @@
             {
               "name": "Impossibilities",
               "id": 32,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             },
             {
               "name": "Duration (estimated?)",
               "id": 34,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             },
             {
@@ -1064,7 +1064,7 @@
       ]
     },
     {
-      "name": "Formally enabling all possibilities",
+      "name": "Formally enabling all possibilities (what are all possibilities of repetition?)",
       "id": 113,
       "topics": [
         35
@@ -1173,6 +1173,31 @@
       "topics": [
         9
       ]
+    },
+    {
+      "name": "Add a repeated tag to tasks",
+      "id": 128,
+      "topics": [
+        35
+      ],
+      "thisWeek": true
+    },
+    {
+      "name": "Enable filtering on repeated tasks (to uncomplete them manually)",
+      "id": 129,
+      "topics": [
+        35,
+        25
+      ],
+      "thisWeek": true
+    },
+    {
+      "name": "Add 'Is Repeated Task' button",
+      "id": 130,
+      "topics": [
+        26
+      ],
+      "thisWeek": true
     }
   ]
 }
