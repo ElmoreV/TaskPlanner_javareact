@@ -1,0 +1,6 @@
+- Not being able to complete tasks on the weekly view: 1
+- Not seeing the repeated tasks: 2
+- Not directly being able to duplicate-drag tasks to other topics: 1
+- Not being able to peek in a list of folded topics: 1
+- Not being able to remove items from the weekly list on the weekly list: 1
+- Having to rename the file every time it is saved (the filename is not remembered on load): 1
