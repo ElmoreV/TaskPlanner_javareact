@@ -198,7 +198,7 @@
 - [x] When creating a new topic, leave it unfolded
 - [ ] Add a way to easier move/duplicate tasks to far-away topics (better drag handling or cut/copy/paste)
 - [ ] Add ability to peek into a list of folded topics
-- [ ] Remember the name of the loaded file (so that it does not need to be renamed on every save)
+- [x] Remember the name of the loaded file (so that it does not need to be renamed on every save)
 
 ## Maintainability:
 

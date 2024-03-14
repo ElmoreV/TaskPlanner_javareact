@@ -10,6 +10,7 @@ const ImportExport = (props) => {
     const { tasks, topics, setTasks, setTopics } = props;
 
     const fileInputRef = useRef(null);
+    const fileNameRef = useRef("")
 
     const inputVersion = (tasks, topics) => {
         console.debug(tasks.length)
@@ -73,7 +74,14 @@ const ImportExport = (props) => {
         const blob = new Blob([YAMLcontent], { type: "text/yaml" });
         var a = document.createElement("a");
         a.href = window.URL.createObjectURL(blob);
-        a.download = "tasks_topics.yaml";
+        if (fileNameRef.current.length > 0) {
+            console.log(fileNameRef.current)
+            // a.download = fileInputRef.split(".")[0]
+            a.download = fileNameRef.current + '.yaml'
+        }
+        else {
+            a.download = "tasks_topics.yaml";
+        }
         a.click();
     }
 
@@ -253,7 +261,14 @@ const ImportExport = (props) => {
         const blob = new Blob([MarkdownContent], { type: "text/markdown" });
         var a = document.createElement("a");
         a.href = window.URL.createObjectURL(blob);
-        a.download = "tasks_topics.md";
+        if (fileNameRef.current.length > 0) {
+            console.log(fileNameRef.current)
+            // a.download = fileInputRef.split(".")[0]
+            a.download = fileNameRef.current + '.md'
+        }
+        else {
+            a.download = "tasks_topics.md";
+        }
         a.click();
 
     }
@@ -277,7 +292,14 @@ const ImportExport = (props) => {
         const blob = new Blob([jsonContent], { type: "application/json" });
         var a = document.createElement("a");
         a.href = window.URL.createObjectURL(blob);
-        a.download = "tasks_topics.json";
+        if (fileNameRef.current.length > 0) {
+            console.log(fileNameRef.current)
+            // a.download = fileInputRef.split(".")[0]
+            a.download = fileNameRef.current + '.json'
+        }
+        else {
+            a.download = "tasks_topics.json";
+        }
         a.click();
     }
 
@@ -320,6 +342,8 @@ const ImportExport = (props) => {
         console.log('file?')
         console.log()
         if (file) {
+            fileNameRef.current = file.name.substring(0, file.name.lastIndexOf('.'))
+            console.log(fileNameRef.current)
             const reader = new FileReader();
             reader.onload = (evt) => {
                 console.log('file loaded now parsing')

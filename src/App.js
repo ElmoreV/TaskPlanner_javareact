@@ -2,7 +2,7 @@ import ViewSelector from './ViewSelector';
 import TaskList from './TaskList';
 import PlannedList from './PlannedList'
 import { useState } from 'react'
-
+import ImportExport from './ImportExport';
 function App() {
   const VIEW_ALL_TASKS = 1
   const VIEW_PLANNED_TASKS = 2
@@ -65,6 +65,12 @@ function App() {
   return (
     <div className="App">
       <div className="contents">
+
+        <ImportExport
+          tasks={tasks}
+          topics={topics}
+          setTasks={setTasks}
+          setTopics={setTopics} />
         <ViewSelector
           viewSetter={setView} />
         {view === VIEW_ALL_TASKS && <TaskList

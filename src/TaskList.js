@@ -132,11 +132,6 @@ const TaskList = (props) => {
             <ul key='root_topics'>
                 {showTopics()}
             </ul>
-            <ImportExport
-                tasks={tasks}
-                topics={topics}
-                setTasks={setTasks}
-                setTopics={setTopics} />
             <button onClick={converter_callback}>Test Converter</button>
 
         </div>

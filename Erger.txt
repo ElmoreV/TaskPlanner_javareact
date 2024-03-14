@@ -1,10 +1,12 @@
-- Not being able to complete tasks on the weekly view: 1 - gefixt
-- Not seeing the repeated tasks: 2
-- Fearing to lose a task by not being able to make it repeatable: 1
-- Not directly being able to duplicate-drag tasks to other topics: 2
-- Not being able to peek in a list of folded topics: 1
+- Not directly being able to duplicate-drag tasks to other topics: 3
 - Not being able to remove items from the weekly list on the weekly list: 3
-- Having to rename the file every time it is saved (the filename is not remembered on load): 7
+- Not being able to duplicate multiple tasks at once (forgetting which tasks are already copied): 3
+- Not seeing the repeated tasks: 2
+- Not being able to peek in a list of folded topics: 2
+- Fearing to lose a task by not being able to make it repeatable: 1
 - Not being able to load the file from the weekly list: 1
 - Not being able to make a new root topic when the button is not in view: 1
-- Not being able to duplicate multiple tasks at once (forgetting which tasks are already copied): 3
+- Not being able to extract the text from the Weekly View (export or Copy): 1
+- Not being able to complete tasks on the weekly view: 1 - gefixt
+- Having to rename the file every time it is saved (the filename is not remembered on load): 11 - gefixt
+

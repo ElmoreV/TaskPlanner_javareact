@@ -179,7 +179,7 @@
         {
           "name": "UX/UI",
           "id": 15,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         },
         {
@@ -1226,7 +1226,8 @@
       "id": 134,
       "topics": [
         15
-      ]
+      ],
+      "completed": true
     }
   ]
 }
