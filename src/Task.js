@@ -6,6 +6,7 @@ const Task = (props) => {
         completed, completeTask,
         currentTopicName, currentTopicId, changeTopic,
         planned, plan, unplan,
+        repeated, toggleRepeatTask,
         duplicateTask } = props;
 
     const [isEditing, setIsEditing] = useState(false);
@@ -13,6 +14,8 @@ const Task = (props) => {
     const [isDragging, setIsDragging] = useState(false);
     const [isDraggingAllowed, setIsDraggingAllowed] = useState(true);
     let isDuplicateDragging = false;
+
+    // let repeated = true
 
     const handleChange = (e) => {
         console.info(e.target.value);
@@ -103,6 +106,7 @@ const Task = (props) => {
     // Completion has precedence over planned
     if (completed) { class_str = 'taskCompleted' }
     else if (planned) { class_str = 'taskPlanned' }
+    else if (repeated) { class_str = 'taskRepeated' }
 
     const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
@@ -171,6 +175,9 @@ const Task = (props) => {
             {completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Decomplete</button>)}
             {plan && planned && (<button className='moveToWeek' onClick={moveOutOfWeek}> Unplan for this week </button>)}
             {plan && !planned && (<button className='moveToWeek' onClick={moveToWeek}> Plan for this week </button>)}
+            {toggleRepeatTask && repeated && (<button className='makeUnrepeated' onClick={toggleRepeatTask}> Repeated </button>)}
+            {toggleRepeatTask && !repeated && (<button className='makeRepeated' onClick={toggleRepeatTask}> Not repeated </button>)}
+
             <span className='buttonDuplicate' {...duplicateDragHandlers}>+ Duplicate +</span>
         </>
     </div>);

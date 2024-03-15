@@ -10,6 +10,7 @@ import {
 import {
     getChangeTaskTopic,
     getCompleteTask,
+    getToggleRepeatTask,
     getDeleteTask,
     getDeleteTopic,
     getDuplicateTask,
@@ -31,7 +32,7 @@ const TaskList = (props) => {
     const { tasks, setTasks, topics, setTopics } = props;
 
     const [hideCompletedItems, setHideCompletedItems] = useState(false)
-
+    const [showRepeatedOnly, setShowRepeatedOnly] = useState(false)
     const converter_callback = () => {
         let [topics2, tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
         let [topics3, tasks3] = convert_new_topic_tasks_to_old_topic_tasks(topics2, tasks2)
@@ -80,7 +81,7 @@ const TaskList = (props) => {
             ))}</ul>
             <ul key={topic.id + '_tasks'}>
                 {topic.unfolded && tasks.map((task) => (
-                    (!(task.completed && hideCompletedItems) && task.topics.includes(topic.id)) ?
+                    (!(task.completed && hideCompletedItems) && task.topics.includes(topic.id) && (task.repeated || !showRepeatedOnly)) ?
                         <li key={topic.id + ' - ' + task.id}>
                             <Task name={task.name}
                                 id={task.id}
@@ -92,7 +93,9 @@ const TaskList = (props) => {
                                 completeTask={getCompleteTask(setTasks, tasks, task.id)}
                                 plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
                                 unplan={getUnplanTask(setTasks, tasks, task.id)}
+                                toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
                                 planned={task.thisWeek}
+                                repeated={task.repeated}
                                 changeTopic={getChangeTaskTopic(setTasks, tasks)}
                                 duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
 
@@ -105,6 +108,9 @@ const TaskList = (props) => {
 
     const onHideCompletedItemsChange = () => {
         setHideCompletedItems(!hideCompletedItems)
+    }
+    const onShowRepeatedOnlyChange = () => {
+        setShowRepeatedOnly(!showRepeatedOnly)
     }
 
     // const showTopics = () => {
@@ -129,6 +135,12 @@ const TaskList = (props) => {
                 onChange={onHideCompletedItemsChange}
                 className="form-check-input"
             />Hide completed tasks</label>
+            <label><input
+                type="checkbox"
+                name='ShowRepeatedOnly'
+                onChange={onShowRepeatedOnlyChange}
+                className="form-check-input"
+            />Show repeated tasks only</label>
             <ul key='root_topics'>
                 {showTopics()}
             </ul>

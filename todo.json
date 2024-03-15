@@ -83,13 +83,13 @@
             {
               "name": "Modifying information",
               "id": 39,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
               "name": "Relaying information",
               "id": 40,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             }
           ]
@@ -97,13 +97,13 @@
         {
           "name": "Daily Task View",
           "id": 6,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         },
         {
           "name": "General",
           "id": 7,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Project management",
@@ -1180,7 +1180,8 @@
       "topics": [
         35
       ],
-      "thisWeek": true
+      "thisWeek": true,
+      "completed": true
     },
     {
       "name": "Enable filtering on repeated tasks (to uncomplete them manually)",
@@ -1189,7 +1190,8 @@
         35,
         25
       ],
-      "thisWeek": true
+      "thisWeek": true,
+      "completed": true
     },
     {
       "name": "Add 'Is Repeated Task' button",
@@ -1197,7 +1199,8 @@
       "topics": [
         26
       ],
-      "thisWeek": true
+      "thisWeek": true,
+      "completed": true
     },
     {
       "name": "Add a button to mark the task as completed",

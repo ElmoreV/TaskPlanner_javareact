@@ -28,6 +28,8 @@ const getChangeTaskTopic = (setTasks, tasks) => {
                 console.debug("Found the task")
                 console.debug(task)
                 console.debug(oldTopicId)
+                // TODO: there is a possibility that the new Topic Id does not exist.
+                // find_topic_by_id(topic,newTopicId)
                 if (task.topics.includes(oldTopicId)) {
                     console.debug("And comes from the old Topic indeed")
                     return {
@@ -139,6 +141,16 @@ const getCompleteTask = (setTasks, tasks, id) => {
         setTasks(newTasks);
     }
     return completeTask;
+}
+
+const getToggleRepeatTask = (setTasks, tasks, id) => {
+    const toggleRepeatTask = () => {
+        const newTasks = [...tasks]
+        const task_to_change = newTasks.find((task) => task.id === id);
+        task_to_change.repeated = !task_to_change.repeated;
+        setTasks(newTasks);
+    }
+    return toggleRepeatTask;
 }
 
 // For v1 data
@@ -336,3 +348,4 @@ export { getToggleFold }
 export { getAddTask }
 export { getAddTopic }
 export { getAddSubtopic }
+export { getToggleRepeatTask }

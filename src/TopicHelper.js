@@ -260,6 +260,12 @@ const getTopicTreeById = (topics, topicId) => {
 
 }
 
+// const generateDefaultTask = (tasks,id,topic,completed,planned,repeated){
+//     let newTask = {
+        
+//     }
+// }
+
 
 export default find_topic_by_key_r;
 export { find_topic_by_key };

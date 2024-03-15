@@ -193,6 +193,20 @@ span.taskText input[type="text"] {
 
 }
 
+.taskRepeated {
+  max-width: 800px;
+  padding: 10px;
+  padding-left: 20px;
+  margin: 1px 0;
+  background: linear-gradient(to right,
+      rgb(243, 135, 223) 0%,
+      rgb(209, 130, 248) 60%,
+      rgb(165, 107, 253) 70%,
+      rgb(113, 100, 255) 100%);
+  border-radius: 3px 3px 3px 20px;
+
+}
+
 span.green {
   color: green;
 }
