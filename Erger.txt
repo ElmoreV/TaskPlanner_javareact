@@ -1,16 +1,33 @@
+m = minor
+M = Major
+
 Open:
-- Not directly being able to duplicate-drag tasks to other topics: 3
-- Not being able to remove items from the weekly list on the weekly list: 3
-- Not being able to duplicate multiple tasks at once (forgetting which tasks are already copied): 3
-- Not being able to peek in a list of folded topics: 2
-- Not being able to load the file from the weekly list: 1
-- Not being able to make a new root topic when the button is not in view: 1
-- Not being able to extract the text from the Weekly View (export or Copy): 1
-- After folding/unfolding, the mouse is not over the same topic anymore: 1
+- Not being able to clear all completed items from the weekly list: 1M
+- Not being able to extract the text from the Weekly View (export or Copy): 2M
+- Adding a task, while only showing repeated tasks, should add a repeated task: 1M
+- Not being able to order the Weekly View tasks - 2M
+
+
+- Not directly being able to duplicate-drag tasks to other topics: 3m
+- Not being able to remove items from the weekly list on the weekly list: 3m
+- The weekly view names are too large and go to the next line (but don't make the task bigger): 3m
+- Hide completed items is not saved when changing views: 3m
+- Not being able to duplicate multiple tasks at once (forgetting which tasks are already copied): 3m
+- Topic view task text is too long: 3m
+- Not being able to peek in a list of folded topics: 2m
+- Not being able to make a new root topic when the button is not in view: 1m
+- After folding/unfolding, the mouse is not over the same topic anymore: 1m
+- The weely view doesn't show all the topics of the task at hand: 1m
+- Fearing that the knowledge that I completed a repeated task gets lost: 1m
+- Delete and duplicate should be near each other. Completed and repeated should be near each other: 1m
+- Not being able to show repeated and completed tasks: 1m
+- Not being able to just have a list of all tasks (with filters): 1m
+- Needing to save the markdown, yaml and json all separately - 1m
 
 Gefixt:
 - Not being able to complete tasks on the weekly view: 1 - gefixt
 - Having to rename the file every time it is saved (the filename is not remembered on load): 11 - gefixt
+- Not being able to load the file from the weekly list: 1 - gefixt
 - Fearing to lose a task by not being able to make it repeatable: 3 - gefixt
 - Not seeing the repeated tasks: 2 -gefixt
 
