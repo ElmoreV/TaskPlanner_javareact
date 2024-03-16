@@ -93,24 +93,17 @@ span.buttonDuplicate:hover {
 
 }
 
-span.buttonDuplicate {
-  float: right;
-  border-radius: 20px;
-  border-style: solid;
-  border-color: blue;
-  border-width: 2px;
-  cursor: copy;
-}
+
 
 span.taskText {
   display: inline-block;
-  max-width: 400px;
+  max-width: 350px;
   word-wrap: break-word;
   /* overflow-wrap: break-word; */
 }
 
 span.taskText input[type="text"] {
-  width: 400px;
+  width: 350px;
   /* max-width: 100px; */
   box-sizing: border-box;
 }
@@ -223,8 +216,21 @@ button.moveToWeek {
   float: right;
 }
 
+button.makeRepeated {
+  float: right;
+}
+
 button.taskComplete {
   float: right;
+}
+
+span.buttonDuplicate {
+  float: right;
+  border-radius: 20px;
+  border-style: solid;
+  border-color: blue;
+  border-width: 2px;
+  cursor: copy;
 }
 
 .topic.topicAddTask {

@@ -33,6 +33,7 @@
 - [ ] Create different settings for the text/markdown based output (keep indent, show completed, show planned, and more?)
 - [ ] Export the weekly list as a txt file (without topic information)
 - [ ] Export the weekly list as a txt file (with condensed topic information)
+- [x] Allow import/export in both topic and weekly view
 
 #### Sanitize input:
 
@@ -199,6 +200,7 @@
 - [ ] Add a way to easier move/duplicate tasks to far-away topics (better drag handling or cut/copy/paste)
 - [ ] Add ability to peek into a list of folded topics
 - [x] Remember the name of the loaded file (so that it does not need to be renamed on every save)
+- [ ] Keep a list of UX issues when manually testing/using the software
 
 ## Maintainability:
 
@@ -220,6 +222,7 @@
 - [ ] Add/modify topic
 - [x] Understand testing framework (jest)
 - [ ] Delete topic
+- [ ] Keep a list of UX issues when manually testing/using the software
 
 ### Refactoring:
 

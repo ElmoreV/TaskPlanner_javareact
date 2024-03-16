@@ -175,7 +175,7 @@ const Task = (props) => {
             {completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Decomplete</button>)}
             {plan && planned && (<button className='moveToWeek' onClick={moveOutOfWeek}> Unplan for this week </button>)}
             {plan && !planned && (<button className='moveToWeek' onClick={moveToWeek}> Plan for this week </button>)}
-            {toggleRepeatTask && repeated && (<button className='makeUnrepeated' onClick={toggleRepeatTask}> Repeated </button>)}
+            {toggleRepeatTask && repeated && (<button className='makeRepeated' onClick={toggleRepeatTask}> Repeated </button>)}
             {toggleRepeatTask && !repeated && (<button className='makeRepeated' onClick={toggleRepeatTask}> Not repeated </button>)}
 
             <span className='buttonDuplicate' {...duplicateDragHandlers}>+ Duplicate +</span>

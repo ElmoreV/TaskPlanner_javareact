@@ -25,6 +25,7 @@
             - 'Create different settings for the text/markdown based output (keep indent, show completed, show planned, and more?)'
             - 'Export the weekly list as a txt file (without topic information)'
             - 'Export the weekly list as a txt file (with condensed topic information)'
+            - 'Allow import/export in both topic and weekly view'
             - 'Sanitize input':
                 - 'Check against duplicate keys'
                 - 'Check against missing optional parameters (completed etc.)'
@@ -141,6 +142,7 @@
         - 'Add a way to easier move/duplicate tasks to far-away topics (better drag handling or cut/copy/paste)'
         - 'Add ability to peek into a list of folded topics'
         - 'Remember the name of the loaded file (so that it does not need to be renamed on every save)'
+        - 'Keep a list of UX issues when manually testing/using the software'
     - 'Maintainability':
         - 'Enable autoformatting'
         - 'Convert to TypeScript'
@@ -154,6 +156,7 @@
             - 'Add/modify topic'
             - 'Understand testing framework (jest)'
             - 'Delete topic'
+            - 'Keep a list of UX issues when manually testing/using the software'
         - 'Refactoring':
             - 'Refactor the TaskList.js into smaller files'
             - 'Refactor ModifyingFunctionGenerators into smaller files'

@@ -1231,6 +1231,24 @@
         15
       ],
       "completed": true
+    },
+    {
+      "name": "Allow import/export in both topic and weekly view",
+      "id": 135,
+      "topics": [
+        9
+      ],
+      "completed": true
+    },
+    {
+      "name": "Keep a list of UX issues when manually testing/using the software",
+      "id": 136,
+      "topics": [
+        19,
+        15
+      ],
+      "repeated": true,
+      "thisWeek": true
     }
   ]
 }
