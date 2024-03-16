@@ -16,7 +16,7 @@ const PlannedTask = (props) => {
 
     const handleChange = (e) => {
         console.info(e.target.value);
-        setTaskName(e.target.value);
+        if (setTaskName) { setTaskName(e.target.value); }
     }
 
     const toggleEdit = () => {
@@ -60,7 +60,7 @@ const PlannedTask = (props) => {
     }
 
     const moveToWeek = () => {
-        plan()
+        if (plan) { plan() }
     }
 
     const handleBlur = () => {
