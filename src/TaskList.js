@@ -80,7 +80,7 @@ const TaskList = (props) => {
                 recursiveShowTopic(subtopic, tasks)
             ))}</ul>
             <ul key={topic.id + '_tasks'}>
-                {topic.unfolded && tasks.sort((taskA, taskB) => { return taskA.name > taskB.name })
+                {topic.unfolded && tasks//.sort((taskA, taskB) => { return taskA.name > taskB.name })
                     .map((task) => (
                         (!(task.completed && hideCompletedItems) && task.topics.includes(topic.id) && (task.repeated || !showRepeatedOnly)) ?
                             <li key={topic.id + ' - ' + task.id}>
@@ -97,7 +97,7 @@ const TaskList = (props) => {
                                     toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
                                     planned={task.thisWeek}
                                     repeated={task.repeated}
-                                    
+
                                     changeTopic={getChangeTaskTopic(setTasks, tasks)}
                                     duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
 
