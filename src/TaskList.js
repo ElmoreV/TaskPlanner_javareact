@@ -80,27 +80,29 @@ const TaskList = (props) => {
                 recursiveShowTopic(subtopic, tasks)
             ))}</ul>
             <ul key={topic.id + '_tasks'}>
-                {topic.unfolded && tasks.map((task) => (
-                    (!(task.completed && hideCompletedItems) && task.topics.includes(topic.id) && (task.repeated || !showRepeatedOnly)) ?
-                        <li key={topic.id + ' - ' + task.id}>
-                            <Task name={task.name}
-                                id={task.id}
-                                completed={task.completed}
-                                currentTopicName={topic.name}
-                                currentTopicId={topic.id}
-                                setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
-                                deleteTask={getDeleteTask(setTasks, tasks, task.id)}
-                                completeTask={getCompleteTask(setTasks, tasks, task.id)}
-                                plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
-                                unplan={getUnplanTask(setTasks, tasks, task.id)}
-                                toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
-                                planned={task.thisWeek}
-                                repeated={task.repeated}
-                                changeTopic={getChangeTaskTopic(setTasks, tasks)}
-                                duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
+                {topic.unfolded && tasks.sort((taskA, taskB) => { return taskA.name > taskB.name })
+                    .map((task) => (
+                        (!(task.completed && hideCompletedItems) && task.topics.includes(topic.id) && (task.repeated || !showRepeatedOnly)) ?
+                            <li key={topic.id + ' - ' + task.id}>
+                                <Task name={task.name}
+                                    id={task.id}
+                                    completed={task.completed}
+                                    currentTopicName={topic.name}
+                                    currentTopicId={topic.id}
+                                    setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
+                                    deleteTask={getDeleteTask(setTasks, tasks, task.id)}
+                                    completeTask={getCompleteTask(setTasks, tasks, task.id)}
+                                    plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
+                                    unplan={getUnplanTask(setTasks, tasks, task.id)}
+                                    toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
+                                    planned={task.thisWeek}
+                                    repeated={task.repeated}
+                                    
+                                    changeTopic={getChangeTaskTopic(setTasks, tasks)}
+                                    duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
 
-                            />
-                        </li> : null))}
+                                />
+                            </li> : null))}
             </ul></div>
         )
     }

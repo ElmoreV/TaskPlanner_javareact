@@ -156,9 +156,17 @@ const getToggleRepeatTask = (setTasks, tasks, id) => {
 // For v1 data
 const getPlanTaskForWeek = (setTasks, tasks, id) => {
     const planTaskForWeek = () => {
-        const newTasks = [...tasks]
+        let newTasks = [...tasks]
         const task_to_change = newTasks.find((task) => task.id === id);
+        newTasks = newTasks.map((task) => {
+            if (task.thisWeek) { task.weekOrderIndex += 1 };
+            return task
+        })
         task_to_change.thisWeek = true;
+        task_to_change.weekOrderIndex = 1;
+        console.log(newTasks.map((task) => {
+            if (task.thisWeek) { return [task.name, task.weekOrderIndex] }
+        }))
         setTasks(newTasks);
     }
     return planTaskForWeek
@@ -168,12 +176,90 @@ const getPlanTaskForWeek = (setTasks, tasks, id) => {
 //v0
 const getUnplanTask = (setTasks, tasks, id) => {
     const unplanTask = () => {
-        const newTasks = [...tasks]
+        let newTasks = [...tasks]
         const task_to_change = newTasks.find((task) => task.id === id);
         task_to_change.thisWeek = false;
+
+        newTasks = newTasks.map((task) => {
+            if (task.thisWeek && task.weekOrderIndex >= task_to_change.weekOrderIndex) {
+                task.weekOrderIndex -= 1
+            };
+            return task
+        })
+        task_to_change.weekOrderIndex = 0;
+        console.log(newTasks.map((task) => {
+            if (task.thisWeek) { return [task.name, task.weekOrderIndex] }
+        }))
         setTasks(newTasks);
     }
     return unplanTask
+}
+
+const checkValidWeekOrderIndex = (tasks) => {
+    // Check if there are undefined values
+    const getWrongTasks = tasks.filter((task) => task.weekOrderIndex == undefined)
+    if (getWrongTasks.length > 0) { return false }
+    // Check if the values are not 0 for tasks where task.thisWeek=false
+    // TODO: sdf
+    // Check if the values are not exactly 1,2,3,4,....
+    // TODO:
+
+    return true
+
+}
+
+const sanitizeWeekOrderIndex = (setTasks, tasks) => {
+    let newTasks = [...tasks]
+    if (checkValidWeekOrderIndex(tasks)) { return; }
+
+    //gather all the tasks with and without a weekOrderIndex
+    // if thisWeek=false: weekOrderIndex = 0
+    // if thisWeek=true: weekOrderIndex = value
+    let nextVal = 1
+    newTasks = newTasks.map((task) => {
+        if (!task.thisWeek) { task.weekOrderIndex = 0 }
+        else {
+            task.weekOrderIndex = nextVal
+            nextVal += 1
+        }
+        return task;
+    })
+
+    setTasks(newTasks)
+
+}
+
+const getChangeWeekOrderIndex = (setTasks, tasks) => {
+    const changeWeekOrderIndex = (taskId, sourceWeekOrderIndex, targetWeekOrderIndex) => {
+        let newTasks = [...tasks]
+        console.log(newTasks)
+
+        if (targetWeekOrderIndex < sourceWeekOrderIndex) {
+            // move all indices newIdx<=idx<oldIdx 1 up
+            newTasks = newTasks.map((task) => {
+                if (task.thisWeek && task.weekOrderIndex >= targetWeekOrderIndex
+                    && task.weekOrderIndex < sourceWeekOrderIndex) {
+                    task.weekOrderIndex += 1
+                };
+                return task
+            })
+        } else if (targetWeekOrderIndex > sourceWeekOrderIndex) {
+            newTasks = newTasks.map((task) => {
+                // move all indices oldIdx<idx<=newIdx one down
+                if (task.thisWeek && task.weekOrderIndex <= targetWeekOrderIndex
+                    && task.weekOrderIndex > sourceWeekOrderIndex) {
+                    task.weekOrderIndex -= 1
+                };
+                return task
+            })
+        }
+        console.log(newTasks)
+        const task_to_change = newTasks.find((task) => task.id == taskId);
+        task_to_change.weekOrderIndex = targetWeekOrderIndex
+        console.log(newTasks)
+        setTasks(newTasks)
+    }
+    return changeWeekOrderIndex;
 }
 
 
@@ -349,3 +435,5 @@ export { getAddTask }
 export { getAddTopic }
 export { getAddSubtopic }
 export { getToggleRepeatTask }
+export { getChangeWeekOrderIndex }
+export { sanitizeWeekOrderIndex }

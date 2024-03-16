@@ -7,6 +7,7 @@ Open:
 - Not being able to clear all completed items from the weekly list: 1M
 - The data is lost when something in React is changed - 1M
 
+- Needing to save the markdown, yaml and json all separately - 4m
 - Not directly being able to duplicate-drag tasks to other topics: 3m
 - Not being able to remove items from the weekly list on the weekly list: 3m
 - The weekly view names are too large and go to the next line (but don't make the task bigger): 3m
@@ -15,7 +16,6 @@ Open:
 - Adding a task, while only showing repeated tasks, should add a repeated task: 2m
 - Not being able to peek in a list of folded topics: 2m
 - Not being able to just have a list of all tasks (with filters): 2m
-- Needing to save the markdown, yaml and json all separately - 2m
 - When showing only uncompleted/repeated tasks: minimize/remove/concatenate topics that are irrelevant/empty - 2m
 - Not being able to make a new root topic when the button is not in view: 1m
 - After folding/unfolding, the mouse is not over the same topic anymore: 1m

@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import PlannedTask from './PlannedTask';
-import { getCompleteTask } from './ModifyFuncGeneratorsV1';
+import {
+    getCompleteTask,
+    getChangeWeekOrderIndex,
+    sanitizeWeekOrderIndex
+} from './ModifyFuncGeneratorsV1';
 // TODO: add the topic name to the bar
 
 const PlannedList = (props) => {
@@ -10,7 +14,7 @@ const PlannedList = (props) => {
     const onHideCompletedItemsChange = () => {
         setHideCompletedItems(!hideCompletedItems)
     }
-
+    sanitizeWeekOrderIndex(setTasks, tasks)
 
     return (
         <div className='planned-list'>
@@ -21,7 +25,7 @@ const PlannedList = (props) => {
                 className="form-check-input"
             />Hide completed tasks</label>
             <ul key='root_topics'>
-                {tasks.map(
+                {tasks.sort((taskA, taskB) => taskA.weekOrderIndex > taskB.weekOrderIndex).map(
                     (task) => {
                         return (
                             <li>
@@ -34,6 +38,8 @@ const PlannedList = (props) => {
                                         completed={task.completed}
                                         completeTask={getCompleteTask(setTasks, tasks, task.id)}
                                         // currentTopic = {task.topics[0]}
+                                        currentWeekOrderIndex={task.weekOrderIndex}
+                                        changeWeekOrderIndex={getChangeWeekOrderIndex(setTasks, tasks)}
                                         topics={topics}
                                         taskTopics={task.topics}
                                     // changeTopic = {getChangeTaskTopic()}

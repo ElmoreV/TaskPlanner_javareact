@@ -236,60 +236,12 @@
   ],
   "tasks": [
     {
-      "name": "Have topics and subtopics show up",
-      "id": 1,
-      "completed": true,
+      "name": " (hierarchical.topics+tasks) to (tasks,topics).v1",
+      "id": 26,
       "topics": [
-        25
-      ]
-    },
-    {
-      "name": "Have tasks show up under the right topic",
-      "id": 2,
-      "completed": true,
-      "topics": [
-        25
-      ]
-    },
-    {
-      "name": "Allow the topics to drop down and collapse",
-      "id": 3,
-      "completed": true,
-      "topics": [
-        25
-      ]
-    },
-    {
-      "name": "Add icon (> or V) for drop down and collapse",
-      "id": 4,
-      "completed": true,
-      "topics": [
-        25
-      ]
-    },
-    {
-      "name": "Editable task names",
-      "id": 5,
-      "completed": true,
-      "topics": [
-        26
-      ]
-    },
-    {
-      "name": "Gitify this project",
-      "id": 6,
-      "completed": true,
-      "topics": [
-        27
-      ]
-    },
-    {
-      "name": "\"Delete task\" button",
-      "id": 7,
-      "completed": true,
-      "topics": [
-        26
-      ]
+        13
+      ],
+      "weekOrderIndex": 0
     },
     {
       "name": "\"Add task\" button",
@@ -297,7 +249,33 @@
       "completed": true,
       "topics": [
         26
-      ]
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "\"Add task\" icon",
+      "id": 42,
+      "topics": [
+        23
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "\"Delete task\" button",
+      "id": 7,
+      "completed": true,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "\"Delete task\" icon",
+      "id": 41,
+      "topics": [
+        23
+      ],
+      "weekOrderIndex": 0
     },
     {
       "name": "\"Task completion\" button",
@@ -305,141 +283,16 @@
       "completed": true,
       "topics": [
         26
-      ]
-    },
-    {
-      "name": "Make topic name editable (doubleclick)",
-      "id": 10,
-      "completed": true,
-      "topics": [
-        26
-      ]
-    },
-    {
-      "name": "Make tasks draggeable to other task lists",
-      "id": 11,
-      "completed": true,
-      "topics": [
-        26
-      ]
-    },
-    {
-      "name": "Make tasks draggeable to topics",
-      "id": 12,
-      "completed": true,
-      "thisWeek": true,
-      "topics": [
-        26
-      ]
-    },
-    {
-      "name": "Make topics draggable to other topics",
-      "id": 13,
-      "completed": true,
-      "thisWeek": true,
-      "topics": [
-        26
-      ]
-    },
-    {
-      "name": "Allow export of tasks as JSON",
-      "id": 14,
-      "completed": true,
-      "topics": [
-        9
-      ]
-    },
-    {
-      "name": "Allow import of tasks as JSON",
-      "id": 15,
-      "completed": true,
-      "topics": [
-        9
-      ]
-    },
-    {
-      "name": "Allow export of tasks as YAML",
-      "id": 16,
-      "completed": true,
-      "topics": [
-        9
-      ]
-    },
-    {
-      "name": "Allow import of tasks as YAML",
-      "id": 17,
-      "completed": true,
-      "topics": [
-        9
-      ]
-    },
-    {
-      "name": "Allow deletion of Topics",
-      "id": 18,
-      "completed": true,
-      "thisWeek": true,
-      "topics": [
-        26
-      ]
-    },
-    {
-      "name": "Understand useRef",
-      "id": 19,
-      "topics": [
-        28
-      ]
-    },
-    {
-      "name": "Understand FileReader",
-      "id": 20,
-      "topics": [
-        28
-      ]
-    },
-    {
-      "name": "Change schema terminology to id,name,...",
-      "id": 21,
-      "completed": true,
-      "topics": [
-        7
-      ]
-    },
-    {
-      "name": "(tasks,topics).v1 to (relational.tasks/topics)",
-      "id": 22,
-      "completed": true,
-      "topics": [
-        13
-      ]
-    },
-    {
-      "name": "(tasks,topics).v1 to (hierarchical.topics+tasks)",
-      "id": 23,
-      "topics": [
-        13
-      ]
-    },
-    {
-      "name": "(tasks,topics).v0 to (task,topics).v1",
-      "id": 24,
-      "completed": true,
-      "topics": [
-        13
-      ]
+      ],
+      "weekOrderIndex": 0
     },
     {
       "name": "(relational.tasks/topics) to (tasks,topics).v1",
       "id": 25,
       "topics": [
         13
-      ]
-    },
-    {
-      "name": " (hierarchical.topics+tasks) to (tasks,topics).v1",
-      "id": 26,
-      "topics": [
-        13
-      ]
+      ],
+      "weekOrderIndex": 0
     },
     {
       "name": "(task,topics).v1 to (tasks,topics).v0",
@@ -447,732 +300,61 @@
       "completed": true,
       "topics": [
         13
-      ]
-    },
-    {
-      "name": "Rendering",
-      "id": 28,
-      "completed": true,
-      "topics": [
-        8
-      ]
-    },
-    {
-      "name": "Export/Import",
-      "id": 29,
-      "completed": true,
-      "topics": [
-        8
-      ]
-    },
-    {
-      "name": "Adding/deleting/modifying tasks",
-      "id": 30,
-      "completed": true,
-      "topics": [
-        8
-      ]
-    },
-    {
-      "name": "Task.js",
-      "id": 31,
-      "completed": true,
-      "topics": [
-        8
-      ]
-    },
-    {
-      "name": "Adding/deleting/modifying topics",
-      "id": 32,
-      "completed": true,
-      "topics": [
-        8
-      ]
-    },
-    {
-      "name": "Topic.js",
-      "id": 33,
-      "topics": [
-        8
       ],
-      "completed": true
+      "weekOrderIndex": 0
     },
     {
-      "name": "Default example",
-      "id": 34,
+      "name": "(tasks,topics).v0 to (task,topics).v1",
+      "id": 24,
       "completed": true,
       "topics": [
-        8
-      ]
+        13
+      ],
+      "weekOrderIndex": 0
     },
     {
-      "name": "Detection of JSON or YAML at import ",
-      "id": 35,
+      "name": "(tasks,topics).v1 to (hierarchical.topics+tasks)",
+      "id": 23,
+      "topics": [
+        13
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "(tasks,topics).v1 to (relational.tasks/topics)",
+      "id": 22,
       "completed": true,
       "topics": [
-        9
-      ]
+        13
+      ],
+      "weekOrderIndex": 0
     },
     {
-      "name": "Drag tasks to change the order in task list",
-      "id": 36,
-      "thisWeek": false,
+      "name": "Add 'Is Repeated Task' button",
+      "id": 130,
       "topics": [
         26
-      ]
-    },
-    {
-      "name": "When text doubleclicked: focus immediately on text input",
-      "id": 37,
-      "completed": true,
-      "topics": [
-        29
-      ]
-    },
-    {
-      "name": "Prettify text input for tasks",
-      "id": 38,
-      "topics": [
-        23
-      ]
-    },
-    {
-      "name": "When enter is pressed: finish editing",
-      "id": 39,
-      "completed": true,
-      "topics": [
-        29
-      ]
-    },
-    {
-      "name": "Improve collapse and dropdown icon",
-      "id": 40,
-      "topics": [
-        23
-      ]
-    },
-    {
-      "name": "\"Delete task\" icon",
-      "id": 41,
-      "topics": [
-        23
-      ]
-    },
-    {
-      "name": "\"Add task\" icon",
-      "id": 42,
-      "topics": [
-        23
-      ]
-    },
-    {
-      "name": "Animate collapse and dropdown",
-      "id": 43,
-      "topics": [
-        23
-      ]
-    },
-    {
-      "name": "Topics with the same name give weird bugs",
-      "id": 45,
-      "topics": [
-        12
-      ],
-      "completed": true
-    },
-    {
-      "name": "Text edit should not lag, but it does now",
-      "id": 46,
-      "completed": true,
-      "topics": [
-        20
-      ]
-    },
-    {
-      "name": "Search engine for tasks/topics",
-      "id": 47,
-      "topics": [
-        29
-      ]
-    },
-    {
-      "name": "Create a history of updates (create undo button)",
-      "id": 48,
-      "topics": [
-        29
-      ]
-    },
-    {
-      "name": "Add comments to tasks/topics",
-      "id": 49,
-      "topics": [
-        29
-      ]
-    },
-    {
-      "name": "Open tasks/topics to have a task/topic card",
-      "id": 50,
-      "topics": [
-        29
-      ]
-    },
-    {
-      "name": "Add hyperlink suport to tasks/topics",
-      "id": 51,
-      "topics": [
-        29
-      ]
-    },
-    {
-      "name": "Save output in markdown",
-      "id": 52,
-      "topics": [
-        9
-      ],
-      "completed": true
-    },
-    {
-      "name": "List all the tasks that are planned for this week",
-      "id": 53,
-      "completed": true,
-      "topics": [
-        40
-      ]
-    },
-    {
-      "name": "Make tasks importable from Weekly View",
-      "id": 54,
-      "topics": [
-        6
-      ]
-    },
-    {
-      "name": "Hide completed tasks",
-      "id": 55,
-      "completed": true,
-      "topics": [
-        25
-      ]
-    },
-    {
-      "name": "Allow keyboard-only mode",
-      "id": 56,
-      "topics": [
-        15
-      ]
-    },
-    {
-      "name": "Test tasks with empty string",
-      "id": 57,
-      "topics": [
-        12
-      ]
-    },
-    {
-      "name": "Make Tasks duplicatable to multiple topics",
-      "id": 58,
-      "completed": true,
-      "thisWeek": true,
-      "topics": [
-        26
-      ]
-    },
-    {
-      "name": "Make the tasks to have a good width. Naive: text-cutoff",
-      "id": 59,
-      "topics": [
-        23
-      ],
-      "completed": true
-    },
-    {
-      "name": "Allow new subtopics to be created",
-      "id": 60,
-      "completed": true,
-      "topics": [
-        26
-      ]
-    },
-    {
-      "name": "Allow root topics to be created",
-      "id": 61,
-      "completed": true,
-      "topics": [
-        26
-      ]
-    },
-    {
-      "name": "Create simple example tasks/topics",
-      "id": 62,
-      "completed": true,
-      "topics": [
-        3
-      ]
-    },
-    {
-      "name": "Create this Todo-list in the TaskPlanner",
-      "id": 63,
-      "completed": true,
-      "topics": [
-        27
-      ]
-    },
-    {
-      "name": "Remove the empty lists from the YAML-export",
-      "id": 64,
-      "completed": true,
-      "topics": [
-        12
-      ]
-    },
-    {
-      "name": "Find a way to add task/topic id into the YAML",
-      "id": 65,
-      "topics": [
-        9
-      ]
-    },
-    {
-      "name": "Properly handle escaped characters in YAML",
-      "id": 66,
-      "topics": [
-        12
-      ]
-    },
-    {
-      "name": "List the topic(s) +subtopic(s) that the task belongs to",
-      "id": 67,
-      "completed": true,
-      "thisWeek": true,
-      "topics": [
-        40
-      ]
-    },
-    {
-      "name": "Add a way to add the task to the current Weekly View",
-      "id": 68,
-      "completed": true,
-      "topics": [
-        26
-      ]
-    },
-    {
-      "name": "Add a way to remove the task from the weekly view on the weekly view",
-      "id": 69,
-      "thisWeek": false,
-      "topics": [
-        39
-      ]
-    },
-    {
-      "name": "Allow reordering the weekly view tasks",
-      "id": 70,
-      "topics": [
-        39
-      ]
-    },
-    {
-      "name": "Add button the clear weekly view",
-      "id": 71,
-      "topics": [
-        39
-      ]
-    },
-    {
-      "name": "Add button to clear all completed items",
-      "id": 72,
-      "topics": [
-        39
-      ]
-    },
-    {
-      "name": "Make visible which Tasks are planned for this week",
-      "id": 73,
-      "completed": true,
-      "topics": [
-        25
-      ]
-    },
-    {
-      "name": "Prettify the output JSON to make it more git-friendly",
-      "id": 74,
-      "completed": true,
-      "topics": [
-        9
-      ]
-    },
-    {
-      "name": "Check against duplicate keys",
-      "id": 75,
-      "topics": [
-        14
-      ]
-    },
-    {
-      "name": "Check against missing optional parameters (completed etc.)",
-      "id": 76,
-      "topics": [
-        14
-      ]
-    },
-    {
-      "name": "Check against missing required parameters (taskName, key)",
-      "id": 77,
-      "topics": [
-        14
-      ]
-    },
-    {
-      "name": "Add the completion of a task into the YAML",
-      "id": 78,
-      "topics": [
-        9
-      ]
-    },
-    {
-      "name": "Make the lists more readable",
-      "id": 79,
-      "topics": [
-        15
-      ]
-    },
-    {
-      "name": "Choose better color schemes for tasks and topics",
-      "id": 80,
-      "topics": [
-        15
-      ]
-    },
-    {
-      "name": "Refactor the TaskList.js into smaller files",
-      "id": 81,
-      "completed": true,
-      "thisWeek": false,
-      "topics": [
-        21
-      ]
-    },
-    {
-      "name": "Add detection of JSON.v0 and JSON.v1 format",
-      "id": 82,
-      "completed": true,
-      "topics": [
-        9
-      ]
-    },
-    {
-      "name": "Import/export",
-      "id": 85,
-      "topics": [
-        19
-      ]
-    },
-    {
-      "name": "Conversion",
-      "id": 86,
-      "topics": [
-        19
-      ]
-    },
-    {
-      "name": "Add/deleting/modifying task",
-      "id": 87,
-      "topics": [
-        19
-      ]
-    },
-    {
-      "name": "Add/modify topic",
-      "id": 88,
-      "topics": [
-        19
-      ]
-    },
-    {
-      "name": "Enable autoformatting",
-      "id": 89,
-      "completed": true,
-      "topics": [
-        16
-      ]
-    },
-    {
-      "name": "Show how many tasks are completed/planned/open in a topic",
-      "id": 90,
-      "topics": [
-        25
-      ]
-    },
-    {
-      "name": "Allow for subtasks",
-      "id": 91,
-      "topics": [
-        29
-      ]
-    },
-    {
-      "name": "Convert to TypeScript",
-      "id": 92,
-      "topics": [
-        16
-      ]
-    },
-    {
-      "name": "Choose better color schemes for the feedback (drag/drop) events",
-      "id": 93,
-      "topics": [
-        15
-      ]
-    },
-    {
-      "name": "Allow hovering over topics to unfold them",
-      "id": 94,
-      "topics": [
-        15
-      ]
-    },
-    {
-      "name": "Create a way to remove task from weekly View",
-      "id": 95,
-      "completed": true,
-      "thisWeek": false,
-      "topics": [
-        26
-      ]
-    },
-    {
-      "name": "Make Topics draggeable to the Root Topic list",
-      "id": 96,
-      "topics": [
-        26
-      ]
-    },
-    {
-      "name": "YAML cannot handle single quotes",
-      "id": 97,
-      "topics": [
-        12
-      ]
-    },
-    {
-      "name": "Create minimal layout (dense/packed/not pretty)",
-      "id": 98,
-      "topics": [
-        30
-      ]
-    },
-    {
-      "name": "Enable dark mode",
-      "id": 99,
-      "topics": [
-        30
-      ]
-    },
-    {
-      "name": "Dragging: make outline of dragged-over-task/topic fat",
-      "id": 100,
-      "topics": [
-        23
-      ]
-    },
-    {
-      "name": "Design good way to limit task text in the task box",
-      "id": 101,
-      "topics": [
-        23
-      ]
-    },
-    {
-      "name": "Create a new text-based output, that is based on YAML",
-      "id": 102,
-      "topics": [
-        9
-      ]
-    },
-    {
-      "name": "Minimize empty topics",
-      "id": 103,
-      "topics": [
-        25
-      ]
-    },
-    {
-      "name": "Show if the loaded json file has meaninfully changed",
-      "id": 104,
-      "topics": [
-        7
-      ]
-    },
-    {
-      "name": "When creating a new topic, leave it unfolded",
-      "id": 105,
-      "completed": true,
-      "thisWeek": true,
-      "topics": [
-        12,
-        15
-      ]
-    },
-    {
-      "name": "Standardize variable, function and classnames (underscore,etc.)",
-      "id": 106,
-      "topics": [
-        16
-      ]
-    },
-    {
-      "name": "Understand testing framework (jest)",
-      "id": 107,
-      "topics": [
-        19
-      ],
-      "completed": true
-    },
-    {
-      "name": "Delete topic",
-      "id": 108,
-      "topics": [
-        19
-      ]
-    },
-    {
-      "name": "Not before, not during, not after (deadline)",
-      "id": 109,
-      "topics": [
-        32
-      ]
-    },
-    {
-      "name": "Instant",
-      "id": 110,
-      "topics": [
-        34
-      ]
-    },
-    {
-      "name": "Time span",
-      "id": 111,
-      "topics": [
-        34
-      ]
-    },
-    {
-      "name": "Scheduling",
-      "id": 112,
-      "topics": [
-        35
-      ]
-    },
-    {
-      "name": "Formally enabling all possibilities (what are all possibilities of repetition?)",
-      "id": 113,
-      "topics": [
-        35
-      ]
-    },
-    {
-      "name": "Prioritize (order control)",
-      "id": 114,
-      "topics": [
-        36
-      ]
-    },
-    {
-      "name": "Automatic promotion (more important, deadline nears)",
-      "id": 115,
-      "topics": [
-        36
-      ]
-    },
-    {
-      "name": "Automatic demotion (less important, was too long ago)",
-      "id": 116,
-      "topics": [
-        36
-      ]
-    },
-    {
-      "name": "Allow tasks to have dependencies",
-      "id": 117,
-      "topics": [
-        37
-      ]
-    },
-    {
-      "name": "Allow tasks to have multiplpe dependenceis",
-      "id": 118,
-      "topics": [
-        37
-      ]
-    },
-    {
-      "name": "Multiple dependencies can be OR or AND dependencies",
-      "id": 119,
-      "topics": [
-        37
-      ]
-    },
-    {
-      "name": "Refactor ModifyingFunctionGenerators into smaller files",
-      "id": 120,
-      "topics": [
-        21
-      ],
-      "thisWeek": false
-    },
-    {
-      "name": "Remove the yellow from the color-scheme for drag and drop (unreadable)",
-      "id": 121,
-      "topics": [
-        12
-      ],
-      "completed": true
-    },
-    {
-      "name": "PlannedTask.js",
-      "id": 122,
-      "topics": [
-        8
-      ],
-      "thisWeek": true
-    },
-    {
-      "name": "Add a way to hide the completed items",
-      "id": 123,
-      "topics": [
-        40
       ],
       "thisWeek": true,
-      "completed": true
+      "completed": true,
+      "weekOrderIndex": 12
     },
     {
       "name": "Add Ability to unfold a topic and all its subtopics in one go",
       "id": 124,
       "topics": [
         23
-      ]
-    },
-    {
-      "name": "Create different settings for the text/markdown based output (keep indent, show completed, show planned, and more?)",
-      "id": 125,
-      "topics": [
-        9
-      ]
-    },
-    {
-      "name": "Export the weekly list as a txt file (without topic information)",
-      "id": 126,
-      "topics": [
-        9
       ],
-      "thisWeek": true
+      "weekOrderIndex": 0
     },
     {
-      "name": "Export the weekly list as a txt file (with condensed topic information)",
-      "id": 127,
+      "name": "Add a button to mark the task as completed",
+      "id": 131,
       "topics": [
-        9
-      ]
+        39
+      ],
+      "completed": true,
+      "weekOrderIndex": 0
     },
     {
       "name": "Add a repeated tag to tasks",
@@ -1181,7 +363,501 @@
         35
       ],
       "thisWeek": true,
+      "completed": true,
+      "weekOrderIndex": 10
+    },
+    {
+      "name": "Add a way to add the task to the current Weekly View",
+      "id": 68,
+      "completed": true,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add a way to easier move/duplicate tasks to far-away topics (better drag handling or cut/copy/paste)",
+      "id": 132,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add a way to hide the completed items",
+      "id": 123,
+      "topics": [
+        40
+      ],
+      "thisWeek": true,
+      "completed": true,
+      "weekOrderIndex": 8
+    },
+    {
+      "name": "Add a way to remove the task from the weekly view on the weekly view",
+      "id": 69,
+      "thisWeek": false,
+      "topics": [
+        39
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add ability to peek into a list of folded topics",
+      "id": 133,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add button the clear weekly view",
+      "id": 71,
+      "topics": [
+        39
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add button to clear all completed items",
+      "id": 72,
+      "topics": [
+        39
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add comments to tasks/topics",
+      "id": 49,
+      "topics": [
+        29
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add detection of JSON.v0 and JSON.v1 format",
+      "id": 82,
+      "completed": true,
+      "topics": [
+        9
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add hyperlink suport to tasks/topics",
+      "id": 51,
+      "topics": [
+        29
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add icon (> or V) for drop down and collapse",
+      "id": 4,
+      "completed": true,
+      "topics": [
+        25
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add the completion of a task into the YAML",
+      "id": 78,
+      "topics": [
+        9
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add/deleting/modifying task",
+      "id": 87,
+      "topics": [
+        19
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add/modify topic",
+      "id": 88,
+      "topics": [
+        19
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Adding/deleting/modifying tasks",
+      "id": 30,
+      "completed": true,
+      "topics": [
+        8
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Adding/deleting/modifying topics",
+      "id": 32,
+      "completed": true,
+      "topics": [
+        8
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Allow deletion of Topics",
+      "id": 18,
+      "completed": true,
+      "thisWeek": true,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 3
+    },
+    {
+      "name": "Allow export of tasks as JSON",
+      "id": 14,
+      "completed": true,
+      "topics": [
+        9
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Allow export of tasks as YAML",
+      "id": 16,
+      "completed": true,
+      "topics": [
+        9
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Allow for subtasks",
+      "id": 91,
+      "topics": [
+        29
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Allow hovering over topics to unfold them",
+      "id": 94,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Allow import of tasks as JSON",
+      "id": 15,
+      "completed": true,
+      "topics": [
+        9
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Allow import of tasks as YAML",
+      "id": 17,
+      "completed": true,
+      "topics": [
+        9
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Allow import/export in both topic and weekly view",
+      "id": 135,
+      "topics": [
+        9
+      ],
+      "completed": true,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Allow keyboard-only mode",
+      "id": 56,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Allow new subtopics to be created",
+      "id": 60,
+      "completed": true,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Allow reordering the weekly view tasks",
+      "id": 70,
+      "topics": [
+        39
+      ],
+      "weekOrderIndex": 0,
       "completed": true
+    },
+    {
+      "name": "Allow root topics to be created",
+      "id": 61,
+      "completed": true,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Allow tasks to have dependencies",
+      "id": 117,
+      "topics": [
+        37
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Allow tasks to have multiplpe dependenceis",
+      "id": 118,
+      "topics": [
+        37
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Allow the topics to drop down and collapse",
+      "id": 3,
+      "completed": true,
+      "topics": [
+        25
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Animate collapse and dropdown",
+      "id": 43,
+      "topics": [
+        23
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Automatic demotion (less important, was too long ago)",
+      "id": 116,
+      "topics": [
+        36
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Automatic promotion (more important, deadline nears)",
+      "id": 115,
+      "topics": [
+        36
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Change schema terminology to id,name,...",
+      "id": 21,
+      "completed": true,
+      "topics": [
+        7
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Check against duplicate keys",
+      "id": 75,
+      "topics": [
+        14
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Check against missing optional parameters (completed etc.)",
+      "id": 76,
+      "topics": [
+        14
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Check against missing required parameters (taskName, key)",
+      "id": 77,
+      "topics": [
+        14
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Choose better color schemes for tasks and topics",
+      "id": 80,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Choose better color schemes for the feedback (drag/drop) events",
+      "id": 93,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Conversion",
+      "id": 86,
+      "topics": [
+        19
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Convert to TypeScript",
+      "id": 92,
+      "topics": [
+        16
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Create a history of updates (create undo button)",
+      "id": 48,
+      "topics": [
+        29
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Create a new text-based output, that is based on YAML",
+      "id": 102,
+      "topics": [
+        9
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Create a way to remove task from weekly View",
+      "id": 95,
+      "completed": true,
+      "thisWeek": false,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Create different settings for the text/markdown based output (keep indent, show completed, show planned, and more?)",
+      "id": 125,
+      "topics": [
+        9
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Create minimal layout (dense/packed/not pretty)",
+      "id": 98,
+      "topics": [
+        30
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Create simple example tasks/topics",
+      "id": 62,
+      "completed": true,
+      "topics": [
+        3
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Create this Todo-list in the TaskPlanner",
+      "id": 63,
+      "completed": true,
+      "topics": [
+        27
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Default example",
+      "id": 34,
+      "completed": true,
+      "topics": [
+        8
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Delete topic",
+      "id": 108,
+      "topics": [
+        19
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Design good way to limit task text in the task box",
+      "id": 101,
+      "topics": [
+        23
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Detection of JSON or YAML at import ",
+      "id": 35,
+      "completed": true,
+      "topics": [
+        9
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Drag tasks to change the order in task list",
+      "id": 36,
+      "thisWeek": false,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Dragging: make outline of dragged-over-task/topic fat",
+      "id": 100,
+      "topics": [
+        23
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Editable task names",
+      "id": 5,
+      "completed": true,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Enable autoformatting",
+      "id": 89,
+      "completed": true,
+      "topics": [
+        16
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Enable dark mode",
+      "id": 99,
+      "topics": [
+        30
+      ],
+      "weekOrderIndex": 0
     },
     {
       "name": "Enable filtering on repeated tasks (to uncomplete them manually)",
@@ -1191,54 +867,110 @@
         25
       ],
       "thisWeek": true,
-      "completed": true
+      "completed": true,
+      "weekOrderIndex": 11
     },
     {
-      "name": "Add 'Is Repeated Task' button",
-      "id": 130,
-      "topics": [
-        26
-      ],
-      "thisWeek": true,
-      "completed": true
-    },
-    {
-      "name": "Add a button to mark the task as completed",
-      "id": 131,
-      "topics": [
-        39
-      ],
-      "completed": true
-    },
-    {
-      "name": "Add a way to easier move/duplicate tasks to far-away topics (better drag handling or cut/copy/paste)",
-      "id": 132,
-      "topics": [
-        15
-      ]
-    },
-    {
-      "name": "Add ability to peek into a list of folded topics",
-      "id": 133,
-      "topics": [
-        15
-      ]
-    },
-    {
-      "name": "Remember the name of the loaded file (so that it does not need to be renamed on every save)",
-      "id": 134,
-      "topics": [
-        15
-      ],
-      "completed": true
-    },
-    {
-      "name": "Allow import/export in both topic and weekly view",
-      "id": 135,
+      "name": "Export the weekly list as a txt file (with condensed topic information)",
+      "id": 127,
       "topics": [
         9
       ],
-      "completed": true
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Export the weekly list as a txt file (without topic information)",
+      "id": 126,
+      "topics": [
+        9
+      ],
+      "thisWeek": true,
+      "weekOrderIndex": 9
+    },
+    {
+      "name": "Export/Import",
+      "id": 29,
+      "completed": true,
+      "topics": [
+        8
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Find a way to add task/topic id into the YAML",
+      "id": 65,
+      "topics": [
+        9
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Formally enabling all possibilities (what are all possibilities of repetition?)",
+      "id": 113,
+      "topics": [
+        35
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Gitify this project",
+      "id": 6,
+      "completed": true,
+      "topics": [
+        27
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Have tasks show up under the right topic",
+      "id": 2,
+      "completed": true,
+      "topics": [
+        25
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Have topics and subtopics show up",
+      "id": 1,
+      "completed": true,
+      "topics": [
+        25
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Hide completed tasks",
+      "id": 55,
+      "completed": true,
+      "topics": [
+        25
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Import/export",
+      "id": 85,
+      "topics": [
+        19
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Improve collapse and dropdown icon",
+      "id": 40,
+      "topics": [
+        23
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Instant",
+      "id": 110,
+      "topics": [
+        34
+      ],
+      "weekOrderIndex": 0
     },
     {
       "name": "Keep a list of UX issues when manually testing/using the software",
@@ -1248,7 +980,409 @@
         15
       ],
       "repeated": true,
-      "thisWeek": true
+      "thisWeek": true,
+      "weekOrderIndex": 13
+    },
+    {
+      "name": "List all the tasks that are planned for this week",
+      "id": 53,
+      "completed": true,
+      "topics": [
+        40
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "List the topic(s) +subtopic(s) that the task belongs to",
+      "id": 67,
+      "completed": true,
+      "thisWeek": true,
+      "topics": [
+        40
+      ],
+      "weekOrderIndex": 5
+    },
+    {
+      "name": "Make Tasks duplicatable to multiple topics",
+      "id": 58,
+      "completed": true,
+      "thisWeek": true,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 4
+    },
+    {
+      "name": "Make Topics draggeable to the Root Topic list",
+      "id": 96,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Make tasks draggeable to other task lists",
+      "id": 11,
+      "completed": true,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Make tasks draggeable to topics",
+      "id": 12,
+      "completed": true,
+      "thisWeek": true,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 1
+    },
+    {
+      "name": "Make tasks importable from Weekly View",
+      "id": 54,
+      "topics": [
+        6
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Make the lists more readable",
+      "id": 79,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Make the tasks to have a good width. Naive: text-cutoff",
+      "id": 59,
+      "topics": [
+        23
+      ],
+      "completed": true,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Make topic name editable (doubleclick)",
+      "id": 10,
+      "completed": true,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Make topics draggable to other topics",
+      "id": 13,
+      "completed": true,
+      "thisWeek": true,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 2
+    },
+    {
+      "name": "Make visible which Tasks are planned for this week",
+      "id": 73,
+      "completed": true,
+      "topics": [
+        25
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Minimize empty topics",
+      "id": 103,
+      "topics": [
+        25
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Multiple dependencies can be OR or AND dependencies",
+      "id": 119,
+      "topics": [
+        37
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Not before, not during, not after (deadline)",
+      "id": 109,
+      "topics": [
+        32
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Open tasks/topics to have a task/topic card",
+      "id": 50,
+      "topics": [
+        29
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "PlannedTask.js",
+      "id": 122,
+      "topics": [
+        8
+      ],
+      "thisWeek": true,
+      "weekOrderIndex": 7
+    },
+    {
+      "name": "Prettify text input for tasks",
+      "id": 38,
+      "topics": [
+        23
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Prettify the output JSON to make it more git-friendly",
+      "id": 74,
+      "completed": true,
+      "topics": [
+        9
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Prioritize (order control)",
+      "id": 114,
+      "topics": [
+        36
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Properly handle escaped characters in YAML",
+      "id": 66,
+      "topics": [
+        12
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Refactor ModifyingFunctionGenerators into smaller files",
+      "id": 120,
+      "topics": [
+        21
+      ],
+      "thisWeek": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Refactor the TaskList.js into smaller files",
+      "id": 81,
+      "completed": true,
+      "thisWeek": false,
+      "topics": [
+        21
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Remember the name of the loaded file (so that it does not need to be renamed on every save)",
+      "id": 134,
+      "topics": [
+        15
+      ],
+      "completed": true,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Remove the empty lists from the YAML-export",
+      "id": 64,
+      "completed": true,
+      "topics": [
+        12
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Remove the yellow from the color-scheme for drag and drop (unreadable)",
+      "id": 121,
+      "topics": [
+        12
+      ],
+      "completed": true,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Rendering",
+      "id": 28,
+      "completed": true,
+      "topics": [
+        8
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Save output in markdown",
+      "id": 52,
+      "topics": [
+        9
+      ],
+      "completed": true,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Scheduling",
+      "id": 112,
+      "topics": [
+        35
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Search engine for tasks/topics",
+      "id": 47,
+      "topics": [
+        29
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Show how many tasks are completed/planned/open in a topic",
+      "id": 90,
+      "topics": [
+        25
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Show if the loaded json file has meaninfully changed",
+      "id": 104,
+      "topics": [
+        7
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Standardize variable, function and classnames (underscore,etc.)",
+      "id": 106,
+      "topics": [
+        16
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Task.js",
+      "id": 31,
+      "completed": true,
+      "topics": [
+        8
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Test tasks with empty string",
+      "id": 57,
+      "topics": [
+        12
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Text edit should not lag, but it does now",
+      "id": 46,
+      "completed": true,
+      "topics": [
+        20
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Time span",
+      "id": 111,
+      "topics": [
+        34
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Topic.js",
+      "id": 33,
+      "topics": [
+        8
+      ],
+      "completed": true,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Topics with the same name give weird bugs",
+      "id": 45,
+      "topics": [
+        12
+      ],
+      "completed": true,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Understand FileReader",
+      "id": 20,
+      "topics": [
+        28
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Understand testing framework (jest)",
+      "id": 107,
+      "topics": [
+        19
+      ],
+      "completed": true,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Understand useRef",
+      "id": 19,
+      "topics": [
+        28
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "When creating a new topic, leave it unfolded",
+      "id": 105,
+      "completed": true,
+      "thisWeek": true,
+      "topics": [
+        12,
+        15
+      ],
+      "weekOrderIndex": 6
+    },
+    {
+      "name": "When enter is pressed: finish editing",
+      "id": 39,
+      "completed": true,
+      "topics": [
+        29
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "When text doubleclicked: focus immediately on text input",
+      "id": 37,
+      "completed": true,
+      "topics": [
+        29
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "YAML cannot handle single quotes",
+      "id": 97,
+      "topics": [
+        12
+      ],
+      "weekOrderIndex": 0
     }
   ]
 }

@@ -44,10 +44,10 @@ function App() {
 
   // v1
   const [tasks, setTasks] = useState([
-    { name: "Fiets repareren", id: 0, topics: [12], completed: true, thisWeek: false, repeated: false },
-    { name: "Outer Wilds", id: 1, topics: [21, 1], completed: false, thisWeek: false, repeated: false },
-    { name: "Badkamer", id: 2, topics: [1], completed: false, thisWeek: true, repeated: false },
-    { name: "Backup opruimen", id: 5, topics: [1], completed: false, thisWeek: false, repeated: true },
+    { name: "Fiets repareren", id: 0, topics: [12], completed: true, thisWeek: false, repeated: false, weekOrderIndex: 1 },
+    { name: "Outer Wilds", id: 1, topics: [21, 1], completed: false, thisWeek: false, repeated: false, weekOrderIndex: 0 },
+    { name: "Badkamer", id: 2, topics: [1], completed: false, thisWeek: true, repeated: false, weekOrderIndex: 2 },
+    { name: "Backup opruimen", id: 5, topics: [1], completed: false, thisWeek: false, repeated: true, weekOrderIndex: 0 },
   ])
 
   //v0

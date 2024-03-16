@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { getTopicTreeById } from './TopicHelper';
 
 const PlannedTask = (props) => {
-    const { taskKey, taskName, setTaskName, deleteTask, completed, completeTask, currentTopic, changeTopic, planned, plan, topics, taskTopics } = props;
+    const { taskKey, taskName, setTaskName, deleteTask, completed, completeTask,
+        currentTopic, changeTopic, planned, plan, topics, taskTopics,
+        changeWeekOrderIndex, currentWeekOrderIndex } = props;
 
     const [isEditing, setIsEditing] = useState(false);
     const [color, setColor] = useState('green');
@@ -26,8 +28,8 @@ const PlannedTask = (props) => {
 
     const handleDragStart = (e) => {
         setIsDragging(true)
-        e.dataTransfer.setData('Text', taskKey)
-        e.dataTransfer.setData('Text2', currentTopic)
+        e.dataTransfer.setData('taskId', taskKey)
+        e.dataTransfer.setData('sourceWeekOrderIndex', currentWeekOrderIndex)
         setColor('blue')
     }
     const handleDragEnd = () => {
@@ -39,12 +41,11 @@ const PlannedTask = (props) => {
         e.preventDefault()
         e.target.setAttribute('draggedOver', false)
         console.info('drop')
-        setColor('yellow')
-        var key = e.dataTransfer.getData("Text")
-        var oldTopic = e.dataTransfer.getData("Text2")
-        if (changeTopic) {
-            changeTopic(key, oldTopic, currentTopic)
-        }
+        setColor('maroon')
+        var sourceTaskId = e.dataTransfer.getData("taskId")
+        var sourceWeekOrderIndex = e.dataTransfer.getData("sourceWeekOrderIndex")
+        console.log(`Dropping from task with id=${sourceTaskId} with weekIndex=${sourceWeekOrderIndex} on task with id=${taskKey} with weekIndex=${currentWeekOrderIndex}`)
+        if (changeWeekOrderIndex) { changeWeekOrderIndex(sourceTaskId, sourceWeekOrderIndex, currentWeekOrderIndex) }
     }
     const handleDragOver = (e) => {
         e.preventDefault();

@@ -8,32 +8,32 @@
 
 ### Migration to schema.v1:
 
-- [x] Rendering
-- [x] Export/Import
 - [x] Adding/deleting/modifying tasks
-- [x] Task.js
 - [x] Adding/deleting/modifying topics
-- [x] Topic.js
 - [x] Default example
+- [x] Export/Import
 - [ ] PlannedTask.js
+- [x] Rendering
+- [x] Task.js
+- [x] Topic.js
 
 ### Importing/Exporting:
 
-- [x] Allow export of tasks as JSON
-- [x] Allow import of tasks as JSON
-- [x] Allow export of tasks as YAML
-- [x] Allow import of tasks as YAML
-- [x] Detection of JSON or YAML at import 
-- [x] Save output in markdown
-- [ ] Find a way to add task/topic id into the YAML
-- [x] Prettify the output JSON to make it more git-friendly
-- [ ] Add the completion of a task into the YAML
 - [x] Add detection of JSON.v0 and JSON.v1 format
+- [ ] Add the completion of a task into the YAML
+- [x] Allow export of tasks as JSON
+- [x] Allow export of tasks as YAML
+- [x] Allow import of tasks as JSON
+- [x] Allow import of tasks as YAML
+- [x] Allow import/export in both topic and weekly view
 - [ ] Create a new text-based output, that is based on YAML
 - [ ] Create different settings for the text/markdown based output (keep indent, show completed, show planned, and more?)
-- [ ] Export the weekly list as a txt file (without topic information)
+- [x] Detection of JSON or YAML at import 
 - [ ] Export the weekly list as a txt file (with condensed topic information)
-- [x] Allow import/export in both topic and weekly view
+- [ ] Export the weekly list as a txt file (without topic information)
+- [ ] Find a way to add task/topic id into the YAML
+- [x] Prettify the output JSON to make it more git-friendly
+- [x] Save output in markdown
 
 #### Sanitize input:
 
@@ -43,62 +43,62 @@
 
 ### Data structure conversion:
 
-- [x] (tasks,topics).v1 to (relational.tasks/topics)
-- [ ] (tasks,topics).v1 to (hierarchical.topics+tasks)
-- [x] (tasks,topics).v0 to (task,topics).v1
-- [ ] (relational.tasks/topics) to (tasks,topics).v1
 - [ ]  (hierarchical.topics+tasks) to (tasks,topics).v1
+- [ ] (relational.tasks/topics) to (tasks,topics).v1
 - [x] (task,topics).v1 to (tasks,topics).v0
+- [x] (tasks,topics).v0 to (task,topics).v1
+- [ ] (tasks,topics).v1 to (hierarchical.topics+tasks)
+- [x] (tasks,topics).v1 to (relational.tasks/topics)
 
 ## Per Topic View:
 
 
 ### Aesthetic:
 
-- [ ] Prettify text input for tasks
-- [ ] Improve collapse and dropdown icon
-- [ ] "Delete task" icon
 - [ ] "Add task" icon
-- [ ] Animate collapse and dropdown
-- [x] Make the tasks to have a good width. Naive: text-cutoff
-- [ ] Dragging: make outline of dragged-over-task/topic fat
-- [ ] Design good way to limit task text in the task box
+- [ ] "Delete task" icon
 - [ ] Add Ability to unfold a topic and all its subtopics in one go
+- [ ] Animate collapse and dropdown
+- [ ] Design good way to limit task text in the task box
+- [ ] Dragging: make outline of dragged-over-task/topic fat
+- [ ] Improve collapse and dropdown icon
+- [x] Make the tasks to have a good width. Naive: text-cutoff
+- [ ] Prettify text input for tasks
 
 ### Functionality:
 
 
 #### Relaying information:
 
-- [x] Have topics and subtopics show up
-- [x] Have tasks show up under the right topic
-- [x] Allow the topics to drop down and collapse
 - [x] Add icon (> or V) for drop down and collapse
+- [x] Allow the topics to drop down and collapse
+- [x] Enable filtering on repeated tasks (to uncomplete them manually)
+- [x] Have tasks show up under the right topic
+- [x] Have topics and subtopics show up
 - [x] Hide completed tasks
 - [x] Make visible which Tasks are planned for this week
-- [ ] Show how many tasks are completed/planned/open in a topic
 - [ ] Minimize empty topics
-- [x] Enable filtering on repeated tasks (to uncomplete them manually)
+- [ ] Show how many tasks are completed/planned/open in a topic
 
 #### Modifying information:
 
-- [x] Editable task names
-- [x] "Delete task" button
 - [x] "Add task" button
+- [x] "Delete task" button
 - [x] "Task completion" button
-- [x] Make topic name editable (doubleclick)
-- [x] Make tasks draggeable to other task lists
-- [x] Make tasks draggeable to topics
-- [x] Make topics draggable to other topics
+- [x] Add 'Is Repeated Task' button
+- [x] Add a way to add the task to the current Weekly View
 - [x] Allow deletion of Topics
-- [ ] Drag tasks to change the order in task list
-- [x] Make Tasks duplicatable to multiple topics
 - [x] Allow new subtopics to be created
 - [x] Allow root topics to be created
-- [x] Add a way to add the task to the current Weekly View
 - [x] Create a way to remove task from weekly View
+- [ ] Drag tasks to change the order in task list
+- [x] Editable task names
+- [x] Make Tasks duplicatable to multiple topics
 - [ ] Make Topics draggeable to the Root Topic list
-- [x] Add 'Is Repeated Task' button
+- [x] Make tasks draggeable to other task lists
+- [x] Make tasks draggeable to topics
+- [x] Make topic name editable (doubleclick)
+- [x] Make topics draggable to other topics
 
 ## Weekly Tasks View:
 
@@ -108,17 +108,17 @@
 
 ### Modifying information:
 
+- [x] Add a button to mark the task as completed
 - [ ] Add a way to remove the task from the weekly view on the weekly view
-- [ ] Allow reordering the weekly view tasks
 - [ ] Add button the clear weekly view
 - [ ] Add button to clear all completed items
-- [x] Add a button to mark the task as completed
+- [x] Allow reordering the weekly view tasks
 
 ### Relaying information:
 
+- [x] Add a way to hide the completed items
 - [x] List all the tasks that are planned for this week
 - [x] List the topic(s) +subtopic(s) that the task belongs to
-- [x] Add a way to hide the completed items
 
 ## Daily Task View:
 
@@ -131,24 +131,24 @@
 
 ### Project management:
 
-- [x] Gitify this project
 - [x] Create this Todo-list in the TaskPlanner
+- [x] Gitify this project
 
 ### Unknowns:
 
-- [ ] Understand useRef
 - [ ] Understand FileReader
+- [ ] Understand useRef
 
 ### Functionality:
 
-- [x] When text doubleclicked: focus immediately on text input
-- [x] When enter is pressed: finish editing
-- [ ] Search engine for tasks/topics
-- [ ] Create a history of updates (create undo button)
 - [ ] Add comments to tasks/topics
-- [ ] Open tasks/topics to have a task/topic card
 - [ ] Add hyperlink suport to tasks/topics
 - [ ] Allow for subtasks
+- [ ] Create a history of updates (create undo button)
+- [ ] Open tasks/topics to have a task/topic card
+- [ ] Search engine for tasks/topics
+- [x] When enter is pressed: finish editing
+- [x] When text doubleclicked: focus immediately on text input
 
 #### Dependencies:
 
@@ -175,37 +175,37 @@
 
 ### Repetition:
 
-- [ ] Scheduling
-- [ ] Formally enabling all possibilities (what are all possibilities of repetition?)
 - [x] Add a repeated tag to tasks
 - [x] Enable filtering on repeated tasks (to uncomplete them manually)
+- [ ] Formally enabling all possibilities (what are all possibilities of repetition?)
+- [ ] Scheduling
 
 ## Priority module:
 
-- [ ] Prioritize (order control)
-- [ ] Automatic promotion (more important, deadline nears)
 - [ ] Automatic demotion (less important, was too long ago)
+- [ ] Automatic promotion (more important, deadline nears)
+- [ ] Prioritize (order control)
 
 # Constraints:
 
 
 ## UX/UI:
 
-- [ ] Allow keyboard-only mode
-- [ ] Make the lists more readable
-- [ ] Choose better color schemes for tasks and topics
-- [ ] Choose better color schemes for the feedback (drag/drop) events
-- [ ] Allow hovering over topics to unfold them
-- [x] When creating a new topic, leave it unfolded
 - [ ] Add a way to easier move/duplicate tasks to far-away topics (better drag handling or cut/copy/paste)
 - [ ] Add ability to peek into a list of folded topics
-- [x] Remember the name of the loaded file (so that it does not need to be renamed on every save)
+- [ ] Allow hovering over topics to unfold them
+- [ ] Allow keyboard-only mode
+- [ ] Choose better color schemes for tasks and topics
+- [ ] Choose better color schemes for the feedback (drag/drop) events
 - [ ] Keep a list of UX issues when manually testing/using the software
+- [ ] Make the lists more readable
+- [x] Remember the name of the loaded file (so that it does not need to be renamed on every save)
+- [x] When creating a new topic, leave it unfolded
 
 ## Maintainability:
 
-- [x] Enable autoformatting
 - [ ] Convert to TypeScript
+- [x] Enable autoformatting
 - [ ] Standardize variable, function and classnames (underscore,etc.)
 
 ### Error handling:
@@ -216,18 +216,18 @@
 
 ### Testing:
 
-- [ ] Import/export
-- [ ] Conversion
 - [ ] Add/deleting/modifying task
 - [ ] Add/modify topic
-- [x] Understand testing framework (jest)
+- [ ] Conversion
 - [ ] Delete topic
+- [ ] Import/export
 - [ ] Keep a list of UX issues when manually testing/using the software
+- [x] Understand testing framework (jest)
 
 ### Refactoring:
 
-- [x] Refactor the TaskList.js into smaller files
 - [ ] Refactor ModifyingFunctionGenerators into smaller files
+- [x] Refactor the TaskList.js into smaller files
 
 ## Performance:
 
@@ -238,10 +238,10 @@
 
 # Bugs/issues:
 
-- [x] Topics with the same name give weird bugs
-- [ ] Test tasks with empty string
-- [x] Remove the empty lists from the YAML-export
 - [ ] Properly handle escaped characters in YAML
-- [ ] YAML cannot handle single quotes
-- [x] When creating a new topic, leave it unfolded
+- [x] Remove the empty lists from the YAML-export
 - [x] Remove the yellow from the color-scheme for drag and drop (unreadable)
+- [ ] Test tasks with empty string
+- [x] Topics with the same name give weird bugs
+- [x] When creating a new topic, leave it unfolded
+- [ ] YAML cannot handle single quotes
