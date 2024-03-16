@@ -2,9 +2,8 @@ m = minor
 M = Major
 
 Open:
-- Not being able to extract the text from the Weekly View (export or Copy): 2M
-- Not being able to order the Weekly View tasks - 2M
-- Not being able to clear all completed items from the weekly list: 1M
+- Not being able to extract the text from the Weekly View (export or Copy): 3M
+- Not being able to clear all completed items from the weekly list: 2M
 - The data is lost when something in React is changed - 1M
 
 - Needing to save the markdown, yaml and json all separately - 4m
@@ -32,5 +31,6 @@ Gefixt:
 - Fearing to lose a task by not being able to make it repeatable: 3 - gefixt
 - Not seeing the repeated tasks: 2 -gefixt
 - Topic view task text is too long: 3m - gefixt (opnieuw)
+- Not being able to order the Weekly View tasks - 2M - gefixt
 
 
