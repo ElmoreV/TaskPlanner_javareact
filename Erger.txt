@@ -2,27 +2,39 @@ m = minor
 M = Major
 
 Open:
-- Not being able to extract the text from the Weekly View (export or Copy): 3M
-- Not being able to clear all completed items from the weekly list: 2M
+- Not being able to extract the text from the Weekly View (export or Copy): 4M
 - The data is lost when something in React is changed - 1M
 
-- Needing to save the markdown, yaml and json all separately - 4m
-- Not directly being able to duplicate-drag tasks to other topics: 3m
-- Not being able to remove items from the weekly list on the weekly list: 3m
+Relaying information:
+- Hide completed items is not saved when changing views: 4m
 - The weekly view names are too large and go to the next line (but don't make the task bigger): 3m
-- Hide completed items is not saved when changing views: 3m
-- Not being able to duplicate multiple tasks at once (forgetting which tasks are already copied): 3m
-- Adding a task, while only showing repeated tasks, should add a repeated task: 2m
+- Not clearly seeing on what level a task is exactly (maybe needs guidance lines?) - 2m+
 - Not being able to peek in a list of folded topics: 2m
 - Not being able to just have a list of all tasks (with filters): 2m
 - When showing only uncompleted/repeated tasks: minimize/remove/concatenate topics that are irrelevant/empty - 2m
-- Not being able to make a new root topic when the button is not in view: 1m
 - After folding/unfolding, the mouse is not over the same topic anymore: 1m
+- In the weekly view: hide completed tasks is always unchecked - 2m
+- It is unclear where a duplicated task is already (is it already duplicated?) -2m
 - The weely view doesn't show all the topics of the task at hand: 1m
 - Fearing that the knowledge that I completed a repeated task gets lost: 1m
-- Delete and duplicate should be near each other. Completed and repeated should be near each other: 1m
 - Not being able to show repeated and completed tasks: 1m
 - Not being able to search for a task (search bar) - 1m
+
+Modifying information:
+- Not being able to remove items from the weekly list on the weekly list: 4m
+- Not directly being able to duplicate-drag tasks to other topics: 3m
+- Not being able to duplicate multiple tasks at once (forgetting which tasks are already copied): 3m
+- Not being able to mark a weekly task as 'planned in the daily view (or locally)' - 3m
+- Adding a task, while only showing repeated tasks, should add a repeated task: 2m
+- Not being able to make a new root topic when the button is not in view: 1m
+- When sorting all the new tasks - giving them a place - it was hard to find my way around. 2m
+- It takes a huge time to drag a task from the top to the bottom - 1m
+- Delete and duplicate should be near each other. Completed and repeated should be near each other: 1m
+- Not being able to partially complete a task - 2m
+
+Import/export:
+- Needing to save the markdown, yaml and json all separately - 4m
+- After saving a new document in .json, it does not remember the file name to save to the .yaml and .md files - 1m
 
 Gefixt:
 - Not being able to complete tasks on the weekly view: 1 - gefixt
@@ -32,5 +44,6 @@ Gefixt:
 - Not seeing the repeated tasks: 2 -gefixt
 - Topic view task text is too long: 3m - gefixt (opnieuw)
 - Not being able to order the Weekly View tasks - 2M - gefixt
+- Not being able to clear all completed items from the weekly list: 2M - gefixt
 
 

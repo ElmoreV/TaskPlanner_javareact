@@ -14,10 +14,19 @@ const PlannedList = (props) => {
     const onHideCompletedItemsChange = () => {
         setHideCompletedItems(!hideCompletedItems)
     }
+
+    const onClearCompletedItems = () => {
+        let newTasks = [...tasks]
+        newTasks = newTasks.map((task) => (task.completed && task.thisWeek) ? { ...task, thisWeek: false } : task)
+        setTasks(newTasks)
+    }
+
+
     sanitizeWeekOrderIndex(setTasks, tasks)
 
     return (
         <div className='planned-list'>
+            <button onClick={onClearCompletedItems}>Clear completed items</button>
             <label><input
                 type="checkbox"
                 name='HideCompletedItems'
