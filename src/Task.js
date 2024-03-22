@@ -108,15 +108,6 @@ const Task = (props) => {
     else if (planned) { class_str = 'taskPlanned' }
     else if (repeated) { class_str = 'taskRepeated' }
 
-    const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
-    const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
-
-    const duplicateDragHandlers = isDraggingAllowed ? {
-        draggable: true,
-        onDragStart: handleDuplicateDragStart,
-        onDragEnd: handleDuplicateDragEnd
-    } : {}
-
 
     const toggleEdit = () => {
         setIsEditing(true);
@@ -149,6 +140,17 @@ const Task = (props) => {
     }, [isEditing]); // Dependency array ensures this runs only when isEditing changes
 
 
+    const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
+    const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
+    const textEditHandlers = { onChange: handleChange, onBlur: handleBlur, onKeyDown: handleKeyDown }
+
+
+    const duplicateDragHandlers = isDraggingAllowed ? {
+        draggable: true,
+        onDragStart: handleDuplicateDragStart,
+        onDragEnd: handleDuplicateDragEnd
+    } : {}
+
 
     return (<div className={class_str}
         onDoubleClick={toggleEdit}
@@ -159,9 +161,7 @@ const Task = (props) => {
                 <input type='text'
                     value={name}
                     width="430px"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    onKeyDown={handleKeyDown}
+                    {...textEditHandlers}
                     ref={inputRef}
                 /> :
                 //  <span style={{color : color}}>{name}</span>
