@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { getTopicTreeById } from './TopicHelper';
 
 const PlannedTask = (props) => {
-    const { taskKey, taskName, setTaskName, deleteTask, completed, completeTask,
+    const { taskKey, taskName, setTaskName, deleteTask,
+        completed, completeTask,
+        scheduled, scheduleTask,
         currentTopic, changeTopic, planned, plan, topics, taskTopics,
         changeWeekOrderIndex, currentWeekOrderIndex } = props;
 
@@ -71,7 +73,7 @@ const PlannedTask = (props) => {
     let class_str = 'task'
     // Completion has precedence over planned
     if (completed) { class_str = 'taskCompleted' }
-    else if (planned) { class_str = 'taskPlanned' }
+    else if (scheduled) { class_str = 'taskPlanned' }
 
     const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
@@ -95,7 +97,10 @@ const PlannedTask = (props) => {
         {!completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Complete</button>)}
         {completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Decomplete</button>)}
         {plan && (<button className='moveToWeek' onClick={moveToWeek}> Plan for this week </button>)}
+        {scheduled && scheduleTask && (<button className='taskSchedule' onClick={scheduleTask}>Scheduled!</button>)}
+        {!scheduled && scheduleTask && (<button className='taskSchedule' onClick={scheduleTask}>Unscheduled</button>)}
         <span className="topicPath">{topicPath}</span>
+
     </div>);
 }
 

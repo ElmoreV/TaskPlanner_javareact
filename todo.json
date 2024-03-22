@@ -13,13 +13,13 @@
             {
               "name": "Migration to schema.v1",
               "id": 8,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
               "name": "Importing/Exporting",
               "id": 9,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": [
                 {
                   "name": "Sanitize input",
@@ -32,7 +32,7 @@
             {
               "name": "Data structure conversion",
               "id": 13,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             }
           ]
@@ -45,7 +45,7 @@
             {
               "name": "Aesthetic",
               "id": 23,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
@@ -125,7 +125,7 @@
                 {
                   "name": "Dependencies",
                   "id": 37,
-                  "unfolded": false,
+                  "unfolded": true,
                   "subtopics": []
                 }
               ]
@@ -141,7 +141,7 @@
         {
           "name": "Timing",
           "id": 31,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Impossibilities",
@@ -166,7 +166,7 @@
         {
           "name": "Priority module",
           "id": 36,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         }
       ]
@@ -366,11 +366,11 @@
     {
       "name": "Add a way to remove the task from the weekly view on the weekly view",
       "id": 69,
-      "thisWeek": false,
+      "thisWeek": true,
       "topics": [
         39
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 11
     },
     {
       "name": "Add ability to peek into a list of folded topics",
@@ -723,7 +723,8 @@
       "topics": [
         30
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 7,
+      "thisWeek": true
     },
     {
       "name": "Create simple example tasks/topics",
@@ -953,7 +954,8 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 4,
+      "thisWeek": true
     },
     {
       "name": "Make the tasks to have a good width. Naive: text-cutoff",
@@ -1141,7 +1143,8 @@
       "topics": [
         7
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 6,
+      "thisWeek": true
     },
     {
       "name": "Standardize variable, function and classnames (underscore,etc.)",
@@ -1171,11 +1174,12 @@
     {
       "name": "Text edit should not lag, but it does now",
       "id": 46,
-      "completed": true,
+      "completed": false,
       "topics": [
         20
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "thisWeek": false
     },
     {
       "name": "Time span",
@@ -1268,7 +1272,8 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 5,
+      "thisWeek": true
     },
     {
       "name": "Add ability too peek into folded topics",
@@ -1284,7 +1289,8 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 3,
+      "thisWeek": true
     },
     {
       "name": "Show topics in a shortened way if possible.",
@@ -1324,7 +1330,8 @@
       "topics": [
         40
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 9,
+      "thisWeek": true
     },
     {
       "name": "Ability to ony show repeated AND completed tasks",
@@ -1348,7 +1355,8 @@
       "topics": [
         29
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 8,
+      "thisWeek": true
     },
     {
       "name": "Add a way to mark a task as handled/scheduled (but not completed)",
@@ -1356,7 +1364,8 @@
       "topics": [
         39
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 10,
+      "thisWeek": true
     },
     {
       "name": "Ability to partially complete a task",
@@ -1413,7 +1422,8 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 2,
+      "thisWeek": true
     },
     {
       "name": "Make tasks draggeable to topics",
@@ -1477,13 +1487,13 @@
       "weekOrderIndex": 6
     },
     {
-      "name": "PlannedTask.js",
-      "id": 122,
+      "name": "Manage the text widths on the task bars",
+      "id": 137,
       "topics": [
-        8
+        38
       ],
       "thisWeek": true,
-      "weekOrderIndex": 7
+      "weekOrderIndex": 18
     },
     {
       "name": "Add a way to hide the completed items",
@@ -1496,6 +1506,26 @@
       "weekOrderIndex": 8
     },
     {
+      "name": "Find a way to save markdown, yaml and json all at the same time",
+      "id": 157,
+      "topics": [
+        15
+      ],
+      "thisWeek": true,
+      "weekOrderIndex": 19
+    },
+    {
+      "name": "Keep a list of UX issues when manually testing/using the software",
+      "id": 136,
+      "topics": [
+        19,
+        15
+      ],
+      "repeated": true,
+      "thisWeek": true,
+      "weekOrderIndex": 20
+    },
+    {
       "name": "Export the weekly list as a txt file (without topic information)",
       "id": 126,
       "topics": [
@@ -1504,6 +1534,15 @@
       "thisWeek": false,
       "weekOrderIndex": 9,
       "completed": true
+    },
+    {
+      "name": "PlannedTask.js",
+      "id": 122,
+      "topics": [
+        8
+      ],
+      "thisWeek": true,
+      "weekOrderIndex": 21
     },
     {
       "name": "Add a repeated tag to tasks",
@@ -1537,33 +1576,13 @@
       "weekOrderIndex": 12
     },
     {
-      "name": "Keep a list of UX issues when manually testing/using the software",
-      "id": 136,
+      "name": "Refactor the TaskBar (the actual visible part) from the interaction part (the list item with all handlers)",
+      "id": 159,
       "topics": [
-        19,
-        15
-      ],
-      "repeated": true,
-      "thisWeek": true,
-      "weekOrderIndex": 13
-    },
-    {
-      "name": "Manage the text widths on the task bars",
-      "id": 137,
-      "topics": [
-        38
+        21
       ],
       "thisWeek": true,
-      "weekOrderIndex": 14
-    },
-    {
-      "name": "Find a way to save markdown, yaml and json all at the same time",
-      "id": 157,
-      "topics": [
-        15
-      ],
-      "thisWeek": true,
-      "weekOrderIndex": 15
+      "weekOrderIndex": 1
     }
   ]
 }

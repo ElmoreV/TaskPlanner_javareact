@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PlannedTask from './PlannedTask';
 import {
     getCompleteTask,
+    getScheduleTask,
     getChangeWeekOrderIndex,
     sanitizeWeekOrderIndex
 } from './ModifyFuncGeneratorsV1';
@@ -11,17 +12,20 @@ const PlannedList = (props) => {
     const { tasks, setTasks, topics, setTopics } = props;
 
     const [hideCompletedItems, setHideCompletedItems] = useState(true)
+    const [hideScheduledItems, setHideScheduledItems] = useState(true)
     const onHideCompletedItemsChange = () => {
         setHideCompletedItems(!hideCompletedItems)
     }
-
+    const onHideScheduledItemsChange = () => {
+        setHideScheduledItems(!hideScheduledItems)
+    }
     const onClearCompletedItems = () => {
         let newTasks = [...tasks]
         newTasks = newTasks.map((task) => (task.completed && task.thisWeek) ? { ...task, thisWeek: false } : task)
         setTasks(newTasks)
     }
     const isVisible = (task) => {
-        return (!(task.completed && hideCompletedItems) && task.thisWeek)
+        return (!(task.completed && hideCompletedItems) && !(task.scheduled && hideScheduledItems) && task.thisWeek)
     }
 
     const copyListToClipboard = () => {
@@ -48,6 +52,13 @@ const PlannedList = (props) => {
                 className="form-check-input"
                 defaultChecked={hideCompletedItems}
             />Hide completed tasks</label>
+            <label><input
+                type="checkbox"
+                name='HideScheduledItems'
+                onChange={onHideScheduledItemsChange}
+                className="form-check-input"
+                defaultChecked={hideScheduledItems}
+            />Hide scheduled tasks</label>
             <button onClick={copyListToClipboard}>
                 Copy to clipboardd
             </button>
@@ -64,6 +75,8 @@ const PlannedList = (props) => {
                                     // deleteTask = {getDeleteTask(task.id)}
                                     completed={task.completed}
                                     completeTask={getCompleteTask(setTasks, tasks, task.id)}
+                                    scheduled={task.scheduled}
+                                    scheduleTask={getScheduleTask(setTasks, tasks, task.id)}
                                     // currentTopic = {task.topics[0]}
                                     currentWeekOrderIndex={task.weekOrderIndex}
                                     changeWeekOrderIndex={getChangeWeekOrderIndex(setTasks, tasks)}

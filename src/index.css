@@ -224,6 +224,10 @@ button.taskComplete {
   float: right;
 }
 
+button.taskSchedule {
+  float: right;
+}
+
 span.buttonDuplicate {
   float: right;
   border-radius: 20px;

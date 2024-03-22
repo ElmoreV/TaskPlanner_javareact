@@ -143,6 +143,16 @@ const getCompleteTask = (setTasks, tasks, id) => {
     return completeTask;
 }
 
+const getScheduleTask = (setTasks, tasks, id) => {
+    const scheduleTask = () => {
+        const newTasks = [...tasks]
+        const task_to_change = newTasks.find((task) => task.id === id);
+        task_to_change.scheduled = !task_to_change.scheduled;
+        setTasks(newTasks);
+    }
+    return scheduleTask;
+}
+
 const getToggleRepeatTask = (setTasks, tasks, id) => {
     const toggleRepeatTask = () => {
         const newTasks = [...tasks]
@@ -421,6 +431,7 @@ const getDeleteTopic = (setTopics, topics, setTasks, tasks, topicId) => {
 export default getChangeTaskTopic;
 export { getChangeTaskTopic };
 export { getCompleteTask };
+export { getScheduleTask };
 export { getDeleteTask };
 export { getDeleteTopic };
 export { getDuplicateTask };

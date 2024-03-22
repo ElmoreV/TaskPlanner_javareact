@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Task from './Task'
 import Topic from './Topic';
+import React from 'react';
 // import Checkbox from './Checkbox'
 import {
     convert_old_topic_tasks_to_new_topic_tasks,
@@ -33,6 +34,10 @@ const TaskList = (props) => {
 
     const [hideCompletedItems, setHideCompletedItems] = useState(true)
     const [showRepeatedOnly, setShowRepeatedOnly] = useState(false)
+    // const MemoizedTopic = React.memo(Topic)
+    // const MemoizedTask = React.memo(Task)
+
+
     const converter_callback = () => {
         let [topics2, tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
         let [topics3, tasks3] = convert_new_topic_tasks_to_old_topic_tasks(topics2, tasks2)
@@ -61,8 +66,9 @@ const TaskList = (props) => {
         // console.debug(topic)
 
 
-        return (<div><li key={topic.id}>
-            <Topic name={topic.name}
+        return (<div key={'div_' + topic.id}><li key={topic.id}>
+            <Topic
+                name={topic.name}
                 id={topic.id}
                 unfolded={topic.unfolded}
                 setTopicName={getSetTopicNameFunc(setTopics, topics, topic.id)}

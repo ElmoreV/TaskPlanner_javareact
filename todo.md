@@ -222,8 +222,8 @@
 - [ ] Plan button, complete button and repeat button should be next to each other
 - [ ] If you save with a certain file name, remember this for use for later saving
 - [x] When creating a new topic, leave it unfolded
-- [ ] Keep a list of UX issues when manually testing/using the software
 - [ ] Find a way to save markdown, yaml and json all at the same time
+- [ ] Keep a list of UX issues when manually testing/using the software
 
 ## Maintainability:
 
@@ -251,10 +251,11 @@
 
 - [ ] Refactor ModifyingFunctionGenerators into smaller files
 - [x] Refactor the TaskList.js into smaller files
+- [ ] Refactor the TaskBar (the actual visible part) from the interaction part (the list item with all handlers)
 
 ## Performance:
 
-- [x] Text edit should not lag, but it does now
+- [ ] Text edit should not lag, but it does now
 
 ## Reliability:
 

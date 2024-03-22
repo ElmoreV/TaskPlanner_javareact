@@ -30,6 +30,7 @@ Modifying information:
 - When sorting all the new tasks - giving them a place - it was hard to find my way around. 2m
 - It takes a huge time to drag a task from the top to the bottom - 1m
 - Text editing tends to slow down if you type more - 1m
+- Not being able to edit task text on the weekly view
 - Delete and duplicate should be near each other. Completed and repeated should be near each other: 1m
 
 Import/export:
