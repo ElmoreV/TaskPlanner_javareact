@@ -10,7 +10,7 @@ import {
 const PlannedList = (props) => {
     const { tasks, setTasks, topics, setTopics } = props;
 
-    const [hideCompletedItems, setHideCompletedItems] = useState(false)
+    const [hideCompletedItems, setHideCompletedItems] = useState(true)
     const onHideCompletedItemsChange = () => {
         setHideCompletedItems(!hideCompletedItems)
     }
@@ -32,6 +32,7 @@ const PlannedList = (props) => {
                 name='HideCompletedItems'
                 onChange={onHideCompletedItemsChange}
                 className="form-check-input"
+                defaultChecked={hideCompletedItems}
             />Hide completed tasks</label>
             <ul key='root_topics'>
                 {tasks.sort((taskA, taskB) => taskA.weekOrderIndex > taskB.weekOrderIndex).map(

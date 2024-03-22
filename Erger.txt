@@ -7,7 +7,7 @@ Open:
 
 Relaying information:
 - Hide completed items is not saved when changing views: 4m
-- The weekly view names are too large and go to the next line (but don't make the task bigger): 3m
+- The weekly view names are too large and go to the next line (but don't make the task bigger): 5m
 - Not clearly seeing on what level a task is exactly (maybe needs guidance lines?) - 2m+
 - Not being able to peek in a list of folded topics: 2m
 - Not being able to just have a list of all tasks (with filters): 2m
@@ -25,12 +25,12 @@ Modifying information:
 - Not directly being able to duplicate-drag tasks to other topics: 3m
 - Not being able to duplicate multiple tasks at once (forgetting which tasks are already copied): 3m
 - Not being able to mark a weekly task as 'planned in the daily view (or locally)' - 3m
+- Not being able to partially complete a task - 3m
 - Adding a task, while only showing repeated tasks, should add a repeated task: 2m
 - Not being able to make a new root topic when the button is not in view: 1m
 - When sorting all the new tasks - giving them a place - it was hard to find my way around. 2m
 - It takes a huge time to drag a task from the top to the bottom - 1m
 - Delete and duplicate should be near each other. Completed and repeated should be near each other: 1m
-- Not being able to partially complete a task - 3m
 
 Import/export:
 - Needing to save the markdown, yaml and json all separately - 4m

@@ -31,7 +31,7 @@ import ImportExport from './ImportExport';
 const TaskList = (props) => {
     const { tasks, setTasks, topics, setTopics } = props;
 
-    const [hideCompletedItems, setHideCompletedItems] = useState(false)
+    const [hideCompletedItems, setHideCompletedItems] = useState(true)
     const [showRepeatedOnly, setShowRepeatedOnly] = useState(false)
     const converter_callback = () => {
         let [topics2, tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
@@ -136,12 +136,14 @@ const TaskList = (props) => {
                 name='HideCompletedItems'
                 onChange={onHideCompletedItemsChange}
                 className="form-check-input"
+                defaultChecked={hideCompletedItems}
             />Hide completed tasks</label>
             <label><input
                 type="checkbox"
                 name='ShowRepeatedOnly'
                 onChange={onShowRepeatedOnlyChange}
                 className="form-check-input"
+                defaultChecked={setShowRepeatedOnly}
             />Show repeated tasks only</label>
             <ul key='root_topics'>
                 {showTopics()}
