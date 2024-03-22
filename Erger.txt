@@ -2,12 +2,11 @@ m = minor
 M = Major
 
 Open:
-- Not being able to extract the text from the Weekly View (export or Copy): 4M
 - The data is lost when something in React is changed - 1M
 
 Relaying information:
-- Hide completed items is not saved when changing views: 4m
 - The weekly view names are too large and go to the next line (but don't make the task bigger): 5m
+- Hide completed items is not saved when changing views: 4m
 - Not clearly seeing on what level a task is exactly (maybe needs guidance lines?) - 2m+
 - Not being able to peek in a list of folded topics: 2m
 - Not being able to just have a list of all tasks (with filters): 2m
@@ -30,6 +29,7 @@ Modifying information:
 - Not being able to make a new root topic when the button is not in view: 1m
 - When sorting all the new tasks - giving them a place - it was hard to find my way around. 2m
 - It takes a huge time to drag a task from the top to the bottom - 1m
+- Text editing tends to slow down if you type more - 1m
 - Delete and duplicate should be near each other. Completed and repeated should be near each other: 1m
 
 Import/export:
@@ -45,5 +45,7 @@ Gefixt:
 - Topic view task text is too long: 3m - gefixt (opnieuw)
 - Not being able to order the Weekly View tasks - 2M - gefixt
 - Not being able to clear all completed items from the weekly list: 2M - gefixt
+- Not being able to extract the text from the Weekly View (export or Copy): 4M - gefixt
+
 
 

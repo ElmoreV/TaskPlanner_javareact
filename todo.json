@@ -13,13 +13,13 @@
             {
               "name": "Migration to schema.v1",
               "id": 8,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             },
             {
               "name": "Importing/Exporting",
               "id": 9,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": [
                 {
                   "name": "Sanitize input",
@@ -32,7 +32,7 @@
             {
               "name": "Data structure conversion",
               "id": 13,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             }
           ]
@@ -45,7 +45,7 @@
             {
               "name": "Aesthetic",
               "id": 23,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             },
             {
@@ -146,13 +146,13 @@
             {
               "name": "Impossibilities",
               "id": 32,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
               "name": "Duration (estimated?)",
               "id": 34,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
@@ -330,16 +330,6 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Add 'Is Repeated Task' button",
-      "id": 130,
-      "topics": [
-        26
-      ],
-      "thisWeek": true,
-      "completed": true,
-      "weekOrderIndex": 12
-    },
-    {
       "name": "Add Ability to unfold a topic and all its subtopics in one go",
       "id": 124,
       "topics": [
@@ -355,16 +345,6 @@
       ],
       "completed": true,
       "weekOrderIndex": 0
-    },
-    {
-      "name": "Add a repeated tag to tasks",
-      "id": 128,
-      "topics": [
-        35
-      ],
-      "thisWeek": true,
-      "completed": true,
-      "weekOrderIndex": 10
     },
     {
       "name": "Add a way to add the task to the current Weekly View",
@@ -384,16 +364,6 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Add a way to hide the completed items",
-      "id": 123,
-      "topics": [
-        40
-      ],
-      "thisWeek": true,
-      "completed": true,
-      "weekOrderIndex": 8
-    },
-    {
       "name": "Add a way to remove the task from the weekly view on the weekly view",
       "id": 69,
       "thisWeek": false,
@@ -411,7 +381,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Add button the clear weekly view",
+      "name": "Add button to clear weekly view",
       "id": 71,
       "topics": [
         39
@@ -424,7 +394,8 @@
       "topics": [
         39
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "completed": true
     },
     {
       "name": "Add comments to tasks/topics",
@@ -501,16 +472,6 @@
         8
       ],
       "weekOrderIndex": 0
-    },
-    {
-      "name": "Allow deletion of Topics",
-      "id": 18,
-      "completed": true,
-      "thisWeek": true,
-      "topics": [
-        26
-      ],
-      "weekOrderIndex": 3
     },
     {
       "name": "Allow export of tasks as JSON",
@@ -860,32 +821,12 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Enable filtering on repeated tasks (to uncomplete them manually)",
-      "id": 129,
-      "topics": [
-        35,
-        25
-      ],
-      "thisWeek": true,
-      "completed": true,
-      "weekOrderIndex": 11
-    },
-    {
       "name": "Export the weekly list as a txt file (with condensed topic information)",
       "id": 127,
       "topics": [
         9
       ],
       "weekOrderIndex": 0
-    },
-    {
-      "name": "Export the weekly list as a txt file (without topic information)",
-      "id": 126,
-      "topics": [
-        9
-      ],
-      "thisWeek": true,
-      "weekOrderIndex": 9
     },
     {
       "name": "Export/Import",
@@ -973,17 +914,6 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Keep a list of UX issues when manually testing/using the software",
-      "id": 136,
-      "topics": [
-        19,
-        15
-      ],
-      "repeated": true,
-      "thisWeek": true,
-      "weekOrderIndex": 13
-    },
-    {
       "name": "List all the tasks that are planned for this week",
       "id": 53,
       "completed": true,
@@ -991,26 +921,6 @@
         40
       ],
       "weekOrderIndex": 0
-    },
-    {
-      "name": "List the topic(s) +subtopic(s) that the task belongs to",
-      "id": 67,
-      "completed": true,
-      "thisWeek": true,
-      "topics": [
-        40
-      ],
-      "weekOrderIndex": 5
-    },
-    {
-      "name": "Make Tasks duplicatable to multiple topics",
-      "id": 58,
-      "completed": true,
-      "thisWeek": true,
-      "topics": [
-        26
-      ],
-      "weekOrderIndex": 4
     },
     {
       "name": "Make Topics draggeable to the Root Topic list",
@@ -1028,16 +938,6 @@
         26
       ],
       "weekOrderIndex": 0
-    },
-    {
-      "name": "Make tasks draggeable to topics",
-      "id": 12,
-      "completed": true,
-      "thisWeek": true,
-      "topics": [
-        26
-      ],
-      "weekOrderIndex": 1
     },
     {
       "name": "Make tasks importable from Weekly View",
@@ -1072,16 +972,6 @@
         26
       ],
       "weekOrderIndex": 0
-    },
-    {
-      "name": "Make topics draggable to other topics",
-      "id": 13,
-      "completed": true,
-      "thisWeek": true,
-      "topics": [
-        26
-      ],
-      "weekOrderIndex": 2
     },
     {
       "name": "Make visible which Tasks are planned for this week",
@@ -1123,15 +1013,6 @@
         29
       ],
       "weekOrderIndex": 0
-    },
-    {
-      "name": "PlannedTask.js",
-      "id": 122,
-      "topics": [
-        8
-      ],
-      "thisWeek": true,
-      "weekOrderIndex": 7
     },
     {
       "name": "Prettify text input for tasks",
@@ -1348,17 +1229,6 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "When creating a new topic, leave it unfolded",
-      "id": 105,
-      "completed": true,
-      "thisWeek": true,
-      "topics": [
-        12,
-        15
-      ],
-      "weekOrderIndex": 6
-    },
-    {
       "name": "When enter is pressed: finish editing",
       "id": 39,
       "completed": true,
@@ -1383,6 +1253,317 @@
         12
       ],
       "weekOrderIndex": 0
+    },
+    {
+      "name": "Remember the choice for HideCompletedItems for a View",
+      "id": 138,
+      "topics": [
+        30
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Make it easier to see the level at which you are at (guidance lines?)",
+      "id": 139,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add ability too peek into folded topics",
+      "id": 140,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Have just a list of tasks, that we can put filters on (basically the weekly list is a list with filter: planned=True)",
+      "id": 141,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Show topics in a shortened way if possible.",
+      "id": 142,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Prevent movement of topics after folding/unfolding + screen height change",
+      "id": 143,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Allow to find all duplicates of a task at first task",
+      "id": 144,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "(Duplicate) dragging tasks should not be a 2-step process (make it easier to go to the right spot)",
+      "id": 145,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Show all topics for a task with multiple topics",
+      "id": 146,
+      "topics": [
+        40
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Ability to ony show repeated AND completed tasks",
+      "id": 147,
+      "topics": [
+        25
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Ability to (duplicate) drag multiple tasks/topics at once",
+      "id": 148,
+      "topics": [
+        29
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Ability to select tasks",
+      "id": 149,
+      "topics": [
+        29
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add a way to mark a task as handled/scheduled (but not completed)",
+      "id": 150,
+      "topics": [
+        39
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Ability to partially complete a task",
+      "id": 151,
+      "topics": [
+        39
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Adding a task (when only showing repeated tasks) should add a repeated task",
+      "id": 152,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Have the new root topic button available everywhere on the page",
+      "id": 153,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Improve navigation during drag-sorting the list",
+      "id": 154,
+      "topics": [
+        39,
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Delete button should be next to duplicate button",
+      "id": 155,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Plan button, complete button and repeat button should be next to each other",
+      "id": 156,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "If you save with a certain file name, remember this for use for later saving",
+      "id": 158,
+      "topics": [
+        15
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Make tasks draggeable to topics",
+      "id": 12,
+      "completed": true,
+      "thisWeek": false,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 1
+    },
+    {
+      "name": "Make topics draggable to other topics",
+      "id": 13,
+      "completed": true,
+      "thisWeek": false,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 2
+    },
+    {
+      "name": "Allow deletion of Topics",
+      "id": 18,
+      "completed": true,
+      "thisWeek": false,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 3
+    },
+    {
+      "name": "Make Tasks duplicatable to multiple topics",
+      "id": 58,
+      "completed": true,
+      "thisWeek": false,
+      "topics": [
+        26
+      ],
+      "weekOrderIndex": 4
+    },
+    {
+      "name": "List the topic(s) +subtopic(s) that the task belongs to",
+      "id": 67,
+      "completed": true,
+      "thisWeek": false,
+      "topics": [
+        40
+      ],
+      "weekOrderIndex": 5
+    },
+    {
+      "name": "When creating a new topic, leave it unfolded",
+      "id": 105,
+      "completed": true,
+      "thisWeek": false,
+      "topics": [
+        12,
+        15
+      ],
+      "weekOrderIndex": 6
+    },
+    {
+      "name": "PlannedTask.js",
+      "id": 122,
+      "topics": [
+        8
+      ],
+      "thisWeek": true,
+      "weekOrderIndex": 7
+    },
+    {
+      "name": "Add a way to hide the completed items",
+      "id": 123,
+      "topics": [
+        40
+      ],
+      "thisWeek": false,
+      "completed": true,
+      "weekOrderIndex": 8
+    },
+    {
+      "name": "Export the weekly list as a txt file (without topic information)",
+      "id": 126,
+      "topics": [
+        9
+      ],
+      "thisWeek": false,
+      "weekOrderIndex": 9,
+      "completed": true
+    },
+    {
+      "name": "Add a repeated tag to tasks",
+      "id": 128,
+      "topics": [
+        35
+      ],
+      "thisWeek": false,
+      "completed": true,
+      "weekOrderIndex": 10
+    },
+    {
+      "name": "Enable filtering on repeated tasks (to uncomplete them manually)",
+      "id": 129,
+      "topics": [
+        35,
+        25
+      ],
+      "thisWeek": false,
+      "completed": true,
+      "weekOrderIndex": 11
+    },
+    {
+      "name": "Add 'Is Repeated Task' button",
+      "id": 130,
+      "topics": [
+        26
+      ],
+      "thisWeek": false,
+      "completed": true,
+      "weekOrderIndex": 12
+    },
+    {
+      "name": "Keep a list of UX issues when manually testing/using the software",
+      "id": 136,
+      "topics": [
+        19,
+        15
+      ],
+      "repeated": true,
+      "thisWeek": true,
+      "weekOrderIndex": 13
+    },
+    {
+      "name": "Manage the text widths on the task bars",
+      "id": 137,
+      "topics": [
+        38
+      ],
+      "thisWeek": true,
+      "weekOrderIndex": 14
+    },
+    {
+      "name": "Find a way to save markdown, yaml and json all at the same time",
+      "id": 157,
+      "topics": [
+        15
+      ],
+      "thisWeek": true,
+      "weekOrderIndex": 15
     }
   ]
 }

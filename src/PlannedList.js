@@ -20,7 +20,21 @@ const PlannedList = (props) => {
         newTasks = newTasks.map((task) => (task.completed && task.thisWeek) ? { ...task, thisWeek: false } : task)
         setTasks(newTasks)
     }
+    const isVisible = (task) => {
+        return (!(task.completed && hideCompletedItems) && task.thisWeek)
+    }
 
+    const copyListToClipboard = () => {
+        let taskList = tasks.sort((taskA, taskB) => taskA.weekOrderIndex > taskB.weekOrderIndex).reduce(
+            (acc, task) =>
+                isVisible(task) ? acc.concat(task.name, '\n') : acc
+            // if (isVisible(task)) { return acc.concat(task.name, '\n') } else { return acc }
+
+            // isVisible(task) ? acc.concat(task.name, '\n') : null
+            , "")
+        console.log(taskList)
+        navigator.clipboard.writeText(taskList)
+    }
 
     sanitizeWeekOrderIndex(setTasks, tasks)
 
@@ -34,26 +48,29 @@ const PlannedList = (props) => {
                 className="form-check-input"
                 defaultChecked={hideCompletedItems}
             />Hide completed tasks</label>
+            <button onClick={copyListToClipboard}>
+                Copy to clipboardd
+            </button>
+
             <ul key='root_topics'>
                 {tasks.sort((taskA, taskB) => taskA.weekOrderIndex > taskB.weekOrderIndex).map(
                     (task) => {
                         return (
                             <li>
-                                {!(task.completed && hideCompletedItems) &&
-                                    task.thisWeek && <PlannedTask
-                                        taskName={task.name}
-                                        taskKey={task.id}
-                                        // setTaskName={getSetTaskNameFunc(task.id)}
-                                        // deleteTask = {getDeleteTask(task.id)}
-                                        completed={task.completed}
-                                        completeTask={getCompleteTask(setTasks, tasks, task.id)}
-                                        // currentTopic = {task.topics[0]}
-                                        currentWeekOrderIndex={task.weekOrderIndex}
-                                        changeWeekOrderIndex={getChangeWeekOrderIndex(setTasks, tasks)}
-                                        topics={topics}
-                                        taskTopics={task.topics}
-                                    // changeTopic = {getChangeTaskTopic()}
-                                    />
+                                {isVisible(task) && <PlannedTask
+                                    taskName={task.name}
+                                    taskKey={task.id}
+                                    // setTaskName={getSetTaskNameFunc(task.id)}
+                                    // deleteTask = {getDeleteTask(task.id)}
+                                    completed={task.completed}
+                                    completeTask={getCompleteTask(setTasks, tasks, task.id)}
+                                    // currentTopic = {task.topics[0]}
+                                    currentWeekOrderIndex={task.weekOrderIndex}
+                                    changeWeekOrderIndex={getChangeWeekOrderIndex(setTasks, tasks)}
+                                    topics={topics}
+                                    taskTopics={task.topics}
+                                // changeTopic = {getChangeTaskTopic()}
+                                />
                                 }
                             </li>
                         )

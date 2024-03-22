@@ -12,10 +12,10 @@
 - [x] Adding/deleting/modifying topics
 - [x] Default example
 - [x] Export/Import
-- [ ] PlannedTask.js
 - [x] Rendering
 - [x] Task.js
 - [x] Topic.js
+- [ ] PlannedTask.js
 
 ### Importing/Exporting:
 
@@ -30,10 +30,10 @@
 - [ ] Create different settings for the text/markdown based output (keep indent, show completed, show planned, and more?)
 - [x] Detection of JSON or YAML at import 
 - [ ] Export the weekly list as a txt file (with condensed topic information)
-- [ ] Export the weekly list as a txt file (without topic information)
 - [ ] Find a way to add task/topic id into the YAML
 - [x] Prettify the output JSON to make it more git-friendly
 - [x] Save output in markdown
+- [x] Export the weekly list as a txt file (without topic information)
 
 #### Sanitize input:
 
@@ -72,53 +72,59 @@
 
 - [x] Add icon (> or V) for drop down and collapse
 - [x] Allow the topics to drop down and collapse
-- [x] Enable filtering on repeated tasks (to uncomplete them manually)
 - [x] Have tasks show up under the right topic
 - [x] Have topics and subtopics show up
 - [x] Hide completed tasks
 - [x] Make visible which Tasks are planned for this week
 - [ ] Minimize empty topics
 - [ ] Show how many tasks are completed/planned/open in a topic
+- [ ] Ability to ony show repeated AND completed tasks
+- [x] Enable filtering on repeated tasks (to uncomplete them manually)
 
 #### Modifying information:
 
 - [x] "Add task" button
 - [x] "Delete task" button
 - [x] "Task completion" button
-- [x] Add 'Is Repeated Task' button
 - [x] Add a way to add the task to the current Weekly View
-- [x] Allow deletion of Topics
 - [x] Allow new subtopics to be created
 - [x] Allow root topics to be created
 - [x] Create a way to remove task from weekly View
 - [ ] Drag tasks to change the order in task list
 - [x] Editable task names
-- [x] Make Tasks duplicatable to multiple topics
 - [ ] Make Topics draggeable to the Root Topic list
 - [x] Make tasks draggeable to other task lists
-- [x] Make tasks draggeable to topics
 - [x] Make topic name editable (doubleclick)
+- [x] Make tasks draggeable to topics
 - [x] Make topics draggable to other topics
+- [x] Allow deletion of Topics
+- [x] Make Tasks duplicatable to multiple topics
+- [x] Add 'Is Repeated Task' button
 
 ## Weekly Tasks View:
 
 
 ### Aesthetic:
 
+- [ ] Manage the text widths on the task bars
 
 ### Modifying information:
 
 - [x] Add a button to mark the task as completed
 - [ ] Add a way to remove the task from the weekly view on the weekly view
-- [ ] Add button the clear weekly view
-- [ ] Add button to clear all completed items
+- [ ] Add button to clear weekly view
+- [x] Add button to clear all completed items
 - [x] Allow reordering the weekly view tasks
+- [ ] Add a way to mark a task as handled/scheduled (but not completed)
+- [ ] Ability to partially complete a task
+- [ ] Improve navigation during drag-sorting the list
 
 ### Relaying information:
 
-- [x] Add a way to hide the completed items
 - [x] List all the tasks that are planned for this week
+- [ ] Show all topics for a task with multiple topics
 - [x] List the topic(s) +subtopic(s) that the task belongs to
+- [x] Add a way to hide the completed items
 
 ## Daily Task View:
 
@@ -149,6 +155,8 @@
 - [ ] Search engine for tasks/topics
 - [x] When enter is pressed: finish editing
 - [x] When text doubleclicked: focus immediately on text input
+- [ ] Ability to (duplicate) drag multiple tasks/topics at once
+- [ ] Ability to select tasks
 
 #### Dependencies:
 
@@ -160,6 +168,7 @@
 
 - [ ] Create minimal layout (dense/packed/not pretty)
 - [ ] Enable dark mode
+- [ ] Remember the choice for HideCompletedItems for a View
 
 ## Timing:
 
@@ -175,10 +184,10 @@
 
 ### Repetition:
 
-- [x] Add a repeated tag to tasks
-- [x] Enable filtering on repeated tasks (to uncomplete them manually)
 - [ ] Formally enabling all possibilities (what are all possibilities of repetition?)
 - [ ] Scheduling
+- [x] Add a repeated tag to tasks
+- [x] Enable filtering on repeated tasks (to uncomplete them manually)
 
 ## Priority module:
 
@@ -197,10 +206,24 @@
 - [ ] Allow keyboard-only mode
 - [ ] Choose better color schemes for tasks and topics
 - [ ] Choose better color schemes for the feedback (drag/drop) events
-- [ ] Keep a list of UX issues when manually testing/using the software
 - [ ] Make the lists more readable
 - [x] Remember the name of the loaded file (so that it does not need to be renamed on every save)
+- [ ] Make it easier to see the level at which you are at (guidance lines?)
+- [ ] Add ability too peek into folded topics
+- [ ] Have just a list of tasks, that we can put filters on (basically the weekly list is a list with filter: planned=True)
+- [ ] Show topics in a shortened way if possible.
+- [ ] Prevent movement of topics after folding/unfolding + screen height change
+- [ ] Allow to find all duplicates of a task at first task
+- [ ] (Duplicate) dragging tasks should not be a 2-step process (make it easier to go to the right spot)
+- [ ] Adding a task (when only showing repeated tasks) should add a repeated task
+- [ ] Have the new root topic button available everywhere on the page
+- [ ] Improve navigation during drag-sorting the list
+- [ ] Delete button should be next to duplicate button
+- [ ] Plan button, complete button and repeat button should be next to each other
+- [ ] If you save with a certain file name, remember this for use for later saving
 - [x] When creating a new topic, leave it unfolded
+- [ ] Keep a list of UX issues when manually testing/using the software
+- [ ] Find a way to save markdown, yaml and json all at the same time
 
 ## Maintainability:
 
@@ -221,8 +244,8 @@
 - [ ] Conversion
 - [ ] Delete topic
 - [ ] Import/export
-- [ ] Keep a list of UX issues when manually testing/using the software
 - [x] Understand testing framework (jest)
+- [ ] Keep a list of UX issues when manually testing/using the software
 
 ### Refactoring:
 
@@ -243,5 +266,5 @@
 - [x] Remove the yellow from the color-scheme for drag and drop (unreadable)
 - [ ] Test tasks with empty string
 - [x] Topics with the same name give weird bugs
-- [x] When creating a new topic, leave it unfolded
 - [ ] YAML cannot handle single quotes
+- [x] When creating a new topic, leave it unfolded
