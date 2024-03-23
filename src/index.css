@@ -87,9 +87,7 @@ span.topicPath {
 
 div.textBar {
   display: inline-block;
-  /* width: 100%; */
   width: 630px;
-  direction: rtl;
   word-wrap: break-word;
 }
 
