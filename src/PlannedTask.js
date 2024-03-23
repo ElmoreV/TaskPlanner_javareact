@@ -85,21 +85,26 @@ const PlannedTask = (props) => {
         onDoubleClick={toggleEdit}
         {...dragHandlers}
         {...dropHandlers}>
-        {isEditing ?
-            <input type='text'
-                value={taskName}
-                onChange={handleChange}
-                onBlur={handleBlur} /> :
-            //  <span style={{color : color}}>{taskName}</span>
-            <span style={{ color: color }}>{taskName}</span>
-        }
+        <div className="textBar">
+            <span className="taskText">
+                {isEditing ?
+                    <input type='text'
+                        value={taskName}
+                        onChange={handleChange}
+                        onBlur={handleBlur} /> :
+                    //  <span style={{color : color}}>{taskName}</span>
+                    <span style={{ color: color }}>{taskName}</span>
+                }
+            </span>
+            <span className="topicPath">{topicPath}</span>
+        </div>
         {deleteTask && (<button className='taskDelete' onClick={deleteTask && deleteTask}>Delete</button>)}
         {!completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Complete</button>)}
         {completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Decomplete</button>)}
         {plan && (<button className='moveToWeek' onClick={moveToWeek}> Plan for this week </button>)}
         {scheduled && scheduleTask && (<button className='taskSchedule' onClick={scheduleTask}>Scheduled!</button>)}
         {!scheduled && scheduleTask && (<button className='taskSchedule' onClick={scheduleTask}>Unscheduled</button>)}
-        <span className="topicPath">{topicPath}</span>
+
 
     </div>);
 }

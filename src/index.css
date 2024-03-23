@@ -81,6 +81,16 @@ button.topicDelete {
 
 span.topicPath {
   float: right;
+  max-width: 310px;
+  text-align: right;
+}
+
+div.textBar {
+  display: inline-block;
+  /* width: 100%; */
+  width: 630px;
+  direction: rtl;
+  word-wrap: break-word;
 }
 
 span.buttonDuplicate:hover {
@@ -93,11 +103,9 @@ span.buttonDuplicate:hover {
 
 }
 
-
-
 span.taskText {
   display: inline-block;
-  max-width: 350px;
+  max-width: 320px;
   word-wrap: break-word;
   /* overflow-wrap: break-word; */
 }
