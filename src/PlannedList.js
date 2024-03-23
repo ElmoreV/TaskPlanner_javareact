@@ -12,7 +12,7 @@ const PlannedList = (props) => {
     const { tasks, setTasks, topics, setTopics } = props;
 
     const [hideCompletedItems, setHideCompletedItems] = useState(true)
-    const [hideScheduledItems, setHideScheduledItems] = useState(true)
+    const [hideScheduledItems, setHideScheduledItems] = useState(false)
     const onHideCompletedItemsChange = () => {
         setHideCompletedItems(!hideCompletedItems)
     }

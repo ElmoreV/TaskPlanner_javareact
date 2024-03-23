@@ -7,31 +7,40 @@ Open:
 Relaying information:
 - The weekly view names are too large and go to the next line (but don't make the task bigger): 5m
 - Hide completed items is not saved when changing views: 4m
+- Repeated tasks do not show last completion/cannot retain information about when the next time would be - 3m
 - Not clearly seeing on what level a task is exactly (maybe needs guidance lines?) - 2m+
 - Not being able to peek in a list of folded topics: 2m
 - Not being able to just have a list of all tasks (with filters): 2m
+- Not being able to collapse or fold all the topics with one button: 2m
 - When showing only uncompleted/repeated tasks: minimize/remove/concatenate topics that are irrelevant/empty - 2m
-- After folding/unfolding, the mouse is not over the same topic anymore: 1m
 - In the weekly view: hide completed tasks is always unchecked - 2m
-- It is unclear where a duplicated task is already (is it already duplicated?) -2m
+- It is unclear where a duplicated task is already (is it already duplicated?) -5m
 - The weely view doesn't show all the topics of the task at hand: 1m
 - Fearing that the knowledge that I completed a repeated task gets lost: 1m
+- Not being able to see statistics of the topic in the topic view - 2m
+- Ability to hide planned items - 2m
+- Not being able to see what is scheduled and what not in the topic view - 1m
 - Not being able to show repeated and completed tasks: 1m
 - Not being able to search for a task (search bar) - 1m
+- After folding/unfolding, the mouse is not over the same topic anymore: 1m
 
 Modifying information:
 - Not being able to remove items from the weekly list on the weekly list: 4m
-- Not directly being able to duplicate-drag tasks to other topics: 3m
-- Not being able to duplicate multiple tasks at once (forgetting which tasks are already copied): 3m
-- Not being able to mark a weekly task as 'planned in the daily view (or locally)' - 3m
+- Not being able to duplicate-drag tasks to other topics without stopping midway/taking a long time/being annoyed: 3m
+- Not being able to duplicate multiple tasks at once (forgetting which tasks are already copied): 6m
+- Not being able to drag multiple items at once - 16m
 - Not being able to partially complete a task - 3m
-- Adding a task, while only showing repeated tasks, should add a repeated task: 2m
+- Adding a task, while only showing repeated tasks, should add a repeated task: 3m
 - Not being able to make a new root topic when the button is not in view: 1m
 - When sorting all the new tasks - giving them a place - it was hard to find my way around. 2m
-- It takes a huge time to drag a task from the top to the bottom - 1m
+- It takes a huge time to drag a task from the top to the bottom - 6m
+	- Use hierarchical instead (but it's not ideal, it still is annoying)
+	- Maybe do a .. hide all tasks or something
 - Text editing tends to slow down if you type more - 1m
-- Not being able to edit task text on the weekly view
+- Not being able to edit task text on the weekly view - 2m
 - Delete and duplicate should be near each other. Completed and repeated should be near each other: 1m
+- There is no easy way to deduplicate a duplicated task - 1m
+- Dragging on the planning list has the wrong visual feedback when dragging downwards - 2m
 
 Import/export:
 - Needing to save the markdown, yaml and json all separately - 4m
@@ -39,6 +48,7 @@ Import/export:
 
 Gefixt:
 - Not being able to complete tasks on the weekly view: 1 - gefixt
+- Not being able to mark a weekly task as 'planned in the daily view (or locally)' - 4m - gefixt
 - Having to rename the file every time it is saved (the filename is not remembered on load): 11 - gefixt
 - Not being able to load the file from the weekly list: 1 - gefixt
 - Fearing to lose a task by not being able to make it repeatable: 3 - gefixt
