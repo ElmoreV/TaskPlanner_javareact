@@ -43,7 +43,7 @@ Modifying information:
 - There is no easy way to deduplicate a duplicated task - 1m
 
 Import/export:
-- Needing to save the markdown, yaml and json all separately - 4m
+- Needing to save the markdown, yaml and json all separately - 6m
 - After saving a new document in .json, it does not remember the file name to save to the .yaml and .md files - 1m
 
 Gefixt:

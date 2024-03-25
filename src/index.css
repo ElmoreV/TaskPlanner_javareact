@@ -81,13 +81,13 @@ button.topicDelete {
 
 span.topicPath {
   float: right;
-  max-width: 310px;
+  max-width: 300px;
   text-align: right;
 }
 
 div.textBar {
   display: inline-block;
-  width: 630px;
+  width: 620px;
   word-wrap: break-word;
 }
 
