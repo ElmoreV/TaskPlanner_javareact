@@ -9,12 +9,20 @@
 
 Download the code or fork the repository and git clone it to your computer.
 
-Then run:
+To install the necessary scripts, first run
+
+```zsh
+npm install
+```
+
+
+Then to collect all the npm/node packages, use:
+
 ``` 
 npm run build
 ```
 
-to collect all the npm/node packages to get started. Subsequently, to run the server on the localhost, use:
+Subsequently, to run the server on the localhost, use:
 
 ```
 npm run start

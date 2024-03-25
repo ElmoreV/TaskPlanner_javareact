@@ -8,7 +8,7 @@
         {
           "name": "Database interaction",
           "id": 3,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Migration to schema.v1",
@@ -1583,6 +1583,34 @@
       ],
       "thisWeek": true,
       "weekOrderIndex": 1
+    },
+    {
+      "name": "Add a color to indicate 'Blocked externally' (waiting for response)",
+      "id": 160,
+      "topics": [
+        25
+      ]
+    },
+    {
+      "name": "Ability to mark a task 'Blocked externally' (waiting for response)",
+      "id": 161,
+      "topics": [
+        26
+      ]
+    },
+    {
+      "name": "Add a color to indicate 'Impossible'",
+      "id": 162,
+      "topics": [
+        25
+      ]
+    },
+    {
+      "name": "Ability to mark a task 'Impossible'",
+      "id": 163,
+      "topics": [
+        26
+      ]
     }
   ]
 }
