@@ -17,13 +17,14 @@ Relaying information:
 - Not being able to see statistics of the topic in the topic view - 2m
 - Ability to hide planned items - 2m
 - The weely view doesn't show all the topics of the task at hand: 1m
-- Fearing that the knowledge that I completed a repeated task gets lost: 1m
+- Fearing that the knowledge that I completed a repeated task gets lost/ not showing that the json is not up to date. 2m
+	- Make hash at load, and during handling (so undoing a thing will reset it to load state). Can I make the load order-independent? Maybe sort the tasks by id, and the topics... should be ordered? Except for the subtopics-order. Also by ID.
 - Not being able to see what is scheduled and what not in the topic view - 1m
 - Not being able to show repeated and completed tasks: 1m
 - Not being able to search for a task (search bar) - 1m
 - After folding/unfolding, the mouse is not over the same topic anymore: 1m
-- Do not know which Tasks are Blocked by other people
-- It does not feel right to Complete or Delete tasks that are just impossible (due to not necessary, deadline, no resources, etc.)
+- Do not know which Tasks are Blocked by other people- 1m
+- It does not feel right to Complete or Delete tasks that are just impossible (due to not necessary, deadline, no resources, etc.) - 1m
 
 Modifying information:
 - Not being able to drag multiple items at once - 16m
@@ -43,8 +44,8 @@ Modifying information:
 - Text editing tends to slow down if you type more - 1m
 - Delete and duplicate should be near each other. Completed and repeated should be near each other: 1m
 - There is no easy way to deduplicate a duplicated task - 1m
-- Cannot mark a task as Blocked
-- Cannot mark a task as Impossible
+- Cannot mark a task as Blocked - 1m
+- Cannot mark a task as Impossible - 1m
 
 Import/export:
 - Needing to save the markdown, yaml and json all separately - 4m
