@@ -22,6 +22,8 @@ Relaying information:
 - Not being able to show repeated and completed tasks: 1m
 - Not being able to search for a task (search bar) - 1m
 - After folding/unfolding, the mouse is not over the same topic anymore: 1m
+- Do not know which Tasks are Blocked by other people
+- It does not feel right to Complete or Delete tasks that are just impossible (due to not necessary, deadline, no resources, etc.)
 
 Modifying information:
 - Not being able to drag multiple items at once - 16m
@@ -41,6 +43,8 @@ Modifying information:
 - Text editing tends to slow down if you type more - 1m
 - Delete and duplicate should be near each other. Completed and repeated should be near each other: 1m
 - There is no easy way to deduplicate a duplicated task - 1m
+- Cannot mark a task as Blocked
+- Cannot mark a task as Impossible
 
 Import/export:
 - Needing to save the markdown, yaml and json all separately - 4m

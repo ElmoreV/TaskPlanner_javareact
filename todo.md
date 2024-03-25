@@ -80,6 +80,8 @@
 - [ ] Show how many tasks are completed/planned/open in a topic
 - [ ] Ability to ony show repeated AND completed tasks
 - [x] Enable filtering on repeated tasks (to uncomplete them manually)
+- [ ] Add a color to indicate 'Blocked externally' (waiting for response)
+- [ ] Add a color to indicate 'Impossible'
 
 #### Modifying information:
 
@@ -100,6 +102,8 @@
 - [x] Allow deletion of Topics
 - [x] Make Tasks duplicatable to multiple topics
 - [x] Add 'Is Repeated Task' button
+- [ ] Ability to mark a task 'Blocked externally' (waiting for response)
+- [ ] Ability to mark a task 'Impossible'
 
 ## Weekly Tasks View:
 
