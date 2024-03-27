@@ -9,6 +9,7 @@ const PlannedTask = (props) => {
         currentTopic, changeTopic, planned, plan, topics, taskTopics,
         changeWeekOrderIndex, currentWeekOrderIndex } = props;
 
+    console.debug("Rendering PlannedTask")
     const [isEditing, setIsEditing] = useState(false);
     const [color, setColor] = useState('green');
     const [isDragging, setIsDragging] = useState(false);

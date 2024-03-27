@@ -4,6 +4,8 @@ import PlannedList from './PlannedList'
 import { useState } from 'react'
 import ImportExport from './ImportExport';
 function App() {
+  console.debug("Rendering App")
+
   const VIEW_ALL_TASKS = 1
   const VIEW_PLANNED_TASKS = 2
   const VIEW_DAILY_PLANNING = 3

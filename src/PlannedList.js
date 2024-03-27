@@ -10,6 +10,7 @@ import {
 
 const PlannedList = (props) => {
     const { tasks, setTasks, topics, setTopics } = props;
+    console.debug("Rendering PlannedList")
 
     const [hideCompletedItems, setHideCompletedItems] = useState(true)
     const [hideScheduledItems, setHideScheduledItems] = useState(false)

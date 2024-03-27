@@ -31,6 +31,7 @@ import ImportExport from './ImportExport';
 
 const TaskList = (props) => {
     const { tasks, setTasks, topics, setTopics } = props;
+    console.debug("Rendering TaskList")
 
     const [hideCompletedItems, setHideCompletedItems] = useState(true)
     const [showRepeatedOnly, setShowRepeatedOnly] = useState(false)

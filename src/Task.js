@@ -8,6 +8,7 @@ const Task = (props) => {
         planned, plan, unplan,
         repeated, toggleRepeatTask,
         duplicateTask } = props;
+    console.debug("Rendering Task")
 
     const [isEditing, setIsEditing] = useState(false);
     const [color, setColor] = useState('green');

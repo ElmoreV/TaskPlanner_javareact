@@ -6,7 +6,7 @@ const VIEW_DAILY_PLANNING = 3
 
 const ViewSelector = (props) => {
     const { viewSetter } = props;
-
+    console.debug("Rendering ViewSelector")
 
     const handleClick = (new_view) => {
         const handleClicker = (e) => {

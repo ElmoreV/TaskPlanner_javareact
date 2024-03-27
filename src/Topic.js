@@ -6,7 +6,7 @@ const Topic = (props) => {
         toggleFold, unfolded,
         addTask, addSubTopic, deleteTopic, changeTopic,
         moveTopic, duplicateTask } = props;
-
+    console.debug("Rendering Topic")
     const folded_symbol = '>';
     const unfolded_symbol = 'v';
 

@@ -262,9 +262,26 @@ const getTopicTreeById = (topics, topicId) => {
 
 // const generateDefaultTask = (tasks,id,topic,completed,planned,repeated){
 //     let newTask = {
-        
+
 //     }
 // }
+
+const getTopicStates = (topics, tasks) => {
+    // topicStats = [
+    //     {
+    //     topicId= ...
+    //     totalTasks= ...
+    //     completedTasks= ...
+    //     plannedTasks= ...
+    //     totalRecursiveTasks =...
+    //     completedRecursiveTasks = ...
+    //     plannedRecursiveTasks = ...
+    // }
+    // 
+    // ]
+
+}
+
 
 
 export default find_topic_by_key_r;

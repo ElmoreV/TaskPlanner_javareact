@@ -7,11 +7,11 @@ import {
 
 
 const ImportExport = (props) => {
+    console.debug("Rendering ImportExport")
     const { tasks, topics, setTasks, setTopics } = props;
 
     const fileInputRef = useRef(null);
     const fileNameRef = useRef("")
-
     const inputVersion = (tasks, topics) => {
         console.debug(tasks.length)
         console.debug('taskName' in tasks[0])
@@ -21,6 +21,24 @@ const ImportExport = (props) => {
             || (topics.length > 0 && 'title' in topics[0])) { return 'v0' }
         else { return 'v1' }
     }
+
+    /*
+    ///////////
+    ////// Calculating hash
+    ///////////////
+    */
+    const calculateHash = (tasks, topics) => {
+        // Strip unimportant stuff
+        // Topics: folded/unfolded
+        // Otherwise everything is important?
+        // The tasks need to be sorted on id
+        let newTasks = structuredClone(tasks)
+        newTasks.sort((a, b) => (a.id > b.id))
+        // The topics need to be sorted on id
+
+
+    }
+
 
 
     /*
