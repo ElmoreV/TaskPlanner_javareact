@@ -115,20 +115,20 @@
 ### Modifying information:
 
 - [x] Add a button to mark the task as completed
-- [ ] Add a way to remove the task from the weekly view on the weekly view
 - [ ] Add button to clear weekly view
 - [x] Add button to clear all completed items
 - [x] Allow reordering the weekly view tasks
-- [ ] Add a way to mark a task as handled/scheduled (but not completed)
 - [ ] Ability to partially complete a task
 - [ ] Improve navigation during drag-sorting the list
+- [ ] Add a way to remove the task from the weekly view on the weekly view
+- [ ] Add a way to mark a task as handled/scheduled (but not completed)
 
 ### Relaying information:
 
 - [x] List all the tasks that are planned for this week
-- [ ] Show all topics for a task with multiple topics
 - [x] List the topic(s) +subtopic(s) that the task belongs to
 - [x] Add a way to hide the completed items
+- [ ] Show all topics for a task with multiple topics
 
 ## Daily Task View:
 
@@ -137,7 +137,7 @@
 ## General:
 
 - [x] Change schema terminology to id,name,...
-- [ ] Show if the loaded json file has meaninfully changed
+- [x] Show if the loaded json file has meaninfully changed
 
 ### Project management:
 
@@ -170,9 +170,9 @@
 
 ### Aesthetics:
 
-- [ ] Create minimal layout (dense/packed/not pretty)
 - [ ] Enable dark mode
 - [ ] Remember the choice for HideCompletedItems for a View
+- [ ] Create minimal layout (dense/packed/not pretty)
 
 ## Timing:
 
@@ -210,11 +210,8 @@
 - [ ] Allow keyboard-only mode
 - [ ] Choose better color schemes for tasks and topics
 - [ ] Choose better color schemes for the feedback (drag/drop) events
-- [ ] Make the lists more readable
 - [x] Remember the name of the loaded file (so that it does not need to be renamed on every save)
-- [ ] Make it easier to see the level at which you are at (guidance lines?)
 - [ ] Add ability too peek into folded topics
-- [ ] Have just a list of tasks, that we can put filters on (basically the weekly list is a list with filter: planned=True)
 - [ ] Show topics in a shortened way if possible.
 - [ ] Prevent movement of topics after folding/unfolding + screen height change
 - [ ] Allow to find all duplicates of a task at first task
@@ -224,8 +221,11 @@
 - [ ] Improve navigation during drag-sorting the list
 - [ ] Delete button should be next to duplicate button
 - [ ] Plan button, complete button and repeat button should be next to each other
-- [ ] If you save with a certain file name, remember this for use for later saving
 - [x] When creating a new topic, leave it unfolded
+- [ ] Make the lists more readable
+- [ ] Make it easier to see the level at which you are at (guidance lines?)
+- [ ] Have just a list of tasks, that we can put filters on (basically the weekly list is a list with filter: planned=True)
+- [ ] If you save with a certain file name, remember this for use for later saving
 - [ ] Find a way to save markdown, yaml and json all at the same time
 - [ ] Keep a list of UX issues when manually testing/using the software
 

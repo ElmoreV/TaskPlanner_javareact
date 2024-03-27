@@ -4,6 +4,7 @@ import {
     convert_old_topic_tasks_to_new_topic_tasks,
     convert_new_topic_tasks_to_old_topic_tasks
 } from './Converter';
+import { sanitizeWeekOrderIndex2 } from './ModifyFuncGeneratorsV1'
 var hash = require('object-hash');
 
 const ImportExport = (props) => {
@@ -35,6 +36,7 @@ const ImportExport = (props) => {
         // Otherwise everything is important?
         // The tasks need to be sorted on id
         let newTasks = structuredClone(tasks)
+        newTasks = sanitizeWeekOrderIndex2(newTasks)
         let fixedTasks = newTasks.sort((a, b) => (a.id > b.id)).map((task) => {
             return {
                 name: task.name,
@@ -74,7 +76,7 @@ const ImportExport = (props) => {
         }
         let topicHash = hash(fixTopics(newTopics))
 
-        console.log(`Calculated hash of tasks: ${topicHash}`)
+        console.log(`Calculated hash of topics: ${topicHash}`)
         // The topics need to be sorted on id
         return topicHash
     }

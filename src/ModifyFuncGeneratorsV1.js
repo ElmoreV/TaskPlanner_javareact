@@ -218,6 +218,27 @@ const checkValidWeekOrderIndex = (tasks) => {
 
 }
 
+const sanitizeWeekOrderIndex2 = (tasks) => {
+    let newTasks = [...tasks]
+    if (checkValidWeekOrderIndex(tasks)) { return newTasks; }
+
+    //gather all the tasks with and without a weekOrderIndex
+    // if thisWeek=false: weekOrderIndex = 0
+    // if thisWeek=true: weekOrderIndex = value
+    let nextVal = 1
+    newTasks = newTasks.map((task) => {
+        if (!task.thisWeek) { task.weekOrderIndex = 0 }
+        else {
+            task.weekOrderIndex = nextVal
+            nextVal += 1
+        }
+        return task;
+    })
+
+    return newTasks
+}
+
+
 const sanitizeWeekOrderIndex = (setTasks, tasks) => {
     let newTasks = [...tasks]
     if (checkValidWeekOrderIndex(tasks)) { return; }
@@ -236,7 +257,6 @@ const sanitizeWeekOrderIndex = (setTasks, tasks) => {
     })
 
     setTasks(newTasks)
-
 }
 
 const getChangeWeekOrderIndex = (setTasks, tasks) => {
@@ -448,3 +468,4 @@ export { getAddSubtopic }
 export { getToggleRepeatTask }
 export { getChangeWeekOrderIndex }
 export { sanitizeWeekOrderIndex }
+export { sanitizeWeekOrderIndex2 }
