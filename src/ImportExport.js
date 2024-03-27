@@ -4,11 +4,13 @@ import {
     convert_old_topic_tasks_to_new_topic_tasks,
     convert_new_topic_tasks_to_old_topic_tasks
 } from './Converter';
-
+var hash = require('object-hash');
 
 const ImportExport = (props) => {
     console.debug("Rendering ImportExport")
     const { tasks, topics, setTasks, setTopics } = props;
+
+
 
     const fileInputRef = useRef(null);
     const fileNameRef = useRef("")
@@ -27,18 +29,66 @@ const ImportExport = (props) => {
     ////// Calculating hash
     ///////////////
     */
-    const calculateHash = (tasks, topics) => {
+    const calculateTaskHash = (tasks) => {
         // Strip unimportant stuff
         // Topics: folded/unfolded
         // Otherwise everything is important?
         // The tasks need to be sorted on id
         let newTasks = structuredClone(tasks)
-        newTasks.sort((a, b) => (a.id > b.id))
+        let fixedTasks = newTasks.sort((a, b) => (a.id > b.id)).map((task) => {
+            return {
+                name: task.name,
+                id: task.id,
+                topics: task.topics.sort(),
+                completed: task.completed ? true : false,
+                thisWeek: task.thisWeek ? true : false,
+                repeated: task.repeated ? true : false,
+                scheduled: task.scheduled ? true : false,
+                weekOrderIndex: (task.thisWeek && task.weekOrderIndex > 0) ? task.weekOrderIndex : 0
+            }
+        }
+        )
+        let taskHash = hash(fixedTasks)
+        console.log(`Calculated hash of tasks: ${taskHash}`)
         // The topics need to be sorted on id
-
-
+        return taskHash
     }
 
+    const calculateTopicHash = (topics) => {
+        // Strip unimportant stuff
+        // Topics: folded/unfolded
+        // Otherwise everything is important?
+        // The tasks need to be sorted on id
+        let newTopics = structuredClone(topics)
+        const fixTopics = (topicList) => {
+            let fixedTopicList = topicList.sort((a, b) => (a.id > b.id)).map((topic) => {
+                // return a new topic wihtout the unfolded
+                return {
+                    name: topic.name,
+                    id: topic.id,
+                    subtopics: fixTopics(topic.subtopics)
+                }
+            })
+            return fixedTopicList
+
+        }
+        let topicHash = hash(fixTopics(newTopics))
+
+        console.log(`Calculated hash of tasks: ${topicHash}`)
+        // The topics need to be sorted on id
+        return topicHash
+    }
+
+    const [taskHash, setTaskHash] = useState(null)
+    const [topicHash, setTopicHash] = useState(null)
+    const [loadedTaskHash, setLoadedTaskHash] = useState(null)
+    const [loadedTopicHash, setLoadedTopicHash] = useState(null)
+
+
+    const calculateHash = (tasks, topics) => {
+        setTaskHash(calculateTaskHash(tasks))
+        setTopicHash(calculateTopicHash(topics))
+    }
 
 
     /*
@@ -306,6 +356,9 @@ const ImportExport = (props) => {
         //     [new_topics, new_tasks] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
         // }
         // Pretty print json (with 2 spaces as space parameter)
+        setLoadedTaskHash(calculateTaskHash(tasks))
+        setLoadedTopicHash(calculateTopicHash(topics))
+
         const jsonContent = JSON.stringify({ topics: new_topics, tasks: new_tasks }, null, 2);
         const blob = new Blob([jsonContent], { type: "application/json" });
         var a = document.createElement("a");
@@ -341,6 +394,8 @@ const ImportExport = (props) => {
                 uploadedData.topics,
                 uploadedData.tasks)
         }
+        setLoadedTaskHash(calculateTaskHash(old_tasks))
+        setLoadedTopicHash(calculateTopicHash(old_topics))
 
         setTopics(old_topics)
         setTasks(old_tasks)
@@ -397,11 +452,21 @@ const ImportExport = (props) => {
     return (
         <div>
             <button onClick={exportjson}>Export Tasks [JSON]</button>
+
             <button onClick={exportYAML}>Export Tasks [YAML]</button>
             <button onClick={exportMarkdown}> Export Tasks [Markdown]</button>
+            <button onClick={() => calculateHash(tasks, topics)}> Calc Hash </button>
             <input type="file"
                 ref={fileInputRef}
                 onChange={handleFileToUpload} />
+            <div style={{ width: "1000px" }}>
+                <ul>
+                    <li>TopicHash on load: {loadedTopicHash}</li>
+                    <li>TaskHash on load: {loadedTaskHash}</li>
+                    <li>TopicHash now: {topicHash}</li>
+                    <li>TaskHash now: {taskHash}</li>
+                </ul>
+            </div>
         </div>);
 }
 
