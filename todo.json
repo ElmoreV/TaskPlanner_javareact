@@ -1559,7 +1559,8 @@
         39
       ],
       "weekOrderIndex": 9,
-      "thisWeek": true
+      "thisWeek": true,
+      "completed": true
     },
     {
       "name": "If you save with a certain file name, remember this for use for later saving",

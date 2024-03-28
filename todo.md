@@ -121,7 +121,7 @@
 - [ ] Ability to partially complete a task
 - [ ] Improve navigation during drag-sorting the list
 - [ ] Add a way to remove the task from the weekly view on the weekly view
-- [ ] Add a way to mark a task as handled/scheduled (but not completed)
+- [x] Add a way to mark a task as handled/scheduled (but not completed)
 
 ### Relaying information:
 

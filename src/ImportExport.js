@@ -11,6 +11,12 @@ const ImportExport = (props) => {
     console.debug("Rendering ImportExport")
     const { tasks, topics, setTasks, setTopics } = props;
 
+    const [taskHash, setTaskHash] = useState(null)
+    const [topicHash, setTopicHash] = useState(null)
+    const [loadedTaskHash, setLoadedTaskHash] = useState(null)
+    const [loadedTopicHash, setLoadedTopicHash] = useState(null)
+    const [savedTaskHash, setSavedTaskHash] = useState(null)
+    const [savedTopicHash, setSavedTopicHash] = useState(null)
 
 
     const fileInputRef = useRef(null);
@@ -81,10 +87,6 @@ const ImportExport = (props) => {
         return topicHash
     }
 
-    const [taskHash, setTaskHash] = useState(null)
-    const [topicHash, setTopicHash] = useState(null)
-    const [loadedTaskHash, setLoadedTaskHash] = useState(null)
-    const [loadedTopicHash, setLoadedTopicHash] = useState(null)
 
 
     const calculateHash = (tasks, topics) => {
@@ -358,8 +360,10 @@ const ImportExport = (props) => {
         //     [new_topics, new_tasks] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
         // }
         // Pretty print json (with 2 spaces as space parameter)
-        setLoadedTaskHash(calculateTaskHash(tasks))
-        setLoadedTopicHash(calculateTopicHash(topics))
+        setSavedTaskHash(calculateTaskHash(tasks))
+        setSavedTopicHash(calculateTopicHash(topics))
+        setTaskHash(calculateTaskHash(tasks))
+        setTopicHash(calculateTopicHash(topics))
 
         const jsonContent = JSON.stringify({ topics: new_topics, tasks: new_tasks }, null, 2);
         const blob = new Blob([jsonContent], { type: "application/json" });
@@ -396,8 +400,14 @@ const ImportExport = (props) => {
                 uploadedData.topics,
                 uploadedData.tasks)
         }
-        setLoadedTaskHash(calculateTaskHash(old_tasks))
-        setLoadedTopicHash(calculateTopicHash(old_topics))
+        let newTaskHash = calculateTaskHash(tasks)
+        let newTopicHash = calculateTopicHash(topics)
+        setTaskHash(newTaskHash)
+        setTopicHash(newTopicHash)
+        setLoadedTaskHash(newTaskHash)
+        setLoadedTopicHash(newTopicHash)
+        setSavedTaskHash(null)
+        setSavedTopicHash(null)
 
         setTopics(old_topics)
         setTasks(old_tasks)
@@ -449,26 +459,34 @@ const ImportExport = (props) => {
         }
     }
 
+    if (taskHash == null) {
+        setTaskHash(calculateTaskHash(tasks))
+        setTopicHash(calculateTopicHash(topics))
+    }
+
+    let mutatedSinceLoad = true
+    let mutatedSinceSave = true
+    if ((loadedTaskHash && (taskHash == loadedTaskHash)) && (loadedTopicHash && (topicHash == loadedTopicHash))) {
+        mutatedSinceLoad = false
+    }
+    // Check only if the file has been saved before
+    if ((savedTaskHash && (taskHash == savedTaskHash)) && (savedTopicHash && (topicHash == savedTopicHash))) {
+        mutatedSinceSave = false
+    }
 
 
     return (
         <div>
-            <button onClick={exportjson}>Export Tasks [JSON]</button>
+            <button onClick={exportjson}>Export Tasks [JSON]</button>{savedTaskHash ? (
+                mutatedSinceSave ? "Unsaved changes" : "Unchanged") : "Not saved yet"}
 
             <button onClick={exportYAML}>Export Tasks [YAML]</button>
             <button onClick={exportMarkdown}> Export Tasks [Markdown]</button>
             <button onClick={() => calculateHash(tasks, topics)}> Calc Hash </button>
             <input type="file"
                 ref={fileInputRef}
-                onChange={handleFileToUpload} />
-            <div style={{ width: "1000px" }}>
-                <ul>
-                    <li>TopicHash on load: {loadedTopicHash}</li>
-                    <li>TaskHash on load: {loadedTaskHash}</li>
-                    <li>TopicHash now: {topicHash}</li>
-                    <li>TaskHash now: {taskHash}</li>
-                </ul>
-            </div>
+                onChange={handleFileToUpload} /> {loadedTaskHash ? (
+                    mutatedSinceLoad ? "Changed rel. to file" : "Unchanged") : "Nothing loaded yet"}
         </div>);
 }
 
