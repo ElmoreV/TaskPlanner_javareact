@@ -1,0 +1,100 @@
+{
+  "topics": [
+    {
+      "name": "Onderhoud",
+      "id": 1,
+      "unfolded": true,
+      "subtopics": []
+    },
+    {
+      "name": "New Topic 2",
+      "id": 2,
+      "unfolded": true,
+      "subtopics": []
+    },
+    {
+      "name": "New Topic 3",
+      "id": 3,
+      "unfolded": true,
+      "subtopics": [
+        {
+          "name": "New Topic 7",
+          "id": 7,
+          "unfolded": true,
+          "subtopics": [
+            {
+              "name": "New Topic 8",
+              "id": 8,
+              "unfolded": true,
+              "subtopics": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "New Topic 4",
+      "id": 4,
+      "unfolded": true,
+      "subtopics": []
+    },
+    {
+      "name": "New Topic 5",
+      "id": 5,
+      "unfolded": true,
+      "subtopics": []
+    },
+    {
+      "name": "New Topic 6",
+      "id": 6,
+      "unfolded": true,
+      "subtopics": []
+    }
+  ],
+  "tasks": [
+    {
+      "name": "Backup opruimen",
+      "id": 5,
+      "topics": [
+        1
+      ],
+      "completed": false,
+      "thisWeek": false
+    },
+    {
+      "name": "New Task 6!",
+      "id": 6,
+      "topics": [
+        3,
+        7,
+        7
+      ],
+      "completed": true
+    },
+    {
+      "name": "New Task 7!",
+      "id": 7,
+      "topics": [
+        3,
+        2
+      ],
+      "thisWeek": true
+    },
+    {
+      "name": "New Task 8!",
+      "id": 8,
+      "topics": [
+        3
+      ],
+      "completed": true,
+      "thisWeek": true
+    },
+    {
+      "name": "New Task 9!",
+      "id": 9,
+      "topics": [
+        3
+      ]
+    }
+  ]
+}
