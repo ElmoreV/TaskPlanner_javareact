@@ -23,6 +23,8 @@ Relaying information:
 - After folding/unfolding, the mouse is not over the same topic anymore: 1m
 - Do not know which Tasks are Blocked by other people- 1m
 - It does not feel right to Complete or Delete tasks that are just impossible (due to not necessary, deadline, no resources, etc.) - 1m
+- There is no way to create a task and it's subtasks. Topics shouldn't be supertasks. - 2m
+
 
 Modifying information:
 - Not being able to drag multiple items at once - 16m
@@ -37,6 +39,7 @@ Modifying information:
 - Not being able to have a main task and subtasks - 2m
 - When sorting all the new tasks - giving them a place - it was hard to find my way around. 2m
 - Not being able to edit task text on the weekly view - 2m
+- Cannot order the tasks/topics on the topic view - 3m
 - Dragging on the planning list has the wrong visual feedback when dragging downwards - 2m
 - Not being able to make a new root topic when the button is not in view: 1m
 - Text editing tends to slow down if you type more - 1m
