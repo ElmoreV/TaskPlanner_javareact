@@ -1,10 +1,16 @@
 m = minor
 M = Major
 
-Open:
+# Open:
+
+## Legend
+
+## Major issues
+
 - The data is lost when something in React is changed - 1M
 
-Relaying information:
+## Relaying information
+
 - It is unclear where a duplicated task is already (is it already duplicated?) -5m
 - Hide completed items is not saved when changing views: 4m - bevroren
 - Repeated tasks do not show last completion/cannot retain information about when the next time would be - 3m
@@ -26,7 +32,8 @@ Relaying information:
 - There is no way to create a task and it's subtasks. Topics shouldn't be supertasks. - 2m
 
 
-Modifying information:
+## Modifying information
+
 - Not being able to drag multiple items at once - 16m
 - It takes a huge time to drag a task from the top to the bottom - 6m
 	- Use hierarchical instead (but it's not ideal, it still is annoying)
@@ -49,11 +56,13 @@ Modifying information:
 - Cannot mark a task as Impossible - 1m
 - Dragging a task (in planned list) below the entire list, should put it at the bottom.
 
-Import/export:
+## Import/export
+
 - Needing to save the markdown, yaml and json all separately - 6m
 - After saving a new document in .json, it does not remember the file name to save to the .yaml and .md files - 1m
 
-Gefixt:
+# Gefixt
+
 - Not being able to complete tasks on the weekly view: 1 - gefixt
 - Not being able to mark a weekly task as 'planned in the daily view (or locally)' - 4m - gefixt
 - Having to rename the file every time it is saved (the filename is not remembered on load): 11 - gefixt
