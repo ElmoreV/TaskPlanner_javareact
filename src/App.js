@@ -52,6 +52,7 @@ function App() {
     { name: "Backup opruimen", id: 5, topics: [1], completed: false, thisWeek: false, repeated: true, scheduled: false, weekOrderIndex: 0 },
   ])
 
+
   //v0
   // const [tasks, setTasks] = useState([
   //   { taskName: "Fiets repareren", key: 0, topics: ["Repareren"], completed: true, thisWeek: false },

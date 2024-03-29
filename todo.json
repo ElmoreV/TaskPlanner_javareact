@@ -40,7 +40,7 @@
         {
           "name": "Per Topic View",
           "id": 4,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Aesthetic",
@@ -63,7 +63,14 @@
                   "name": "Modifying information",
                   "id": 26,
                   "unfolded": true,
-                  "subtopics": []
+                  "subtopics": [
+                    {
+                      "name": "Dragging tasks",
+                      "id": 41,
+                      "unfolded": true,
+                      "subtopics": []
+                    }
+                  ]
                 }
               ]
             }
@@ -72,7 +79,7 @@
         {
           "name": "Weekly Tasks View",
           "id": 5,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Aesthetic",
@@ -97,7 +104,7 @@
         {
           "name": "Daily Task View",
           "id": 6,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
@@ -202,7 +209,7 @@
             {
               "name": "Testing",
               "id": 19,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             },
             {
@@ -377,7 +384,8 @@
       "topics": [
         39
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "completed": false
     },
     {
       "name": "Add button to clear all completed items",
@@ -765,7 +773,7 @@
       "id": 36,
       "thisWeek": false,
       "topics": [
-        26
+        41
       ],
       "weekOrderIndex": 0
     },
@@ -909,7 +917,7 @@
       "name": "Make Topics draggeable to the Root Topic list",
       "id": 96,
       "topics": [
-        26
+        41
       ],
       "weekOrderIndex": 0
     },
@@ -918,7 +926,7 @@
       "id": 11,
       "completed": true,
       "topics": [
-        26
+        41
       ],
       "weekOrderIndex": 0
     },
@@ -1282,7 +1290,8 @@
       "name": "Ability to (duplicate) drag multiple tasks/topics at once",
       "id": 148,
       "topics": [
-        29
+        29,
+        41
       ],
       "weekOrderIndex": 0
     },
@@ -1341,7 +1350,7 @@
       "completed": true,
       "thisWeek": false,
       "topics": [
-        26
+        41
       ],
       "weekOrderIndex": 0
     },
@@ -1351,7 +1360,7 @@
       "completed": true,
       "thisWeek": false,
       "topics": [
-        26
+        41
       ],
       "weekOrderIndex": 0
     },
@@ -1371,7 +1380,7 @@
       "completed": true,
       "thisWeek": false,
       "topics": [
-        26
+        41
       ],
       "weekOrderIndex": 0
     },
@@ -1480,13 +1489,34 @@
       "weekOrderIndex": 0
     },
     {
+      "name": "Create sensible moments to clear the task selection (click outside the task)",
+      "id": 164,
+      "topics": [
+        41
+      ],
+      "thisWeek": true,
+      "weekOrderIndex": 1
+    },
+    {
+      "name": "Ability to select (multiple) tasks",
+      "id": 149,
+      "topics": [
+        29,
+        41
+      ],
+      "weekOrderIndex": 2,
+      "thisWeek": true,
+      "completed": true
+    },
+    {
       "name": "Add a way to remove the task from the weekly view on the weekly view",
       "id": 69,
       "thisWeek": true,
       "topics": [
         39
       ],
-      "weekOrderIndex": 1
+      "weekOrderIndex": 3,
+      "completed": true
     },
     {
       "name": "Create minimal layout (dense/packed/not pretty)",
@@ -1494,7 +1524,7 @@
       "topics": [
         30
       ],
-      "weekOrderIndex": 2,
+      "weekOrderIndex": 4,
       "thisWeek": true
     },
     {
@@ -1503,7 +1533,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 3,
+      "weekOrderIndex": 5,
       "thisWeek": true
     },
     {
@@ -1512,7 +1542,7 @@
       "topics": [
         7
       ],
-      "weekOrderIndex": 4,
+      "weekOrderIndex": 6,
       "thisWeek": true,
       "completed": true
     },
@@ -1522,7 +1552,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 5,
+      "weekOrderIndex": 7,
       "thisWeek": true
     },
     {
@@ -1531,7 +1561,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 6,
+      "weekOrderIndex": 8,
       "thisWeek": true
     },
     {
@@ -1540,16 +1570,7 @@
       "topics": [
         40
       ],
-      "weekOrderIndex": 7,
-      "thisWeek": true
-    },
-    {
-      "name": "Ability to select tasks",
-      "id": 149,
-      "topics": [
-        29
-      ],
-      "weekOrderIndex": 8,
+      "weekOrderIndex": 9,
       "thisWeek": true
     },
     {
@@ -1558,7 +1579,7 @@
       "topics": [
         39
       ],
-      "weekOrderIndex": 9,
+      "weekOrderIndex": 10,
       "thisWeek": true,
       "completed": true
     },
@@ -1568,7 +1589,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 10,
+      "weekOrderIndex": 11,
       "thisWeek": true
     },
     {
@@ -1578,7 +1599,7 @@
         38
       ],
       "thisWeek": true,
-      "weekOrderIndex": 11
+      "weekOrderIndex": 12
     },
     {
       "name": "Find a way to save markdown, yaml and json all at the same time",
@@ -1587,7 +1608,7 @@
         15
       ],
       "thisWeek": true,
-      "weekOrderIndex": 12
+      "weekOrderIndex": 13
     },
     {
       "name": "Keep a list of UX issues when manually testing/using the software",
@@ -1598,7 +1619,7 @@
       ],
       "repeated": true,
       "thisWeek": true,
-      "weekOrderIndex": 13
+      "weekOrderIndex": 14
     },
     {
       "name": "PlannedTask.js",
@@ -1607,7 +1628,7 @@
         8
       ],
       "thisWeek": true,
-      "weekOrderIndex": 14
+      "weekOrderIndex": 15
     },
     {
       "name": "Refactor the TaskBar (the actual visible part) from the interaction part (the list item with all handlers)",
@@ -1616,7 +1637,21 @@
         21
       ],
       "thisWeek": true,
-      "weekOrderIndex": 15
+      "weekOrderIndex": 16
+    },
+    {
+      "name": "Isolate logic from content output as much as possible",
+      "id": 165,
+      "topics": [
+        21
+      ]
+    },
+    {
+      "name": "Isolate content output from visualization as much as possible",
+      "id": 166,
+      "topics": [
+        21
+      ]
     }
   ]
 }

@@ -28,6 +28,12 @@ import {
 } from './ModifyFuncGeneratorsV1'
 import ImportExport from './ImportExport';
 
+class SelectedTask {
+    constructor(taskId, topicId) {
+        this.taskId = taskId
+        this.topicId = topicId
+    }
+}
 
 const TaskList = (props) => {
     const { tasks, setTasks, topics, setTopics } = props;
@@ -38,7 +44,7 @@ const TaskList = (props) => {
     // const MemoizedTopic = React.memo(Topic)
     // const MemoizedTask = React.memo(Task)
 
-
+    const [selectedTasks, setSelectedTasks] = useState([])
     const converter_callback = () => {
         let [topics2, tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
         let [topics3, tasks3] = convert_new_topic_tasks_to_old_topic_tasks(topics2, tasks2)
@@ -55,6 +61,18 @@ const TaskList = (props) => {
         // console.log(tasks2)
         // console.log(tables)
     }
+
+    const addTaskToSelection = (taskId, topicId) => {
+        let newSelectedTasks = [...selectedTasks]
+        newSelectedTasks.push(new SelectedTask(taskId, topicId))
+        setSelectedTasks(newSelectedTasks)
+    }
+    const deleteTaskFromSelection = (taskId, topicId) => {
+        let newSelectedTasks = [...selectedTasks]
+        newSelectedTasks = newSelectedTasks.filter((selTask) => !(selTask.taskId == taskId && selTask.topicId == topicId))
+        setSelectedTasks(newSelectedTasks)
+    }
+
 
     const recursiveShowTopic = (topic, tasks) => {
         // 1. Show topic
@@ -104,7 +122,9 @@ const TaskList = (props) => {
                                     toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
                                     planned={task.thisWeek}
                                     repeated={task.repeated}
-
+                                    addToSelection={() => addTaskToSelection(task.id, topic.id)}
+                                    deleteFromSelection={() => deleteTaskFromSelection(task.id, topic.id)}
+                                    selected={selectedTasks.find((st) => (st.taskId == task.id && st.topicId == topic.id)) ? true : false}
                                     changeTopic={getChangeTaskTopic(setTasks, tasks)}
                                     duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
 

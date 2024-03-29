@@ -92,18 +92,24 @@
 - [x] Allow new subtopics to be created
 - [x] Allow root topics to be created
 - [x] Create a way to remove task from weekly View
-- [ ] Drag tasks to change the order in task list
 - [x] Editable task names
-- [ ] Make Topics draggeable to the Root Topic list
-- [x] Make tasks draggeable to other task lists
 - [x] Make topic name editable (doubleclick)
-- [x] Make tasks draggeable to topics
-- [x] Make topics draggable to other topics
 - [x] Allow deletion of Topics
-- [x] Make Tasks duplicatable to multiple topics
 - [x] Add 'Is Repeated Task' button
 - [ ] Ability to mark a task 'Blocked externally' (waiting for response)
 - [ ] Ability to mark a task 'Impossible'
+
+##### Dragging tasks:
+
+- [ ] Drag tasks to change the order in task list
+- [ ] Make Topics draggeable to the Root Topic list
+- [x] Make tasks draggeable to other task lists
+- [ ] Ability to (duplicate) drag multiple tasks/topics at once
+- [x] Make tasks draggeable to topics
+- [x] Make topics draggable to other topics
+- [x] Make Tasks duplicatable to multiple topics
+- [ ] Create sensible moments to clear the task selection (click outside the task)
+- [x] Ability to select (multiple) tasks
 
 ## Weekly Tasks View:
 
@@ -120,7 +126,7 @@
 - [x] Allow reordering the weekly view tasks
 - [ ] Ability to partially complete a task
 - [ ] Improve navigation during drag-sorting the list
-- [ ] Add a way to remove the task from the weekly view on the weekly view
+- [x] Add a way to remove the task from the weekly view on the weekly view
 - [x] Add a way to mark a task as handled/scheduled (but not completed)
 
 ### Relaying information:
@@ -160,7 +166,7 @@
 - [x] When enter is pressed: finish editing
 - [x] When text doubleclicked: focus immediately on text input
 - [ ] Ability to (duplicate) drag multiple tasks/topics at once
-- [ ] Ability to select tasks
+- [x] Ability to select (multiple) tasks
 
 #### Dependencies:
 
@@ -256,6 +262,8 @@
 - [ ] Refactor ModifyingFunctionGenerators into smaller files
 - [x] Refactor the TaskList.js into smaller files
 - [ ] Refactor the TaskBar (the actual visible part) from the interaction part (the list item with all handlers)
+- [ ] Isolate logic from content output as much as possible
+- [ ] Isolate content output from visualization as much as possible
 
 ## Performance:
 

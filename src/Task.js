@@ -7,6 +7,7 @@ const Task = (props) => {
         currentTopicName, currentTopicId, changeTopic,
         planned, plan, unplan,
         repeated, toggleRepeatTask,
+        addToSelection, deleteFromSelection, selected,
         duplicateTask } = props;
     console.debug("Rendering Task")
 
@@ -29,8 +30,8 @@ const Task = (props) => {
         setIsDragging(true)
         e.dataTransfer.setData('Type', "Task")
         e.dataTransfer.setData('TaskId', id)
-        e.dataTransfer.setData('TopicName', currentTopicName) //also name
-        e.dataTransfer.setData('TopicId', currentTopicId) //also name
+        e.dataTransfer.setData('TopicName', currentTopicName)
+        e.dataTransfer.setData('TopicId', currentTopicId)
         console.info('Dragging task')
         setColor('blue')
     }
@@ -57,7 +58,6 @@ const Task = (props) => {
         setIsDragging(false)
         setColor('violet')
     }
-
 
     const handleDrop = (e) => {
         e.preventDefault()
@@ -109,6 +109,14 @@ const Task = (props) => {
     else if (planned) { class_str = 'taskPlanned' }
     else if (repeated) { class_str = 'taskRepeated' }
 
+    let selectStyle = {}
+    if (selected) {
+        selectStyle = {
+            borderStyle: "dashed",
+            borderWidth: "2px",
+            margin: "0px"
+        }
+    }
 
     const toggleEdit = () => {
         setIsEditing(true);
@@ -144,6 +152,7 @@ const Task = (props) => {
     const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
     const textEditHandlers = { onChange: handleChange, onBlur: handleBlur, onKeyDown: handleKeyDown }
+    const selectHandlers = selected ? { onClick: deleteFromSelection } : { onClick: addToSelection }
 
 
     const duplicateDragHandlers = isDraggingAllowed ? {
@@ -154,7 +163,9 @@ const Task = (props) => {
 
 
     return (<div className={class_str}
+        style={selectStyle}
         onDoubleClick={toggleEdit}
+        {...selectHandlers}
         {...dragHandlers}
         {...dropHandlers}>
         <span className="taskText">
