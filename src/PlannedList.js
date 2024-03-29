@@ -4,7 +4,8 @@ import {
     getCompleteTask,
     getScheduleTask,
     getChangeWeekOrderIndex,
-    sanitizeWeekOrderIndex
+    sanitizeWeekOrderIndex,
+    getPlanTaskForWeek
 } from './ModifyFuncGeneratorsV1';
 // TODO: add the topic name to the bar
 
@@ -78,6 +79,7 @@ const PlannedList = (props) => {
                                     completeTask={getCompleteTask(setTasks, tasks, task.id)}
                                     scheduled={task.scheduled}
                                     scheduleTask={getScheduleTask(setTasks, tasks, task.id)}
+                                    plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
                                     // currentTopic = {task.topics[0]}
                                     currentWeekOrderIndex={task.weekOrderIndex}
                                     changeWeekOrderIndex={getChangeWeekOrderIndex(setTasks, tasks)}

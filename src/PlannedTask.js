@@ -102,7 +102,7 @@ const PlannedTask = (props) => {
         {deleteTask && (<button className='taskDelete' onClick={deleteTask && deleteTask}>Delete</button>)}
         {!completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Complete</button>)}
         {completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Decomplete</button>)}
-        {plan && (<button className='moveToWeek' onClick={moveToWeek}> Plan for this week </button>)}
+        {plan && (<button className='moveToWeek' onClick={moveToWeek}> Unplan </button>)}
         {scheduled && scheduleTask && (<button className='taskSchedule' onClick={scheduleTask}>Scheduled!</button>)}
         {!scheduled && scheduleTask && (<button className='taskSchedule' onClick={scheduleTask}>Unscheduled</button>)}
 

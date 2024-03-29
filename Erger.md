@@ -10,6 +10,7 @@ M = Major
 - :blue_heart: : needs task filtering
 - :heart: : Unimplemented information in data structure
 - :orange_heart: :Leftover
+- :purple_heart: : Related to subtasks
 
 ## Major issues
 
@@ -17,7 +18,7 @@ M = Major
 
 ## Relaying information
 
-- It is unclear where a duplicated task is already (is it already duplicated?) -5m
+- :yellow_heart: It is unclear where a duplicated task is already (is it already duplicated?) -5m
 - :blue_heart: Hide completed items is not saved when changing views: 4m - bevroren
 - :heart: Repeated tasks do not show last completion/cannot retain information about when the next time would be - 3m
 - :yellow_heart: Not clearly seeing on what level a task is exactly (maybe needs guidance lines?) - 2m+
@@ -26,17 +27,18 @@ M = Major
 - :yellow_heart: Not being able to collapse or fold all the topics with one button: 2m
 - :yellow_heart: When showing only uncompleted/repeated tasks: minimize/remove/concatenate topics that are irrelevant/empty - 2m
 - :blue_heart: In the weekly view: hide completed tasks is always unchecked - 2m
-- Not being able to see statistics of the topic in the topic view - 2m
+- :yellow_heart: Not being able to see statistics of the topic in the topic view - 2m
 - :blue_heart: Ability to hide planned items - 2m
-- The weely view doesn't show all the topics of the task at hand: 1m
+- :purple_heart: There is no way to create a task and it's subtasks. Topics shouldn't be supertasks. - 3m
+- :purple_heart: There is no way to have a planned task (3x sport in a week) and complete it partially - 2m
+	+ e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled - 2m
+- :blue_heart: Filtering is not available when in the middle of a large list - 2m
+- :heart: Do not know which Tasks are Blocked by other people- 2m
+- :yellow_heart: The weely view doesn't show all the topics of the task at hand: 1m
 - :blue_heart: Not being able to see what is scheduled and what not in the topic view - 1m
 - :blue_heart: Not being able to show repeated and completed tasks: 1m
 - :orange_heart: Not being able to search for a task (search bar) - 1m
 - :yellow_heart: After folding/unfolding, the mouse is not over the same topic anymore: 1m
-- :heart: Do not know which Tasks are Blocked by other people- 1m
-- :heart: It does not feel right to Complete or Delete tasks that are just impossible (due to not necessary, deadline, no resources, etc.) - 1m
-- :heart: There is no way to create a task and it's subtasks. Topics shouldn't be supertasks. - 2m
-
 
 ## Modifying information
 
@@ -45,22 +47,22 @@ M = Major
 	- Use hierarchical instead (but it's not ideal, it still is annoying)
 	- Maybe do a .. hide all tasks or something
 - :yellow_heart: Not being able to duplicate multiple tasks at once (forgetting which tasks are already copied): 6m
+- :heart: It does not feel right to Complete or Delete tasks that are just impossible (due to not necessary, deadline, no resources, etc.) - 6m
 - :yellow_heart: Not being able to remove items from the weekly list on the weekly list: 4m
+- :orange_heart: Cannot order the tasks/topics on the topic view - 4m
 - :green_heart: Not being able to duplicate-drag tasks to other topics without stopping midway/taking a long time/being annoyed: 3m
-- :heart: Not being able to partially complete a task - 3m
+- :purple_heart: Not being able to partially complete a task - 3m
 - :yellow_heart: :blue_heart: Adding a task, while only showing repeated tasks, should add a repeated task: 3m
-- :heart: Not being able to have a main task and subtasks - 2m
+- :purple_heart: Not being able to have a main task and subtasks - 3m
+- :orange_heart: Not being able to edit task text on the weekly view - 3m
+- :heart: Cannot mark a task as Blocked - 2m
 - :green_heart: When sorting all the new tasks - giving them a place - it was hard to find my way around. 2m
-- :orange_heart: Not being able to edit task text on the weekly view - 2m
-- :orange_heart: Cannot order the tasks/topics on the topic view - 3m
 - :green_heart: Dragging on the planning list has the wrong visual feedback when dragging downwards - 2m
 - :orange_heart: Not being able to make a new root topic when the button is not in view: 1m
 - :orange_heart: Text editing tends to slow down if you type more - 1m
 - :yellow_heart: Delete and duplicate should be near each other. Completed and repeated should be near each other: 1m
 -  :yellow_heart: There is no easy way to deduplicate a duplicated task - 1m
-- :heart: Cannot mark a task as Blocked - 1m
-- :heart: Cannot mark a task as Impossible - 1m
-- :green_heart: Dragging a task (in planned list) below the entire list, should put it at the bottom.
+- :green_heart: Dragging a task (in planned list) below the entire list, should put it at the bottom. - 1m
 
 ## Import/export
 
@@ -83,6 +85,8 @@ M = Major
 - Fearing that the knowledge that I completed a repeated task gets lost/ not showing that the json is not up to date. 5m - gefixt
 	- Make hash at load, and during handling (so undoing a thing will reset it to load state). 
 	- Can I make the load order-independent? Maybe sort the tasks by id, and the topics... should be ordered? Except for the subtopics-order. Also by ID.
+ - Bug: source_supertopic is undefined in moveTopic - gefixt
+
 
 
 

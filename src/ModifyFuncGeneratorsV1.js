@@ -12,8 +12,6 @@ import {
 /// Changing tasks
 //////////////
 
-
-
 // Can be used for v1 mode.
 const getChangeTaskTopic = (setTasks, tasks) => {
     // Key here is the key of the task
@@ -311,8 +309,21 @@ const getMoveTopic = (setTopics, topics) => {
         }
         // If the target topic is the sources topic direct supertopic, also don't do it
         // Find the super topic of the source topic
-        const newTopics = [...topics];
+        let newTopics = [...topics];
         let source_supertopic = find_supertopic_by_id(newTopics, source_id)
+        if (!source_supertopic) {
+            console.log("There is no supertopic. Is this a root topic?")
+            let target_topic = find_topic_by_key(newTopics, target_id)
+            console.info(target_topic)
+            console.info(source_supertopic)
+            // Copy the topic into the new topic
+            target_topic.subtopics.push(source_topic)
+            // Delete the topic out of its current spot
+            newTopics = newTopics.filter((t) => t.id != source_topic.id)
+            setTopics(newTopics)
+            return
+
+        }
         if (source_supertopic.id == target_id) {
             console.log("Will not move a topic to its direct supertopic. It does nothing")
             return
