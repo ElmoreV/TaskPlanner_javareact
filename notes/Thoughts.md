@@ -31,6 +31,7 @@ What I was seeing were 2 things:
 		* Threshold to avoid: not researching internet
 				
 I have the feeling that avoiding threshold tasks and changing threshold tasks are the most tiring/exhausting.
+It depends, if avoiding the threshold is the status quo (don't work, don't do drugs), it's relatively easy. However, during an addiction, actually the (don't do drugs) is the more difficult threshold to avoid. So threshold-based tasks that you are already above naturally are easy. Threshold based tasks that you do not meet are definitely more difficult. First you need to hit a target and then keep it.
 
 ### Goals vs. Actions
 

@@ -5,6 +5,7 @@ import {
     convert_new_topic_tasks_to_old_topic_tasks
 } from './Converter';
 import { sanitizeWeekOrderIndex2 } from './ModifyFuncGeneratorsV1'
+import structuredClone from '@ungap/structured-clone'
 var hash = require('object-hash');
 
 const ImportExport = (props) => {

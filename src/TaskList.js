@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Task from './Task'
 import Topic from './Topic';
 import React from 'react';
@@ -61,6 +61,22 @@ const TaskList = (props) => {
         // console.log(tasks2)
         // console.log(tables)
     }
+
+    useEffect(() => {
+        // Function to clear selection
+        const clearSelectionOnClickOutside = (event) => {
+            setSelectedTasks([]);
+        };
+
+        // Add global click listener
+        document.addEventListener('click', clearSelectionOnClickOutside);
+
+        // Remove the event listener on cleanup
+        return () => {
+            document.removeEventListener('click', clearSelectionOnClickOutside);
+        };
+    }, []); // Empty dependency array means this effect runs once on mount
+
 
     const addTaskToSelection = (taskId, topicId) => {
         let newSelectedTasks = [...selectedTasks]

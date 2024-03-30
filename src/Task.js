@@ -120,6 +120,8 @@ const Task = (props) => {
 
     const toggleEdit = () => {
         setIsEditing(true);
+        // TODO: Should actually clear the entire selection maybe?
+        if (selected) { deleteFromSelection() }
         setIsDraggingAllowed(false);
         // inputRef.current.focus()
         // TODO: set focus on text edit box
@@ -148,11 +150,18 @@ const Task = (props) => {
         }
     }, [isEditing]); // Dependency array ensures this runs only when isEditing changes
 
+    const captureClick = (func) => {
+        const wrapper = (e) => {
+            e.stopPropagation()
+            return func()
+        }
+        return wrapper
+    }
 
     const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
     const textEditHandlers = { onChange: handleChange, onBlur: handleBlur, onKeyDown: handleKeyDown }
-    const selectHandlers = selected ? { onClick: deleteFromSelection } : { onClick: addToSelection }
+    const selectHandlers = selected ? { onClick: captureClick(deleteFromSelection) } : { onClick: captureClick(addToSelection) }
 
 
     const duplicateDragHandlers = isDraggingAllowed ? {
@@ -160,6 +169,7 @@ const Task = (props) => {
         onDragStart: handleDuplicateDragStart,
         onDragEnd: handleDuplicateDragEnd
     } : {}
+
 
 
     return (<div className={class_str}
@@ -182,13 +192,13 @@ const Task = (props) => {
             }
         </span>
         <>
-            {deleteTask && (<button className='taskDelete' onClick={deleteTask && deleteTask}>Delete</button>)}
-            {!completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Complete</button>)}
-            {completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Decomplete</button>)}
-            {plan && planned && (<button className='moveToWeek' onClick={moveOutOfWeek}> Unplan for this week </button>)}
-            {plan && !planned && (<button className='moveToWeek' onClick={moveToWeek}> Plan for this week </button>)}
-            {toggleRepeatTask && repeated && (<button className='makeRepeated' onClick={toggleRepeatTask}> Repeated </button>)}
-            {toggleRepeatTask && !repeated && (<button className='makeRepeated' onClick={toggleRepeatTask}> Not repeated </button>)}
+            {deleteTask && (<button className='taskDelete' onClick={deleteTask && (captureClick(deleteTask))}>Delete</button>)}
+            {!completed && completeTask && (<button className='taskComplete' onClick={captureClick(completeTask)}>Complete</button>)}
+            {completed && completeTask && (<button className='taskComplete' onClick={captureClick(completeTask)}>Decomplete</button>)}
+            {plan && planned && (<button className='moveToWeek' onClick={captureClick(moveOutOfWeek)}> Unplan for this week </button>)}
+            {plan && !planned && (<button className='moveToWeek' onClick={captureClick(moveToWeek)}> Plan for this week </button>)}
+            {toggleRepeatTask && repeated && (<button className='makeRepeated' onClick={captureClick(toggleRepeatTask)}> Repeated </button>)}
+            {toggleRepeatTask && !repeated && (<button className='makeRepeated' onClick={captureClick(toggleRepeatTask)}> Not repeated </button>)}
 
             <span className='buttonDuplicate' {...duplicateDragHandlers}>+ Duplicate +</span>
         </>
