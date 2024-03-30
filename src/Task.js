@@ -7,7 +7,7 @@ const Task = (props) => {
         currentTopicName, currentTopicId, changeTopic,
         planned, plan, unplan,
         repeated, toggleRepeatTask,
-        addToSelection, deleteFromSelection, selected,
+        selectedTasks, addToSelection, deleteFromSelection, selected,
         duplicateTask } = props;
     console.debug("Rendering Task")
 
@@ -71,9 +71,19 @@ const Task = (props) => {
             var oldTopicId = Number(e.dataTransfer.getData("TopicId"))
             console.info(`Dropped task with id ${task_id} with old topic id ${oldTopicId} on task within topic with id ${currentTopicId}`)
             console.info(changeTopic)
+            let taskIds = []
+            let oldTopicIds = []
+            taskIds.push(task_id)
+            oldTopicIds.push(oldTopicId)
+            if (selectedTasks && selectedTasks.length > 0) {
+                selectedTasks.forEach((st) => {
+                    console.info(`Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${currentTopicId}`)
+                    taskIds.push(st.taskId)
+                    oldTopicIds.push(st.topicId)
+                })
+            }
             if (changeTopic) {
-                // changeTopic(key, oldTopicName, currentTopicName) //v0
-                changeTopic(task_id, oldTopicId, currentTopicId)
+                changeTopic(taskIds, oldTopicIds, currentTopicId)
             }
         } else if (type == "TaskDuplicate") {
             var task_id = Number(e.dataTransfer.getData("TaskId"))

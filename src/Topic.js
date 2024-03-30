@@ -5,6 +5,7 @@ const Topic = (props) => {
     const { name, updateTaskTopics, setTopicName, id,
         toggleFold, unfolded,
         addTask, addSubTopic, deleteTopic, changeTopic,
+        selectedTasks,
         moveTopic, duplicateTask } = props;
     console.debug("Rendering Topic")
     const folded_symbol = '>';
@@ -65,9 +66,20 @@ const Topic = (props) => {
             console.debug(name)
             console.info(`Dropped task with id ${task_id} with old topic id ${oldTopicId} on topic with id ${id}`)
 
+
+            let taskIds = []
+            let oldTopicIds = []
+            taskIds.push(task_id)
+            oldTopicIds.push(oldTopicId)
+            if (selectedTasks && selectedTasks.length > 0) {
+                selectedTasks.forEach((st) => {
+                    console.info(`Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${id}`)
+                    taskIds.push(st.taskId)
+                    oldTopicIds.push(st.topicId)
+                })
+            }
             if (changeTopic) {
-                // changeTopic(key, oldTopicName, name) //v0
-                changeTopic(task_id, oldTopicId, id) //v0
+                changeTopic(taskIds, oldTopicIds, id)
             }
         } else if (type == "Topic") {
             let source_id = Number(e.dataTransfer.getData("id"))

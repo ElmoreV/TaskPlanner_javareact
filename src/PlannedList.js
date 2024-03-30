@@ -1,13 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import PlannedTask from './PlannedTask';
 import {
     getCompleteTask,
     getScheduleTask,
     getChangeWeekOrderIndex,
     sanitizeWeekOrderIndex,
-    getPlanTaskForWeek
+    getUnplanTask
 } from './ModifyFuncGeneratorsV1';
 // TODO: add the topic name to the bar
+
+class SelectedTask {
+    constructor(taskId, weekOrderIndex) {
+        this.taskId = taskId
+        this.weekOrderIndex = weekOrderIndex
+    }
+}
+
 
 const PlannedList = (props) => {
     const { tasks, setTasks, topics, setTopics } = props;
@@ -15,6 +23,35 @@ const PlannedList = (props) => {
 
     const [hideCompletedItems, setHideCompletedItems] = useState(true)
     const [hideScheduledItems, setHideScheduledItems] = useState(false)
+    const [selectedTasks, setSelectedTasks] = useState([])
+
+    useEffect(() => {
+        // Function to clear selection
+        const clearSelectionOnClickOutside = (event) => {
+            setSelectedTasks([]);
+        };
+
+        // Add global click listener
+        document.addEventListener('click', clearSelectionOnClickOutside);
+
+        // Remove the event listener on cleanup
+        return () => {
+            document.removeEventListener('click', clearSelectionOnClickOutside);
+        };
+    }, []); // Empty dependency array means this effect runs once on mount
+
+
+    const addTaskToSelection = (taskId, weekOrderIndex) => {
+        let newSelectedTasks = [...selectedTasks]
+        newSelectedTasks.push(new SelectedTask(taskId, weekOrderIndex))
+        setSelectedTasks(newSelectedTasks)
+    }
+    const deleteTaskFromSelection = (taskId, weekOrderIndex) => {
+        let newSelectedTasks = [...selectedTasks]
+        newSelectedTasks = newSelectedTasks.filter((selTask) => !(selTask.taskId == taskId && selTask.weekOrderIndex == weekOrderIndex))
+        setSelectedTasks(newSelectedTasks)
+    }
+
     const onHideCompletedItemsChange = () => {
         setHideCompletedItems(!hideCompletedItems)
     }
@@ -79,8 +116,13 @@ const PlannedList = (props) => {
                                     completeTask={getCompleteTask(setTasks, tasks, task.id)}
                                     scheduled={task.scheduled}
                                     scheduleTask={getScheduleTask(setTasks, tasks, task.id)}
-                                    plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
+                                    unplan={getUnplanTask(setTasks, tasks, task.id)}
                                     // currentTopic = {task.topics[0]}
+                                    addToSelection={() => addTaskToSelection(task.id, task.weekOrderIndex)}
+                                    deleteFromSelection={() => deleteTaskFromSelection(task.id, task.weekOrderIndex)}
+                                    selected={selectedTasks.find((st) => (st.taskId == task.id && st.weekOrderIndex == task.weekOrderIndex)) ? true : false}
+                                    selectedTasks={selectedTasks}
+
                                     currentWeekOrderIndex={task.weekOrderIndex}
                                     changeWeekOrderIndex={getChangeWeekOrderIndex(setTasks, tasks)}
                                     topics={topics}

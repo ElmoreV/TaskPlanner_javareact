@@ -18,21 +18,29 @@ const getChangeTaskTopic = (setTasks, tasks) => {
     // oldTopic is the topic-object where the task came from
     // newTopic is the topic-object where the task is going to
 
-    const changeTaskTopic = (taskId, oldTopicId, newTopicId) => {
+    const changeTaskTopic = (taskIds, oldTopicIds, newTopicId) => {
+        if (!Array.isArray(taskIds)) { taskIds = [taskIds] }
+        if (!Array.isArray(oldTopicIds)) { oldTopicIds = [oldTopicIds] }
+        if (oldTopicIds.length != taskIds.length) {
+            console.error('The length of the taskIds and oldTopicIds should be the same')
+            return
+        }
+
         console.debug('Inside change task topic (by id)')
         const newTasks = tasks.map((task) => {
-            if (task.id == taskId) //cannot be ===?
+            if (taskIds.includes(task.id)) //cannot be ===?
             {
                 console.debug("Found the task")
                 console.debug(task)
-                console.debug(oldTopicId)
+                console.debug(oldTopicIds)
                 // TODO: there is a possibility that the new Topic Id does not exist.
                 // find_topic_by_id(topic,newTopicId)
-                if (task.topics.includes(oldTopicId)) {
+                let containedTopicIds = task.topics.filter((tt) => oldTopicIds.includes(tt))
+                if (containedTopicIds.length > 0) {
                     console.debug("And comes from the old Topic indeed")
                     return {
                         ...task,
-                        topics: task.topics.map((topicId) => topicId == oldTopicId ? newTopicId : topicId)
+                        topics: task.topics.map((topicId) => oldTopicIds.includes(topicId) ? newTopicId : topicId)
                     }
                 }
             }
@@ -208,8 +216,15 @@ const checkValidWeekOrderIndex = (tasks) => {
     const getWrongTasks = tasks.filter((task) => task.weekOrderIndex == undefined)
     if (getWrongTasks.length > 0) { return false }
     // Check if the values are not 0 for tasks where task.thisWeek=false
+    const getWrongTasks2 = tasks.filter((task) => !task.thisWeek && task.weekOrderIndex != 0)
+    if (getWrongTasks2.length > 0) { return false }
     // TODO: sdf
     // Check if the values are not exactly 1,2,3,4,....
+    const getWrongTasks3 = tasks.filter((task) => task.thisWeek && task.weekOrderIndex < 1)
+    if (getWrongTasks3.length > 0) { return false }
+    // Check if there are duplicate weekOrderIndices
+    const getWrongTasks4 = tasks.filter((task) => task.thisWeek).map((task) => task.weekOrderIndex)
+    if (new Set(getWrongTasks4).size !== getWrongTasks4.length) { return false }
     // TODO:
 
     return true
@@ -240,7 +255,7 @@ const sanitizeWeekOrderIndex2 = (tasks) => {
 const sanitizeWeekOrderIndex = (setTasks, tasks) => {
     let newTasks = [...tasks]
     if (checkValidWeekOrderIndex(tasks)) { return; }
-
+    console.warn("Found invalid weekOrderIndex. Reordering...")
     //gather all the tasks with and without a weekOrderIndex
     // if thisWeek=false: weekOrderIndex = 0
     // if thisWeek=true: weekOrderIndex = value
@@ -257,34 +272,91 @@ const sanitizeWeekOrderIndex = (setTasks, tasks) => {
     setTasks(newTasks)
 }
 
+// TODO: make this way nicer. This feels wacked.
 const getChangeWeekOrderIndex = (setTasks, tasks) => {
-    const changeWeekOrderIndex = (taskId, sourceWeekOrderIndex, targetWeekOrderIndex) => {
-        let newTasks = [...tasks]
-        console.log(newTasks)
+    const changeWeekOrderIndex = (taskIds, sourceWeekOrderIndices, targetWeekOrderIndex) => {
+        console.log(taskIds, sourceWeekOrderIndices, targetWeekOrderIndex)
 
-        if (targetWeekOrderIndex < sourceWeekOrderIndex) {
-            // move all indices newIdx<=idx<oldIdx 1 up
+        if (!Array.isArray(taskIds)) { taskIds = [taskIds] }
+        if (!Array.isArray(sourceWeekOrderIndices)) { sourceWeekOrderIndices = [sourceWeekOrderIndices] }
+        console.log(taskIds, sourceWeekOrderIndices, targetWeekOrderIndex)
+
+        // Sort the tasks and sourceWeekOrderIndices by their sourceWeekOrderIndex
+        let zipped = taskIds.map((el, idx) => [el, sourceWeekOrderIndices[idx]]);
+        zipped = zipped.sort((a, b) => a[1] - b[1]);
+        // Remove duplicate task Ids
+        zipped = zipped.filter((el, idx, self) => self.findIndex((t) => t[0] === el[0]) === idx);
+        // Exclude any tasks that are the target
+        zipped = zipped.filter((el) => el[1] !== targetWeekOrderIndex);
+        taskIds = zipped.map((el) => el[0]);
+        sourceWeekOrderIndices = zipped.map((el) => el[1]);
+        console.log(taskIds, sourceWeekOrderIndices, targetWeekOrderIndex)
+
+        let newTasks = [...tasks]
+        console.log(newTasks.filter(t => t.thisWeek).map(t => [t.name, t.weekOrderIndex]))
+
+
+        let tasksBeforeTarget = sourceWeekOrderIndices.filter((idx) => idx < targetWeekOrderIndex).length
+        let tasksAfterTarget = sourceWeekOrderIndices.filter((idx) => idx > targetWeekOrderIndex).length
+        let tasksMovedUp = 0
+        let tasksMovedDown = 0
+        let direction = 0
+        console.log(tasksBeforeTarget, tasksAfterTarget)
+        // console.log()
+        // If the target task is before the source task, move all tasks between source tasks and target task up
+        // Includes target task
+        if (targetWeekOrderIndex < sourceWeekOrderIndices[0]) {
+            // Reorder all tasks squeezed between the source tasks and the target task
             newTasks = newTasks.map((task) => {
-                if (task.thisWeek && task.weekOrderIndex >= targetWeekOrderIndex
-                    && task.weekOrderIndex < sourceWeekOrderIndex) {
-                    task.weekOrderIndex += 1
+
+                // Count the number of tasks that are marked to move that are  this task
+                let tasksBefore = sourceWeekOrderIndices.filter((idx) => idx < task.weekOrderIndex).length
+                let tasksAfter = sourceWeekOrderIndices.filter((idx) => idx > task.weekOrderIndex).length
+                // Move all tasks squeezed, which aren't marked to move
+                if (task.thisWeek && !taskIds.includes(task.id)) {
+                    if (task.weekOrderIndex >= targetWeekOrderIndex) {
+                        task.weekOrderIndex += tasksAfter
+                        tasksMovedDown += 1
+                    }
+                    else {
+                        task.weekOrderIndex -= tasksBefore
+                    }
                 };
                 return task
             })
-        } else if (targetWeekOrderIndex > sourceWeekOrderIndex) {
+            direction = 0//tasksAfterTarget - 1
+            // If the target task is after the first source task, move all tasks between source tasks and target task down
+        } else if (targetWeekOrderIndex > sourceWeekOrderIndices[0]) {
+            // move all indices behind this target task
             newTasks = newTasks.map((task) => {
-                // move all indices oldIdx<idx<=newIdx one down
-                if (task.thisWeek && task.weekOrderIndex <= targetWeekOrderIndex
-                    && task.weekOrderIndex > sourceWeekOrderIndex) {
-                    task.weekOrderIndex -= 1
+                // Count the number of tasks that are marked to move that are before this task
+                let tasksBefore = sourceWeekOrderIndices.filter((idx) => idx <= task.weekOrderIndex).length
+                let tasksAfter = sourceWeekOrderIndices.filter((idx) => idx > task.weekOrderIndex).length
+                if (task.thisWeek && !taskIds.includes(task.id)) {
+                    if (task.weekOrderIndex <= targetWeekOrderIndex) {
+                        task.weekOrderIndex -= tasksBefore
+                        tasksMovedUp += 1
+                    }
+                    else {
+                        task.weekOrderIndex += tasksAfter
+                    }
                 };
                 return task
             })
+            direction = - tasksBeforeTarget + 1
         }
-        console.log(newTasks)
-        const task_to_change = newTasks.find((task) => task.id == taskId);
-        task_to_change.weekOrderIndex = targetWeekOrderIndex
-        console.log(newTasks)
+        console.log(newTasks.filter(t => t.thisWeek).map(t => [t.name, t.weekOrderIndex]))
+
+        const tasks_to_change = newTasks.filter((task) => taskIds.includes(task.id));
+        const tasks_to_change_indices = tasks_to_change.map((task, idx) => idx)
+
+        // Change the weekOrderIndex of the tasks to change
+        tasks_to_change.forEach((task) => {
+            task.weekOrderIndex = targetWeekOrderIndex + tasks_to_change_indices[taskIds.indexOf(task.id)] + direction
+        })
+
+        console.log(newTasks.filter(t => t.thisWeek).map(t => [t.name, t.weekOrderIndex]))
+
         setTasks(newTasks)
     }
     return changeWeekOrderIndex;

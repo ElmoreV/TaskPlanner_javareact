@@ -6,7 +6,8 @@ const PlannedTask = (props) => {
     const { taskKey, taskName, setTaskName, deleteTask,
         completed, completeTask,
         scheduled, scheduleTask,
-        currentTopic, changeTopic, planned, plan, topics, taskTopics,
+        currentTopic, changeTopic, planned, unplan, topics, taskTopics,
+        selectedTasks, addToSelection, deleteFromSelection, selected,
         changeWeekOrderIndex, currentWeekOrderIndex } = props;
 
     console.debug("Rendering PlannedTask")
@@ -24,6 +25,8 @@ const PlannedTask = (props) => {
 
     const toggleEdit = () => {
         setIsEditing(true);
+        // TODO: Should actually clear the entire selection maybe?
+        if (selected) { deleteFromSelection() }
         setIsDraggingAllowed(false);
         // TODO: set focus on text edit box
 
@@ -45,10 +48,26 @@ const PlannedTask = (props) => {
         e.target.setAttribute('draggedOver', false)
         console.info('drop')
         setColor('maroon')
-        var sourceTaskId = e.dataTransfer.getData("taskId")
-        var sourceWeekOrderIndex = e.dataTransfer.getData("sourceWeekOrderIndex")
+        var sourceTaskIds = []
+        var sourceWeekOrderIndidces = []
+
+        var sourceTaskId = Number(e.dataTransfer.getData("taskId"))
+        var sourceWeekOrderIndex = Number(e.dataTransfer.getData("sourceWeekOrderIndex"))
         console.log(`Dropping from task with id=${sourceTaskId} with weekIndex=${sourceWeekOrderIndex} on task with id=${taskKey} with weekIndex=${currentWeekOrderIndex}`)
-        if (changeWeekOrderIndex) { changeWeekOrderIndex(sourceTaskId, sourceWeekOrderIndex, currentWeekOrderIndex) }
+        sourceTaskIds.push(sourceTaskId)
+        sourceWeekOrderIndidces.push(sourceWeekOrderIndex)
+        if (selectedTasks && selectedTasks.length > 0) {
+            selectedTasks.forEach((st) => {
+                console.info(`Changing weekOrderIdx of task with id ${st.taskId} from wOrderIdx ${st.weekOrderIndex} to wOrderIdx ${currentWeekOrderIndex}`)
+                sourceTaskIds.push(st.taskId)
+                sourceWeekOrderIndidces.push(st.weekOrderIndex)
+            })
+        }
+        if (changeWeekOrderIndex) {
+            changeWeekOrderIndex(sourceTaskIds,
+                sourceWeekOrderIndidces,
+                currentWeekOrderIndex)
+        }
     }
     const handleDragOver = (e) => {
         e.preventDefault();
@@ -63,7 +82,7 @@ const PlannedTask = (props) => {
     }
 
     const moveToWeek = () => {
-        if (plan) { plan() }
+        if (unplan) { unplan() }
     }
 
     const handleBlur = () => {
@@ -71,19 +90,40 @@ const PlannedTask = (props) => {
         setIsEditing(false);
 
     }
+
+    const captureClick = (func) => {
+        const wrapper = (e) => {
+            e.stopPropagation()
+            return func()
+        }
+        return wrapper
+    }
+
     let class_str = 'task'
     // Completion has precedence over planned
     if (completed) { class_str = 'taskCompleted' }
     else if (scheduled) { class_str = 'taskPlanned' }
-
+    let selectStyle = {}
+    if (selected) {
+        selectStyle = {
+            borderStyle: "dashed",
+            borderWidth: "2px",
+            margin: "0px"
+        }
+    }
     const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
+
+    const selectHandlers = selected ? { onClick: captureClick(deleteFromSelection) } : { onClick: captureClick(addToSelection) }
+
 
     let topicPath = getTopicTreeById(topics, taskTopics[0])
 
 
     return (<div className={class_str}
+        style={selectStyle}
         onDoubleClick={toggleEdit}
+        {...selectHandlers}
         {...dragHandlers}
         {...dropHandlers}>
         <div className="textBar">
@@ -99,12 +139,12 @@ const PlannedTask = (props) => {
             </span>
             <span className="topicPath">{topicPath}</span>
         </div>
-        {deleteTask && (<button className='taskDelete' onClick={deleteTask && deleteTask}>Delete</button>)}
-        {!completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Complete</button>)}
-        {completed && completeTask && (<button className='taskComplete' onClick={completeTask}>Decomplete</button>)}
-        {plan && (<button className='moveToWeek' onClick={moveToWeek}> Unplan </button>)}
-        {scheduled && scheduleTask && (<button className='taskSchedule' onClick={scheduleTask}>Scheduled!</button>)}
-        {!scheduled && scheduleTask && (<button className='taskSchedule' onClick={scheduleTask}>Unscheduled</button>)}
+        {deleteTask && (<button className='taskDelete' onClick={deleteTask && captureClick(deleteTask)}>Delete</button>)}
+        {!completed && completeTask && (<button className='taskComplete' onClick={captureClick(completeTask)}>Complete</button>)}
+        {completed && completeTask && (<button className='taskComplete' onClick={captureClick(completeTask)}>Decomplete</button>)}
+        {unplan && (<button className='moveToWeek' onClick={captureClick(moveToWeek)}> Unplan </button>)}
+        {scheduled && scheduleTask && (<button className='taskSchedule' onClick={captureClick(scheduleTask)}>Scheduled!</button>)}
+        {!scheduled && scheduleTask && (<button className='taskSchedule' onClick={captureClick(scheduleTask)}>Unscheduled</button>)}
 
 
     </div>);

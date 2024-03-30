@@ -141,6 +141,7 @@ const TaskList = (props) => {
                                     addToSelection={() => addTaskToSelection(task.id, topic.id)}
                                     deleteFromSelection={() => deleteTaskFromSelection(task.id, topic.id)}
                                     selected={selectedTasks.find((st) => (st.taskId == task.id && st.topicId == topic.id)) ? true : false}
+                                    selectedTasks = {selectedTasks}
                                     changeTopic={getChangeTaskTopic(setTasks, tasks)}
                                     duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
 
