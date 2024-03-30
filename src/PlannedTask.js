@@ -7,7 +7,7 @@ const PlannedTask = (props) => {
         completed, completeTask,
         scheduled, scheduleTask,
         currentTopic, changeTopic, planned, unplan, topics, taskTopics,
-        selectedTasks, addToSelection, deleteFromSelection, selected,
+        selectedTasks, addToSelection, deleteFromSelection, selected, clearSelection,
         changeWeekOrderIndex, currentWeekOrderIndex } = props;
 
     console.debug("Rendering PlannedTask")
@@ -26,7 +26,7 @@ const PlannedTask = (props) => {
     const toggleEdit = () => {
         setIsEditing(true);
         // TODO: Should actually clear the entire selection maybe?
-        if (selected) { deleteFromSelection() }
+        clearSelection()
         setIsDraggingAllowed(false);
         // TODO: set focus on text edit box
 
@@ -68,6 +68,7 @@ const PlannedTask = (props) => {
                 sourceWeekOrderIndidces,
                 currentWeekOrderIndex)
         }
+        clearSelection()
     }
     const handleDragOver = (e) => {
         e.preventDefault();
@@ -132,7 +133,8 @@ const PlannedTask = (props) => {
                     <input type='text'
                         value={taskName}
                         onChange={handleChange}
-                        onBlur={handleBlur} /> :
+                        onBlur={handleBlur}
+                        onClick={captureClick(() => { })} /> :
                     //  <span style={{color : color}}>{taskName}</span>
                     <span style={{ color: color }}>{taskName}</span>
                 }

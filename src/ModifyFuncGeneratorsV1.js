@@ -297,12 +297,8 @@ const getChangeWeekOrderIndex = (setTasks, tasks) => {
 
 
         let tasksBeforeTarget = sourceWeekOrderIndices.filter((idx) => idx < targetWeekOrderIndex).length
-        let tasksAfterTarget = sourceWeekOrderIndices.filter((idx) => idx > targetWeekOrderIndex).length
-        let tasksMovedUp = 0
-        let tasksMovedDown = 0
         let direction = 0
-        console.log(tasksBeforeTarget, tasksAfterTarget)
-        // console.log()
+
         // If the target task is before the source task, move all tasks between source tasks and target task up
         // Includes target task
         if (targetWeekOrderIndex < sourceWeekOrderIndices[0]) {
@@ -316,7 +312,6 @@ const getChangeWeekOrderIndex = (setTasks, tasks) => {
                 if (task.thisWeek && !taskIds.includes(task.id)) {
                     if (task.weekOrderIndex >= targetWeekOrderIndex) {
                         task.weekOrderIndex += tasksAfter
-                        tasksMovedDown += 1
                     }
                     else {
                         task.weekOrderIndex -= tasksBefore
@@ -324,7 +319,7 @@ const getChangeWeekOrderIndex = (setTasks, tasks) => {
                 };
                 return task
             })
-            direction = 0//tasksAfterTarget - 1
+
             // If the target task is after the first source task, move all tasks between source tasks and target task down
         } else if (targetWeekOrderIndex > sourceWeekOrderIndices[0]) {
             // move all indices behind this target task
@@ -335,7 +330,6 @@ const getChangeWeekOrderIndex = (setTasks, tasks) => {
                 if (task.thisWeek && !taskIds.includes(task.id)) {
                     if (task.weekOrderIndex <= targetWeekOrderIndex) {
                         task.weekOrderIndex -= tasksBefore
-                        tasksMovedUp += 1
                     }
                     else {
                         task.weekOrderIndex += tasksAfter

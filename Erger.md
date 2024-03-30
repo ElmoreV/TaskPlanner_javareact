@@ -19,7 +19,6 @@ M = Major
 ## Relaying information
 
 - :yellow_heart: It is unclear where a duplicated task is already (is it already duplicated?) - 10m
-
 - :blue_heart: Hide completed items is not saved when changing views: 4m - bevroren
 - :heart: Repeated tasks do not show last completion/cannot retain information about when the next time would be - 8m
 - :yellow_heart: Not clearly seeing on what level a task is exactly (maybe needs guidance lines?) - 2m+
@@ -44,7 +43,6 @@ M = Major
 	+ The abiltiy to merge tasks?
 ## Modifying information
 
-- :green_heart: Not being able to drag multiple items at once in the planned view - 30m
 - :yellow_heart: Not being able to duplicate multiple tasks at once in Topic View (forgetting which tasks are already copied): 10m
 - :green_heart: It takes a huge time to drag a task from the top to the bottom - 10m
 	- Make dragging hide all other tasks instead (but it's not ideal, it still is annoying)
@@ -97,3 +95,4 @@ M = Major
 	- Can I make the load order-independent? Maybe sort the tasks by id, and the topics... should be ordered? Except for the subtopics-order. Also by ID.
  - Bug: source_supertopic is undefined in moveTopic - gefixt
 - :green_heart: Not being able to drag multiple items at once in the topic view - 16m - gefixt
+- :green_heart: Not being able to drag multiple items at once in the planned view - 30m - gefixt

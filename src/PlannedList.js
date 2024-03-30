@@ -25,18 +25,20 @@ const PlannedList = (props) => {
     const [hideScheduledItems, setHideScheduledItems] = useState(false)
     const [selectedTasks, setSelectedTasks] = useState([])
 
+    const clearSelection = () => {
+        console.log("Clearing selection")
+        setSelectedTasks([]);
+    };
     useEffect(() => {
         // Function to clear selection
-        const clearSelectionOnClickOutside = (event) => {
-            setSelectedTasks([]);
-        };
+
 
         // Add global click listener
-        document.addEventListener('click', clearSelectionOnClickOutside);
+        document.addEventListener('click', clearSelection);
 
         // Remove the event listener on cleanup
         return () => {
-            document.removeEventListener('click', clearSelectionOnClickOutside);
+            document.removeEventListener('click', clearSelection);
         };
     }, []); // Empty dependency array means this effect runs once on mount
 
@@ -120,9 +122,9 @@ const PlannedList = (props) => {
                                     // currentTopic = {task.topics[0]}
                                     addToSelection={() => addTaskToSelection(task.id, task.weekOrderIndex)}
                                     deleteFromSelection={() => deleteTaskFromSelection(task.id, task.weekOrderIndex)}
+                                    clearSelection={clearSelection}
                                     selected={selectedTasks.find((st) => (st.taskId == task.id && st.weekOrderIndex == task.weekOrderIndex)) ? true : false}
                                     selectedTasks={selectedTasks}
-
                                     currentWeekOrderIndex={task.weekOrderIndex}
                                     changeWeekOrderIndex={getChangeWeekOrderIndex(setTasks, tasks)}
                                     topics={topics}
