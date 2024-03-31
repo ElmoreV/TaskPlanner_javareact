@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import TaskContent from './TaskContent'
+
 
 const Task = (props) => {
     const { id, name, setTaskName, deleteTask,
@@ -170,7 +172,7 @@ const Task = (props) => {
 
     const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
-    const textEditHandlers = { onChange: handleChange, onBlur: handleBlur, onKeyDown: handleKeyDown }
+    const textEditHandlers = { onChange: handleChange, onBlur: handleBlur, onKeyDown: handleKeyDown, onClick: captureClick(() => { }) }
     const selectHandlers = selected ? { onClick: captureClick(deleteFromSelection) } : { onClick: captureClick(addToSelection) }
 
 
@@ -181,38 +183,27 @@ const Task = (props) => {
     } : {}
 
 
-
-    return (<div className={class_str}
-        style={selectStyle}
-        onDoubleClick={toggleEdit}
-        {...selectHandlers}
-        {...dragHandlers}
-        {...dropHandlers}>
-        <span className="taskText">
-            {isEditing ?
-                <input type='text'
-                    value={name}
-                    width="430px"
-                    {...textEditHandlers}
-                    ref={inputRef}
-                /> :
-                //  <span style={{color : color}}>{name}</span>
-                <span style={{ color: color }}>{name}</span>
-
-            }
-        </span>
-        <>
-            {deleteTask && (<button className='taskDelete' onClick={deleteTask && (captureClick(deleteTask))}>Delete</button>)}
-            {!completed && completeTask && (<button className='taskComplete' onClick={captureClick(completeTask)}>Complete</button>)}
-            {completed && completeTask && (<button className='taskComplete' onClick={captureClick(completeTask)}>Decomplete</button>)}
-            {plan && planned && (<button className='moveToWeek' onClick={captureClick(moveOutOfWeek)}> Unplan for this week </button>)}
-            {plan && !planned && (<button className='moveToWeek' onClick={captureClick(moveToWeek)}> Plan for this week </button>)}
-            {toggleRepeatTask && repeated && (<button className='makeRepeated' onClick={captureClick(toggleRepeatTask)}> Repeated </button>)}
-            {toggleRepeatTask && !repeated && (<button className='makeRepeated' onClick={captureClick(toggleRepeatTask)}> Not repeated </button>)}
-
-            <span className='buttonDuplicate' {...duplicateDragHandlers}>+ Duplicate +</span>
-        </>
-    </div>);
+    return (<TaskContent classStr={class_str}
+        selectStyle={selectStyle}
+        selectHandlers={selectHandlers}
+        dragHandlers={dragHandlers}
+        dropHandlers={dropHandlers}
+        name={name}
+        textEditHandlers={textEditHandlers}
+        inputRef={inputRef}
+        isEditing={isEditing}
+        toggleEdit={toggleEdit}
+        color={color}
+        deleteTask={deleteTask}
+        completed={completed}
+        completeTask={completeTask}
+        planned={planned}
+        plan={moveToWeek}
+        unplan={moveOutOfWeek}
+        repeated={repeated}
+        toggleRepeatTask={toggleRepeatTask}
+        duplicateDragHandlers={duplicateDragHandlers}
+    />);
 }
 
 Task.propTypes = {

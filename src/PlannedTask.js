@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getTopicTreeById } from './TopicHelper';
-
+import TaskContent from './TaskContent'
 const PlannedTask = (props) => {
     const { taskKey, taskName, setTaskName, deleteTask,
         completed, completeTask,
@@ -116,40 +116,45 @@ const PlannedTask = (props) => {
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
 
     const selectHandlers = selected ? { onClick: captureClick(deleteFromSelection) } : { onClick: captureClick(addToSelection) }
-
+    const textEditHandlers = {
+        onChange: handleChange, onBlur: handleBlur, onClick: captureClick(() => { })
+    }
 
     let topicPath = getTopicTreeById(topics, taskTopics[0])
 
 
-    return (<div className={class_str}
-        style={selectStyle}
-        onDoubleClick={toggleEdit}
-        {...selectHandlers}
-        {...dragHandlers}
-        {...dropHandlers}>
-        <div className="textBar">
-            <span className="taskText">
-                {isEditing ?
-                    <input type='text'
-                        value={taskName}
-                        onChange={handleChange}
-                        onBlur={handleBlur}
-                        onClick={captureClick(() => { })} /> :
-                    //  <span style={{color : color}}>{taskName}</span>
-                    <span style={{ color: color }}>{taskName}</span>
-                }
-            </span>
-            <span className="topicPath">{topicPath}</span>
-        </div>
-        {deleteTask && (<button className='taskDelete' onClick={deleteTask && captureClick(deleteTask)}>Delete</button>)}
-        {!completed && completeTask && (<button className='taskComplete' onClick={captureClick(completeTask)}>Complete</button>)}
-        {completed && completeTask && (<button className='taskComplete' onClick={captureClick(completeTask)}>Decomplete</button>)}
-        {unplan && (<button className='moveToWeek' onClick={captureClick(moveToWeek)}> Unplan </button>)}
-        {scheduled && scheduleTask && (<button className='taskSchedule' onClick={captureClick(scheduleTask)}>Scheduled!</button>)}
-        {!scheduled && scheduleTask && (<button className='taskSchedule' onClick={captureClick(scheduleTask)}>Unscheduled</button>)}
+    const inputRef = useRef(null);
+    useEffect(() => {
+        if (isEditing && inputRef.current) {
+            inputRef.current.focus();
+            inputRef.current.select();
+        }
+    }, [isEditing]); // Dependency array ensures this runs only when isEditing changes
 
 
-    </div>);
+    return (<>
+        <TaskContent classStr={class_str}
+            selectStyle={selectStyle}
+            selectHandlers={selectHandlers}
+            dragHandlers={dragHandlers}
+            dropHandlers={dropHandlers}
+            name={taskName}
+            textEditHandlers={textEditHandlers}
+            inputRef={inputRef}
+            isEditing={isEditing}
+            toggleEdit={toggleEdit}
+            topicPath={topicPath}
+            color={color}
+            deleteTask={deleteTask}
+            completed={completed}
+            completeTask={completeTask}
+            planned={true}
+            unplan={unplan}
+            scheduled={scheduled}
+            scheduleTask={scheduleTask} />
+
+    </>)
+
 }
 
 PlannedTask.propTypes = {

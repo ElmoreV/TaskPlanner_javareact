@@ -5,7 +5,8 @@ import {
     getScheduleTask,
     getChangeWeekOrderIndex,
     sanitizeWeekOrderIndex,
-    getUnplanTask
+    getUnplanTask,
+    getSetTaskNameFunc
 } from './ModifyFuncGeneratorsV1';
 // TODO: add the topic name to the bar
 
@@ -112,7 +113,7 @@ const PlannedList = (props) => {
                                 {isVisible(task) && <PlannedTask
                                     taskName={task.name}
                                     taskKey={task.id}
-                                    // setTaskName={getSetTaskNameFunc(task.id)}
+                                    setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
                                     // deleteTask = {getDeleteTask(task.id)}
                                     completed={task.completed}
                                     completeTask={getCompleteTask(setTasks, tasks, task.id)}
