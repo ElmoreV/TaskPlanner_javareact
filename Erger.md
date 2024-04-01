@@ -55,7 +55,6 @@ M = Major
 - :purple_heart: Not being able to partially complete a task - 3m
 - :yellow_heart: :blue_heart: Adding a task, while only showing repeated tasks, should add a repeated task: 3m
 - :purple_heart: Not being able to have a main task and subtasks - 3m
-- :orange_heart: Not being able to edit task text on the weekly view - 3m
 - :green_heart: Dragging on the planning list has the wrong visual feedback when dragging downwards - 3m
 - :heart: Cannot mark a task as Blocked - 2m
 - :green_heart: When sorting all the new tasks - giving them a place - it was hard to find my way around. 2m
@@ -97,3 +96,4 @@ M = Major
 - :green_heart: Not being able to drag multiple items at once in the planned view - 30m - gefixt
 - :blue_heart: In the weekly view: hide completed tasks is always unchecked - 2m - gefixt
 - :yellow_heart: Not being able to remove items from the weekly list on the weekly list: 4m - gefixt
+- :orange_heart: Not being able to edit task text on the weekly view - 3m - gefixt

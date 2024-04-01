@@ -4,7 +4,6 @@
 
 ### General overview
 
-
 See completion of a task as a search algorithm. There are many paths to take to an end point. And in completion of a task, there are many ways to complete a task. I first confused the way to complete a task and the goal of a task. They look and taste almost the same, but are different in some fundamental ways, which I try to find here.
 
 Example goals that confuse me:
