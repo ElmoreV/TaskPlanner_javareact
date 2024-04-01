@@ -1,12 +1,14 @@
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-
+import TopicContent from './TopicContent';
 const Topic = (props) => {
     const { name, updateTaskTopics, setTopicName, id,
         toggleFold, unfolded,
         addTask, addSubTopic, deleteTopic, changeTopic,
         selectedTasks,
-        moveTopic, duplicateTask } = props;
+        moveTopic, duplicateTask,
+        fancy,
+     } = props;
     console.debug("Rendering Topic")
     const folded_symbol = '>';
     const unfolded_symbol = 'v';
@@ -71,6 +73,7 @@ const Topic = (props) => {
             let oldTopicIds = []
             taskIds.push(task_id)
             oldTopicIds.push(oldTopicId)
+            console.log(selectedTasks)
             if (selectedTasks && selectedTasks.length > 0) {
                 selectedTasks.forEach((st) => {
                     console.info(`Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${id}`)
@@ -163,6 +166,23 @@ const Topic = (props) => {
         }
     }, [isEditing]); // Dependency array ensures this runs only when isEditing changes
 
+
+    return (<><TopicContent
+        name={name}
+        handleToggleFold={handleToggleFold}
+        dragHandlers={dragHandlers}
+        dropHandlers={dropHandlers}
+        textEditHandlers={{ onChange: handleChange, onBlur: handleBlur, onKeyDown: handleKeyDown }}
+        foldingSymbol={unfolded ? unfolded_symbol : folded_symbol}
+        isEditing={isEditing}
+        inputRef={inputRef}
+        color={color}
+        toggleEdit={toggleEdit}
+        handleAddTaskClick={handleAddTaskClick}
+        handleAddTopicClick={handleAddTopicClick}
+        handleDeleteClick={handleDeleteClick}
+        fancy={fancy}
+    /></>)
 
 
     return (<div

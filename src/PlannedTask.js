@@ -8,7 +8,9 @@ const PlannedTask = (props) => {
         scheduled, scheduleTask,
         currentTopic, changeTopic, planned, unplan, topics, taskTopics,
         selectedTasks, addToSelection, deleteFromSelection, selected, clearSelection,
-        changeWeekOrderIndex, currentWeekOrderIndex } = props;
+        changeWeekOrderIndex, currentWeekOrderIndex,
+        fancy,
+    } = props;
 
     console.debug("Rendering PlannedTask")
     const [isEditing, setIsEditing] = useState(false);
@@ -151,7 +153,10 @@ const PlannedTask = (props) => {
             planned={true}
             unplan={unplan}
             scheduled={scheduled}
-            scheduleTask={scheduleTask} />
+            scheduleTask={scheduleTask}
+            textBarWidth="570px"
+            fancy={fancy}
+        />
 
     </>)
 

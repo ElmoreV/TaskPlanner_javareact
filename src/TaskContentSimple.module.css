@@ -1,0 +1,103 @@
+.taskText {
+    display: inline-block;
+    max-width: 290px;
+    word-wrap: break-word;
+}
+
+.textBar {
+    display: inline-block;
+    width: 565px;
+    word-wrap: break-word;
+}
+
+
+
+
+.taskText input[type="text"] {
+    width: 350px;
+    /* max-width: 100px; */
+    box-sizing: border-box;
+}
+
+.task {
+    max-width: 800px;
+    padding: 3px 3px 3px 7px;
+    margin: 1px 0;
+    background: rgb(252, 255, 167)
+}
+
+.task:hover,
+.taskCompleted:hover,
+.taskPlanned:hover,
+.taskRepeated:hover,
+.taskScheduled:hover {
+    /* box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1); */
+    padding-left: 12px;
+    position: relative;
+    z-index: 50;
+    cursor: grab;
+
+}
+
+
+.task:active,
+.taskCompleted:active,
+.taskPlanned:active,
+.taskRepeated:active,
+.taskScheduled:active {
+    padding-left: 14px;
+    position: relative;
+    z-index: 50;
+}
+
+
+
+
+
+.taskPlanned {
+    max-width: 800px;
+    padding: 1px 10px 5px 10px;
+    margin: 1px 0;
+    background: rgb(168, 224, 255);
+}
+
+.taskCompleted {
+    max-width: 800px;
+    padding: 1px 10px 5px 10px;
+    margin: 1px 0;
+    background: rgb(199, 255, 185);
+}
+
+.taskRepeated {
+    max-width: 800px;
+    padding: 1px 10px 5px 10px;
+    margin: 1px 0;
+    background: rgb(220, 149, 255);
+}
+
+span.topicPath {
+    float: right;
+    max-width: 275px;
+    text-align: right;
+}
+
+button.taskDelete,
+button.moveToWeek,
+button.makeRepeated,
+button.taskComplete,
+button.taskSchedule {
+    float: right;
+}
+
+span.buttonDuplicate:hover {
+    float: right;
+    border-style: solid;
+    border-width: 2px;
+}
+
+span.buttonDuplicate {
+    float: right;
+    border-style: solid;
+    border-width: 1px;
+    cursor: copy;
+}

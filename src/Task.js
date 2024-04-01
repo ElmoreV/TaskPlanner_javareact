@@ -1,16 +1,18 @@
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TaskContent from './TaskContent'
+import React from 'react';
 
-
-const Task = (props) => {
+const Task = React.memo((props) => {
     const { id, name, setTaskName, deleteTask,
         completed, completeTask,
         currentTopicName, currentTopicId, changeTopic,
         planned, plan, unplan,
         repeated, toggleRepeatTask,
         selectedTasks, addToSelection, deleteFromSelection, selected,
-        duplicateTask } = props;
+        duplicateTask,
+        fancy,
+    } = props;
     console.debug("Rendering Task")
 
     const [isEditing, setIsEditing] = useState(false);
@@ -77,6 +79,7 @@ const Task = (props) => {
             let oldTopicIds = []
             taskIds.push(task_id)
             oldTopicIds.push(oldTopicId)
+            console.info(selectedTasks)
             if (selectedTasks && selectedTasks.length > 0) {
                 selectedTasks.forEach((st) => {
                     console.info(`Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${currentTopicId}`)
@@ -203,8 +206,10 @@ const Task = (props) => {
         repeated={repeated}
         toggleRepeatTask={toggleRepeatTask}
         duplicateDragHandlers={duplicateDragHandlers}
+        textBarWidth="425px"
+        fancy={fancy}
     />);
-}
+})
 
 Task.propTypes = {
     name: PropTypes.string.isRequired,

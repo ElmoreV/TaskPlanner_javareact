@@ -19,7 +19,7 @@ class SelectedTask {
 
 
 const PlannedList = (props) => {
-    const { tasks, setTasks, topics, setTopics } = props;
+    const { tasks, setTasks, topics, setTopics, fancy } = props;
     console.debug("Rendering PlannedList")
 
     const [hideCompletedItems, setHideCompletedItems] = useState(true)
@@ -130,6 +130,8 @@ const PlannedList = (props) => {
                                     changeWeekOrderIndex={getChangeWeekOrderIndex(setTasks, tasks)}
                                     topics={topics}
                                     taskTopics={task.topics}
+                                    fancy={fancy}
+
                                 // changeTopic = {getChangeTaskTopic()}
                                 />
                                 }

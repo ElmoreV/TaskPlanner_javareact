@@ -1,0 +1,145 @@
+.taskText {
+    display: inline-block;
+    max-width: 290px;
+    word-wrap: break-word;
+}
+
+.textBar {
+    display: inline-block;
+    width: 565px;
+    word-wrap: break-word;
+}
+
+span.buttonDuplicate:hover {
+    float: right;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: blue;
+    border-width: 4px;
+
+
+}
+
+
+
+.taskText input[type="text"] {
+    width: 350px;
+    /* max-width: 100px; */
+    box-sizing: border-box;
+}
+
+.task {
+    max-width: 800px;
+    padding: 10px;
+    padding-left: 20px;
+    margin: 1px 0;
+    background: linear-gradient(to right,
+            rgb(168, 249, 168) 0%,
+            rgb(168, 249, 168) 60%,
+            rgb(131, 255, 255) 70%,
+            rgb(131, 255, 255) 100%);
+    border-radius: 3px 3px 3px 20px;
+
+}
+
+.task:hover,
+.taskCompleted:hover,
+.taskPlanned:hover,
+.taskRepeated:hover,
+.taskScheduled:hover {
+    box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
+    padding-left: 25px;
+    position: relative;
+    z-index: 50;
+    cursor: grab;
+
+}
+
+
+.task:active,
+.taskCompleted:active,
+.taskPlanned:active,
+.taskRepeated:active,
+.taskScheduled:active {
+    box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.4);
+    padding-left: 30px;
+    position: relative;
+    z-index: 50;
+}
+
+.task[draggedOver=true] {
+    /* padding-left:100px; */
+    border-top-width: 20px;
+    border-top-color: white;
+    border-top-style: solid;
+    padding-top: 5px;
+    box-shadow: 10px 5px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
+
+
+.taskPlanned {
+    max-width: 800px;
+    padding: 10px;
+    padding-left: 20px;
+    margin: 1px 0;
+    background: linear-gradient(to right,
+            rgb(105, 205, 255) 0%,
+            rgb(155, 243, 255) 60%,
+            rgb(151, 234, 255) 70%,
+            rgb(0, 166, 255) 100%);
+    border-radius: 3px 3px 3px 20px;
+
+}
+
+.taskCompleted {
+    max-width: 800px;
+    padding: 10px;
+    padding-left: 20px;
+    margin: 1px 0;
+    background: linear-gradient(to right,
+            rgb(168, 255, 50) 0%,
+            rgb(168, 255, 50) 60%,
+            rgb(131, 255, 100) 70%,
+            rgb(131, 255, 100) 100%);
+    border-radius: 3px 3px 3px 20px;
+
+}
+
+.taskRepeated {
+    max-width: 800px;
+    padding: 10px;
+    padding-left: 20px;
+    margin: 1px 0;
+    background: linear-gradient(to right,
+            rgb(243, 135, 223) 0%,
+            rgb(209, 130, 248) 60%,
+            rgb(165, 107, 253) 70%,
+            rgb(113, 100, 255) 100%);
+    border-radius: 3px 3px 3px 20px;
+
+}
+
+span.topicPath {
+    float: right;
+    max-width: 275px;
+    text-align: right;
+}
+
+button.taskDelete,
+button.moveToWeek,
+button.makeRepeated,
+button.taskComplete,
+button.taskSchedule {
+    float: right;
+}
+
+
+span.buttonDuplicate {
+    float: right;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: blue;
+    border-width: 2px;
+    cursor: copy;
+}

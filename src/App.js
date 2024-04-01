@@ -63,8 +63,11 @@ function App() {
 
 
   const [view, setView] = useState(VIEW_ALL_TASKS)
+  const [fancy, setFancy] = useState(false)
 
-
+  const onMakeFancyChange = () => {
+    setFancy(!fancy)
+  }
   return (
     <div className="App">
       <div className="contents">
@@ -81,16 +84,23 @@ function App() {
           setTasks={setTasks}
           topics={topics}
           setTopics={setTopics}
-
+          fancy={fancy}
         />}
         {view === VIEW_PLANNED_TASKS && <PlannedList
           tasks={tasks}
           setTasks={setTasks}
           topics={topics}
           setTopics={setTopics}
+          fancy={fancy}
         />}
         {view === VIEW_DAILY_PLANNING}
-
+        <label><input
+          type="checkbox"
+          name='MakeFancy'
+          onChange={onMakeFancyChange}
+          className="form-check-input"
+          defaultChecked={fancy}
+        />Fancy layout</label>
       </div>
     </div>
   );

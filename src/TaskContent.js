@@ -1,71 +1,80 @@
 // These are the contents of the TaskBar
 // Leave any logic out of the contents component
 // Instead, make it a prop of the TaskContent
-// 
 
+import React from "react"
+import fancyStyles from './TaskContentFancy.module.css';
+import simpleStyles from './TaskContentSimple.module.css';
 
-const TaskContent = (props) => {
+const captureClick = (func) => {
+    const wrapper = (e) => {
+        e.stopPropagation()
+        return func()
+    }
+    return wrapper
+}
 
-    console.debug("Rendering TaskUI")
+const TaskContent = React.memo((props) => {
+
     const { classStr,
         selectStyle, selectHandlers,
         dragHandlers, dropHandlers, duplicateDragHandlers,
         name, textEditHandlers, inputRef, isEditing, toggleEdit,
-        topicPath,
+        topicPath, textBarWidth,
         color,
         deleteTask,
         completed, completeTask,
         planned, plan, unplan,
         repeated, toggleRepeatTask,
         scheduled, scheduleTask,
+        fancy,
     } = props;
+    console.debug(`Rendering TaskContent ${name}`)
 
-    const captureClick = (func) => {
-        const wrapper = (e) => {
-            e.stopPropagation()
-            return func()
-        }
-        return wrapper
-    }
+    let styles = fancy ? fancyStyles : simpleStyles;
 
-    return (<div className={classStr}
-        style={selectStyle}
-        onDoubleClick={toggleEdit}
-        {...selectHandlers}
-        {...dragHandlers}
-        {...dropHandlers}>
-        <div className="textBar"
-            style={{ width: topicPath ? "570px" : "425px" }}>
-            <span className="taskText">
-                {isEditing ?
-                    <input type='text'
-                        value={name}
-                        width="430px"
-                        {...textEditHandlers}
-                        ref={inputRef}
-                    /> :
-                    //  <span style={{color : color}}>{name}</span>
-                    <span style={{
-                        color: color,
-                    }}>{name}</span>
+    // Applying dynamic class names based on the classStr prop
+    const taskClassNames = [styles.task, styles[classStr]].filter(Boolean).join(' ');
 
-                }
-            </span>
-            {topicPath && <span className="topicPath">{topicPath}</span>}
+    return (
+        // <div className={styles.task}>
+        <div className={taskClassNames}
+            style={selectStyle}
+            onDoubleClick={toggleEdit}
+            {...selectHandlers}
+            {...dragHandlers}
+            {...dropHandlers}>
+            <div className={styles.textBar}
+                style={{ width: textBarWidth }}>
+                <span className={styles.taskText}>
+                    {isEditing ?
+                        <input type='text'
+                            value={name}
+                            width={textBarWidth}
+                            {...textEditHandlers}
+                            ref={inputRef}
+                        /> :
+                        <span style={{ color: color }}>{name}</span>
+
+                    }
+                </span>
+                {topicPath && <span className={styles.topicPath}>{topicPath}</span>}
+            </div>
+            <>
+                {deleteTask && (<button className={styles.taskDelete} onClick={captureClick(deleteTask)}>Delete</button>)}
+                {!completed && completeTask && (<button className={styles.taskComplete} onClick={captureClick(completeTask)}>Complete</button>)}
+                {completed && completeTask && (<button className={styles.taskComplete} onClick={captureClick(completeTask)}>Decomplete</button>)}
+                {unplan && planned && (<button className={styles.moveToWeek} onClick={captureClick(unplan)}> Unplan </button>)}
+                {plan && !planned && (<button className={styles.moveToWeek} onClick={captureClick(plan)}> Plan </button>)}
+                {toggleRepeatTask && repeated && (<button className={styles.makeRepeated} onClick={captureClick(toggleRepeatTask)}> Repeated </button>)}
+                {toggleRepeatTask && !repeated && (<button className={styles.makeRepeated} onClick={captureClick(toggleRepeatTask)}> Not repeated </button>)}
+                {scheduled && scheduleTask && (<button className={styles.taskSchedule} onClick={captureClick(scheduleTask)}>Scheduled!</button>)}
+                {!scheduled && scheduleTask && (<button className={styles.taskSchedule} onClick={captureClick(scheduleTask)}>Unscheduled</button>)}
+                {duplicateDragHandlers && <span className={styles.buttonDuplicate} {...duplicateDragHandlers}>+ Duplicate +</span>}
+            </>
         </div>
-        <>
-            {deleteTask && (<button className='taskDelete' onClick={captureClick(deleteTask)}>Delete</button>)}
-            {!completed && completeTask && (<button className='taskComplete' onClick={captureClick(completeTask)}>Complete</button>)}
-            {completed && completeTask && (<button className='taskComplete' onClick={captureClick(completeTask)}>Decomplete</button>)}
-            {unplan && planned && (<button className='moveToWeek' onClick={captureClick(unplan)}> Unplan </button>)}
-            {plan && !planned && (<button className='moveToWeek' onClick={captureClick(plan)}> Plan </button>)}
-            {toggleRepeatTask && repeated && (<button className='makeRepeated' onClick={captureClick(toggleRepeatTask)}> Repeated </button>)}
-            {toggleRepeatTask && !repeated && (<button className='makeRepeated' onClick={captureClick(toggleRepeatTask)}> Not repeated </button>)}
-            {scheduled && scheduleTask && (<button className='taskSchedule' onClick={captureClick(scheduleTask)}>Scheduled!</button>)}
-            {!scheduled && scheduleTask && (<button className='taskSchedule' onClick={captureClick(scheduleTask)}>Unscheduled</button>)}
-            {duplicateDragHandlers && <span className='buttonDuplicate' {...duplicateDragHandlers}>+ Duplicate +</span>}
-        </>
-    </div>);
-}
+        // </div>
+    );
+})
 
-export default TaskUI;
+export default TaskContent;
