@@ -3,6 +3,9 @@ import TaskList from './TaskList';
 import PlannedList from './PlannedList'
 import { useState } from 'react'
 import ImportExport from './ImportExport';
+import Theme from "./Theme";
+
+
 function App() {
   console.debug("Rendering App")
 
@@ -64,14 +67,20 @@ function App() {
 
   const [view, setView] = useState(VIEW_ALL_TASKS)
   const [fancy, setFancy] = useState(false)
+  const [darkMode, setDarkMode] = useState(true)
 
   const onMakeFancyChange = () => {
     setFancy(!fancy)
   }
-  return (
+
+  const onDarkModeChange = () => {
+    setDarkMode(!darkMode)
+  }
+
+  return ( 
+    <Theme darkMode={darkMode}>
     <div className="App">
       <div className="contents">
-
         <ImportExport
           tasks={tasks}
           topics={topics}
@@ -94,15 +103,25 @@ function App() {
           fancy={fancy}
         />}
         {view === VIEW_DAILY_PLANNING}
+        <div classStr="settingsUI">
         <label><input
           type="checkbox"
           name='MakeFancy'
           onChange={onMakeFancyChange}
           className="form-check-input"
           defaultChecked={fancy}
-        />Fancy layout</label>
+        />Fancy layout</label><br/>
+        <label><input
+          type="checkbox"
+          name='DarkMode'
+          onChange={onDarkModeChange}
+          className="form-check-input"
+          defaultChecked={darkMode}
+        />Dark Mode</label>
+        </div>
       </div>
     </div>
+    </Theme>
   );
 }
 
