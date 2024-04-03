@@ -23,7 +23,7 @@ M = Major
 - :yellow_heart: Not being able to collapse or fold all the topics with one button: 8m 
 - :blue_heart: Hide completed items is not saved when changing views: 4m - bevroren
 - :yellow_heart: When showing only uncompleted/repeated tasks: minimize/remove/concatenate topics that are irrelevant/empty - 3m
-- :purple_heart: There is no way to create a task and it's subtasks. Topics shouldn't be supertasks. - 3m
+- :purple_heart: There is no way to create a task and it's subtasks. Topics shouldn't be supertasks. - 4m
 - :yellow_heart: Not clearly seeing on what level a task is exactly (maybe needs guidance lines?) - 2m+
 - :yellow_heart: Not being able to peek in a list of folded topics: 2m
 - :blue_heart: Not being able to just have a list of all tasks (with filters): 2m
@@ -52,7 +52,7 @@ M = Major
 - :orange_heart: Cannot order/sort the tasks/topics on the topic view - 7m
 - Removing items from the planned list or completing an item, does not unschedule them - 5m
 - :green_heart: Not being able to duplicate-drag tasks to other topics without stopping midway/taking a long time/being annoyed: 3m
-- :purple_heart: Not being able to partially complete a task - 3m
+- :purple_heart: Not being able to partially complete a task - 5m
 - :yellow_heart: :blue_heart: Adding a task, while only showing repeated tasks, should add a repeated task: 3m
 - :purple_heart: Not being able to have a main task and subtasks - 3m
 - :green_heart: Dragging on the planning list has the wrong visual feedback when dragging downwards - 3m
@@ -97,3 +97,4 @@ M = Major
 - :blue_heart: In the weekly view: hide completed tasks is always unchecked - 2m - gefixt
 - :yellow_heart: Not being able to remove items from the weekly list on the weekly list: 4m - gefixt
 - :orange_heart: Not being able to edit task text on the weekly view - 3m - gefixt
+- No dark mode - 1m -gefixt
