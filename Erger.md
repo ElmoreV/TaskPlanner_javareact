@@ -67,7 +67,7 @@ M = Major
 - :green_heart: Dragging a task (in planned list) below the entire list, should put it at the bottom. - 1m
 - Inability to add comments to a (repeating) task - 1m
 	+ Missing information: what time range has been checked
-
+- Cannot split a task into multiple tasks in the weekly list - 1m
 
 ## Import/export
 

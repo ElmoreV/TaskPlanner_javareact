@@ -476,3 +476,16 @@ What ways can a task become impossible to do?
 There is also the possilbity of a task becoming irrelevant
 
 - Higher goal has changed
+
+# The psychology of Task Planning.
+
+1. Distinguish between urgent and important tasks
+2. Don't do tasks that just spent time on your todo list
+3. Celebrate your completed tasks
+
+There are a bunch of micro-tasks that all take just a couple of minutes, but turn out to take a lot of time collectively. Is it better to do them after each other? Or to spread them out?
+
+Source:
+http://webcache.googleusercontent.com/search?q=cache:https://medium.com/age-of-awareness/the-3-lists-you-should-be-making-f22a47a52bd7&strip=0&vwsrc=1&referer=medium-parser
+Source for more:
+https://gretchenrubin.com/articles/how-to-tackle-a-nagging-task-power-hour/
