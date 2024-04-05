@@ -23,7 +23,7 @@ M = Major
 - :yellow_heart: Not being able to collapse or fold all the topics with one button: 8m 
 - :blue_heart: Hide completed items is not saved when changing views: 4m - bevroren
 - :yellow_heart: When showing only uncompleted/repeated tasks: minimize/remove/concatenate topics that are irrelevant/empty - 3m
-- :purple_heart: There is no way to create a task and it's subtasks. Topics shouldn't be supertasks. - 3m
+- :purple_heart: There is no way to create a task and it's subtasks. Topics shouldn't be supertasks. - 4m
 - :yellow_heart: Not clearly seeing on what level a task is exactly (maybe needs guidance lines?) - 2m+
 - :yellow_heart: Not being able to peek in a list of folded topics: 2m
 - :blue_heart: Not being able to just have a list of all tasks (with filters): 2m
@@ -50,16 +50,16 @@ M = Major
 	- Main issue, I cannot scroll during dragging
 - :heart: It does not feel right to Complete or Delete tasks that are just impossible (due to not necessary, deadline, no resources, etc.) - 8m
 - :orange_heart: Cannot order/sort the tasks/topics on the topic view - 7m
-- Removing items from the planned list or completing an item, does not unschedule them - 5m
+- Removing items from the planned list or completing an item, does not unschedule them - 6m
 - :green_heart: Not being able to duplicate-drag tasks to other topics without stopping midway/taking a long time/being annoyed: 3m
 - :purple_heart: Not being able to partially complete a task - 3m
 - :yellow_heart: :blue_heart: Adding a task, while only showing repeated tasks, should add a repeated task: 3m
-- :purple_heart: Not being able to have a main task and subtasks - 3m
+- :purple_heart: Not being able to have a main task and subtasks - 4m
 - :green_heart: Dragging on the planning list has the wrong visual feedback when dragging downwards - 3m
 - :heart: Cannot mark a task as Blocked - 2m
 - :green_heart: When sorting all the new tasks - giving them a place - it was hard to find my way around. 2m
-- :purple_heart: There is no way to have a planned task (3x sport in a week) and complete it partially - 2m
-	+ e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled - 2m
+- :purple_heart: There is no way to have a planned task (3x sport in a week) and complete it partially - 3m
+	+ e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled
 - :orange_heart: Not being able to make a new root topic when the button is not in view: 1m
 - :orange_heart: Text editing tends to slow down if you type more - 1m
 - :yellow_heart: Delete and duplicate should be near each other. Completed and repeated should be near each other: 1m
@@ -67,7 +67,9 @@ M = Major
 - :green_heart: Dragging a task (in planned list) below the entire list, should put it at the bottom. - 1m
 - Inability to add comments to a (repeating) task - 1m
 	+ Missing information: what time range has been checked
-
+- Cannot spawn another task from a task completed in the weekly/planned list (completing the task made another todo) - 1m
+- No possibility to create a new task in the planned list - 1m
+	+ Spontaneous ideas that should be categorized later
 
 ## Import/export
 
