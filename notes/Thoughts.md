@@ -27,7 +27,7 @@ Dimensions of a task:
 - Is this task changing? Does the target or threshold change?
 - How does it relate to planning or scheduling?
 - How to tasks relate to improving systems?
-
+- Do we know or believe that we can do it?
 
 
 Description | Target-based | Threshold-based| Both |
@@ -594,3 +594,16 @@ A system is not necessary that multiple similar processes run. But that two orth
 - Different goal?
 - different person?
 - 50% information exchange?
+
+
+#### Goals vs. implementation
+
+- Goal: we don't know how to do it. And we don't know if we can do it.
+- Task: we know that we can do it.
+
+#### States of the task
+
+- Unplanned 
+- Planned
+- Planned & Scheduled
+- Finished

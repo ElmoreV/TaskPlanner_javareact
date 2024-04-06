@@ -63,6 +63,7 @@
 - [ ] Improve collapse and dropdown icon
 - [x] Make the tasks to have a good width. Naive: text-cutoff
 - [ ] Prettify text input for tasks
+- [ ] Not being able to collapse or fold all the topics with one button - 20m
 - [ ] Add Ability to unfold a topic and all its subtopics in one go
 
 ### Functionality:
@@ -180,7 +181,7 @@
 
 - [ ] Enable dark mode
 - [ ] Remember the choice for HideCompletedItems for a View
-- [ ] Create minimal layout (dense/packed/not pretty)
+- [x] Create minimal layout (dense/packed/not pretty)
 
 ## Timing:
 
@@ -295,14 +296,11 @@
 
 ## Relaying information:
 
-- [ ] Not being able to collapse or fold all the topics with one button - 20m
-- [ ] Repeated tasks do not show last completion/cannot retain information about when the next time would be -13m+
-- [ ] It is unclear where a duplicated task is already (is it already duplicated?) -10m
 - [ ] When showing only uncompleted/repeated tasks: minimize/remove/concatenate topic (paths) that are irrelevant/empty - 3m
 - [ ] Not clearly seeing on what level a task is exactly (maybe needs guidance lines?) -2m+
 - [ ] Not being able to peek in a list of folded topics: 2m
 - [ ] Not being able to see statistics of the topic in the topic view - 2m
-- [ ] I sometimes find a duplicate task that I made myself (The abiltiy to merge tasks?) -2m 
+- [ ] I sometimes find a duplicate task that I made myself (The abiltiy to merge tasks?) -3m 
 - [ ] There is a missing intent to progress towards a goal, but the task is not 'working on ... for 2 hours' but just 'finish this', and I make it repeated, which is also not the right way to do it. - 2m   'Working towards xx for 2 hours' is a subtask of 'Finish xx', so it should be fixed with subtasks
 - [ ] The weekly view doesn't show all the topics of the task at hand: 1m
 - [ ] After folding/unfolding, the mouse is not over the same topic anymore: 1m
@@ -312,6 +310,11 @@
 - [x] The weekly view names are too large and go to the next line (but don't make the task bigger): 5m - gefixt
 - [x] Not seeing the repeated tasks: 2 -gefixt
 - [x] No dark mode - 1m -gefixt
+- [ ] Topic text is not handled right and makes the buttons go crazy - 1m
+- [ ] Text width on a narrow screen is not handled well (text width not respected) - 5m
+- [ ] Not being able to collapse or fold all the topics with one button - 20m
+- [ ] Repeated tasks do not show last completion/cannot retain information about when the next time would be -13m+
+- [ ] It is unclear where a duplicated task is already (is it already duplicated?) -10m
 
 ### Filtering:
 
@@ -326,8 +329,6 @@
 
 ## Modifying information:
 
-- [ ] Removing items from the planned list or completing an item, does not unschedule them - 14m
-- [ ] Not being able to duplicate multiple tasks at once in Topic View (forgetting which tasks are already copied): 12m
 - [ ] Not being able to duplicate-drag tasks to other topics without stopping midway/taking a long time/being annoyed: 3m
 - [ ] Adding a task, while only showing repeated tasks, should add a repeated task: 3m
 - [ ] Dragging on the planning list has the wrong visual feedback when dragging downwards - 3m
@@ -350,7 +351,8 @@
 - [x] Not being able to edit task text on the weekly view - 3m - gefixt
 - [x] Not being able to mark a weekly task as 'planned in the daily view (or locally)' - 4m - gefixt
 - [x] Topic view task text is too long: 3m - gefixt (opnieuw)
-- [ ] New Task 248!
+- [ ] Removing items from the planned list or completing an item, does not unschedule them - 14m
+- [ ] Not being able to duplicate multiple tasks at once in Topic View (forgetting which tasks are already copied): 12m
 
 ### It takes a huge time to drag a task from the top to the bottom - 13m :
 
@@ -364,8 +366,6 @@
 ### Missing data structure:
 
 - [ ] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -4m
-- [ ] Cannot order/sort the tasks/topics on the topic view - 17m
-- [ ] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 10m
 - [ ] Not being able to have a main task and subtasks - 5m
 - [ ] There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -9m
 - [ ] Cannot mark a task as Blocked - 2m
@@ -374,6 +374,8 @@
 - [x] Fearing to lose a task by not being able to make it repeatable: 3 - gefixt
 - [x] Not being able to drag multiple items at once in the topic view - 16m - gefixt
 - [x] ot being able to drag multiple items at once in the planned view - 30m - gefixt
+- [ ] Cannot order/sort the tasks/topics on the topic view - 20m
+- [ ] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 10m
 
 ## Import/export:
 
@@ -384,3 +386,5 @@
 - [x] Not being able to extract the text from the Weekly View (export or Copy): 4M - gefixt
 - [x] not showing that the json is not up to date. 5m - gefixt      Make hash at load, and during handling (so undoing a thing will reset it to load state).     Can I make the load order-independent? Maybe sort the tasks by id, and the topics... should be ordered? Except for the subtopics-order. Also by ID.
 - [x] Needing to save the markdown, yaml and json all separately - 30m - gefixt?
+- [ ] Cannot partially add a markdown/json file to a topic (create the tree there from the json/merge two jsons) - 1m
+- [ ] Cannot export the tree within a topic  - 0m
