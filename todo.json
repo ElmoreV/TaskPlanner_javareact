@@ -79,7 +79,7 @@
         {
           "name": "Weekly Tasks View",
           "id": 5,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Aesthetic",
@@ -104,7 +104,7 @@
         {
           "name": "Daily Task View",
           "id": 6,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         },
         {
@@ -148,7 +148,7 @@
         {
           "name": "Timing",
           "id": 31,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Impossibilities",
@@ -173,7 +173,7 @@
         {
           "name": "Priority module",
           "id": 36,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         }
       ]
@@ -209,7 +209,7 @@
             {
               "name": "Testing",
               "id": 19,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
@@ -239,6 +239,57 @@
       "id": 12,
       "unfolded": true,
       "subtopics": []
+    },
+    {
+      "name": "Annoyances",
+      "id": 43,
+      "unfolded": true,
+      "subtopics": [
+        {
+          "name": "Major/crashes/bugs",
+          "id": 44,
+          "unfolded": true,
+          "subtopics": []
+        },
+        {
+          "name": "Relaying information",
+          "id": 45,
+          "unfolded": true,
+          "subtopics": [
+            {
+              "name": "Filtering",
+              "id": 48,
+              "unfolded": true,
+              "subtopics": []
+            }
+          ]
+        },
+        {
+          "name": "Modifying information",
+          "id": 46,
+          "unfolded": true,
+          "subtopics": [
+            {
+              "name": "It takes a huge time to drag a task from the top to the bottom - 13m ",
+              "id": 49,
+              "unfolded": false,
+              "subtopics": []
+            },
+            {
+              "name": "Missing data structure",
+              "id": 50,
+              "unfolded": true,
+              "subtopics": []
+            }
+          ]
+        },
+        {
+          "name": "Import/export",
+          "id": 47,
+          "unfolded": true,
+          "subtopics": []
+        }
+      ]
     }
   ],
   "tasks": [
@@ -333,14 +384,6 @@
       "completed": true,
       "topics": [
         13
-      ],
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Add Ability to unfold a topic and all its subtopics in one go",
-      "id": 124,
-      "topics": [
-        23
       ],
       "weekOrderIndex": 0
     },
@@ -765,15 +808,6 @@
       "completed": true,
       "topics": [
         9
-      ],
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Drag tasks to change the order in task list",
-      "id": 36,
-      "thisWeek": false,
-      "topics": [
-        41
       ],
       "weekOrderIndex": 0
     },
@@ -1489,13 +1523,73 @@
       "weekOrderIndex": 0
     },
     {
+      "name": "Isolate logic from content output as much as possible",
+      "id": 165,
+      "topics": [
+        21
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Isolate content output from visualization as much as possible",
+      "id": 166,
+      "topics": [
+        21
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Make the sorting of the weekly planning not change the topic view order - 1M",
+      "id": 167,
+      "topics": [
+        44
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add Ability to unfold a topic and all its subtopics in one go",
+      "id": 124,
+      "topics": [
+        23
+      ],
+      "weekOrderIndex": 1,
+      "thisWeek": true
+    },
+    {
+      "name": "Drag tasks to change the order in task list",
+      "id": 36,
+      "thisWeek": true,
+      "topics": [
+        41
+      ],
+      "weekOrderIndex": 2
+    },
+    {
+      "name": "The task remembers the last time it has been completed",
+      "id": 172,
+      "topics": [
+        25
+      ],
+      "thisWeek": true,
+      "weekOrderIndex": 3
+    },
+    {
+      "name": "Drag topics to sort them in the topic list",
+      "id": 173,
+      "topics": [
+        41
+      ],
+      "thisWeek": true,
+      "weekOrderIndex": 4
+    },
+    {
       "name": "Create sensible moments to clear the task selection (click outside the task)",
       "id": 164,
       "topics": [
         41
       ],
       "thisWeek": true,
-      "weekOrderIndex": 1
+      "weekOrderIndex": 5
     },
     {
       "name": "Ability to select (multiple) tasks",
@@ -1504,7 +1598,7 @@
         29,
         41
       ],
-      "weekOrderIndex": 2,
+      "weekOrderIndex": 6,
       "thisWeek": true,
       "completed": true
     },
@@ -1515,7 +1609,7 @@
       "topics": [
         39
       ],
-      "weekOrderIndex": 3,
+      "weekOrderIndex": 7,
       "completed": true
     },
     {
@@ -1524,7 +1618,7 @@
       "topics": [
         30
       ],
-      "weekOrderIndex": 4,
+      "weekOrderIndex": 8,
       "thisWeek": true
     },
     {
@@ -1533,7 +1627,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 5,
+      "weekOrderIndex": 9,
       "thisWeek": true
     },
     {
@@ -1542,7 +1636,7 @@
       "topics": [
         7
       ],
-      "weekOrderIndex": 6,
+      "weekOrderIndex": 10,
       "thisWeek": true,
       "completed": true
     },
@@ -1552,7 +1646,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 7,
+      "weekOrderIndex": 11,
       "thisWeek": true
     },
     {
@@ -1561,7 +1655,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 8,
+      "weekOrderIndex": 12,
       "thisWeek": true
     },
     {
@@ -1570,7 +1664,7 @@
       "topics": [
         40
       ],
-      "weekOrderIndex": 9,
+      "weekOrderIndex": 13,
       "thisWeek": true
     },
     {
@@ -1579,7 +1673,7 @@
       "topics": [
         39
       ],
-      "weekOrderIndex": 10,
+      "weekOrderIndex": 14,
       "thisWeek": true,
       "completed": true
     },
@@ -1589,7 +1683,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 11,
+      "weekOrderIndex": 15,
       "thisWeek": true
     },
     {
@@ -1599,7 +1693,7 @@
         38
       ],
       "thisWeek": true,
-      "weekOrderIndex": 12
+      "weekOrderIndex": 16
     },
     {
       "name": "Find a way to save markdown, yaml and json all at the same time",
@@ -1608,7 +1702,8 @@
         15
       ],
       "thisWeek": true,
-      "weekOrderIndex": 13
+      "weekOrderIndex": 17,
+      "completed": true
     },
     {
       "name": "Keep a list of UX issues when manually testing/using the software",
@@ -1619,7 +1714,7 @@
       ],
       "repeated": true,
       "thisWeek": true,
-      "weekOrderIndex": 14
+      "weekOrderIndex": 18
     },
     {
       "name": "PlannedTask.js",
@@ -1628,7 +1723,7 @@
         8
       ],
       "thisWeek": true,
-      "weekOrderIndex": 15
+      "weekOrderIndex": 19
     },
     {
       "name": "Refactor the TaskBar (the actual visible part) from the interaction part (the list item with all handlers)",
@@ -1637,21 +1732,559 @@
         21
       ],
       "thisWeek": true,
-      "weekOrderIndex": 16
+      "weekOrderIndex": 20,
+      "completed": true
     },
     {
-      "name": "Isolate logic from content output as much as possible",
-      "id": 165,
+      "name": "Not being able to collapse or fold all the topics with one button - 20m",
+      "id": 174,
       "topics": [
-        21
+        45
       ]
     },
     {
-      "name": "Isolate content output from visualization as much as possible",
-      "id": 166,
+      "name": "Repeated tasks do not show last completion/cannot retain information about when the next time would be -13m+",
+      "id": 175,
       "topics": [
-        21
+        45
       ]
+    },
+    {
+      "name": "It is unclear where a duplicated task is already (is it already duplicated?) -10m",
+      "id": 176,
+      "topics": [
+        45
+      ]
+    },
+    {
+      "name": "Hide completed items is not saved when changing views: 4m - frozen",
+      "id": 177,
+      "topics": [
+        48
+      ]
+    },
+    {
+      "name": "The data is lost when something in react is changed - 1M",
+      "id": 178,
+      "topics": [
+        44
+      ]
+    },
+    {
+      "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -4m",
+      "id": 179,
+      "topics": [
+        50
+      ]
+    },
+    {
+      "name": "When showing only uncompleted/repeated tasks: minimize/remove/concatenate topic (paths) that are irrelevant/empty - 3m",
+      "id": 180,
+      "topics": [
+        45
+      ]
+    },
+    {
+      "name": "Not clearly seeing on what level a task is exactly (maybe needs guidance lines?) -2m+",
+      "id": 181,
+      "topics": [
+        45
+      ]
+    },
+    {
+      "name": "Not being able to peek in a list of folded topics: 2m",
+      "id": 182,
+      "topics": [
+        45
+      ]
+    },
+    {
+      "name": "Not being able to just have a list of all tasks (with filters): 2m",
+      "id": 183,
+      "topics": [
+        48
+      ]
+    },
+    {
+      "name": "Not being able to see statistics of the topic in the topic view - 2m",
+      "id": 184,
+      "topics": [
+        45
+      ]
+    },
+    {
+      "name": "Ability to hide planned items - 2m",
+      "id": 185,
+      "topics": [
+        48
+      ]
+    },
+    {
+      "name": "Filtering is not available when in the middle of a large list - 2m",
+      "id": 186,
+      "topics": [
+        48
+      ]
+    },
+    {
+      "name": "Do not know which Tasks are Blocked by other people- 2m",
+      "id": 187,
+      "topics": [
+        48
+      ]
+    },
+    {
+      "name": "Not being able to show only repeated and only completed tasks: 2m",
+      "id": 188,
+      "topics": [
+        48
+      ]
+    },
+    {
+      "name": "I sometimes find a duplicate task that I made myself (The abiltiy to merge tasks?) -2m ",
+      "id": 189,
+      "topics": [
+        45
+      ]
+    },
+    {
+      "name": "There is a missing intent to progress towards a goal, but the task is not 'working on ... for 2 hours' but just 'finish this', and I make it repeated, which is also not the right way to do it. - 2m   'Working towards xx for 2 hours' is a subtask of 'Finish xx', so it should be fixed with subtasks",
+      "id": 190,
+      "topics": [
+        45
+      ]
+    },
+    {
+      "name": "The weekly view doesn't show all the topics of the task at hand: 1m",
+      "id": 191,
+      "topics": [
+        45
+      ]
+    },
+    {
+      "name": "Not being able to see what is scheduled and what not in the topic view - 1m",
+      "id": 192,
+      "topics": [
+        48
+      ]
+    },
+    {
+      "name": "After folding/unfolding, the mouse is not over the same topic anymore: 1m",
+      "id": 193,
+      "topics": [
+        45
+      ]
+    },
+    {
+      "name": "Not being able to search for a task (search bar) - 1m",
+      "id": 194,
+      "topics": [
+        45
+      ]
+    },
+    {
+      "name": "When I add a new root topics, do I want to add it at the end or the front? Do I want it in focus? - 1m",
+      "id": 195,
+      "topics": [
+        45
+      ]
+    },
+    {
+      "name": "Missing a way to sort the tasks by some other order (e.g. topic) temporarily - 1m",
+      "id": 196,
+      "topics": [
+        45
+      ]
+    },
+    {
+      "name": "Cannot order/sort the tasks/topics on the topic view - 17m",
+      "id": 197,
+      "topics": [
+        50
+      ]
+    },
+    {
+      "name": "Removing items from the planned list or completing an item, does not unschedule them - 14m",
+      "id": 198,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "Not being able to duplicate multiple tasks at once in Topic View (forgetting which tasks are already copied): 12m",
+      "id": 199,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 10m",
+      "id": 200,
+      "topics": [
+        50
+      ]
+    },
+    {
+      "name": "Not being able to have a main task and subtasks - 5m",
+      "id": 202,
+      "topics": [
+        50
+      ]
+    },
+    {
+      "name": "There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -9m",
+      "id": 203,
+      "topics": [
+        50
+      ]
+    },
+    {
+      "name": "Not being able to duplicate-drag tasks to other topics without stopping midway/taking a long time/being annoyed: 3m",
+      "id": 204,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "Adding a task, while only showing repeated tasks, should add a repeated task: 3m",
+      "id": 205,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "Dragging on the planning list has the wrong visual feedback when dragging downwards - 3m",
+      "id": 206,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "Make dragging hide all other tasks instead (but it's not ideal, it still is annoying)",
+      "id": 207,
+      "topics": [
+        49
+      ]
+    },
+    {
+      "name": "Manually sort the tasks one level down each time",
+      "id": 208,
+      "topics": [
+        49
+      ]
+    },
+    {
+      "name": "Open folded topics by hovering over the topic",
+      "id": 209,
+      "topics": [
+        49
+      ]
+    },
+    {
+      "name": "Maybe do a .. hide all tasks or something",
+      "id": 210,
+      "topics": [
+        49
+      ]
+    },
+    {
+      "name": "Main issue, I cannot scroll during dragging",
+      "id": 211,
+      "topics": [
+        49
+      ]
+    },
+    {
+      "name": "Read: https://blog.logrocket.com/ux-design/organizing-categorizing-content-information-architecture/",
+      "id": 212,
+      "topics": [
+        49
+      ]
+    },
+    {
+      "name": "Cannot mark a task as Blocked - 2m",
+      "id": 213,
+      "topics": [
+        50
+      ]
+    },
+    {
+      "name": "When sorting all the new tasks - giving them a place - it was hard to find my way around. 2m",
+      "id": 214,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "Text editing tends to slow down if you type more - 2m",
+      "id": 215,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "Dragging does suddenly stop if using a laptop drag. Maybe edge of screen? - 2m",
+      "id": 216,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "Selection also unselects when stopping dragging, which is also unexpected - 2m",
+      "id": 217,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 2m",
+      "id": 218,
+      "topics": [
+        50
+      ]
+    },
+    {
+      "name": "Not being able to make a new root topic when the button is not in view: 1m",
+      "id": 219,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "Delete and duplicate should be near each other. Completed and repeated should be near each other: 1m",
+      "id": 220,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "There is no easy way to deduplicate a duplicated task - 1m",
+      "id": 221,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "Dragging a task (in planned list) below the entire list, should put it at the bottom. - 1m",
+      "id": 222,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "Inability to add comments to a (repeating) task - 1m      Missing information: what time range has been checked",
+      "id": 223,
+      "topics": [
+        50
+      ]
+    },
+    {
+      "name": "Cannot spawn another task from a task completed in the weekly/planned list (completing the task made another todo) - 1m",
+      "id": 224,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "No possibility to create a new task in the planned list - 1m      Spontaneous ideas that should be categorized later",
+      "id": 225,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "Cannot split a task into multiple tasks in the weekly list - 1m",
+      "id": 226,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "Cannot uncomplete/plan multiple selected items at once -1m",
+      "id": 227,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "Enter does not finish text input in planned list - 1m",
+      "id": 228,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "The week planning is missing from the MarkDown - 6m",
+      "id": 229,
+      "topics": [
+        47
+      ]
+    },
+    {
+      "name": "After saving a new document in .json, it does not remember the file name to save to the .yaml and .md files - 1m",
+      "id": 230,
+      "topics": [
+        47
+      ]
+    },
+    {
+      "name": "Not being able to complete tasks on the weekly view: 1 - gefixt",
+      "id": 231,
+      "topics": [
+        46
+      ],
+      "completed": true
+    },
+    {
+      "name": "Not being able to clear all completed items from the weekly list: 2M - gefixt",
+      "id": 232,
+      "topics": [
+        46
+      ],
+      "completed": true
+    },
+    {
+      "name": " Not being able to remove items from the weekly list on the weekly list: 4m - gefixt",
+      "id": 233,
+      "topics": [
+        46
+      ],
+      "completed": true
+    },
+    {
+      "name": "Not being able to edit task text on the weekly view - 3m - gefixt",
+      "id": 234,
+      "topics": [
+        46
+      ],
+      "completed": true
+    },
+    {
+      "name": "Not being able to mark a weekly task as 'planned in the daily view (or locally)' - 4m - gefixt",
+      "id": 235,
+      "topics": [
+        46
+      ],
+      "completed": true
+    },
+    {
+      "name": "Having to rename the file every time it is saved (the filename is not remembered on load): 11 - gefixt",
+      "id": 236,
+      "topics": [
+        47
+      ],
+      "completed": true
+    },
+    {
+      "name": "Not being able to load the file from the weekly list: 1 - gefixt",
+      "id": 237,
+      "topics": [
+        47
+      ],
+      "completed": true
+    },
+    {
+      "name": "The weekly view names are too large and go to the next line (but don't make the task bigger): 5m - gefixt",
+      "id": 238,
+      "topics": [
+        45
+      ],
+      "completed": true
+    },
+    {
+      "name": "Topic view task text is too long: 3m - gefixt (opnieuw)",
+      "id": 239,
+      "topics": [
+        46
+      ],
+      "completed": true
+    },
+    {
+      "name": "Not seeing the repeated tasks: 2 -gefixt",
+      "id": 240,
+      "topics": [
+        45
+      ],
+      "completed": true
+    },
+    {
+      "name": "Fearing to lose a task by not being able to make it repeatable: 3 - gefixt",
+      "id": 241,
+      "topics": [
+        50
+      ],
+      "completed": true
+    },
+    {
+      "name": "Not being able to extract the text from the Weekly View (export or Copy): 4M - gefixt",
+      "id": 242,
+      "topics": [
+        47
+      ],
+      "completed": true
+    },
+    {
+      "name": "not showing that the json is not up to date. 5m - gefixt      Make hash at load, and during handling (so undoing a thing will reset it to load state).     Can I make the load order-independent? Maybe sort the tasks by id, and the topics... should be ordered? Except for the subtopics-order. Also by ID.",
+      "id": 243,
+      "topics": [
+        47
+      ],
+      "completed": true
+    },
+    {
+      "name": "Bug: source_supertopic is undefined in moveTopic - gefixt",
+      "id": 244,
+      "topics": [
+        44
+      ],
+      "completed": true
+    },
+    {
+      "name": "Not being able to drag multiple items at once in the topic view - 16m - gefixt",
+      "id": 245,
+      "topics": [
+        50
+      ],
+      "completed": true
+    },
+    {
+      "name": "ot being able to drag multiple items at once in the planned view - 30m - gefixt",
+      "id": 246,
+      "topics": [
+        50
+      ],
+      "completed": true
+    },
+    {
+      "name": "In the weekly view: hide completed tasks is always unchecked - 2m - gefixt",
+      "id": 247,
+      "topics": [
+        48
+      ],
+      "completed": true
+    },
+    {
+      "name": "New Task 248!",
+      "id": 248,
+      "topics": [
+        46
+      ]
+    },
+    {
+      "name": "No dark mode - 1m -gefixt",
+      "id": 249,
+      "topics": [
+        45
+      ],
+      "completed": true
+    },
+    {
+      "name": "Needing to save the markdown, yaml and json all separately - 30m - gefixt?",
+      "id": 250,
+      "topics": [
+        47
+      ],
+      "completed": true
     }
   ]
 }
