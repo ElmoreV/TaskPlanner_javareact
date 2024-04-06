@@ -21,43 +21,30 @@ Actions that confuse me:
 
 Dimensions of a task:
 
-- Why is the task there?
-- Product/Outcome or system/process based?
-- What are tasks, user stories?
-- Does it generate value?
-- How does it relate to planning scheduling?
-- How does it related to change?
-- How is it rewarded?
-- Way to complete it?
-- Scheduled?
-- 
+- What is the purpose of a task? Why is this task there? Does this generate value? What is the reward or punishment behind it? What is the motivation to do it?
+- What would complete the task? What would fulfill a task?
+- How to implement a task? What is the way to complete it?
+- Is this task changing? Does the target or threshold change?
+- How does it relate to planning or scheduling?
+- How to tasks relate to improving systems?
+
 
 
 Description | Target-based | Threshold-based| Both |
 ------|--------|---------|-----|
 |Question they answer:| Why do we do this?||How do we get there?|
 |Synonym1|Outcomes|? |Systems|
-|Synonym2|Products|?|Process|
-|Synonym3|'Tasks'|? |'User stories'|
-|Synonym4|Value| Punishment|Implementation|
 |Synonym5|'end point'|'dead end'|'paths' or 'ways'|
 |Synonym6|end|?|means|
 |Synonym7|result|activity|activity|
-| Purpose / make sense | Gives the purpose | |Gives the way there |
 |Can be scheduled|No|No|Yes|
 | Can be exactly planned / controllable|No|Yes||
-| Clear on what to do| No | Yes||
-| Clear when it is completed| Yes| No |Yes|
-| Clear if it can be completed| No | No |No|
 | Good for progressing|No | No |Yes|
 | Good for planning | Yes | Yes|No|
 | When completed: will add result/value|Yes|No|No|
 | Can be improved| No| Yes|Yes|
-|Relation to change|Change|Can change |Change|
-|Analogy in work|Paid for result| Paid by the hour||
-|Way to complete it | Planning it and doing the actions | Doing it ||
+|Analogy in work|Rewarded for result| Rewarded by the hour||
 |Can be scheduled| No| Time spans||
-|Can be made obsolete|Deadline|Possible time spans||
 |Time spent||||
 |Complexity|The amount of unknown| The effort of doing it||
 |Analogy: travelling|The end point B| The path from A to B||
@@ -127,21 +114,41 @@ It can be done in a sentence:
 
 "I need to reflect every week to continuously improve" or "I want to continuously improve, so I need to reflect ... every week."
 
+#### Root goals
 
-
-#### Root topics/root goals
+Root goals
 
 Product-based work, will try to finish the product and make as many of the with a tradeoff (time/schedule/fast)/(budget/cheap/money)/(scope=quantity+quality=good).
 
 
-#### Subtasks
+#### Subtasks vs. supertasks
 
 It can be easily misused to allow goals and actions to be intermixed.
 
 It would need to be called subgoals and subprocesses/actions.
 
+||Supertask|Subtask(s)|
+|-|-|-|
+||Gives purpose|Implementation|
+||The End|The means|
+||Epic|User story|
+||User story|Tasks|
+|Value|Generates value|Might not generate value|
+|Production|Product|Process|
 
-### Target values vs. thresholds (ways to complete a goal)
+
+### Verifiability/testability of goals
+
+||Goals|Actions|??|
+|-|-|-|-|
+| Clear on what to do| No | Yes||
+| Clear when it is completed| Yes| No |Yes|
+| Clear if it can be completed| No | No |No|
+
+
+
+This is basically: is it clear when it is completed? There are some ways to do this.
+Is the goal very clearly defined? What is the definition of every word?
 
 #### Target values
 
@@ -168,8 +175,14 @@ Goals can be completed:
 - *Timing: cont. limited - when a subtask has been going on for as long as the time span'*
 - Timing: cont. infinity - when all subtasks are being completed until its impossible
 
+Theorem:
 
-### Static and changing goals
+Every goal will eventually be reduced to a condition based/threshold based goal.
+
+
+
+
+#### Static and changing goals
 
 
 There is something fishy here. There is something about goals and actions and infinity/neverending that doesn't seem right. There is a part of meaning and purpose in there. A part of doing vs. wanting. A parts of the process as the goal. Never the goal as the process. Is there an overarching framework? Is the RL framework a good framework for this?
@@ -203,17 +216,22 @@ What I was seeing were 2 things:
 I have the feeling that avoiding threshold tasks and changing threshold tasks are the most tiring/exhausting.
 It depends, if avoiding the threshold is the status quo (don't work, don't do drugs), it's relatively easy. However, during an addiction, actually the (don't do drugs) is the more difficult threshold to avoid. So threshold-based tasks that you are already above naturally are easy. Threshold based tasks that you do not meet are definitely more difficult. First you need to hit a target and then keep it.
 
-#### Improvability
+##### Improvability
 
-##### TODO
+To create improvement, you must be able to quantify it in some way. Even just a "I don't know how this would be done" to "I know how it could be done" is an improvement.
 
-### Verifiability/testability of goals
+This is the trackable part. It can be a specific value, an ordinal value (a ranking of understanding), a step towards understanding, or even just one of the many conditions to be achieved.
 
-#### TODO
+TODO: How do I decompose progression vs. improvement?
+
 
 ### Progression (how to measure)
 
 #### TODO
+
+### Plannability?
+
+### Schedulability?
 
 ### Duration
 
@@ -223,7 +241,7 @@ It depends, if avoiding the threshold is the status quo (don't work, don't do dr
 
 Complexity makes the amount of time and effort spent more difficult to estimate. It might not be longer, but the actual time may just be more off from the estimated time.
 
-#### Motivation/effort
+### Motivation/effort
 
 Some tasks are just more difficult to do
 
@@ -236,6 +254,7 @@ Some tasks are just more difficult to do
 
 - Satisfaction
 - Completion of a supertask
+- If there is no higher goal, the task is useless, or a core goal.
 
 ### Repetition
 
@@ -268,7 +287,14 @@ Examples:
 - "I want to practice Spanish until I die" (until impossible)
 - "I want to practice Spanish every Monday" (repeated + time span
 
+### Organization/person/group
+
+who benefits from the goal fullfillment?
+
 ### SMART goals
+
+Smart goals are a way to solve goals, but it conflates a couple of parameters:
+
 
 - Specific (testable: true/false result. Not a maybe result.)
 - Measurable/trackable
@@ -280,6 +306,8 @@ Examples:
 - Emotions: aggressive/ambitious/motivating
 
 - Results-based vs. action-oriented
+
+- 
 
 
 ## Relations between tasks
@@ -348,15 +376,27 @@ It seems like every task will have a certain influence on certain other tasks. T
 So to categorize tasks, there are different possibilities:
 1. Overarching Goals
 2. Overarching System or Process
-2. Projects that are helped by this task
+2. People that benefit from this task
 3. Tasks that are dependent on each other (the second one relies on the completion of the first)
 4. Correlated tasks (improving one automatically improves the other)
-5. Type of action the task requires (learning/reading/going outside)
+5. Type of action the task requires (learning/reading/going shopping)
 6. People involved in the task
+8. Location where task can be completed.
 
+#### Root topics
+
+This are the most abstract topics that are available. There seems to be a bit of a conflict between a root topic and a root goal. Root topics can be a part of:
+
+- A largest group of people it affects
+- The biggest system that is involved
+- The general action it involves (intake/output/etc.)
+- The root goal that it progresses towards.
 
 ### Priorities
 
+### Multitasking
+
+### Concurrent task execution
 
 ## Task workflows
 
@@ -364,6 +404,10 @@ So to categorize tasks, there are different possibilities:
 
 
 ### Scheduling
+
+I define scheduling as allocating time to do anything that works towards completing a goal. That makes it a threshold-sub-goal. (Do not work on anything else for x amount of time.) 
+
+#### When can a goal be scheduled?
 
 #### Unexpected events
 
@@ -466,6 +510,9 @@ Description | Target-based | Threshold-based| Both |
 
 
 ## Impossible tasks
+Goal/Action
+|Can be made obsolete|Deadline|Possible time spans||
+
 
 What ways can a task become impossible to do?
 
@@ -489,3 +536,61 @@ Source:
 http://webcache.googleusercontent.com/search?q=cache:https://medium.com/age-of-awareness/the-3-lists-you-should-be-making-f22a47a52bd7&strip=0&vwsrc=1&referer=medium-parser
 Source for more:
 https://gretchenrubin.com/articles/how-to-tackle-a-nagging-task-power-hour/
+
+
+
+
+# Systems/processes vs. goals.
+
+Are processes just a series of goals to keep in mind? Or how does this work? What are processes??
+
+What are the differences between the user stories and tasks?
+
+
+User stories:
+As a [individual] I want [intent] so that [higher purpose]
+
+The individual is the one who benefits from the goal being completed. The intent is the goal of the individual. The higher purpose is the supergoal.
+
+
+Understand https://www.atlassian.com/agile/project-management/user-stories
+
+1. Userstories define a goal, who the goal is meant for, and the supergoal.
+2. Definition of done/acceptance criteria: How to test if it is done? What are the targets, conditions or threshold? Define with who the goal is for.
+
+A process is a series of steps. Basically a series of tasks to complete.
+
+A system is a collection of processes? What makes a system different from processes?
+Processes seem to be synchronous/sequential.
+
+Systems are asynchronous. So maybe contain multiple steps that run simultaneously.
+
+A process does not solve the end goal. Systems solve the end goal?
+
+Open and closed systems: contained and no interaction or interacting outside of the boundaries.
+
+Systems are interconnected...
+
+Processes are input->process->output
+
+Systems are inputs+outputs+feedback+processes.
+
+Read:  “The Fifth Discipline” by Peter M Senge. 1990.
+
+A systems diagram can also show values, and their influence on other factors (positive/negative) + delays.
+
+https://www.educative.io/blog/software-architecture-diagramming-and-patterns
+
+Diagrams have different purposes for different people. This factors into the "For whom and why do we make this documentation?"
+
+
+Back to systems and processes.
+
+Processes are a sequence of tasks, and will be finished when it reaches the output.
+
+Two processes that are the same can run simultaneously.
+
+A system is not necessary that multiple similar processes run. But that two orthogonal processes run? What makes a process different from another process? 
+- Different goal?
+- different person?
+- 50% information exchange?

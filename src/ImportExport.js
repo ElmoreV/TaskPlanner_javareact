@@ -460,6 +460,54 @@ const ImportExport = (props) => {
         }
     }
 
+    const getFilename = (extension) => {
+        if (fileNameRef.current.length > 0) {
+            console.log(fileNameRef.current)
+            return fileNameRef.current + extension
+        }
+        else {
+            return "tasks_topics" + extension
+        }
+
+    }
+    const exportAll = () => {
+        console.log("Test")
+
+        let [new_topics, new_tasks] = [topics, tasks]
+        // Check if v0 format, or v1 format
+        // if (inputVersion(new_topics, new_tasks) == 'v0') {
+        //     console.log('Converting internal v0 format to v1');
+        //     [new_topics, new_tasks] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
+        // }
+        // Pretty print json (with 2 spaces as space parameter)
+        setSavedTaskHash(calculateTaskHash(tasks))
+        setSavedTopicHash(calculateTopicHash(topics))
+        setTaskHash(calculateTaskHash(tasks))
+        setTopicHash(calculateTopicHash(topics))
+
+        const jsonContent = JSON.stringify({ topics: new_topics, tasks: new_tasks }, null, 2);
+        const jsonBlob = new Blob([jsonContent], { type: "application/json" });
+        const MarkdownContent = buildMarkdownRecursive(topics, tasks, 0)
+        const markdownBlob = new Blob([MarkdownContent], { type: "text/markdown" });
+        const YAMLcontent = buildYAML_r(topics, tasks, 0)
+        const yamlBlob = new Blob([YAMLcontent], { type: "text/yaml" });
+        const blobs = [jsonBlob, markdownBlob, yamlBlob]
+        const extensions = ['.json', '.md', '.yaml']
+        var a = document.createElement("a");
+        a.setAttribute("download", null)
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        for (var i = 0; i < blobs.length; i++) {
+            a.download = getFilename(extensions[i])
+            a.href = URL.createObjectURL(blobs[i])
+            a.click();
+
+        }
+        document.body.removeChild(a);
+
+    }
+
+
     if (taskHash == null) {
         setTaskHash(calculateTaskHash(tasks))
         setTopicHash(calculateTopicHash(topics))
@@ -483,6 +531,7 @@ const ImportExport = (props) => {
 
             <button onClick={exportYAML}>Export Tasks [YAML]</button>
             <button onClick={exportMarkdown}> Export Tasks [Markdown]</button>
+            <button onClick={exportAll}> Export All [JSON+YAML+Markdown]</button>
             <button onClick={() => calculateHash(tasks, topics)}> Calc Hash </button>
             <input type="file"
                 ref={fileInputRef}
