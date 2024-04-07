@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getTopicTreeById } from './TopicHelper';
+import { getTopicPathByTopicId } from './TopicHelper';
 import TaskContent from './TaskContent'
 const PlannedTask = (props) => {
     const { taskKey, taskName, setTaskName, deleteTask,
@@ -122,7 +122,7 @@ const PlannedTask = (props) => {
         onChange: handleChange, onBlur: handleBlur, onClick: captureClick(() => { })
     }
 
-    let topicPath = getTopicTreeById(topics, taskTopics[0])
+    let topicPath = getTopicPathByTopicId(topics, taskTopics[0])
 
 
     const inputRef = useRef(null);

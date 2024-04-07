@@ -1,4 +1,4 @@
-import { findTopicById } from './TopicHelper'
+import { findTopicByTopicId } from './FindItems'
 
 //Recursive function to handle all toggles
 const toggleFold_r = (topics, id) => {
@@ -23,7 +23,7 @@ const getToggleFold = (setTopics, topics) => {
 const getSetTopicNameFunc = (setTopics, topics, id) => {
     const setTopicName = (newTopicName) => {
         const newTopics = [...topics];
-        const topic_to_change = findTopicById(topics, id);
+        const topic_to_change = findTopicByTopicId(topics, id);
         topic_to_change.name = newTopicName;
         setTopics(newTopics);
     }

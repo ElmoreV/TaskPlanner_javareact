@@ -1,49 +1,7 @@
-
-
-const findTopicByIdR = (topics, topic_key) => {
-    // console.debug(topics);
-    for (let topic of topics) {
-        // console.debug(topic.id);
-        if (topic.id === topic_key) {
-            // console.debug('Fount it!');
-            return topic;
-        }
-        let topic_res = findTopicByIdR(topic.subtopics, topic_key);
-        if (topic_res) {
-            // console.debug('Bubble up'); 
-            return topic_res;
-        }
-    }
-    return null;
-}
-
-
-const findTopicById = (topics, topic_key) => {
-    return findTopicByIdR(topics, topic_key);
-}
-const find_supertopic_by_id_r = (topic, subtopic_id) => {
-    console.debug(topic);
-    for (let subtopic of topic.subtopics) {
-        console.debug(subtopic.id);
-        if (subtopic.id === subtopic_id) {
-            console.info('Found subtopic id in a topic');
-            return topic;
-        }
-        let topic_res = topic.subtopics.map((t) => find_supertopic_by_id_r(t, subtopic_id)).filter((s) => (s));
-        console.debug(topic_res)
-        if (topic_res.length > 0) { console.debug('Bubble up'); return topic_res[0]; }
-    }
-    return null;
-}
-const find_supertopic_by_id = (topics, subtopic_id) => {
-    // Assumptions: ids are unique
-    console.debug(topics)
-    console.debug(subtopic_id)
-    let topic_res = topics.map((topic) => find_supertopic_by_id_r(topic, subtopic_id)).filter((s) => s)
-    console.debug(topic_res)
-    if (topic_res) { return topic_res[0] }
-    return null;
-}
+import {
+    findTopicByTopicId,
+    findTopicByTopicIdR
+} from './FindItems'
 
 const find_topic_by_name_r = (topics, topic_name) => {
     console.debug(topics);
@@ -109,10 +67,10 @@ const topicCompletelyContainsTasks = (topic, task) => {
 }
 
 const filterTopicsById_r = (topics, topicId) => {
-    // 1. enumerate all subtopics that do not match name, and filter their subtopics
-    // 2. filter all subtopics that do match name
-    // 3. return the topics object as is, just with all topics with title==topic_name filtered out,
-    // and all subtopics (or subsubtopics) with title==topic_name filtered out
+    // 1. enumerate all subtopics that do not match id, and filter their subtopics
+    // 2. filter all subtopics that do match id
+    // 3. return the topics object as is, just with all topics with id==topic_id filtered out,
+    // and all subtopics (or subsubtopics) with id==topic_id filtered out
     console.log(topics)
     return topics.filter((topic) => topic.id !== topicId).map(
         (topic) => { return { ...topic, subtopics: filterTopicsById_r(topic.subtopics, topicId) } }
@@ -133,7 +91,6 @@ const find_topic_by_name = (topics, topic_name) => {
     return find_topic_by_name_r(topics, topic_name);
 }
 const get_all_subtopics = (topic) => {
-
     return topic.subtopics.map((subtopic) => get_all_subtopics(subtopic)).concat(topic);
 }
 
@@ -143,7 +100,7 @@ const isTaskInAnyTopicV1 = (task, topics) => {
     // console.log(task.topics)
     task.topics = task.topics.filter((topicId) => {
         console.log(`Is topic ${topicId} in non-deleted topics ${topics}`)
-        return findTopicById(topics, topicId)
+        return findTopicByTopicId(topics, topicId)
     })
     // console.log(`Resulting task.topics: ${task.topics}`)
     // console.log(task.topics)
@@ -235,14 +192,14 @@ const getTopicTree_by_name = (topics, topic_name) => {
 
 }
 
-const getTopicTreeByIdRecursive = (topic, topicId) => {
+const getTopicPathByTopicIdRecursive = (topic, topicId) => {
     let foundTopicId = false;
     let nextString = "";
     if (topic.id == topicId) {
         nextString = topic.name
         foundTopicId = true;
     } else {
-        let strings = topic.subtopics.map((t) => getTopicTreeByIdRecursive(t, topicId)).filter((s) => s.length > 0)
+        let strings = topic.subtopics.map((t) => getTopicPathByTopicIdRecursive(t, topicId)).filter((s) => s.length > 0)
         if (strings.length > 0) {
             nextString = topic.name + '/' + strings[0]
             foundTopicId = true;
@@ -255,9 +212,9 @@ const getTopicTreeByIdRecursive = (topic, topicId) => {
     }
 }
 
-const getTopicTreeById = (topics, topicId) => {
+const getTopicPathByTopicId = (topics, topicId) => {
     let strings = topics.map((t) =>
-        getTopicTreeByIdRecursive(t, topicId)).filter((s) => s.length > 0)
+        getTopicPathByTopicIdRecursive(t, topicId)).filter((s) => s.length > 0)
     if (strings.length > 0) { return strings[0] } else { return "" }
 
 }
@@ -268,7 +225,7 @@ const getTopicTreeById = (topics, topicId) => {
 //     }
 // }
 
-const getTopicStates = (topics, tasks) => {
+const getTopicStats = (topics, tasks) => {
     // topicStats = [
     //     {
     //     topicId= ...
@@ -286,9 +243,7 @@ const getTopicStates = (topics, tasks) => {
 
 
 
-export default findTopicByIdR;
-export { findTopicById };
-export { find_topic_by_name_r };
+export default findTopicByTopicIdR;
 export { getFreeTaskKey };
 export { getFreeTaskId };
 export { isTaskInAnyTopic };
@@ -296,6 +251,5 @@ export { isTaskInAnyTopicV1 };
 export { filter_by_name_r };
 export { getFreeTopicKey };
 export { getTopicTree_by_name }
-export { getTopicTreeById }
-export { find_supertopic_by_id }
+export { getTopicPathByTopicId }
 export { filterTopicsById_r }
