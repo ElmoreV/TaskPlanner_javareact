@@ -1,5 +1,5 @@
 import {
-    find_topic_by_key,
+    findTopicById,
     getFreeTaskKey,
     getFreeTopicKey,
     isTaskInAnyTopic,
@@ -85,7 +85,7 @@ const getDuplicateTask = (setTasks, tasks, topics) => {
         let newTasks = [...tasks]
         const task_to_change = newTasks.find((task) => task.key == task_id);
         console.debug(task_to_change)
-        const topic_to_add = find_topic_by_key(topics, topic_id)
+        const topic_to_add = findTopicById(topics, topic_id)
         if (task_to_change.topics.includes(topic_to_add.title)) {
             console.info("Task is already in topic")
             return;
@@ -101,7 +101,7 @@ const getAddTask = (setTasks, tasks, topics, topic_key) => {
     const addTask = () => {
         let newTasks = [...tasks];
         console.log(topic_key);
-        const topic = find_topic_by_key(topics, topic_key);
+        const topic = findTopicById(topics, topic_key);
         if (topic) {
             const addedTask = {
                 taskName: `New Task ${getFreeTaskKey(tasks)}!`,
@@ -173,9 +173,9 @@ const getMoveTopic = (setTopics, topics) => {
     const moveTopic = (source_id, target_id) => {
         console.info(`Moving topic ${source_id} to ${target_id}`)
         // Cannot move a topic into one of its sub(sub)topics
-        let source_topic = find_topic_by_key(topics, source_id)
+        let source_topic = findTopicById(topics, source_id)
         console.info(source_topic)
-        let is_sub_topic = find_topic_by_key(source_topic.subtopics, target_id)
+        let is_sub_topic = findTopicById(source_topic.subtopics, target_id)
         if (is_sub_topic) {
             console.log("Cannot move a topic to its own subtopic")
             return
@@ -189,7 +189,7 @@ const getMoveTopic = (setTopics, topics) => {
             return
 
         }
-        let target_topic = find_topic_by_key(newTopics, target_id)
+        let target_topic = findTopicById(newTopics, target_id)
         console.info(target_topic)
         console.info(source_supertopic)
         // Copy the topic into the new topic
@@ -205,7 +205,7 @@ const getMoveTopic = (setTopics, topics) => {
 const getSetTopicNameFunc = (setTopics, topics, id) => {
     const setTopicName = (newTopicName) => {
         const newTopics = [...topics];
-        const topic_to_change = find_topic_by_key(topics, id);
+        const topic_to_change = findTopicById(topics, id);
         topic_to_change.title = newTopicName;
         setTopics(newTopics);
     }

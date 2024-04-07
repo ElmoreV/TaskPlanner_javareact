@@ -1,6 +1,6 @@
 
 
-const find_topic_by_key_r = (topics, topic_key) => {
+const findTopicByIdR = (topics, topic_key) => {
     // console.debug(topics);
     for (let topic of topics) {
         // console.debug(topic.id);
@@ -8,7 +8,7 @@ const find_topic_by_key_r = (topics, topic_key) => {
             // console.debug('Fount it!');
             return topic;
         }
-        let topic_res = find_topic_by_key_r(topic.subtopics, topic_key);
+        let topic_res = findTopicByIdR(topic.subtopics, topic_key);
         if (topic_res) {
             // console.debug('Bubble up'); 
             return topic_res;
@@ -16,8 +16,10 @@ const find_topic_by_key_r = (topics, topic_key) => {
     }
     return null;
 }
-const find_topic_by_key = (topics, topic_key) => {
-    return find_topic_by_key_r(topics, topic_key);
+
+
+const findTopicById = (topics, topic_key) => {
+    return findTopicByIdR(topics, topic_key);
 }
 const find_supertopic_by_id_r = (topic, subtopic_id) => {
     console.debug(topic);
@@ -141,7 +143,7 @@ const isTaskInAnyTopicV1 = (task, topics) => {
     // console.log(task.topics)
     task.topics = task.topics.filter((topicId) => {
         console.log(`Is topic ${topicId} in non-deleted topics ${topics}`)
-        return find_topic_by_key(topics, topicId)
+        return findTopicById(topics, topicId)
     })
     // console.log(`Resulting task.topics: ${task.topics}`)
     // console.log(task.topics)
@@ -284,8 +286,8 @@ const getTopicStates = (topics, tasks) => {
 
 
 
-export default find_topic_by_key_r;
-export { find_topic_by_key };
+export default findTopicByIdR;
+export { findTopicById };
 export { find_topic_by_name_r };
 export { getFreeTaskKey };
 export { getFreeTaskId };

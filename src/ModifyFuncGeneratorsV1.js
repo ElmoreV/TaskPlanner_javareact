@@ -1,5 +1,5 @@
 import {
-    find_topic_by_key,
+    findTopicById,
     getFreeTaskId,
     getFreeTopicKey,
     isTaskInAnyTopicV1,
@@ -34,7 +34,7 @@ const getChangeTaskTopic = (setTasks, tasks) => {
                 console.debug(task)
                 console.debug(oldTopicIds)
                 // TODO: there is a possibility that the new Topic Id does not exist.
-                // find_topic_by_id(topic,newTopicId)
+                // findTopicById(topic,newTopicId)
                 let containedTopicIds = task.topics.filter((tt) => oldTopicIds.includes(tt))
                 if (containedTopicIds.length > 0) {
                     console.debug("And comes from the old Topic indeed")
@@ -83,7 +83,7 @@ const getDuplicateTask = (setTasks, tasks, topics) => {
         let newTasks = [...tasks]
         const task_to_change = newTasks.find((task) => task.id == task_id);
         console.debug(task_to_change)
-        const topic_to_add = find_topic_by_key(topics, topic_id)
+        const topic_to_add = findTopicById(topics, topic_id)
         if (task_to_change.topics.includes(topic_to_add.id)) {
             console.info("Task is already in topic")
             return;
@@ -100,7 +100,7 @@ const getAddTask = (setTasks, tasks, topics, topicId) => {
     const addTask = () => {
         let newTasks = [...tasks];
         console.log(topicId);
-        const topic = find_topic_by_key(topics, topicId);
+        const topic = findTopicById(topics, topicId);
         if (topic) {
             const addedTask = {
                 name: `New Task ${getFreeTaskId(tasks)}!`,
@@ -284,9 +284,9 @@ const getMoveTopic = (setTopics, topics) => {
     const moveTopic = (source_id, target_id) => {
         console.info(`Moving topic ${source_id} to ${target_id}`)
         // Cannot move a topic into one of its sub(sub)topics
-        let source_topic = find_topic_by_key(topics, source_id)
+        let source_topic = findTopicById(topics, source_id)
         console.info(source_topic)
-        let is_sub_topic = find_topic_by_key(source_topic.subtopics, target_id)
+        let is_sub_topic = findTopicById(source_topic.subtopics, target_id)
         if (is_sub_topic) {
             console.log("Cannot move a topic to its own subtopic")
             return
@@ -297,7 +297,7 @@ const getMoveTopic = (setTopics, topics) => {
         let source_supertopic = find_supertopic_by_id(newTopics, source_id)
         if (!source_supertopic) {
             console.log("There is no supertopic. Is this a root topic?")
-            let target_topic = find_topic_by_key(newTopics, target_id)
+            let target_topic = findTopicById(newTopics, target_id)
             console.info(target_topic)
             console.info(source_supertopic)
             // Copy the topic into the new topic
@@ -313,7 +313,7 @@ const getMoveTopic = (setTopics, topics) => {
             return
 
         }
-        let target_topic = find_topic_by_key(newTopics, target_id)
+        let target_topic = findTopicById(newTopics, target_id)
         console.info(target_topic)
         console.info(source_supertopic)
         // Copy the topic into the new topic
