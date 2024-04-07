@@ -10,22 +10,24 @@ import {
 } from './Converter';
 import {
     getChangeTaskTopic,
-    getCompleteTask,
-    getToggleRepeatTask,
     getDeleteTask,
     getDeleteTopic,
     getDuplicateTask,
     getMoveTopic,
-    getPlanTaskForWeek,
-    getSetTaskNameFunc,
     getSetTopicNameFunc,
-    getUnplanTask,
     getUpdateTaskTopics,
     getToggleFold,
     getAddTask,
     getAddSubtopic,
     getAddTopic,
 } from './ModifyFuncGeneratorsV1'
+import {
+    getCompleteTask,
+    getToggleRepeatTask,
+    getPlanTaskForWeek,
+    getSetTaskNameFunc,
+    getUnplanTask,
+} from './TaskModifyFuncGens'
 import ImportExport from './ImportExport';
 
 class SelectedTask {

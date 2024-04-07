@@ -1,13 +1,15 @@
 import { useState, useEffect } from 'react';
 import PlannedTask from './PlannedTask';
 import {
-    getCompleteTask,
-    getScheduleTask,
     getChangeWeekOrderIndex,
     sanitizeWeekOrderIndex,
+} from './ModifyFuncGeneratorsV1';
+import {
+    getCompleteTask,
+    getScheduleTask,
     getUnplanTask,
     getSetTaskNameFunc
-} from './ModifyFuncGeneratorsV1';
+} from "./TaskModifyFuncGens";
 // TODO: add the topic name to the bar
 
 class SelectedTask {
