@@ -5,6 +5,14 @@ import { useState } from 'react'
 import ImportExport from './ImportExport';
 import Theme from "./Theme";
 
+// class TopicViewIndex {
+//   constructor(index, topicId, taskId) {
+//     this.index = index
+//     this.topicId = topicId
+//     this.taskId = taskId
+//   }
+// }
+
 
 function App() {
   console.debug("Rendering App")
@@ -55,19 +63,23 @@ function App() {
     { name: "Backup opruimen", id: 5, topics: [1], completed: false, thisWeek: false, repeated: true, scheduled: false, weekOrderIndex: 0 },
   ])
 
-
-  //v0
-  // const [tasks, setTasks] = useState([
-  //   { taskName: "Fiets repareren", key: 0, topics: ["Repareren"], completed: true, thisWeek: false },
-  //   { taskName: "Outer Wilds", key: 1, topics: ["Gamen", "Onderhoud"], completed: false, thisWeek: false },
-  //   { taskName: "Badkamer", key: 2, topics: ["Onderhoud"], completed: true, thisWeek: false },
-  //   { taskName: "Backup opruimen", key: 5, topics: ["Onderhoud"], completed: false, thisWeek: false },
+  // Note: this wouldn't work if we could duplicate topics as well
+  // and if we had subtasks, because the supertasks could be 
+  // duplicated as well...... Let's do this for now.
+  // Anyway, these are all global indices.
+  // const [topicViewIndices, setTopicViewIndices] = useState([
+  //   new TopicViewIndex(1, 12, 0),
+  //   new TopicViewIndex(2, 21, 1),
+  //   new TopicViewIndex(3, 1, 2),
+  //   new TopicViewIndex(4, 1, 5),
+  //   new TopicViewIndex(5, 1, 1),
+  //   new TopicViewIndex(6, 12, null) // A topic view index
   // ])
 
 
   const [view, setView] = useState(VIEW_ALL_TASKS)
-  const [fancy, setFancy] = useState(false)
-  const [darkMode, setDarkMode] = useState(true)
+  const [fancy, setFancy] = useState(true)
+  const [darkMode, setDarkMode] = useState(false)
 
   const onMakeFancyChange = () => {
     setFancy(!fancy)
@@ -77,50 +89,50 @@ function App() {
     setDarkMode(!darkMode)
   }
 
-  return ( 
+  return (
     <Theme darkMode={darkMode}>
-    <div className="App">
-      <div className="contents">
-        <ImportExport
-          tasks={tasks}
-          topics={topics}
-          setTasks={setTasks}
-          setTopics={setTopics} />
-        <ViewSelector
-          viewSetter={setView} />
-        {view === VIEW_ALL_TASKS && <TaskList
-          tasks={tasks}
-          setTasks={setTasks}
-          topics={topics}
-          setTopics={setTopics}
-          fancy={fancy}
-        />}
-        {view === VIEW_PLANNED_TASKS && <PlannedList
-          tasks={tasks}
-          setTasks={setTasks}
-          topics={topics}
-          setTopics={setTopics}
-          fancy={fancy}
-        />}
-        {view === VIEW_DAILY_PLANNING}
-        <div classStr="settingsUI">
-        <label><input
-          type="checkbox"
-          name='MakeFancy'
-          onChange={onMakeFancyChange}
-          className="form-check-input"
-          defaultChecked={fancy}
-        />Fancy layout</label><br/>
-        <label><input
-          type="checkbox"
-          name='DarkMode'
-          onChange={onDarkModeChange}
-          className="form-check-input"
-          defaultChecked={darkMode}
-        />Dark Mode</label>
+      <div className="App">
+        <div className="contents">
+          <ImportExport
+            tasks={tasks}
+            topics={topics}
+            setTasks={setTasks}
+            setTopics={setTopics} />
+          <ViewSelector
+            viewSetter={setView} />
+          {view === VIEW_ALL_TASKS && <TaskList
+            tasks={tasks}
+            setTasks={setTasks}
+            topics={topics}
+            setTopics={setTopics}
+            fancy={fancy}
+          />}
+          {view === VIEW_PLANNED_TASKS && <PlannedList
+            tasks={tasks}
+            setTasks={setTasks}
+            topics={topics}
+            setTopics={setTopics}
+            fancy={fancy}
+          />}
+          {view === VIEW_DAILY_PLANNING}
+          <div classStr="settingsUI">
+            <label><input
+              type="checkbox"
+              name='MakeFancy'
+              onChange={onMakeFancyChange}
+              className="form-check-input"
+              defaultChecked={fancy}
+            />Fancy layout</label><br />
+            <label><input
+              type="checkbox"
+              name='DarkMode'
+              onChange={onDarkModeChange}
+              className="form-check-input"
+              defaultChecked={darkMode}
+            />Dark Mode</label>
+          </div>
         </div>
       </div>
-    </div>
     </Theme>
   );
 }
