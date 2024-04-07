@@ -10,6 +10,7 @@ import {
     getUnplanTask,
     getSetTaskNameFunc
 } from "./TaskModifyFuncGens";
+
 // TODO: add the topic name to the bar
 
 class SelectedTask {

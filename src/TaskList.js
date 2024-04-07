@@ -14,9 +14,7 @@ import {
     getDeleteTopic,
     getDuplicateTask,
     getMoveTopic,
-    getSetTopicNameFunc,
     getUpdateTaskTopics,
-    getToggleFold,
     getAddTask,
     getAddSubtopic,
     getAddTopic,
@@ -28,6 +26,11 @@ import {
     getSetTaskNameFunc,
     getUnplanTask,
 } from './TaskModifyFuncGens'
+import {
+    getToggleFold,
+    getSetTopicNameFunc,
+} from './TopicModifyFuncGens'
+
 import ImportExport from './ImportExport';
 
 class SelectedTask {
