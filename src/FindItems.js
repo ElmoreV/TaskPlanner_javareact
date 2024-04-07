@@ -1,9 +1,4 @@
-// Find (exactly 1) supertopic of topic id
-// Find subtopics of topic id
-// Find topic of topic id
-// Find child tasks of topic id
-// Find task of task id
-// Find parent topics of task id
+
 const findTopicByTopicIdR = (topics, topic_key) => {
     // console.debug(topics);
     for (let topic of topics) {
@@ -21,20 +16,20 @@ const findTopicByTopicIdR = (topics, topic_key) => {
     return null;
 }
 
-
 const findTopicByTopicId = (topics, topic_key) => {
     return findTopicByTopicIdR(topics, topic_key);
 }
 
-const findSupertopicByTopicId_r = (topic, subtopic_id) => {
-    console.debug(topic);
+const findSupertopicByTopicId_r = (topic, subtopicId) => {
+    // For every subtopic, see if it matches the id
+    // otherwise, search through the subtopics of the subtopic
     for (let subtopic of topic.subtopics) {
         console.debug(subtopic.id);
-        if (subtopic.id === subtopic_id) {
+        if (subtopic.id === subtopicId) {
             console.info('Found subtopic id in a topic');
             return topic;
         }
-        let topic_res = topic.subtopics.map((t) => findSupertopicByTopicId_r(t, subtopic_id)).filter((s) => (s));
+        let topic_res = topic.subtopics.map((t) => findSupertopicByTopicId_r(t, subtopicId)).filter((s) => (s));
         console.debug(topic_res)
         if (topic_res.length > 0) { console.debug('Bubble up'); return topic_res[0]; }
     }
@@ -42,8 +37,7 @@ const findSupertopicByTopicId_r = (topic, subtopic_id) => {
 }
 const findSupertopicByTopicId = (topics, subtopic_id) => {
     // Assumptions: ids are unique
-    console.debug(topics)
-    console.debug(subtopic_id)
+    // For all root topics, 
     let topic_res = topics.map((topic) => findSupertopicByTopicId_r(topic, subtopic_id)).filter((s) => s)
     console.debug(topic_res)
     if (topic_res) { return topic_res[0] }
@@ -63,13 +57,18 @@ const findTaskByTaskId = (tasks, taskId) => {
     return tasks.find((t) => t.id == taskId)
 }
 
+const findTopicsByTaskId = (tasks, topics, taskId) => {
+    let task = findTaskByTaskId(tasks, taskId)
+    topics = task.topics.map((topicId) => findTopicByTopicId(topics, topicId))
+}
+
 
 export { findTopicByTopicId };
 export { findTopicByTopicIdR };
 export { findSupertopicByTopicId };
 export { findSubtopicsByTopicId };
 export { findTasksByTopicId };
-// export { findTaskByTaskId };
-// export { findTopicsByTaskId };
+export { findTaskByTaskId };
+export { findTopicsByTaskId };
 
 // export { findFirstTopicByNameR };

@@ -21,11 +21,6 @@ const getFreeTaskId = (tasks) => {
     return 1 + tasks.reduce((max_id, task) => Math.max(max_id, task.id), 0);
 }
 
-
-const getFreeTaskKey = (tasks) => {
-    return 1 + tasks.reduce((max_key, task) => Math.max(max_key, task.key), 0);
-}
-
 function isEqual(a, b) {
     if (a.length !== b.length) {
         return false;
@@ -242,14 +237,12 @@ const getTopicStats = (topics, tasks) => {
 }
 
 
-
-export default findTopicByTopicIdR;
-export { getFreeTaskKey };
+export default getFreeTaskId;
 export { getFreeTaskId };
+export { getFreeTopicKey };
 export { isTaskInAnyTopic };
 export { isTaskInAnyTopicV1 };
 export { filter_by_name_r };
-export { getFreeTopicKey };
 export { getTopicTree_by_name }
 export { getTopicPathByTopicId }
 export { filterTopicsById_r }
