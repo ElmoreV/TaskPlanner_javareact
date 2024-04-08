@@ -341,7 +341,7 @@
 - [ ] There is no easy way to deduplicate a duplicated task - 1m
 - [ ] Dragging a task (in planned list) below the entire list, should put it at the bottom. - 1m
 - [ ] Cannot spawn another task from a task completed in the weekly/planned list (completing the task made another todo) - 1m
-- [ ] No possibility to create a new task in the planned list - 1m      Spontaneous ideas that should be categorized later
+- [ ] No possibility to create a new task in the planned list/Spontaneous ideas that should be categorized later -2m
 - [ ] Cannot split a task into multiple tasks in the weekly list - 1m
 - [ ] Cannot uncomplete/plan multiple selected items at once -1m
 - [ ] Enter does not finish text input in planned list - 1m
@@ -365,8 +365,7 @@
 
 ### Missing data structure:
 
-- [ ] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -4m
-- [ ] Not being able to have a main task and subtasks - 5m
+- [ ] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -10m
 - [ ] There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -9m
 - [ ] Cannot mark a task as Blocked - 2m
 - [ ] I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 2m
@@ -374,7 +373,7 @@
 - [x] Fearing to lose a task by not being able to make it repeatable: 3 - gefixt
 - [x] Not being able to drag multiple items at once in the topic view - 16m - gefixt
 - [x] ot being able to drag multiple items at once in the planned view - 30m - gefixt
-- [ ] Cannot order/sort the tasks/topics on the topic view - 20m
+- [ ] Cannot order/sort the tasks/topics on the topic view - 21m
 - [ ] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 10m
 
 ## Import/export:
@@ -388,3 +387,7 @@
 - [x] Needing to save the markdown, yaml and json all separately - 30m - gefixt?
 - [ ] Cannot partially add a markdown/json file to a topic (create the tree there from the json/merge two jsons) - 1m
 - [ ] Cannot export the tree within a topic  - 0m
+
+# Uncategorized:
+
+- [ ] New Task 255!

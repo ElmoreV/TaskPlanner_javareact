@@ -290,6 +290,12 @@
           "subtopics": []
         }
       ]
+    },
+    {
+      "name": "Uncategorized",
+      "id": 51,
+      "unfolded": true,
+      "subtopics": []
     }
   ],
   "tasks": [
@@ -1563,7 +1569,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -4m",
+      "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -10m",
       "id": 179,
       "topics": [
         50
@@ -1703,14 +1709,6 @@
       "id": 196,
       "topics": [
         45
-      ],
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Not being able to have a main task and subtasks - 5m",
-      "id": 202,
-      "topics": [
-        50
       ],
       "weekOrderIndex": 0
     },
@@ -1891,7 +1889,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "No possibility to create a new task in the planned list - 1m      Spontaneous ideas that should be categorized later",
+      "name": "No possibility to create a new task in the planned list/Spontaneous ideas that should be categorized later -2m",
       "id": 225,
       "topics": [
         46
@@ -2142,7 +2140,15 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Cannot order/sort the tasks/topics on the topic view - 20m",
+      "name": "New Task 255!",
+      "id": 255,
+      "topics": [
+        51
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Cannot order/sort the tasks/topics on the topic view - 21m",
       "id": 197,
       "topics": [
         50
