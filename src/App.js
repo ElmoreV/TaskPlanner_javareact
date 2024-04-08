@@ -5,13 +5,13 @@ import { useState } from 'react'
 import ImportExport from './ImportExport';
 import Theme from "./Theme";
 
-// class TopicViewIndex {
-//   constructor(index, topicId, taskId) {
-//     this.index = index
-//     this.topicId = topicId
-//     this.taskId = taskId
-//   }
-// }
+class TopicViewIndex {
+  constructor(index, topicId, taskId) {
+    this.index = index
+    this.topicId = topicId
+    this.taskId = taskId
+  }
+}
 
 
 function App() {
@@ -67,14 +67,14 @@ function App() {
   // and if we had subtasks, because the supertasks could be 
   // duplicated as well...... Let's do this for now.
   // Anyway, these are all global indices.
-  // const [topicViewIndices, setTopicViewIndices] = useState([
-  //   new TopicViewIndex(1, 12, 0),
-  //   new TopicViewIndex(2, 21, 1),
-  //   new TopicViewIndex(3, 1, 2),
-  //   new TopicViewIndex(4, 1, 5),
-  //   new TopicViewIndex(5, 1, 1),
-  //   new TopicViewIndex(6, 12, null) // A topic view index
-  // ])
+  const [topicViewIndices, setTopicViewIndices] = useState([
+    new TopicViewIndex(1, 12, 0),
+    new TopicViewIndex(2, 21, 1),
+    new TopicViewIndex(3, 1, 2),
+    new TopicViewIndex(4, 1, 5),
+    new TopicViewIndex(5, 1, 1),
+    new TopicViewIndex(6, 12, null) // A topic view index
+  ])
 
 
   const [view, setView] = useState(VIEW_ALL_TASKS)
