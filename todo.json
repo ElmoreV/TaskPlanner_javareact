@@ -2140,7 +2140,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "New Task 255!",
+      "name": "Make UI look professional",
       "id": 255,
       "topics": [
         51
@@ -2400,6 +2400,27 @@
       "thisWeek": true,
       "weekOrderIndex": 27,
       "completed": true
+    },
+    {
+      "name": "Make Dark mode work",
+      "id": 256,
+      "topics": [
+        51
+      ]
+    },
+    {
+      "name": "Adding processes as tasks (this is again a type of supertask/subtask)",
+      "id": 257,
+      "topics": [
+        51
+      ]
+    },
+    {
+      "name": "Track different activities (need daily planning + completion timings)",
+      "id": 258,
+      "topics": [
+        51
+      ]
     }
   ]
 }

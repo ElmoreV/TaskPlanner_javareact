@@ -390,4 +390,7 @@
 
 # Uncategorized:
 
-- [ ] New Task 255!
+- [ ] Make UI look professional
+- [ ] Make Dark mode work
+- [ ] Adding processes as tasks (this is again a type of supertask/subtask)
+- [ ] Track different activities (need daily planning + completion timings)
