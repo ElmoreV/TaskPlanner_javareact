@@ -63,7 +63,7 @@
 - [ ] Improve collapse and dropdown icon
 - [x] Make the tasks to have a good width. Naive: text-cutoff
 - [ ] Prettify text input for tasks
-- [ ] Not being able to collapse or fold all the topics with one button - 20m
+- [ ] Not being able to collapse or fold all the topics with one button - 21m
 - [ ] Add Ability to unfold a topic and all its subtopics in one go
 
 ### Functionality:
@@ -312,8 +312,8 @@
 - [x] No dark mode - 1m -gefixt
 - [ ] Topic text is not handled right and makes the buttons go crazy - 1m
 - [ ] Text width on a narrow screen is not handled well (text width not respected) - 5m
-- [ ] Not being able to collapse or fold all the topics with one button - 20m
-- [ ] Repeated tasks do not show last completion/cannot retain information about when the next time would be -13m+
+- [ ] Not being able to collapse or fold all the topics with one button - 21m
+- [ ] Repeated tasks do not show last completion/cannot retain information about when the next time would be -14m+
 - [ ] It is unclear where a duplicated task is already (is it already duplicated?) -10m
 
 ### Filtering:
@@ -365,16 +365,16 @@
 
 ### Missing data structure:
 
-- [ ] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -10m
+- [ ] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -11m
 - [ ] There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -9m
-- [ ] Cannot mark a task as Blocked - 2m
-- [ ] I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 2m
+- [ ] Cannot mark a task as Blocked - 3m
+- [ ] I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 3m
 - [ ] Inability to add comments to a (repeating) task - 1m      Missing information: what time range has been checked
 - [x] Fearing to lose a task by not being able to make it repeatable: 3 - gefixt
 - [x] Not being able to drag multiple items at once in the topic view - 16m - gefixt
 - [x] ot being able to drag multiple items at once in the planned view - 30m - gefixt
-- [ ] Cannot order/sort the tasks/topics on the topic view - 21m
-- [ ] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 10m
+- [ ] Cannot order/sort the tasks/topics on the topic view - 23m
+- [ ] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 12m
 
 ## Import/export:
 
@@ -390,4 +390,6 @@
 
 # Uncategorized:
 
-- [ ] New Task 255!
+- [ ] The UI does not look professional -1m
+- [ ] The Dark Mode does not work correctly -1m
+- [ ] There needs to be some feedback on when something was done (an event log) - 1m

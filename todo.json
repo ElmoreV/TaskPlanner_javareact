@@ -1569,7 +1569,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -10m",
+      "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -11m",
       "id": 179,
       "topics": [
         50
@@ -1793,7 +1793,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Cannot mark a task as Blocked - 2m",
+      "name": "Cannot mark a task as Blocked - 3m",
       "id": 213,
       "topics": [
         50
@@ -1833,7 +1833,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 2m",
+      "name": "I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 3m",
       "id": 218,
       "topics": [
         50
@@ -2140,7 +2140,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "New Task 255!",
+      "name": "The UI does not look professional -1m",
       "id": 255,
       "topics": [
         51
@@ -2148,7 +2148,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Cannot order/sort the tasks/topics on the topic view - 21m",
+      "name": "Cannot order/sort the tasks/topics on the topic view - 23m",
       "id": 197,
       "topics": [
         50
@@ -2175,7 +2175,7 @@
       "weekOrderIndex": 3
     },
     {
-      "name": "Not being able to collapse or fold all the topics with one button - 20m",
+      "name": "Not being able to collapse or fold all the topics with one button - 21m",
       "id": 174,
       "topics": [
         45,
@@ -2203,7 +2203,7 @@
       "thisWeek": true
     },
     {
-      "name": "Repeated tasks do not show last completion/cannot retain information about when the next time would be -13m+",
+      "name": "Repeated tasks do not show last completion/cannot retain information about when the next time would be -14m+",
       "id": 175,
       "topics": [
         45
@@ -2240,7 +2240,7 @@
       "completed": true
     },
     {
-      "name": "It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 10m",
+      "name": "It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 12m",
       "id": 200,
       "topics": [
         50
@@ -2400,6 +2400,20 @@
       "thisWeek": true,
       "weekOrderIndex": 27,
       "completed": true
+    },
+    {
+      "name": "The Dark Mode does not work correctly -1m",
+      "id": 256,
+      "topics": [
+        51
+      ]
+    },
+    {
+      "name": "There needs to be some feedback on when something was done (an event log) - 1m",
+      "id": 257,
+      "topics": [
+        51
+      ]
     }
   ]
 }
