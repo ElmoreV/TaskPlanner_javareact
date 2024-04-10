@@ -2409,8 +2409,16 @@
       ]
     },
     {
-      "name": "There needs to be some feedback on when something was done (an event log) - 1m",
+      "name": "There needs to be some feedback on when something was done (an event log) - 1m/Adding processes as tasks (this is again a type of supertask/subtask)",
+
       "id": 257,
+      "topics": [
+        51
+      ]
+    },
+    {
+      "name": "Track different activities (need daily planning + completion timings)",
+      "id": 258,
       "topics": [
         51
       ]

@@ -393,3 +393,8 @@
 - [ ] The UI does not look professional -1m
 - [ ] The Dark Mode does not work correctly -1m
 - [ ] There needs to be some feedback on when something was done (an event log) - 1m
+- [ ] Make UI look professional
+- [ ] Make Dark mode work
+- [ ] Adding processes as tasks (this is again a type of supertask/subtask)
+- [ ] Track different activities (need daily planning + completion timings)
+
