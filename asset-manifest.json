@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.19064278.css",
-    "main.js": "/static/js/main.bea9db0b.js",
-    "index.html": "/index.html",
-    "main.19064278.css.map": "/static/css/main.19064278.css.map",
-    "main.bea9db0b.js.map": "/static/js/main.bea9db0b.js.map"
+    "main.css": "/Taskplanner_javareact/static/css/main.19064278.css",
+    "main.js": "/Taskplanner_javareact/static/js/main.bea9db0b.js",
+    "index.html": "/Taskplanner_javareact/index.html",
+    "main.19064278.css.map": "/Taskplanner_javareact/static/css/main.19064278.css.map",
+    "main.bea9db0b.js.map": "/Taskplanner_javareact/static/js/main.bea9db0b.js.map"
   },
   "entrypoints": [
     "static/css/main.19064278.css",
