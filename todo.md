@@ -63,7 +63,7 @@
 - [ ] Improve collapse and dropdown icon
 - [x] Make the tasks to have a good width. Naive: text-cutoff
 - [ ] Prettify text input for tasks
-- [ ] Not being able to collapse or fold all the topics with one button - 20m
+- [ ] Not being able to collapse or fold all the topics with one button - 22m
 - [ ] Add Ability to unfold a topic and all its subtopics in one go
 
 ### Functionality:
@@ -312,7 +312,7 @@
 - [x] No dark mode - 1m -gefixt
 - [ ] Topic text is not handled right and makes the buttons go crazy - 1m
 - [ ] Text width on a narrow screen is not handled well (text width not respected) - 5m
-- [ ] Not being able to collapse or fold all the topics with one button - 20m
+- [ ] Not being able to collapse or fold all the topics with one button - 22m
 - [ ] Repeated tasks do not show last completion/cannot retain information about when the next time would be -13m+
 - [ ] It is unclear where a duplicated task is already (is it already duplicated?) -10m
 
@@ -365,7 +365,7 @@
 
 ### Missing data structure:
 
-- [ ] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -10m
+- [ ] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -11m
 - [ ] There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -9m
 - [ ] Cannot mark a task as Blocked - 2m
 - [ ] I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 2m
@@ -387,6 +387,7 @@
 - [x] Needing to save the markdown, yaml and json all separately - 30m - gefixt?
 - [ ] Cannot partially add a markdown/json file to a topic (create the tree there from the json/merge two jsons) - 1m
 - [ ] Cannot export the tree within a topic  - 0m
+- [ ] Create a way to solve merge conflicts between two saved task-lists. Especially for the JSON. - 1M
 
 # Uncategorized:
 

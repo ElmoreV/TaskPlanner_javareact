@@ -272,7 +272,7 @@
             {
               "name": "It takes a huge time to drag a task from the top to the bottom - 13m ",
               "id": 49,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
@@ -1569,7 +1569,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -10m",
+      "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -11m",
       "id": 179,
       "topics": [
         50
@@ -2175,7 +2175,7 @@
       "weekOrderIndex": 3
     },
     {
-      "name": "Not being able to collapse or fold all the topics with one button - 20m",
+      "name": "Not being able to collapse or fold all the topics with one button - 22m",
       "id": 174,
       "topics": [
         45,
@@ -2420,6 +2420,13 @@
       "id": 258,
       "topics": [
         51
+      ]
+    },
+    {
+      "name": "Create a way to solve merge conflicts between two saved task-lists. Especially for the JSON. - 1M",
+      "id": 259,
+      "topics": [
+        47
       ]
     }
   ]
