@@ -291,7 +291,7 @@
 ## Major/crashes/bugs:
 
 - [ ] Make the sorting of the weekly planning not change the topic view order - 1M
-- [ ] The data is lost when something in react is changed - 1M
+- [ ] The data is lost when something in react is changed/firefox crashes - 2M
 - [x] Bug: source_supertopic is undefined in moveTopic - gefixt
 
 ## Relaying information:
@@ -313,7 +313,7 @@
 - [ ] Topic text is not handled right and makes the buttons go crazy - 1m
 - [ ] Text width on a narrow screen is not handled well (text width not respected) - 5m
 - [ ] Not being able to collapse or fold all the topics with one button - 22m
-- [ ] Repeated tasks do not show last completion/cannot retain information about when the next time would be -13m+
+- [ ] Repeated tasks do not show last completion/cannot retain information about when the next time would be -14m+
 - [ ] It is unclear where a duplicated task is already (is it already duplicated?) -10m
 
 ### Filtering:
@@ -344,7 +344,7 @@
 - [ ] No possibility to create a new task in the planned list/Spontaneous ideas that should be categorized later -2m
 - [ ] Cannot split a task into multiple tasks in the weekly list - 1m
 - [ ] Cannot uncomplete/plan multiple selected items at once -1m
-- [ ] Enter does not finish text input in planned list - 1m
+- [ ] Enter does not finish text input in planned list - 3m
 - [x] Not being able to complete tasks on the weekly view: 1 - gefixt
 - [x] Not being able to clear all completed items from the weekly list: 2M - gefixt
 - [x]  Not being able to remove items from the weekly list on the weekly list: 4m - gefixt
@@ -373,8 +373,8 @@
 - [x] Fearing to lose a task by not being able to make it repeatable: 3 - gefixt
 - [x] Not being able to drag multiple items at once in the topic view - 16m - gefixt
 - [x] ot being able to drag multiple items at once in the planned view - 30m - gefixt
-- [ ] Cannot order/sort the tasks/topics on the topic view - 21m
-- [ ] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 10m
+- [ ] Cannot order/sort the tasks/topics on the topic view - 23m
+- [ ] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 12m
 
 ## Import/export:
 

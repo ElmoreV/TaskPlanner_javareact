@@ -1561,7 +1561,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "The data is lost when something in react is changed - 1M",
+      "name": "The data is lost when something in react is changed/firefox crashes - 2M",
       "id": 178,
       "topics": [
         44
@@ -1913,7 +1913,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Enter does not finish text input in planned list - 1m",
+      "name": "Enter does not finish text input in planned list - 3m",
       "id": 228,
       "topics": [
         46
@@ -2148,7 +2148,39 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Cannot order/sort the tasks/topics on the topic view - 21m",
+      "name": "Make Dark mode work",
+      "id": 256,
+      "topics": [
+        51
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Adding processes as tasks (this is again a type of supertask/subtask)",
+      "id": 257,
+      "topics": [
+        51
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Track different activities (need daily planning + completion timings)",
+      "id": 258,
+      "topics": [
+        51
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Create a way to solve merge conflicts between two saved task-lists. Especially for the JSON. - 1M",
+      "id": 259,
+      "topics": [
+        47
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Cannot order/sort the tasks/topics on the topic view - 23m",
       "id": 197,
       "topics": [
         50
@@ -2203,7 +2235,7 @@
       "thisWeek": true
     },
     {
-      "name": "Repeated tasks do not show last completion/cannot retain information about when the next time would be -13m+",
+      "name": "Repeated tasks do not show last completion/cannot retain information about when the next time would be -14m+",
       "id": 175,
       "topics": [
         45
@@ -2240,7 +2272,7 @@
       "completed": true
     },
     {
-      "name": "It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 10m",
+      "name": "It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 12m",
       "id": 200,
       "topics": [
         50
@@ -2400,34 +2432,6 @@
       "thisWeek": true,
       "weekOrderIndex": 27,
       "completed": true
-    },
-    {
-      "name": "Make Dark mode work",
-      "id": 256,
-      "topics": [
-        51
-      ]
-    },
-    {
-      "name": "Adding processes as tasks (this is again a type of supertask/subtask)",
-      "id": 257,
-      "topics": [
-        51
-      ]
-    },
-    {
-      "name": "Track different activities (need daily planning + completion timings)",
-      "id": 258,
-      "topics": [
-        51
-      ]
-    },
-    {
-      "name": "Create a way to solve merge conflicts between two saved task-lists. Especially for the JSON. - 1M",
-      "id": 259,
-      "topics": [
-        47
-      ]
     }
   ]
 }
