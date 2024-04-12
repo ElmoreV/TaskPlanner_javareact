@@ -105,7 +105,7 @@ const PlannedList = (props) => {
                 defaultChecked={hideScheduledItems}
             />Hide scheduled tasks</label>
             <button onClick={copyListToClipboard}>
-                Copy to clipboardd
+                Copy to clipboard
             </button>
 
             <ul key='root_topics'>
