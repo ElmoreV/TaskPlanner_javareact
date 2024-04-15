@@ -18,6 +18,7 @@ import {
     getAddTask,
     getAddSubtopic,
     getAddTopic,
+    sanitizeTopicOrderIndex,
 } from './ModifyFuncGeneratorsV1'
 import {
     getCompleteTask,
@@ -56,6 +57,9 @@ const recursiveShowTopic = (topic, tasks,
     // console.debug('Hello2')
     // console.debug(topics)
     // console.debug(topic)
+    const findTopicViewIdx=(topicId,task)=>{
+        return task.topicViewIndices[task.topics.findIndex(el=>el==topicId)]
+    }
 
     return (<div key={'div_' + topic.id}><li key={topic.id}>
         <Topic
@@ -86,32 +90,36 @@ const recursiveShowTopic = (topic, tasks,
         ))}</ul>
         <ul key={topic.id + '_tasks'}>
             {topic.unfolded && tasks//.sort((taskA, taskB) => { return taskA.name > taskB.name })
-                .map((task) => (
-                    (!(task.completed && hideCompletedItems) && task.topics.includes(topic.id) && (task.repeated || !showRepeatedOnly)) ?
-                        <li key={topic.id + ' - ' + task.id}>
-                            <Task name={task.name}
-                                id={task.id}
-                                completed={task.completed}
-                                currentTopicName={topic.name}
-                                currentTopicId={topic.id}
-                                setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
-                                deleteTask={getDeleteTask(setTasks, tasks, task.id)}
-                                completeTask={getCompleteTask(setTasks, tasks, task.id)}
-                                plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
-                                unplan={getUnplanTask(setTasks, tasks, task.id)}
-                                toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
-                                planned={task.thisWeek}
-                                repeated={task.repeated}
-                                addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
-                                deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
-                                selected={selectedTasks.find((st) => (st.taskId == task.id && st.topicId == topic.id)) ? true : false}
-                                selectedTasks={selectedTasks}
-                                changeTopic={getChangeTaskTopic(setTasks, tasks)}
-                                duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
-                                fancy={fancy}
+                // .map((task) => (
+                //     ( && task.topics.includes(topic.id) ) ?
+                .filter((task) => task.topics.includes(topic.id))
+                .filter((task) => (!(task.completed && hideCompletedItems) && (task.repeated || !showRepeatedOnly)))
+                .slice(0).sort((taskA,taskB)=>{return findTopicViewIdx(topic.id,taskA)-findTopicViewIdx(topic.id,taskB)})
+                .map(task => (
+                    <li key={topic.id + ' - ' + task.id}>
+                        <Task name={task.name}
+                            id={task.id}
+                            completed={task.completed}
+                            currentTopicName={topic.name}
+                            currentTopicId={topic.id}
+                            setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
+                            deleteTask={getDeleteTask(setTasks, tasks, task.id)}
+                            completeTask={getCompleteTask(setTasks, tasks, task.id)}
+                            plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
+                            unplan={getUnplanTask(setTasks, tasks, task.id)}
+                            toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
+                            planned={task.thisWeek}
+                            repeated={task.repeated}
+                            addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
+                            deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
+                            selected={selectedTasks.find((st) => (st.taskId == task.id && st.topicId == topic.id)) ? true : false}
+                            selectedTasks={selectedTasks}
+                            changeTopic={getChangeTaskTopic(setTasks, tasks)}
+                            duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
+                            fancy={fancy}
 
-                            />
-                        </li> : null))}
+                        />
+                    </li>))}
         </ul></div>
     )
 }
@@ -151,6 +159,7 @@ const TaskList = (props) => {
     const [showRepeatedOnly, setShowRepeatedOnly] = useState(false)
 
     const [selectedTasks, setSelectedTasks] = useState([])
+    const [runOnce, setRunOnce] = useState(false)
 
 
     const converter_callback = () => {
@@ -207,6 +216,10 @@ const TaskList = (props) => {
     // }
 
 
+    if (runOnce < 2) {
+        sanitizeTopicOrderIndex(topics, tasks, setTasks)
+        // setRunOnce(runOnce + 1)
+    }
     return (
         // <div>
         <div className='task-list'>

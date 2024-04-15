@@ -57,24 +57,15 @@ function App() {
 
   // v1
   const [tasks, setTasks] = useState([
-    { name: "Fiets repareren", id: 0, topics: [12], completed: true, thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 1 },
-    { name: "Outer Wilds", id: 1, topics: [21, 1], completed: false, thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 0 },
-    { name: "Badkamer", id: 2, topics: [1], completed: false, thisWeek: true, repeated: false, scheduled: true, weekOrderIndex: 2 },
-    { name: "Backup opruimen", id: 5, topics: [1], completed: false, thisWeek: false, repeated: true, scheduled: false, weekOrderIndex: 0 },
+    { name: "Fiets repareren", id: 0, topics: [12],topicViewIndices: [6], completed: true, thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 1 },
+    { name: "Outer Wilds", id: 1, topics: [21, 1],topicViewIndices:[5,2], completed: false, thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 0 },
+    { name: "Badkamer", id: 2, topics: [1], topicViewIndices:[4], completed: false, thisWeek: true, repeated: false, scheduled: true, weekOrderIndex: 2 },
+    { name: "Backup opruimen", id: 5, topics: [1],topicViewIndices:[3], completed: false, thisWeek: false, repeated: true, scheduled: false, weekOrderIndex: 0 },
   ])
 
-  // Note: this wouldn't work if we could duplicate topics as well
-  // and if we had subtasks, because the supertasks could be 
-  // duplicated as well...... Let's do this for now.
-  // Anyway, these are all global indices.
-  const [topicViewIndices, setTopicViewIndices] = useState([
-    new TopicViewIndex(1, 12, 0),
-    new TopicViewIndex(2, 21, 1),
-    new TopicViewIndex(3, 1, 2),
-    new TopicViewIndex(4, 1, 5),
-    new TopicViewIndex(5, 1, 1),
-    new TopicViewIndex(6, 12, null) // A topic view index
-  ])
+  // Order of Tasks would be inside of the tasks by orderId
+  // Order of Topic is just the order of the subtopics
+  
 
 
   const [view, setView] = useState(VIEW_ALL_TASKS)
