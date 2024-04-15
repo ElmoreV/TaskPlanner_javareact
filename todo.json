@@ -2148,6 +2148,46 @@
       "weekOrderIndex": 0
     },
     {
+      "name": "Make Dark mode work",
+      "id": 256,
+      "topics": [
+        51
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Adding processes as tasks (this is again a type of supertask/subtask)",
+      "id": 257,
+      "topics": [
+        51
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Track different activities (need daily planning + completion timings)",
+      "id": 258,
+      "topics": [
+        51
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add browser tab icon",
+      "id": 259,
+      "topics": [
+        51
+      ],
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add name of file to Tab Name",
+      "id": 260,
+      "topics": [
+        51
+      ],
+      "weekOrderIndex": 0
+    },
+    {
       "name": "Cannot order/sort the tasks/topics on the topic view - 21m",
       "id": 197,
       "topics": [
@@ -2175,7 +2215,7 @@
       "weekOrderIndex": 3
     },
     {
-      "name": "Not being able to collapse or fold all the topics with one button - 20m",
+      "name": "Not being able to collapse or fold all the topics with one button - 21m",
       "id": 174,
       "topics": [
         45,
@@ -2400,27 +2440,6 @@
       "thisWeek": true,
       "weekOrderIndex": 27,
       "completed": true
-    },
-    {
-      "name": "Make Dark mode work",
-      "id": 256,
-      "topics": [
-        51
-      ]
-    },
-    {
-      "name": "Adding processes as tasks (this is again a type of supertask/subtask)",
-      "id": 257,
-      "topics": [
-        51
-      ]
-    },
-    {
-      "name": "Track different activities (need daily planning + completion timings)",
-      "id": 258,
-      "topics": [
-        51
-      ]
     }
   ]
 }
