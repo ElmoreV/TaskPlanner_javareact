@@ -272,7 +272,7 @@
             {
               "name": "It takes a huge time to drag a task from the top to the bottom - 13m ",
               "id": 49,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
@@ -1561,7 +1561,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "The data is lost when something in react is changed - 1M",
+      "name": "The data is lost when something in react is changed/firefox crashes - 2M",
       "id": 178,
       "topics": [
         44
@@ -1569,7 +1569,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -10m",
+      "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -11m",
       "id": 179,
       "topics": [
         50
@@ -1913,7 +1913,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Enter does not finish text input in planned list - 1m",
+      "name": "Enter does not finish text input in planned list - 3m",
       "id": 228,
       "topics": [
         46
@@ -2215,7 +2215,7 @@
       "weekOrderIndex": 3
     },
     {
-      "name": "Not being able to collapse or fold all the topics with one button - 21m",
+      "name": "Not being able to collapse or fold all the topics with one button - 22m",
       "id": 174,
       "topics": [
         45,
@@ -2243,7 +2243,7 @@
       "thisWeek": true
     },
     {
-      "name": "Repeated tasks do not show last completion/cannot retain information about when the next time would be -13m+",
+      "name": "Repeated tasks do not show last completion/cannot retain information about when the next time would be -14m+",
       "id": 175,
       "topics": [
         45
@@ -2280,7 +2280,7 @@
       "completed": true
     },
     {
-      "name": "It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 10m",
+      "name": "It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 12m",
       "id": 200,
       "topics": [
         50
