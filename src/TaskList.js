@@ -19,6 +19,7 @@ import {
     getAddSubtopic,
     getAddTopic,
     sanitizeTopicOrderIndex,
+    changeTopicOrderIndices
 } from './ModifyFuncGeneratorsV1'
 import {
     getCompleteTask,
@@ -35,9 +36,10 @@ import {
 import ImportExport from './ImportExport';
 
 class SelectedTask {
-    constructor(taskId, topicId) {
+    constructor(taskId, topicId, topicViewIndex) {
         this.taskId = taskId
         this.topicId = topicId
+        this.topicViewIndex = topicViewIndex
     }
 }
 
@@ -57,8 +59,8 @@ const recursiveShowTopic = (topic, tasks,
     // console.debug('Hello2')
     // console.debug(topics)
     // console.debug(topic)
-    const findTopicViewIdx=(topicId,task)=>{
-        return task.topicViewIndices[task.topics.findIndex(el=>el==topicId)]
+    const findTopicViewIdx = (topicId, task) => {
+        return task.topicViewIndices[task.topics.findIndex(el => el == topicId)]
     }
 
     return (<div key={'div_' + topic.id}><li key={topic.id}>
@@ -94,12 +96,13 @@ const recursiveShowTopic = (topic, tasks,
                 //     ( && task.topics.includes(topic.id) ) ?
                 .filter((task) => task.topics.includes(topic.id))
                 .filter((task) => (!(task.completed && hideCompletedItems) && (task.repeated || !showRepeatedOnly)))
-                .slice(0).sort((taskA,taskB)=>{return findTopicViewIdx(topic.id,taskA)-findTopicViewIdx(topic.id,taskB)})
+                .slice(0).sort((taskA, taskB) => { return findTopicViewIdx(topic.id, taskA) - findTopicViewIdx(topic.id, taskB) })
                 .map(task => (
                     <li key={topic.id + ' - ' + task.id}>
                         <Task name={task.name}
                             id={task.id}
                             completed={task.completed}
+                            currentTopicViewIndex={findTopicViewIdx(topic.id, task)}
                             currentTopicName={topic.name}
                             currentTopicId={topic.id}
                             setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
@@ -110,13 +113,15 @@ const recursiveShowTopic = (topic, tasks,
                             toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
                             planned={task.thisWeek}
                             repeated={task.repeated}
-                            addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
+                            addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic.id, findTopicViewIdx(topic.id, task))}
                             deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
                             selected={selectedTasks.find((st) => (st.taskId == task.id && st.topicId == topic.id)) ? true : false}
                             selectedTasks={selectedTasks}
                             changeTopic={getChangeTaskTopic(setTasks, tasks)}
                             duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
                             fancy={fancy}
+                            setTasks={setTasks}
+                            tasks={tasks}
 
                         />
                     </li>))}
@@ -138,9 +143,9 @@ const showTopics = (topics, tasks,
         hideCompletedItems, showRepeatedOnly,
         fancy)))
 }
-const addTaskToSelection = (selectedTasks, setSelectedTasks, taskId, topicId) => {
+const addTaskToSelection = (selectedTasks, setSelectedTasks, taskId, topicId, topicViewIndex) => {
     let newSelectedTasks = [...selectedTasks]
-    newSelectedTasks.push(new SelectedTask(taskId, topicId))
+    newSelectedTasks.push(new SelectedTask(taskId, topicId, topicViewIndex))
     setSelectedTasks(newSelectedTasks)
 }
 const deleteTaskFromSelection = (selectedTasks, setSelectedTasks, taskId, topicId) => {
@@ -160,7 +165,6 @@ const TaskList = (props) => {
 
     const [selectedTasks, setSelectedTasks] = useState([])
     const [runOnce, setRunOnce] = useState(false)
-
 
     const converter_callback = () => {
         let [topics2, tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
@@ -247,7 +251,7 @@ const TaskList = (props) => {
                     fancy)}
             </ul>
             <button onClick={converter_callback}>Test Converter</button>
-
+            {/* <button onClick={testFunction}>Test Function</button> */}
         </div>
 
     );

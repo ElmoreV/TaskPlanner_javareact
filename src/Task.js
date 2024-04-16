@@ -2,15 +2,16 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TaskContent from './TaskContent'
 import React from 'react';
+import { changeTopicOrderIndices } from './ModifyFuncGeneratorsV1';
 
 const Task = React.memo((props) => {
     const { id, name, setTaskName, deleteTask,
         completed, completeTask,
-        currentTopicName, currentTopicId, changeTopic,
+        currentTopicName, currentTopicId, changeTopic, currentTopicViewIndex,
         planned, plan, unplan,
         repeated, toggleRepeatTask,
         selectedTasks, addToSelection, deleteFromSelection, selected,
-        duplicateTask,
+        duplicateTask, setTasks, tasks,
         fancy,
     } = props;
     console.debug("Rendering Task")
@@ -34,6 +35,7 @@ const Task = React.memo((props) => {
         setIsDragging(true)
         e.dataTransfer.setData('Type', "Task")
         e.dataTransfer.setData('TaskId', id)
+        e.dataTransfer.setData('TaskTopicViewIndex', currentTopicViewIndex)
         e.dataTransfer.setData('TopicName', currentTopicName)
         e.dataTransfer.setData('TopicId', currentTopicId)
         console.info('Dragging task')
@@ -73,6 +75,7 @@ const Task = React.memo((props) => {
             var task_id = Number(e.dataTransfer.getData("TaskId"))
             var oldTopicName = e.dataTransfer.getData("TopicName")
             var oldTopicId = Number(e.dataTransfer.getData("TopicId"))
+            let oldTopicViewIndex = Number(e.dataTransfer.getData("TaskTopicViewIndex"))
             console.info(`Dropped task with id ${task_id} with old topic id ${oldTopicId} on task within topic with id ${currentTopicId}`)
             console.info(changeTopic)
             let taskIds = []
@@ -86,6 +89,10 @@ const Task = React.memo((props) => {
                     taskIds.push(st.taskId)
                     oldTopicIds.push(st.topicId)
                 })
+            }
+            if (changeTopicOrderIndices) {
+                let newTasks = changeTopicOrderIndices(tasks, [task_id], [oldTopicViewIndex], currentTopicViewIndex)
+                setTasks(newTasks)
             }
             if (changeTopic) {
                 changeTopic(taskIds, oldTopicIds, currentTopicId)

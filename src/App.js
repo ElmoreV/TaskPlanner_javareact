@@ -57,15 +57,15 @@ function App() {
 
   // v1
   const [tasks, setTasks] = useState([
-    { name: "Fiets repareren", id: 0, topics: [12],topicViewIndices: [6], completed: true, thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 1 },
-    { name: "Outer Wilds", id: 1, topics: [21, 1],topicViewIndices:[5,2], completed: false, thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 0 },
-    { name: "Badkamer", id: 2, topics: [1], topicViewIndices:[4], completed: false, thisWeek: true, repeated: false, scheduled: true, weekOrderIndex: 2 },
-    { name: "Backup opruimen", id: 5, topics: [1],topicViewIndices:[3], completed: false, thisWeek: false, repeated: true, scheduled: false, weekOrderIndex: 0 },
+    { name: "Fiets repareren", id: 0, topics: [12], topicViewIndices: [1], completed: true, thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 1 },
+    { name: "Outer Wilds", id: 1, topics: [21, 1], topicViewIndices: [1, 1], completed: false, thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 0 },
+    { name: "Badkamer", id: 2, topics: [1], topicViewIndices: [3], completed: false, thisWeek: true, repeated: false, scheduled: true, weekOrderIndex: 2 },
+    { name: "Backup opruimen", id: 5, topics: [1], topicViewIndices: [2], completed: false, thisWeek: false, repeated: true, scheduled: false, weekOrderIndex: 0 },
   ])
 
   // Order of Tasks would be inside of the tasks by orderId
   // Order of Topic is just the order of the subtopics
-  
+
 
 
   const [view, setView] = useState(VIEW_ALL_TASKS)
