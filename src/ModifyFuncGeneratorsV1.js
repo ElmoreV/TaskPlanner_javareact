@@ -56,8 +56,8 @@ const getChangeTaskTopic = (setTasks, tasks) => {
 
 
 
-
 // For v1 data
+// This one is called on the Update Topic name when doing 
 const getUpdateTaskTopics = (setTasks, tasks, curTopicId) => {
     const updateTaskTopics = (newTopicId) => {
         const newTasks = tasks.map((task) => {
@@ -72,6 +72,19 @@ const getUpdateTaskTopics = (setTasks, tasks, curTopicId) => {
         setTasks(newTasks);
     }
     return updateTaskTopics;
+}
+
+
+
+const getMoveTask = (topics,tasks,setTasks) =>{
+    const moveTask = (taskIds,sourceTopicIds,targetTopicId,sourceViewIndices,targetViewIndex)=>{
+        //Task 1. Change the topic ids in the tasks to the target topic Id\
+        //Task 2. For the target topic, we need to insert all the tasks at the target view index
+        //Task 3(Optional). For all the source Topics, we need to handle the reordering of the leftover tasks
+
+
+    }
+
 }
 
 
@@ -544,3 +557,8 @@ export { sanitizeWeekOrderIndex }
 export { sanitizeWeekOrderIndex2 }
 export { sanitizeTopicOrderIndex }
 export { changeTopicOrderIndices }
+
+
+/// What I would need is basically
+// A moveTaskToTopic
+// moveTask
