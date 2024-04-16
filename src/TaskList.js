@@ -222,7 +222,7 @@ const TaskList = (props) => {
 
     if (runOnce < 2) {
         sanitizeTopicOrderIndex(topics, tasks, setTasks)
-        // setRunOnce(runOnce + 1)
+        setRunOnce(runOnce + 1)
     }
     return (
         // <div>

@@ -90,10 +90,10 @@ const Task = React.memo((props) => {
                     oldTopicIds.push(st.topicId)
                 })
             }
-            if (changeTopicOrderIndices) {
-                let newTasks = changeTopicOrderIndices(tasks, [task_id], [oldTopicViewIndex], currentTopicViewIndex)
-                setTasks(newTasks)
-            }
+            // if (changeTopicOrderIndices) {
+            //     let newTasks = changeTopicOrderIndices(tasks, [task_id], [oldTopicViewIndex], currentTopicViewIndex)
+            //     setTasks(newTasks)
+            // }
             if (changeTopic) {
                 changeTopic(taskIds, oldTopicIds, currentTopicId)
             }

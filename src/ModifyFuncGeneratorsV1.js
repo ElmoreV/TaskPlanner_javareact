@@ -20,33 +20,35 @@ const getChangeTaskTopic = (setTasks, tasks) => {
     // newTopic is the topic-object where the task is going to
 
     const changeTaskTopic = (taskIds, oldTopicIds, newTopicId) => {
-        if (!Array.isArray(taskIds)) { taskIds = [taskIds] }
-        if (!Array.isArray(oldTopicIds)) { oldTopicIds = [oldTopicIds] }
-        if (oldTopicIds.length != taskIds.length) {
-            console.error('The length of the taskIds and oldTopicIds should be the same')
-            return
-        }
+        // if (!Array.isArray(taskIds)) { taskIds = [taskIds] }
+        // if (!Array.isArray(oldTopicIds)) { oldTopicIds = [oldTopicIds] }
+        // if (oldTopicIds.length != taskIds.length) {
+        //     console.error('The length of the taskIds and oldTopicIds should be the same')
+        //     return
+        // }
 
-        console.debug('Inside change task topic (by id)')
-        const newTasks = tasks.map((task) => {
-            if (taskIds.includes(task.id)) //cannot be ===?
-            {
-                console.debug("Found the task")
-                console.debug(task)
-                console.debug(oldTopicIds)
-                // TODO: there is a possibility that the new Topic Id does not exist.
-                // findTopicByTopicId(topic,newTopicId)
-                let containedTopicIds = task.topics.filter((tt) => oldTopicIds.includes(tt))
-                if (containedTopicIds.length > 0) {
-                    console.debug("And comes from the old Topic indeed")
-                    return {
-                        ...task,
-                        topics: task.topics.map((topicId) => oldTopicIds.includes(topicId) ? newTopicId : topicId)
-                    }
-                }
-            }
-            return task;
-        });
+        // console.debug('Inside change task topic (by id)')
+        // const newTasks = tasks.map((task) => {
+        //     if (taskIds.includes(task.id)) //cannot be ===?
+        //     {
+        //         console.debug("Found the task")
+        //         console.debug(task)
+        //         console.debug(oldTopicIds)
+        //         // TODO: there is a possibility that the new Topic Id does not exist.
+        //         // findTopicByTopicId(topic,newTopicId)
+        //         let containedTopicIds = task.topics.filter((tt) => oldTopicIds.includes(tt))
+        //         if (containedTopicIds.length > 0) {
+        //             console.debug("And comes from the old Topic indeed")
+        //             return {
+        //                 ...task,
+        //                 topics: task.topics.map((topicId) => oldTopicIds.includes(topicId) ? newTopicId : topicId)
+        //             }
+        //         }
+        //     }
+        //     return task;
+        // });
+        let newTasks = [...tasks]
+        newTasks = updateTaskTopicIds(newTasks, taskIds, oldTopicIds, newTopicId)
         setTasks(newTasks);
     }
 
@@ -76,9 +78,45 @@ const getUpdateTaskTopics = (setTasks, tasks, curTopicId) => {
 
 
 
-const getMoveTask = (topics,tasks,setTasks) =>{
-    const moveTask = (taskIds,sourceTopicIds,targetTopicId,sourceViewIndices,targetViewIndex)=>{
+const updateTaskTopicIds = (tasks, taskIds, sourceTopicIds, targetTopicId) => {
+    if (!Array.isArray(taskIds)) { taskIds = [taskIds] }
+    if (!Array.isArray(sourceTopicIds)) { sourceTopicIds = [sourceTopicIds] }
+    if (sourceTopicIds.length != taskIds.length) {
+        console.error('The length of the taskIds and sourceTopicIds should be the same')
+        return
+    }
+
+    console.debug('Inside change task topic (by id)')
+    const tasksToChange = tasks.filter(task => taskIds.includes(task.id))
+    //inside these tasks, change the topic corresponding to the taskId in this thingy.
+    tasksToChange.forEach(task => {
+        //For single selected task it's
+        // idx = taskIds.findIndex(task.id)
+        // topicIdIdx = task.topics.findIndex(sourceTopicIds[idx])
+        // task.topics[topicIdIdx]=targetTopicId
+        // Oh wait, it should also deduplicate the task if it's alreday in the topic.
+
+        //Might have the task selected multiple times.
+        let idcs = taskIds.reduce((accList, taskId, idx) => (taskId == task.id ? [...accList, idx] : accList), [])
+        idcs.forEach(idx => {
+            let topicIdIdx = task.topics.findIndex(topicId => topicId == sourceTopicIds[idx])
+            if (task.topics.includes(targetTopicId) && sourceTopicIds[idx] != targetTopicId) {
+                task.topics.splice(topicIdIdx, 1)
+            } else {
+                task.topics[topicIdIdx] = targetTopicId
+            }
+        })
+
+    })
+    return tasks
+
+}
+
+const getMoveTask = (topics, tasks, setTasks) => {
+    const moveTask = (taskIds, sourceTopicIds, targetTopicId, sourceViewIndices, targetViewIndex) => {
+        let newTasks = [...tasks]
         //Task 1. Change the topic ids in the tasks to the target topic Id\
+        newTasks = updateTaskTopicIds(newTasks, taskIds, sourceTopicIds, targetTopicId)
         //Task 2. For the target topic, we need to insert all the tasks at the target view index
         //Task 3(Optional). For all the source Topics, we need to handle the reordering of the leftover tasks
 
@@ -144,11 +182,6 @@ const changeTopicOrderIndices = (tasks, taskIds, sourceOrderIndices, targetOrder
 
 
     return newTasks
-}
-
-const getChangeTaskTopicAndTopicViewIndex=(tasks,topics,setTasks)=>{
-
-
 }
 
 
