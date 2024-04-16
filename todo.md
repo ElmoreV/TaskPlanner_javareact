@@ -63,7 +63,7 @@
 - [ ] Improve collapse and dropdown icon
 - [x] Make the tasks to have a good width. Naive: text-cutoff
 - [ ] Prettify text input for tasks
-- [ ] Not being able to collapse or fold all the topics with one button - 22m
+- [ ] Not being able to collapse or fold all the topics with one button - 21m
 - [ ] Add Ability to unfold a topic and all its subtopics in one go
 
 ### Functionality:
@@ -260,6 +260,12 @@
 - [x] Understand testing framework (jest)
 - [ ] Keep a list of UX issues when manually testing/using the software
 
+#### Specific regression tests:
+
+- [ ] Moving a task to the same topic should keep the same topic
+- [ ] Moving a duplicated task to the second duplicated task, should deduplicate the task
+- [ ] Tasks A and B both have duplicates in Topic 1 and Topic 2. Selecting task A1 and B2 and moving to topic C should leave A2 and B1 alone
+
 ### Refactoring:
 
 - [ ] Refactor ModifyingFunctionGenerators into smaller files
@@ -291,7 +297,7 @@
 ## Major/crashes/bugs:
 
 - [ ] Make the sorting of the weekly planning not change the topic view order - 1M
-- [ ] The data is lost when something in react is changed/firefox crashes - 2M
+- [ ] The data is lost when something in react is changed - 1M
 - [x] Bug: source_supertopic is undefined in moveTopic - gefixt
 
 ## Relaying information:
@@ -312,8 +318,8 @@
 - [x] No dark mode - 1m -gefixt
 - [ ] Topic text is not handled right and makes the buttons go crazy - 1m
 - [ ] Text width on a narrow screen is not handled well (text width not respected) - 5m
-- [ ] Not being able to collapse or fold all the topics with one button - 22m
-- [ ] Repeated tasks do not show last completion/cannot retain information about when the next time would be -14m+
+- [ ] Not being able to collapse or fold all the topics with one button - 21m
+- [ ] Repeated tasks do not show last completion/cannot retain information about when the next time would be -13m+
 - [ ] It is unclear where a duplicated task is already (is it already duplicated?) -10m
 
 ### Filtering:
@@ -344,7 +350,7 @@
 - [ ] No possibility to create a new task in the planned list/Spontaneous ideas that should be categorized later -2m
 - [ ] Cannot split a task into multiple tasks in the weekly list - 1m
 - [ ] Cannot uncomplete/plan multiple selected items at once -1m
-- [ ] Enter does not finish text input in planned list - 3m
+- [ ] Enter does not finish text input in planned list - 1m
 - [x] Not being able to complete tasks on the weekly view: 1 - gefixt
 - [x] Not being able to clear all completed items from the weekly list: 2M - gefixt
 - [x]  Not being able to remove items from the weekly list on the weekly list: 4m - gefixt
@@ -365,7 +371,7 @@
 
 ### Missing data structure:
 
-- [ ] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -11m
+- [ ] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -10m
 - [ ] There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -9m
 - [ ] Cannot mark a task as Blocked - 2m
 - [ ] I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 2m
@@ -373,8 +379,8 @@
 - [x] Fearing to lose a task by not being able to make it repeatable: 3 - gefixt
 - [x] Not being able to drag multiple items at once in the topic view - 16m - gefixt
 - [x] ot being able to drag multiple items at once in the planned view - 30m - gefixt
-- [ ] Cannot order/sort the tasks/topics on the topic view - 23m
-- [ ] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 12m
+- [ ] Cannot order/sort the tasks/topics on the topic view - 21m
+- [ ] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 10m
 
 ## Import/export:
 
@@ -387,7 +393,6 @@
 - [x] Needing to save the markdown, yaml and json all separately - 30m - gefixt?
 - [ ] Cannot partially add a markdown/json file to a topic (create the tree there from the json/merge two jsons) - 1m
 - [ ] Cannot export the tree within a topic  - 0m
-- [ ] Create a way to solve merge conflicts between two saved task-lists. Especially for the JSON. - 1M
 
 # Uncategorized:
 
@@ -395,3 +400,5 @@
 - [ ] Make Dark mode work
 - [ ] Adding processes as tasks (this is again a type of supertask/subtask)
 - [ ] Track different activities (need daily planning + completion timings)
+- [ ] Add browser tab icon
+- [ ] Add name of file to Tab Name

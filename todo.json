@@ -181,12 +181,12 @@
     {
       "name": "Constraints",
       "id": 2,
-      "unfolded": false,
+      "unfolded": true,
       "subtopics": [
         {
           "name": "UX/UI",
           "id": 15,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
@@ -210,7 +210,14 @@
               "name": "Testing",
               "id": 19,
               "unfolded": true,
-              "subtopics": []
+              "subtopics": [
+                {
+                  "name": "Specific regression tests",
+                  "id": 52,
+                  "unfolded": true,
+                  "subtopics": []
+                }
+              ]
             },
             {
               "name": "Refactoring",
@@ -237,7 +244,7 @@
     {
       "name": "Bugs/issues",
       "id": 12,
-      "unfolded": false,
+      "unfolded": true,
       "subtopics": []
     },
     {
@@ -272,7 +279,7 @@
             {
               "name": "It takes a huge time to drag a task from the top to the bottom - 13m ",
               "id": 49,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             },
             {
@@ -1561,7 +1568,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "The data is lost when something in react is changed/firefox crashes - 2M",
+      "name": "The data is lost when something in react is changed - 1M",
       "id": 178,
       "topics": [
         44
@@ -1569,7 +1576,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -11m",
+      "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -10m",
       "id": 179,
       "topics": [
         50
@@ -1913,7 +1920,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Enter does not finish text input in planned list - 3m",
+      "name": "Enter does not finish text input in planned list - 1m",
       "id": 228,
       "topics": [
         46
@@ -2215,7 +2222,7 @@
       "weekOrderIndex": 3
     },
     {
-      "name": "Not being able to collapse or fold all the topics with one button - 22m",
+      "name": "Not being able to collapse or fold all the topics with one button - 21m",
       "id": 174,
       "topics": [
         45,
@@ -2243,7 +2250,7 @@
       "thisWeek": true
     },
     {
-      "name": "Repeated tasks do not show last completion/cannot retain information about when the next time would be -14m+",
+      "name": "Repeated tasks do not show last completion/cannot retain information about when the next time would be -13m+",
       "id": 175,
       "topics": [
         45
@@ -2280,7 +2287,7 @@
       "completed": true
     },
     {
-      "name": "It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 12m",
+      "name": "It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 10m",
       "id": 200,
       "topics": [
         50
@@ -2440,6 +2447,27 @@
       "thisWeek": true,
       "weekOrderIndex": 27,
       "completed": true
+    },
+    {
+      "name": "Moving a task to the same topic should keep the same topic",
+      "id": 261,
+      "topics": [
+        52
+      ]
+    },
+    {
+      "name": "Moving a duplicated task to the second duplicated task, should deduplicate the task",
+      "id": 262,
+      "topics": [
+        52
+      ]
+    },
+    {
+      "name": "Tasks A and B both have duplicates in Topic 1 and Topic 2. Selecting task A1 and B2 and moving to topic C should leave A2 and B1 alone",
+      "id": 263,
+      "topics": [
+        52
+      ]
     }
   ]
 }
