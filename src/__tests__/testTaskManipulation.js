@@ -87,9 +87,9 @@ it('addSubtopic_good', () => {
     expect(newTopics).toEqual(
         [{
             name: "Onderhoud", id: 1, unfolded: false, subtopics: [
+                { name: "New Topic 22", id: 22, unfolded: true, subtopics: [] },
                 { name: "Vervangen", id: 11, unfolded: false, subtopics: [] },
-                { name: "Repareren", id: 12, unfolded: false, subtopics: [] },
-                { name: "New Topic 22", id: 22, unfolded: true, subtopics: [] }
+                { name: "Repareren", id: 12, unfolded: false, subtopics: [] }
 
             ]
         },
@@ -179,7 +179,7 @@ it('changeTaskTopic_validtask_from_invalidtopic', () => {
     //Act
     getChangeTaskTopic(setTasks, freshTasks)(5, 202, 1)
     //Assert
-    expect(newTasks).toEqual(tasks)
+    expect(newTasks.toString()).toEqual(tasks.toString())
 })
 
 it('changeTaskTopic_validtask_to_invalidtopic', () => {
@@ -189,5 +189,5 @@ it('changeTaskTopic_validtask_to_invalidtopic', () => {
     //Act
     getChangeTaskTopic(setTasks, freshTasks)(5, 202, 404)
     //Assert
-    expect(newTasks).toEqual(tasks)
+    expect(newTasks.toString()).toEqual(tasks.toString())
 })

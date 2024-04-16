@@ -76,7 +76,7 @@ const getUpdateTaskTopics = (setTasks, tasks, curTopicId) => {
     return updateTaskTopics;
 }
 
-
+const findIndices = (arr, val) => arr.reduce((accList, el, idx) => (el == val ? [...accList, idx] : accList), [])
 
 const updateTaskTopicIds = (tasks, taskIds, sourceTopicIds, targetTopicId) => {
     if (!Array.isArray(taskIds)) { taskIds = [taskIds] }
@@ -91,20 +91,17 @@ const updateTaskTopicIds = (tasks, taskIds, sourceTopicIds, targetTopicId) => {
     //inside these tasks, change the topic corresponding to the taskId in this thingy.
     tasksToChange.forEach(task => {
         //For single selected task it's
-        // idx = taskIds.findIndex(task.id)
+        // idx = taskIds.findIndex(task.id) 
         // topicIdIdx = task.topics.findIndex(sourceTopicIds[idx])
         // task.topics[topicIdIdx]=targetTopicId
         // Oh wait, it should also deduplicate the task if it's alreday in the topic.
-
+        // TODO: Deduplicate task.topics at the end
         //Might have the task selected multiple times.
         let idcs = taskIds.reduce((accList, taskId, idx) => (taskId == task.id ? [...accList, idx] : accList), [])
         idcs.forEach(idx => {
-            let topicIdIdx = task.topics.findIndex(topicId => topicId == sourceTopicIds[idx])
-            if (task.topics.includes(targetTopicId) && sourceTopicIds[idx] != targetTopicId) {
-                task.topics.splice(topicIdIdx, 1)
-            } else {
-                task.topics[topicIdIdx] = targetTopicId
-            }
+            let topicIdIdcs = findIndices(task.topics, sourceTopicIds[idx])
+            topicIdIdcs.forEach(idx2 =>
+                task.topics[idx2] = targetTopicId)
         })
 
     })
@@ -119,7 +116,7 @@ const getMoveTask = (topics, tasks, setTasks) => {
         newTasks = updateTaskTopicIds(newTasks, taskIds, sourceTopicIds, targetTopicId)
         //Task 2. For the target topic, we need to insert all the tasks at the target view index
         //Task 3(Optional). For all the source Topics, we need to handle the reordering of the leftover tasks
-
+        //Task 4. Clean up duplicate topic Ids (by moving duplicates around)
 
     }
 
