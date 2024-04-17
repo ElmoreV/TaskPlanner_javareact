@@ -8,6 +8,7 @@ import {
     findSupertopicByTopicId,
     findTopicByTopicId,
 } from './FindItems'
+import { addOrphanTasktoTaskList, deleteEntireTask, generateEmptyTask, insertTaskInstanceIntoTopic } from './ModifyTaskTopicAdgElements';
 
 ///////////////
 /// Changing tasks
@@ -204,6 +205,27 @@ const getDuplicateTask = (setTasks, tasks, topics) => {
 const getAddTask = (setTasks, tasks, topics, topicId) => {
 
     const addTask = () => {
+        // Check if topic belonging to topicId exists
+        // Find tasks in the topic
+        // generate a new task
+        // insert it into the new topic
+
+
+        let newTasks = [...tasks]
+        const topic = findTopicByTopicId(topics,topicId)
+        if (!topic){
+            return
+        }
+        let newTask = generateEmptyTask(newTasks)
+        newTasks = addOrphanTasktoTaskList(newTasks,newTask)
+        newTasks = insertTaskInstanceIntoTopic(newTasks,newTask.id,topicId,1)
+        setTasks(newTasks)
+
+
+
+
+
+/*
         let newTasks = [...tasks];
         console.log(topicId);
         const topic = findTopicByTopicId(topics, topicId);
@@ -232,7 +254,7 @@ const getAddTask = (setTasks, tasks, topics, topicId) => {
             setTasks(newTasks);
 
         }
-
+*/
     }
     return addTask
 }
@@ -240,13 +262,16 @@ const getAddTask = (setTasks, tasks, topics, topicId) => {
 // For v1 data
 const getDeleteTask = (setTasks, tasks, id) => {
     const deleteTask = () => {
-        let newTasks = [...tasks]
-        newTasks = newTasks.filter((task) => task.id !== id);
+        let newTasks = deleteEntireTask(tasks,id)
+        // let newTasks = [...tasks]
+        // newTasks = newTasks.filter((task) => task.id !== id);
         setTasks(newTasks);
 
     }
     return deleteTask;
 }
+
+
 
 
 const checkValidWeekOrderIndex = (tasks) => {
