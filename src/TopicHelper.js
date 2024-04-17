@@ -89,7 +89,7 @@ const get_all_subtopics = (topic) => {
     return topic.subtopics.map((subtopic) => get_all_subtopics(subtopic)).concat(topic);
 }
 
-const isTaskInAnyTopicV1 = (task, topics) => {
+const isTaskInAnyTopic = (task, topics) => {
     // check if the topic of the task in the
     // console.log("Before task.topics")
     // console.log(task.topics)
@@ -105,23 +105,7 @@ const isTaskInAnyTopicV1 = (task, topics) => {
     }
     return false;
 }
-const isTaskInAnyTopic = (task, topics) => {
-    // check if the topic of the task in the
-    console.log(task.topics)
-    task.topics = task.topics.filter((topic_name) => {
-        console.log('Is topic .. in non-deleted topics ...')
-        console.log(topic_name)
-        console.log(topics)
-        return find_topic_by_name(topics, topic_name)
-    })
-    console.log('Resulting task.topics')
-    console.log(task.topics)
-    console.log(task.topics.length)
-    if (task.topics.length > 0) {
-        return true;
-    }
-    return false;
-}
+
 const getLargestTopicKey = (topic) => {
     let max_id = Math.max(topic.id,
         topic.subtopics.reduce((max_key, topic) => Math.max(max_key, getLargestTopicKey(topic)), 0));
@@ -241,7 +225,6 @@ export default getFreeTaskId;
 export { getFreeTaskId };
 export { getFreeTopicKey };
 export { isTaskInAnyTopic };
-export { isTaskInAnyTopicV1 };
 export { filter_by_name_r };
 export { getTopicTree_by_name }
 export { getTopicPathByTopicId }

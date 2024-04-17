@@ -135,7 +135,6 @@ const PlannedList = (props) => {
                                     taskTopics={task.topics}
                                     fancy={fancy}
 
-                                // changeTopic = {getChangeTaskTopic()}
                                 />
                                 }
                             </li>

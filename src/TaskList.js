@@ -4,12 +4,6 @@ import Topic from './Topic';
 import React from 'react';
 // import Checkbox from './Checkbox'
 import {
-    convert_old_topic_tasks_to_new_topic_tasks,
-    convert_topic_tasks_to_relational,
-    convert_new_topic_tasks_to_old_topic_tasks
-} from './Converter';
-import {
-    getChangeTaskTopic,
     getDeleteTask,
     getDeleteTopic,
     getDuplicateTask,
@@ -17,9 +11,9 @@ import {
     getUpdateTaskTopics,
     getAddTask,
     getAddSubtopic,
+    getMoveTasks,
     getAddTopic,
     sanitizeTopicOrderIndex,
-    changeTopicOrderIndices
 } from './ModifyFuncGeneratorsV1'
 import {
     getCompleteTask,
@@ -60,7 +54,7 @@ const recursiveShowTopic = (topic, tasks,
     // console.debug(topics)
     // console.debug(topic)
     const findTopicViewIdx = (topicId, task) => {
-        return task.topicViewIndices[task.topics.findIndex(el => el == topicId)]
+        return task.topicViewIndices[task.topics.findIndex(taskTopicId => taskTopicId == topicId)]
     }
 
     return (<div key={'div_' + topic.id}><li key={topic.id}>
@@ -74,7 +68,7 @@ const recursiveShowTopic = (topic, tasks,
             addSubTopic={getAddSubtopic(setTopics, topics, topic)}
             moveTopic={getMoveTopic(setTopics, topics)}
             addTask={getAddTask(setTasks, tasks, topics, topic.id)}
-            changeTopic={getChangeTaskTopic(setTasks, tasks)}
+            moveTasks={getMoveTasks(topics, tasks, setTasks)}
             updateTaskTopics={getUpdateTaskTopics(setTasks, tasks, topic.name)}
             duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
             deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}
@@ -117,7 +111,7 @@ const recursiveShowTopic = (topic, tasks,
                             deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
                             selected={selectedTasks.find((st) => (st.taskId == task.id && st.topicId == topic.id)) ? true : false}
                             selectedTasks={selectedTasks}
-                            changeTopic={getChangeTaskTopic(setTasks, tasks)}
+                            moveTasks={getMoveTasks(topics, tasks, setTasks)}
                             duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
                             fancy={fancy}
                             setTasks={setTasks}
@@ -166,22 +160,11 @@ const TaskList = (props) => {
     const [selectedTasks, setSelectedTasks] = useState([])
     const [runOnce, setRunOnce] = useState(false)
 
-    const converter_callback = () => {
-        let [topics2, tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
-        let [topics3, tasks3] = convert_new_topic_tasks_to_old_topic_tasks(topics2, tasks2)
-        console.log(tasks, tasks3)
-        console.log('Boy oh boy')
-        for (let i = 0; i < tasks.length; i++) {
-            console.log(tasks[i])
-            console.log(tasks2[i])
-            console.log(tasks3[i])
-        }
-        // let tables = convert_topic_tasks_to_relational(topics2,tasks2)
-        // console.log('res')
-        // console.log(topics2)
-        // console.log(tasks2)
-        // console.log(tables)
+    const testFunction = () => {
+        console.log(tasks)
+        console.log(topics)
     }
+
 
     useEffect(() => {
         // Function to clear selection
@@ -250,8 +233,7 @@ const TaskList = (props) => {
                     hideCompletedItems, showRepeatedOnly,
                     fancy)}
             </ul>
-            <button onClick={converter_callback}>Test Converter</button>
-            {/* <button onClick={testFunction}>Test Function</button> */}
+            <button onClick={testFunction}>Test Function</button>
         </div>
 
     );
