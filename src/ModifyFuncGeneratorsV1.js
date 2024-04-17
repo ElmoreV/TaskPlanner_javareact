@@ -22,6 +22,8 @@ const getMoveTasks = (topics, tasks, setTasks) => {
     // targetTopicId is the topic-object where the task is going to
     const moveTasks = (taskIds, sourceTopicIds, targetTopicId, targetViewIndex) => {
         //TODO: remove duplicates
+        //TODO: Make sure that tasks that come from the same topicId stay in the same order (local sequence so to say).
+        // Maybe calculate a global index and sort them by this.
         if (!Array.isArray(taskIds)) { taskIds = [taskIds] }
         if (!Array.isArray(sourceTopicIds)) { sourceTopicIds = [sourceTopicIds] }
         if (sourceTopicIds.length != taskIds.length) {
@@ -210,14 +212,16 @@ const getAddSubtopic = (setTopics, topics, superTopic) => {
 
 const checkValidTopicOrderIndex = (topics, tasks) => {
     // Every task needs to have as many topicOrderIndices as they have topics
-    const getWrongTasks = tasks.filter((task) => task.topicViewIndices == undefined)
+    const getWrongTasks = tasks.filter((task) => task.topicViewIndices === undefined)
     if (getWrongTasks.length > 0) {
         console.debug("There are tasks that don't have topicViewIndices")
+        console.debug(getWrongTasks)
         return false
     }
-    let valid2 = tasks.reduce((valid, task) => (valid & (task.topics.length == task.topicViewIndices.length)), true)
-    if (!valid2) {
+    let getWrongTasks2 = tasks.filter((task) => (task.topics.length != task.topicViewIndices.length))
+    if (getWrongTasks2.length > 0) {
         console.debug("There are tasks that don't have the same amount of topicViewIndices as topics")
+        console.debug(getWrongTasks2)
         return false
     }
 
@@ -236,17 +240,19 @@ const sanitizeTopicOrderIndex = (topics, tasks, setTasks) => {
         for (let topic of topics) {
             //Iterate through subtopics and update tasks
             newTasks = sanitize_r(topic.subtopics, newTasks)
-
             // are there tasks in this topic?
             let tasksInTopic = newTasks.filter((task) => task.topics.includes(topic.id))
             console.debug(`Tasks ${tasksInTopic.map(t => t.name)} in topic ${topic.name}`)
             // if there are tasks in this topic, give them an order index
-            tasksInTopic = tasksInTopic.map(
+            nextOrderVal = 0
+            tasksInTopic.forEach(
                 (task) => {
-                    let idx = task.topics.findIndex((topicId) => topicId == topic.id)
+                    let idcs = task.topics.reduce((acc, topicId, idx) => (topicId == topic.id ? [...acc, idx] : acc), [])
                     if (!task.topicViewIndices) { task.topicViewIndices = new Array }
-                    task.topicViewIndices[idx] = nextOrderVal
-                    nextOrderVal += 1
+                    idcs.forEach(idx => {
+                        task.topicViewIndices[idx] = nextOrderVal
+                        nextOrderVal += 1
+                    })
                 }
             )
         }
@@ -442,7 +448,6 @@ export { getDeleteTask };
 export { getDeleteTopic };
 export { getDuplicateTask };
 export { getMoveTopic };
-export { getUpdateTaskTopics };
 export { getAddTask }
 export { getAddTopic }
 export { getAddSubtopic }

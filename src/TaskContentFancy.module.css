@@ -69,11 +69,11 @@ span.buttonDuplicate:hover {
 
 .task[draggedOver=true] {
     /* padding-left:100px; */
-    border-top-width: 20px;
-    border-top-color: white;
+    border-top-width: 3px;
+    border-top-color: blue;
     border-top-style: solid;
     padding-top: 5px;
-    box-shadow: 10px 5px 5px 0px rgba(0, 0, 0, 0.4);
+    box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.4);
 }
 
 

@@ -45,7 +45,7 @@ const Topic = (props) => {
         // update all tasks to be a member of the new topic name
         // update the topic name
         console.info(e.target.value);
-        updateTaskTopics(e.target.value);
+        // updateTaskTopics(e.target.value);
         setTopicName(e.target.value);
 
     }

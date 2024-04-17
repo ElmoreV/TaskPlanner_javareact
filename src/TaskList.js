@@ -8,7 +8,6 @@ import {
     getDeleteTopic,
     getDuplicateTask,
     getMoveTopic,
-    getUpdateTaskTopics,
     getAddTask,
     getAddSubtopic,
     getMoveTasks,
@@ -69,7 +68,7 @@ const recursiveShowTopic = (topic, tasks,
             moveTopic={getMoveTopic(setTopics, topics)}
             addTask={getAddTask(setTasks, tasks, topics, topic.id)}
             moveTasks={getMoveTasks(topics, tasks, setTasks)}
-            updateTaskTopics={getUpdateTaskTopics(setTasks, tasks, topic.name)}
+            // updateTaskTopics={getUpdateTaskTopics(setTasks, tasks, topic.name)}
             duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
             deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}
             fancy={fancy}
@@ -204,8 +203,9 @@ const TaskList = (props) => {
 
 
     if (runOnce < 2) {
+        console.log("Running sanitzie")
         sanitizeTopicOrderIndex(topics, tasks, setTasks)
-        setRunOnce(runOnce + 1)
+        // setRunOnce(runOnce + 1)
     }
     return (
         // <div>
@@ -233,7 +233,7 @@ const TaskList = (props) => {
                     hideCompletedItems, showRepeatedOnly,
                     fancy)}
             </ul>
-            <button onClick={testFunction}>Test Function</button>
+            <button onClick={() => sanitizeTopicOrderIndex(topics, tasks, setTasks)}>Test Function</button>
         </div>
 
     );
