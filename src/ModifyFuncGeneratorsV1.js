@@ -76,7 +76,10 @@ const getUpdateTaskTopics = (setTasks, tasks, curTopicId) => {
     return updateTaskTopics;
 }
 
+// const findIndicesExp = (arr,) => arr.reduce
+
 const findIndices = (arr, val) => arr.reduce((accList, el, idx) => (el == val ? [...accList, idx] : accList), [])
+const findNotIndices = (arr, val) => arr.reduce((accList, el, idx) => (el != val ? [...accList, idx] : accList), [])
 
 const updateTaskTopicIds = (tasks, taskIds, sourceTopicIds, targetTopicId) => {
     if (!Array.isArray(taskIds)) { taskIds = [taskIds] }
@@ -108,6 +111,60 @@ const updateTaskTopicIds = (tasks, taskIds, sourceTopicIds, targetTopicId) => {
     return tasks
 
 }
+
+const updateTopicViewIndices = (tasks, taskIds, sourceTopicIds, targetTopicId, sourceViewIndices, targetViewIndex) => {
+    //
+    let newTasks = [...tasks]
+    let tasksToChange = newTasks.filter((task) => taskIds.includes(task.id))
+    // Task-> Topic A 2 Task-> Topic B
+    let indicesMove = findIndices(sourceTopicIds, targetTopicId)
+    // Task-> Topic A 2 Task -> Topic A
+    let indicesStay = findNotIndices(sourceTopicIds, targetTopicId)
+    //Moving indices should be inserted at the right targetViewIndex
+    let tasksInTargetTopic = newTasks.filter((task) => task.topics.includes(targetTopicId))
+
+    let insertedTasksCount = indicesMove.length //All tasks at and after the target View Index should be increased be this amount
+    // All tasks that are shuffled within the topic should be shuffled like always (with the weird logic)
+
+
+}
+
+
+const shuffleTopicOrderIndicesWithinTopic = (tasks, taskIds, sourceOrderIndices, targetOrderIndex) => {
+    let newTasks = [...tasks]
+    let taskId = taskIds[0]
+    // let topic = find
+    let sourceOrderIdx = sourceOrderIndices[0]
+    let taskToChange = newTasks.filter(task => task.id == taskId)
+    console.log('called change topic order with ', taskIds, sourceOrderIndices, targetOrderIndex)
+    // If we go to an index before, we need to shift down all the ones before
+    // If we go down an index after, we need to shift up all the ones after
+    console.log(newTasks.map(t => t.id + '|' + t.name + '|' + t.topicViewIndices))
+    newTasks = newTasks.map(task => {
+        return {
+            ...task,
+            topicViewIndices: task.topicViewIndices.map(
+                idx => {
+                    if (sourceOrderIdx < idx && idx <= targetOrderIndex) {
+                        console.log(idx, idx + 1)
+                        return idx - 1
+                    } else if (targetOrderIndex <= idx && idx < sourceOrderIdx) {
+                        console.log(idx, idx - 1)
+                        return idx + 1
+                    } else if (idx == sourceOrderIdx) {
+                        return targetOrderIndex
+                    }
+                    else {
+                        return idx
+                    }
+                }
+            )
+        }
+    })
+    console.log(newTasks.map(t => t.id + '|' + t.name + '|' + t.topicViewIndices))
+    return newTasks
+}
+
 
 const getMoveTask = (topics, tasks, setTasks) => {
     const moveTask = (taskIds, sourceTopicIds, targetTopicId, sourceViewIndices, targetViewIndex) => {
@@ -141,44 +198,6 @@ const getDuplicateTask = (setTasks, tasks, topics) => {
         setTasks(newTasks)
     }
     return duplicateTask
-}
-
-const changeTopicOrderIndices = (tasks, taskIds, sourceOrderIndices, targetOrderIndex) => {
-    let newTasks = [...tasks]
-    let taskId = taskIds[0]
-    // let topic = find
-    let sourceOrderIdx = sourceOrderIndices[0]
-    let taskToChange = newTasks.filter(task => task.id == taskId)
-    console.log('called change topic order with ', taskIds, sourceOrderIndices, targetOrderIndex)
-    // If we go to an index before, we need to shift down all the ones before
-    // If we go down an index after, we need to shift up all the ones after
-    console.log(newTasks.map(t => t.id + '|' + t.name + '|' + t.topicViewIndices))
-    newTasks = newTasks.map(task => {
-        return {
-            ...task,
-            topicViewIndices: task.topicViewIndices.map(
-                idx => {
-                    if (sourceOrderIdx < idx && idx <= targetOrderIndex) {
-                        console.log(idx, idx + 1)
-                        return idx - 1
-                    } else if (targetOrderIndex <= idx && idx < sourceOrderIdx) {
-                        console.log(idx, idx - 1)
-                        return idx + 1
-                    } else if (idx == sourceOrderIdx) {
-                        return targetOrderIndex
-                    }
-                    else {
-                        return idx
-                    }
-                }
-            )
-        }
-    })
-    console.log(newTasks.map(t => t.id + '|' + t.name + '|' + t.topicViewIndices))
-
-
-
-    return newTasks
 }
 
 
