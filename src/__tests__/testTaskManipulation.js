@@ -43,11 +43,8 @@ it('deleteTopic_invalid_topic_id', () => {
     newTopics = structuredClone(topics)
     let invalidId = 240
     //Act
-    console.log('before')
-    console.log(newTasks)
     getDeleteTopic(setTopics, freshTopics, setTasks, freshTasks, invalidId)()
     expect(newTopics).toEqual(topics)
-    console.log(newTasks)
     expect(newTasks).toEqual(tasks)
 })
 
@@ -162,19 +159,18 @@ it('changeTaskTopic_validtask_to_invalidtopic', () => {
     getChangeTaskTopic(setTasks, freshTasks)(5, 1, 201)
     //Assert
     //TODO: this is clearly a mistake
-    expect(newTasks).toEqual(
-        [
-            { name: "Fiets repareren", id: 0, topics: [12], completed: true, thisWeek: false },
-            { name: "Outer Wilds", id: 1, topics: [21, 1], completed: false, thisWeek: false },
-            { name: "Badkamer", id: 2, topics: [1], completed: true, thisWeek: false },
-            { name: "Backup opruimen", id: 5, topics: [201], completed: false, thisWeek: false },
-        ]
-    )
+    expect(newTasks).toEqual(        [
+        { name: "Fiets repareren", id: 0, topics: [12], completed: true, thisWeek: false },
+        { name: "Outer Wilds", id: 1, topics: [21, 1], completed: false, thisWeek: false },
+        { name: "Badkamer", id: 2, topics: [1], completed: true, thisWeek: false },
+        { name: "Backup opruimen", id: 5, topics: [11], completed: false, thisWeek: false },
+    ]
+)
 })
 
 it('changeTaskTopic_validtask_from_invalidtopic', () => {
     //Arrange
-    let freshTasks = structuredClone(tasks)
+    let freshTasks = structuredClone(tasks) 
     newTasks = structuredClone(tasks)
     //Act
     getChangeTaskTopic(setTasks, freshTasks)(5, 202, 1)

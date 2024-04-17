@@ -3,22 +3,27 @@ The elementary functions
 */
 import {getFreeTaskId} from './TopicHelper'
 
-const generateEmptyTask= (tasks)=>{
-    let newTasks = [...tasks]
+const generateEmptyTask = (tasks)=>{
     let newTask = {
-            name: `New Task ${getFreeTaskId(tasks)}!`,
-            id: getFreeTaskId(tasks),
-            topics: [],
-            topicViewIndices: [],
-            completed:false,
-            thisWeek:false,
-            repeated: false,
-            scheduled: false, 
-            weekOrderIndex: 0
-    }
-    newTasks.push(newTask)
+        name: `New Task ${getFreeTaskId(tasks)}!`,
+        id: getFreeTaskId(tasks),
+        topics: [],
+        topicViewIndices: [],
+        completed:false,
+        thisWeek:false,
+        repeated: false,
+        scheduled: false, 
+        weekOrderIndex: 0
+}
+    return newTask
+}
+
+const addOrphanTasktoTaskList = (tasks,task)=>{
+    let newTasks = [...tasks]
+    newTasks.push(task)
     return newTasks
 }
+
 
 // Insert an existig task (even with no instances) into the topic
 // Does not check if task already exsists
@@ -33,13 +38,14 @@ const insertTaskInstanceIntoTopic=(tasks,taskId,topicId,topicViewIndex)=>
     }
     let newTasks = [...tasks]
     let tasksInTopic = newTasks.filter((task)=>task.topics.includes(topicId))
-    let thisTask = newTasks.find((task)=>(task.id==taskId))
+    let thisTask = newTasks.find((task)=>(task.id===taskId))
     //Shift up all tasks at or above the topicOrderIndex
     tasksInTopic.forEach((taskInTopic)=>{
-        let topicIdx = taskInTopic.topics.find(taskTopicId=>topicId==taskTopicId)
+        let topicIdx = taskInTopic.topics.findIndex(taskTopicId=>topicId==taskTopicId)
         if (taskInTopic.topicViewIndices[topicIdx]>=topicViewIndex){
-        taskInTopic.topicViewIndices[topicIdx]+=1
-    }
+            console.log(taskInTopic)
+            taskInTopic.topicViewIndices[topicIdx]=taskInTopic.topicViewIndices[topicIdx]+1
+        }
     })
     // Add topicId and topicViewIndex
     thisTask.topics.push(topicId)
@@ -55,13 +61,13 @@ const insertTaskInstanceIntoTopic=(tasks,taskId,topicId,topicViewIndex)=>
 const removeTaskInstanceFromTopic=(tasks,taskId,topicId)=>{
     let newTasks = [...tasks]
     let tasksInTopic = newTasks.filter((task)=>task.topics.includes(topicId))
-    let thisTask = newTasks.find((task)=>(task.id==taskId))
-    let topicIdIdx = thisTask.topics.findIndex(taskTopicId=>taskTopicId==topicId) 
+    let thisTask = newTasks.find((task)=>(task.id===taskId))
+    let topicIdIdx = thisTask.topics.findIndex(taskTopicId=>taskTopicId===topicId) 
     let topicViewIndex = thisTask.topicViewIndices[topicIdIdx]
 
     //Shift down all tasks at or above the topicOrderIndex
     tasksInTopic.forEach((taskInTopic)=>{
-        let topicIdx = taskInTopic.topics.find(taskTopicId=>topicId==taskTopicId)
+        let topicIdx = taskInTopic.topics.find(taskTopicId=>topicId===taskTopicId)
         if (taskInTopic.topicViewIndices[topicIdx]>topicViewIndex){
             taskInTopic.topicViewIndices[topicIdx]-=1
         }
@@ -71,17 +77,18 @@ const removeTaskInstanceFromTopic=(tasks,taskId,topicId)=>{
     thisTask.topicViewIndices.splice(topicIdIdx,1)
     return newTasks
 }
-//
 
+// Pretty much no assumptions.
 const deleteEntireTask=(tasks,taskId)=>{
     let newTasks = [...tasks]
-    newTasks = newTasks.filter(task=>(task.id!=taskId))
+    newTasks = newTasks.filter(task=>(task.id!==taskId))
     return newTasks
 }
 
 
 
 export{generateEmptyTask}
+export{addOrphanTasktoTaskList}
 export{insertTaskInstanceIntoTopic}
 export{removeTaskInstanceFromTopic}
 export{deleteEntireTask}
