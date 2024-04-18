@@ -367,8 +367,8 @@
 
 - [ ] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -11m
 - [ ] There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -9m
-- [ ] Cannot mark a task as Blocked - 2m
-- [ ] I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 2m
+- [ ] Cannot mark a task as Blocked - 3m
+- [ ] I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 3m
 - [ ] Inability to add comments to a (repeating) task - 1m      Missing information: what time range has been checked
 - [x] Fearing to lose a task by not being able to make it repeatable: 3 - gefixt
 - [x] Not being able to drag multiple items at once in the topic view - 16m - gefixt
@@ -391,7 +391,11 @@
 
 # Uncategorized:
 
+- [ ] The UI does not look professional -1m
+- [ ] The Dark Mode does not work correctly -1m
+- [ ] There needs to be some feedback on when something was done (an event log) - 1m
 - [ ] Make UI look professional
 - [ ] Make Dark mode work
 - [ ] Adding processes as tasks (this is again a type of supertask/subtask)
 - [ ] Track different activities (need daily planning + completion timings)
+

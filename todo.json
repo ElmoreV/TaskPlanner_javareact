@@ -1793,7 +1793,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Cannot mark a task as Blocked - 2m",
+      "name": "Cannot mark a task as Blocked - 3m",
       "id": 213,
       "topics": [
         50
@@ -1833,7 +1833,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 2m",
+      "name": "I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 3m",
       "id": 218,
       "topics": [
         50
@@ -2140,7 +2140,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Make UI look professional",
+      "name": "The UI does not look professional -1m",
       "id": 255,
       "topics": [
         51
@@ -2440,6 +2440,28 @@
       "thisWeek": true,
       "weekOrderIndex": 27,
       "completed": true
+    },
+    {
+      "name": "The Dark Mode does not work correctly -1m",
+      "id": 256,
+      "topics": [
+        51
+      ]
+    },
+    {
+      "name": "There needs to be some feedback on when something was done (an event log) - 1m/Adding processes as tasks (this is again a type of supertask/subtask)",
+
+      "id": 257,
+      "topics": [
+        51
+      ]
+    },
+    {
+      "name": "Track different activities (need daily planning + completion timings)",
+      "id": 258,
+      "topics": [
+        51
+      ]
     }
   ]
 }

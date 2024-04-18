@@ -4,11 +4,11 @@ import TopicContent from './TopicContent';
 const Topic = (props) => {
     const { name, updateTaskTopics, setTopicName, id,
         toggleFold, unfolded,
-        addTask, addSubTopic, deleteTopic, changeTopic,
+        addTask, addSubTopic, deleteTopic, moveTasks,
         selectedTasks,
         moveTopic, duplicateTask,
         fancy,
-     } = props;
+    } = props;
     console.debug("Rendering Topic")
     const folded_symbol = '>';
     const unfolded_symbol = 'v';
@@ -45,7 +45,7 @@ const Topic = (props) => {
         // update all tasks to be a member of the new topic name
         // update the topic name
         console.info(e.target.value);
-        updateTaskTopics(e.target.value);
+        // updateTaskTopics(e.target.value);
         setTopicName(e.target.value);
 
     }
@@ -81,8 +81,9 @@ const Topic = (props) => {
                     oldTopicIds.push(st.topicId)
                 })
             }
-            if (changeTopic) {
-                changeTopic(taskIds, oldTopicIds, id)
+            if (moveTasks) {
+                // Always move the tasks to the top (index = 1)
+                moveTasks(taskIds, oldTopicIds, id, 1)
             }
         } else if (type == "Topic") {
             let source_id = Number(e.dataTransfer.getData("id"))
