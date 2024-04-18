@@ -215,6 +215,18 @@ const TaskList = (props) => {
     // let taskIdCount = tasks.map((task,idx)=>(arr[task.id])?arr[task.id]+=1:arr[task.id]=1)
     // console.log(taskIdCount)
     // console.log(arr)
+    const checkForDuplicateIds = (tasks) => {
+        let taskIdCount = new Array
+        tasks.forEach((task, idx) => taskIdCount[idx] ? taskIdCount[idx] += 1 : taskIdCount[idx] = 1)
+        taskIdCount.forEach((count, taskId) => {
+            if (taskIdCount > 1) {
+                console.warn(`task (id:${taskId}) has ${count} tasks associated with it:`)
+                console.warn(tasks.filter((task) => task.id == taskId))
+            }
+        })
+    }
+    checkForDuplicateIds(tasks)
+
     return (
         // <div>
         <div className='task-list'>
