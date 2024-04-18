@@ -1,134 +1,274 @@
 import {
-    getFreeTaskId,
     getFreeTopicKey,
-    isTaskInAnyTopicV1,
+    isTaskInAnyTopic,
     filterTopicsById_r,
 } from './TopicHelper';
 import {
     findSupertopicByTopicId,
     findTopicByTopicId,
+    findTopicsByTaskId,
 } from './FindItems'
+import {
+    addOrphanTasktoTaskList,
+    deleteEntireTask,
+    generateEmptyTask,
+    insertTaskInstanceIntoTopic,
+    removeTaskInstanceFromTopic
+} from './ModifyTaskTopicAdgElements';
 
-///////////////
-/// Changing tasks
-//////////////
-
-// Can be used for v1 mode.
-const getChangeTaskTopic = (setTasks, tasks) => {
-    // Key here is the key of the task
-    // oldTopic is the topic-object where the task came from
-    // newTopic is the topic-object where the task is going to
-
-    const changeTaskTopic = (taskIds, oldTopicIds, newTopicId) => {
+const getMoveTasks = (topics, tasks, setTasks) => {
+    // taskIds here is the id of the task
+    // sourceTopicIds is the topic-object where the task came from
+    // targetTopicId is the topic-object where the task is going to
+    const moveTasks = (taskIds, sourceTopicIds, targetTopicId, targetViewIndex) => {
+        //TODO: remove duplicates
+        //TODO: Make sure that tasks that come from the same topicId stay in the same order (local sequence so to say).
+        // Maybe calculate a global index and sort them by this.
         if (!Array.isArray(taskIds)) { taskIds = [taskIds] }
-        if (!Array.isArray(oldTopicIds)) { oldTopicIds = [oldTopicIds] }
-        if (oldTopicIds.length != taskIds.length) {
-            console.error('The length of the taskIds and oldTopicIds should be the same')
+        if (!Array.isArray(sourceTopicIds)) { sourceTopicIds = [sourceTopicIds] }
+        if (sourceTopicIds.length != taskIds.length) {
+            console.error('The length of the taskIds and sourceTopicIds should be the same')
             return
         }
-
-        console.debug('Inside change task topic (by id)')
-        const newTasks = tasks.map((task) => {
-            if (taskIds.includes(task.id)) //cannot be ===?
-            {
-                console.debug("Found the task")
-                console.debug(task)
-                console.debug(oldTopicIds)
-                // TODO: there is a possibility that the new Topic Id does not exist.
-                // findTopicByTopicId(topic,newTopicId)
-                let containedTopicIds = task.topics.filter((tt) => oldTopicIds.includes(tt))
-                if (containedTopicIds.length > 0) {
-                    console.debug("And comes from the old Topic indeed")
-                    return {
-                        ...task,
-                        topics: task.topics.map((topicId) => oldTopicIds.includes(topicId) ? newTopicId : topicId)
-                    }
-                }
-            }
-            return task;
-        });
-        setTasks(newTasks);
-    }
-
-    return changeTaskTopic
-
-}
-
-
-
-
-// For v1 data
-const getUpdateTaskTopics = (setTasks, tasks, curTopicId) => {
-    const updateTaskTopics = (newTopicId) => {
-        const newTasks = tasks.map((task) => {
-            if (task.topics.includes(curTopicId)) {
-                return {
-                    ...task,
-                    topics: task.topics.map((topicId) => topicId === curTopicId ? newTopicId : topicId)
-                }
-            }
-            return task;
-        });
-        setTasks(newTasks);
-    }
-    return updateTaskTopics;
-}
-
-
-
-
-// For v1 data
-const getDuplicateTask = (setTasks, tasks, topics) => {
-    const duplicateTask = (task_id, topic_id) => {
-        // Copy tasks
         let newTasks = [...tasks]
-        const task_to_change = newTasks.find((task) => task.id == task_id);
-        console.debug(task_to_change)
-        const topic_to_add = findTopicByTopicId(topics, topic_id)
+        // go through all 'operations' 1-by-1
+
+        taskIds.forEach((taskId, idx) => {
+            let sourceTopicId = sourceTopicIds[idx]
+            newTasks = removeTaskInstanceFromTopic(newTasks, taskId, sourceTopicId)
+            // If the task is already in the targetTopic, remove it
+            let taskTopics = findTopicsByTaskId(tasks, topics, taskId)
+            if (taskTopics.includes(targetTopicId)) {
+                newTasks = removeTaskInstanceFromTopic(newTasks, taskId, targetTopicId)
+            }
+            newTasks = insertTaskInstanceIntoTopic(newTasks, taskId, targetTopicId, targetViewIndex)
+        })
+        setTasks(newTasks)
+    }
+    return moveTasks
+}
+
+const getDuplicateTask = (setTasks, tasks, topics) => {
+    const duplicateTask = (taskId, targetTopicId, targetViewIndex) => {
+        // Copy tasks
+        if (targetViewIndex === undefined) { targetViewIndex = 1 }
+
+        let newTasks = [...tasks]
+        const task_to_change = newTasks.find((task) => task.id == taskId);
+        const topic_to_add = findTopicByTopicId(topics, targetTopicId)
         if (task_to_change.topics.includes(topic_to_add.id)) {
             console.info("Task is already in topic")
             return;
         }
-        task_to_change.topics.push(topic_to_add.id)
+        newTasks = insertTaskInstanceIntoTopic(newTasks, taskId, targetTopicId, targetViewIndex)
         setTasks(newTasks)
     }
     return duplicateTask
 }
 
-
 const getAddTask = (setTasks, tasks, topics, topicId) => {
-
     const addTask = () => {
-        let newTasks = [...tasks];
-        console.log(topicId);
-        const topic = findTopicByTopicId(topics, topicId);
-        if (topic) {
-            const addedTask = {
-                name: `New Task ${getFreeTaskId(tasks)}!`,
-                id: getFreeTaskId(tasks),
-                topics: [topic.id]
-            }
-            newTasks.push(addedTask);
-            console.log(newTasks);
-            setTasks(newTasks);
-
+        // Check if topic belonging to topicId exists
+        // Find tasks in the topic
+        // generate a new task
+        // insert it into the new topic
+        let newTasks = [...tasks]
+        const topic = findTopicByTopicId(topics, topicId)
+        if (!topic) {
+            return
         }
-
+        let newTask = generateEmptyTask(newTasks)
+        newTasks = addOrphanTasktoTaskList(newTasks, newTask)
+        newTasks = insertTaskInstanceIntoTopic(newTasks, newTask.id, topicId, 1)
+        setTasks(newTasks)
     }
     return addTask
 }
 
-// For v1 data
 const getDeleteTask = (setTasks, tasks, id) => {
     const deleteTask = () => {
-        let newTasks = [...tasks]
-        newTasks = newTasks.filter((task) => task.id !== id);
+        let newTasks = deleteEntireTask(tasks, id)
         setTasks(newTasks);
-
     }
     return deleteTask;
 }
 
+
+
+/////////////////////////
+/// Changing topics
+//////////////////////////
+
+// Both for v0 and v1 data
+const getMoveTopic = (setTopics, topics) => {
+    const moveTopic = (source_id, target_id) => {
+        console.info(`Moving topic ${source_id} to ${target_id}`)
+        // Cannot move a topic into one of its sub(sub)topics
+        let source_topic = findTopicByTopicId(topics, source_id)
+        console.info(source_topic)
+        let is_sub_topic = findTopicByTopicId(source_topic.subtopics, target_id)
+        if (is_sub_topic) {
+            console.log("Cannot move a topic to its own subtopic")
+            return
+        }
+        // If the target topic is the sources topic direct supertopic, also don't do it
+        // Find the super topic of the source topic
+        let newTopics = [...topics];
+        let source_supertopic = findSupertopicByTopicId(newTopics, source_id)
+        if (!source_supertopic) {
+            console.log("There is no supertopic. Is this a root topic?")
+            let target_topic = findTopicByTopicId(newTopics, target_id)
+            console.info(target_topic)
+            console.info(source_supertopic)
+            // Copy the topic into the new topic
+            target_topic.subtopics.push(source_topic)
+            // Delete the topic out of its current spot
+            newTopics = newTopics.filter((t) => t.id != source_topic.id)
+            setTopics(newTopics)
+            return
+
+        }
+        if (source_supertopic.id == target_id) {
+            console.log("Will not move a topic to its direct supertopic. It does nothing")
+            return
+
+        }
+        let target_topic = findTopicByTopicId(newTopics, target_id)
+        console.info(target_topic)
+        console.info(source_supertopic)
+        // Copy the topic into the new topic
+        target_topic.subtopics.push(source_topic)
+        // Delete the topic out of its current spot
+        source_supertopic.subtopics = source_supertopic.subtopics.filter((t) => t.id != source_topic.id)
+        setTopics(newTopics)
+    }
+    return moveTopic
+}
+
+
+const getAddTopic = (setTopics, topics) => {
+    const addTopic = () => {
+        let newTopics = [...topics];
+        const addedTopic = {
+            name: `New Topic ${getFreeTopicKey(topics)}`,
+            id: getFreeTopicKey(topics),
+            unfolded: true,
+            subtopics: []
+        }
+        newTopics.push(addedTopic);
+        console.debug(newTopics);
+        setTopics(newTopics);
+    }
+    return addTopic
+}
+
+// This one might be separated
+const addSubtopic_r = (topic, superTopic, newSubTopic) => {
+    if (topic.id == superTopic.id) {
+        //Add subtopic here
+        topic.subtopics = [newSubTopic,
+            ...topic.subtopics,
+        ];
+        return topic;
+    } else {
+        //recurse through all subtopics
+        return {
+            ...topic,
+            subtopics: topic.subtopics.map((topic) => addSubtopic_r(topic, superTopic, newSubTopic))
+        }
+    }
+}
+
+const getAddSubtopic = (setTopics, topics, superTopic) => {
+    // console.log("Creating add subtopic")
+    // console.log(topic);
+    // console.log(topics)
+
+    const addSubtopic = () => {
+        console.log('In AddSubTopic')
+        console.log(superTopic);
+        console.log(topics)
+        let newTopics = [...topics]
+        const addedTopic = {
+            name: `New Topic ${getFreeTopicKey(topics)}`,
+            id: getFreeTopicKey(topics),
+            unfolded: true,
+            subtopics: []
+        }
+        console.log(addedTopic)
+        console.log('start recursion')
+        // now add this topic at the exact right spot
+        // recurse through newTopics
+        // and return the changed topic if it is the right topic
+        newTopics = newTopics.map((topic_r) => addSubtopic_r(topic_r, superTopic, addedTopic));
+        setTopics(newTopics);
+    }
+    return addSubtopic
+}
+
+////////////////////////////
+/////  Sanitize topic and task order
+/////////////////////////////
+
+const checkValidTopicOrderIndex = (topics, tasks) => {
+    // Every task needs to have as many topicOrderIndices as they have topics
+    const getWrongTasks = tasks.filter((task) => task.topicViewIndices === undefined)
+    if (getWrongTasks.length > 0) {
+        console.debug("There are tasks that don't have topicViewIndices")
+        console.debug(getWrongTasks)
+        return false
+    }
+    let getWrongTasks2 = tasks.filter((task) => (task.topics.length != task.topicViewIndices.length))
+    if (getWrongTasks2.length > 0) {
+        console.debug("There are tasks that don't have the same amount of topicViewIndices as topics")
+        console.debug(getWrongTasks2)
+        return false
+    }
+
+
+    return true
+}
+
+
+const sanitizeTopicOrderIndex = (topics, tasks, setTasks) => {
+    let newTasks = [...tasks]
+    if (checkValidTopicOrderIndex(topics, tasks)) { return; }
+    console.warn("Found invalid topicOrderIndex. Reordering...")
+
+    const sanitize_r = (topics, tasks) => {
+        newTasks = [...tasks]
+        for (let topic of topics) {
+            //Iterate through subtopics and update tasks
+            newTasks = sanitize_r(topic.subtopics, newTasks)
+            // are there tasks in this topic?
+            let tasksInTopic = newTasks.filter((task) => task.topics.includes(topic.id))
+            console.debug(`Tasks ${tasksInTopic.map(t => t.name)} in topic ${topic.name}`)
+            // if there are tasks in this topic, give them an order index
+            nextOrderVal = 0
+            tasksInTopic.forEach(
+                (task) => {
+                    let idcs = task.topics.reduce((acc, topicId, idx) => (topicId == topic.id ? [...acc, idx] : acc), [])
+                    if (!task.topicViewIndices) { task.topicViewIndices = new Array }
+                    idcs.forEach(idx => {
+                        task.topicViewIndices[idx] = nextOrderVal
+                        nextOrderVal += 1
+                    })
+                }
+            )
+        }
+        return newTasks
+    }
+
+    // Recurse through all topics+tasks and fix the order.
+    let nextOrderVal = 1
+    newTasks = sanitize_r(topics, tasks)
+    console.log(newTasks)
+    setTasks(newTasks)
+}
+
+////////////////////////
+//// Fix Week Order Indices
+///////////////////////////
 
 const checkValidWeekOrderIndex = (tasks) => {
     // Check if there are undefined values
@@ -276,117 +416,6 @@ const getChangeWeekOrderIndex = (setTasks, tasks) => {
 }
 
 
-/////////////////////////
-/// Changing topics
-//////////////////////////
-
-// Both for v0 and v1 data
-const getMoveTopic = (setTopics, topics) => {
-    const moveTopic = (source_id, target_id) => {
-        console.info(`Moving topic ${source_id} to ${target_id}`)
-        // Cannot move a topic into one of its sub(sub)topics
-        let source_topic = findTopicByTopicId(topics, source_id)
-        console.info(source_topic)
-        let is_sub_topic = findTopicByTopicId(source_topic.subtopics, target_id)
-        if (is_sub_topic) {
-            console.log("Cannot move a topic to its own subtopic")
-            return
-        }
-        // If the target topic is the sources topic direct supertopic, also don't do it
-        // Find the super topic of the source topic
-        let newTopics = [...topics];
-        let source_supertopic = findSupertopicByTopicId(newTopics, source_id)
-        if (!source_supertopic) {
-            console.log("There is no supertopic. Is this a root topic?")
-            let target_topic = findTopicByTopicId(newTopics, target_id)
-            console.info(target_topic)
-            console.info(source_supertopic)
-            // Copy the topic into the new topic
-            target_topic.subtopics.push(source_topic)
-            // Delete the topic out of its current spot
-            newTopics = newTopics.filter((t) => t.id != source_topic.id)
-            setTopics(newTopics)
-            return
-
-        }
-        if (source_supertopic.id == target_id) {
-            console.log("Will not move a topic to its direct supertopic. It does nothing")
-            return
-
-        }
-        let target_topic = findTopicByTopicId(newTopics, target_id)
-        console.info(target_topic)
-        console.info(source_supertopic)
-        // Copy the topic into the new topic
-        target_topic.subtopics.push(source_topic)
-        // Delete the topic out of its current spot
-        source_supertopic.subtopics = source_supertopic.subtopics.filter((t) => t.id != source_topic.id)
-        setTopics(newTopics)
-    }
-    return moveTopic
-}
-
-
-const getAddTopic = (setTopics, topics) => {
-    const addTopic = () => {
-        let newTopics = [...topics];
-        const addedTopic = {
-            name: `New Topic ${getFreeTopicKey(topics)}`,
-            id: getFreeTopicKey(topics),
-            unfolded: true,
-            subtopics: []
-        }
-        newTopics.push(addedTopic);
-        console.debug(newTopics);
-        setTopics(newTopics);
-    }
-    return addTopic
-}
-
-// This one might be separated
-const addSubtopic_r = (topic, superTopic, newSubTopic) => {
-    if (topic.id == superTopic.id) {
-        //Add subtopic here
-        topic.subtopics = [...topic.subtopics,
-            newSubTopic];
-        return topic;
-    } else {
-        //recurse through all subtopics
-        return {
-            ...topic,
-            subtopics: topic.subtopics.map((topic) => addSubtopic_r(topic, superTopic, newSubTopic))
-        }
-    }
-}
-
-const getAddSubtopic = (setTopics, topics, superTopic) => {
-    // console.log("Creating add subtopic")
-    // console.log(topic);
-    // console.log(topics)
-
-    const addSubtopic = () => {
-        console.log('In AddSubTopic')
-        console.log(superTopic);
-        console.log(topics)
-        let newTopics = [...topics]
-        const addedTopic = {
-            name: `New Topic ${getFreeTopicKey(topics)}`,
-            id: getFreeTopicKey(topics),
-            unfolded: true,
-            subtopics: []
-        }
-        console.log(addedTopic)
-        console.log('start recursion')
-        // now add this topic at the exact right spot
-        // recurse through newTopics
-        // and return the changed topic if it is the right topic
-        newTopics = newTopics.map((topic_r) => addSubtopic_r(topic_r, superTopic, addedTopic));
-        setTopics(newTopics);
-    }
-    return addSubtopic
-}
-
-
 
 ////////////////////////////////
 /// Changing both topics and tasks
@@ -404,7 +433,7 @@ const getDeleteTopic = (setTopics, topics, setTasks, tasks, topicId) => {
         // TODO: this is slow and not scalable. Fix when necessary.
         let newTasks = [...tasks]
         // all_subtopics = newTopics.
-        newTasks = newTasks.filter((task) => isTaskInAnyTopicV1(task, newTopics))
+        newTasks = newTasks.filter((task) => isTaskInAnyTopic(task, newTopics))
         console.info('Length of tasks before deletion/length of tasks after deletion')
         console.info(tasks.length + ' / ' + newTasks.length)
 
@@ -414,16 +443,21 @@ const getDeleteTopic = (setTopics, topics, setTasks, tasks, topicId) => {
     return deleteTopic;
 }
 
-export default getChangeTaskTopic;
-export { getChangeTaskTopic };
+export default getAddTask;
 export { getDeleteTask };
 export { getDeleteTopic };
 export { getDuplicateTask };
 export { getMoveTopic };
-export { getUpdateTaskTopics };
 export { getAddTask }
 export { getAddTopic }
 export { getAddSubtopic }
 export { getChangeWeekOrderIndex }
 export { sanitizeWeekOrderIndex }
 export { sanitizeWeekOrderIndex2 }
+export { sanitizeTopicOrderIndex }
+export { getMoveTasks }
+
+
+/// What I would need is basically
+// A moveTaskToTopic
+// moveTask

@@ -109,7 +109,7 @@
 - [x] Make tasks draggeable to topics
 - [x] Make topics draggable to other topics
 - [x] Make Tasks duplicatable to multiple topics
-- [ ] Drag tasks to change the order in task list
+- [x] Drag tasks to change the order in task list
 - [ ] Drag topics to sort them in the topic list
 - [ ] Create sensible moments to clear the task selection (click outside the task)
 - [x] Ability to select (multiple) tasks
@@ -294,11 +294,22 @@
 # Annoyances:
 
 
+## Development:
+
+- [ ] Need an easier way to show task/topic information (id/viewIndex/weekIndex) - 2m
+- [ ] Need an identifier for which version we are working with (date, commit, version, dev or production) - 2m
+
 ## Major/crashes/bugs:
 
+<<<<<<< HEAD
 - [ ] Make the sorting of the weekly planning not change the topic view order - 1M
 - [ ] The data is lost when something in react is changed - 1M
+=======
+- [x] Make the sorting of the weekly planning not change the topic view order - 1M
+- [ ] The data is lost when something in react is changed/firefox crashes - 2M
+>>>>>>> cac2913298e6cc66d653b700a74cc99dc9c922c0
 - [x] Bug: source_supertopic is undefined in moveTopic - gefixt
+- [ ] Tasks with the same id will mess up entire workflow - 1M
 
 ## Relaying information:
 
@@ -307,7 +318,7 @@
 - [ ] Not being able to peek in a list of folded topics: 2m
 - [ ] Not being able to see statistics of the topic in the topic view - 2m
 - [ ] I sometimes find a duplicate task that I made myself (The abiltiy to merge tasks?) -3m 
-- [ ] There is a missing intent to progress towards a goal, but the task is not 'working on ... for 2 hours' but just 'finish this', and I make it repeated, which is also not the right way to do it. - 2m   'Working towards xx for 2 hours' is a subtask of 'Finish xx', so it should be fixed with subtasks
+- [ ] There is a missing intent to progress towards a goal, but the task is not 'working on ... for 2 hours' but just 'finish this', and I make it repeated, which is also not the right way to do it.   'Working towards xx for 2 hours' is a subtask of 'Finish xx', so it should be fixed with subtasks - 2m
 - [ ] The weekly view doesn't show all the topics of the task at hand: 1m
 - [ ] After folding/unfolding, the mouse is not over the same topic anymore: 1m
 - [ ] Not being able to search for a task (search bar) - 1m
@@ -318,8 +329,18 @@
 - [x] No dark mode - 1m -gefixt
 - [ ] Topic text is not handled right and makes the buttons go crazy - 1m
 - [ ] Text width on a narrow screen is not handled well (text width not respected) - 5m
+<<<<<<< HEAD
 - [ ] Not being able to collapse or fold all the topics with one button - 21m
 - [ ] Repeated tasks do not show last completion/cannot retain information about when the next time would be -13m+
+=======
+- [ ] The UI does not look professional -1m
+- [ ] Add browser tab icon - 1m
+- [ ] Add name of file to Tab Name -1m
+- [ ] The Dark Mode does not work correctly -1m
+- [ ] After dragging, the selection is sometimes not shown, even though it is still selected - 3m
+- [ ] Not being able to collapse or fold all the topics with one button - 22m
+- [ ] Repeated tasks do not show last completion/cannot retain information about when the next time would be -14m+
+>>>>>>> cac2913298e6cc66d653b700a74cc99dc9c922c0
 - [ ] It is unclear where a duplicated task is already (is it already duplicated?) -10m
 
 ### Filtering:
@@ -357,6 +378,7 @@
 - [x] Not being able to edit task text on the weekly view - 3m - gefixt
 - [x] Not being able to mark a weekly task as 'planned in the daily view (or locally)' - 4m - gefixt
 - [x] Topic view task text is too long: 3m - gefixt (opnieuw)
+- [ ] There needs to be some feedback on when something was done (an event log) /Adding processes as tasks (this is again a type of supertask/subtask) - 1m
 - [ ] Removing items from the planned list or completing an item, does not unschedule them - 14m
 - [ ] Not being able to duplicate multiple tasks at once in Topic View (forgetting which tasks are already copied): 12m
 
@@ -373,14 +395,16 @@
 
 - [ ] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -10m
 - [ ] There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -9m
-- [ ] Cannot mark a task as Blocked - 2m
-- [ ] I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 2m
+- [ ] Cannot mark a task as Blocked - 3m
+- [ ] I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 3m
 - [ ] Inability to add comments to a (repeating) task - 1m      Missing information: what time range has been checked
 - [x] Fearing to lose a task by not being able to make it repeatable: 3 - gefixt
 - [x] Not being able to drag multiple items at once in the topic view - 16m - gefixt
 - [x] ot being able to drag multiple items at once in the planned view - 30m - gefixt
-- [ ] Cannot order/sort the tasks/topics on the topic view - 21m
-- [ ] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 10m
+- [ ] Adding processes as tasks (this is again a type of supertask/subtask)
+- [ ] Track different activities (need daily planning + completion timings) - 1m
+- [x] Cannot order/sort the tasks/topics on the topic view - 21m
+- [ ] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 12m
 
 ## Import/export:
 
@@ -396,9 +420,3 @@
 
 # Uncategorized:
 
-- [ ] Make UI look professional
-- [ ] Make Dark mode work
-- [ ] Adding processes as tasks (this is again a type of supertask/subtask)
-- [ ] Track different activities (need daily planning + completion timings)
-- [ ] Add browser tab icon
-- [ ] Add name of file to Tab Name

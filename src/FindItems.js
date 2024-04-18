@@ -60,6 +60,7 @@ const findTaskByTaskId = (tasks, taskId) => {
 const findTopicsByTaskId = (tasks, topics, taskId) => {
     let task = findTaskByTaskId(tasks, taskId)
     topics = task.topics.map((topicId) => findTopicByTopicId(topics, topicId))
+    return topics
 }
 
 

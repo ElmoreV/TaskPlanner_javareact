@@ -3,14 +3,14 @@ import PropTypes from 'prop-types';
 import TaskContent from './TaskContent'
 import React from 'react';
 
-const Task = React.memo((props) => {
+const Task =(props) => {
     const { id, name, setTaskName, deleteTask,
         completed, completeTask,
-        currentTopicName, currentTopicId, changeTopic,
+        currentTopicName, currentTopicId, moveTasks, currentTopicViewIndex,
         planned, plan, unplan,
         repeated, toggleRepeatTask,
         selectedTasks, addToSelection, deleteFromSelection, selected,
-        duplicateTask,
+        duplicateTask, setTasks, tasks,
         fancy,
     } = props;
     console.debug("Rendering Task")
@@ -71,10 +71,9 @@ const Task = React.memo((props) => {
         var type = e.dataTransfer.getData("Type")
         if (type == "Task") {
             var task_id = Number(e.dataTransfer.getData("TaskId"))
-            var oldTopicName = e.dataTransfer.getData("TopicName")
             var oldTopicId = Number(e.dataTransfer.getData("TopicId"))
-            console.info(`Dropped task with id ${task_id} with old topic id ${oldTopicId} on task within topic with id ${currentTopicId}`)
-            console.info(changeTopic)
+            console.info(`Dropped task with id ${task_id} with old topic id ${oldTopicId} on task (id:${id}) within topic with id ${currentTopicId}`)
+            // console.info(changeTopic)
             let taskIds = []
             let oldTopicIds = []
             taskIds.push(task_id)
@@ -87,13 +86,14 @@ const Task = React.memo((props) => {
                     oldTopicIds.push(st.topicId)
                 })
             }
-            if (changeTopic) {
-                changeTopic(taskIds, oldTopicIds, currentTopicId)
+
+            if (moveTasks) {
+                moveTasks(taskIds, oldTopicIds, currentTopicId, currentTopicViewIndex)
             }
         } else if (type == "TaskDuplicate") {
-            var task_id = Number(e.dataTransfer.getData("TaskId"))
-            console.info(`Duplicate dropped task with id ${task_id} on this topic with id ${currentTopicId}`)
-            duplicateTask(task_id, currentTopicId)
+            var taskId = Number(e.dataTransfer.getData("TaskId"))
+            console.info(`Duplicate dropped task with id ${taskId} on this topic with id ${currentTopicId}`)
+            duplicateTask(taskId, currentTopicId, currentTopicViewIndex)
         } else {
             console.info("On a task, you can only drop another task (not a topic)")
         }
@@ -155,7 +155,6 @@ const Task = React.memo((props) => {
     const handleBlur = () => {
         setIsDraggingAllowed(true);
         setIsEditing(false);
-
     }
     const inputRef = useRef(null);
     useEffect(() => {
@@ -209,14 +208,17 @@ const Task = React.memo((props) => {
         textBarWidth="425px"
         fancy={fancy}
     />);
-})
+}
 
 Task.propTypes = {
     name: PropTypes.string.isRequired,
     setTaskName: PropTypes.func,
     deleteTask: PropTypes.func,
     completed: PropTypes.bool.isRequired,
-    completeTask: PropTypes.func
+    completeTask: PropTypes.func,
+    id: PropTypes.number,
+    currentTopicId: PropTypes.number,
+    currentViewIdx: PropTypes.number,
 };
 
 

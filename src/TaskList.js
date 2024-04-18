@@ -4,20 +4,15 @@ import Topic from './Topic';
 import React from 'react';
 // import Checkbox from './Checkbox'
 import {
-    convert_old_topic_tasks_to_new_topic_tasks,
-    convert_topic_tasks_to_relational,
-    convert_new_topic_tasks_to_old_topic_tasks
-} from './Converter';
-import {
-    getChangeTaskTopic,
     getDeleteTask,
     getDeleteTopic,
     getDuplicateTask,
     getMoveTopic,
-    getUpdateTaskTopics,
     getAddTask,
     getAddSubtopic,
+    getMoveTasks,
     getAddTopic,
+    sanitizeTopicOrderIndex,
 } from './ModifyFuncGeneratorsV1'
 import {
     getCompleteTask,
@@ -34,9 +29,10 @@ import {
 import ImportExport from './ImportExport';
 
 class SelectedTask {
-    constructor(taskId, topicId) {
+    constructor(taskId, topicId, topicViewIndex) {
         this.taskId = taskId
         this.topicId = topicId
+        this.topicViewIndex = topicViewIndex
     }
 }
 
@@ -56,6 +52,9 @@ const recursiveShowTopic = (topic, tasks,
     // console.debug('Hello2')
     // console.debug(topics)
     // console.debug(topic)
+    const findTopicViewIdx = (topicId, task) => {
+        return task.topicViewIndices[task.topics.findIndex(taskTopicId => taskTopicId == topicId)]
+    }
 
     return (<div key={'div_' + topic.id}><li key={topic.id}>
         <Topic
@@ -68,8 +67,8 @@ const recursiveShowTopic = (topic, tasks,
             addSubTopic={getAddSubtopic(setTopics, topics, topic)}
             moveTopic={getMoveTopic(setTopics, topics)}
             addTask={getAddTask(setTasks, tasks, topics, topic.id)}
-            changeTopic={getChangeTaskTopic(setTasks, tasks)}
-            updateTaskTopics={getUpdateTaskTopics(setTasks, tasks, topic.name)}
+            moveTasks={getMoveTasks(topics, tasks, setTasks)}
+            // updateTaskTopics={getUpdateTaskTopics(setTasks, tasks, topic.name)}
             duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
             deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}
             fancy={fancy}
@@ -86,32 +85,39 @@ const recursiveShowTopic = (topic, tasks,
         ))}</ul>
         <ul key={topic.id + '_tasks'}>
             {topic.unfolded && tasks//.sort((taskA, taskB) => { return taskA.name > taskB.name })
-                .map((task) => (
-                    (!(task.completed && hideCompletedItems) && task.topics.includes(topic.id) && (task.repeated || !showRepeatedOnly)) ?
-                        <li key={topic.id + ' - ' + task.id}>
-                            <Task name={task.name}
-                                id={task.id}
-                                completed={task.completed}
-                                currentTopicName={topic.name}
-                                currentTopicId={topic.id}
-                                setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
-                                deleteTask={getDeleteTask(setTasks, tasks, task.id)}
-                                completeTask={getCompleteTask(setTasks, tasks, task.id)}
-                                plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
-                                unplan={getUnplanTask(setTasks, tasks, task.id)}
-                                toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
-                                planned={task.thisWeek}
-                                repeated={task.repeated}
-                                addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
-                                deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
-                                selected={selectedTasks.find((st) => (st.taskId == task.id && st.topicId == topic.id)) ? true : false}
-                                selectedTasks={selectedTasks}
-                                changeTopic={getChangeTaskTopic(setTasks, tasks)}
-                                duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
-                                fancy={fancy}
+                // .map((task) => (
+                //     ( && task.topics.includes(topic.id) ) ?
+                .filter((task) => task.topics.includes(topic.id))
+                .filter((task) => (!(task.completed && hideCompletedItems) && (task.repeated || !showRepeatedOnly)))
+                .slice(0).sort((taskA, taskB) => { return findTopicViewIdx(topic.id, taskA) - findTopicViewIdx(topic.id, taskB) })
+                .map(task => (
+                    <li key={topic.id + ' - ' + task.id}>
+                        <Task name={task.name}
+                            id={task.id}
+                            completed={task.completed}
+                            currentTopicViewIndex={findTopicViewIdx(topic.id, task)}
+                            currentTopicName={topic.name}
+                            currentTopicId={topic.id}
+                            setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
+                            deleteTask={getDeleteTask(setTasks, tasks, task.id)}
+                            completeTask={getCompleteTask(setTasks, tasks, task.id)}
+                            plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
+                            unplan={getUnplanTask(setTasks, tasks, task.id)}
+                            toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
+                            planned={task.thisWeek}
+                            repeated={task.repeated}
+                            addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic.id, findTopicViewIdx(topic.id, task))}
+                            deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
+                            selected={selectedTasks.find((st) => (st.taskId == task.id && st.topicId == topic.id)) ? true : false}
+                            selectedTasks={selectedTasks}
+                            moveTasks={getMoveTasks(topics, tasks, setTasks)}
+                            duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
+                            fancy={fancy}
+                            setTasks={setTasks}
+                            tasks={tasks}
 
-                            />
-                        </li> : null))}
+                        />
+                    </li>))}
         </ul></div>
     )
 }
@@ -130,9 +136,9 @@ const showTopics = (topics, tasks,
         hideCompletedItems, showRepeatedOnly,
         fancy)))
 }
-const addTaskToSelection = (selectedTasks, setSelectedTasks, taskId, topicId) => {
+const addTaskToSelection = (selectedTasks, setSelectedTasks, taskId, topicId, topicViewIndex) => {
     let newSelectedTasks = [...selectedTasks]
-    newSelectedTasks.push(new SelectedTask(taskId, topicId))
+    newSelectedTasks.push(new SelectedTask(taskId, topicId, topicViewIndex))
     setSelectedTasks(newSelectedTasks)
 }
 const deleteTaskFromSelection = (selectedTasks, setSelectedTasks, taskId, topicId) => {
@@ -151,24 +157,13 @@ const TaskList = (props) => {
     const [showRepeatedOnly, setShowRepeatedOnly] = useState(false)
 
     const [selectedTasks, setSelectedTasks] = useState([])
+    const [runOnce, setRunOnce] = useState(false)
 
-
-    const converter_callback = () => {
-        let [topics2, tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
-        let [topics3, tasks3] = convert_new_topic_tasks_to_old_topic_tasks(topics2, tasks2)
-        console.log(tasks, tasks3)
-        console.log('Boy oh boy')
-        for (let i = 0; i < tasks.length; i++) {
-            console.log(tasks[i])
-            console.log(tasks2[i])
-            console.log(tasks3[i])
-        }
-        // let tables = convert_topic_tasks_to_relational(topics2,tasks2)
-        // console.log('res')
-        // console.log(topics2)
-        // console.log(tasks2)
-        // console.log(tables)
+    const testFunction = () => {
+        console.log(tasks)
+        console.log(topics)
     }
+
 
     useEffect(() => {
         // Function to clear selection
@@ -207,6 +202,19 @@ const TaskList = (props) => {
     // }
 
 
+    if (runOnce < 2) {
+        console.log("Running sanitzie")
+        sanitizeTopicOrderIndex(topics, tasks, setTasks)
+        // setRunOnce(runOnce + 1)
+    }
+    // TODO: add duplicate id recognition and resolving
+    // let arr = new Array
+    // for (let i in new Range(300)){
+    //     arr[i]=0
+    // }
+    // let taskIdCount = tasks.map((task,idx)=>(arr[task.id])?arr[task.id]+=1:arr[task.id]=1)
+    // console.log(taskIdCount)
+    // console.log(arr)
     return (
         // <div>
         <div className='task-list'>
@@ -233,8 +241,7 @@ const TaskList = (props) => {
                     hideCompletedItems, showRepeatedOnly,
                     fancy)}
             </ul>
-            <button onClick={converter_callback}>Test Converter</button>
-
+            <button onClick={() => sanitizeTopicOrderIndex(topics, tasks, setTasks)}>Test Function</button>
         </div>
 
     );

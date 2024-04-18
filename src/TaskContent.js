@@ -14,7 +14,7 @@ const captureClick = (func) => {
     return wrapper
 }
 
-const TaskContent = React.memo((props) => {
+const TaskContent =(props) => {
 
     const { classStr,
         selectStyle, selectHandlers,
@@ -75,6 +75,6 @@ const TaskContent = React.memo((props) => {
         </div>
         // </div>
     );
-})
+}
 
 export default TaskContent;

@@ -6,7 +6,7 @@ const PlannedTask = (props) => {
     const { taskKey, taskName, setTaskName, deleteTask,
         completed, completeTask,
         scheduled, scheduleTask,
-        currentTopic, changeTopic, planned, unplan, topics, taskTopics,
+        planned, unplan, topics, taskTopics,
         selectedTasks, addToSelection, deleteFromSelection, selected, clearSelection,
         changeWeekOrderIndex, currentWeekOrderIndex,
         fancy,
