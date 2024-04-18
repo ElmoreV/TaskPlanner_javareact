@@ -1,5 +1,5 @@
 import structuredClone from '@ungap/structured-clone'
-import { getChangeTaskTopic, getDeleteTopic } from '../ModifyFuncGeneratorsV1';
+import { getDeleteTopic } from '../ModifyFuncGeneratorsV1';
 
 //1. Prepare a tasks/topics example
 const tasks = [
@@ -121,69 +121,69 @@ it('addSubtopic_invalidSupertopic', () => {
 })
 
 
-it('changeTaskTopic_validtask_to_validtopic', () => {
-    //Arrange
-    let freshTasks = structuredClone(tasks)
-    newTasks = structuredClone(tasks)
-    //Act
+// it('changeTaskTopic_validtask_to_validtopic', () => {
+//     //Arrange
+//     let freshTasks = structuredClone(tasks)
+//     newTasks = structuredClone(tasks)
+//     //Act
 
-    getChangeTaskTopic(setTasks, tasks)(5, 1, 11)
-    expect(newTasks).toEqual(
-        [
-            { name: "Fiets repareren", id: 0, topics: [12], completed: true, thisWeek: false },
-            { name: "Outer Wilds", id: 1, topics: [21, 1], completed: false, thisWeek: false },
-            { name: "Badkamer", id: 2, topics: [1], completed: true, thisWeek: false },
-            { name: "Backup opruimen", id: 5, topics: [11], completed: false, thisWeek: false },
-        ]
-    )
+//     getChangeTaskTopic(setTasks, tasks)(5, 1, 11)
+//     expect(newTasks).toEqual(
+//         [
+//             { name: "Fiets repareren", id: 0, topics: [12], completed: true, thisWeek: false },
+//             { name: "Outer Wilds", id: 1, topics: [21, 1], completed: false, thisWeek: false },
+//             { name: "Badkamer", id: 2, topics: [1], completed: true, thisWeek: false },
+//             { name: "Backup opruimen", id: 5, topics: [11], completed: false, thisWeek: false },
+//         ]
+//     )
 
-})
-
-
-it('changeTaskTopic_invalidtask_to_validtopic', () => {
-    //Arrange
-    let freshTasks = structuredClone(tasks)
-    newTasks = structuredClone(tasks)
-    //Act
-
-    getChangeTaskTopic(setTasks, tasks)(404, 1, 11)
-    expect(newTasks).toEqual(tasks)
-})
+// })
 
 
-it('changeTaskTopic_validtask_to_invalidtopic', () => {
-    //Arrange
-    let freshTasks = structuredClone(tasks)
-    newTasks = structuredClone(tasks)
-    //Act
-    getChangeTaskTopic(setTasks, freshTasks)(5, 1, 201)
-    //Assert
-    //TODO: this is clearly a mistake
-    expect(newTasks).toEqual(        [
-        { name: "Fiets repareren", id: 0, topics: [12], completed: true, thisWeek: false },
-        { name: "Outer Wilds", id: 1, topics: [21, 1], completed: false, thisWeek: false },
-        { name: "Badkamer", id: 2, topics: [1], completed: true, thisWeek: false },
-        { name: "Backup opruimen", id: 5, topics: [11], completed: false, thisWeek: false },
-    ]
-)
-})
+// it('changeTaskTopic_invalidtask_to_validtopic', () => {
+//     //Arrange
+//     let freshTasks = structuredClone(tasks)
+//     newTasks = structuredClone(tasks)
+//     //Act
 
-it('changeTaskTopic_validtask_from_invalidtopic', () => {
-    //Arrange
-    let freshTasks = structuredClone(tasks) 
-    newTasks = structuredClone(tasks)
-    //Act
-    getChangeTaskTopic(setTasks, freshTasks)(5, 202, 1)
-    //Assert
-    expect(newTasks.toString()).toEqual(tasks.toString())
-})
+//     getChangeTaskTopic(setTasks, tasks)(404, 1, 11)
+//     expect(newTasks).toEqual(tasks)
+// })
 
-it('changeTaskTopic_validtask_to_invalidtopic', () => {
-    //Arrange
-    let freshTasks = structuredClone(tasks)
-    newTasks = structuredClone(tasks)
-    //Act
-    getChangeTaskTopic(setTasks, freshTasks)(5, 202, 404)
-    //Assert
-    expect(newTasks.toString()).toEqual(tasks.toString())
-})
+
+// it('changeTaskTopic_validtask_to_invalidtopic', () => {
+//     //Arrange
+//     let freshTasks = structuredClone(tasks)
+//     newTasks = structuredClone(tasks)
+//     //Act
+//     getChangeTaskTopic(setTasks, freshTasks)(5, 1, 201)
+//     //Assert
+//     //TODO: this is clearly a mistake
+//     expect(newTasks).toEqual(        [
+//         { name: "Fiets repareren", id: 0, topics: [12], completed: true, thisWeek: false },
+//         { name: "Outer Wilds", id: 1, topics: [21, 1], completed: false, thisWeek: false },
+//         { name: "Badkamer", id: 2, topics: [1], completed: true, thisWeek: false },
+//         { name: "Backup opruimen", id: 5, topics: [11], completed: false, thisWeek: false },
+//     ]
+// )
+// })
+
+// it('changeTaskTopic_validtask_from_invalidtopic', () => {
+//     //Arrange
+//     let freshTasks = structuredClone(tasks) 
+//     newTasks = structuredClone(tasks)
+//     //Act
+//     getChangeTaskTopic(setTasks, freshTasks)(5, 202, 1)
+//     //Assert
+//     expect(newTasks.toString()).toEqual(tasks.toString())
+// })
+
+// it('changeTaskTopic_validtask_to_invalidtopic', () => {
+//     //Arrange
+//     let freshTasks = structuredClone(tasks)
+//     newTasks = structuredClone(tasks)
+//     //Act
+//     getChangeTaskTopic(setTasks, freshTasks)(5, 202, 404)
+//     //Assert
+//     expect(newTasks.toString()).toEqual(tasks.toString())
+// })

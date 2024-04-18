@@ -207,6 +207,14 @@ const TaskList = (props) => {
         sanitizeTopicOrderIndex(topics, tasks, setTasks)
         // setRunOnce(runOnce + 1)
     }
+    // TODO: add duplicate id recognition and resolving
+    // let arr = new Array
+    // for (let i in new Range(300)){
+    //     arr[i]=0
+    // }
+    // let taskIdCount = tasks.map((task,idx)=>(arr[task.id])?arr[task.id]+=1:arr[task.id]=1)
+    // console.log(taskIdCount)
+    // console.log(arr)
     return (
         // <div>
         <div className='task-list'>

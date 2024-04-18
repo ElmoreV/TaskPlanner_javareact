@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TaskContent from './TaskContent'
 import React from 'react';
 
-const Task = React.memo((props) => {
+const Task =(props) => {
     const { id, name, setTaskName, deleteTask,
         completed, completeTask,
         currentTopicName, currentTopicId, moveTasks, currentTopicViewIndex,
@@ -208,7 +208,7 @@ const Task = React.memo((props) => {
         textBarWidth="425px"
         fancy={fancy}
     />);
-})
+}
 
 Task.propTypes = {
     name: PropTypes.string.isRequired,
