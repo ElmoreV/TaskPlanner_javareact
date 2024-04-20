@@ -606,4 +606,17 @@ A system is not necessary that multiple similar processes run. But that two orth
 - Unplanned 
 - Planned
 - Planned & Scheduled
+- Verifying completeness (if this takes time)
 - Finished
+
+
+
+## Who does it matters
+
+Depending on how you phrase the task, the criteria of having it done is different.
+
+1. The bathroom needs to be cleaned once every 2 weeks.
+2. I need to clean the bathroom every 4 weeks. (my roommate will clean it every 4 weeks in between.)
+
+
+
