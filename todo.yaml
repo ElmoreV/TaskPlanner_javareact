@@ -192,8 +192,6 @@
             - 'Understand testing framework (jest)'
             - 'Keep a list of UX issues when manually testing/using the software'
             - 'Specific regression tests':
-                - 'Need an easier way to show task/topic information (id/viewIndex/weekIndex) - 2m'
-                - 'Need an identifier for which version we are working with (date, commit, version, dev or production) - 2m'
                 - 'Moving a task to the same topic should keep the same topic'
                 - 'Moving a duplicated task to the second duplicated task, should deduplicate the task'
                 - 'Tasks A and B both have duplicates in Topic 1 and Topic 2. Selecting task A1 and B2 and moving to topic C should leave A2 and B1 alone'
@@ -218,14 +216,12 @@
     - 'Development':
         - 'Need an easier way to show task/topic information (id/viewIndex/weekIndex) - 2m'
         - 'Need an identifier for which version we are working with (date, commit, version, dev or production) - 2m'
-        - 'Moving a task to the same topic should keep the same topic'
-        - 'Moving a duplicated task to the second duplicated task, should deduplicate the task'
-        - 'Tasks A and B both have duplicates in Topic 1 and Topic 2. Selecting task A1 and B2 and moving to topic C should leave A2 and B1 alone'
+        - 'Create an easier way to debug (debug mode with more information directly on screen) - 2m'
     - 'Major/crashes/bugs':
         - 'Make the sorting of the weekly planning not change the topic view order - 1M'
         - 'The data is lost when something in react is changed - 1M'
         - 'Bug: source_supertopic is undefined in moveTopic - 1M- gefixt'
-        - 'Tasks with the same id will mess up entire workflow - 1M'
+        - 'Tasks/topics with the same id will mess up program - 2M'
         - 'Sometimes a new task will not be inserted at the absolute top -3m'
         - '- Should not be able to delete non-empty topics. - 1M'
         - 'Visual bug: selected tasks are not outline after dragging completes in the topic view - 1m'

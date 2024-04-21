@@ -181,7 +181,7 @@
     {
       "name": "Constraints",
       "id": 2,
-      "unfolded": false,
+      "unfolded": true,
       "subtopics": [
         {
           "name": "UX/UI",
@@ -214,7 +214,7 @@
                 {
                   "name": "Specific regression tests",
                   "id": 52,
-                  "unfolded": false,
+                  "unfolded": true,
                   "subtopics": []
                 }
               ]
@@ -244,7 +244,7 @@
     {
       "name": "Bugs/issues",
       "id": 12,
-      "unfolded": false,
+      "unfolded": true,
       "subtopics": []
     },
     {
@@ -254,7 +254,7 @@
       "subtopics": [
         {
           "name": "Development",
-          "id": 52,
+          "id": 53,
           "unfolded": false,
           "subtopics": []
         },
@@ -280,7 +280,7 @@
         {
           "name": "Modifying information",
           "id": 46,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "It takes a huge time to drag a task from the top to the bottom - 16m ",
@@ -291,7 +291,7 @@
             {
               "name": "Missing data structure",
               "id": 50,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             }
           ]
@@ -307,7 +307,7 @@
     {
       "name": "Uncategorized",
       "id": 51,
-      "unfolded": true,
+      "unfolded": false,
       "subtopics": []
     }
   ],
@@ -2027,7 +2027,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        7
+        8
       ]
     },
     {
@@ -2658,7 +2658,7 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        8
+        9
       ]
     },
     {
@@ -2832,28 +2832,28 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Tasks with the same id will mess up entire workflow - 1M",
+      "name": "Tasks/topics with the same id will mess up program - 2M",
       "id": 263,
       "topics": [
         44
       ],
       "topicViewIndices": [
-        9
+        7
       ],
       "completed": false,
-      "thisWeek": false,
+      "thisWeek": true,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 1
     },
     {
       "name": "Need an easier way to show task/topic information (id/viewIndex/weekIndex) - 2m",
       "id": 264,
       "topics": [
-        52
+        53
       ],
       "topicViewIndices": [
-        0
+        2
       ],
       "completed": false,
       "thisWeek": false,
@@ -2865,7 +2865,7 @@
       "name": "Need an identifier for which version we are working with (date, commit, version, dev or production) - 2m",
       "id": 265,
       "topics": [
-        52
+        53
       ],
       "topicViewIndices": [
         1
@@ -3128,7 +3128,7 @@
         44
       ],
       "topicViewIndices": [
-        11
+        12
       ],
       "completed": false,
       "thisWeek": false,
@@ -3216,7 +3216,7 @@
         44
       ],
       "topicViewIndices": [
-        10
+        11
       ],
       "completed": false,
       "thisWeek": false,
@@ -3246,7 +3246,7 @@
         44
       ],
       "topicViewIndices": [
-        12
+        13
       ],
       "completed": false,
       "thisWeek": false,
@@ -3263,7 +3263,7 @@
       ],
       "repeated": true,
       "thisWeek": true,
-      "weekOrderIndex": 1,
+      "weekOrderIndex": 2,
       "topicViewIndices": [
         6,
         23
@@ -3275,7 +3275,7 @@
       "topics": [
         46
       ],
-      "weekOrderIndex": 2,
+      "weekOrderIndex": 3,
       "topicViewIndices": [
         7
       ],
@@ -3288,7 +3288,7 @@
       "topics": [
         46
       ],
-      "weekOrderIndex": 3,
+      "weekOrderIndex": 4,
       "thisWeek": true,
       "topicViewIndices": [
         6
@@ -3303,7 +3303,7 @@
         45
       ],
       "thisWeek": true,
-      "weekOrderIndex": 4,
+      "weekOrderIndex": 5,
       "topicViewIndices": [
         8,
         0
@@ -3316,7 +3316,7 @@
       "topics": [
         23
       ],
-      "weekOrderIndex": 5,
+      "weekOrderIndex": 6,
       "thisWeek": true,
       "topicViewIndices": [
         9
@@ -3329,7 +3329,7 @@
       "topics": [
         50
       ],
-      "weekOrderIndex": 6,
+      "weekOrderIndex": 7,
       "thisWeek": true,
       "topicViewIndices": [
         8
@@ -3342,7 +3342,7 @@
       "topics": [
         46
       ],
-      "weekOrderIndex": 7,
+      "weekOrderIndex": 8,
       "thisWeek": true,
       "topicViewIndices": [
         8
@@ -3355,7 +3355,7 @@
       "topics": [
         50
       ],
-      "weekOrderIndex": 8,
+      "weekOrderIndex": 9,
       "topicViewIndices": [
         5
       ],
@@ -3367,7 +3367,7 @@
       "topics": [
         45
       ],
-      "weekOrderIndex": 9,
+      "weekOrderIndex": 10,
       "thisWeek": true,
       "topicViewIndices": [
         2
@@ -3386,7 +3386,7 @@
       "thisWeek": true,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 10
+      "weekOrderIndex": 11
     },
     {
       "name": "I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -12m- ",
@@ -3394,7 +3394,7 @@
       "topics": [
         46
       ],
-      "weekOrderIndex": 11,
+      "weekOrderIndex": 12,
       "topicViewIndices": [
         33
       ],
@@ -3413,7 +3413,7 @@
       "thisWeek": true,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 12
+      "weekOrderIndex": 13
     },
     {
       "name": "It is unclear where a duplicated task is already (is it already duplicated?) -12m",
@@ -3421,7 +3421,7 @@
       "topics": [
         45
       ],
-      "weekOrderIndex": 13,
+      "weekOrderIndex": 14,
       "thisWeek": true,
       "topicViewIndices": [
         4
@@ -3433,7 +3433,7 @@
       "topics": [
         40
       ],
-      "weekOrderIndex": 14,
+      "weekOrderIndex": 15,
       "thisWeek": true,
       "topicViewIndices": [
         3
@@ -3445,7 +3445,7 @@
       "topics": [
         45
       ],
-      "weekOrderIndex": 15,
+      "weekOrderIndex": 16,
       "topicViewIndices": [
         9
       ],
@@ -3457,7 +3457,7 @@
       "topics": [
         50
       ],
-      "weekOrderIndex": 16,
+      "weekOrderIndex": 17,
       "thisWeek": true,
       "topicViewIndices": [
         3
@@ -3471,7 +3471,7 @@
       "topics": [
         41
       ],
-      "weekOrderIndex": 17,
+      "weekOrderIndex": 18,
       "topicViewIndices": [
         6
       ],
@@ -3484,7 +3484,7 @@
         41
       ],
       "thisWeek": true,
-      "weekOrderIndex": 18,
+      "weekOrderIndex": 19,
       "topicViewIndices": [
         7
       ]
@@ -3496,7 +3496,7 @@
         25
       ],
       "thisWeek": true,
-      "weekOrderIndex": 19,
+      "weekOrderIndex": 20,
       "topicViewIndices": [
         12
       ]
@@ -3507,7 +3507,7 @@
       "topics": [
         30
       ],
-      "weekOrderIndex": 20,
+      "weekOrderIndex": 21,
       "thisWeek": true,
       "completed": true,
       "topicViewIndices": [
@@ -3521,7 +3521,7 @@
         41
       ],
       "thisWeek": true,
-      "weekOrderIndex": 21,
+      "weekOrderIndex": 22,
       "topicViewIndices": [
         8
       ]
@@ -3533,7 +3533,7 @@
         29,
         41
       ],
-      "weekOrderIndex": 22,
+      "weekOrderIndex": 23,
       "thisWeek": true,
       "completed": true,
       "topicViewIndices": [
@@ -3548,7 +3548,7 @@
       "topics": [
         39
       ],
-      "weekOrderIndex": 23,
+      "weekOrderIndex": 24,
       "completed": true,
       "topicViewIndices": [
         6
@@ -3560,7 +3560,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 24,
+      "weekOrderIndex": 25,
       "thisWeek": true,
       "topicViewIndices": [
         18
@@ -3572,7 +3572,7 @@
       "topics": [
         7
       ],
-      "weekOrderIndex": 25,
+      "weekOrderIndex": 26,
       "thisWeek": true,
       "completed": true,
       "topicViewIndices": [
@@ -3585,7 +3585,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 26,
+      "weekOrderIndex": 27,
       "thisWeek": true,
       "topicViewIndices": [
         19
@@ -3597,7 +3597,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 27,
+      "weekOrderIndex": 28,
       "thisWeek": true,
       "topicViewIndices": [
         20
@@ -3609,7 +3609,7 @@
       "topics": [
         39
       ],
-      "weekOrderIndex": 28,
+      "weekOrderIndex": 29,
       "thisWeek": true,
       "completed": true,
       "topicViewIndices": [
@@ -3622,7 +3622,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 29,
+      "weekOrderIndex": 30,
       "thisWeek": true,
       "topicViewIndices": [
         21
@@ -3636,7 +3636,7 @@
         15
       ],
       "thisWeek": true,
-      "weekOrderIndex": 30,
+      "weekOrderIndex": 31,
       "completed": true,
       "topicViewIndices": [
         22
@@ -3649,7 +3649,7 @@
         8
       ],
       "thisWeek": true,
-      "weekOrderIndex": 31,
+      "weekOrderIndex": 32,
       "topicViewIndices": [
         7
       ]
@@ -3661,11 +3661,26 @@
         21
       ],
       "thisWeek": true,
-      "weekOrderIndex": 32,
+      "weekOrderIndex": 33,
       "completed": true,
       "topicViewIndices": [
         4
       ]
+    },
+    {
+      "name": "Create an easier way to debug (debug mode with more information directly on screen) - 2m",
+      "id": 299,
+      "topics": [
+        53
+      ],
+      "topicViewIndices": [
+        4
+      ],
+      "completed": false,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
     }
   ]
 }

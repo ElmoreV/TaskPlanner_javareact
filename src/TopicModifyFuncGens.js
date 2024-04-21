@@ -3,7 +3,10 @@ import { findTopicByTopicId } from './FindItems'
 //Recursive function to handle all toggles
 const toggleFold_r = (topics, id) => {
     for (let topic of topics) {
-        if (topic.id === id) { topic.unfolded = !topic.unfolded; return true; }
+        if (topic.id === id) {
+            topic.unfolded = !topic.unfolded;
+            return true;
+        }
         if (toggleFold_r(topic.subtopics, id)) { return true; }
     }
     return false;
