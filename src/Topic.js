@@ -92,7 +92,16 @@ const Topic = (props) => {
         } else if (type == "TaskDuplicate") {
             var task_id = Number(e.dataTransfer.getData("TaskId"))
             console.info(`Duplicate dropped task with id ${task_id} on this topic with id ${id}`)
-            duplicateTask(task_id, id)
+            let taskIds = []
+            taskIds.push(task_id)
+            if (selectedTasks && selectedTasks.length > 0) {
+                selectedTasks.forEach((st) => {
+                    console.info(`Duplicating task with id ${st.taskId} to topic with id ${id}`)
+                    taskIds.push(st.taskId)
+                })
+            }
+
+            duplicateTask(taskIds, id)
         } else {
             console.info("On a topic, you can only drop another topic or a task (not something else)")
 

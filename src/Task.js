@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TaskContent from './TaskContent'
 import React from 'react';
 
-const Task =(props) => {
+const Task = (props) => {
     const { id, name, setTaskName, deleteTask,
         completed, completeTask,
         currentTopicName, currentTopicId, moveTasks, currentTopicViewIndex,
@@ -93,7 +93,15 @@ const Task =(props) => {
         } else if (type == "TaskDuplicate") {
             var taskId = Number(e.dataTransfer.getData("TaskId"))
             console.info(`Duplicate dropped task with id ${taskId} on this topic with id ${currentTopicId}`)
-            duplicateTask(taskId, currentTopicId, currentTopicViewIndex)
+            let taskIds = []
+            taskIds.push(taskId)
+            if (selectedTasks && selectedTasks.length > 0) {
+                selectedTasks.forEach((st) => {
+                    console.info(`Duplicating task with id ${st.taskId} to topic with id ${currentTopicId}`)
+                    taskIds.push(st.taskId)
+                })
+            }
+            duplicateTask(taskIds, currentTopicId, currentTopicViewIndex)
         } else {
             console.info("On a task, you can only drop another task (not a topic)")
         }
@@ -152,6 +160,7 @@ const Task =(props) => {
             event.preventDefault();
         }
     };
+
     const handleBlur = () => {
         setIsDraggingAllowed(true);
         setIsEditing(false);

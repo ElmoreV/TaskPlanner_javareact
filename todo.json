@@ -3279,7 +3279,8 @@
       "topicViewIndices": [
         7
       ],
-      "thisWeek": true
+      "thisWeek": true,
+      "completed": true
     },
     {
       "name": "Not being able to duplicate multiple tasks at once in Topic View (forgetting which tasks are already copied): 19m",
@@ -3291,7 +3292,8 @@
       "thisWeek": true,
       "topicViewIndices": [
         6
-      ]
+      ],
+      "completed": true
     },
     {
       "name": "Not being able to collapse or fold all the topics with one button - 27m",

@@ -390,8 +390,8 @@
 - [ ] Ability to create a task on the Weekly List - 1m
 - [ ] Selection in the weekly list gets unselected after dragging completes - 1m
 - [ ] - The order of selected tasks should be kept locally coherent (so same topic Id then the source Indices should be ordered) - 2m
-- [ ] Enter does not finish text input in planned list - 15m
-- [ ] Not being able to duplicate multiple tasks at once in Topic View (forgetting which tasks are already copied): 19m
+- [x] Enter does not finish text input in planned list - 15m
+- [x] Not being able to duplicate multiple tasks at once in Topic View (forgetting which tasks are already copied): 19m
 - [ ] Removing items from the planned list or completing an item, does not unschedule them - 14m
 - [ ] I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -12m- 
 

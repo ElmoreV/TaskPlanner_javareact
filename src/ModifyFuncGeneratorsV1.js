@@ -6,7 +6,6 @@ import {
 import {
     findSupertopicByTopicId,
     findTopicByTopicId,
-    findTopicsByTaskId,
 } from './FindItems'
 import {
     addOrphanTasktoTaskList,
@@ -21,9 +20,7 @@ const getMoveTasks = (topics, tasks, setTasks) => {
     // sourceTopicIds is the topic-object where the task came from
     // targetTopicId is the topic-object where the task is going to
     const moveTasks = (taskIds, sourceTopicIds, targetTopicId, targetViewIndex) => {
-        //TODO: remove duplicates
-        //TODO: Make sure that tasks that come from the same topicId stay in the same order (local sequence so to say).
-        // Maybe calculate a global index and sort them by this.
+        // Validation checks + defaults
         if (!Array.isArray(taskIds)) { taskIds = [taskIds] }
         if (!Array.isArray(sourceTopicIds)) { sourceTopicIds = [sourceTopicIds] }
         if (sourceTopicIds.length != taskIds.length) {
@@ -31,14 +28,26 @@ const getMoveTasks = (topics, tasks, setTasks) => {
             return
         }
         let newTasks = [...tasks]
-        // go through all 'operations' 1-by-1
+        const targetTopic = findTopicByTopicId(topics, targetTopicId)
+        if (!targetTopic) {
+            console.warn(`Target topic ${targetTopicId} does not exist.`)
+            return
+        }
 
+        //TODO: remove duplicates
+        //TODO: Make sure that tasks that come from the same topicId stay in the same order (local sequence so to say).
+        // Maybe calculate a global index and sort them by this.
+
+
+        // go through all 'operations' 1-by-1
         taskIds.forEach((taskId, idx) => {
             let sourceTopicId = sourceTopicIds[idx]
             newTasks = removeTaskInstanceFromTopic(newTasks, taskId, sourceTopicId)
             // If the task is already in the targetTopic, remove it
-            let taskTopics = findTopicsByTaskId(tasks, topics, taskId)
-            if (taskTopics.includes(targetTopicId)) {
+            let taskTopics = newTasks.find((task) => task.id == taskId);
+            if (taskTopics.topics.includes(targetTopicId)) {
+                console.info(`Task ${taskId} is already in topic ${targetTopicId}`)
+
                 newTasks = removeTaskInstanceFromTopic(newTasks, taskId, targetTopicId)
             }
             newTasks = insertTaskInstanceIntoTopic(newTasks, taskId, targetTopicId, targetViewIndex)
@@ -49,18 +58,28 @@ const getMoveTasks = (topics, tasks, setTasks) => {
 }
 
 const getDuplicateTask = (setTasks, tasks, topics) => {
-    const duplicateTask = (taskId, targetTopicId, targetViewIndex) => {
-        // Copy tasks
+    const duplicateTask = (taskIds, targetTopicId, targetViewIndex) => {
+        // Validation checks + defaults
+        // Convert single items to a list
+        if (!Array.isArray(taskIds)) { taskIds = [taskIds] }
         if (targetViewIndex === undefined) { targetViewIndex = 1 }
-
-        let newTasks = [...tasks]
-        const task_to_change = newTasks.find((task) => task.id == taskId);
-        const topic_to_add = findTopicByTopicId(topics, targetTopicId)
-        if (task_to_change.topics.includes(topic_to_add.id)) {
-            console.info("Task is already in topic")
-            return;
+        const targetTopic = findTopicByTopicId(topics, targetTopicId)
+        if (!targetTopic) {
+            console.warn(`Target topic ${targetTopicId} does not exist.`)
+            return
         }
-        newTasks = insertTaskInstanceIntoTopic(newTasks, taskId, targetTopicId, targetViewIndex)
+
+        // Copy tasks
+        let newTasks = [...tasks]
+        taskIds.forEach(taskId => {
+            const task_to_change = newTasks.find((task) => task.id == taskId);
+            if (task_to_change.topics.includes(targetTopicId)) {
+                console.info(`Task ${task_to_change.id} is already in topic ${targetTopicId}`)
+                return;
+            }
+            newTasks = insertTaskInstanceIntoTopic(newTasks, taskId, targetTopicId, targetViewIndex)
+
+        })
         setTasks(newTasks)
     }
     return duplicateTask

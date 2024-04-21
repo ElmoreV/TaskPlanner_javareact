@@ -88,6 +88,16 @@ const PlannedTask = (props) => {
         if (unplan) { unplan() }
     }
 
+    const handleKeyDown = (event) => {
+        // Check if the Enter key was pressed
+        if (event.key === 'Enter') {
+            // Call handleBlur or directly implement logic to finish editing
+            handleBlur();
+            // Prevents the form from being submitted if your input is part of one
+            event.preventDefault();
+        }
+    };
+
     const handleBlur = () => {
         setIsDraggingAllowed(true);
         setIsEditing(false);
@@ -119,12 +129,12 @@ const PlannedTask = (props) => {
 
     const selectHandlers = selected ? { onClick: captureClick(deleteFromSelection) } : { onClick: captureClick(addToSelection) }
     const textEditHandlers = {
-        onChange: handleChange, onBlur: handleBlur, onClick: captureClick(() => { })
+        onChange: handleChange, onBlur: handleBlur, onKeyDown: handleKeyDown, onClick: captureClick(() => { })
     }
 
     let topicPath = getTopicPathByTopicId(topics, taskTopics[0])
 
-
+    // Put focus on text editor when editing is enabled
     const inputRef = useRef(null);
     useEffect(() => {
         if (isEditing && inputRef.current) {

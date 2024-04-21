@@ -253,7 +253,7 @@ const TaskList = (props) => {
                     hideCompletedItems, showRepeatedOnly,
                     fancy)}
             </ul>
-            <button onClick={() => sanitizeTopicOrderIndex(topics, tasks, setTasks)}>Test Function</button>
+            <button onClick={() => testFunction()}>Test Function</button>
         </div>
 
     );
