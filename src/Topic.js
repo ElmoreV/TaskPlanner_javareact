@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TopicContent from './TopicContent';
 const Topic = (props) => {
     const { name, updateTaskTopics, setTopicName, id,
-        toggleFold, unfolded,
+        toggleFold, unfolded, foldAll,unfoldAll,
         addTask, addSubTopic, deleteTopic, moveTasks,
         selectedTasks,
         moveTopic, duplicateTask,
@@ -149,6 +149,17 @@ const Topic = (props) => {
 
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
 
+    const handleFoldDoubleClick = (event)=>{
+        event.stopPropagation();
+        console.log("Inside handle fold double click")
+        if (unfolded){
+            foldAll(id)
+        }else{
+            unfoldAll(id)
+        }
+
+    }
+
     const handleKeyDown = (event) => {
         // Check if the Enter key was pressed
         if (event.key === 'Enter') {
@@ -191,6 +202,7 @@ const Topic = (props) => {
         handleAddTaskClick={handleAddTaskClick}
         handleAddTopicClick={handleAddTopicClick}
         handleDeleteClick={handleDeleteClick}
+        handleFoldDoubleClick = {handleFoldDoubleClick}
         fancy={fancy}
     /></>)
 

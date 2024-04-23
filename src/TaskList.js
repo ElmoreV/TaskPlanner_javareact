@@ -24,6 +24,8 @@ import {
 import {
     getToggleFold,
     getSetTopicNameFunc,
+    getUnfoldAll,
+    getFoldAll
 } from './TopicModifyFuncGens'
 
 import ImportExport from './ImportExport';
@@ -68,6 +70,8 @@ const recursiveShowTopic = (topic, tasks,
             moveTopic={getMoveTopic(setTopics, topics)}
             addTask={getAddTask(setTasks, tasks, topics, topic.id)}
             moveTasks={getMoveTasks(topics, tasks, setTasks)}
+            unfoldAll = {getUnfoldAll(setTopics,topics)}
+            foldAll = {getFoldAll(setTopics,topics)}
             // updateTaskTopics={getUpdateTaskTopics(setTasks, tasks, topic.name)}
             duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
             deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}

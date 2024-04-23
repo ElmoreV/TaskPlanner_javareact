@@ -5,6 +5,7 @@ import simpleStyles from './TopicContentSimple.module.css';
 const TopicContent = (props) => {
     const { name,
         handleToggleFold,
+        handleFoldDoubleClick,
         dragHandlers,
         dropHandlers,
         textEditHandlers,
@@ -27,7 +28,7 @@ const TopicContent = (props) => {
         {...dragHandlers}
         {...dropHandlers}
     >
-        {foldingSymbol}
+        <span onDoubleClick={handleFoldDoubleClick}>{foldingSymbol}</span>
         {isEditing ?
             (<input type='text'
                 value={name}
