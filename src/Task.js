@@ -180,6 +180,15 @@ const Task = (props) => {
         }
         return wrapper
     }
+    const unselect = (func) => {
+        const wrapper = (e) => {
+            if (selected) { deleteFromSelection() }
+            return func()
+
+        }
+        return wrapper
+    }
+
 
     const dragHandlers = isDraggingAllowed ? { draggable: true, onDragStart: handleDragStart, onDragEnd: handleDragEnd } : {};
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
@@ -205,7 +214,7 @@ const Task = (props) => {
         isEditing={isEditing}
         toggleEdit={toggleEdit}
         color={color}
-        deleteTask={deleteTask}
+        deleteTask={unselect(deleteTask)}
         completed={completed}
         completeTask={completeTask}
         planned={planned}
