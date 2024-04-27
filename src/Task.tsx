@@ -16,6 +16,7 @@ const Task = (props) => {
         fancy,
     } = props;
     console.debug("Rendering Task")
+    if (taskFinishStatus === undefined) { }
 
     const [isEditing, setIsEditing] = useState(false);
     const [color, setColor] = useState('green');
@@ -225,7 +226,7 @@ const Task = (props) => {
         deleteTask={unselect(deleteTask)}
         completeTask={completeTask}
         markTaskIrrelevant={markTaskIrrelevant}
-        taskFinishStatus={taskFinishStatus}
+        taskFinishStatus={(taskFinishStatus ? taskFinishStatus : (completed ? FinishedState.Completed : FinishedState.NotFinished))}
         planned={planned}
         plan={moveToWeek}
         unplan={moveOutOfWeek}
