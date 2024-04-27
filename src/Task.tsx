@@ -24,6 +24,12 @@ const Task = (props) => {
     let isDuplicateDragging = false;
 
     // let repeated = true
+    const markTaskIrrelevant = () => {
+        if (taskFinishStatus == FinishedState.Irrelevant) { setTaskFinishStatus(FinishedState.NotFinished) }
+        else {
+            setTaskFinishStatus(FinishedState.Irrelevant)
+        }
+    }
 
     const handleChange = (e) => {
         console.info(e.target.value);
@@ -203,9 +209,6 @@ const Task = (props) => {
         onDragStart: handleDuplicateDragStart,
         onDragEnd: handleDuplicateDragEnd
     } : {}
-    // let completed = (taskFinishStatus == Finished.Completed)
-    let newTaskFinishStatus = FinishedState.NotFinished
-    if (completed) { newTaskFinishStatus = FinishedState.Completed }
 
     return (<TaskContent classStr={class_str}
         selectStyle={selectStyle}
@@ -220,7 +223,8 @@ const Task = (props) => {
         color={color}
         deleteTask={unselect(deleteTask)}
         completeTask={completeTask}
-        taskFinishStatus={newTaskFinishStatus}
+        markTaskIrrelevant={markTaskIrrelevant}
+        taskFinishStatus={taskFinishStatus}
         planned={planned}
         plan={moveToWeek}
         unplan={moveOutOfWeek}

@@ -25,6 +25,7 @@ const TaskContent = (props) => {
         color,
         deleteTask,
         completeTask,
+        markTaskIrrelevant,
         taskFinishStatus,
         planned, plan, unplan,
         repeated, toggleRepeatTask,
@@ -32,9 +33,8 @@ const TaskContent = (props) => {
         fancy,
     } = props;
     console.debug(`Rendering TaskContent ${name}`)
-
+    // let taskFinishStatus = FinishedState.Irrelevant;
     // let completed = (taskFinishStatus == Finished.Completed)
-    let completed = (taskFinishStatus == FinishedState.Completed)
 
     let styles = fancy ? fancyStyles : simpleStyles;
 
@@ -67,8 +67,10 @@ const TaskContent = (props) => {
             </div>
             <>
                 {deleteTask && (<button className={styles.taskDelete} onClick={captureClick(deleteTask)}>Delete</button>)}
-                {!completed && completeTask && (<button className={styles.taskComplete} onClick={captureClick(completeTask)}>Complete</button>)}
-                {completed && completeTask && (<button className={styles.taskComplete} onClick={captureClick(completeTask)}>Decomplete</button>)}
+                {taskFinishStatus == FinishedState.NotFinished && (completeTask && (<button className={styles.taskComplete} onClick={captureClick(completeTask)}>Complete</button>))}
+                {taskFinishStatus == FinishedState.NotFinished && (markTaskIrrelevant && (<button className={styles.taskIrrelevant} onClick={captureClick(markTaskIrrelevant)}>Irrel</button>))}
+                {taskFinishStatus == FinishedState.Completed && completeTask && (<button className={styles.taskComplete} onClick={captureClick(completeTask)}>Decomplete</button>)}
+                {taskFinishStatus == FinishedState.Irrelevant && markTaskIrrelevant && (<button className={styles.taskIrrelevant} onClick={captureClick(markTaskIrrelevant)}>Rele</button>)}
                 {unplan && planned && (<button className={styles.moveToWeek} onClick={captureClick(unplan)}> Unplan </button>)}
                 {plan && !planned && (<button className={styles.moveToWeek} onClick={captureClick(plan)}> Plan </button>)}
                 {toggleRepeatTask && repeated && (<button className={styles.makeRepeated} onClick={captureClick(toggleRepeatTask)}> Repeated </button>)}

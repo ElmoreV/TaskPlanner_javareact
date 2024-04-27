@@ -19,6 +19,7 @@ import {
     getToggleRepeatTask,
     getPlanTaskForWeek,
     getSetTaskNameFunc,
+    getSetTaskFinishStatus,
     getUnplanTask,
 } from './TaskModifyFuncGens'
 import {
@@ -99,6 +100,8 @@ const recursiveShowTopic = (topic, tasks,
                         <Task name={task.name}
                             id={task.id}
                             completed={task.completed}
+                            taskFinishStatus={task.finishStatus}
+                            setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
                             currentTopicViewIndex={findTopicViewIdx(topic.id, task)}
                             currentTopicName={topic.name}
                             currentTopicId={topic.id}

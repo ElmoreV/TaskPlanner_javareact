@@ -4,6 +4,7 @@ import PlannedList from './PlannedList'
 import { useState } from 'react'
 import ImportExport from './ImportExport';
 import Theme from "./Theme";
+import { FinishedState } from './TaskInterfaces.tsx';
 
 class TopicViewIndex {
   constructor(index, topicId, taskId) {
@@ -38,29 +39,27 @@ function App() {
 
   ]);
 
-  //v0
-  // const [topics, setTopics] = useState([
-  //   {
-  //     title: "Onderhoud", id: 1, unfolded: false, subtopics: [
-  //       { title: "Vervangen", id: 11, unfolded: false, subtopics: [] },
-  //       { title: "Repareren", id: 12, unfolded: false, subtopics: [] },
-
-  //     ]
-  //   },
-  //   {
-  //     title: "Ontspanning", id: 2, unfolded: false, subtopics: [
-  //       { title: "Gamen", id: 21, unfolded: false, subtopics: [] }
-  //     ]
-  //   }
-
-  // ]);
-
-  // v1
   const [tasks, setTasks] = useState([
-    { name: "Fiets repareren", id: 0, topics: [12], topicViewIndices: [1], completed: true, thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 1 },
-    { name: "Outer Wilds", id: 1, topics: [21, 1], topicViewIndices: [1, 1], completed: false, thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 0 },
-    { name: "Badkamer", id: 2, topics: [1], topicViewIndices: [3], completed: false, thisWeek: true, repeated: false, scheduled: true, weekOrderIndex: 2 },
-    { name: "Backup opruimen", id: 5, topics: [1], topicViewIndices: [2], completed: false, thisWeek: false, repeated: true, scheduled: false, weekOrderIndex: 0 },
+    {
+      name: "Fiets repareren", id: 0, topics: [12], topicViewIndices: [1], completed: true,
+      finishStatus: FinishedState.Completed,
+      thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 1
+    },
+    {
+      name: "Outer Wilds", id: 1, topics: [21, 1], topicViewIndices: [1, 1], completed: false,
+      finishStatus: FinishedState.NotFinished,
+      thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 0
+    },
+    {
+      name: "Badkamer", id: 2, topics: [1], topicViewIndices: [3], completed: false,
+      finishStatus: FinishedState.NotFinished,
+      thisWeek: true, repeated: false, scheduled: true, weekOrderIndex: 2
+    },
+    {
+      name: "Backup opruimen", id: 5, topics: [1], topicViewIndices: [2], completed: false,
+      finishStatus: FinishedState.NotFinished,
+      thisWeek: false, repeated: true, scheduled: false, weekOrderIndex: 0
+    },
   ])
 
   // Order of Tasks would be inside of the tasks by orderId

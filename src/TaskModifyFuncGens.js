@@ -1,3 +1,4 @@
+import { FinishedState } from "./TaskInterfaces.tsx";
 
 
 const getScheduleTask = (setTasks, tasks, id) => {
@@ -27,11 +28,22 @@ const getCompleteTask = (setTasks, tasks, id) => {
         const newTasks = [...tasks]
         const task_to_change = newTasks.find((task) => task.id === id);
         task_to_change.completed = !task_to_change.completed;
+        if (task_to_change.completed) { task_to_change.finishStatus = FinishedState.Completed }
+        else { task_to_change.finishStatus = FinishedState.NotFinished }
         setTasks(newTasks);
     }
     return completeTask;
 }
 
+const getSetTaskFinishStatus = (setTasks, tasks, id) => {
+    const setTaskFinishStatus = (status) => {
+        const newTasks = [...tasks]
+        const task_to_change = newTasks.find((task) => task.id === id);
+        task_to_change.finishStatus = status;
+        setTasks(newTasks);
+    }
+    return setTaskFinishStatus;
+}
 
 
 // For v1 data
@@ -94,4 +106,4 @@ export { getToggleRepeatTask }
 export { getUnplanTask };
 export { getPlanTaskForWeek };
 export { getSetTaskNameFunc };
-
+export { getSetTaskFinishStatus }; 
