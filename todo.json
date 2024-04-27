@@ -3385,6 +3385,36 @@
       ]
     },
     {
+      "name": "Completed + repeated + ready to do again should be easier to find -2m",
+      "id": 310,
+      "topics": [
+        45
+      ],
+      "topicViewIndices": [
+        40
+      ],
+      "completed": false,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Completed are almost same color as not yet planned/scheduled with a night filter - 1m",
+      "id": 311,
+      "topics": [
+        45
+      ],
+      "topicViewIndices": [
+        73
+      ],
+      "completed": false,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
       "name": "Keep a list of UX issues when manually testing/using the software",
       "id": 136,
       "topics": [
@@ -3492,12 +3522,26 @@
       "thisWeek": true
     },
     {
+      "name": "Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 13m",
+      "id": 213,
+      "topics": [
+        50,
+        48
+      ],
+      "weekOrderIndex": 9,
+      "topicViewIndices": [
+        15,
+        0
+      ],
+      "thisWeek": true
+    },
+    {
       "name": "It is unclear where a duplicated task is already (is it already duplicated?) -12m",
       "id": 176,
       "topics": [
         45
       ],
-      "weekOrderIndex": 9,
+      "weekOrderIndex": 10,
       "thisWeek": true,
       "topicViewIndices": [
         11
@@ -3509,23 +3553,9 @@
       "topics": [
         50
       ],
-      "weekOrderIndex": 10,
-      "topicViewIndices": [
-        11
-      ],
-      "thisWeek": true
-    },
-    {
-      "name": "Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 13m",
-      "id": 213,
-      "topics": [
-        50,
-        48
-      ],
       "weekOrderIndex": 11,
       "topicViewIndices": [
-        15,
-        0
+        11
       ],
       "thisWeek": true
     },
@@ -3827,36 +3857,6 @@
       "topicViewIndices": [
         4
       ]
-    },
-    {
-      "name": "Completed + repeated + ready to do again should be easier to find -2m",
-      "id": 310,
-      "topics": [
-        45
-      ],
-      "topicViewIndices": [
-        40
-      ],
-      "completed": false,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Completed are almost same color as not yet planned/scheduled with a night filter - 1m",
-      "id": 311,
-      "topics": [
-        45
-      ],
-      "topicViewIndices": [
-        73
-      ],
-      "completed": false,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
     }
   ]
 }
