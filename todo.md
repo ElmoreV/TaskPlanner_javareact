@@ -319,7 +319,7 @@
 - [ ] Not being able to see statistics of the topic in the topic view - 2m
 - [ ] There is a missing intent to progress towards a goal, but the task is not 'working on ... for 2 hours' but just 'finish this', and I make it repeated, which is also not the right way to do it.   'Working towards xx for 2 hours' is a subtask of 'Finish xx', so it should be fixed with subtasks - 2m
 - [ ] The weekly view doesn't show all the topics of all task instances at hand: 1m
-- [ ] After folding/unfolding, the mouse is not over the same topic anymore: 1m
+- [ ] After folding/unfolding, the mouse is not over the same topic anymore: 2m
 - [ ] Not being able to search for a task (search bar) - 1m
 - [ ] When I add a new root topics, do I want to add it at the end or the front? Do I want it in focus? - 1m
 - [ ] Missing a way to sort the tasks by some other order (e.g. topic) temporarily - 1m
@@ -340,6 +340,8 @@
 - [ ] Repeated tasks do not show last completion/cannot retain information about when the next time would be -15m+
 - [ ] It is unclear where a duplicated task is already (is it already duplicated?) -12m
 - [ ] Text width on a narrow screen is not handled well (text width not respected) - 10m
+- [ ] When planning things from topic view to weekly view, the order in the weekly view is shifted from the topic view- 1m
+- [ ] I cannot plan mutliple tasks at once - 1m
 
 ### Filtering:
 
@@ -347,9 +349,9 @@
 - [ ] Not being able to just have a list of all tasks (with filters): 2m
 - [ ] Ability to hide planned items in Topic View - 2m
 - [ ] Filtering is not available when in the middle of a large list - 4m
-- [ ] Do not know which Tasks are Blocked by other people- 2m
 - [ ] Not being able to show only repeated and only completed tasks: 2m
 - [ ] Not being able to see what is scheduled and what not in the topic view - 1m
+- [ ] Cannot mark/filter a task as Blocked( (internally or externally) - 10m
 - [x] In the weekly view: hide completed tasks is always unchecked - 2m - gefixt
 - [ ]  Changing view automatically doesn't remember Hide completed Tasks setting - 1m
 - [ ]  Need easy way to show completed and repeated tasks (to uncomplete them) - 3m
@@ -382,7 +384,7 @@
 - [ ] It does not make sense to be able to plan/schedule a completed items. - 1m
 - [ ]  Dragging items sometimes ends up in the gap between the tasks - 2m
 - [ ]  Completed items are still scheduled. - 2m
-- [ ] Ability to spawn follow-up tasks or necessary tasks on a task in the Weekly List from a task (Completing the task made another TODO) - 2m
+- [ ] Ability to spawn follow-up tasks or necessary tasks on a task in the Weekly List from a task (Completing the task made another TODO) - 4m
 - [ ] Ability to create a task on the Weekly List - 1m
 - [ ] Selection in the weekly list gets unselected after dragging completes - 1m
 - [ ] - The order of selected tasks should be kept locally coherent (so same topic Id then the source Indices should be ordered) - 2m
@@ -390,6 +392,8 @@
 - [x] Not being able to duplicate multiple tasks at once in Topic View (forgetting which tasks are already copied): 19m
 - [ ] Removing items from the planned list or completing an item, does not unschedule them - 14m
 - [ ] I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -12m- 
+- [ ] Cannot merge topics together -1m
+- [ ] Should have ability that adds a task INSIDE of another task - 1m
 
 ### It takes a huge time to drag a task from the top to the bottom - 16m :
 
@@ -403,8 +407,8 @@
 
 ### Missing data structure:
 
-- [ ] There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -9m
-- [ ] Cannot mark a task as Blocked( (internally or externally) - 5m
+- [ ] There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -10m
+- [ ] Cannot mark/filter a task as Blocked( (internally or externally) - 10m
 - [ ] I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 3m
 - [ ] Inability to add comments to a (repeating) task       Missing information: what time range has been checked  -1m
 - [x] Fearing to lose a task by not being able to make it repeatable: 3 - gefixt
@@ -431,6 +435,7 @@
 - [ ] Cannot export the tree within a topic  - 0m
 - [ ] Kan niet een lijst van bullet points importeren in een topic - 4m+
 - [ ] The order of tasks in the MarkDown file should reflect the ordering inside the topoic view -0m
+- [ ] Deprecate the YAML format - 1m
 
 # Uncategorized:
 

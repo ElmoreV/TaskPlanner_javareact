@@ -1,9 +1,1 @@
-- Kan niet deels een taak voltooien (50% voltooid, or 1/2 herhalingen) -1m 
 
-- De topic balk verplaatst wanneer ik het open/dichtdoe - 1m
-
-- Deprecate the YAML format - 1m
-
-- Kan niet een taak spawnen in de weekly list view from another task (follow up task, or subtask) - 1m
-
-- Cannot mark a task as externally blocked - 3m
