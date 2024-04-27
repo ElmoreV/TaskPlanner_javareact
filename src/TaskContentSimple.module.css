@@ -85,7 +85,8 @@ button.taskDelete,
 button.moveToWeek,
 button.makeRepeated,
 button.taskComplete,
-button.taskSchedule {
+button.taskSchedule,
+button.taskMarkIrrelevant {
     float: right;
 }
 

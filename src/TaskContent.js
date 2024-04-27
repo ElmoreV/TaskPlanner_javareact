@@ -68,9 +68,9 @@ const TaskContent = (props) => {
             <>
                 {deleteTask && (<button className={styles.taskDelete} onClick={captureClick(deleteTask)}>Delete</button>)}
                 {taskFinishStatus == FinishedState.NotFinished && (completeTask && (<button className={styles.taskComplete} onClick={captureClick(completeTask)}>Complete</button>))}
-                {taskFinishStatus == FinishedState.NotFinished && (markTaskIrrelevant && (<button className={styles.taskIrrelevant} onClick={captureClick(markTaskIrrelevant)}>Irrel</button>))}
+                {taskFinishStatus == FinishedState.NotFinished && (markTaskIrrelevant && (<button className={styles.taskMarkIrrelevant} onClick={captureClick(markTaskIrrelevant)}>Irrel</button>))}
                 {taskFinishStatus == FinishedState.Completed && completeTask && (<button className={styles.taskComplete} onClick={captureClick(completeTask)}>Decomplete</button>)}
-                {taskFinishStatus == FinishedState.Irrelevant && markTaskIrrelevant && (<button className={styles.taskIrrelevant} onClick={captureClick(markTaskIrrelevant)}>Rele</button>)}
+                {taskFinishStatus == FinishedState.Irrelevant && markTaskIrrelevant && (<button className={styles.taskMarkIrrelevant} onClick={captureClick(markTaskIrrelevant)}>Rele</button>)}
                 {unplan && planned && (<button className={styles.moveToWeek} onClick={captureClick(unplan)}> Unplan </button>)}
                 {plan && !planned && (<button className={styles.moveToWeek} onClick={captureClick(plan)}> Plan </button>)}
                 {toggleRepeatTask && repeated && (<button className={styles.makeRepeated} onClick={captureClick(toggleRepeatTask)}> Repeated </button>)}
