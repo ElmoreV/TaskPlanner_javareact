@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { getTopicPathByTopicId } from './TopicHelper';
 import TaskContent from './TaskContent'
+import { FinishedState } from './TaskInterfaces.tsx';
 const PlannedTask = (props) => {
     const { taskKey, taskName, setTaskName, deleteTask,
         completed, completeTask,
@@ -143,6 +144,7 @@ const PlannedTask = (props) => {
         }
     }, [isEditing]); // Dependency array ensures this runs only when isEditing changes
 
+    let taskFinishStatus = (completed == true)
 
     return (<>
         <TaskContent classStr={class_str}
@@ -158,7 +160,7 @@ const PlannedTask = (props) => {
             topicPath={topicPath}
             color={color}
             deleteTask={deleteTask}
-            completed={completed}
+            taskFinishStatus={taskFinishStatus}
             completeTask={completeTask}
             planned={true}
             unplan={unplan}

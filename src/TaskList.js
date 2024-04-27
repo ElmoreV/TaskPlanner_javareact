@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Task from './Task'
+import Task from './Task.tsx'
 import Topic from './Topic';
 import React from 'react';
 // import Checkbox from './Checkbox'

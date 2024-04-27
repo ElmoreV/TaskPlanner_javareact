@@ -5,6 +5,7 @@
 import React from "react"
 import fancyStyles from './TaskContentFancy.module.css';
 import simpleStyles from './TaskContentSimple.module.css';
+import { FinishedState } from "./TaskInterfaces.tsx";
 
 const captureClick = (func) => {
     const wrapper = (e) => {
@@ -14,7 +15,7 @@ const captureClick = (func) => {
     return wrapper
 }
 
-const TaskContent =(props) => {
+const TaskContent = (props) => {
 
     const { classStr,
         selectStyle, selectHandlers,
@@ -23,13 +24,17 @@ const TaskContent =(props) => {
         topicPath, textBarWidth,
         color,
         deleteTask,
-        completed, completeTask,
+        completeTask,
+        taskFinishStatus,
         planned, plan, unplan,
         repeated, toggleRepeatTask,
         scheduled, scheduleTask,
         fancy,
     } = props;
     console.debug(`Rendering TaskContent ${name}`)
+
+    // let completed = (taskFinishStatus == Finished.Completed)
+    let completed = (taskFinishStatus == FinishedState.Completed)
 
     let styles = fancy ? fancyStyles : simpleStyles;
 

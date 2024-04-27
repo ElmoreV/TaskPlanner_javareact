@@ -2,10 +2,12 @@ import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import TaskContent from './TaskContent'
 import React from 'react';
+import { FinishedState } from './TaskInterfaces.tsx';
 
 const Task = (props) => {
     const { id, name, setTaskName, deleteTask,
         completed, completeTask,
+        taskFinishStatus, setTaskFinishStatus,
         currentTopicName, currentTopicId, moveTasks, currentTopicViewIndex,
         planned, plan, unplan,
         repeated, toggleRepeatTask,
@@ -201,7 +203,9 @@ const Task = (props) => {
         onDragStart: handleDuplicateDragStart,
         onDragEnd: handleDuplicateDragEnd
     } : {}
-
+    // let completed = (taskFinishStatus == Finished.Completed)
+    let newTaskFinishStatus = FinishedState.NotFinished
+    if (completed) { newTaskFinishStatus = FinishedState.Completed }
 
     return (<TaskContent classStr={class_str}
         selectStyle={selectStyle}
@@ -215,8 +219,8 @@ const Task = (props) => {
         toggleEdit={toggleEdit}
         color={color}
         deleteTask={unselect(deleteTask)}
-        completed={completed}
         completeTask={completeTask}
+        taskFinishStatus={newTaskFinishStatus}
         planned={planned}
         plan={moveToWeek}
         unplan={moveOutOfWeek}
