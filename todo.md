@@ -63,8 +63,8 @@
 - [ ] Improve collapse and dropdown icon
 - [x] Make the tasks to have a good width. Naive: text-cutoff
 - [ ] Prettify text input for tasks
-- [ ] Not being able to collapse or fold all the topics with one button - 27m
-- [ ] Add Ability to unfold a topic and all its subtopics in one go
+- [x] Not being able to collapse or fold all the topics with one button - 27m
+- [x] Add Ability to unfold a topic and all its subtopics in one go
 
 ### Functionality:
 
@@ -305,10 +305,10 @@
 - [x] Make the sorting of the weekly planning not change the topic view order - 1M
 - [ ] The data is lost when something in react is changed - 1M
 - [x] Bug: source_supertopic is undefined in moveTopic - 1M- gefixt
-- [ ] Tasks/topics with the same id will mess up program - 2M
 - [ ] Sometimes a new task will not be inserted at the absolute top -3m
 - [ ] - Should not be able to delete non-empty topics. - 1M
 - [ ] Visual bug: selected tasks are not outline after dragging completes in the topic view - 1m
+- [ ] Tasks/topics with the same id will mess up program - 2M
 - [ ] Er is geen Undo knop - 3M
 
 ## Relaying information:
@@ -332,11 +332,11 @@
 - [ ] Add name of file to Tab Name -1m
 - [ ] The Dark Mode does not work correctly -1m
 - [ ] After dragging, the selection is sometimes not shown, even though it is still selected -5m
-- [ ] Links die niet werken/in te korten zijn - 4m
+- [ ] Hyperlinks die niet werken/in te korten zijn - 4m
 - [ ] It does not make sense to be able to plan/schedule a completed items. - 1m
 - [ ]  Maybe show the whole list in increments of 10? Or logarithmically, with 10 being the lowest step?  I'm a bit overwhelmed when I see a group of 30 tasks after another. - 3m
 - [ ] Would like to monitor the progression of tasks over time (new tasks added, tasks completed, tasks scheduled, repeated tasks newly planned) -1m
-- [ ] Not being able to collapse or fold all the topics with one button - 27m
+- [x] Not being able to collapse or fold all the topics with one button - 27m
 - [ ] Repeated tasks do not show last completion/cannot retain information about when the next time would be -15m+
 - [ ] It is unclear where a duplicated task is already (is it already duplicated?) -12m
 - [ ] Text width on a narrow screen is not handled well (text width not respected) - 10m

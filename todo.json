@@ -255,19 +255,19 @@
         {
           "name": "Development",
           "id": 53,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         },
         {
           "name": "Major/crashes/bugs",
           "id": 44,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         },
         {
           "name": "Relaying information",
           "id": 45,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Filtering",
@@ -280,18 +280,18 @@
         {
           "name": "Modifying information",
           "id": 46,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "It takes a huge time to drag a task from the top to the bottom - 16m ",
               "id": 49,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
               "name": "Missing data structure",
               "id": 50,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             }
           ]
@@ -299,7 +299,7 @@
         {
           "name": "Import/export",
           "id": 47,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         }
       ]
@@ -2832,21 +2832,6 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Tasks/topics with the same id will mess up program - 2M",
-      "id": 263,
-      "topics": [
-        44
-      ],
-      "topicViewIndices": [
-        7
-      ],
-      "completed": false,
-      "thisWeek": true,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 1
-    },
-    {
       "name": "Need an easier way to show task/topic information (id/viewIndex/weekIndex) - 2m",
       "id": 264,
       "topics": [
@@ -2940,7 +2925,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Links die niet werken/in te korten zijn - 4m",
+      "name": "Hyperlinks die niet werken/in te korten zijn - 4m",
       "id": 270,
       "topics": [
         45
@@ -3255,6 +3240,36 @@
       "weekOrderIndex": 0
     },
     {
+      "name": "Create an easier way to debug (debug mode with more information directly on screen) - 2m",
+      "id": 299,
+      "topics": [
+        53
+      ],
+      "topicViewIndices": [
+        4
+      ],
+      "completed": false,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Tasks/topics with the same id will mess up program - 2M",
+      "id": 263,
+      "topics": [
+        44
+      ],
+      "topicViewIndices": [
+        7
+      ],
+      "completed": false,
+      "thisWeek": true,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 1
+    },
+    {
       "name": "Keep a list of UX issues when manually testing/using the software",
       "id": 136,
       "topics": [
@@ -3308,7 +3323,8 @@
         8,
         0
       ],
-      "scheduled": true
+      "scheduled": true,
+      "completed": true
     },
     {
       "name": "Add Ability to unfold a topic and all its subtopics in one go",
@@ -3321,7 +3337,8 @@
       "topicViewIndices": [
         9
       ],
-      "scheduled": true
+      "scheduled": true,
+      "completed": true
     },
     {
       "name": "It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 18m",
@@ -3362,18 +3379,6 @@
       "thisWeek": true
     },
     {
-      "name": "Repeated tasks do not show last completion/cannot retain information about when the next time would be -15m+",
-      "id": 175,
-      "topics": [
-        45
-      ],
-      "weekOrderIndex": 10,
-      "thisWeek": true,
-      "topicViewIndices": [
-        2
-      ]
-    },
-    {
       "name": "It takes a huge time to drag a task from the top to the bottom - 16m ",
       "id": 287,
       "topics": [
@@ -3386,19 +3391,19 @@
       "thisWeek": true,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 11
+      "weekOrderIndex": 10
     },
     {
-      "name": "I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -12m- ",
-      "id": 189,
+      "name": "Repeated tasks do not show last completion/cannot retain information about when the next time would be -15m+",
+      "id": 175,
       "topics": [
-        46
+        45
       ],
-      "weekOrderIndex": 12,
+      "weekOrderIndex": 11,
+      "thisWeek": true,
       "topicViewIndices": [
-        33
-      ],
-      "thisWeek": true
+        2
+      ]
     },
     {
       "name": "Er is geen Undo knop - 3M",
@@ -3413,7 +3418,19 @@
       "thisWeek": true,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 13
+      "weekOrderIndex": 12
+    },
+    {
+      "name": "I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -12m- ",
+      "id": 189,
+      "topics": [
+        46
+      ],
+      "weekOrderIndex": 13,
+      "topicViewIndices": [
+        33
+      ],
+      "thisWeek": true
     },
     {
       "name": "It is unclear where a duplicated task is already (is it already duplicated?) -12m",
@@ -3666,21 +3683,6 @@
       "topicViewIndices": [
         4
       ]
-    },
-    {
-      "name": "Create an easier way to debug (debug mode with more information directly on screen) - 2m",
-      "id": 299,
-      "topics": [
-        53
-      ],
-      "topicViewIndices": [
-        4
-      ],
-      "completed": false,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
     }
   ]
 }

@@ -70,8 +70,8 @@ const recursiveShowTopic = (topic, tasks,
             moveTopic={getMoveTopic(setTopics, topics)}
             addTask={getAddTask(setTasks, tasks, topics, topic.id)}
             moveTasks={getMoveTasks(topics, tasks, setTasks)}
-            unfoldAll = {getUnfoldAll(setTopics,topics)}
-            foldAll = {getFoldAll(setTopics,topics)}
+            unfoldAll={getUnfoldAll(setTopics, topics)}
+            foldAll={getFoldAll(setTopics, topics)}
             // updateTaskTopics={getUpdateTaskTopics(setTasks, tasks, topic.name)}
             duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
             deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}
@@ -204,10 +204,14 @@ const TaskList = (props) => {
     //     let [topics2, tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks);
     //     return topics2.map((topic) => (recursiveShowTopic(topic, tasks2)))
     // }
+    const handleFoldAll = () => {
+        let foldAll = getFoldAll(setTopics, topics)
+        topics.map(topic => foldAll(topic.id))
 
+    }
 
     if (runOnce < 2) {
-        console.log("Running sanitzie")
+        console.log("Running sanitize")
         sanitizeTopicOrderIndex(topics, tasks, setTasks)
         // setRunOnce(runOnce + 1)
     }
@@ -249,6 +253,7 @@ const TaskList = (props) => {
                 className="form-check-input"
                 defaultChecked={setShowRepeatedOnly}
             />Show repeated tasks only</label>
+            <button className="fold_all" onClick={handleFoldAll} >Fold all</button>
             <ul key='root_topics'>
                 {showTopics(topics, tasks,
                     setTopics,

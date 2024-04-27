@@ -1,26 +1,9 @@
-Dat ik niet meteen een taak aan de bovenkant heb, maar aan de onderkant van de topic list, als ik Add Task doe - 7m
+- Kan niet deels een taak voltooien (50% voltooid, or 1/2 herhalingen) -1m 
 
-Links die niet werken - 4m
+- De topic balk verplaatst wanneer ik het open/dichtdoe - 1m
 
-Met een dunne window, (window aan linkerzijde/op mobieltje) ziet de layout er niet uit (de layout werkt niet). - 4m
+- Deprecate the YAML format - 1m
 
-Langzaam slepen van een taak - 3m+
+- Kan niet een taak spawnen in de weekly list view from another task (follow up task, or subtask) - 1m
 
-Kan moeilijk veel bestanden in een rij na elkaar selecteren. Als ze verspreid zijn is het prima. -2m
-
-Ook dat all dingen niet makkelijk te folden/unfolden zijn -5m
-
-Geen subtaken - 4m
-
-Kan niet een lijst van bullet points importeren in een topic - 4m+
-
-
-Er is geen Undo knop - 1m
-
-Ik weet nog of er duplicaten van dingen zijn - 1m
-
-Ik kan geen taken samenvoegen (als ze per ongeluk duplicaten zijn) - 1m
-
-It does not make sense to be able to plan/schedule a completed items. - 1m
-
-Changing view automatically doesn't remember Hide completed Tasks setting - 1m
+- Cannot mark a task as externally blocked - 3m

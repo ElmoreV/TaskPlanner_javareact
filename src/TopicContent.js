@@ -19,7 +19,7 @@ const TopicContent = (props) => {
     } = props;
     console.debug(`Rendering TopicContent ${name}`)
 
-    let styles = fancy?fancyStyles: simpleStyles ;
+    let styles = fancy ? fancyStyles : simpleStyles;
 
 
     return (<div
@@ -33,6 +33,7 @@ const TopicContent = (props) => {
             (<input type='text'
                 value={name}
                 {...textEditHandlers}
+
                 ref={inputRef}
             />) :
             (<span style={{ color: color }} onDoubleClick={toggleEdit}>{name}</span>)
