@@ -1,6 +1,7 @@
 /*
 The elementary functions
 */
+import { FinishedState } from './TaskInterfaces.tsx'
 import { getFreeTaskId } from './TopicHelper'
 
 const generateEmptyTask = (tasks) => {
@@ -12,6 +13,7 @@ const generateEmptyTask = (tasks) => {
         topics: [],
         topicViewIndices: [],
         completed: false,
+        finishStatus: FinishedState.NotFinished,
         thisWeek: false,
         repeated: false,
         scheduled: false,
