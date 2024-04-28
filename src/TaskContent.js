@@ -26,6 +26,7 @@ const TaskContent = (props) => {
         deleteTask,
         completeTask,
         markTaskIrrelevant,
+        markTaskImpossible,
         taskFinishStatus,
         planned, plan, unplan,
         repeated, toggleRepeatTask,
@@ -69,10 +70,12 @@ const TaskContent = (props) => {
                 {deleteTask && (<button className={styles.taskDelete} onClick={captureClick(deleteTask)}>Delete</button>)}
                 {taskFinishStatus == FinishedState.NotFinished && (completeTask && (<button className={styles.taskComplete} onClick={captureClick(completeTask)}>Complete</button>))}
                 {taskFinishStatus == FinishedState.NotFinished && (markTaskIrrelevant && (<button className={styles.taskMarkIrrelevant} onClick={captureClick(markTaskIrrelevant)}>Irrel</button>))}
+                {taskFinishStatus == FinishedState.NotFinished && (markTaskImpossible && (<button className={styles.taskMarkImpossible} onClick={captureClick(markTaskImpossible)}>Imposs</button>))}
                 {taskFinishStatus == FinishedState.NotFinished && unplan && planned && (<button className={styles.moveToWeek} onClick={captureClick(unplan)}> Unplan </button>)}
                 {taskFinishStatus == FinishedState.NotFinished && plan && !planned && (<button className={styles.moveToWeek} onClick={captureClick(plan)}> Plan </button>)}
                 {taskFinishStatus == FinishedState.Completed && completeTask && (<button className={styles.taskComplete} onClick={captureClick(completeTask)}>Decomplete</button>)}
                 {taskFinishStatus == FinishedState.Irrelevant && markTaskIrrelevant && (<button className={styles.taskMarkIrrelevant} onClick={captureClick(markTaskIrrelevant)}>Rele</button>)}
+                {taskFinishStatus == FinishedState.Impossible && markTaskImpossible && (<button className={styles.taskMarkImpossible} onClick={captureClick(markTaskImpossible)}>Possib</button>)}
                 {toggleRepeatTask && repeated && (<button className={styles.makeRepeated} onClick={captureClick(toggleRepeatTask)}> Repeat </button>)}
                 {toggleRepeatTask && !repeated && (<button className={styles.makeRepeated} onClick={captureClick(toggleRepeatTask)}> <s>Repeat</s> </button>)}
                 {taskFinishStatus == FinishedState.NotFinished && scheduled && scheduleTask && (<button className={styles.taskSchedule} onClick={captureClick(scheduleTask)}>Scheduled!</button>)}

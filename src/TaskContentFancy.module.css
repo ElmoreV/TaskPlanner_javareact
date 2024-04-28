@@ -134,6 +134,20 @@ span.buttonDuplicate:hover {
 
 }
 
+.taskImpossible {
+    max-width: 800px;
+    padding: 10px;
+    padding-left: 20px;
+    margin: 1px 0;
+    background: linear-gradient(to right,
+            rgb(252, 137, 137) 0%,
+            rgb(255, 210, 210) 60%,
+            rgb(255, 223, 223) 70%,
+            rgb(158, 158, 158) 100%);
+    border-radius: 3px 3px 3px 20px;
+
+}
+
 span.topicPath {
     float: right;
     max-width: 275px;
@@ -145,7 +159,8 @@ button.moveToWeek,
 button.makeRepeated,
 button.taskComplete,
 button.taskSchedule,
-button.taskMarkIrrelevant {
+button.taskMarkIrrelevant,
+button.taskMarkImpossible {
     float: right;
 }
 

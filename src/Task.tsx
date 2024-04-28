@@ -32,6 +32,13 @@ const Task = (props) => {
         }
     }
 
+    const markTaskImpossible = () => {
+        if (taskFinishStatus == FinishedState.Impossible) { setTaskFinishStatus(FinishedState.NotFinished) }
+        else {
+            setTaskFinishStatus(FinishedState.Impossible)
+        }
+    }
+
     const handleChange = (e) => {
         console.info(e.target.value);
         setTaskName(e.target.value);
@@ -139,6 +146,7 @@ const Task = (props) => {
     // Completion has precedence over planned
     if (taskFinishStatus == FinishedState.Completed) { class_str = 'taskCompleted' }
     else if (taskFinishStatus == FinishedState.Irrelevant) { class_str = "taskIrrelevant" }
+    else if (taskFinishStatus == FinishedState.Impossible) { class_str = "taskImpossible" }
     else if (planned) { class_str = 'taskPlanned' }
     else if (repeated) { class_str = 'taskRepeated' }
 
@@ -226,6 +234,7 @@ const Task = (props) => {
         deleteTask={unselect(deleteTask)}
         completeTask={completeTask}
         markTaskIrrelevant={markTaskIrrelevant}
+        markTaskImpossible={markTaskImpossible}
         taskFinishStatus={(taskFinishStatus ? taskFinishStatus : (completed ? FinishedState.Completed : FinishedState.NotFinished))}
         planned={planned}
         plan={moveToWeek}
