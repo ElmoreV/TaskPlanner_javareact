@@ -130,9 +130,9 @@ const PlannedTask = (props) => {
 
     let class_str = 'task'
     // Completion has precedence over planned
-    if (taskFinishStatus == FinishedState.Completed) { class_str = 'taskCompleted' }
-    else if (taskFinishStatus == FinishedState.Irrelevant) { class_str = "taskIrrelevant" }
-    else if (taskFinishStatus == FinishedState.Impossible) { class_str = "taskImpossible" }
+    if (completed || taskFinishStatus === FinishedState.Completed) { class_str = 'taskCompleted' }
+    else if (taskFinishStatus === FinishedState.Irrelevant) { class_str = "taskIrrelevant" }
+    else if (taskFinishStatus === FinishedState.Impossible) { class_str = "taskImpossible" }
     else if (scheduled) { class_str = 'taskPlanned' }
 
 
