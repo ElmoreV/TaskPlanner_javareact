@@ -28,6 +28,8 @@ import {
     getUnfoldAll,
     getFoldAll
 } from './TopicModifyFuncGens'
+import { FinishedState } from './TaskInterfaces.tsx';
+
 
 import ImportExport from './ImportExport';
 
@@ -39,6 +41,13 @@ class SelectedTask {
     }
 }
 
+
+const isTaskVisible = (task, hideCompletedItems, showRepeatedOnly) => {
+    return (
+        (!((task.completed || (task.finishStatus !== undefined && task.finishStatus !== FinishedState.NotFinished))
+            && hideCompletedItems))
+        && (task.repeated || !showRepeatedOnly))
+}
 
 const recursiveShowTopic = (topic, tasks,
     setTopics, topics,
@@ -93,7 +102,7 @@ const recursiveShowTopic = (topic, tasks,
                 // .map((task) => (
                 //     ( && task.topics.includes(topic.id) ) ?
                 .filter((task) => task.topics.includes(topic.id))
-                .filter((task) => (!(task.completed && hideCompletedItems) && (task.repeated || !showRepeatedOnly)))
+                .filter((task) => isTaskVisible(task, hideCompletedItems, showRepeatedOnly))
                 .slice(0).sort((taskA, taskB) => { return findTopicViewIdx(topic.id, taskA) - findTopicViewIdx(topic.id, taskB) })
                 .map(task => (
                     <li key={topic.id + ' - ' + task.id}>
@@ -193,8 +202,6 @@ const TaskList = (props) => {
 
 
 
-    
-
     const onHideCompletedItemsChange = () => {
         setHideCompletedItems(!hideCompletedItems)
     }
@@ -248,7 +255,7 @@ const TaskList = (props) => {
                 onChange={onHideCompletedItemsChange}
                 className="form-check-input"
                 defaultChecked={hideCompletedItems}
-            />Hide completed tasks</label>
+            />Hide finished tasks</label>
             <label><input
                 type="checkbox"
                 name='ShowRepeatedOnly'
