@@ -97,14 +97,14 @@ const PlannedList = (props) => {
 
     return (
         <div className='planned-list'>
-            <button onClick={onClearCompletedItems}>Clear completed items</button>
+            <button onClick={onClearCompletedItems}>Clear finished items</button>
             <label><input
                 type="checkbox"
                 name='HideCompletedItems'
                 onChange={onHideCompletedItemsChange}
                 className="form-check-input"
                 defaultChecked={hideCompletedItems}
-            />Hide completed tasks</label>
+            />Hide finished tasks</label>
             <label><input
                 type="checkbox"
                 name='HideScheduledItems'
