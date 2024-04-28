@@ -6,6 +6,7 @@ import { FinishedState } from './TaskInterfaces.tsx';
 const PlannedTask = (props) => {
     const { taskKey, taskName, setTaskName, deleteTask,
         completed, completeTask,
+        taskFinishStatus, setTaskFinishStatus,
         scheduled, scheduleTask,
         planned, unplan, topics, taskTopics,
         selectedTasks, addToSelection, deleteFromSelection, selected, clearSelection,
@@ -19,6 +20,20 @@ const PlannedTask = (props) => {
     const [isDragging, setIsDragging] = useState(false);
     const [isDraggingAllowed, setIsDraggingAllowed] = useState(true);
 
+    // let repeated = true
+    const markTaskIrrelevant = () => {
+        if (taskFinishStatus == FinishedState.Irrelevant) { setTaskFinishStatus(FinishedState.NotFinished) }
+        else {
+            setTaskFinishStatus(FinishedState.Irrelevant)
+        }
+    }
+
+    const markTaskImpossible = () => {
+        if (taskFinishStatus == FinishedState.Impossible) { setTaskFinishStatus(FinishedState.NotFinished) }
+        else {
+            setTaskFinishStatus(FinishedState.Impossible)
+        }
+    }
 
 
     const handleChange = (e) => {
@@ -115,8 +130,13 @@ const PlannedTask = (props) => {
 
     let class_str = 'task'
     // Completion has precedence over planned
-    if (completed) { class_str = 'taskCompleted' }
+    if (taskFinishStatus == FinishedState.Completed) { class_str = 'taskCompleted' }
+    else if (taskFinishStatus == FinishedState.Irrelevant) { class_str = "taskIrrelevant" }
+    else if (taskFinishStatus == FinishedState.Impossible) { class_str = "taskImpossible" }
     else if (scheduled) { class_str = 'taskPlanned' }
+
+
+
     let selectStyle = {}
     if (selected) {
         selectStyle = {
@@ -144,8 +164,6 @@ const PlannedTask = (props) => {
         }
     }, [isEditing]); // Dependency array ensures this runs only when isEditing changes
 
-    let taskFinishStatus = (completed == true)
-
     return (<>
         <TaskContent classStr={class_str}
             selectStyle={selectStyle}
@@ -160,7 +178,9 @@ const PlannedTask = (props) => {
             topicPath={topicPath}
             color={color}
             deleteTask={deleteTask}
-            taskFinishStatus={taskFinishStatus}
+            markTaskIrrelevant={markTaskIrrelevant}
+            markTaskImpossible={markTaskImpossible}
+            taskFinishStatus={(taskFinishStatus ? taskFinishStatus : (completed ? FinishedState.Completed : FinishedState.NotFinished))}
             completeTask={completeTask}
             planned={true}
             unplan={unplan}

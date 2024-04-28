@@ -8,8 +8,11 @@ import {
     getCompleteTask,
     getScheduleTask,
     getUnplanTask,
-    getSetTaskNameFunc
+    getSetTaskNameFunc,
+    getSetTaskFinishStatus,
 } from "./TaskModifyFuncGens";
+
+import { FinishedState } from './TaskInterfaces.tsx';
 
 // TODO: add the topic name to the bar
 
@@ -66,11 +69,16 @@ const PlannedList = (props) => {
     }
     const onClearCompletedItems = () => {
         let newTasks = [...tasks]
-        newTasks = newTasks.map((task) => (task.completed && task.thisWeek) ? { ...task, thisWeek: false } : task)
+        newTasks = newTasks.map((task) => (((task.completed || (task.finishStatus !== undefined && task.finishStatus !== FinishedState.NotFinished))
+            && task.thisWeek) ? { ...task, thisWeek: false, scheduled: false } : task))
         setTasks(newTasks)
     }
     const isVisible = (task) => {
-        return (!(task.completed && hideCompletedItems) && !(task.scheduled && hideScheduledItems) && task.thisWeek)
+        return ((!((task.completed || (task.finishStatus !== undefined && task.finishStatus !== FinishedState.NotFinished))
+            && hideCompletedItems))
+            && !(task.scheduled && hideScheduledItems)
+            && task.thisWeek
+        )
     }
 
     const copyListToClipboard = () => {
@@ -119,6 +127,8 @@ const PlannedList = (props) => {
                                     setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
                                     // deleteTask = {getDeleteTask(task.id)}
                                     completed={task.completed}
+                                    taskFinishStatus={task.finishStatus}
+                                    setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
                                     completeTask={getCompleteTask(setTasks, tasks, task.id)}
                                     scheduled={task.scheduled}
                                     scheduleTask={getScheduleTask(setTasks, tasks, task.id)}
