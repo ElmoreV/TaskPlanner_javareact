@@ -242,7 +242,7 @@ const Task = (props) => {
         repeated={repeated}
         toggleRepeatTask={toggleRepeatTask}
         duplicateDragHandlers={duplicateDragHandlers}
-        textBarWidth="425px"
+        // textBarWidth="425px"
         fancy={fancy}
     />);
 }

@@ -1,17 +1,27 @@
 .taskText {
-    display: inline-block;
-    max-width: 290px;
+    /* display: inline-block; */
+    /* max-width: 290px; */
+    flex-grow: 1;
     word-wrap: break-word;
 }
 
+span.topicPath {
+    /* float: right; */
+    flex-grow: 1;
+    /* max-width: 275px; */
+    text-align: right;
+}
+
 .textBar {
-    display: inline-block;
-    width: 565px;
+    /* display: inline-block; */
+    display: flex;
+    flex-grow: 1;
+    /* width: 565px; */
     word-wrap: break-word;
 }
 
 span.buttonDuplicate:hover {
-    float: right;
+    /* float: right; */
     border-radius: 5px;
     border-style: solid;
     border-color: blue;
@@ -23,12 +33,18 @@ span.buttonDuplicate:hover {
 
 
 .taskText input[type="text"] {
-    width: 350px;
+    /* width: 350px; */
     /* max-width: 100px; */
     box-sizing: border-box;
 }
 
+/*https://css-tricks.com/useful-flexbox-technique-alignment-shifting-wrapping/*/
 .task {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* justify-content: flex-end; */
     max-width: 800px;
     padding: 10px;
     padding-left: 20px;
@@ -52,7 +68,6 @@ span.buttonDuplicate:hover {
     position: relative;
     z-index: 50;
     cursor: grab;
-
 }
 
 
@@ -148,10 +163,14 @@ span.buttonDuplicate:hover {
 
 }
 
-span.topicPath {
-    float: right;
-    max-width: 275px;
-    text-align: right;
+
+span.buttonDuplicate {
+    /* float: right; */
+    border-radius: 20px;
+    border-style: solid;
+    border-color: blue;
+    border-width: 2px;
+    cursor: copy;
 }
 
 button.taskDelete,
@@ -161,15 +180,5 @@ button.taskComplete,
 button.taskSchedule,
 button.taskMarkIrrelevant,
 button.taskMarkImpossible {
-    float: right;
-}
-
-
-span.buttonDuplicate {
-    float: right;
-    border-radius: 20px;
-    border-style: solid;
-    border-color: blue;
-    border-width: 2px;
-    cursor: copy;
+    /* float: right; */
 }
