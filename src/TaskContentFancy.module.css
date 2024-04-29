@@ -2,20 +2,19 @@
 .textBar {
     display: flex;
     flex-grow: 1;
-    word-wrap: break-word;
 }
 
 /* is contained in textbar */
 .taskText {
     flex-grow: 1;
-    word-wrap: break-word;
+    overflow-wrap: anywhere;
 }
 
 /* is contained in textbar */
 span.topicPath {
     flex-grow: 1;
     text-align: right;
-    word-wrap: break-word;
+    overflow-wrap: anywhere;
 }
 
 /* is contained in button-list */
@@ -34,7 +33,7 @@ span.buttonDuplicate:hover {
 .task {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
     flex-direction: row;
     flex-wrap: nowrap;
     max-width: 800px;
