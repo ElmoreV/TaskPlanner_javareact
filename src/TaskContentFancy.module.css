@@ -1,50 +1,41 @@
-.taskText {
-    /* display: inline-block; */
-    /* max-width: 290px; */
+/* is contained in taskxxx*/
+.textBar {
+    display: flex;
     flex-grow: 1;
     word-wrap: break-word;
 }
 
-span.topicPath {
-    /* float: right; */
+/* is contained in textbar */
+.taskText {
     flex-grow: 1;
-    /* max-width: 275px; */
+    word-wrap: break-word;
+}
+
+/* is contained in textbar */
+span.topicPath {
+    flex-grow: 1;
     text-align: right;
 }
 
-.textBar {
-    /* display: inline-block; */
-    display: flex;
-    flex-grow: 1;
-    /* width: 565px; */
-    word-wrap: break-word;
-}
-
+/* is contained in button-list */
 span.buttonDuplicate:hover {
-    /* float: right; */
     border-radius: 5px;
     border-style: solid;
     border-color: blue;
     border-width: 4px;
-
-
 }
 
-
-
 .taskText input[type="text"] {
-    /* width: 350px; */
-    /* max-width: 100px; */
     box-sizing: border-box;
 }
 
 /*https://css-tricks.com/useful-flexbox-technique-alignment-shifting-wrapping/*/
 .task {
     display: flex;
+    justify-content: space-between;
     align-items: flex-end;
     flex-direction: row;
-    flex-wrap: wrap;
-    /* justify-content: flex-end; */
+    flex-wrap: nowrap;
     max-width: 800px;
     padding: 10px;
     padding-left: 20px;
@@ -163,9 +154,15 @@ span.buttonDuplicate:hover {
 
 }
 
+.buttonList {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+}
 
 span.buttonDuplicate {
-    /* float: right; */
+    white-space: nowrap;
     border-radius: 20px;
     border-style: solid;
     border-color: blue;
@@ -173,12 +170,9 @@ span.buttonDuplicate {
     cursor: copy;
 }
 
-button.taskDelete,
-button.moveToWeek,
-button.makeRepeated,
-button.taskComplete,
-button.taskSchedule,
-button.taskMarkIrrelevant,
-button.taskMarkImpossible {
-    /* float: right; */
+@media (max-width: 800px) {
+    .task {
+        flex-direction: column;
+        align-items: flex-start;
+    }
 }

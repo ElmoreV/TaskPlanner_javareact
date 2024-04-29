@@ -68,7 +68,7 @@ const TaskContent = (props) => {
                     </span>
                     {topicPath && <span className={styles.topicPath}>{topicPath}</span>}
                 </div>
-                <div>
+                <div className={styles.buttonList}>
                     {duplicateDragHandlers && <span className={styles.buttonDuplicate} {...duplicateDragHandlers}>+ Duplicate +</span>}
 
                     {deleteTask && (<button className={styles.taskDelete} onClick={captureClick(deleteTask)}>Delete</button>)}
