@@ -220,6 +220,12 @@ const TaskList = (props) => {
 
     }
 
+    const handleUnfoldAll = () => {
+        let unfoldAll = getUnfoldAll(setTopics, topics)
+        topics.map(topic => unfoldAll(topic.id))
+
+    }
+
     if (runOnce < 2) {
         console.log("Running sanitize")
         sanitizeTopicOrderIndex(topics, tasks, setTasks)
@@ -264,6 +270,7 @@ const TaskList = (props) => {
                 defaultChecked={setShowRepeatedOnly}
             />Show repeated tasks only</label>
             <button className="fold_all" onClick={handleFoldAll} >Fold all</button>
+            <button className="unfold_all" onClick={handleUnfoldAll} >Unfold all</button>
             <ul key='root_topics'>
                 {showTopics(topics, tasks,
                     setTopics,
