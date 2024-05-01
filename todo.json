@@ -3,12 +3,12 @@
     {
       "name": "Features",
       "id": 1,
-      "unfolded": false,
+      "unfolded": true,
       "subtopics": [
         {
           "name": "Database interaction",
           "id": 3,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Migration to schema.v1",
@@ -40,18 +40,18 @@
         {
           "name": "Per Topic View",
           "id": 4,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Aesthetic",
               "id": 23,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
               "name": "Functionality",
               "id": 24,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": [
                 {
                   "name": "Relaying information",
@@ -79,7 +79,7 @@
         {
           "name": "Weekly Tasks View",
           "id": 5,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Aesthetic",
@@ -104,13 +104,13 @@
         {
           "name": "Daily Task View",
           "id": 6,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         },
         {
           "name": "General",
           "id": 7,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Project management",
@@ -148,7 +148,7 @@
         {
           "name": "Timing",
           "id": 31,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Impossibilities",
@@ -173,7 +173,7 @@
         {
           "name": "Priority module",
           "id": 36,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         }
       ]
@@ -181,18 +181,18 @@
     {
       "name": "Constraints",
       "id": 2,
-      "unfolded": false,
+      "unfolded": true,
       "subtopics": [
         {
           "name": "UX/UI",
           "id": 15,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": []
         },
         {
           "name": "Maintainability",
           "id": 16,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Error handling",
@@ -203,13 +203,13 @@
             {
               "name": "Documentation/logging",
               "id": 18,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
               "name": "Testing",
               "id": 19,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": [
                 {
                   "name": "Specific regression tests",
@@ -244,7 +244,7 @@
     {
       "name": "Bugs/issues",
       "id": 12,
-      "unfolded": false,
+      "unfolded": true,
       "subtopics": []
     },
     {
@@ -285,7 +285,7 @@
             {
               "name": "It takes a huge time to drag a task from the top to the bottom - 16m ",
               "id": 49,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             },
             {
@@ -307,7 +307,7 @@
     {
       "name": "Uncategorized",
       "id": 51,
-      "unfolded": false,
+      "unfolded": true,
       "subtopics": []
     }
   ],
@@ -999,7 +999,9 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         3
-      ]
+      ],
+      "completed": true,
+      "finishStatus": 1
     },
     {
       "name": "Detection of JSON or YAML at import ",
@@ -2720,7 +2722,9 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         64
-      ]
+      ],
+      "completed": true,
+      "finishStatus": 1
     },
     {
       "name": "The UI does not look professional -1m",
@@ -3100,7 +3104,9 @@
       "topicViewIndices": [
         0
       ],
-      "scheduled": false
+      "scheduled": false,
+      "completed": true,
+      "finishStatus": 1
     },
     {
       "name": "Cannot create dependencies between task completions (auto->IKEA/recept bedenken->boodschappen) - 3m ",
@@ -3440,7 +3446,9 @@
       "topicViewIndices": [
         5
       ],
-      "scheduled": false
+      "scheduled": false,
+      "completed": true,
+      "finishStatus": 1
     },
     {
       "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -19m",
@@ -3507,7 +3515,9 @@
       "topicViewIndices": [
         10
       ],
-      "scheduled": false
+      "scheduled": false,
+      "completed": true,
+      "finishStatus": 1
     },
     {
       "name": "I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -12m- ",
@@ -3652,7 +3662,9 @@
       "topicViewIndices": [
         16
       ],
-      "thisWeek": true
+      "thisWeek": true,
+      "completed": true,
+      "finishStatus": 1
     },
     {
       "name": "Cannot order/sort the tasks/topics on the topic view - 21m",

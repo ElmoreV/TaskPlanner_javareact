@@ -58,7 +58,7 @@
 - [ ] "Add task" icon
 - [ ] "Delete task" icon
 - [ ] Animate collapse and dropdown
-- [ ] Design good way to limit task text in the task box
+- [x] Design good way to limit task text in the task box
 - [ ] Dragging: make outline of dragged-over-task/topic fat
 - [ ] Improve collapse and dropdown icon
 - [x] Make the tasks to have a good width. Naive: text-cutoff
@@ -119,7 +119,7 @@
 
 ### Aesthetic:
 
-- [ ] Manage the text widths on the task bars
+- [x] Manage the text widths on the task bars
 
 ### Modifying information:
 
@@ -326,7 +326,7 @@
 - [x] The weekly view names are too large and go to the next line (but don't make the task bigger): 5m - gefixt
 - [x] Not seeing the repeated tasks: 2 -gefixt
 - [x] No dark mode - 1m -gefixt
-- [ ] Topic text is not handled right and makes the buttons go crazy - 1m
+- [x] Topic text is not handled right and makes the buttons go crazy - 1m
 - [ ] The UI does not look professional -1m
 - [ ] Add browser tab icon - 1m
 - [ ] Add name of file to Tab Name -1m
@@ -346,7 +346,7 @@
 - [ ] Repeated tasks do not show last completion/cannot retain information about when the next time would be -16m+
 - [ ] It is unclear where a duplicated task is already (is it already duplicated?) -12m
 - [x] Not being able to collapse or fold all the topics with one button - 27m
-- [ ] Text width on a narrow screen is not handled well (text width not respected) - 10m
+- [x] Text width on a narrow screen is not handled well (text width not respected) - 10m
 
 ### Filtering:
 
@@ -395,7 +395,7 @@
 - [ ] - The order of selected tasks should be kept locally coherent (so same topic Id then the source Indices should be ordered) - 2m
 - [ ] Cannot merge topics together -1m
 - [ ] Should have ability that adds a task INSIDE of another task - 1m
-- [ ] Removing items from the planned list or completing an item, does not unschedule them - 14m
+- [x] Removing items from the planned list or completing an item, does not unschedule them - 14m
 - [ ] I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -12m- 
 - [x] Enter does not finish text input in planned list - 15m
 - [x] Not being able to duplicate multiple tasks at once in Topic View (forgetting which tasks are already copied): 19m
@@ -421,7 +421,7 @@
 - [ ] Track different activities (need daily planning + completion timings) - 1m
 - [ ] Cannot create dependencies between task completions (auto->IKEA/recept bedenken->boodschappen) - 3m 
 - [ ] Cannot filter out irrelevant items (already planned, completed, repeatable but it's not yet time, blocked, irrelevant) - 1m
-- [ ] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 20m
+- [x] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 20m
 - [ ] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -19m
 - [ ] Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 13m
 - [ ] There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -12m
