@@ -79,7 +79,7 @@ const removeTaskInstanceFromTopic = (tasks, taskId, topicId) => {
             taskInTopic.topicViewIndices[topicIdx] -= 1
         }
     })
-    // Add topicId and topicViewIndex
+    // Remove topicId and topicViewIndex
     thisTask.topics.splice(topicIdIdx, 1)
     thisTask.topicViewIndices.splice(topicIdIdx, 1)
     return newTasks

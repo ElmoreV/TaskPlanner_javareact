@@ -253,7 +253,6 @@ const sanitizeTopicOrderIndex = (topics, tasks, setTasks) => {
     let newTasks = [...tasks]
     if (checkValidTopicOrderIndex(topics, tasks)) { return; }
     console.warn("Found invalid topicOrderIndex. Reordering...")
-
     const sanitize_r = (topics, tasks) => {
         newTasks = [...tasks]
         for (let topic of topics) {
@@ -439,22 +438,61 @@ const getChangeWeekOrderIndex = (setTasks, tasks) => {
 ////////////////////////////////
 /// Changing both topics and tasks
 ///////////////////////////////
+const findAllSubtopicIds_r = (topics, topicId, inside) => {
+    let idList = [];
+    topics.forEach((topic) => {
+        // If this is inside the hierarchy, return this topic id and all subtopics
+        if (inside || topicId == topic.id) {
+            idList.push(topic.id)
+            idList = idList.concat(findAllSubtopicIds_r(topic.subtopics, topicId, true))
+        }
+        else {
+            // Or go deeper to find it
+            idList = idList.concat(findAllSubtopicIds_r(topic.subtopics, topicId, false))
+        }
+    })
+    return idList
+
+}
+
+const findAllSubtopicIds = (topics, topicId) => {
+    return findAllSubtopicIds_r(topics, topicId, false)
+}
+
 
 // For v1 data
 const getDeleteTopic = (setTopics, topics, setTasks, tasks, topicId) => {
     const deleteTopic = () => {
+        console.debut(`Deleting topic ${topicId}`)
         let newTopics = [...topics]
+        // 1. Find all topic ids that will be removed
+        // 2. Remove topic id and its subtopics from topics
+        // 3. Remove the topic ids from all relevant tasks
+        // 4. Remove empty tasks
+
+        // Find all topic ids that will be removed
+        let idList = findAllSubtopicIds(newTopics, topicId)
 
         // Filter out any topic that is a subtopic of topicId, recursively
         newTopics = filterTopicsById_r(newTopics, topicId);
-        // Find any orphan tasks (tasks without a topic)
-        // and filter them
-        // TODO: this is slow and not scalable. Fix when necessary.
+
+        // Removing task instances
         let newTasks = [...tasks]
-        // all_subtopics = newTopics.
-        newTasks = newTasks.filter((task) => isTaskInAnyTopic(task, newTopics))
+        // Filter tasks that have overlap in idList and task.topics
+        let tasksToRemove = newTasks.filter((task) => task.topics.some(taskTopicId => idList.includes(taskTopicId)))
+
+        // For every task, find the task instances that are to be removed
+        // and remove them
+        tasksToRemove.forEach(task => {
+            let overlappingIdList = idList.filter(topicIdToRemove => (task.topics.includes(topicIdToRemove)))
+            overlappingIdList.forEach((id) => {
+                removeTaskInstanceFromTopic(newTasks, task.id, id)
+            })
+        })
+        // Filter out tasks without instances (not inside any topic)
+        newTasks = newTasks.filter((task) => task.topics.length > 0)
         console.info('Length of tasks before deletion/length of tasks after deletion')
-        console.info(tasks.length + ' / ' + newTasks.length)
+        console.info(tasks.length + ' -> ' + newTasks.length)
 
         setTopics(newTopics);
         setTasks(newTasks);
