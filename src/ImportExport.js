@@ -526,11 +526,11 @@ const ImportExport = (props) => {
 
     return (
         <div>
-            <button onClick={exportjson}>Export Tasks [JSON]</button>{savedTaskHash ? (
+            <button onClick={exportjson}>Save as JSON</button>{savedTaskHash ? (
                 mutatedSinceSave ? "Unsaved changes" : "Unchanged") : "Not saved yet"}
 
-            <button onClick={exportYAML}>Export Tasks [YAML]</button>
-            <button onClick={exportMarkdown}> Export Tasks [Markdown]</button>
+            <button onClick={exportYAML}>Export as YAML</button>
+            <button onClick={exportMarkdown}> Export as Markdown</button>
             <button onClick={exportAll}> Export All [JSON+YAML+Markdown]</button>
             <button onClick={() => calculateHash(tasks, topics)}> Calc Hash </button>
             <input type="file"
