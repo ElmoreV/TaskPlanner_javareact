@@ -283,7 +283,7 @@
           "unfolded": true,
           "subtopics": [
             {
-              "name": "It takes a huge time to drag a task from the top to the bottom - 16m ",
+              "name": "Too long to drag a task from the top to the bottom - 18m ",
               "id": 49,
               "unfolded": true,
               "subtopics": []
@@ -2041,7 +2041,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        25
+        28
       ]
     },
     {
@@ -2052,7 +2052,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        39
+        42
       ]
     },
     {
@@ -2063,7 +2063,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        41
+        44
       ]
     },
     {
@@ -2085,7 +2085,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        43
+        46
       ]
     },
     {
@@ -2100,7 +2100,7 @@
       ]
     },
     {
-      "name": "Filtering is not available when in the middle of a large list - 4m",
+      "name": "Filtering is not available when in the middle of a large list - 5m",
       "id": 186,
       "topics": [
         48
@@ -2129,7 +2129,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        48
+        52
       ]
     },
     {
@@ -2140,7 +2140,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        54
+        59
       ]
     },
     {
@@ -2162,7 +2162,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        24
+        26
       ]
     },
     {
@@ -2173,7 +2173,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        57
+        62
       ]
     },
     {
@@ -2184,7 +2184,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        58
+        63
       ]
     },
     {
@@ -2195,7 +2195,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        60
+        65
       ]
     },
     {
@@ -2206,7 +2206,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        41
+        43
       ]
     },
     {
@@ -2217,7 +2217,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        43
+        45
       ]
     },
     {
@@ -2228,7 +2228,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        49
+        51
       ]
     },
     {
@@ -2239,7 +2239,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        3
+        5
       ]
     },
     {
@@ -2250,7 +2250,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        4
+        6
       ]
     },
     {
@@ -2261,7 +2261,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        5
+        7
       ]
     },
     {
@@ -2272,7 +2272,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        6
+        8
       ]
     },
     {
@@ -2283,7 +2283,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        7
+        9
       ]
     },
     {
@@ -2294,7 +2294,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        1
+        3
       ]
     },
     {
@@ -2305,18 +2305,18 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        67
+        69
       ]
     },
     {
-      "name": "Text editing tends to slow down if you type more - 3m",
+      "name": "Text editing tends to lag/slow down if you type more - 4m",
       "id": 215,
       "topics": [
         46
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        71
+        73
       ]
     },
     {
@@ -2327,7 +2327,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        73
+        75
       ]
     },
     {
@@ -2338,7 +2338,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        65
+        67
       ],
       "completed": true
     },
@@ -2350,7 +2350,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        19
+        20
       ]
     },
     {
@@ -2361,7 +2361,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        107
+        110
       ]
     },
     {
@@ -2372,7 +2372,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        106
+        109
       ]
     },
     {
@@ -2383,7 +2383,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        104
+        107
       ]
     },
     {
@@ -2394,7 +2394,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        96
+        99
       ]
     },
     {
@@ -2405,7 +2405,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        23
+        25
       ]
     },
     {
@@ -2416,7 +2416,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        57
+        59
       ]
     },
     {
@@ -2427,7 +2427,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        109
+        112
       ]
     },
     {
@@ -2438,7 +2438,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        110
+        113
       ]
     },
     {
@@ -2472,7 +2472,7 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        133
+        136
       ]
     },
     {
@@ -2484,7 +2484,7 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        14
+        16
       ]
     },
     {
@@ -2496,7 +2496,7 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        47
+        49
       ]
     },
     {
@@ -2508,7 +2508,7 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        56
+        58
       ]
     },
     {
@@ -2520,7 +2520,7 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        38
+        40
       ]
     },
     {
@@ -2556,7 +2556,7 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        20
+        22
       ]
     },
     {
@@ -2568,7 +2568,7 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        55
+        57
       ]
     },
     {
@@ -2580,7 +2580,7 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        49
+        53
       ]
     },
     {
@@ -2592,7 +2592,7 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        20
+        21
       ]
     },
     {
@@ -2640,7 +2640,7 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        4
+        5
       ]
     },
     {
@@ -2676,7 +2676,7 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        63
+        68
       ]
     },
     {
@@ -2721,7 +2721,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        64
+        69
       ],
       "completed": true,
       "finishStatus": 1
@@ -2734,7 +2734,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        67
+        72
       ]
     },
     {
@@ -2745,7 +2745,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        21
+        23
       ]
     },
     {
@@ -2756,7 +2756,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        28
+        30
       ]
     },
     {
@@ -2767,7 +2767,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        68
+        73
       ]
     },
     {
@@ -2778,7 +2778,7 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        69
+        74
       ]
     },
     {
@@ -2788,7 +2788,7 @@
         45
       ],
       "topicViewIndices": [
-        70
+        75
       ],
       "weekOrderIndex": 0
     },
@@ -2799,7 +2799,7 @@
         46
       ],
       "topicViewIndices": [
-        140
+        143
       ],
       "weekOrderIndex": 0
     },
@@ -2840,7 +2840,7 @@
         45
       ],
       "topicViewIndices": [
-        19
+        21
       ],
       "completed": false,
       "thisWeek": false,
@@ -2888,7 +2888,7 @@
         46
       ],
       "topicViewIndices": [
-        53
+        55
       ],
       "completed": false,
       "thisWeek": false,
@@ -2903,7 +2903,7 @@
         45
       ],
       "topicViewIndices": [
-        21
+        23
       ],
       "completed": false,
       "thisWeek": false,
@@ -2918,7 +2918,7 @@
         46
       ],
       "topicViewIndices": [
-        15
+        17
       ],
       "completed": true,
       "thisWeek": false,
@@ -2934,8 +2934,8 @@
         46
       ],
       "topicViewIndices": [
-        51,
-        92
+        55,
+        94
       ],
       "completed": false,
       "thisWeek": false,
@@ -2980,7 +2980,7 @@
         45
       ],
       "topicViewIndices": [
-        27
+        30
       ],
       "completed": false,
       "thisWeek": false,
@@ -2995,7 +2995,7 @@
         46
       ],
       "topicViewIndices": [
-        77
+        79
       ],
       "completed": false,
       "thisWeek": false,
@@ -3010,7 +3010,7 @@
         46
       ],
       "topicViewIndices": [
-        76
+        78
       ],
       "completed": false,
       "thisWeek": false,
@@ -3049,28 +3049,13 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "Ability to spawn follow-up tasks or subtask/necessary tasks on a task in the Weekly List from a task (Completing the task made another TODO) - 8m",
-      "id": 288,
-      "topics": [
-        46
-      ],
-      "topicViewIndices": [
-        40
-      ],
-      "completed": false,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
       "name": "Ability to create a task on the Weekly List - 1m",
       "id": 289,
       "topics": [
         46
       ],
       "topicViewIndices": [
-        93
+        96
       ],
       "completed": false,
       "thisWeek": false,
@@ -3085,7 +3070,7 @@
         44
       ],
       "topicViewIndices": [
-        12
+        13
       ],
       "completed": false,
       "thisWeek": false,
@@ -3115,7 +3100,7 @@
         50
       ],
       "topicViewIndices": [
-        18
+        19
       ],
       "completed": false,
       "thisWeek": false,
@@ -3130,7 +3115,7 @@
         45
       ],
       "topicViewIndices": [
-        74
+        79
       ],
       "completed": false,
       "thisWeek": false,
@@ -3145,7 +3130,7 @@
         46
       ],
       "topicViewIndices": [
-        142
+        145
       ],
       "completed": false,
       "thisWeek": false,
@@ -3160,7 +3145,7 @@
         46
       ],
       "topicViewIndices": [
-        90
+        92
       ],
       "completed": false,
       "thisWeek": false,
@@ -3190,7 +3175,7 @@
         50
       ],
       "topicViewIndices": [
-        22
+        24
       ],
       "completed": false,
       "thisWeek": false,
@@ -3205,7 +3190,7 @@
         44
       ],
       "topicViewIndices": [
-        13
+        14
       ],
       "completed": false,
       "thisWeek": false,
@@ -3250,7 +3235,7 @@
         46
       ],
       "topicViewIndices": [
-        143
+        147
       ],
       "completed": false,
       "thisWeek": false,
@@ -3265,7 +3250,7 @@
         46
       ],
       "topicViewIndices": [
-        103
+        106
       ],
       "completed": false,
       "thisWeek": false,
@@ -3280,7 +3265,7 @@
         45
       ],
       "topicViewIndices": [
-        72
+        77
       ],
       "completed": false,
       "thisWeek": false,
@@ -3295,7 +3280,7 @@
         45
       ],
       "topicViewIndices": [
-        71
+        76
       ],
       "completed": false,
       "thisWeek": false,
@@ -3310,7 +3295,7 @@
         45
       ],
       "topicViewIndices": [
-        50
+        58
       ],
       "completed": false,
       "thisWeek": false,
@@ -3325,7 +3310,7 @@
         45
       ],
       "topicViewIndices": [
-        53
+        27
       ],
       "completed": false,
       "thisWeek": false,
@@ -3340,7 +3325,7 @@
         45
       ],
       "topicViewIndices": [
-        66
+        71
       ],
       "completed": false,
       "thisWeek": false,
@@ -3364,7 +3349,7 @@
       "weekOrderIndex": 0
     },
     {
-      "name": "It doesn't show you that your file is changed and unsaved when you change something - 2m",
+      "name": "It doesn't automatically show you that your file is changed and unsaved when you change something - 3m",
       "id": 309,
       "topics": [
         47
@@ -3397,7 +3382,7 @@
         45
       ],
       "topicViewIndices": [
-        40
+        43
       ],
       "completed": false,
       "thisWeek": false,
@@ -3412,9 +3397,121 @@
         45
       ],
       "topicViewIndices": [
-        73
+        78
       ],
       "completed": false,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Missing button for deleting just a task instance and not the whole task - 1m",
+      "id": 312,
+      "topics": [
+        46
+      ],
+      "topicViewIndices": [
+        146
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Cannot order the subtopics - 2m",
+      "id": 313,
+      "topics": [
+        46
+      ],
+      "topicViewIndices": [
+        95
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "When having more than 500+ tasks, it gets difficult to manage - information overload (maybe only show first 2 of every topic?)- 1M",
+      "id": 314,
+      "topics": [
+        44
+      ],
+      "topicViewIndices": [
+        12
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Maybe add a way to type and click (duplicate towards)?",
+      "id": 315,
+      "topics": [
+        49
+      ],
+      "topicViewIndices": [
+        2
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Maybe allow to right click and select \"Duplicate selected tasks here\"?",
+      "id": 316,
+      "topics": [
+        49
+      ],
+      "topicViewIndices": [
+        1
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Cannot add a schedule to a repeated item - 1m",
+      "id": 317,
+      "topics": [
+        50
+      ],
+      "topicViewIndices": [
+        31
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "You should select a task and 'Go to Topic View/Planned View' as an action - 1m",
+      "id": 318,
+      "topics": [
+        45
+      ],
+      "topicViewIndices": [
+        80
+      ],
+      "completed": false,
+      "finishStatus": 0,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
@@ -3444,44 +3541,44 @@
       "weekOrderIndex": 2,
       "thisWeek": true,
       "topicViewIndices": [
-        5
+        6
       ],
       "scheduled": false,
       "completed": true,
       "finishStatus": 1
     },
     {
-      "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -19m",
-      "id": 179,
-      "topics": [
-        50
-      ],
-      "weekOrderIndex": 3,
-      "topicViewIndices": [
-        6
-      ],
-      "thisWeek": true
-    },
-    {
-      "name": "Repeated tasks do not show last completion/cannot retain information about when the next time would be -16m+",
+      "name": "Repeated tasks do not show last completion/cannot retain information about when the next time would be -31m+",
       "id": 175,
       "topics": [
         45
       ],
-      "weekOrderIndex": 4,
+      "weekOrderIndex": 3,
       "thisWeek": true,
       "topicViewIndices": [
-        9
+        11
       ]
     },
     {
-      "name": "It takes a huge time to drag a task from the top to the bottom - 16m ",
-      "id": 287,
+      "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -20m",
+      "id": 179,
       "topics": [
-        49
+        50
+      ],
+      "weekOrderIndex": 4,
+      "topicViewIndices": [
+        7
+      ],
+      "thisWeek": true
+    },
+    {
+      "name": "Er is geen Undo knop - 4M",
+      "id": 275,
+      "topics": [
+        44
       ],
       "topicViewIndices": [
-        0
+        4
       ],
       "completed": false,
       "thisWeek": true,
@@ -3490,13 +3587,13 @@
       "weekOrderIndex": 5
     },
     {
-      "name": "Er is geen Undo knop - 3M",
-      "id": 275,
+      "name": "It takes a huge time to drag a task from the top to the bottom - 18m ",
+      "id": 287,
       "topics": [
-        44
+        49
       ],
       "topicViewIndices": [
-        4
+        0
       ],
       "completed": false,
       "thisWeek": true,
@@ -3513,26 +3610,26 @@
       "weekOrderIndex": 7,
       "thisWeek": true,
       "topicViewIndices": [
-        10
+        12
       ],
       "scheduled": false,
       "completed": true,
       "finishStatus": 1
     },
     {
-      "name": "I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -12m- ",
-      "id": 189,
+      "name": "There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -16m",
+      "id": 203,
       "topics": [
-        46
+        50
       ],
       "weekOrderIndex": 8,
       "topicViewIndices": [
-        35
+        12
       ],
       "thisWeek": true
     },
     {
-      "name": "Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 13m",
+      "name": "Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 14m",
       "id": 213,
       "topics": [
         50,
@@ -3540,8 +3637,20 @@
       ],
       "weekOrderIndex": 9,
       "topicViewIndices": [
-        15,
+        16,
         0
+      ],
+      "thisWeek": true
+    },
+    {
+      "name": "I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -14m- ",
+      "id": 189,
+      "topics": [
+        46
+      ],
+      "weekOrderIndex": 10,
+      "topicViewIndices": [
+        37
       ],
       "thisWeek": true
     },
@@ -3551,23 +3660,11 @@
       "topics": [
         45
       ],
-      "weekOrderIndex": 10,
+      "weekOrderIndex": 11,
       "thisWeek": true,
       "topicViewIndices": [
-        11
+        13
       ]
-    },
-    {
-      "name": "There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -12m",
-      "id": 203,
-      "topics": [
-        50
-      ],
-      "weekOrderIndex": 11,
-      "topicViewIndices": [
-        11
-      ],
-      "thisWeek": true
     },
     {
       "name": "Tasks/topics with the same id will mess up program - 2M",
@@ -3592,7 +3689,7 @@
       ],
       "weekOrderIndex": 13,
       "topicViewIndices": [
-        9
+        11
       ],
       "thisWeek": true,
       "completed": true
@@ -3606,7 +3703,7 @@
       "weekOrderIndex": 14,
       "thisWeek": true,
       "topicViewIndices": [
-        8
+        10
       ],
       "completed": true
     },
@@ -3641,12 +3738,27 @@
       "completed": true
     },
     {
+      "name": "Ability to spawn follow-up tasks or subtask/necessary tasks on a task in the Weekly List from a task (Completing the task made another TODO) - 10m",
+      "id": 288,
+      "topics": [
+        46
+      ],
+      "topicViewIndices": [
+        42
+      ],
+      "completed": false,
+      "thisWeek": true,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 17
+    },
+    {
       "name": "Show all topics for a task with multiple topics",
       "id": 146,
       "topics": [
         40
       ],
-      "weekOrderIndex": 17,
+      "weekOrderIndex": 18,
       "thisWeek": true,
       "topicViewIndices": [
         3
@@ -3658,9 +3770,9 @@
       "topics": [
         45
       ],
-      "weekOrderIndex": 18,
+      "weekOrderIndex": 19,
       "topicViewIndices": [
-        16
+        18
       ],
       "thisWeek": true,
       "completed": true,
@@ -3672,10 +3784,10 @@
       "topics": [
         50
       ],
-      "weekOrderIndex": 19,
+      "weekOrderIndex": 20,
       "thisWeek": true,
       "topicViewIndices": [
-        3
+        4
       ],
       "completed": true
     },
@@ -3686,7 +3798,7 @@
       "topics": [
         41
       ],
-      "weekOrderIndex": 20,
+      "weekOrderIndex": 21,
       "topicViewIndices": [
         6
       ],
@@ -3699,7 +3811,7 @@
         41
       ],
       "thisWeek": true,
-      "weekOrderIndex": 21,
+      "weekOrderIndex": 22,
       "topicViewIndices": [
         7
       ]
@@ -3711,7 +3823,7 @@
         25
       ],
       "thisWeek": true,
-      "weekOrderIndex": 22,
+      "weekOrderIndex": 23,
       "topicViewIndices": [
         12
       ]
@@ -3722,7 +3834,7 @@
       "topics": [
         30
       ],
-      "weekOrderIndex": 23,
+      "weekOrderIndex": 24,
       "thisWeek": true,
       "completed": true,
       "topicViewIndices": [
@@ -3736,7 +3848,7 @@
         41
       ],
       "thisWeek": true,
-      "weekOrderIndex": 24,
+      "weekOrderIndex": 25,
       "topicViewIndices": [
         8
       ]
@@ -3748,7 +3860,7 @@
         29,
         41
       ],
-      "weekOrderIndex": 25,
+      "weekOrderIndex": 26,
       "thisWeek": true,
       "completed": true,
       "topicViewIndices": [
@@ -3763,7 +3875,7 @@
       "topics": [
         39
       ],
-      "weekOrderIndex": 26,
+      "weekOrderIndex": 27,
       "completed": true,
       "topicViewIndices": [
         6
@@ -3775,7 +3887,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 27,
+      "weekOrderIndex": 28,
       "thisWeek": true,
       "topicViewIndices": [
         18
@@ -3787,7 +3899,7 @@
       "topics": [
         7
       ],
-      "weekOrderIndex": 28,
+      "weekOrderIndex": 29,
       "thisWeek": true,
       "completed": true,
       "topicViewIndices": [
@@ -3800,7 +3912,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 29,
+      "weekOrderIndex": 30,
       "thisWeek": true,
       "topicViewIndices": [
         19
@@ -3812,7 +3924,7 @@
       "topics": [
         39
       ],
-      "weekOrderIndex": 30,
+      "weekOrderIndex": 31,
       "thisWeek": true,
       "completed": true,
       "topicViewIndices": [
@@ -3825,7 +3937,7 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 31,
+      "weekOrderIndex": 32,
       "thisWeek": true,
       "topicViewIndices": [
         21
@@ -3839,7 +3951,7 @@
         15
       ],
       "thisWeek": true,
-      "weekOrderIndex": 32,
+      "weekOrderIndex": 33,
       "completed": true,
       "topicViewIndices": [
         22
@@ -3852,7 +3964,7 @@
         8
       ],
       "thisWeek": true,
-      "weekOrderIndex": 33,
+      "weekOrderIndex": 34,
       "topicViewIndices": [
         7
       ]
@@ -3864,7 +3976,7 @@
         21
       ],
       "thisWeek": true,
-      "weekOrderIndex": 34,
+      "weekOrderIndex": 35,
       "completed": true,
       "topicViewIndices": [
         4
