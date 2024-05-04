@@ -1,1 +1,4 @@
 - Cannot mark a task as Blocked (internally/externally) - 1m
+
+- Does not show last time it was saved - 1m (or loaded, or modified)
+
