@@ -214,8 +214,8 @@
     - 'When creating a new topic, leave it unfolded'
 'Annoyances':
     - 'Development':
-        - 'Need an easier way to show task/topic information (id/viewIndex/weekIndex) - 3m'
-        - 'Need an identifier for which version we are working with (date, commit, version, dev or production) - 2m'
+        - 'Need an easier way to show task/topic information (id/viewIndex/weekIndex) - 4m'
+        - 'Need an identifier for which version we are working with (date, commit, version, dev or production) - 3m'
         - 'Create an easier way to debug (debug mode with more information directly on screen) - 3m'
     - 'Major/crashes/bugs':
         - 'Make the sorting of the weekly planning not change the topic view order - 1M'
@@ -244,7 +244,7 @@
         - 'Topic text is not handled right and makes the buttons go crazy - 1m'
         - 'The UI does not look professional -1m'
         - 'Add browser tab icon - 1m'
-        - 'Add name of file to Tab Name -1m'
+        - 'Add name of file to Tab Name -2m'
         - 'The Dark Mode does not work correctly -1m'
         - 'After dragging, the selection is sometimes not shown, even though it is still selected -5m'
         - 'Hyperlinks die niet werken/in te korten zijn - 5m'
@@ -273,7 +273,7 @@
             - 'In the weekly view: hide completed tasks is always unchecked - 2m - gefixt'
             - ' Changing view automatically doesn't remember Hide completed Tasks setting - 1m'
             - ' Need easy way to show completed and repeated tasks (to uncomplete them) - 3m'
-            - 'Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 14m'
+            - 'Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 15m'
     - 'Modifying information':
         - 'Not being able to duplicate-drag tasks to other topics without stopping midway/taking a long time/being annoyed: 3m'
         - 'Adding a task, while only showing repeated tasks, should add a repeated task: 3m'
@@ -337,7 +337,7 @@
             - 'It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 20m'
             - 'There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -20m'
             - 'There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -16m'
-            - 'Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 14m'
+            - 'Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 15m'
             - 'Cannot order/sort the tasks/topics on the topic view - 21m'
     - 'Import/export':
         - 'The week planning is missing from the MarkDown - 7m'
@@ -354,4 +354,5 @@
         - 'Deprecate the YAML format - 1m'
         - 'It doesn't check that your file is changed before closing the window - 1m'
         - 'It doesn't automatically show you that your file is changed and unsaved when you change something - 3m'
+        - 'Should show you when it the tasks were last saved/loaded/modified - 1m'
 'Uncategorized':
