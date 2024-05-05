@@ -1,0 +1,5 @@
+- Kan niet een task instance deleten zonder de taak te deleten -1m
+
+- Heb niet door welke duplicaten waar zijn - 1m+
+
+- Kan niet een taak deels voltooien - 1m
