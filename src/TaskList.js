@@ -122,6 +122,7 @@ const recursiveShowTopic = (topic, tasks,
                             toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
                             planned={task.thisWeek}
                             repeated={task.repeated}
+                            taskLastCompletion={task.lastFinished}
                             addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic.id, findTopicViewIdx(topic.id, task))}
                             deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
                             selected={selectedTasks.find((st) => (st.taskId == task.id && st.topicId == topic.id)) ? true : false}

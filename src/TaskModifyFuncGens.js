@@ -28,7 +28,10 @@ const getCompleteTask = (setTasks, tasks, id) => {
         const newTasks = [...tasks]
         const task_to_change = newTasks.find((task) => task.id === id);
         task_to_change.completed = !task_to_change.completed;
-        if (task_to_change.completed) { task_to_change.finishStatus = FinishedState.Completed }
+        if (task_to_change.completed) {
+            task_to_change.finishStatus = FinishedState.Completed
+            task_to_change.lastFinished = new Date().toISOString()
+        }
         else { task_to_change.finishStatus = FinishedState.NotFinished }
         setTasks(newTasks);
     }
@@ -40,6 +43,9 @@ const getSetTaskFinishStatus = (setTasks, tasks, id) => {
         const newTasks = [...tasks]
         const task_to_change = newTasks.find((task) => task.id === id);
         task_to_change.finishStatus = status;
+        if (status !== FinishedState.NotFinished) {
+            task_to_change.lastFinished = new Date().toISOString()
+        }
         setTasks(newTasks);
     }
     return setTaskFinishStatus;

@@ -10,7 +10,7 @@ const Task = (props) => {
         taskFinishStatus, setTaskFinishStatus,
         currentTopicName, currentTopicId, moveTasks, currentTopicViewIndex,
         planned, plan, unplan,
-        repeated, toggleRepeatTask,
+        repeated, toggleRepeatTask, taskLastCompletion,
         selectedTasks, addToSelection, deleteFromSelection, selected,
         duplicateTask, setTasks, tasks,
         fancy,
@@ -212,8 +212,12 @@ const Task = (props) => {
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
     const textEditHandlers = { onChange: handleChange, onBlur: handleBlur, onKeyDown: handleKeyDown, onClick: captureClick(() => { }) }
     const selectHandlers = selected ? { onClick: captureClick(deleteFromSelection) } : { onClick: captureClick(addToSelection) }
-
-
+    let fullName = name
+    if (repeated && taskFinishStatus !== FinishedState.NotFinished &&
+        taskLastCompletion
+    ) {
+        fullName += " / " + taskLastCompletion
+    }
     const duplicateDragHandlers = isDraggingAllowed ? {
         draggable: true,
         onDragStart: handleDuplicateDragStart,
@@ -225,7 +229,7 @@ const Task = (props) => {
         selectHandlers={selectHandlers}
         dragHandlers={dragHandlers}
         dropHandlers={dropHandlers}
-        name={name}
+        name={fullName}
         textEditHandlers={textEditHandlers}
         inputRef={inputRef}
         isEditing={isEditing}
@@ -242,7 +246,6 @@ const Task = (props) => {
         repeated={repeated}
         toggleRepeatTask={toggleRepeatTask}
         duplicateDragHandlers={duplicateDragHandlers}
-        // textBarWidth="425px"
         fancy={fancy}
     />);
 }
