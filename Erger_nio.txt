@@ -2,3 +2,25 @@
 - Cannot go to topic/planned task instance from the other one - 1m
 
 Maybe: permanent link to a certain task (but that's also silly if there is no server side routing)
+
+- Does not show exactly what the last time of saving/loading/modification was. (Can be a table with: Last saved: ... , Last modified: ..., Last loaded ... -1m
+
+- The topic text width will mess up the whole layout if the text is too long - 1m
+
+- I'm really missing internal dependencies/positively correlated functions - 1m
+ (This really reduces load on how many tasks I should look into)
+
+
+- Reduce cognitive load - 2M
+-- Do not show any tasks that are finished
+-- Do not show any repeated tasks that should not be redone in a while
+-- Do not show any tasks that are blocked (by another task)
+-- Do not show any tasks that would be easier (by doing another task)
+-- Do not show any task that is currently waiting (by a meeting/other person/event/appointment)
+-- Do not show any task that is currently "Testing for completion"
+-- Show tasks that are important
+
+
+- Does not unselect items after dragging in Topic View/does not show the selection after dragging in Topic View - 1m
+
+- Accidentally made a duplicate task - 1m
