@@ -1,0 +1,4 @@
+- Cannot spawn a task from an existing task (in planned list) - 1m
+- Cannot go to topic/planned task instance from the other one - 1m
+
+Maybe: permanent link to a certain task (but that's also silly if there is no server side routing)
