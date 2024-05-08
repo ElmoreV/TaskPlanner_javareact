@@ -1,9 +1,0 @@
-- Kan niet een task instance deleten zonder de taak te deleten -1m
-
-- Heb niet door welke duplicaten waar zijn - 1m+
-
-- Kan niet een taak deels voltooien - 1m
-
-- Kan geen task spawnen van een andere taak - 3m+
-
-- Lag met typen en andere dingen wanneer alles uitgeklapt is - 3m
