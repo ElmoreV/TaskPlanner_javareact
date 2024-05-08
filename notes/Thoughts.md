@@ -620,3 +620,41 @@ Depending on how you phrase the task, the criteria of having it done is differen
 
 
 
+## How to reduce cognitive load while planning OR how to only see the most important tasks.
+
+1. We need to see only the most important things. When we are not busy with something, we should be able to plan/schedule it but not worry about the details yet. Especially when it's blocked by another task.
+2. Of course, it's good to have an overview of everything that would be good to have. You need to have some way to relax, but the exact implementation would be free.
+
+
+## Timing, what would the lowest set of instructions be to get the most amount of reliability?
+
+Assumptions: the units of time that people care about are
+- Day
+- Month (is not always 30 days)
+- Week
+- Year
+- Day of week (business days vs weekends)
+
+People do not care about
+- Hour, minute, second
+
+I want to have a system that can handle all of the schedules.
+Each scheduling event is a set of days given some offset. 
+
+It might be:
+
+- Every x days (tasks that do not remove everything that is generated)
+- x days after last completion (maintenance tasks that remove everything that is generated)
+- Every x days, which doubles?
+- Completely custom schedule (with memorization tasks)
+
+But yeah, it's not just a set of dates. It's a set of dates with some conditions.
+
+It needs to be able to do lot's of different schedules based on all different combinations.
+But also needs to be consistent?
+
+In this case, there is also a difference between automatic task execution and manual (fallible) task execution.
+
+Maybe just start with the easy ones:
+- Every x days
+- x days after last completion
