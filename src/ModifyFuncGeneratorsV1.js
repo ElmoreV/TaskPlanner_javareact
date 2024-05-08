@@ -14,6 +14,7 @@ import {
     insertTaskInstanceIntoTopic,
     removeTaskInstanceFromTopic
 } from './ModifyTaskTopicAdgElements';
+import { getPlanTaskForWeek } from './TaskModifyFuncGens';
 
 const getMoveTasks = (topics, tasks, setTasks) => {
     // taskIds here is the id of the task
@@ -500,6 +501,38 @@ const getDeleteTopic = (setTopics, topics, setTasks, tasks, topicId) => {
     return deleteTopic;
 }
 
+const getSpawnNewTask = (setTasks, tasks, sourceTask) => {
+    const spawnNewTask = () => {
+        // From the source task
+        // Spawn a new task in the same topics
+        // Just below the old source task in Topic View
+        // And below the old source task in the Planned View
+        let newTasks = [...tasks]
+        let spawnedTask = generateEmptyTask(tasks)
+        spawnedTask.name = sourceTask.name + ' spawn'
+        newTasks = addOrphanTasktoTaskList(newTasks, spawnedTask)
+        sourceTask.topics.forEach((val, idx) => {
+            insertTaskInstanceIntoTopic(newTasks, spawnedTask.id, sourceTask.topics[idx], sourceTask.topics[idx])
+        })
+
+        newTasks = newTasks.map((task) => {
+            if (task.thisWeek) { task.weekOrderIndex += 1 };
+            return task
+        })
+        spawnedTask.thisWeek = true;
+        spawnedTask.weekOrderIndex = 1;
+        // console.log(newTasks.map((task) => {
+        //     if (task.thisWeek) { return [task.name, task.weekOrderIndex] }
+        // }))
+        setTasks(newTasks);
+
+
+        // setTasks(newTasks)
+    }
+    return spawnNewTask
+}
+
+
 export default getAddTask;
 export { getDeleteTask };
 export { getDeleteTopic };
@@ -513,6 +546,7 @@ export { sanitizeWeekOrderIndex }
 export { sanitizeWeekOrderIndex2 }
 export { sanitizeTopicOrderIndex }
 export { getMoveTasks }
+export { getSpawnNewTask }
 
 
 /// What I would need is basically

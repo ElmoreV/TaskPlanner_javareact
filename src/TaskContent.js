@@ -31,6 +31,7 @@ const TaskContent = (props) => {
         planned, plan, unplan,
         repeated, toggleRepeatTask,
         scheduled, scheduleTask,
+        spawnNewTask,
         fancy,
     } = props;
     console.debug(`Rendering TaskContent ${name}`)
@@ -84,6 +85,7 @@ const TaskContent = (props) => {
                     {toggleRepeatTask && !repeated && (<button className={styles.makeRepeated} onClick={captureClick(toggleRepeatTask)}> <s>Repeat</s> </button>)}
                     {taskFinishStatus == FinishedState.NotFinished && scheduled && scheduleTask && (<button className={styles.taskSchedule} onClick={captureClick(scheduleTask)}>Scheduled!</button>)}
                     {taskFinishStatus == FinishedState.NotFinished && !scheduled && scheduleTask && (<button className={styles.taskSchedule} onClick={captureClick(scheduleTask)}>Unscheduled</button>)}
+                    {spawnNewTask && (<button className={styles.taskSpawn} onClick={captureClick(spawnNewTask)}>Spawn</button>)}
                 </div>
             </div>
 

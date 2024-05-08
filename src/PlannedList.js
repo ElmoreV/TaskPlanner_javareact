@@ -3,6 +3,7 @@ import PlannedTask from './PlannedTask';
 import {
     getChangeWeekOrderIndex,
     sanitizeWeekOrderIndex,
+    getSpawnNewTask,
 } from './ModifyFuncGeneratorsV1';
 import {
     getCompleteTask,
@@ -144,6 +145,7 @@ const PlannedList = (props) => {
                                     topics={topics}
                                     taskTopics={task.topics}
                                     fancy={fancy}
+                                    spawnNewTask={getSpawnNewTask(setTasks, tasks, task)}
 
                                 />
                                 }

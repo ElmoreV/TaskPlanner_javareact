@@ -12,6 +12,7 @@ const PlannedTask = (props) => {
         selectedTasks, addToSelection, deleteFromSelection, selected, clearSelection,
         changeWeekOrderIndex, currentWeekOrderIndex,
         fancy,
+        spawnNewTask,
     } = props;
 
     console.debug("Rendering PlannedTask")
@@ -19,6 +20,7 @@ const PlannedTask = (props) => {
     const [color, setColor] = useState('green');
     const [isDragging, setIsDragging] = useState(false);
     const [isDraggingAllowed, setIsDraggingAllowed] = useState(true);
+
 
     // let repeated = true
     const markTaskIrrelevant = () => {
@@ -188,6 +190,7 @@ const PlannedTask = (props) => {
             scheduleTask={scheduleTask}
             textBarWidth="570px"
             fancy={fancy}
+            spawnNewTask={spawnNewTask}
         />
 
     </>)
