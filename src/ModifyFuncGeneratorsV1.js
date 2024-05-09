@@ -464,7 +464,6 @@ const findAllSubtopicIds = (topics, topicId) => {
 // For v1 data
 const getDeleteTopic = (setTopics, topics, setTasks, tasks, topicId) => {
     const deleteTopic = () => {
-        console.debut(`Deleting topic ${topicId}`)
         let newTopics = [...topics]
         // 1. Find all topic ids that will be removed
         // 2. Remove topic id and its subtopics from topics
