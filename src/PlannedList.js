@@ -118,11 +118,11 @@ const PlannedList = (props) => {
             </button>
 
             <ul key='root_topics'>
-                {tasks.sort((taskA, taskB) => taskA.weekOrderIndex > taskB.weekOrderIndex).map(
-                    (task) => {
+                {tasks.sort((taskA, taskB) => taskA.weekOrderIndex > taskB.weekOrderIndex)
+                    .filter((task) => (isVisible(task))).map((task) => {
                         return (
-                            <li>
-                                {isVisible(task) && <PlannedTask
+                            <li key={"planned_" + (task.id)}>
+                                <PlannedTask
                                     taskName={task.name}
                                     taskKey={task.id}
                                     setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
@@ -148,11 +148,11 @@ const PlannedList = (props) => {
                                     spawnNewTask={getSpawnNewTask(setTasks, tasks, task)}
 
                                 />
-                                }
+
                             </li>
                         )
                     }
-                )}
+                    )}
             </ul>
         </div>
     );
