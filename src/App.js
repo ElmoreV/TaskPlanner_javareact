@@ -75,8 +75,11 @@ function App() {
 
   return (
     <Theme darkMode={darkMode}>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+
       <div className="App">
         <div className="contents">
+
           <ImportExport
             tasks={tasks}
             topics={topics}
@@ -100,13 +103,13 @@ function App() {
           />}
           {view === VIEW_DAILY_PLANNING}
           <div classStr="settingsUI">
-            <label><input
+            {/* <label><input
               type="checkbox"
               name='MakeFancy'
               onChange={onMakeFancyChange}
               className="form-check-input"
               defaultChecked={fancy}
-            />Fancy layout</label><br />
+            />Fancy layout</label><br /> */}
             <label><input
               type="checkbox"
               name='DarkMode'
@@ -117,6 +120,8 @@ function App() {
           </div>
         </div>
       </div>
+      <a href="https://github.com/ElmoreV" target="_blank"><button> <i className="fa fa-github"></i> GitHub: ElmoreV</button></a>
+
     </Theme>
   );
 }
