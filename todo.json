@@ -181,17 +181,17 @@
     {
       "name": "Constraints",
       "id": 2,
-      "unfolded": false,
+      "unfolded": true,
       "subtopics": [
         {
           "name": "UX/UI",
           "id": 15,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Release 1 (feature freeze)",
               "id": 55,
-              "unfolded": false,
+              "unfolded": true,
               "subtopics": []
             }
           ]
@@ -199,7 +199,7 @@
         {
           "name": "Maintainability",
           "id": 16,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Error handling",
@@ -257,7 +257,7 @@
     {
       "name": "Annoyances",
       "id": 43,
-      "unfolded": true,
+      "unfolded": false,
       "subtopics": [
         {
           "name": "Development",
@@ -2068,7 +2068,7 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         47,
-        6
+        7
       ]
     },
     {
@@ -2114,7 +2114,7 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         15,
-        4
+        5
       ]
     },
     {
@@ -3704,7 +3704,7 @@
       "thisWeek": true,
       "topicViewIndices": [
         18,
-        5
+        6
       ]
     },
     {
@@ -4078,7 +4078,7 @@
         54
       ],
       "topicViewIndices": [
-        7
+        4
       ],
       "completed": false,
       "finishStatus": 0,
@@ -4272,12 +4272,13 @@
       "topicViewIndices": [
         3
       ],
-      "completed": false,
-      "finishStatus": 0,
+      "completed": true,
+      "finishStatus": 1,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "lastFinished": "2024-05-09T14:03:31.748Z"
     },
     {
       "name": "Add Github links",
@@ -4288,12 +4289,13 @@
       "topicViewIndices": [
         2
       ],
-      "completed": false,
-      "finishStatus": 0,
+      "completed": true,
+      "finishStatus": 1,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "lastFinished": "2024-05-09T14:02:29.280Z"
     },
     {
       "name": "Archive minimal layout",
@@ -4304,12 +4306,13 @@
       "topicViewIndices": [
         4
       ],
-      "completed": false,
-      "finishStatus": 0,
+      "completed": true,
+      "finishStatus": 1,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "lastFinished": "2024-05-09T14:04:00.316Z"
     },
     {
       "name": "Fix/remove dark mode",
@@ -4336,12 +4339,13 @@
       "topicViewIndices": [
         1
       ],
-      "completed": false,
-      "finishStatus": 0,
+      "completed": true,
+      "finishStatus": 1,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "lastFinished": "2024-05-09T13:51:46.718Z"
     },
     {
       "name": "Add icons instead of buttons (with alt text and labels)",
