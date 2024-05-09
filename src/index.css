@@ -37,6 +37,9 @@ body {
   --color-background: #1f2023;
   --color-primary: #efefef;
   --color-secondary: #3b3f46;
+  --color-secondary-hover: #555555;
+  --color-secondary-active: #777777;
+
   --color-topic: rgb(90, 66, 36);
   --color-task-unfinished1: rgb(124, 149, 63);
   --color-task-unfinished2: rgb(55, 113, 113);
@@ -62,6 +65,9 @@ body {
   --color-background: #fafafa;
   --color-primary: #000000;
   --color-secondary: #efefef;
+  --color-secondary-hover: #dddddd;
+  --color-secondary-active: #bbbbbb;
+
   --color-topic: antiquewhite;
   --color-task-unfinished1: rgb(168, 249, 168);
   --color-task-unfinished2: rgb(131, 255, 255);
@@ -109,16 +115,32 @@ body {
   grid-row: 3/5;
 }
 
-button,
 input {
-  background-color: var(--color-secondary);
-  /* Green */
-  color: var(--color-primary);
-  /* padding: 15px 32px; */
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
   font: inherit;
+}
+
+button {
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
+  border: solid 1px grey;
+  border-radius: 5px;
+  padding: 2px 5px;
+  /* border: none; */
+  /* padding: 15px 32px; */
+  /* text-align: center; */
+  /* text-decoration: none; */
+  /* display: inline-block; */
+  font: inherit;
+}
+
+button:hover {
+  background-color: var(--color-secondary-hover);
+  /* border: 5px; */
+}
+
+button:active {
+  background-color: var(--color-secondary-active);
+  /* border: 5px; */
 }
 
 ul {
