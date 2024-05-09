@@ -489,10 +489,12 @@ const ImportExport = (props) => {
         const jsonBlob = new Blob([jsonContent], { type: "application/json" });
         const MarkdownContent = buildMarkdownRecursive(topics, tasks, 0)
         const markdownBlob = new Blob([MarkdownContent], { type: "text/markdown" });
-        const YAMLcontent = buildYAML_r(topics, tasks, 0)
-        const yamlBlob = new Blob([YAMLcontent], { type: "text/yaml" });
-        const blobs = [jsonBlob, markdownBlob, yamlBlob]
-        const extensions = ['.json', '.md', '.yaml']
+        // const YAMLcontent = buildYAML_r(topics, tasks, 0)
+        // const yamlBlob = new Blob([YAMLcontent], { type: "text/yaml" });
+        // const blobs = [jsonBlob, markdownBlob, yamlBlob]
+        // const extensions = ['.json', '.md', '.yaml']
+        const blobs = [jsonBlob, markdownBlob]
+        const extensions = ['.json', '.md']
         var a = document.createElement("a");
         a.setAttribute("download", null)
         a.style.display = 'none';
@@ -525,13 +527,13 @@ const ImportExport = (props) => {
 
 
     return (
-        <div>
+        <div className="importExport">
             <button onClick={exportjson}>Save as JSON</button>{savedTaskHash ? (
                 mutatedSinceSave ? "Unsaved changes" : "Unchanged") : "Not saved yet"}
 
-            <button onClick={exportYAML}>Export as YAML</button>
+            {/* <button onClick={exportYAML}>Export as YAML</button> */}
             <button onClick={exportMarkdown}> Export as Markdown</button>
-            <button onClick={exportAll}> Export All [JSON+YAML+Markdown]</button>
+            <button onClick={exportAll}> Export All [JSON+Markdown]</button>
             <button onClick={() => calculateHash(tasks, topics)}> Calc Hash </button>
             <input type="file"
                 ref={fileInputRef}
