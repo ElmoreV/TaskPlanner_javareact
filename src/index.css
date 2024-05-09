@@ -3,54 +3,63 @@
 
 * {
   font-family: 'Roboto', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  /* border:solid 2px; */
+  /* border: solid 2px; */
+  /* padding: 0px; */
+  /* margin: 0px; */
 }
 
-/*  ViewSelector + View*/
-.contents {
-  display: grid;
-  max-width: 1600px;
-  grid-template-columns: repeat(12, 1fr);
-  grid-auto-rows: minmax(30px, auto);
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
+
+
+html {
+  height: 100%;
 }
-html{
-  height:100%;
-}
+
 
 #root,
-body{
-  margin:0px;
+body {
   min-height: 100%;
-  height:100%;
+  height: 100%;
 }
-.dark{
-  background-color: rgb(10,20,20);
+
+.dark {
+  background-color: rgb(10, 20, 20);
   color: white;
+  padding: 0px;
   width: 100%;
   height: 100%;
 }
-.light{
+
+.light {
   background-color: rgb(255, 255, 255);
   color: black;
   width: 100%;
   height: 100%;
 }
 
+/*  ViewSelector + View*/
+.contents {
+  display: grid;
+  max-width: 1600px;
+  /* padding-left: 0px; */
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(20px, auto);
+  grid-column-gap: 10px;
+  grid-row-gap: 30px;
+}
+
 .task-list {
   max-width: 1000px;
   padding: 10px;
   grid-column: 1 / 13;
-  grid-row: 2/4;
+  grid-row: 3/5;
 }
 
 
 .planned-list {
   max-width: 1000px;
   padding: 10px;
-  grid-column: 2 / 13;
-  grid-row: 2/4;
+  grid-column: 1 / 13;
+  grid-row: 3/5;
 }
 
 ul {
@@ -61,7 +70,7 @@ ul {
 
 .view-select {
   grid-column: 1/8;
-  grid-row: 1/1;
+  grid-row: 2/2;
   color: gray;
 }
 
@@ -79,9 +88,13 @@ ul {
   box-shadow: 3px 5px 5px 0px;
 }
 
+.importExport {
+  grid-row: 1/1;
+  grid-column: 1/13;
+}
 
 
-/*Do not care about these*/
+
 .navbar {
   grid-row: 2/4;
   grid-column: 1/13;
