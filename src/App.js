@@ -6,15 +6,6 @@ import ImportExport from './ImportExport';
 import Theme from "./Theme";
 import { FinishedState } from './TaskInterfaces.tsx';
 
-class TopicViewIndex {
-  constructor(index, topicId, taskId) {
-    this.index = index
-    this.topicId = topicId
-    this.taskId = taskId
-  }
-}
-
-
 function App() {
   console.debug("Rendering App")
 
@@ -25,47 +16,50 @@ function App() {
   //v1
   const [topics, setTopics] = useState([
     {
-      name: "Onderhoud", id: 1, unfolded: false, subtopics: [
-        { name: "Vervangen", id: 11, unfolded: false, subtopics: [] },
-        { name: "Repareren", id: 12, unfolded: false, subtopics: [] },
+      name: "Maintenance", id: 1, unfolded: false, subtopics: [
+        { name: "Replace", id: 11, unfolded: false, subtopics: [] },
+        { name: "Repair", id: 12, unfolded: false, subtopics: [] },
+        { name: "Document", id: 13, unfolded: true, subtopics: [] }
 
       ]
     },
     {
-      name: "Ontspanning", id: 2, unfolded: false, subtopics: [
-        { name: "Gamen", id: 21, unfolded: false, subtopics: [] }
+      name: "Creativity", id: 2, unfolded: false, subtopics: [
+        { name: "Writing", id: 21, unfolded: false, subtopics: [] }
       ]
     }
 
   ]);
 
+  // const  [tasks, setTasks] = useState([])
+  // Should use generation functions here, to make it immediately issueless
+
+  // const [topics,setTopics] = useState([])
+  // createNewRootTopic(topics,...)
+  // should up generation functions here
+
   const [tasks, setTasks] = useState([
     {
-      name: "Fiets repareren", id: 0, topics: [12], topicViewIndices: [1], completed: true,
+      name: "Repair bicycle", id: 0, topics: [12], topicViewIndices: [1], completed: true,
       finishStatus: FinishedState.Completed,
       thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 1
     },
     {
-      name: "Outer Wilds", id: 1, topics: [21, 1], topicViewIndices: [1, 1], completed: false,
+      name: "Write Cover Letter", id: 1, topics: [21, 13], topicViewIndices: [1, 1], completed: false,
       finishStatus: FinishedState.NotFinished,
       thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 0
     },
     {
-      name: "Badkamer", id: 2, topics: [1], topicViewIndices: [3], completed: false,
+      name: "Check tax return", id: 2, topics: [1], topicViewIndices: [3], completed: false,
       finishStatus: FinishedState.NotFinished,
       thisWeek: true, repeated: false, scheduled: true, weekOrderIndex: 2
     },
     {
-      name: "Backup opruimen", id: 5, topics: [1], topicViewIndices: [2], completed: false,
+      name: "Create a NAS server", id: 5, topics: [1], topicViewIndices: [2], completed: false,
       finishStatus: FinishedState.NotFinished,
       thisWeek: false, repeated: true, scheduled: false, weekOrderIndex: 0
     },
   ])
-
-  // Order of Tasks would be inside of the tasks by orderId
-  // Order of Topic is just the order of the subtopics
-
-
 
   const [view, setView] = useState(VIEW_ALL_TASKS)
   const [fancy, setFancy] = useState(true)
