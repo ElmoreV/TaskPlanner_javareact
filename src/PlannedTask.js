@@ -17,7 +17,6 @@ const PlannedTask = (props) => {
 
     console.debug("Rendering PlannedTask")
     const [isEditing, setIsEditing] = useState(false);
-    const [color, setColor] = useState('green');
     const [isDragging, setIsDragging] = useState(false);
     const [isDraggingAllowed, setIsDraggingAllowed] = useState(true);
 
@@ -56,18 +55,15 @@ const PlannedTask = (props) => {
         setIsDragging(true)
         e.dataTransfer.setData('taskId', taskKey)
         e.dataTransfer.setData('sourceWeekOrderIndex', currentWeekOrderIndex)
-        setColor('blue')
     }
     const handleDragEnd = () => {
         setIsDragging(false)
-        setColor('green')
     }
 
     const handleDrop = (e) => {
         e.preventDefault()
         e.target.setAttribute('draggedOver', false)
         console.info('drop')
-        setColor('maroon')
         var sourceTaskIds = []
         var sourceWeekOrderIndidces = []
 
@@ -94,12 +90,10 @@ const PlannedTask = (props) => {
         e.preventDefault();
         // this is not perfect, because I always want the <div class='task'> to be the target..
         e.target.setAttribute('draggedOver', true);
-        setColor('red');
     }
     const handleDragLeave = (e) => {
         e.preventDefault();
         e.target.setAttribute('draggedOver', false);
-        setColor('gray');
     }
 
     const moveToWeek = () => {
@@ -178,7 +172,6 @@ const PlannedTask = (props) => {
             isEditing={isEditing}
             toggleEdit={toggleEdit}
             topicPath={topicPath}
-            color={color}
             deleteTask={deleteTask}
             markTaskIrrelevant={markTaskIrrelevant}
             markTaskImpossible={markTaskImpossible}

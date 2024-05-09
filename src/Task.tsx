@@ -19,7 +19,6 @@ const Task = (props) => {
     if (taskFinishStatus === undefined) { }
 
     const [isEditing, setIsEditing] = useState(false);
-    const [color, setColor] = useState('green');
     const [isDragging, setIsDragging] = useState(false);
     const [isDraggingAllowed, setIsDraggingAllowed] = useState(true);
     let isDuplicateDragging = false;
@@ -53,14 +52,12 @@ const Task = (props) => {
         e.dataTransfer.setData('TopicName', currentTopicName)
         e.dataTransfer.setData('TopicId', currentTopicId)
         console.info('Dragging task')
-        setColor('blue')
     }
     const handleDragEnd = () => {
         //TODO: how is this event still called when dropping duplicate?
         if (isDuplicateDragging) { return; }
         console.info("Stop dragging task")
         setIsDragging(false)
-        setColor('green')
     }
 
     const handleDuplicateDragStart = (e) => {
@@ -70,20 +67,17 @@ const Task = (props) => {
         e.dataTransfer.setData("Type", "TaskDuplicate")
         e.dataTransfer.setData('TaskId', id)
         console.info('Duplicate dragging task')
-        setColor('pink')
     }
     const handleDuplicateDragEnd = () => {
         isDuplicateDragging = false;
         console.info("Stop duplicate dragging task")
         setIsDragging(false)
-        setColor('violet')
     }
 
     const handleDrop = (e) => {
         e.preventDefault()
         e.target.setAttribute('draggedOver', false)
         console.info('drop')
-        setColor('maroon')
         var type = e.dataTransfer.getData("Type")
         if (type == "Task") {
             var task_id = Number(e.dataTransfer.getData("TaskId"))
@@ -126,12 +120,10 @@ const Task = (props) => {
         e.preventDefault();
         // this is not perfect, because I always want the <div class='task'> to be the target..
         e.target.setAttribute('draggedOver', true);
-        setColor('red');
     }
     const handleDragLeave = (e) => {
         e.preventDefault();
         e.target.setAttribute('draggedOver', false);
-        setColor('gray');
     }
 
     const moveToWeek = () => {
@@ -234,7 +226,6 @@ const Task = (props) => {
         inputRef={inputRef}
         isEditing={isEditing}
         toggleEdit={toggleEdit}
-        color={color}
         deleteTask={unselect(deleteTask)}
         completeTask={completeTask}
         markTaskIrrelevant={markTaskIrrelevant}

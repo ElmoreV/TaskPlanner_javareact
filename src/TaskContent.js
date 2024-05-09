@@ -22,7 +22,6 @@ const TaskContent = (props) => {
         dragHandlers, dropHandlers, duplicateDragHandlers,
         name, textEditHandlers, inputRef, isEditing, toggleEdit,
         topicPath, textBarWidth,
-        color,
         deleteTask,
         completeTask,
         markTaskIrrelevant,
@@ -63,7 +62,7 @@ const TaskContent = (props) => {
                                 {...textEditHandlers}
                                 ref={inputRef}
                             /> :
-                            <span style={{ color: color }}>{name}</span>
+                            <span>{name}</span>
 
                         }
                     </span>
