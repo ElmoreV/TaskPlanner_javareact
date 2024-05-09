@@ -41,10 +41,10 @@ span.buttonDuplicate:hover {
     padding-left: 20px;
     margin: 1px 0;
     background: linear-gradient(to right,
-            rgb(168, 249, 168) 0%,
-            rgb(168, 249, 168) 60%,
-            rgb(131, 255, 255) 70%,
-            rgb(131, 255, 255) 100%);
+            var(--color-task-unfinished1) 0%,
+            var(--color-task-unfinished1) 60%,
+            var(--color-task-unfinished2) 70%,
+            var(--color-task-unfinished2) 100%);
     border-radius: 3px 3px 3px 20px;
 
 }
@@ -90,10 +90,9 @@ span.buttonDuplicate:hover {
     padding-left: 20px;
     margin: 1px 0;
     background: linear-gradient(to right,
-            rgb(105, 205, 255) 0%,
-            rgb(155, 243, 255) 60%,
-            rgb(151, 234, 255) 70%,
-            rgb(0, 166, 255) 100%);
+            var(--color-task-planned1) 0%,
+            var(--color-task-planned2) 60%,
+            var(--color-task-planned2) 100%);
     border-radius: 3px 3px 3px 20px;
 
 }
@@ -104,10 +103,10 @@ span.buttonDuplicate:hover {
     padding-left: 20px;
     margin: 1px 0;
     background: linear-gradient(to right,
-            rgb(168, 255, 50) 0%,
-            rgb(168, 255, 50) 60%,
-            rgb(131, 255, 100) 70%,
-            rgb(131, 255, 100) 100%);
+            var(--color-task-completed1) 0%,
+            var(--color-task-completed1) 60%,
+            var(--color-task-completed2) 70%,
+            var(--color-task-completed2) 100%);
     border-radius: 3px 3px 3px 20px;
 
 }
@@ -118,10 +117,10 @@ span.buttonDuplicate:hover {
     padding-left: 20px;
     margin: 1px 0;
     background: linear-gradient(to right,
-            rgb(243, 135, 223) 0%,
-            rgb(209, 130, 248) 60%,
-            rgb(165, 107, 253) 70%,
-            rgb(113, 100, 255) 100%);
+            var(--color-task-repeated1) 0%,
+            var(--color-task-repeated1) 60%,
+            var(--color-task-repeated2) 70%,
+            var(--color-task-repeated2) 100%);
     border-radius: 3px 3px 3px 20px;
 
 }
@@ -132,10 +131,10 @@ span.buttonDuplicate:hover {
     padding-left: 20px;
     margin: 1px 0;
     background: linear-gradient(to right,
-            rgb(224, 224, 224) 0%,
-            rgb(224, 224, 224) 60%,
-            rgb(201, 201, 201) 70%,
-            rgb(222, 222, 222) 100%);
+            var(--color-task-irrelevant1) 0%,
+            var(--color-task-irrelevant1) 60%,
+            var(--color-task-irrelevant2) 70%,
+            var(--color-task-irrelevant2) 100%);
     border-radius: 3px 3px 3px 20px;
 
 }
@@ -146,10 +145,10 @@ span.buttonDuplicate:hover {
     padding-left: 20px;
     margin: 1px 0;
     background: linear-gradient(to right,
-            rgb(252, 137, 137) 0%,
-            rgb(255, 210, 210) 60%,
-            rgb(255, 223, 223) 70%,
-            rgb(158, 158, 158) 100%);
+            var(--color-task-impossible1) 0%,
+            var(--color-task-impossible1) 60%,
+            var(--color-task-impossible2) 70%,
+            var(--color-task-impossible2) 100%);
     border-radius: 3px 3px 3px 20px;
 
 }

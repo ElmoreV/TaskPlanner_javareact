@@ -36,7 +36,21 @@ body {
 .dark {
   --color-background: #1f2023;
   --color-primary: #efefef;
-  --color-topic: rgb(195, 160, 114);
+  --color-secondary: #3b3f46;
+  --color-topic: rgb(90, 66, 36);
+  --color-task-unfinished1: rgb(124, 149, 63);
+  --color-task-unfinished2: rgb(55, 113, 113);
+  --color-task-completed1: rgb(26, 130, 0);
+  --color-task-completed2: rgb(2, 95, 11);
+  --color-task-planned1: rgb(7, 118, 178);
+  --color-task-planned2: rgb(24, 118, 134);
+  --color-task-repeated1: rgb(99, 0, 144);
+  --color-task-repeated2: rgb(31, 0, 117);
+  --color-task-impossible1: rgb(119, 19, 19);
+  --color-task-impossible2: rgb(77, 43, 43);
+  --color-task-irrelevant1: rgb(48, 48, 48);
+  --color-task-irrelevant2: rgb(39, 39, 39);
+
   background-color: var(--color-background);
   color: var(--color-primary);
   padding: 0px;
@@ -47,7 +61,20 @@ body {
 .light {
   --color-background: #fafafa;
   --color-primary: #000000;
+  --color-secondary: #efefef;
   --color-topic: antiquewhite;
+  --color-task-unfinished1: rgb(168, 249, 168);
+  --color-task-unfinished2: rgb(131, 255, 255);
+  --color-task-completed1: rgb(168, 255, 50);
+  --color-task-completed2: rgb(131, 255, 100);
+  --color-task-planned1: rgb(0, 166, 255);
+  --color-task-planned2: rgb(155, 243, 255);
+  --color-task-repeated1: rgb(209, 130, 248);
+  --color-task-repeated2: rgb(145, 107, 253);
+  --color-task-impossible1: rgb(252, 137, 137);
+  --color-task-impossible2: rgb(230, 190, 190);
+  --color-task-irrelevant2: rgb(234, 234, 234);
+  --color-task-irrelevant1: rgb(211, 211, 211);
 
   background-color: var(--color-background);
   color: var(--color-primary);
@@ -80,6 +107,18 @@ body {
   padding: 10px;
   grid-column: 1 / 13;
   grid-row: 3/5;
+}
+
+button,
+input {
+  background-color: var(--color-secondary);
+  /* Green */
+  color: var(--color-primary);
+  /* padding: 15px 32px; */
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font: inherit;
 }
 
 ul {
