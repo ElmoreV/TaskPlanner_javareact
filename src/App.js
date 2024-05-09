@@ -119,7 +119,7 @@ function App() {
             />Dark Mode</label>
           </div>
         </div>
-        <a href="https://github.com/ElmoreV" target="_blank"><button> <i className="fa fa-github"></i> GitHub: ElmoreV</button></a>
+        <a href="https://github.com/ElmoreV/TaskPlanner_javareact" target="_blank"><button> <i className="fa fa-github"></i> GitHub: ElmoreV</button></a>
       </div>
     </Theme>
   );
