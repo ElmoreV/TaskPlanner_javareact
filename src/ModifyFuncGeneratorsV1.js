@@ -512,7 +512,7 @@ const getSpawnNewTask = (setTasks, tasks, sourceTask) => {
         spawnedTask.name = sourceTask.name + ' spawn'
         newTasks = addOrphanTasktoTaskList(newTasks, spawnedTask)
         sourceTask.topics.forEach((val, idx) => {
-            insertTaskInstanceIntoTopic(newTasks, spawnedTask.id, sourceTask.topics[idx], sourceTask.topics[idx])
+            insertTaskInstanceIntoTopic(newTasks, spawnedTask.id, sourceTask.topics[idx], sourceTask.topicViewIndices[idx])
         })
 
         newTasks = newTasks.map((task) => {
