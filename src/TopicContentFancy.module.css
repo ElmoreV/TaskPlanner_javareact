@@ -3,7 +3,7 @@
     padding: 10px;
     padding-left: 20px;
     margin: 1px;
-    background-color: antiquewhite;
+    background-color: var(--color-topic);
     /* background:  */
     border-radius: 3px 3px 3px 20px;
 }

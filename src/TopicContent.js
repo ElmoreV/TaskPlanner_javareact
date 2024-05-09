@@ -12,7 +12,6 @@ const TopicContent = (props) => {
         foldingSymbol,
         isEditing,
         inputRef,
-        color,
         toggleEdit,
         handleAddTaskClick, handleAddTopicClick, handleDeleteClick,
         fancy
@@ -20,7 +19,6 @@ const TopicContent = (props) => {
     console.debug(`Rendering TopicContent ${name}`)
 
     let styles = fancy ? fancyStyles : simpleStyles;
-
 
     return (<div
         className={styles.topic}
@@ -36,7 +34,7 @@ const TopicContent = (props) => {
 
                 ref={inputRef}
             />) :
-            (<span style={{ color: color }} onDoubleClick={toggleEdit}>{name}</span>)
+            (<span onDoubleClick={toggleEdit}>{name}</span>)
         }
         <button className={styles.topicAddTask}
             onClick={handleAddTaskClick}>Add task</button>

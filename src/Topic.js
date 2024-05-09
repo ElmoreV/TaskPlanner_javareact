@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TopicContent from './TopicContent';
 const Topic = (props) => {
     const { name, updateTaskTopics, setTopicName, id,
-        toggleFold, unfolded, foldAll,unfoldAll,
+        toggleFold, unfolded, foldAll, unfoldAll,
         addTask, addSubTopic, deleteTopic, moveTasks,
         selectedTasks,
         moveTopic, duplicateTask,
@@ -14,7 +14,6 @@ const Topic = (props) => {
     const unfolded_symbol = 'v';
 
     const [isEditing, setIsEditing] = useState(false);
-    const [color, setColor] = useState('purple');
 
     const [isDragging, setIsDragging] = useState(false);
     const [isDraggingAllowed, setIsDraggingAllowed] = useState(true);
@@ -33,11 +32,9 @@ const Topic = (props) => {
         e.dataTransfer.setData("id", id)
         // e.dataTransfer.setData('Text', taskKey)
         // e.dataTransfer.setData('TopicName', currentTopic) //also name
-        setColor('blue')
     }
     const handleDragEnd = () => {
         setIsDragging(false)
-        setColor('green')
     }
 
     const handleChange = (e) => {
@@ -54,7 +51,6 @@ const Topic = (props) => {
         e.preventDefault()
         e.target.setAttribute('draggedOver', false)
         console.info('Drop on Topic')
-        setColor('maroon')
         console.debug(e.target)
         var type = e.dataTransfer.getData("Type")
         console.info(type)
@@ -112,12 +108,10 @@ const Topic = (props) => {
 
         // this is not perfect, because I always want the <div class='task'> to be the target..
         e.target.setAttribute('draggedOver', true);
-        setColor('red');
     }
     const handleDragLeave = (e) => {
         e.preventDefault();
         e.target.setAttribute('draggedOver', false);
-        setColor('gray');
     }
 
 
@@ -149,12 +143,12 @@ const Topic = (props) => {
 
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
 
-    const handleFoldDoubleClick = (event)=>{
+    const handleFoldDoubleClick = (event) => {
         event.stopPropagation();
         console.log("Inside handle fold double click")
-        if (unfolded){
+        if (unfolded) {
             foldAll(id)
-        }else{
+        } else {
             unfoldAll(id)
         }
 
@@ -197,41 +191,13 @@ const Topic = (props) => {
         foldingSymbol={unfolded ? unfolded_symbol : folded_symbol}
         isEditing={isEditing}
         inputRef={inputRef}
-        color={color}
         toggleEdit={toggleEdit}
         handleAddTaskClick={handleAddTaskClick}
         handleAddTopicClick={handleAddTopicClick}
         handleDeleteClick={handleDeleteClick}
-        handleFoldDoubleClick = {handleFoldDoubleClick}
+        handleFoldDoubleClick={handleFoldDoubleClick}
         fancy={fancy}
     /></>)
-
-
-    return (<div
-        className='topic'
-        onClick={handleToggleFold}
-        {...dragHandlers}
-        {...dropHandlers}
-    >
-        {unfolded ? unfolded_symbol : folded_symbol}
-        {isEditing ?
-            (<input type='text'
-                value={name}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                onKeyDown={handleKeyDown}
-                ref={inputRef}
-            />) :
-            (<span style={{ color: color }} onDoubleClick={toggleEdit}>{name}</span>)
-        }
-        <button className='topicAddTask'
-            onClick={handleAddTaskClick}>Add task</button>
-        <button className='topicAddTopic'
-            onClick={handleAddTopicClick}>Add topic</button>
-        <button className='topicDelete'
-            onClick={handleDeleteClick}>Delete</button>
-
-    </div>);
 }
 
 Topic.propTypes = {

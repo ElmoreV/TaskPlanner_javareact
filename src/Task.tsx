@@ -10,7 +10,7 @@ const Task = (props) => {
         taskFinishStatus, setTaskFinishStatus,
         currentTopicName, currentTopicId, moveTasks, currentTopicViewIndex,
         planned, plan, unplan,
-        repeated, toggleRepeatTask,
+        repeated, toggleRepeatTask, taskLastCompletion,
         selectedTasks, addToSelection, deleteFromSelection, selected,
         duplicateTask, setTasks, tasks,
         fancy,
@@ -19,7 +19,6 @@ const Task = (props) => {
     if (taskFinishStatus === undefined) { }
 
     const [isEditing, setIsEditing] = useState(false);
-    const [color, setColor] = useState('green');
     const [isDragging, setIsDragging] = useState(false);
     const [isDraggingAllowed, setIsDraggingAllowed] = useState(true);
     let isDuplicateDragging = false;
@@ -53,14 +52,12 @@ const Task = (props) => {
         e.dataTransfer.setData('TopicName', currentTopicName)
         e.dataTransfer.setData('TopicId', currentTopicId)
         console.info('Dragging task')
-        setColor('blue')
     }
     const handleDragEnd = () => {
         //TODO: how is this event still called when dropping duplicate?
         if (isDuplicateDragging) { return; }
         console.info("Stop dragging task")
         setIsDragging(false)
-        setColor('green')
     }
 
     const handleDuplicateDragStart = (e) => {
@@ -70,20 +67,17 @@ const Task = (props) => {
         e.dataTransfer.setData("Type", "TaskDuplicate")
         e.dataTransfer.setData('TaskId', id)
         console.info('Duplicate dragging task')
-        setColor('pink')
     }
     const handleDuplicateDragEnd = () => {
         isDuplicateDragging = false;
         console.info("Stop duplicate dragging task")
         setIsDragging(false)
-        setColor('violet')
     }
 
     const handleDrop = (e) => {
         e.preventDefault()
         e.target.setAttribute('draggedOver', false)
         console.info('drop')
-        setColor('maroon')
         var type = e.dataTransfer.getData("Type")
         if (type == "Task") {
             var task_id = Number(e.dataTransfer.getData("TaskId"))
@@ -126,12 +120,10 @@ const Task = (props) => {
         e.preventDefault();
         // this is not perfect, because I always want the <div class='task'> to be the target..
         e.target.setAttribute('draggedOver', true);
-        setColor('red');
     }
     const handleDragLeave = (e) => {
         e.preventDefault();
         e.target.setAttribute('draggedOver', false);
-        setColor('gray');
     }
 
     const moveToWeek = () => {
@@ -212,8 +204,12 @@ const Task = (props) => {
     const dropHandlers = isDragging ? {} : { onDrop: handleDrop, onDragOver: handleDragOver, onDragLeave: handleDragLeave };
     const textEditHandlers = { onChange: handleChange, onBlur: handleBlur, onKeyDown: handleKeyDown, onClick: captureClick(() => { }) }
     const selectHandlers = selected ? { onClick: captureClick(deleteFromSelection) } : { onClick: captureClick(addToSelection) }
-
-
+    let fullName = name
+    if (repeated && taskFinishStatus !== FinishedState.NotFinished &&
+        taskLastCompletion
+    ) {
+        fullName += " / " + taskLastCompletion
+    }
     const duplicateDragHandlers = isDraggingAllowed ? {
         draggable: true,
         onDragStart: handleDuplicateDragStart,
@@ -225,12 +221,11 @@ const Task = (props) => {
         selectHandlers={selectHandlers}
         dragHandlers={dragHandlers}
         dropHandlers={dropHandlers}
-        name={name}
+        name={fullName}
         textEditHandlers={textEditHandlers}
         inputRef={inputRef}
         isEditing={isEditing}
         toggleEdit={toggleEdit}
-        color={color}
         deleteTask={unselect(deleteTask)}
         completeTask={completeTask}
         markTaskIrrelevant={markTaskIrrelevant}
@@ -242,7 +237,6 @@ const Task = (props) => {
         repeated={repeated}
         toggleRepeatTask={toggleRepeatTask}
         duplicateDragHandlers={duplicateDragHandlers}
-        // textBarWidth="425px"
         fancy={fancy}
     />);
 }

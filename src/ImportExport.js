@@ -22,6 +22,7 @@ const ImportExport = (props) => {
 
     const fileInputRef = useRef(null);
     const fileNameRef = useRef("")
+    const fileNameRefComplete = useRef("")
     const inputVersion = (tasks, topics) => {
         console.debug(tasks.length)
         console.debug('taskName' in tasks[0])
@@ -429,6 +430,7 @@ const ImportExport = (props) => {
         console.log()
         if (file) {
             fileNameRef.current = file.name.substring(0, file.name.lastIndexOf('.'))
+            fileNameRefComplete.current = file.name
             console.log(fileNameRef.current)
             const reader = new FileReader();
             reader.onload = (evt) => {
@@ -489,10 +491,12 @@ const ImportExport = (props) => {
         const jsonBlob = new Blob([jsonContent], { type: "application/json" });
         const MarkdownContent = buildMarkdownRecursive(topics, tasks, 0)
         const markdownBlob = new Blob([MarkdownContent], { type: "text/markdown" });
-        const YAMLcontent = buildYAML_r(topics, tasks, 0)
-        const yamlBlob = new Blob([YAMLcontent], { type: "text/yaml" });
-        const blobs = [jsonBlob, markdownBlob, yamlBlob]
-        const extensions = ['.json', '.md', '.yaml']
+        // const YAMLcontent = buildYAML_r(topics, tasks, 0)
+        // const yamlBlob = new Blob([YAMLcontent], { type: "text/yaml" });
+        // const blobs = [jsonBlob, markdownBlob, yamlBlob]
+        // const extensions = ['.json', '.md', '.yaml']
+        const blobs = [jsonBlob, markdownBlob]
+        const extensions = ['.json', '.md']
         var a = document.createElement("a");
         a.setAttribute("download", null)
         a.style.display = 'none';
@@ -523,20 +527,41 @@ const ImportExport = (props) => {
         mutatedSinceSave = false
     }
 
+    const handleBrowseClick = () => {
+        // Trigger the file input click
+        fileInputRef.current.click();
+    };
 
     return (
-        <div>
-            <button onClick={exportjson}>Export Tasks [JSON]</button>{savedTaskHash ? (
+        <div className="importExport">
+            <button onClick={exportjson}>Save as JSON</button>
+            <br />
+            {savedTaskHash ? (
                 mutatedSinceSave ? "Unsaved changes" : "Unchanged") : "Not saved yet"}
 
-            <button onClick={exportYAML}>Export Tasks [YAML]</button>
-            <button onClick={exportMarkdown}> Export Tasks [Markdown]</button>
-            <button onClick={exportAll}> Export All [JSON+YAML+Markdown]</button>
+            {/* <button onClick={exportYAML}>Export as YAML</button> */}
+            <button onClick={exportMarkdown}> Export as Markdown</button>
+            <br />
+            <button onClick={exportAll}> Export All [JSON+Markdown]</button>
+            <br />
             <button onClick={() => calculateHash(tasks, topics)}> Calc Hash </button>
+            <br />
             <input type="file"
                 ref={fileInputRef}
-                onChange={handleFileToUpload} /> {loadedTaskHash ? (
-                    mutatedSinceLoad ? "Changed rel. to file" : "Unchanged") : "Nothing loaded yet"}
+                style={{ display: 'none' }}
+                onChange={handleFileToUpload} />
+            <button onClick={handleBrowseClick}>
+                Load file
+            </button>
+            <br />
+            <input
+                type="text"
+                value={fileNameRefComplete.current}
+                readOnly
+            />
+            <br />
+            {loadedTaskHash ? (
+                mutatedSinceLoad ? "Changed since load" : "Unchanged since load") : "Nothing loaded yet"}
         </div>);
 }
 

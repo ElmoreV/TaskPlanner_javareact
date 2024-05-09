@@ -3,6 +3,7 @@ import PlannedTask from './PlannedTask';
 import {
     getChangeWeekOrderIndex,
     sanitizeWeekOrderIndex,
+    getSpawnNewTask,
 } from './ModifyFuncGeneratorsV1';
 import {
     getCompleteTask,
@@ -117,11 +118,11 @@ const PlannedList = (props) => {
             </button>
 
             <ul key='root_topics'>
-                {tasks.sort((taskA, taskB) => taskA.weekOrderIndex > taskB.weekOrderIndex).map(
-                    (task) => {
+                {tasks.sort((taskA, taskB) => taskA.weekOrderIndex > taskB.weekOrderIndex)
+                    .filter((task) => (isVisible(task))).map((task) => {
                         return (
-                            <li>
-                                {isVisible(task) && <PlannedTask
+                            <li key={"planned_" + (task.id)}>
+                                <PlannedTask
                                     taskName={task.name}
                                     taskKey={task.id}
                                     setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
@@ -144,13 +145,14 @@ const PlannedList = (props) => {
                                     topics={topics}
                                     taskTopics={task.topics}
                                     fancy={fancy}
+                                    spawnNewTask={getSpawnNewTask(setTasks, tasks, task)}
 
                                 />
-                                }
+
                             </li>
                         )
                     }
-                )}
+                    )}
             </ul>
         </div>
     );
