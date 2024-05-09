@@ -1,0 +1,9 @@
+Cannot plan the entire selection at once - 1m
+
+Filter is not available from the middle of the task lists - 1m
+
+No possibility to create an empty tasklist - 1m
+
+Topic text bar does not behave well - 5m
+
+Completion time: write it as 'x minutes/days ago'
