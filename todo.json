@@ -3,7 +3,7 @@
     {
       "name": "Features",
       "id": 1,
-      "unfolded": true,
+      "unfolded": false,
       "subtopics": [
         {
           "name": "Database interaction",
@@ -181,13 +181,20 @@
     {
       "name": "Constraints",
       "id": 2,
-      "unfolded": true,
+      "unfolded": false,
       "subtopics": [
         {
           "name": "UX/UI",
           "id": 15,
-          "unfolded": true,
-          "subtopics": []
+          "unfolded": false,
+          "subtopics": [
+            {
+              "name": "Release 1 (feature freeze)",
+              "id": 55,
+              "unfolded": false,
+              "subtopics": []
+            }
+          ]
         },
         {
           "name": "Maintainability",
@@ -244,7 +251,7 @@
     {
       "name": "Bugs/issues",
       "id": 12,
-      "unfolded": true,
+      "unfolded": false,
       "subtopics": []
     },
     {
@@ -2821,7 +2828,7 @@
         53
       ],
       "topicViewIndices": [
-        1
+        2
       ],
       "completed": false,
       "thisWeek": false,
@@ -2836,7 +2843,7 @@
         53
       ],
       "topicViewIndices": [
-        4
+        5
       ],
       "completed": false,
       "thisWeek": false,
@@ -3216,7 +3223,7 @@
         53
       ],
       "topicViewIndices": [
-        2
+        3
       ],
       "completed": false,
       "thisWeek": false,
@@ -4232,6 +4239,134 @@
       ],
       "topicViewIndices": [
         29
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Improve the saving/modified/loading messaging",
+      "id": 334,
+      "topics": [
+        55
+      ],
+      "topicViewIndices": [
+        12
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Remove YAML export",
+      "id": 335,
+      "topics": [
+        55
+      ],
+      "topicViewIndices": [
+        3
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add Github links",
+      "id": 336,
+      "topics": [
+        55
+      ],
+      "topicViewIndices": [
+        2
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Archive minimal layout",
+      "id": 337,
+      "topics": [
+        55
+      ],
+      "topicViewIndices": [
+        4
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Fix/remove dark mode",
+      "id": 338,
+      "topics": [
+        55
+      ],
+      "topicViewIndices": [
+        5
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Change default tasks",
+      "id": 339,
+      "topics": [
+        55
+      ],
+      "topicViewIndices": [
+        1
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add icons instead of buttons (with alt text and labels)",
+      "id": 340,
+      "topics": [
+        55
+      ],
+      "topicViewIndices": [
+        6
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Add version to export/saved files - 1M",
+      "id": 341,
+      "topics": [
+        53
+      ],
+      "topicViewIndices": [
+        1
       ],
       "completed": false,
       "finishStatus": 0,

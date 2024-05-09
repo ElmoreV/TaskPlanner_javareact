@@ -238,6 +238,16 @@
 - [x] If you save with a certain file name, remember this for use for later saving
 - [x] Find a way to save markdown, yaml and json all at the same time
 
+### Release 1 (feature freeze):
+
+- [ ] Improve the saving/modified/loading messaging
+- [ ] Remove YAML export
+- [ ] Add Github links
+- [ ] Archive minimal layout
+- [ ] Fix/remove dark mode
+- [ ] Change default tasks
+- [ ] Add icons instead of buttons (with alt text and labels)
+
 ## Maintainability:
 
 - [ ] Convert to TypeScript
@@ -299,6 +309,7 @@
 - [ ] Need an easier way to show task/topic information (id/viewIndex/weekIndex) - 4m
 - [ ] Need an identifier for which version we are working with (date, commit, version, dev or production) - 3m
 - [ ] Create an easier way to debug (debug mode with more information directly on screen) - 3m
+- [ ] Add version to export/saved files - 1M
 
 ## Major/crashes/bugs:
 
