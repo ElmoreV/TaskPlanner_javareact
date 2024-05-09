@@ -1,3 +1,4 @@
+@import-normalize;
 @import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
 
 
@@ -12,6 +13,7 @@
 
 html {
   height: 100%;
+
 }
 
 
@@ -19,25 +21,43 @@ html {
 body {
   min-height: 100%;
   height: 100%;
+  background-color: var(--color-background);
+  padding: 0px;
+  margin: 0px;
+
+}
+
+.App {
+  background-color: var(--color-background);
+  color: var(--color-primary);
+  padding: 10px;
 }
 
 .dark {
-  background-color: rgb(10, 20, 20);
-  color: white;
+  --color-background: #1f2023;
+  --color-primary: #efefef;
+  --color-topic: rgb(195, 160, 114);
+  background-color: var(--color-background);
+  color: var(--color-primary);
   padding: 0px;
   width: 100%;
   height: 100%;
 }
 
 .light {
-  background-color: rgb(255, 255, 255);
-  color: black;
+  --color-background: #fafafa;
+  --color-primary: #000000;
+  --color-topic: antiquewhite;
+
+  background-color: var(--color-background);
+  color: var(--color-primary);
   width: 100%;
   height: 100%;
 }
 
 /*  ViewSelector + View*/
 .contents {
+
   display: grid;
   max-width: 1600px;
   /* padding-left: 0px; */
