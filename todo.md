@@ -240,13 +240,16 @@
 
 ### Release 1 (feature freeze):
 
+- [x] Remove YAML export
+- [x] Add Github links
+- [x] Archive minimal layout
+- [x] Change default tasks
+- [x] Fix Browse button/input to button element
+- [ ] Fix Topic text width
 - [ ] Improve the saving/modified/loading messaging
-- [ ] Remove YAML export
-- [ ] Add Github links
-- [ ] Archive minimal layout
-- [ ] Fix/remove dark mode
-- [ ] Change default tasks
 - [ ] Add icons instead of buttons (with alt text and labels)
+- [ ] Improve layout
+- [x] Fix/remove dark mode
 
 ## Maintainability:
 
@@ -327,11 +330,11 @@
 
 - [ ] Not clearly seeing on what level a task is exactly (maybe needs guidance lines?) -2m+
 - [ ] Ability to hide planned items in Topic View - 2m
-- [ ] Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 15m
-- [ ] It is unclear where a duplicated task is already (is it already duplicated?) -12m
 - [ ] Reduce cognitive load - 2M
 - [ ] Block out anything irrelevant
 - [ ] Hierarchical/supertasks in planned list would reduce cognitive load by a lot (add Grooming instead of each substep)
+- [ ] Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 15m
+- [ ] It is unclear where a duplicated task is already (is it already duplicated?) -12m
 
 ## Relaying information:
 
@@ -366,14 +369,14 @@
 - [ ] Completed + repeated + ready to do again should be easier to find -2m
 - [ ] Completed are almost same color as not yet planned/scheduled with a night filter - 1m
 - [ ] You should select a task and 'Go to Topic View/Planned View' as an action - 2m
-- [x] Repeated tasks do not show last completion/cannot retain information about when the next time would be -31m+
-- [ ] It is unclear where a duplicated task is already (is it already duplicated?) -12m
-- [x] Not being able to collapse or fold all the topics with one button - 27m
-- [x] Text width on a narrow screen is not handled well (text width not respected) - 10m
 - [ ] Should be able to add a link to a certain task - 1m
 - [ ] The topic text width will mess up the whole layout if the text is too long - 1m
 - [ ] Add an index/list number to the planned list - 1m
 - [ ] Repeated tasks do not show when the next time should happen - 1m
+- [x] Repeated tasks do not show last completion/cannot retain information about when the next time would be -31m+
+- [ ] It is unclear where a duplicated task is already (is it already duplicated?) -12m
+- [x] Not being able to collapse or fold all the topics with one button - 27m
+- [x] Text width on a narrow screen is not handled well (text width not respected) - 10m
 
 ### Filtering:
 
@@ -386,11 +389,11 @@
 - [x] In the weekly view: hide completed tasks is always unchecked - 2m - gefixt
 - [ ]  Changing view automatically doesn't remember Hide completed Tasks setting - 1m
 - [ ]  Need easy way to show completed and repeated tasks (to uncomplete them) - 3m
-- [ ] Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 15m
 - [ ] Filter repeated items that are completed and should not be done in a while 
 - [ ] Filter all tasks that are currently in Waiting or Blocked
 - [ ] Filter all tasks that are currently "Testing for completion" 
 - [ ] When looking through the system when it's filtered, it's easy to forget the state of the filtering (better feedback on filtering) - 1m
+- [ ] Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 15m
 
 ## Modifying information:
 
@@ -427,13 +430,13 @@
 - [ ] Should have ability that adds a task INSIDE of another task - 1m
 - [ ] Missing button for deleting just a task instance and not the whole task - 1m
 - [ ] Cannot order the subtopics - 2m
+- [ ] Cannot add a task in the middle/at the end of a list - 1m
+- [ ] I should be warned when I make a duplicate task - 1m
 - [x] Removing items from the planned list or completing an item, does not unschedule them - 14m
 - [ ] I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -15m 
 - [x] Enter does not finish text input in planned list - 15m
 - [x] Not being able to duplicate multiple tasks at once in Topic View (forgetting which tasks are already copied): 19m
 - [ ] Ability to spawn follow-up tasks or subtask/necessary tasks on a task in the Weekly List from a task (Completing the task made another TODO) - 15m+
-- [ ] Cannot add a task in the middle/at the end of a list - 1m
-- [ ] I should be warned when I make a duplicate task - 1m
 
 ### Too long to drag a task from the top to the bottom - 18m :
 
@@ -459,12 +462,12 @@
 - [ ] Cannot create dependencies between task completions (auto->IKEA/recept bedenken->boodschappen) - 4m 
 - [ ] Cannot filter out irrelevant items (already planned, completed, repeatable but it's not yet time, blocked, irrelevant) - 1m
 - [ ] Cannot add a schedule to a repeated item - 1m
+- [ ] I'm also missing positively correlated tasks (completing one makes the other easier) - 1m
 - [x] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 20m
 - [ ] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -20m
 - [ ] There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -17m
 - [ ] Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 15m
 - [x] Cannot order/sort the tasks/topics on the topic view - 21m
-- [ ] I'm also missing positively correlated tasks (completing one makes the other easier) - 1m
 
 ## Import/export:
 
