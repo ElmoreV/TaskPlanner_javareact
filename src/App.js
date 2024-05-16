@@ -6,6 +6,10 @@ import ImportExport from './ImportExport';
 import Theme from "./Theme";
 import { FinishedState } from './TaskInterfaces.tsx';
 
+// 1. Go through all tasks and search if their .supertasks list contains [task.id] N*E(M) , E(M) is avg of supertasks per task
+// 2. Go through all tasks and search if the ids match one of the .subtasks List N*P P is # of subtasks in task
+
+
 function App() {
   console.debug("Rendering App")
 
@@ -42,22 +46,26 @@ function App() {
     {
       name: "Repair bicycle", id: 0, topics: [12], topicViewIndices: [1], completed: true,
       finishStatus: FinishedState.Completed,
-      thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 1
+      thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 1,
+      subTaskIds: [], unfolded: false
     },
     {
       name: "Write Cover Letter", id: 1, topics: [21, 13], topicViewIndices: [1, 1], completed: false,
       finishStatus: FinishedState.NotFinished,
-      thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 0
+      thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 0,
+      subTaskIds: [], unfolded: false
     },
     {
       name: "Check tax return", id: 2, topics: [1], topicViewIndices: [3], completed: false,
       finishStatus: FinishedState.NotFinished,
-      thisWeek: true, repeated: false, scheduled: true, weekOrderIndex: 2
+      thisWeek: true, repeated: false, scheduled: true, weekOrderIndex: 2,
+      subTaskIds: [1], unfolded: true
     },
     {
       name: "Create a NAS server", id: 5, topics: [1], topicViewIndices: [2], completed: false,
       finishStatus: FinishedState.NotFinished,
-      thisWeek: false, repeated: true, scheduled: false, weekOrderIndex: 0
+      thisWeek: false, repeated: true, scheduled: false, weekOrderIndex: 0,
+      subTaskIds: [], unfolded: false
     },
   ])
 

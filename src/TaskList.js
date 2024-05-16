@@ -134,7 +134,9 @@ const recursiveShowTopic = (topic, tasks,
                             tasks={tasks}
 
                         />
-                    </li>))}
+                    </li>
+                    (task.subtasks && task.subtasks.length > 0 && tasks.filter(subtask => task.subtasks.includes(task)))
+                ))}
         </ul></div>
     )
 }
