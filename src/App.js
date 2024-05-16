@@ -47,13 +47,13 @@ function App() {
       name: "Repair bicycle", id: 0, topics: [12], topicViewIndices: [1], completed: true,
       finishStatus: FinishedState.Completed,
       thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 1,
-      subTaskIds: [], unfolded: false
+      subTaskIds: [], unfolded: true
     },
     {
       name: "Write Cover Letter", id: 1, topics: [21, 13], topicViewIndices: [1, 1], completed: false,
       finishStatus: FinishedState.NotFinished,
       thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 0,
-      subTaskIds: [], unfolded: false
+      subTaskIds: [0], unfolded: true
     },
     {
       name: "Check tax return", id: 2, topics: [1], topicViewIndices: [3], completed: false,
@@ -62,10 +62,10 @@ function App() {
       subTaskIds: [1], unfolded: true
     },
     {
-      name: "Create a NAS server", id: 5, topics: [1], topicViewIndices: [2], completed: false,
+      name: "Create a NASS server", id: 5, topics: [1], topicViewIndices: [2], completed: false,
       finishStatus: FinishedState.NotFinished,
       thisWeek: false, repeated: true, scheduled: false, weekOrderIndex: 0,
-      subTaskIds: [], unfolded: false
+      subTaskIds: [2], unfolded: true
     },
   ])
 
