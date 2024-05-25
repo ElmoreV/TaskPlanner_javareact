@@ -6,4 +6,13 @@ No possibility to create an empty tasklist - 1m
 
 Topic text bar does not behave well - 5m
 
-Completion time: write it as 'x minutes/days ago'
+Completion time: write it as 'x minutes/days ago' - 1m
+
+It lags a lot when lot's of tasks are present - 2M
+
+Selection is not unselected after dragging into folded topic (you can't see it is still selected)  -1m
+
+Er waren onbedoeld duplicaten - 5m
+
+Kan niet zien wanneer de takenlijst voor de laatste keer veranderd/geladen/gesaved is - 1m
+
