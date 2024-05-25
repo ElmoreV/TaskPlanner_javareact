@@ -595,8 +595,11 @@ const getDeleteTopic = (setTopics, topics, setTasks, tasks, topicId) => {
                 removeTaskInstanceFromTopic(newTasks, task.id, id)
             })
         })
-        // Filter out tasks without instances (not inside any topic)
-        newTasks = newTasks.filter((task) => task.topics.length > 0)
+
+
+        // Filter out tasks without instances (not inside any topic OR in any supertask)
+        let subTaskIds = newTasks.reduce((acc, curr) => acc.concat(curr.subTaskIds), [])
+        newTasks = newTasks.filter((task) => (task.topics.length > 0 || subTaskIds.includes(task.id)))
         console.info('Length of tasks before deletion/length of tasks after deletion')
         console.info(tasks.length + ' -> ' + newTasks.length)
 
