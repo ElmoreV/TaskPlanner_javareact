@@ -58,6 +58,8 @@ const Topic = (props) => {
             var task_id = Number(e.dataTransfer.getData("TaskId"))
             var oldTopicName = e.dataTransfer.getData("TopicName")
             var oldTopicId = Number(e.dataTransfer.getData("TopicId"))
+            var oldSuperTaskId = Number(e.dataTransfer.getData("SuperTaskId"))
+
             console.debug(task_id)
 
             console.debug(oldTopicName) // name???
@@ -67,20 +69,27 @@ const Topic = (props) => {
 
             let taskIds = []
             let oldTopicIds = []
+            let oldSuperTaskIds = []
+
             taskIds.push(task_id)
             oldTopicIds.push(oldTopicId)
+            oldSuperTaskIds.push(oldSuperTaskId)
+
             console.log(selectedTasks)
             if (selectedTasks && selectedTasks.length > 0) {
                 selectedTasks.forEach((st) => {
                     console.info(`Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${id}`)
                     taskIds.push(st.taskId)
                     oldTopicIds.push(st.topicId)
+                    oldSuperTaskIds.push(st.superTaskId)
+
                 })
             }
             if (moveTasks) {
                 // Always move the tasks to the top (index = 1)
-                moveTasks(taskIds, oldTopicIds, id, 1)
+                moveTasks(taskIds, oldTopicIds, oldSuperTaskIds, id, 1, null)
             }
+
         } else if (type == "Topic") {
             let source_id = Number(e.dataTransfer.getData("id"))
             console.info(`Dropped topic with id ${source_id} on this topic with id ${id}`)

@@ -50,7 +50,6 @@ const Task = (props) => {
         setTaskName(e.target.value);
     }
 
-
     const handleDragStart = (e) => {
         if (isDuplicateDragging) { return; }
         setIsDragging(true)
@@ -60,6 +59,8 @@ const Task = (props) => {
         e.dataTransfer.setData('TopicId', currentTopicId)
         e.dataTransfer.setData("SuperTaskId", currentSuperTaskId)
         console.info('Dragging task')
+        console.log("Inside dragging task")
+        console.log(tasks)
     }
     const handleDragEnd = () => {
         //TODO: how is this event still called when dropping duplicate?
@@ -92,6 +93,9 @@ const Task = (props) => {
         e.target.setAttribute('draggedOver', false)
         console.info('drop')
         var type = e.dataTransfer.getData("Type")
+        console.log("Inside upper drop")
+        console.log(tasks)
+
         if (type == "Task") {
             var task_id = Number(e.dataTransfer.getData("TaskId"))
             var oldTopicId = Number(e.dataTransfer.getData("TopicId"))

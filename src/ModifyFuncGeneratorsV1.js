@@ -25,6 +25,25 @@ import { getPlanTaskForWeek } from './TaskModifyFuncGens';
 // Move from task in subtask to task in topic
 // Move from task in topic to task in topic
 
+const findTaskInSubTaskTree = (tasks, rootTaskId, subTaskId) => {
+    if (rootTaskId === subTaskId) { return true; }
+    let rootTask = findTaskByTaskId(tasks, rootTaskId)
+    if (rootTask === undefined) {
+        console.warn(`Searched for task with id ${rootTaskId} but could not find it.`)
+        return false;
+    }
+    console.log("rootTask")
+    console.log(rootTask)
+    if (rootTask.subTaskIds === undefined) { console.log("undefined ret"); return false }
+    else if (rootTask.subTaskIds.includes(subTaskId)) {
+        console.log(`${rootTask.subTaskIds} and ${subTaskId}`); return true
+    }
+    else {
+        return rootTask.subTaskIds.map(
+            st => findTaskInSubTaskTree(tasks, st, subTaskId)
+        ).reduce((acc, curr) => curr ? acc || curr : acc, false)
+    }
+}
 
 
 const getMoveTasks = (topics, tasks, setTasks) => {
@@ -34,6 +53,7 @@ const getMoveTasks = (topics, tasks, setTasks) => {
     // const moveTasks = (taskIds, sourceTopicIds, targetTopicId, targetViewIndex) => {
     const moveTasks = (taskIds, sourceTopicIds, sourceTaskIds, targetTopicId, targetViewIndex, targetTaskId) => {
         // Validation checks + defaults
+
         if (!Array.isArray(taskIds)) { taskIds = [taskIds] }
         if (!Array.isArray(sourceTopicIds)) { sourceTopicIds = [sourceTopicIds] }
         if (!Array.isArray(sourceTaskIds)) { sourceTaskIds = [sourceTaskIds] }
@@ -62,15 +82,20 @@ const getMoveTasks = (topics, tasks, setTasks) => {
             console.warn("Either targetTaskId or targetTopicId needs to be specified.")
         }
 
+
         // go through all 'operations' 1-by-1
         taskIds.forEach((taskId, idx) => {
             let sourceTopicId = sourceTopicIds[idx]
             let sourceTaskId = sourceTaskIds[idx]
+            let moveAllowed = true
+            if (targetTaskId) { moveAllowed = !findTaskInSubTaskTree(tasks, targetTaskId, taskId) }
+            if (!moveAllowed) { console.warn(`Move of task id ${taskId} to task with id ${targetTaskId} is not allowed: task already in target task subtree.`) }
+
             // Removing from source location (task or topic)
             if (sourceTopicId) {
-                newTasks = removeTaskInstanceFromTopic(newTasks, taskId, sourceTopicId)
+                if (moveAllowed) { newTasks = removeTaskInstanceFromTopic(newTasks, taskId, sourceTopicId) }
             } else if (sourceTaskId) {
-                newTasks = removeTaskInstanceFromTask(newTasks, taskId, sourceTaskId)
+                if (moveAllowed) { newTasks = removeTaskInstanceFromTask(newTasks, taskId, sourceTaskId) }
             } else {
                 console.warn(`No source (task or topic) defined for  ${taskId}.`)
                 return
@@ -88,13 +113,23 @@ const getMoveTasks = (topics, tasks, setTasks) => {
 
             } else if (targetTaskId) {
                 // If task already in target supertask, remove it
-                let superTask = newTasks.find((task) => task.id === targetTaskId)
-                if (superTask.subTaskIds && superTask.subTaskIds.includes(taskId)) {
-                    console.info(`Task ${taskId} is already in supertask ${targetTaskId}`)
-                    newTasks = removeTaskInstanceFromTask(newTasks, taskId, targetTaskId)
+                if (moveAllowed) {
+                    let superTask = newTasks.find((task) => task.id === targetTaskId)
+                    console.log(superTask)
+                    if (superTask.subTaskIds && superTask.subTaskIds.includes(taskId)) {
+                        console.info(`Task ${taskId} is already in supertask ${targetTaskId}`)
+                        newTasks = removeTaskInstanceFromTask(newTasks, taskId, targetTaskId)
+                    }
+                    // TODO: prevent a cycle to exist (task1<-task2<-task1<-task2<-...)    
+                    if (superTask.subTaskIds === undefined) { superTask.subTaskIds = [] }
+                    console.log(superTask)
+                    let alreadyExisting = findTaskInSubTaskTree(tasks, targetTaskId, taskId)
+                    console.log(alreadyExisting)
+                    console.log(`Task ${taskId} already exists somewhere within task ${targetTaskId}`)
+
+                    newTasks = insertTaskInstanceIntoTask(newTasks, taskId, targetTaskId)
+                    console.log(superTask)
                 }
-                if (superTask.subTaskIds === undefined) { superTask.subTaskIds = [] }
-                newTasks = insertTaskInstanceIntoTask(newTasks, taskId, targetTaskId)
             }
 
         })
