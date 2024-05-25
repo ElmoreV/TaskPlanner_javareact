@@ -11,6 +11,15 @@ const getScheduleTask = (setTasks, tasks, id) => {
     return scheduleTask;
 }
 
+const getToggleFoldTask = (setTasks, tasks) => {
+    const toggleFold = (id) => {
+        const newTasks = [...tasks];
+        let thisTask = newTasks.find(task => (task.id == id))
+        thisTask.unfolded = !thisTask.unfolded
+        setTasks(newTasks)
+    }
+    return toggleFold;
+}
 
 const getToggleRepeatTask = (setTasks, tasks, id) => {
     const toggleRepeatTask = () => {
@@ -112,4 +121,5 @@ export { getToggleRepeatTask }
 export { getUnplanTask };
 export { getPlanTaskForWeek };
 export { getSetTaskNameFunc };
-export { getSetTaskFinishStatus }; 
+export { getSetTaskFinishStatus };
+export { getToggleFoldTask };

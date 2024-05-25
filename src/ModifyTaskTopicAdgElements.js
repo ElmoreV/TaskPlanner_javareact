@@ -43,6 +43,7 @@ const insertTaskInstanceIntoTopic = (tasks, taskId, topicId, topicViewIndex) => 
         topicViewIndex = 0
     }
     let newTasks = [...tasks]
+    // Find all tasks that are in the topic
     let tasksInTopic = newTasks.filter((task) => task.topics.includes(topicId))
     let thisTask = newTasks.find((task) => (task.id === taskId))
     //Shift up all tasks at or above the topicOrderIndex
@@ -57,6 +58,27 @@ const insertTaskInstanceIntoTopic = (tasks, taskId, topicId, topicViewIndex) => 
     thisTask.topicViewIndices.push(topicViewIndex)
     return newTasks
 }
+
+// Insert an existig subTask (even with no instances) into the current task (as supertask)
+// Does not check if subtask already exsists
+// Does not check if supertask exists
+// Assumes task ids are unique
+// Returns a shallow copy with the changed tasks 
+const insertTaskInstanceIntoTask = (tasks, superTaskId, subTaskId) => {
+    console.debug(`Insert task instance with task.id: ${subTaskId} into (super)task with id: ${superTaskId}`)
+    //TODO: add taskViewIndices
+
+    let newTasks = [...tasks]
+
+    let superTask = newTasks.find((task) => (task.id === superTaskId))
+    // let subTask = newTasks.find((task) => (task.id === subTaskId))
+
+    superTask.subTaskIds.push(subTaskId)
+    return newTasks
+}
+
+
+
 
 // Assumes the viewIndices of all tasks exists
 // Assumes the task is in the topic
@@ -99,5 +121,4 @@ export { addOrphanTasktoTaskList }
 export { insertTaskInstanceIntoTopic }
 export { removeTaskInstanceFromTopic }
 export { deleteEntireTask }
-
-
+export { insertTaskInstanceIntoTask }

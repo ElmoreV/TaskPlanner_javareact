@@ -5,12 +5,14 @@ import {
 } from './TopicHelper';
 import {
     findSupertopicByTopicId,
+    findTaskByTaskId,
     findTopicByTopicId,
 } from './FindItems'
 import {
     addOrphanTasktoTaskList,
     deleteEntireTask,
     generateEmptyTask,
+    insertTaskInstanceIntoTask,
     insertTaskInstanceIntoTopic,
     removeTaskInstanceFromTopic
 } from './ModifyTaskTopicAdgElements';
@@ -104,6 +106,28 @@ const getAddTask = (setTasks, tasks, topics, topicId) => {
     }
     return addTask
 }
+
+
+const getAddNewSubTask = (setTasks, tasks, superTaskId) => {
+    const addTask = () => {
+
+        let newTasks = [...tasks]
+        // Check if supertask belonging to superTaskId exists
+        // Generate new (sub)task
+        // insert it into (super)task
+        const superTask = findTaskByTaskId(tasks, superTaskId)
+        if (!superTask) {
+            return
+        }
+        let newSubTask = generateEmptyTask(newTasks)
+        newTasks = addOrphanTasktoTaskList(newTasks, newSubTask)
+        newTasks = insertTaskInstanceIntoTask(newTasks, superTaskId, newSubTask.id)
+        setTasks(newTasks)
+    }
+    return addTask
+}
+
+
 
 const getDeleteTask = (setTasks, tasks, id) => {
     const deleteTask = () => {
@@ -546,7 +570,7 @@ export { sanitizeWeekOrderIndex2 }
 export { sanitizeTopicOrderIndex }
 export { getMoveTasks }
 export { getSpawnNewTask }
-
+export { getAddNewSubTask }
 
 /// What I would need is basically
 // A moveTaskToTopic

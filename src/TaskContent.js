@@ -23,6 +23,7 @@ const TaskContent = (props) => {
         name, textEditHandlers, inputRef, isEditing, toggleEdit,
         topicPath, textBarWidth,
         deleteTask,
+        addSubTask,
         completeTask,
         markTaskIrrelevant,
         markTaskImpossible,
@@ -31,6 +32,8 @@ const TaskContent = (props) => {
         repeated, toggleRepeatTask,
         scheduled, scheduleTask,
         spawnNewTask,
+        toggleFold,
+        foldingSymbol,
         fancy,
     } = props;
     console.debug(`Rendering TaskContent ${name}`)
@@ -51,6 +54,7 @@ const TaskContent = (props) => {
                 {...selectHandlers}
                 {...dragHandlers}
                 {...dropHandlers}>
+                {toggleFold && <span className={styles.foldingButton} onClick={captureClick(toggleFold)}>{foldingSymbol}</span>}
                 <div className={styles.textBar}
                 // style={{ width: textBarWidth }}
                 >
@@ -85,6 +89,7 @@ const TaskContent = (props) => {
                     {taskFinishStatus == FinishedState.NotFinished && scheduled && scheduleTask && (<button className={styles.taskSchedule} onClick={captureClick(scheduleTask)}>Scheduled!</button>)}
                     {taskFinishStatus == FinishedState.NotFinished && !scheduled && scheduleTask && (<button className={styles.taskSchedule} onClick={captureClick(scheduleTask)}>Unscheduled</button>)}
                     {spawnNewTask && (<button className={styles.taskSpawn} onClick={captureClick(spawnNewTask)}>Spawn</button>)}
+                    {addSubTask && (<button className={styles.taskSpawn} onClick={captureClick(addSubTask)}>Add subtask</button>)}
                 </div>
             </div>
 

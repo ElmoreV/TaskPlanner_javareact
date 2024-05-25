@@ -5,6 +5,7 @@ import React from 'react';
 // import Checkbox from './Checkbox'
 import {
     getDeleteTask,
+    getAddNewSubTask,
     getDeleteTopic,
     getDuplicateTask,
     getMoveTopic,
@@ -21,6 +22,7 @@ import {
     getSetTaskNameFunc,
     getSetTaskFinishStatus,
     getUnplanTask,
+    getToggleFoldTask,
 } from './TaskModifyFuncGens'
 import {
     getToggleFold,
@@ -48,6 +50,8 @@ const isTaskVisible = (task, hideCompletedItems, showRepeatedOnly) => {
             && hideCompletedItems))
         && (task.repeated || !showRepeatedOnly))
 }
+
+
 
 const recursiveShowTopic = (topic, tasks,
     setTopics, topics,
@@ -104,80 +108,83 @@ const recursiveShowTopic = (topic, tasks,
                 .filter((task) => task.topics.includes(topic.id))
                 .filter((task) => isTaskVisible(task, hideCompletedItems, showRepeatedOnly))
                 .slice(0).sort((taskA, taskB) => { return findTopicViewIdx(topic.id, taskA) - findTopicViewIdx(topic.id, taskB) })
-                .map(task =>  (
+                .map(task => (
                     <>
-                    <li key={topic.id + ' - ' + task.id}>
-                        <Task name={task.name}
-                            id={task.id}
-                            completed={task.completed}
-                            taskFinishStatus={task.finishStatus}
-                            setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
-                            currentTopicViewIndex={findTopicViewIdx(topic.id, task)}
-                            currentTopicName={topic.name}
-                            currentTopicId={topic.id}
-                            setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
-                            deleteTask={getDeleteTask(setTasks, tasks, task.id)}
-                            completeTask={getCompleteTask(setTasks, tasks, task.id)}
-                            plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
-                            unplan={getUnplanTask(setTasks, tasks, task.id)}
-                            toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
-                            planned={task.thisWeek}
-                            repeated={task.repeated}
-                            taskLastCompletion={task.lastFinished}
-                            addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic.id, findTopicViewIdx(topic.id, task))}
-                            deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
-                            selected={selectedTasks.find((st) => (st.taskId == task.id && st.topicId == topic.id)) ? true : false}
-                            selectedTasks={selectedTasks}
-                            moveTasks={getMoveTasks(topics, tasks, setTasks)}
-                            duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
-                            fancy={fancy}
-                            setTasks={setTasks}
-                            tasks={tasks}
+                        <li key={topic.id + ' - ' + task.id}>
+                            <Task name={task.name}
+                                id={task.id}
+                                completed={task.completed}
+                                taskFinishStatus={task.finishStatus}
+                                setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
+                                currentTopicViewIndex={findTopicViewIdx(topic.id, task)}
+                                currentTopicName={topic.name}
+                                currentTopicId={topic.id}
+                                setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
+                                deleteTask={getDeleteTask(setTasks, tasks, task.id)}
+                                addSubTask={getAddNewSubTask(setTasks, tasks, task.id)}
+                                hasSubTasks={true}
+                                completeTask={getCompleteTask(setTasks, tasks, task.id)}
+                                plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
+                                unplan={getUnplanTask(setTasks, tasks, task.id)}
+                                toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
+                                planned={task.thisWeek}
+                                repeated={task.repeated}
+                                taskLastCompletion={task.lastFinished}
+                                addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic.id, findTopicViewIdx(topic.id, task))}
+                                deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
+                                selected={selectedTasks.find((st) => (st.taskId == task.id && st.topicId == topic.id)) ? true : false}
+                                selectedTasks={selectedTasks}
+                                moveTasks={getMoveTasks(topics, tasks, setTasks)}
+                                duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
+                                fancy={fancy}
+                                toggleFold={getToggleFoldTask(setTasks, tasks)}
+                                setTasks={setTasks}
+                                tasks={tasks}
 
-                        />
-                    </li>
-                    {task.subTaskIds && task.subTaskIds.length > 0 && task.unfolded && (
-                        <ul>
-                        {tasks
-                            // .map(t=>{console.log("Hi, I'm a subtask"+t);return t})
-                            .filter(subtask => task.subTaskIds.includes(subtask.id))                        
-                            .map(subtask=>(
-                                <li key={topic.id + ' - ' + subtask.id}>
-                                    <Task name={subtask.name}
-                                        id={subtask.id}
-                                        completed={subtask.completed}
-                                        taskFinishStatus={subtask.finishStatus}
-                                        setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, subtask.id)}
-                                        currentTopicViewIndex={findTopicViewIdx(topic.id, subtask)}
-                                        currentTopicName={topic.name}
-                                        currentTopicId={topic.id}
-                                        setTaskName={getSetTaskNameFunc(setTasks, tasks, subtask.id)}
-                                        deleteTask={getDeleteTask(setTasks, tasks, subtask.id)}
-                                        completeTask={getCompleteTask(setTasks, tasks, subtask.id)}
-                                        plan={getPlanTaskForWeek(setTasks, tasks, subtask.id)}
-                                        unplan={getUnplanTask(setTasks, tasks, subtask.id)}
-                                        toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, subtask.id)}
-                                        planned={subtask.thisWeek}
-                                        repeated={subtask.repeated}
-                                        taskLastCompletion={subtask.lastFinished}
-                                        addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, subtask.id, topic.id, findTopicViewIdx(topic.id, task))}
-                                        deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, subtask.id, topic.id)}
-                                        selected={selectedTasks.find((st) => (st.taskId == subtask.id && st.topicId == topic.id)) ? true : false}
-                                        selectedTasks={selectedTasks}
-                                        moveTasks={getMoveTasks(topics, tasks, setTasks)}
-                                        duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
-                                        fancy={fancy}
-                                        setTasks={setTasks}
-                                        tasks={tasks}
-            
-                                    />
-                                </li>
-                            ))}
+                            />
+                        </li>
+                        {task.subTaskIds && task.subTaskIds.length > 0 && task.unfolded && (
+                            <ul>
+                                {tasks
+                                    // .map(t=>{console.log("Hi, I'm a subtask"+t);return t})
+                                    .filter(subtask => task.subTaskIds.includes(subtask.id))
+                                    .map(subtask => (
+                                        <li key={topic.id + ' - ' + subtask.id}>
+                                            <Task name={subtask.name}
+                                                id={subtask.id}
+                                                completed={subtask.completed}
+                                                taskFinishStatus={subtask.finishStatus}
+                                                setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, subtask.id)}
+                                                currentTopicViewIndex={findTopicViewIdx(topic.id, subtask)}
+                                                currentTopicName={topic.name}
+                                                currentTopicId={topic.id}
+                                                setTaskName={getSetTaskNameFunc(setTasks, tasks, subtask.id)}
+                                                deleteTask={getDeleteTask(setTasks, tasks, subtask.id)}
+                                                completeTask={getCompleteTask(setTasks, tasks, subtask.id)}
+                                                plan={getPlanTaskForWeek(setTasks, tasks, subtask.id)}
+                                                unplan={getUnplanTask(setTasks, tasks, subtask.id)}
+                                                toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, subtask.id)}
+                                                planned={subtask.thisWeek}
+                                                repeated={subtask.repeated}
+                                                taskLastCompletion={subtask.lastFinished}
+                                                addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, subtask.id, topic.id, findTopicViewIdx(topic.id, task))}
+                                                deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, subtask.id, topic.id)}
+                                                selected={selectedTasks.find((st) => (st.taskId == subtask.id && st.topicId == topic.id)) ? true : false}
+                                                selectedTasks={selectedTasks}
+                                                moveTasks={getMoveTasks(topics, tasks, setTasks)}
+                                                duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
+                                                fancy={fancy}
+                                                setTasks={setTasks}
+                                                tasks={tasks}
+
+                                            />
+                                        </li>
+                                    ))}
                             </ul>
-                    )}
+                        )}
                     </>
-                    
-                
+
+
                 ))
             }
         </ul></div>

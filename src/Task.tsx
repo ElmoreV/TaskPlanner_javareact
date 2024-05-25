@@ -7,15 +7,22 @@ import { FinishedState } from './TaskInterfaces.tsx';
 const Task = (props) => {
     const { id, name, setTaskName, deleteTask,
         completed, completeTask,
+        toggleFold, unfolded,
         taskFinishStatus, setTaskFinishStatus,
         currentTopicName, currentTopicId, moveTasks, currentTopicViewIndex,
         planned, plan, unplan,
         repeated, toggleRepeatTask, taskLastCompletion,
         selectedTasks, addToSelection, deleteFromSelection, selected,
         duplicateTask, setTasks, tasks,
+        addSubTask, hasSubTasks,
         fancy,
     } = props;
     console.debug("Rendering Task")
+    const folded_symbol = '>';
+    const unfolded_symbol = 'v';
+
+
+
     if (taskFinishStatus === undefined) { }
 
     const [isEditing, setIsEditing] = useState(false);
@@ -73,6 +80,11 @@ const Task = (props) => {
         console.info("Stop duplicate dragging task")
         setIsDragging(false)
     }
+    const handleToggleFold = () => {
+        if (!isEditing) {
+            toggleFold(id);
+        }
+    };
 
     const handleDrop = (e) => {
         e.preventDefault()
@@ -222,11 +234,14 @@ const Task = (props) => {
         dragHandlers={dragHandlers}
         dropHandlers={dropHandlers}
         name={fullName}
+        foldingSymbol={hasSubTasks ? (unfolded ? unfolded_symbol : folded_symbol) : null}
+        toggleFold={hasSubTasks ? handleToggleFold : null}
         textEditHandlers={textEditHandlers}
         inputRef={inputRef}
         isEditing={isEditing}
         toggleEdit={toggleEdit}
         deleteTask={unselect(deleteTask)}
+        addSubTask={unselect(addSubTask)}
         completeTask={completeTask}
         markTaskIrrelevant={markTaskIrrelevant}
         markTaskImpossible={markTaskImpossible}
