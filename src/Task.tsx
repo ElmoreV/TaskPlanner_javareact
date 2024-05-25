@@ -11,6 +11,7 @@ const Task = (props) => {
         taskFinishStatus, setTaskFinishStatus,
         currentTopicName, currentTopicId, moveTasks, currentTopicViewIndex,
         planned, plan, unplan,
+        currentSuperTaskId,
         repeated, toggleRepeatTask, taskLastCompletion,
         selectedTasks, addToSelection, deleteFromSelection, selected,
         duplicateTask, setTasks, tasks,
@@ -57,6 +58,7 @@ const Task = (props) => {
         e.dataTransfer.setData('TaskId', id)
         e.dataTransfer.setData('TopicName', currentTopicName)
         e.dataTransfer.setData('TopicId', currentTopicId)
+        e.dataTransfer.setData("SuperTaskId", currentSuperTaskId)
         console.info('Dragging task')
     }
     const handleDragEnd = () => {
@@ -93,23 +95,27 @@ const Task = (props) => {
         if (type == "Task") {
             var task_id = Number(e.dataTransfer.getData("TaskId"))
             var oldTopicId = Number(e.dataTransfer.getData("TopicId"))
+            var oldSuperTaskId = Number(e.dataTransfer.getData("SuperTaskId"))
             console.info(`Dropped task with id ${task_id} with old topic id ${oldTopicId} on task (id:${id}) within topic with id ${currentTopicId}`)
             // console.info(changeTopic)
             let taskIds = []
             let oldTopicIds = []
+            let oldSuperTaskIds = []
             taskIds.push(task_id)
             oldTopicIds.push(oldTopicId)
+            oldSuperTaskIds.push(oldSuperTaskId)
             console.info(selectedTasks)
             if (selectedTasks && selectedTasks.length > 0) {
                 selectedTasks.forEach((st) => {
                     console.info(`Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${currentTopicId}`)
                     taskIds.push(st.taskId)
                     oldTopicIds.push(st.topicId)
+                    oldSuperTaskIds.push(st.superTaskId)
                 })
             }
 
             if (moveTasks) {
-                moveTasks(taskIds, oldTopicIds, currentTopicId, currentTopicViewIndex)
+                moveTasks(taskIds, oldTopicIds, oldSuperTaskIds, currentTopicId, currentTopicViewIndex, currentSuperTaskId)
             }
         } else if (type == "TaskDuplicate") {
             var taskId = Number(e.dataTransfer.getData("TaskId"))

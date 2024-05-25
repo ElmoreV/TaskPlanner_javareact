@@ -36,10 +36,11 @@ import { FinishedState } from './TaskInterfaces.tsx';
 import ImportExport from './ImportExport';
 
 class SelectedTask {
-    constructor(taskId, topicId, topicViewIndex) {
+    constructor(taskId, topicId, topicViewIndex, superTaskId) {
         this.taskId = taskId
         this.topicId = topicId
         this.topicViewIndex = topicViewIndex
+        this.superTaskId = superTaskId
     }
 }
 
@@ -61,19 +62,17 @@ const recursiveShowTask = (topic, superTask, task, tasks,
     // 1. Show task
     // 2. Show all subtasks
 
-    // Do not show subtasks when task is folded
     const findTopicViewIdx = (topicId, task) => {
         return task.topicViewIndices[task.topics.findIndex(taskTopicId => taskTopicId == topicId)]
     }
+
+    // Return the following HTML structure
     //  <>
     //      <li topic.id - suipertask.id - task id>
     //      <Task>
     //      <ul>
     //          subtasks
     //          
-
-
-
     return (
         <>
             <li key={(topic && topic.id) + "-" + (superTask && superTask.id) + ' - ' + task.id}>
@@ -85,6 +84,7 @@ const recursiveShowTask = (topic, superTask, task, tasks,
                     currentTopicViewIndex={topic && findTopicViewIdx(topic.id, task)}
                     currentTopicName={topic && topic.name}
                     currentTopicId={topic && topic.id}
+                    currentSuperTaskId={superTask && superTask.id}
                     setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
                     deleteTask={getDeleteTask(setTasks, tasks, task.id)}
                     addSubTask={getAddNewSubTask(setTasks, tasks, task.id)}
@@ -96,9 +96,9 @@ const recursiveShowTask = (topic, superTask, task, tasks,
                     planned={task.thisWeek}
                     repeated={task.repeated}
                     taskLastCompletion={task.lastFinished}
-                    addToSelection={() => topic && addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic.id, findTopicViewIdx(topic.id, task))}
-                    deleteFromSelection={() => topic && deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
-                    selected={topic && selectedTasks.find((st) => (st.taskId == task.id && st.topicId == topic.id)) ? true : false}
+                    addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, topic && findTopicViewIdx(topic.id, task), superTask && superTask.id)}
+                    deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, superTask && superTask.id)}
+                    selected={selectedTasks.find((st) => (st.taskId == task.id && (!topic || st.topicId == topic.id) && (!superTask || st.superTaskId == superTask.id))) ? true : false}
                     selectedTasks={selectedTasks}
                     moveTasks={getMoveTasks(topics, tasks, setTasks)}
                     duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
@@ -149,6 +149,7 @@ const recursiveShowTopic = (topic, tasks,
         return task.topicViewIndices[task.topics.findIndex(taskTopicId => taskTopicId == topicId)]
     }
 
+    // Return the following HTML structure
     //  <div div_topic_id>
     //      <li>
     //          <Topic>
@@ -156,8 +157,6 @@ const recursiveShowTopic = (topic, tasks,
     //          Other subtopics
     //      <ul>
     //          Tasks inside of topic
-
-
     return (<div key={'div_' + topic.id}>
         <li key={topic.id}>
             <Topic
@@ -215,17 +214,16 @@ const showTopics = (topics, tasks,
         hideCompletedItems, showRepeatedOnly,
         fancy)))
 }
-const addTaskToSelection = (selectedTasks, setSelectedTasks, taskId, topicId, topicViewIndex) => {
+const addTaskToSelection = (selectedTasks, setSelectedTasks, taskId, topicId, topicViewIndex, superTaskId) => {
     let newSelectedTasks = [...selectedTasks]
-    newSelectedTasks.push(new SelectedTask(taskId, topicId, topicViewIndex))
+    newSelectedTasks.push(new SelectedTask(taskId, topicId, topicViewIndex, superTaskId))
     setSelectedTasks(newSelectedTasks)
 }
-const deleteTaskFromSelection = (selectedTasks, setSelectedTasks, taskId, topicId) => {
+const deleteTaskFromSelection = (selectedTasks, setSelectedTasks, taskId, topicId, superTaskId) => {
     let newSelectedTasks = [...selectedTasks]
-    newSelectedTasks = newSelectedTasks.filter((selTask) => !(selTask.taskId == taskId && selTask.topicId == topicId))
+    newSelectedTasks = newSelectedTasks.filter((selTask) => !(selTask.taskId == taskId && selTask.topicId == topicId && selTask.superTaskId == superTaskId))
     setSelectedTasks(newSelectedTasks)
 }
-
 
 
 const TaskList = (props) => {
@@ -262,8 +260,6 @@ const TaskList = (props) => {
             document.removeEventListener('click', clearSelectionOnClickOutside);
         };
     }, []); // Empty dependency array means this effect runs once on mount
-
-
 
     const onHideCompletedItemsChange = () => {
         setHideCompletedItems(!hideCompletedItems)
@@ -315,7 +311,6 @@ const TaskList = (props) => {
     checkForDuplicateIds(tasks)
 
     return (
-        // <div>
         <div className='task-list'>
             <button onClick={getAddTopic(setTopics, topics)}> Add New Root topic</button><br />
             <label><input
@@ -344,7 +339,6 @@ const TaskList = (props) => {
             </ul>
             <button onClick={() => testFunction()}>Test Function</button>
         </div>
-
     );
 }
 

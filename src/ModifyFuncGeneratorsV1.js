@@ -14,46 +14,89 @@ import {
     generateEmptyTask,
     insertTaskInstanceIntoTask,
     insertTaskInstanceIntoTopic,
-    removeTaskInstanceFromTopic
+    removeTaskInstanceFromTopic,
+    removeTaskInstanceFromTask,
 } from './ModifyTaskTopicAdgElements';
 import { getPlanTaskForWeek } from './TaskModifyFuncGens';
+
+// Now need four functions
+// Move from task in topic to subtask in task
+// Move from task in subtask to subtask in other task
+// Move from task in subtask to task in topic
+// Move from task in topic to task in topic
+
+
 
 const getMoveTasks = (topics, tasks, setTasks) => {
     // taskIds here is the id of the task
     // sourceTopicIds is the topic-object where the task came from
     // targetTopicId is the topic-object where the task is going to
-    const moveTasks = (taskIds, sourceTopicIds, targetTopicId, targetViewIndex) => {
+    // const moveTasks = (taskIds, sourceTopicIds, targetTopicId, targetViewIndex) => {
+    const moveTasks = (taskIds, sourceTopicIds, sourceTaskIds, targetTopicId, targetViewIndex, targetTaskId) => {
         // Validation checks + defaults
         if (!Array.isArray(taskIds)) { taskIds = [taskIds] }
         if (!Array.isArray(sourceTopicIds)) { sourceTopicIds = [sourceTopicIds] }
-        if (sourceTopicIds.length != taskIds.length) {
+        if (!Array.isArray(sourceTaskIds)) { sourceTaskIds = [sourceTaskIds] }
+        if (sourceTaskIds.length != taskIds.length) {
+            console.error('The length of the taskIds and sourceTopicIds should be the same')
+            return
+        }
+        if (sourceTaskIds.length != taskIds.length) {
             console.error('The length of the taskIds and sourceTopicIds should be the same')
             return
         }
         let newTasks = [...tasks]
-        const targetTopic = findTopicByTopicId(topics, targetTopicId)
-        if (!targetTopic) {
-            console.warn(`Target topic ${targetTopicId} does not exist.`)
-            return
+        if (targetTopicId) {
+            const targetTopic = findTopicByTopicId(topics, targetTopicId)
+            if (!targetTopic) {
+                console.warn(`Target topic ${targetTopicId} does not exist.`)
+                return
+            }
+        } else if (targetTaskId) {
+            const targetTask = findTaskByTaskId(tasks, targetTaskId)
+            if (!targetTask) {
+                console.warn(`Target super task ${targetTaskId} does not exist.`)
+                return
+            }
+        } else {
+            console.warn("Either targetTaskId or targetTopicId needs to be specified.")
         }
-
-        //TODO: remove duplicates
-        //TODO: Make sure that tasks that come from the same topicId stay in the same order (local sequence so to say).
-        // Maybe calculate a global index and sort them by this.
-
 
         // go through all 'operations' 1-by-1
         taskIds.forEach((taskId, idx) => {
             let sourceTopicId = sourceTopicIds[idx]
-            newTasks = removeTaskInstanceFromTopic(newTasks, taskId, sourceTopicId)
-            // If the task is already in the targetTopic, remove it
-            let taskTopics = newTasks.find((task) => task.id == taskId);
-            if (taskTopics.topics.includes(targetTopicId)) {
-                console.info(`Task ${taskId} is already in topic ${targetTopicId}`)
-
-                newTasks = removeTaskInstanceFromTopic(newTasks, taskId, targetTopicId)
+            let sourceTaskId = sourceTaskIds[idx]
+            // Removing from source location (task or topic)
+            if (sourceTopicId) {
+                newTasks = removeTaskInstanceFromTopic(newTasks, taskId, sourceTopicId)
+            } else if (sourceTaskId) {
+                newTasks = removeTaskInstanceFromTask(newTasks, taskId, sourceTaskId)
+            } else {
+                console.warn(`No source (task or topic) defined for  ${taskId}.`)
+                return
             }
-            newTasks = insertTaskInstanceIntoTopic(newTasks, taskId, targetTopicId, targetViewIndex)
+            // Adding to destination location (task or topic)
+            if (targetTopicId) {
+                // If the task is already in the targetTopic, remove it
+                let taskTopics = newTasks.find((task) => task.id == taskId);
+                if (taskTopics.topics.includes(targetTopicId)) {
+                    console.info(`Task ${taskId} is already in topic ${targetTopicId}`)
+
+                    newTasks = removeTaskInstanceFromTopic(newTasks, taskId, targetTopicId)
+                }
+                newTasks = insertTaskInstanceIntoTopic(newTasks, taskId, targetTopicId, targetViewIndex)
+
+            } else if (targetTaskId) {
+                // If task already in target supertask, remove it
+                let superTask = newTasks.find((task) => task.id === targetTaskId)
+                if (superTask.subTaskIds && superTask.subTaskIds.includes(taskId)) {
+                    console.info(`Task ${taskId} is already in supertask ${targetTaskId}`)
+                    newTasks = removeTaskInstanceFromTask(newTasks, taskId, targetTaskId)
+                }
+                if (superTask.subTaskIds === undefined) { superTask.subTaskIds = [] }
+                newTasks = insertTaskInstanceIntoTask(newTasks, taskId, targetTaskId)
+            }
+
         })
         setTasks(newTasks)
     }
@@ -125,7 +168,7 @@ const getAddNewSubTask = (setTasks, tasks, superTaskId) => {
         let newSubTask = generateEmptyTask(newTasks)
         newTasks = addOrphanTasktoTaskList(newTasks, newSubTask)
 
-        newTasks = insertTaskInstanceIntoTask(newTasks, superTaskId, newSubTask.id)
+        newTasks = insertTaskInstanceIntoTask(newTasks, newSubTask.id, superTaskId)
         setTasks(newTasks)
     }
     return addTask

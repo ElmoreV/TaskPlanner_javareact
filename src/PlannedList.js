@@ -11,6 +11,7 @@ import {
     getUnplanTask,
     getSetTaskNameFunc,
     getSetTaskFinishStatus,
+    getToggleFoldTask,
 } from "./TaskModifyFuncGens";
 
 import { FinishedState } from './TaskInterfaces.tsx';
@@ -24,6 +25,65 @@ class SelectedTask {
     }
 }
 
+
+const recursiveShowPlannedTask = (task, superTask, setTasks, tasks,
+    addTaskToSelection, deleteTaskFromSelection, clearSelection, selectedTasks,
+    topics, fancy, isVisible) => {
+    console.log("Task recusrive planning " + task.name)
+    return (
+        <li key={"planned_" + (task.id)}>
+            <PlannedTask
+                taskName={task.name}
+                taskKey={task.id}
+                setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
+                // deleteTask = {getDeleteTask(task.id)}
+                completed={task.completed}
+                taskFinishStatus={task.finishStatus}
+                setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
+                completeTask={getCompleteTask(setTasks, tasks, task.id)}
+                scheduled={task.scheduled}
+                scheduleTask={getScheduleTask(setTasks, tasks, task.id)}
+                unplan={getUnplanTask(setTasks, tasks, task.id)}
+                // currentTopic = {task.topics[0]}
+                addToSelection={() => addTaskToSelection(task.id, task.weekOrderIndex)}
+                deleteFromSelection={() => deleteTaskFromSelection(task.id, task.weekOrderIndex)}
+                clearSelection={clearSelection}
+                selected={selectedTasks.find((st) => (st.taskId == task.id && st.weekOrderIndex == task.weekOrderIndex)) ? true : false}
+                selectedTasks={selectedTasks}
+                currentWeekOrderIndex={task.weekOrderIndex}
+                changeWeekOrderIndex={getChangeWeekOrderIndex(setTasks, tasks)}
+                topics={topics}
+                taskTopics={task.topics}
+                fancy={fancy}
+                spawnNewTask={getSpawnNewTask(setTasks, tasks, task)}
+
+                hasSubTasks={task.subTaskIds && task.subTaskIds.length > 0}
+                unfolded={task.unfolded}
+                toggleFold={getToggleFoldTask(setTasks, tasks)}
+
+            />
+            {
+                task.subTaskIds && task.subTaskIds.length > 0 && task.unfolded && (
+                    <ul>
+                        {tasks
+                            // .map(t=>{console.log("Hi, I'm a subtask"+t);return t})
+                            .filter(subTask => task.subTaskIds.includes(subTask.id))
+                            .filter((subTask) => isVisible(subTask, false))
+                            // TODO: ordering of subtasks
+                            .map(subTask => (
+                                recursiveShowPlannedTask(subTask, task, setTasks, tasks,
+                                    addTaskToSelection, deleteTaskFromSelection, clearSelection, selectedTasks,
+                                    topics, fancy, isVisible))
+                            )
+                        }
+                    </ul>
+                )
+            }
+        </li>
+    )
+
+
+}
 
 const PlannedList = (props) => {
     const { tasks, setTasks, topics, setTopics, fancy } = props;
@@ -74,18 +134,18 @@ const PlannedList = (props) => {
             && task.thisWeek) ? { ...task, thisWeek: false, scheduled: false } : task))
         setTasks(newTasks)
     }
-    const isVisible = (task) => {
+    const isVisible = (task, checkWeek) => {
         return ((!((task.completed || (task.finishStatus !== undefined && task.finishStatus !== FinishedState.NotFinished))
             && hideCompletedItems))
             && !(task.scheduled && hideScheduledItems)
-            && task.thisWeek
+            && (task.thisWeek || !checkWeek)
         )
     }
 
     const copyListToClipboard = () => {
         let taskList = tasks.sort((taskA, taskB) => taskA.weekOrderIndex > taskB.weekOrderIndex).reduce(
             (acc, task) =>
-                isVisible(task) ? acc.concat(task.name, '\n') : acc
+                isVisible(task, true) ? acc.concat(task.name, '\n') : acc
             // if (isVisible(task)) { return acc.concat(task.name, '\n') } else { return acc }
 
             // isVisible(task) ? acc.concat(task.name, '\n') : null
@@ -119,39 +179,12 @@ const PlannedList = (props) => {
 
             <ul key='root_topics'>
                 {tasks.sort((taskA, taskB) => taskA.weekOrderIndex > taskB.weekOrderIndex)
-                    .filter((task) => (isVisible(task))).map((task) => {
-                        return (
-                            <li key={"planned_" + (task.id)}>
-                                <PlannedTask
-                                    taskName={task.name}
-                                    taskKey={task.id}
-                                    setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
-                                    // deleteTask = {getDeleteTask(task.id)}
-                                    completed={task.completed}
-                                    taskFinishStatus={task.finishStatus}
-                                    setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
-                                    completeTask={getCompleteTask(setTasks, tasks, task.id)}
-                                    scheduled={task.scheduled}
-                                    scheduleTask={getScheduleTask(setTasks, tasks, task.id)}
-                                    unplan={getUnplanTask(setTasks, tasks, task.id)}
-                                    // currentTopic = {task.topics[0]}
-                                    addToSelection={() => addTaskToSelection(task.id, task.weekOrderIndex)}
-                                    deleteFromSelection={() => deleteTaskFromSelection(task.id, task.weekOrderIndex)}
-                                    clearSelection={clearSelection}
-                                    selected={selectedTasks.find((st) => (st.taskId == task.id && st.weekOrderIndex == task.weekOrderIndex)) ? true : false}
-                                    selectedTasks={selectedTasks}
-                                    currentWeekOrderIndex={task.weekOrderIndex}
-                                    changeWeekOrderIndex={getChangeWeekOrderIndex(setTasks, tasks)}
-                                    topics={topics}
-                                    taskTopics={task.topics}
-                                    fancy={fancy}
-                                    spawnNewTask={getSpawnNewTask(setTasks, tasks, task)}
-
-                                />
-
-                            </li>
-                        )
-                    }
+                    .filter((task) => (isVisible(task, true)))
+                    .map((task) => (
+                        recursiveShowPlannedTask(task, null, setTasks, tasks,
+                            addTaskToSelection, deleteTaskFromSelection, clearSelection, selectedTasks,
+                            topics, fancy, isVisible)
+                    )
                     )}
             </ul>
         </div>

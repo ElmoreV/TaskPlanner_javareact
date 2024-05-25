@@ -13,6 +13,7 @@ const PlannedTask = (props) => {
         changeWeekOrderIndex, currentWeekOrderIndex,
         fancy,
         spawnNewTask,
+        hasSubTasks, toggleFold, unfolded,
     } = props;
 
     console.debug("Rendering PlannedTask")
@@ -20,6 +21,8 @@ const PlannedTask = (props) => {
     const [isDragging, setIsDragging] = useState(false);
     const [isDraggingAllowed, setIsDraggingAllowed] = useState(true);
 
+    const folded_symbol = '>';
+    const unfolded_symbol = 'v';
 
     // let repeated = true
     const markTaskIrrelevant = () => {
@@ -109,7 +112,11 @@ const PlannedTask = (props) => {
             event.preventDefault();
         }
     };
-
+    const handleToggleFold = () => {
+        if (!isEditing) {
+            toggleFold(taskKey);
+        }
+    };
     const handleBlur = () => {
         setIsDraggingAllowed(true);
         setIsEditing(false);
@@ -184,6 +191,10 @@ const PlannedTask = (props) => {
             textBarWidth="570px"
             fancy={fancy}
             spawnNewTask={spawnNewTask}
+
+            foldingSymbol={hasSubTasks ? (unfolded ? unfolded_symbol : folded_symbol) : null}
+            toggleFold={hasSubTasks ? handleToggleFold : null}
+
         />
 
     </>)
