@@ -133,6 +133,14 @@ const removeTaskInstanceFromTask = (tasks, taskId, superTaskId) => {
 const deleteEntireTask = (tasks, taskId) => {
     let newTasks = [...tasks]
     newTasks = newTasks.filter(task => (task.id !== taskId))
+    // Remove this id from subtasks
+    newTasks = newTasks.map(task => {
+        return {
+            ...task,
+            subTaskIds: (task.subTaskIds ? task.subTaskIds.filter(st => (st !== taskId)) : []),
+        }
+    })
+
     return newTasks
 }
 
