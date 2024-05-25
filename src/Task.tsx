@@ -17,10 +17,9 @@ const Task = (props) => {
         addSubTask, hasSubTasks,
         fancy,
     } = props;
-    console.debug("Rendering Task")
+    console.debug("Rendering Task: " + name)
     const folded_symbol = '>';
     const unfolded_symbol = 'v';
-
 
 
     if (taskFinishStatus === undefined) { }

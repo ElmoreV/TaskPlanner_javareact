@@ -119,8 +119,12 @@ const getAddNewSubTask = (setTasks, tasks, superTaskId) => {
         if (!superTask) {
             return
         }
+        if (superTask.subTaskIds == undefined) {
+            superTask.subTaskIds = []
+        }
         let newSubTask = generateEmptyTask(newTasks)
         newTasks = addOrphanTasktoTaskList(newTasks, newSubTask)
+
         newTasks = insertTaskInstanceIntoTask(newTasks, superTaskId, newSubTask.id)
         setTasks(newTasks)
     }

@@ -44,7 +44,6 @@ const TaskContent = (props) => {
 
     // Applying dynamic class names based on the classStr prop
     const taskClassNames = [styles.task, styles[classStr]].filter(Boolean).join(' ');
-
     return (
         // <div className={styles.task}>
         <div className={styles.taskContent}>

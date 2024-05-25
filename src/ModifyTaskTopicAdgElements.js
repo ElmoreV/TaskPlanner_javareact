@@ -12,6 +12,7 @@ const generateEmptyTask = (tasks) => {
         id: newId,
         topics: [],
         topicViewIndices: [],
+        subTaskIds: [],
         completed: false,
         finishStatus: FinishedState.NotFinished,
         thisWeek: false,

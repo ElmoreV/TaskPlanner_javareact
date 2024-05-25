@@ -51,6 +51,85 @@ const isTaskVisible = (task, hideCompletedItems, showRepeatedOnly) => {
         && (task.repeated || !showRepeatedOnly))
 }
 
+const recursiveShowTask = (topic, superTask, task, tasks,
+    topics,
+    setTasks,
+    selectedTasks, setSelectedTasks,
+    hideCompletedItems, showRepeatedOnly,
+    fancy
+) => {
+    // 1. Show task
+    // 2. Show all subtasks
+
+    // Do not show subtasks when task is folded
+    const findTopicViewIdx = (topicId, task) => {
+        return task.topicViewIndices[task.topics.findIndex(taskTopicId => taskTopicId == topicId)]
+    }
+    //  <>
+    //      <li topic.id - suipertask.id - task id>
+    //      <Task>
+    //      <ul>
+    //          subtasks
+    //          
+
+
+
+    return (
+        <>
+            <li key={(topic && topic.id) + "-" + (superTask && superTask.id) + ' - ' + task.id}>
+                <Task name={task.name}
+                    id={task.id}
+                    completed={task.completed}
+                    taskFinishStatus={task.finishStatus}
+                    setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
+                    currentTopicViewIndex={topic && findTopicViewIdx(topic.id, task)}
+                    currentTopicName={topic && topic.name}
+                    currentTopicId={topic && topic.id}
+                    setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
+                    deleteTask={getDeleteTask(setTasks, tasks, task.id)}
+                    addSubTask={getAddNewSubTask(setTasks, tasks, task.id)}
+                    hasSubTasks={task.subTaskIds && task.subTaskIds.length > 0}
+                    completeTask={getCompleteTask(setTasks, tasks, task.id)}
+                    plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
+                    unplan={getUnplanTask(setTasks, tasks, task.id)}
+                    toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
+                    planned={task.thisWeek}
+                    repeated={task.repeated}
+                    taskLastCompletion={task.lastFinished}
+                    addToSelection={() => topic && addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic.id, findTopicViewIdx(topic.id, task))}
+                    deleteFromSelection={() => topic && deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
+                    selected={topic && selectedTasks.find((st) => (st.taskId == task.id && st.topicId == topic.id)) ? true : false}
+                    selectedTasks={selectedTasks}
+                    moveTasks={getMoveTasks(topics, tasks, setTasks)}
+                    duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
+                    fancy={fancy}
+                    toggleFold={getToggleFoldTask(setTasks, tasks)}
+                    setTasks={setTasks}
+                    tasks={tasks}
+                    unfolded={task.unfolded}
+
+                />
+            </li >
+            {
+                task.subTaskIds && task.subTaskIds.length > 0 && task.unfolded && (
+                    <ul>
+                        {tasks
+                            // .map(t=>{console.log("Hi, I'm a subtask"+t);return t})
+                            .filter(subTask => task.subTaskIds.includes(subTask.id))
+                            .filter((subTask) => isTaskVisible(subTask, hideCompletedItems, showRepeatedOnly))
+                            // TODO: ordering of subtasks
+                            .map(subTask => (
+                                recursiveShowTask(null, task, subTask, tasks, topics, setTasks,
+                                    selectedTasks, setSelectedTasks, hideCompletedItems, showRepeatedOnly, fancy))
+                            )
+                        }
+                    </ul>
+                )
+            }
+        </>
+    )
+}
+
 
 
 const recursiveShowTopic = (topic, tasks,
@@ -65,34 +144,41 @@ const recursiveShowTopic = (topic, tasks,
     // 3. Show all tasks
 
     // Do not show subtopics when Topic is folded
-    // console.debug('Hello2')
-    // console.debug(topics)
-    // console.debug(topic)
+
     const findTopicViewIdx = (topicId, task) => {
         return task.topicViewIndices[task.topics.findIndex(taskTopicId => taskTopicId == topicId)]
     }
 
-    return (<div key={'div_' + topic.id}><li key={topic.id}>
-        <Topic
-            name={topic.name}
-            id={topic.id}
-            unfolded={topic.unfolded}
-            selectedTasks={selectedTasks}
-            setTopicName={getSetTopicNameFunc(setTopics, topics, topic.id)}
-            toggleFold={getToggleFold(setTopics, topics)}
-            addSubTopic={getAddSubtopic(setTopics, topics, topic)}
-            moveTopic={getMoveTopic(setTopics, topics)}
-            addTask={getAddTask(setTasks, tasks, topics, topic.id)}
-            moveTasks={getMoveTasks(topics, tasks, setTasks)}
-            unfoldAll={getUnfoldAll(setTopics, topics)}
-            foldAll={getFoldAll(setTopics, topics)}
-            // updateTaskTopics={getUpdateTaskTopics(setTasks, tasks, topic.name)}
-            duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
-            deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}
-            fancy={fancy}
+    //  <div div_topic_id>
+    //      <li>
+    //          <Topic>
+    //      <ul>
+    //          Other subtopics
+    //      <ul>
+    //          Tasks inside of topic
 
-        />
-    </li>
+
+    return (<div key={'div_' + topic.id}>
+        <li key={topic.id}>
+            <Topic
+                name={topic.name}
+                id={topic.id}
+                unfolded={topic.unfolded}
+                selectedTasks={selectedTasks}
+                setTopicName={getSetTopicNameFunc(setTopics, topics, topic.id)}
+                toggleFold={getToggleFold(setTopics, topics)}
+                addSubTopic={getAddSubtopic(setTopics, topics, topic)}
+                moveTopic={getMoveTopic(setTopics, topics)}
+                addTask={getAddTask(setTasks, tasks, topics, topic.id)}
+                moveTasks={getMoveTasks(topics, tasks, setTasks)}
+                unfoldAll={getUnfoldAll(setTopics, topics)}
+                foldAll={getFoldAll(setTopics, topics)}
+                duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
+                deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}
+                fancy={fancy}
+
+            />
+        </li>
         <ul key={topic.id + '_topics'}>{topic.unfolded && topic.subtopics.map((subtopic) => (
             recursiveShowTopic(subtopic, tasks,
                 setTopics, topics,
@@ -102,90 +188,14 @@ const recursiveShowTopic = (topic, tasks,
                 fancy)
         ))}</ul>
         <ul key={topic.id + '_tasks'}>
-            {topic.unfolded && tasks//.sort((taskA, taskB) => { return taskA.name > taskB.name })
-                // .map((task) => (
-                //     ( && task.topics.includes(topic.id) ) ?
+            {topic.unfolded && tasks
                 .filter((task) => task.topics.includes(topic.id))
                 .filter((task) => isTaskVisible(task, hideCompletedItems, showRepeatedOnly))
                 .slice(0).sort((taskA, taskB) => { return findTopicViewIdx(topic.id, taskA) - findTopicViewIdx(topic.id, taskB) })
                 .map(task => (
-                    <>
-                        <li key={topic.id + ' - ' + task.id}>
-                            <Task name={task.name}
-                                id={task.id}
-                                completed={task.completed}
-                                taskFinishStatus={task.finishStatus}
-                                setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
-                                currentTopicViewIndex={findTopicViewIdx(topic.id, task)}
-                                currentTopicName={topic.name}
-                                currentTopicId={topic.id}
-                                setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
-                                deleteTask={getDeleteTask(setTasks, tasks, task.id)}
-                                addSubTask={getAddNewSubTask(setTasks, tasks, task.id)}
-                                hasSubTasks={true}
-                                completeTask={getCompleteTask(setTasks, tasks, task.id)}
-                                plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
-                                unplan={getUnplanTask(setTasks, tasks, task.id)}
-                                toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
-                                planned={task.thisWeek}
-                                repeated={task.repeated}
-                                taskLastCompletion={task.lastFinished}
-                                addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic.id, findTopicViewIdx(topic.id, task))}
-                                deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic.id)}
-                                selected={selectedTasks.find((st) => (st.taskId == task.id && st.topicId == topic.id)) ? true : false}
-                                selectedTasks={selectedTasks}
-                                moveTasks={getMoveTasks(topics, tasks, setTasks)}
-                                duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
-                                fancy={fancy}
-                                toggleFold={getToggleFoldTask(setTasks, tasks)}
-                                setTasks={setTasks}
-                                tasks={tasks}
-
-                            />
-                        </li>
-                        {task.subTaskIds && task.subTaskIds.length > 0 && task.unfolded && (
-                            <ul>
-                                {tasks
-                                    // .map(t=>{console.log("Hi, I'm a subtask"+t);return t})
-                                    .filter(subtask => task.subTaskIds.includes(subtask.id))
-                                    .map(subtask => (
-                                        <li key={topic.id + ' - ' + subtask.id}>
-                                            <Task name={subtask.name}
-                                                id={subtask.id}
-                                                completed={subtask.completed}
-                                                taskFinishStatus={subtask.finishStatus}
-                                                setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, subtask.id)}
-                                                currentTopicViewIndex={findTopicViewIdx(topic.id, subtask)}
-                                                currentTopicName={topic.name}
-                                                currentTopicId={topic.id}
-                                                setTaskName={getSetTaskNameFunc(setTasks, tasks, subtask.id)}
-                                                deleteTask={getDeleteTask(setTasks, tasks, subtask.id)}
-                                                completeTask={getCompleteTask(setTasks, tasks, subtask.id)}
-                                                plan={getPlanTaskForWeek(setTasks, tasks, subtask.id)}
-                                                unplan={getUnplanTask(setTasks, tasks, subtask.id)}
-                                                toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, subtask.id)}
-                                                planned={subtask.thisWeek}
-                                                repeated={subtask.repeated}
-                                                taskLastCompletion={subtask.lastFinished}
-                                                addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, subtask.id, topic.id, findTopicViewIdx(topic.id, task))}
-                                                deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, subtask.id, topic.id)}
-                                                selected={selectedTasks.find((st) => (st.taskId == subtask.id && st.topicId == topic.id)) ? true : false}
-                                                selectedTasks={selectedTasks}
-                                                moveTasks={getMoveTasks(topics, tasks, setTasks)}
-                                                duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
-                                                fancy={fancy}
-                                                setTasks={setTasks}
-                                                tasks={tasks}
-
-                                            />
-                                        </li>
-                                    ))}
-                            </ul>
-                        )}
-                    </>
-
-
-                ))
+                    recursiveShowTask(topic, null, task, tasks, topics, setTasks,
+                        selectedTasks, setSelectedTasks, hideCompletedItems, showRepeatedOnly, fancy))
+                )
             }
         </ul></div>
     )
