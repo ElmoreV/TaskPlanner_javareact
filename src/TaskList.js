@@ -112,6 +112,7 @@ const recursiveShowTask = (topic, superTask, task, tasks,
             </li >
             {
                 task.subTaskIds && task.subTaskIds.length > 0 && task.unfolded && (
+
                     <ul>
                         {tasks
                             // .map(t=>{console.log("Hi, I'm a subtask"+t);return t})
@@ -308,7 +309,7 @@ const TaskList = (props) => {
             }
         })
     }
-    checkForDuplicateIds(tasks)
+    // checkForDuplicateIds(tasks)
 
     return (
         <div className='task-list'>
