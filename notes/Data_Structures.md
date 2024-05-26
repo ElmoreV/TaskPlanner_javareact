@@ -92,3 +92,16 @@ I'm pretty sure I just have to work it out. And make testing so that it's higher
 
 Important key facts:
 Only use id's or actual pointers to other objects.
+
+# Optimality of the data structure
+
+There are different actions that are performed, that would need to be optimized.
+
+## Application/website/app
+
+- Optimize for rendering time: read
+- And optimize for code complexity.
+
+## Storage
+
+- Optimize for size and git version ability
