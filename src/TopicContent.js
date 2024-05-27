@@ -27,21 +27,25 @@ const TopicContent = (props) => {
         {...dropHandlers}
     >
         <span onDoubleClick={handleFoldDoubleClick}>{foldingSymbol}</span>
-        {isEditing ?
-            (<input type='text'
-                value={name}
-                {...textEditHandlers}
+        <div className={styles.textBar}>
+            {isEditing ?
+                (<input type='text'
+                    value={name}
+                    {...textEditHandlers}
 
-                ref={inputRef}
-            />) :
-            (<span onDoubleClick={toggleEdit}>{name}</span>)
-        }
-        <button className={styles.topicAddTask}
-            onClick={handleAddTaskClick}>Add task</button>
-        <button className={styles.topicAddTopic}
-            onClick={handleAddTopicClick}>Add topic</button>
-        <button className={styles.topicDelete}
-            onClick={handleDeleteClick}>Delete</button>
+                    ref={inputRef}
+                />) :
+                (<span onDoubleClick={toggleEdit}>{name}</span>)
+            }
+        </div>
+        <div className={styles.buttonList}>
+            <button className={styles.topicAddTask}
+                onClick={handleAddTaskClick}>Add task</button>
+            <button className={styles.topicAddTopic}
+                onClick={handleAddTopicClick}>Add topic</button>
+            <button className={styles.topicDelete}
+                onClick={handleDeleteClick}>Delete</button>
+        </div>
     </div>);
 }
 

@@ -61,7 +61,6 @@ const TaskContent = (props) => {
                         {isEditing ?
                             <input type='text'
                                 value={name}
-                                width={textBarWidth}
                                 {...textEditHandlers}
                                 ref={inputRef}
                             /> :

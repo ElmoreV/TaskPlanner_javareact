@@ -6,6 +6,7 @@
 
 /* is contained in textbar */
 .taskText {
+    display: flex;
     flex-grow: 1;
     overflow-wrap: anywhere;
 }
@@ -27,6 +28,7 @@ span.buttonDuplicate:hover {
 
 .taskText input[type="text"] {
     box-sizing: border-box;
+    flex-grow: 1;
 }
 
 /*https://css-tricks.com/useful-flexbox-technique-alignment-shifting-wrapping/*/
