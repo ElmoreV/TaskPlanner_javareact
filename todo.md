@@ -245,10 +245,10 @@
 - [x] Archive minimal layout
 - [x] Change default tasks
 - [x] Fix Browse button/input to button element
-- [ ] Fix Topic text width
+- [x] Fix Topic text width
 - [ ] Improve the saving/modified/loading messaging
 - [ ] Add icons instead of buttons (with alt text and labels)
-- [ ] Improve layout
+- [x] Improve layout
 - [x] Fix/remove dark mode
 
 ## Maintainability:
@@ -325,6 +325,8 @@
 - [ ] When having more than 500+ tasks, it gets difficult to manage - information overload (maybe only show first 2 of every topic?)- 1M
 - [ ] Er is geen Undo knop - 4M
 - [ ] Tasks/topics with the same id will mess up program - 2M
+- [ ] Visual bug: overscrolling upwards/downwards give a small white margin in dark mode - 1m
+- [ ] Bug: editing name of completed item with timestamp messes up the whole name - 1M
 
 ### Reduce cognitive load:
 
@@ -355,10 +357,10 @@
 - [ ] The UI does not look professional -1m
 - [ ] Add browser tab icon - 1m
 - [ ] Add name of file to Tab Name -2m
-- [ ] The Dark Mode does not work correctly -1m
+- [x] The Dark Mode does not work correctly -1m
 - [ ] After dragging, the selection is sometimes not shown, even though it is still selected -6m
 - [ ] Hyperlinks die niet werken/in te korten zijn - 5m
-- [ ] It does not make sense to be able to plan/schedule a completed items. - 2m
+- [x] It does not make sense to be able to plan/schedule a completed items. - 2m
 - [ ]  Maybe show the whole list in increments of 10? Or logarithmically, with 10 being the lowest step?  I'm a bit overwhelmed when I see a group of 30 tasks after another. - 3m
 - [ ] Would like to monitor the progression of tasks over time (new tasks added, tasks completed, tasks scheduled, repeated tasks newly planned) -1m
 - [ ] When planning things from topic view to weekly view, the order in the weekly view is shifted from the topic view- 1m
@@ -370,20 +372,22 @@
 - [ ] Completed are almost same color as not yet planned/scheduled with a night filter - 1m
 - [ ] You should select a task and 'Go to Topic View/Planned View' as an action - 2m
 - [ ] Should be able to add a link to a certain task - 1m
-- [ ] The topic text width will mess up the whole layout if the text is too long - 1m
+- [x] The topic text width will mess up the whole layout if the text is too long - 4m
 - [ ] Add an index/list number to the planned list - 1m
 - [ ] Repeated tasks do not show when the next time should happen - 1m
 - [x] Repeated tasks do not show last completion/cannot retain information about when the next time would be -31m+
 - [ ] It is unclear where a duplicated task is already (is it already duplicated?) -12m
 - [x] Not being able to collapse or fold all the topics with one button - 27m
 - [x] Text width on a narrow screen is not handled well (text width not respected) - 10m
+- [ ] Selection is not unselected after dragging into folded topic (you can't see the selection) - 1m
+- [ ] Does not show the completion time as (x minutes/days) ago - 3m
 
 ### Filtering:
 
 - [ ] Hide completed items is not saved when changing views: 1m
 - [ ] Not being able to just have a list of all tasks (with filters): 2m
 - [ ] Ability to hide planned items in Topic View - 2m
-- [ ] Filtering is not available when in the middle of a large list - 5m
+- [ ] Filtering is not available when in the middle of a large list - 7m
 - [ ] Not being able to show only repeated and only completed tasks: 2m
 - [ ] Not being able to see what is scheduled and what not in the topic view - 1m
 - [x] In the weekly view: hide completed tasks is always unchecked - 2m - gefixt
@@ -394,6 +398,7 @@
 - [ ] Filter all tasks that are currently "Testing for completion" 
 - [ ] When looking through the system when it's filtered, it's easy to forget the state of the filtering (better feedback on filtering) - 1m
 - [ ] Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 15m
+- [ ] Does not show repeated tasks within supertasks when "Show only repeated tasks" is on. - 1m
 
 ## Modifying information:
 
@@ -401,7 +406,7 @@
 - [ ] Adding a task, while only showing repeated tasks, should add a repeated task: 3m
 - [ ] Dragging on the planning list has the wrong visual feedback when dragging downwards - 3m
 - [ ] When sorting all the new tasks - giving them a place - it was hard to find my way around. 2m
-- [ ] Text editing tends to lag/slow down if you type more - 7m
+- [ ] Text editing tends to lag/slow down if you type more - 17m
 - [ ] Dragging does suddenly stop if using a laptop drag. Maybe edge of screen? - 2m
 - [x] Selection also unselects when stopping dragging, which is also unexpected - 2m
 - [ ] Not being able to make a new root topic when the button is not in view: 1m
@@ -420,23 +425,24 @@
 - [ ] There needs to be some feedback on when something was done (an event log) /Adding processes as tasks (this is again a type of supertask/subtask) - 1m
 - [ ]  Kan moeilijk veel bestanden in een rij na elkaar selecteren. Als ze verspreid zijn is het prima. -3m
 - [x] Dat ik niet meteen een taak aan de bovenkant heb, maar aan de onderkant van de topic list, als ik Add Task doe - 7m
-- [ ] It does not make sense to be able to plan/schedule a completed items. - 2m
+- [x] It does not make sense to be able to plan/schedule a completed items. - 2m
 - [ ]  Dragging items sometimes ends up in the gap between the tasks - 2m
-- [ ]  Completed items are still scheduled. - 2m
+- [x]  Completed items are still scheduled. - 2m
 - [ ] Ability to create a task on the Weekly List - 1m
 - [ ] Selection in the weekly list gets unselected after dragging completes - 1m
 - [ ] - The order of selected tasks should be kept locally coherent (so same topic Id then the source Indices should be ordered) - 2m
 - [ ] Cannot merge topics together -1m
-- [ ] Should have ability that adds a task INSIDE of another task - 1m
+- [x] Should have ability that adds a task INSIDE of another task - 1m
 - [ ] Missing button for deleting just a task instance and not the whole task - 1m
 - [ ] Cannot order the subtopics - 2m
 - [ ] Cannot add a task in the middle/at the end of a list - 1m
 - [ ] I should be warned when I make a duplicate task - 1m
 - [x] Removing items from the planned list or completing an item, does not unschedule them - 14m
-- [ ] I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -15m 
+- [ ] I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -20m 
 - [x] Enter does not finish text input in planned list - 15m
 - [x] Not being able to duplicate multiple tasks at once in Topic View (forgetting which tasks are already copied): 19m
-- [ ] Ability to spawn follow-up tasks or subtask/necessary tasks on a task in the Weekly List from a task (Completing the task made another TODO) - 15m+
+- [x] Ability to spawn follow-up tasks or subtask/necessary tasks on a task in the Weekly List from a task (Completing the task made another TODO) - 15m+
+- [ ] Cannot plan (bulk edit) the entire selection at once - 1m
 
 ### Too long to drag a task from the top to the bottom - 18m :
 
@@ -464,7 +470,7 @@
 - [ ] Cannot add a schedule to a repeated item - 1m
 - [ ] I'm also missing positively correlated tasks (completing one makes the other easier) - 1m
 - [x] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 20m
-- [ ] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -20m
+- [x] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -20m
 - [ ] There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -17m
 - [ ] Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 15m
 - [x] Cannot order/sort the tasks/topics on the topic view - 21m
@@ -485,7 +491,7 @@
 - [ ] Deprecate the YAML format - 1m
 - [ ] It doesn't check that your file is changed before closing the window - 1m
 - [ ] It doesn't automatically show you that your file is changed and unsaved when you change something - 3m
-- [ ]  - Does not show exactly what the last time of saving/loading/modification was. (Can be a table with: Last saved: ... , Last modified: ..., Last loaded ... -2m
+- [ ]  - Does not show exactly what the last time of saving/loading/modification was. (Can be a table with: Last saved: ... , Last modified: ..., Last loaded ... -3m
 
 # Uncategorized:
 
