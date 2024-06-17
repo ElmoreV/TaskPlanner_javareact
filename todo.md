@@ -321,12 +321,12 @@
 - [x] Bug: source_supertopic is undefined in moveTopic - 1M- gefixt
 - [ ] Sometimes a new task will not be inserted at the absolute top -3m
 - [ ] - Should not be able to delete non-empty topics. - 1M
-- [ ] Visual bug: selected tasks are not outline after dragging completes in the topic view - 1m
+- [ ] Visual bug: selected tasks are not outline after dragging completes in the topic view - 2m
 - [ ] When having more than 500+ tasks, it gets difficult to manage - information overload (maybe only show first 2 of every topic?)- 1M
-- [ ] Er is geen Undo knop - 4M
-- [ ] Tasks/topics with the same id will mess up program - 2M
 - [ ] Visual bug: overscrolling upwards/downwards give a small white margin in dark mode - 1m
 - [ ] Bug: editing name of completed item with timestamp messes up the whole name - 1M
+- [ ] Er is geen Undo knop - 4M
+- [ ] Tasks/topics with the same id will mess up program - 2M
 
 ### Reduce cognitive load:
 
@@ -375,12 +375,12 @@
 - [x] The topic text width will mess up the whole layout if the text is too long - 4m
 - [ ] Add an index/list number to the planned list - 1m
 - [ ] Repeated tasks do not show when the next time should happen - 1m
+- [ ] Selection is not unselected after dragging into folded topic (you can't see the selection) - 1m
+- [ ] Does not show the completion time as (x minutes/days) ago - 3m
 - [x] Repeated tasks do not show last completion/cannot retain information about when the next time would be -31m+
 - [ ] It is unclear where a duplicated task is already (is it already duplicated?) -12m
 - [x] Not being able to collapse or fold all the topics with one button - 27m
 - [x] Text width on a narrow screen is not handled well (text width not respected) - 10m
-- [ ] Selection is not unselected after dragging into folded topic (you can't see the selection) - 1m
-- [ ] Does not show the completion time as (x minutes/days) ago - 3m
 
 ### Filtering:
 
@@ -406,7 +406,6 @@
 - [ ] Adding a task, while only showing repeated tasks, should add a repeated task: 3m
 - [ ] Dragging on the planning list has the wrong visual feedback when dragging downwards - 3m
 - [ ] When sorting all the new tasks - giving them a place - it was hard to find my way around. 2m
-- [ ] Text editing tends to lag/slow down if you type more - 17m
 - [ ] Dragging does suddenly stop if using a laptop drag. Maybe edge of screen? - 2m
 - [x] Selection also unselects when stopping dragging, which is also unexpected - 2m
 - [ ] Not being able to make a new root topic when the button is not in view: 1m
@@ -437,24 +436,14 @@
 - [ ] Cannot order the subtopics - 2m
 - [ ] Cannot add a task in the middle/at the end of a list - 1m
 - [ ] I should be warned when I make a duplicate task - 1m
-- [x] Removing items from the planned list or completing an item, does not unschedule them - 14m
 - [ ] I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -20m 
+- [ ] Cannot plan (bulk edit) the entire selection at once - 1m
+- [ ] Text editing tends to lag/slow down if you type more - 17m
+- [ ] It takes a huge time to drag a task from the top to the bottom - 18m 
+- [x] Removing items from the planned list or completing an item, does not unschedule them - 14m
 - [x] Enter does not finish text input in planned list - 15m
 - [x] Not being able to duplicate multiple tasks at once in Topic View (forgetting which tasks are already copied): 19m
 - [x] Ability to spawn follow-up tasks or subtask/necessary tasks on a task in the Weekly List from a task (Completing the task made another TODO) - 15m+
-- [ ] Cannot plan (bulk edit) the entire selection at once - 1m
-
-### Too long to drag a task from the top to the bottom - 18m :
-
-- [ ] Make dragging hide all other tasks instead (but it's not ideal, it still is annoying)
-- [ ] Manually sort the tasks one level down each time
-- [ ] Open folded topics by hovering over the topic
-- [ ] Maybe do a .. hide all tasks or something
-- [ ] Main issue, I cannot scroll during dragging
-- [ ] Read: https://blog.logrocket.com/ux-design/organizing-categorizing-content-information-architecture/
-- [ ] Maybe add a way to type and click (duplicate towards)?
-- [ ] Maybe allow to right click and select "Duplicate selected tasks here"?
-- [ ] It takes a huge time to drag a task from the top to the bottom - 18m 
 
 ### Missing data structure:
 
@@ -469,10 +458,10 @@
 - [ ] Cannot filter out irrelevant items (already planned, completed, repeatable but it's not yet time, blocked, irrelevant) - 1m
 - [ ] Cannot add a schedule to a repeated item - 1m
 - [ ] I'm also missing positively correlated tasks (completing one makes the other easier) - 1m
-- [x] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 20m
-- [x] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -20m
 - [ ] There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -17m
 - [ ] Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 15m
+- [x] It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 20m
+- [x] There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -20m
 - [x] Cannot order/sort the tasks/topics on the topic view - 21m
 
 ## Import/export:
