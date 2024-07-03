@@ -340,14 +340,14 @@ const checkValidTopicOrderIndex = (topics, tasks) => {
     // Every task needs to have as many topicOrderIndices as they have topics
     const getWrongTasks = tasks.filter((task) => task.topicViewIndices === undefined)
     if (getWrongTasks.length > 0) {
-        console.debug("There are tasks that don't have topicViewIndices")
-        console.debug(getWrongTasks)
+        console.warn("There are tasks that don't have topicViewIndices")
+        console.warn(getWrongTasks)
         return false
     }
     let getWrongTasks2 = tasks.filter((task) => (task.topics.length != task.topicViewIndices.length))
     if (getWrongTasks2.length > 0) {
-        console.debug("There are tasks that don't have the same amount of topicViewIndices as topics")
-        console.debug(getWrongTasks2)
+        console.warn("There are tasks that don't have the same amount of topicViewIndices as topics")
+        console.warn(getWrongTasks2)
         return false
     }
 
