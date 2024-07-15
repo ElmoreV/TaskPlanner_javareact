@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { getTopicPathByTopicId } from './TopicHelper';
 import TaskContent from './TaskContent'
 import { FinishedState } from './TaskInterfaces.tsx';
+import { translateLastCompletedDatetime } from './TaskHelperFuncs.js';
+
 const PlannedTask = (props) => {
     const { taskKey, taskName, setTaskName, deleteTask,
         completed, completeTask,
@@ -11,7 +13,7 @@ const PlannedTask = (props) => {
         planned, unplan, topics, taskTopics,
         selectedTasks, addToSelection, deleteFromSelection, selected, clearSelection,
         changeWeekOrderIndex, currentWeekOrderIndex,
-        fancy,
+        fancy, taskLastCompletion,
         spawnNewTask,
         hasSubTasks, toggleFold, unfolded,
     } = props;
@@ -156,6 +158,16 @@ const PlannedTask = (props) => {
         onChange: handleChange, onBlur: handleBlur, onKeyDown: handleKeyDown, onClick: captureClick(() => { })
     }
 
+    let fullName = taskName
+    if (
+        (taskFinishStatus !== FinishedState.Impossible || taskFinishStatus !== FinishedState.Irrelevant) &&
+        taskLastCompletion &&
+        !isEditing
+    ) {
+        console.warn("taskLastCompletion", taskLastCompletion)
+        fullName += " / " + translateLastCompletedDatetime(taskLastCompletion)
+    }
+
     let topicPath = getTopicPathByTopicId(topics, taskTopics[0])
 
     // Put focus on text editor when editing is enabled
@@ -173,7 +185,7 @@ const PlannedTask = (props) => {
             selectHandlers={selectHandlers}
             dragHandlers={dragHandlers}
             dropHandlers={dropHandlers}
-            name={taskName}
+            name={fullName}
             textEditHandlers={textEditHandlers}
             inputRef={inputRef}
             isEditing={isEditing}

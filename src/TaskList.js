@@ -80,6 +80,10 @@ const recursiveShowTask = (topic, superTask, task, tasks,
                     id={task.id}
                     completed={task.completed}
                     taskFinishStatus={task.finishStatus}
+                    planned={task.thisWeek}
+                    repeated={task.repeated}
+                    taskLastCompletion={task.lastFinished}
+
                     setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
                     currentTopicViewIndex={topic && findTopicViewIdx(topic.id, task)}
                     currentTopicName={topic && topic.name}
@@ -93,9 +97,6 @@ const recursiveShowTask = (topic, superTask, task, tasks,
                     plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
                     unplan={getUnplanTask(setTasks, tasks, task.id)}
                     toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
-                    planned={task.thisWeek}
-                    repeated={task.repeated}
-                    taskLastCompletion={task.lastFinished}
                     addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, topic && findTopicViewIdx(topic.id, task), superTask && superTask.id)}
                     deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, superTask && superTask.id)}
                     selected={selectedTasks.find((st) => (st.taskId == task.id && (!topic || st.topicId == topic.id) && (!superTask || st.superTaskId == superTask.id))) ? true : false}

@@ -35,32 +35,32 @@ const recursiveShowPlannedTask = (task, superTask, setTasks, tasks,
             <PlannedTask
                 taskName={task.name}
                 taskKey={task.id}
-                setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
                 // deleteTask = {getDeleteTask(task.id)}
                 completed={task.completed}
                 taskFinishStatus={task.finishStatus}
+                scheduled={task.scheduled}
+                currentWeekOrderIndex={task.weekOrderIndex}
+                taskLastCompletion={task.lastFinished}
+                taskTopics={task.topics}
+                hasSubTasks={task.subTaskIds && task.subTaskIds.length > 0}
+                unfolded={task.unfolded}
+                topics={topics}
+                fancy={fancy}
+                clearSelection={clearSelection}
+                selected={selectedTasks.find((st) => (st.taskId == task.id && st.weekOrderIndex == task.weekOrderIndex)) ? true : false}
+                selectedTasks={selectedTasks}
+
+                setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
                 setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
                 completeTask={getCompleteTask(setTasks, tasks, task.id)}
-                scheduled={task.scheduled}
                 scheduleTask={getScheduleTask(setTasks, tasks, task.id)}
                 unplan={getUnplanTask(setTasks, tasks, task.id)}
                 // currentTopic = {task.topics[0]}
                 addToSelection={() => addTaskToSelection(task.id, task.weekOrderIndex)}
                 deleteFromSelection={() => deleteTaskFromSelection(task.id, task.weekOrderIndex)}
-                clearSelection={clearSelection}
-                selected={selectedTasks.find((st) => (st.taskId == task.id && st.weekOrderIndex == task.weekOrderIndex)) ? true : false}
-                selectedTasks={selectedTasks}
-                currentWeekOrderIndex={task.weekOrderIndex}
                 changeWeekOrderIndex={getChangeWeekOrderIndex(setTasks, tasks)}
-                topics={topics}
-                taskTopics={task.topics}
-                fancy={fancy}
                 spawnNewTask={getSpawnNewTask(setTasks, tasks, task)}
-
-                hasSubTasks={task.subTaskIds && task.subTaskIds.length > 0}
-                unfolded={task.unfolded}
                 toggleFold={getToggleFoldTask(setTasks, tasks)}
-
             />
             {
                 task.subTaskIds && task.subTaskIds.length > 0 && task.unfolded && (
