@@ -658,3 +658,76 @@ In this case, there is also a difference between automatic task execution and ma
 Maybe just start with the easy ones:
 - Every x days
 - x days after last completion
+
+
+# What would the perfect UI look like?
+
+What task can you focus on?
+
+- Collecting tasks from another source
+- Importing tasks
+- Categorizing/tagging tasks
+- Generating subtasks
+- Evaluating/modifying tasks
+- Selecting tasks
+- Prioritising tasks
+- Updating task list with progress
+- Seeing everything you did in the past.
+- Time planning of tasks
+- Cleaning up task list.
+
+
+
+## 1. Collecting new tasks/importing new tasks (Current tree view/full view)
+
+- Have a way to quickly add new tasks
+- Have a way to quickly add a batch of new tasks
+
+## 2. Categorizing/tagging tasks (currently Tree view/full view)
+
+- Easy search for a tag/topic/task
+- Easily tag tasks
+- Easily categorize tasks
+
+- Especially categorize tasks without categories.
+
+
+## 3. Selecting tasks (current Tree view/full view + a bit of )
+
+- Needs to be able to filter really good and really quick.
+
+A task is ripe to be done when:
+
+1. It should be done after a certain time (like cleaning)
+2. It should be done before a certain time (e.g. deadline)
+2. It is important
+3. It is a task on which an important task is dependent.
+4. It is a subtask of an important task
+3. It is already scheduled (event)
+4. The conditions are right. (opportunity)
+4. It needs to be done, might as well do it now.
+5. There is just a want to do it. (interest)
+
+A task might be skipped if:
+
+1. It takes a lot of energy
+2. It takes a lot of time
+3. The conditions aren't right.
+3. It doesn't add something of value
+4. Something else has a higher priority
+5. It is impossible
+6. The task has changed/might change.
+
+## 4. Prioritising tasks
+
+## 5. Updating tasks/completing tasks (Currently list view)
+
+- When completed: update tasks/generate new tasks/etc. etc.
+- When conditions change/priorities change: change priorities
+
+## 6. Time planning tasks (Not implemented yet)
+
+
+## 7. Task management
+
+- Deleting/Sorting/editing tasks in general.
