@@ -17,6 +17,8 @@ function App() {
   const VIEW_PLANNED_TASKS = 2
   const VIEW_DAILY_PLANNING = 3
 
+  const [debugMode, setDebugMode] = useState(false)
+
   //v1
   const [topics, setTopics] = useState([
     {
@@ -81,6 +83,10 @@ function App() {
     setDarkMode(!darkMode)
   }
 
+  const onDebugModeChange = () => {
+    setDebugMode(!debugMode)
+  }
+
   return (
     <Theme darkMode={darkMode}>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
@@ -127,7 +133,14 @@ function App() {
             />Dark Mode</label>
           </div>
         </div>
-        <a href="https://github.com/ElmoreV/TaskPlanner_javareact" target="_blank"><button> <i className="fa fa-github"></i> GitHub: ElmoreV</button></a>
+        <a href="https://github.com/ElmoreV/TaskPlanner_javareact" target="_blank"><button> <i className="fa fa-github"></i> GitHub: ElmoreV</button></a><br />
+        <label><input
+          type="checkbox"
+          name='DebugMode'
+          onChange={onDebugModeChange}
+          className="form-check-input"
+          defaultChecked={debugMode}
+        />Debug Mode</label>
       </div>
     </Theme>
   );
