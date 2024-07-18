@@ -16,6 +16,7 @@ const Task = (props) => {
         repeated, toggleRepeatTask, taskLastCompletion,
         selectedTasks, addToSelection, deleteFromSelection, selected,
         duplicateTask, setTasks, tasks,
+        taskTopics,
         addSubTask, hasSubTasks,
         fancy,
     } = props;
@@ -265,7 +266,8 @@ const Task = (props) => {
         toggleRepeatTask={toggleRepeatTask}
         duplicateDragHandlers={duplicateDragHandlers}
         fancy={fancy}
-    />);
+        topicCount={taskTopics.length}
+    />); 
 }
 
 Task.propTypes = {

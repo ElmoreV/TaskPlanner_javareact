@@ -82,8 +82,8 @@ const recursiveShowTask = (topic, superTask, task, tasks,
                     taskFinishStatus={task.finishStatus}
                     planned={task.thisWeek}
                     repeated={task.repeated}
+                    taskTopics = {task.topics}
                     taskLastCompletion={task.lastFinished}
-
                     setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
                     currentTopicViewIndex={topic && findTopicViewIdx(topic.id, task)}
                     currentTopicName={topic && topic.name}
