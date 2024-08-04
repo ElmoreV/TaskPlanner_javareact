@@ -1,4 +1,4 @@
-import { findTopicByTopicId } from './FindItems'
+import { findTopicByTopicId } from '../ADG/FindItems'
 
 //Recursive function to handle all toggles
 const toggleFold_r = (topics, id) => {
@@ -22,50 +22,48 @@ const getToggleFold = (setTopics, topics) => {
     return toggleFold;
 }
 
-const unfoldAll_r =  (topic,topicId,shouldUnfold)=>{
-    if (shouldUnfold==true)
-    {
+const unfoldAll_r = (topic, topicId, shouldUnfold) => {
+    if (shouldUnfold == true) {
         topic.unfolded = true
-    }else{
-        if (topic.id == topicId){
+    } else {
+        if (topic.id == topicId) {
             shouldUnfold = true
             topic.unfolded = true
         }
     }
-    topic.subtopics.forEach(subtopic=>unfoldAll_r(subtopic,topicId,shouldUnfold))
+    topic.subtopics.forEach(subtopic => unfoldAll_r(subtopic, topicId, shouldUnfold))
 }
 
 
-const getUnfoldAll = (setTopics,topics) =>{
-    const unfoldAll = (topicId)=>{
+const getUnfoldAll = (setTopics, topics) => {
+    const unfoldAll = (topicId) => {
         console.log('inside unfoldall')
 
         let newTopics = [...topics]
-        newTopics.forEach(topic=>unfoldAll_r(topic,topicId,false))
+        newTopics.forEach(topic => unfoldAll_r(topic, topicId, false))
         setTopics(newTopics)
     }
     return unfoldAll
 }
 
 
-const foldAll_r = (topic,topicId,shouldFold)=>{
-    if (shouldFold==true)
-    {
+const foldAll_r = (topic, topicId, shouldFold) => {
+    if (shouldFold == true) {
         topic.unfolded = false
-    }else{
-        if (topic.id == topicId){
+    } else {
+        if (topic.id == topicId) {
             shouldFold = true
             topic.unfolded = false
         }
     }
-    topic.subtopics.forEach(subtopic=>foldAll_r(subtopic,topicId,shouldFold))
+    topic.subtopics.forEach(subtopic => foldAll_r(subtopic, topicId, shouldFold))
 }
 
-const getFoldAll = (setTopics,topics) =>{
-    const foldAll = (topicId)=>{
+const getFoldAll = (setTopics, topics) => {
+    const foldAll = (topicId) => {
         console.log('inside foldall')
         let newTopics = [...topics]
-        newTopics.forEach(topic=>foldAll_r(topic,topicId,false))
+        newTopics.forEach(topic => foldAll_r(topic, topicId, false))
         setTopics(newTopics)
     }
     return foldAll
@@ -87,5 +85,5 @@ const getSetTopicNameFunc = (setTopics, topics, id) => {
 
 export { getToggleFold }
 export { getSetTopicNameFunc };
-export {getFoldAll};
-export {getUnfoldAll}
+export { getFoldAll };
+export { getUnfoldAll }

@@ -2,7 +2,7 @@ import {
     getFreeTopicKey,
     isTaskInAnyTopic,
     filterTopicsById_r,
-} from './TopicHelper';
+} from '../Topics/TopicHelper';
 import {
     findSupertopicByTopicId,
     findTaskByTaskId,
@@ -16,8 +16,8 @@ import {
     insertTaskInstanceIntoTopic,
     removeTaskInstanceFromTopic,
     removeTaskInstanceFromTask,
-} from './ModifyTaskTopicAdgElements';
-import { getPlanTaskForWeek } from './TaskModifyFuncGens';
+} from '../ADG/ModifyTaskTopicAdgElements';
+import { getPlanTaskForWeek } from '../Tasks/TaskModifyFuncGens';
 
 // Now need four functions
 // Move from task in topic to subtask in task

@@ -4,7 +4,7 @@ import PlannedList from './TaskViews/PlannedList.js'
 import { useState } from 'react'
 import ImportExport from './ImportExport';
 import Theme from "./Theme";
-import { FinishedState } from './TaskViews/TaskInterfaces.tsx';
+import { FinishedState } from './Tasks/TaskInterfaces.tsx';
 import AddTaskView from './TaskViews/NewTaskList.js';
 
 // 1. Go through all tasks and search if their .supertasks list contains [task.id] N*E(M) , E(M) is avg of supertasks per task

@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
-import PlannedTask from './PlannedTask';
+import PlannedTask from './PlannedTask.js';
 import {
     getChangeWeekOrderIndex,
     sanitizeWeekOrderIndex,
     getSpawnNewTask,
-} from './ModifyFuncGeneratorsV1.js';
+} from '../ADG/ModifyFuncGeneratorsV1.js';
 import {
     getCompleteTask,
     getScheduleTask,
@@ -12,9 +12,9 @@ import {
     getSetTaskNameFunc,
     getSetTaskFinishStatus,
     getToggleFoldTask,
-} from "./TaskModifyFuncGens.js";
+} from "../Tasks/TaskModifyFuncGens.js";
 
-import { FinishedState } from './TaskInterfaces.tsx';
+import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
 
 // TODO: add the topic name to the bar
 

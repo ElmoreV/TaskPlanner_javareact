@@ -1,6 +1,6 @@
 import PlannedTask from "./PlannedTask.js"
-import { getSetTaskNameFunc } from "./TaskModifyFuncGens";
-import { getAddTaskWithoutTopic } from "./ModifyFuncGeneratorsV1.js";
+import { getSetTaskNameFunc } from "../Tasks/TaskModifyFuncGens.js";
+import { getAddTaskWithoutTopic } from "../ADG/ModifyFuncGeneratorsV1.js";
 
 const AddTaskView = (props) => {
     const { tasks, setTasks, topics, setTopics, fancy } = props;

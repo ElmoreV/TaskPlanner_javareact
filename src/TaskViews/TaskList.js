@@ -14,7 +14,7 @@ import {
     getMoveTasks,
     getAddTopic,
     sanitizeTopicOrderIndex,
-} from './ModifyFuncGeneratorsV1.js'
+} from '../ADG/ModifyFuncGeneratorsV1.js'
 import {
     getCompleteTask,
     getToggleRepeatTask,
@@ -23,14 +23,14 @@ import {
     getSetTaskFinishStatus,
     getUnplanTask,
     getToggleFoldTask,
-} from './TaskModifyFuncGens.js'
+} from '../Tasks/TaskModifyFuncGens.js'
 import {
     getToggleFold,
     getSetTopicNameFunc,
     getUnfoldAll,
     getFoldAll
-} from './TopicModifyFuncGens.js'
-import { FinishedState } from './TaskInterfaces.tsx';
+} from '../Topics/TopicModifyFuncGens.js'
+import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
 
 class SelectedTask {
     constructor(taskId, topicId, topicViewIndex, superTaskId) {
