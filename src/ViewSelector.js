@@ -25,7 +25,7 @@ const ViewSelector = (props) => {
         <h3 onClick={handleClick(VIEW_PLAN_TASKS)}>3. Plan</h3>
         <h3 onClick={handleClick(VIEW_PLANNED_TASKS)}>4. Prioritize</h3>
         <h3 onClick={handleClick(VIEW_DAILY_PLANNING)}>5. Schedule</h3>
-        <h3 onClick={handleClick(VIEW_COMPLETE_TASKS)}>6. Update/complete</h3>
+        <h3 onClick={handleClick(VIEW_COMPLETE_TASKS)}>6. Check</h3>
 
     </div>);
 }
