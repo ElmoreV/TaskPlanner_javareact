@@ -98,7 +98,7 @@ const getMoveTasks = (topics, tasks, setTasks) => {
                 if (moveAllowed) { newTasks = removeTaskInstanceFromTask(newTasks, taskId, sourceTaskId) }
             } else {
                 console.warn(`No source (task or topic) defined for  ${taskId}.`)
-                return
+                // return
             }
             // Adding to destination location (task or topic)
             if (targetTopicId) {
@@ -164,6 +164,21 @@ const getDuplicateTask = (setTasks, tasks, topics) => {
         setTasks(newTasks)
     }
     return duplicateTask
+}
+
+const getAddTaskWithoutTopic = (setTasks, tasks) => {
+    const addTaskWithoutTopic = () => {
+        // Check if topic belonging to topicId exists
+        // Find tasks in the topic
+        // generate a new task
+        // insert it into the new topic
+        let newTasks = [...tasks]
+        let newTask = generateEmptyTask(newTasks)
+        newTasks = addOrphanTasktoTaskList(newTasks, newTask)
+        setTasks(newTasks)
+    }
+    return addTaskWithoutTopic
+
 }
 
 const getAddTask = (setTasks, tasks, topics, topicId) => {
@@ -656,6 +671,7 @@ export { sanitizeTopicOrderIndex }
 export { getMoveTasks }
 export { getSpawnNewTask }
 export { getAddNewSubTask }
+export { getAddTaskWithoutTopic }
 
 /// What I would need is basically
 // A moveTaskToTopic

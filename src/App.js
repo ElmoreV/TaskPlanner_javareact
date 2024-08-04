@@ -5,6 +5,7 @@ import { useState } from 'react'
 import ImportExport from './ImportExport';
 import Theme from "./Theme";
 import { FinishedState } from './TaskViews/TaskInterfaces.tsx';
+import AddTaskView from './TaskViews/NewTaskList.js';
 
 // 1. Go through all tasks and search if their .supertasks list contains [task.id] N*E(M) , E(M) is avg of supertasks per task
 // 2. Go through all tasks and search if the ids match one of the .subtasks List N*P P is # of subtasks in task
@@ -103,7 +104,13 @@ function App() {
             setTopics={setTopics} />
           <ViewSelector
             viewSetter={setView} />
-          {view === VIEW_ADD_TASKS}
+          {view === VIEW_ADD_TASKS && <AddTaskView
+            tasks={tasks}
+            setTasks={setTasks}
+            topics={topics}
+            setTopics={setTopics}
+            fancy={fancy}
+          />}
           {view === VIEW_ALL_TASKS && <TaskList
             tasks={tasks}
             setTasks={setTasks}
