@@ -128,7 +128,7 @@ const PlannedTask = (props) => {
     const captureClick = (func) => {
         const wrapper = (e) => {
             e.stopPropagation()
-            return func()
+            if (func) { return func() }
         }
         return wrapper
     }
