@@ -129,7 +129,27 @@ const recursiveShowTask = (topic, superTask, task, tasks,
     )
 }
 
+const showTasksWithoutTopics = (topics, tasks, setTopics, setTasks, selectedTasks, setSelectedTasks,
+    hideCompletedItems, showRepeatedOnly,
+    fancy
+) => {
+    // const findTopicViewIdx = (topicId, task) => {
+    //     return task.topicViewIndices[task.topics.findIndex(taskTopicId => taskTopicId == topicId)]
+    // }
 
+
+    return (<div key="div_tasks_no_topic">
+        {tasks
+            .filter((task) => task.topics.length == 0)
+            // .slice(0).sort((taskA, taskB) => { return findTopicViewIdx(topic.id, taskA) - findTopicViewIdx(topic.id, taskB) })
+            .map((task) => (
+                recursiveShowTask(null, null, task, tasks, topics, setTasks,
+                    selectedTasks, setSelectedTasks, hideCompletedItems, showRepeatedOnly, fancy)
+            ))
+
+        }
+    </div>)
+}
 
 const recursiveShowTopic = (topic, tasks,
     setTopics, topics,
@@ -329,6 +349,13 @@ const TaskList = (props) => {
             <button className="fold_all" onClick={handleFoldAll} >Fold all</button>
             <button className="unfold_all" onClick={handleUnfoldAll} >Unfold all</button>
             <ul key='root_topics'>
+                {showTasksWithoutTopics(
+                    topics, tasks,
+                    setTopics, setTasks,
+                    selectedTasks, setSelectedTasks,
+                    hideCompletedItems, showRepeatedOnly,
+                    fancy
+                )}
                 {showTopics(topics, tasks,
                     setTopics,
                     setTasks,
