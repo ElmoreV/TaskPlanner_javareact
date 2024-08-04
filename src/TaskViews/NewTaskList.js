@@ -53,7 +53,10 @@ const AddTaskView = (props) => {
     //     setTasks(newTasks)
     // }
     const isVisible = (task) => {
-        return true
+        // Only show tasks when it has no topics
+        // Otherwise, we can assume it's already been categorized and not new
+        // Also do not show tasks that are in a subtask
+        return task.topics.length == 0 && !allSubTaskIds.includes(task.id)
     }
     // const isVisible = (task, checkWeek) => {
     //     return ((!((task.completed || (task.finishStatus !== undefined && task.finishStatus !== FinishedState.NotFinished))
@@ -76,7 +79,11 @@ const AddTaskView = (props) => {
     // }
 
     // sanitizeWeekOrderIndex(setTasks, tasks)
-
+    let allSuperTasks = tasks.filter((task) => task.subTaskIds && task.subTaskIds.length > 0)
+    let allSubTaskIds = allSuperTasks.reduce((acc, task) => {
+        acc = acc.concat(task.subTaskIds)
+        return acc
+    }, [])
     return (
         <div className='task-list'>
             {/* <button onClick={onClearCompletedItems}>Clear finished items</button> */}

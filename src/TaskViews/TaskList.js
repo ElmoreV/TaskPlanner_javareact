@@ -40,7 +40,9 @@ class SelectedTask {
         this.superTaskId = superTaskId
     }
 }
-
+const isNewTask = (task, allSubTaskIds) => {
+    return task.topics.length == 0 && !allSubTaskIds.includes(task.id)
+}
 
 const isTaskVisible = (task, hideCompletedItems, showRepeatedOnly) => {
     return (
@@ -131,7 +133,7 @@ const recursiveShowTask = (topic, superTask, task, tasks,
 
 const showTasksWithoutTopics = (topics, tasks, setTopics, setTasks, selectedTasks, setSelectedTasks,
     hideCompletedItems, showRepeatedOnly,
-    fancy
+    fancy, allSubTaskIds
 ) => {
     // const findTopicViewIdx = (topicId, task) => {
     //     return task.topicViewIndices[task.topics.findIndex(taskTopicId => taskTopicId == topicId)]
@@ -140,7 +142,7 @@ const showTasksWithoutTopics = (topics, tasks, setTopics, setTasks, selectedTask
 
     return (<div key="div_tasks_no_topic">
         {tasks
-            .filter((task) => task.topics.length == 0)
+            .filter((task) => isNewTask(task, allSubTaskIds))
             // .slice(0).sort((taskA, taskB) => { return findTopicViewIdx(topic.id, taskA) - findTopicViewIdx(topic.id, taskB) })
             .map((task) => (
                 recursiveShowTask(null, null, task, tasks, topics, setTasks,
@@ -304,6 +306,13 @@ const TaskList = (props) => {
 
     }
 
+
+    let allSuperTasks = tasks.filter((task) => task.subTaskIds && task.subTaskIds.length > 0)
+    let allSubTaskIds = allSuperTasks.reduce((acc, task) => {
+        acc = acc.concat(task.subTaskIds)
+        return acc
+    }, [])
+
     if (runOnce < 2) {
         console.log("Running sanitize")
         sanitizeTopicOrderIndex(topics, tasks, setTasks)
@@ -354,7 +363,8 @@ const TaskList = (props) => {
                     setTopics, setTasks,
                     selectedTasks, setSelectedTasks,
                     hideCompletedItems, showRepeatedOnly,
-                    fancy
+                    fancy,
+                    allSubTaskIds,
                 )}
                 {showTopics(topics, tasks,
                     setTopics,
