@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Task from './Task.tsx'
-import Topic from './Topic';
+import Topic from './Topic.js';
 import React from 'react';
 // import Checkbox from './Checkbox'
 import {
@@ -14,7 +14,7 @@ import {
     getMoveTasks,
     getAddTopic,
     sanitizeTopicOrderIndex,
-} from './ModifyFuncGeneratorsV1'
+} from './ModifyFuncGeneratorsV1.js'
 import {
     getCompleteTask,
     getToggleRepeatTask,
@@ -23,17 +23,14 @@ import {
     getSetTaskFinishStatus,
     getUnplanTask,
     getToggleFoldTask,
-} from './TaskModifyFuncGens'
+} from './TaskModifyFuncGens.js'
 import {
     getToggleFold,
     getSetTopicNameFunc,
     getUnfoldAll,
     getFoldAll
-} from './TopicModifyFuncGens'
+} from './TopicModifyFuncGens.js'
 import { FinishedState } from './TaskInterfaces.tsx';
-
-
-import ImportExport from './ImportExport';
 
 class SelectedTask {
     constructor(taskId, topicId, topicViewIndex, superTaskId) {
@@ -82,7 +79,7 @@ const recursiveShowTask = (topic, superTask, task, tasks,
                     taskFinishStatus={task.finishStatus}
                     planned={task.thisWeek}
                     repeated={task.repeated}
-                    taskTopics = {task.topics}
+                    taskTopics={task.topics}
                     taskLastCompletion={task.lastFinished}
                     setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
                     currentTopicViewIndex={topic && findTopicViewIdx(topic.id, task)}

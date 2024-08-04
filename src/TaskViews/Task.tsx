@@ -267,7 +267,7 @@ const Task = (props) => {
         duplicateDragHandlers={duplicateDragHandlers}
         fancy={fancy}
         topicCount={taskTopics.length}
-    />); 
+    />);
 }
 
 Task.propTypes = {

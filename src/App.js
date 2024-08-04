@@ -1,10 +1,10 @@
 import ViewSelector from './ViewSelector';
-import TaskList from './TaskList';
-import PlannedList from './PlannedList'
+import TaskList from './TaskViews/TaskList.js';
+import PlannedList from './TaskViews/PlannedList.js'
 import { useState } from 'react'
 import ImportExport from './ImportExport';
 import Theme from "./Theme";
-import { FinishedState } from './TaskInterfaces.tsx';
+import { FinishedState } from './TaskViews/TaskInterfaces.tsx';
 
 // 1. Go through all tasks and search if their .supertasks list contains [task.id] N*E(M) , E(M) is avg of supertasks per task
 // 2. Go through all tasks and search if the ids match one of the .subtasks List N*P P is # of subtasks in task

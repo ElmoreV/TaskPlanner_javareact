@@ -4,7 +4,7 @@ import {
     getChangeWeekOrderIndex,
     sanitizeWeekOrderIndex,
     getSpawnNewTask,
-} from './ModifyFuncGeneratorsV1';
+} from './ModifyFuncGeneratorsV1.js';
 import {
     getCompleteTask,
     getScheduleTask,
@@ -12,7 +12,7 @@ import {
     getSetTaskNameFunc,
     getSetTaskFinishStatus,
     getToggleFoldTask,
-} from "./TaskModifyFuncGens";
+} from "./TaskModifyFuncGens.js";
 
 import { FinishedState } from './TaskInterfaces.tsx';
 
