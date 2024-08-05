@@ -72,7 +72,7 @@ const TaskContent = (props) => {
                     {topicPath && <span className={styles.topicPath}>{topicPath}</span>}
                 </div>
                 <div className={styles.buttonList}>
-                    {topicCount>1 && <span>+{topicCount-1}  more</span>}
+                    {topicCount > 1 && <span>+{topicCount - 1}  more</span>}
                     {/* {topicCount>1 && (<button className={styles.taskComplete} onClick={()=>{}}>Delete copy</button>)} */}
                     {duplicateDragHandlers && <span className={styles.buttonDuplicate} {...duplicateDragHandlers}>+ Duplicate +</span>}
 

@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import TopicContent from './TopicContent';
+import TopicContent from '../Topics/TopicContent';
 const Topic = (props) => {
     const { name, updateTaskTopics, setTopicName, id,
         toggleFold, unfolded, foldAll, unfoldAll,

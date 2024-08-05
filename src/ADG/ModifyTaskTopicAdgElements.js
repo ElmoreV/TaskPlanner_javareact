@@ -1,8 +1,8 @@
 /*
 The elementary functions
 */
-import { FinishedState } from './TaskInterfaces.tsx'
-import { getFreeTaskId } from './TopicHelper'
+import { FinishedState } from '../Tasks/TaskInterfaces.tsx'
+import { getFreeTaskId } from '../Topics/TopicHelper.js'
 
 const generateEmptyTask = (tasks) => {
     let newId = getFreeTaskId(tasks)

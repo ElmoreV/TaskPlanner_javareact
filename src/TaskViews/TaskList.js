@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Task from './Task.tsx'
-import Topic from './Topic';
+import Topic from './Topic.js';
 import React from 'react';
 // import Checkbox from './Checkbox'
 import {
@@ -14,7 +14,7 @@ import {
     getMoveTasks,
     getAddTopic,
     sanitizeTopicOrderIndex,
-} from './ModifyFuncGeneratorsV1'
+} from '../ADG/ModifyFuncGeneratorsV1.js'
 import {
     getCompleteTask,
     getToggleRepeatTask,
@@ -23,17 +23,14 @@ import {
     getSetTaskFinishStatus,
     getUnplanTask,
     getToggleFoldTask,
-} from './TaskModifyFuncGens'
+} from '../Tasks/TaskModifyFuncGens.js'
 import {
     getToggleFold,
     getSetTopicNameFunc,
     getUnfoldAll,
     getFoldAll
-} from './TopicModifyFuncGens'
-import { FinishedState } from './TaskInterfaces.tsx';
-
-
-import ImportExport from './ImportExport';
+} from '../Topics/TopicModifyFuncGens.js'
+import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
 
 class SelectedTask {
     constructor(taskId, topicId, topicViewIndex, superTaskId) {
@@ -43,7 +40,9 @@ class SelectedTask {
         this.superTaskId = superTaskId
     }
 }
-
+const isNewTask = (task, allSubTaskIds) => {
+    return task.topics.length == 0 && !allSubTaskIds.includes(task.id)
+}
 
 const isTaskVisible = (task, hideCompletedItems, showRepeatedOnly) => {
     return (
@@ -82,7 +81,7 @@ const recursiveShowTask = (topic, superTask, task, tasks,
                     taskFinishStatus={task.finishStatus}
                     planned={task.thisWeek}
                     repeated={task.repeated}
-                    taskTopics = {task.topics}
+                    taskTopics={task.topics}
                     taskLastCompletion={task.lastFinished}
                     setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
                     currentTopicViewIndex={topic && findTopicViewIdx(topic.id, task)}
@@ -132,7 +131,27 @@ const recursiveShowTask = (topic, superTask, task, tasks,
     )
 }
 
+const showTasksWithoutTopics = (topics, tasks, setTopics, setTasks, selectedTasks, setSelectedTasks,
+    hideCompletedItems, showRepeatedOnly,
+    fancy, allSubTaskIds
+) => {
+    // const findTopicViewIdx = (topicId, task) => {
+    //     return task.topicViewIndices[task.topics.findIndex(taskTopicId => taskTopicId == topicId)]
+    // }
 
+
+    return (<div key="div_tasks_no_topic">
+        {tasks
+            .filter((task) => isNewTask(task, allSubTaskIds))
+            // .slice(0).sort((taskA, taskB) => { return findTopicViewIdx(topic.id, taskA) - findTopicViewIdx(topic.id, taskB) })
+            .map((task) => (
+                recursiveShowTask(null, null, task, tasks, topics, setTasks,
+                    selectedTasks, setSelectedTasks, hideCompletedItems, showRepeatedOnly, fancy)
+            ))
+
+        }
+    </div>)
+}
 
 const recursiveShowTopic = (topic, tasks,
     setTopics, topics,
@@ -287,6 +306,13 @@ const TaskList = (props) => {
 
     }
 
+
+    let allSuperTasks = tasks.filter((task) => task.subTaskIds && task.subTaskIds.length > 0)
+    let allSubTaskIds = allSuperTasks.reduce((acc, task) => {
+        acc = acc.concat(task.subTaskIds)
+        return acc
+    }, [])
+
     if (runOnce < 2) {
         console.log("Running sanitize")
         sanitizeTopicOrderIndex(topics, tasks, setTasks)
@@ -332,6 +358,14 @@ const TaskList = (props) => {
             <button className="fold_all" onClick={handleFoldAll} >Fold all</button>
             <button className="unfold_all" onClick={handleUnfoldAll} >Unfold all</button>
             <ul key='root_topics'>
+                {showTasksWithoutTopics(
+                    topics, tasks,
+                    setTopics, setTasks,
+                    selectedTasks, setSelectedTasks,
+                    hideCompletedItems, showRepeatedOnly,
+                    fancy,
+                    allSubTaskIds,
+                )}
                 {showTopics(topics, tasks,
                     setTopics,
                     setTasks,

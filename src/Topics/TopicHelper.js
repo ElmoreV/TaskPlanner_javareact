@@ -1,7 +1,7 @@
 import {
     findTopicByTopicId,
     findTopicByTopicIdR
-} from './FindItems'
+} from '../ADG/FindItems'
 
 const find_topic_by_name_r = (topics, topic_name) => {
     console.debug(topics);

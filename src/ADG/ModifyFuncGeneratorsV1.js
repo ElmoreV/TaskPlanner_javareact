@@ -2,7 +2,7 @@ import {
     getFreeTopicKey,
     isTaskInAnyTopic,
     filterTopicsById_r,
-} from './TopicHelper';
+} from '../Topics/TopicHelper';
 import {
     findSupertopicByTopicId,
     findTaskByTaskId,
@@ -16,8 +16,8 @@ import {
     insertTaskInstanceIntoTopic,
     removeTaskInstanceFromTopic,
     removeTaskInstanceFromTask,
-} from './ModifyTaskTopicAdgElements';
-import { getPlanTaskForWeek } from './TaskModifyFuncGens';
+} from '../ADG/ModifyTaskTopicAdgElements';
+import { getPlanTaskForWeek } from '../Tasks/TaskModifyFuncGens';
 
 // Now need four functions
 // Move from task in topic to subtask in task
@@ -98,7 +98,7 @@ const getMoveTasks = (topics, tasks, setTasks) => {
                 if (moveAllowed) { newTasks = removeTaskInstanceFromTask(newTasks, taskId, sourceTaskId) }
             } else {
                 console.warn(`No source (task or topic) defined for  ${taskId}.`)
-                return
+                // return
             }
             // Adding to destination location (task or topic)
             if (targetTopicId) {
@@ -164,6 +164,21 @@ const getDuplicateTask = (setTasks, tasks, topics) => {
         setTasks(newTasks)
     }
     return duplicateTask
+}
+
+const getAddTaskWithoutTopic = (setTasks, tasks) => {
+    const addTaskWithoutTopic = () => {
+        // Check if topic belonging to topicId exists
+        // Find tasks in the topic
+        // generate a new task
+        // insert it into the new topic
+        let newTasks = [...tasks]
+        let newTask = generateEmptyTask(newTasks)
+        newTasks = addOrphanTasktoTaskList(newTasks, newTask)
+        setTasks(newTasks)
+    }
+    return addTaskWithoutTopic
+
 }
 
 const getAddTask = (setTasks, tasks, topics, topicId) => {
@@ -656,6 +671,7 @@ export { sanitizeTopicOrderIndex }
 export { getMoveTasks }
 export { getSpawnNewTask }
 export { getAddNewSubTask }
+export { getAddTaskWithoutTopic }
 
 /// What I would need is basically
 // A moveTaskToTopic

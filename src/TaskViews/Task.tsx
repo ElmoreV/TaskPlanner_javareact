@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import TaskContent from './TaskContent'
+import TaskContent from '../Tasks/TaskContent.js'
 import React from 'react';
-import { FinishedState } from './TaskInterfaces.tsx';
-import { translateLastCompletedDatetime } from './TaskHelperFuncs.js';
+import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
+import { translateLastCompletedDatetime } from '../Tasks/TaskHelperFuncs.js';
 
 const Task = (props) => {
     const { id, name, setTaskName, deleteTask,
@@ -267,7 +267,7 @@ const Task = (props) => {
         duplicateDragHandlers={duplicateDragHandlers}
         fancy={fancy}
         topicCount={taskTopics.length}
-    />); 
+    />);
 }
 
 Task.propTypes = {

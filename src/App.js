@@ -1,10 +1,11 @@
 import ViewSelector from './ViewSelector';
-import TaskList from './TaskList';
-import PlannedList from './PlannedList'
+import TaskList from './TaskViews/TaskList.js';
+import PlannedList from './TaskViews/PlannedList.js'
 import { useState } from 'react'
 import ImportExport from './ImportExport';
 import Theme from "./Theme";
-import { FinishedState } from './TaskInterfaces.tsx';
+import { FinishedState } from './Tasks/TaskInterfaces.tsx';
+import AddTaskView from './TaskViews/NewTaskList.js';
 
 // 1. Go through all tasks and search if their .supertasks list contains [task.id] N*E(M) , E(M) is avg of supertasks per task
 // 2. Go through all tasks and search if the ids match one of the .subtasks List N*P P is # of subtasks in task
@@ -16,6 +17,8 @@ function App() {
   const VIEW_ALL_TASKS = 1
   const VIEW_PLANNED_TASKS = 2
   const VIEW_DAILY_PLANNING = 3
+  const VIEW_ADD_TASKS = 4
+  const VIEW_COMPLETE_TASKS = 5
 
   const [debugMode, setDebugMode] = useState(false)
 
@@ -101,6 +104,13 @@ function App() {
             setTopics={setTopics} />
           <ViewSelector
             viewSetter={setView} />
+          {view === VIEW_ADD_TASKS && <AddTaskView
+            tasks={tasks}
+            setTasks={setTasks}
+            topics={topics}
+            setTopics={setTopics}
+            fancy={fancy}
+          />}
           {view === VIEW_ALL_TASKS && <TaskList
             tasks={tasks}
             setTasks={setTasks}
@@ -116,6 +126,7 @@ function App() {
             fancy={fancy}
           />}
           {view === VIEW_DAILY_PLANNING}
+          {view == VIEW_COMPLETE_TASKS}
           <div classStr="settingsUI">
             {/* <label><input
               type="checkbox"
