@@ -3,12 +3,12 @@
     {
       "name": "Features",
       "id": 1,
-      "unfolded": true,
+      "unfolded": false,
       "subtopics": [
         {
           "name": "Database interaction",
           "id": 3,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Migration to schema.v1",
@@ -40,7 +40,7 @@
         {
           "name": "Per Topic View",
           "id": 4,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Aesthetic",
@@ -79,7 +79,7 @@
         {
           "name": "Weekly Tasks View",
           "id": 5,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Aesthetic",
@@ -104,13 +104,13 @@
         {
           "name": "Daily Task View",
           "id": 6,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
           "name": "General",
           "id": 7,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Project management",
@@ -148,7 +148,7 @@
         {
           "name": "Timing",
           "id": 31,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Impossibilities",
@@ -173,7 +173,7 @@
         {
           "name": "Priority module",
           "id": 36,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         }
       ]
@@ -181,12 +181,12 @@
     {
       "name": "Constraints",
       "id": 2,
-      "unfolded": true,
+      "unfolded": false,
       "subtopics": [
         {
           "name": "UX/UI",
           "id": 15,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Release 1 (feature freeze)",
@@ -221,7 +221,7 @@
                 {
                   "name": "Specific regression tests",
                   "id": 52,
-                  "unfolded": true,
+                  "unfolded": false,
                   "subtopics": []
                 }
               ]
@@ -237,7 +237,7 @@
         {
           "name": "Performance",
           "id": 20,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
@@ -257,23 +257,23 @@
     {
       "name": "Annoyances",
       "id": 43,
-      "unfolded": true,
+      "unfolded": false,
       "subtopics": [
         {
           "name": "Development",
           "id": 53,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
           "name": "Major/crashes/bugs",
           "id": 44,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Reduce cognitive load",
               "id": 54,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             }
           ]
@@ -3008,7 +3008,7 @@
         53
       ],
       "topicViewIndices": [
-        2
+        3
       ],
       "completed": false,
       "thisWeek": false,
@@ -3024,7 +3024,7 @@
         53
       ],
       "topicViewIndices": [
-        5
+        6
       ],
       "completed": false,
       "thisWeek": false,
@@ -3290,7 +3290,7 @@
         44
       ],
       "topicViewIndices": [
-        17
+        18
       ],
       "completed": false,
       "thisWeek": false,
@@ -3380,7 +3380,7 @@
       "subTaskIds": []
     },
     {
-      "name": "- Should not be able to delete non-empty topics. - 1M",
+      "name": "- Should not be able to willy-nilly delete non-empty topics. - 1M",
       "id": 295,
       "topics": [
         44
@@ -3412,13 +3412,13 @@
       "subTaskIds": []
     },
     {
-      "name": "Visual bug: selected tasks are not outline after dragging completes in the topic view - 2m",
+      "name": "Visual bug: selected tasks are not outline after dragging completes in the topic view - 5m",
       "id": 297,
       "topics": [
         44
       ],
       "topicViewIndices": [
-        18
+        17
       ],
       "completed": false,
       "thisWeek": false,
@@ -3434,7 +3434,7 @@
         53
       ],
       "topicViewIndices": [
-        3
+        4
       ],
       "completed": false,
       "thisWeek": false,
@@ -4096,7 +4096,7 @@
         53
       ],
       "topicViewIndices": [
-        1
+        2
       ],
       "completed": false,
       "finishStatus": 0,
@@ -4170,7 +4170,7 @@
         44
       ],
       "topicViewIndices": [
-        21
+        22
       ],
       "subTaskIds": [],
       "completed": false,
@@ -4792,7 +4792,10 @@
       "topicViewIndices": [
         19
       ],
-      "subTaskIds": []
+      "subTaskIds": [],
+      "completed": true,
+      "finishStatus": 1,
+      "lastFinished": "2024-07-18T07:52:26.857Z"
     },
     {
       "name": "Add a way to mark a task as handled/scheduled (but not completed)",
@@ -4862,6 +4865,23 @@
         4
       ],
       "subTaskIds": []
+    },
+    {
+      "name": "Add name of task list to export/saved files - 1M",
+      "id": 352,
+      "topics": [
+        53
+      ],
+      "topicViewIndices": [
+        1
+      ],
+      "subTaskIds": [],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
     }
   ]
 }
