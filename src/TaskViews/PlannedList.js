@@ -18,7 +18,7 @@ import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
 
 // TODO: add the topic name to the bar
 
-class SelectedTask {
+class SelectedPlannedTask {
     constructor(taskId, weekOrderIndex) {
         this.taskId = taskId
         this.weekOrderIndex = weekOrderIndex
@@ -113,7 +113,7 @@ const PlannedList = (props) => {
 
     const addTaskToSelection = (taskId, weekOrderIndex) => {
         let newSelectedTasks = [...selectedTasks]
-        newSelectedTasks.push(new SelectedTask(taskId, weekOrderIndex))
+        newSelectedTasks.push(new SelectedPlannedTask(taskId, weekOrderIndex))
         setSelectedTasks(newSelectedTasks)
     }
     const deleteTaskFromSelection = (taskId, weekOrderIndex) => {

@@ -32,7 +32,7 @@ import {
 } from '../Topics/TopicModifyFuncGens.js'
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
 
-class SelectedTask {
+class SelectedCategoryTask {
     constructor(taskId, topicId, topicViewIndex, superTaskId) {
         this.taskId = taskId
         this.topicId = topicId
@@ -40,6 +40,7 @@ class SelectedTask {
         this.superTaskId = superTaskId
     }
 }
+
 const isNewTask = (task, allSubTaskIds) => {
     return task.topics.length == 0 && !allSubTaskIds.includes(task.id)
 }
@@ -237,7 +238,7 @@ const showTopics = (topics, tasks,
 }
 const addTaskToSelection = (selectedTasks, setSelectedTasks, taskId, topicId, topicViewIndex, superTaskId) => {
     let newSelectedTasks = [...selectedTasks]
-    newSelectedTasks.push(new SelectedTask(taskId, topicId, topicViewIndex, superTaskId))
+    newSelectedTasks.push(new SelectedCategoryTask(taskId, topicId, topicViewIndex, superTaskId))
     setSelectedTasks(newSelectedTasks)
 }
 const deleteTaskFromSelection = (selectedTasks, setSelectedTasks, taskId, topicId, superTaskId) => {

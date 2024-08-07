@@ -3,10 +3,9 @@ import PlannedTask from "./PlannedTask.js"
 import { getSetTaskNameFunc } from "../Tasks/TaskModifyFuncGens.js";
 import { getAddTaskWithoutTopic } from "../ADG/ModifyFuncGeneratorsV1.js";
 
-class SelectedTask {
+class SelectedNewTask {
     constructor(taskId, weekOrderIndex) {
         this.taskId = taskId
-        this.weekOrderIndex = weekOrderIndex
     }
 }
 
@@ -33,7 +32,7 @@ const AddTaskView = (props) => {
 
     const addTaskToSelection = (taskId, weekOrderIndex) => {
         let newSelectedTasks = [...selectedTasks]
-        newSelectedTasks.push(new SelectedTask(taskId, weekOrderIndex))
+        newSelectedTasks.push(new SelectedNewTask(taskId))
         setSelectedTasks(newSelectedTasks)
     }
 
