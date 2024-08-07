@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef,useEffect } from 'react';
 import YAML from 'yaml';
 import {
     convert_old_topic_tasks_to_new_topic_tasks,
@@ -18,7 +18,7 @@ const ImportExport = (props) => {
     const [loadedTopicHash, setLoadedTopicHash] = useState(null)
     const [savedTaskHash, setSavedTaskHash] = useState(null)
     const [savedTopicHash, setSavedTopicHash] = useState(null)
-
+    const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false)
 
     const fileInputRef = useRef(null);
     const fileNameRef = useRef("")
@@ -410,9 +410,10 @@ const ImportExport = (props) => {
         setLoadedTopicHash(newTopicHash)
         setSavedTaskHash(null)
         setSavedTopicHash(null)
-
         setTopics(old_topics)
         setTasks(old_tasks)
+        console.log ("Loading etc")
+
         return 'succesful import'
 
     };
@@ -517,20 +518,93 @@ const ImportExport = (props) => {
         setTopicHash(calculateTopicHash(topics))
     }
 
-    let mutatedSinceLoad = true
-    let mutatedSinceSave = true
-    if ((loadedTaskHash && (taskHash == loadedTaskHash)) && (loadedTopicHash && (topicHash == loadedTopicHash))) {
-        mutatedSinceLoad = false
+    let mutatedSinceLoad = false
+    let mutatedSinceSave = false
+    if ((loadedTaskHash && (taskHash !== loadedTaskHash)) || (loadedTopicHash && (topicHash !== loadedTopicHash))) {
+        mutatedSinceLoad = true
     }
     // Check only if the file has been saved before
-    if ((savedTaskHash && (taskHash == savedTaskHash)) && (savedTopicHash && (topicHash == savedTopicHash))) {
-        mutatedSinceSave = false
+    if ((savedTaskHash && (taskHash !== savedTaskHash)) && (savedTopicHash && (topicHash !== savedTopicHash))) { 
+        mutatedSinceSave = true
+    }
+
+    const isChanged = ( taskHash, topicHash) => {
+
+        let mutatedSinceLoad = false
+        let mutatedSinceSave = false
+        if ((loadedTaskHash && (taskHash !== loadedTaskHash)) || (loadedTopicHash && (topicHash !== loadedTopicHash))) {
+            mutatedSinceLoad = true
+        }
+        // Check only if the file has been saved before
+        if ((savedTaskHash && (taskHash !== savedTaskHash)) && (savedTopicHash && (topicHash !== savedTopicHash))) { 
+            mutatedSinceSave = true
+        }
+        console.log ("Mutated since load and save")
+        console.log(mutatedSinceLoad)
+        console.log(mutatedSinceSave)
+        console.log(savedTaskHash)
+        console.log(savedTopicHash)
+        console.log(loadedTaskHash)
+        console.log(loadedTopicHash)
+        console.log(taskHash)
+        console.log(topicHash)
+
+        if (!savedTaskHash && mutatedSinceLoad) {
+            return true
+        } else if (savedTaskHash && mutatedSinceSave) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+    let hasChanges = isChanged(loadedTaskHash, taskHash,loadedTopicHash, topicHash,savedTaskHash, savedTopicHash)
+    if (!hasUnsavedChanges && hasChanges) {
+        setHasUnsavedChanges(true)
+    } else if (hasUnsavedChanges && !hasChanges) {
+        setHasUnsavedChanges(false)
     }
 
     const handleBrowseClick = () => {
         // Trigger the file input click
         fileInputRef.current.click();
     };
+
+
+    useEffect(() => {
+        const handleBeforeUnload = (event) => {
+            console.log("beforeunload")
+            console.log ("Mutated since load and save")
+            console.log(savedTaskHash)
+            console.log(savedTopicHash)
+            console.log(loadedTaskHash)
+            console.log(loadedTopicHash)
+            console.log(taskHash,topicHash)
+            let newTaskHash = calculateTaskHash(tasks)
+            let newTopicHash = calculateTopicHash(topics)
+            console.log("Recaclucalted")
+            console.log(newTaskHash,newTopicHash)
+            let hasChanges = isChanged( newTaskHash, newTopicHash)
+            console.log(hasChanges)
+            if (hasChanges) {
+                console.log("Changes")
+                const message = "You have unsaved changes. Are you sure you want to leave?";
+                event.returnValue = message;
+                return message;
+            } else{
+                console.log("No changes?")
+                const message = "The checking didn't work";
+                event.returnValue = message;
+                return message;
+            } 
+        };
+        console.log("adding listener")
+        window.addEventListener('beforeunload', handleBeforeUnload);
+    
+        return () => {
+          window.removeEventListener('beforeunload', handleBeforeUnload);
+        };
+      }, []);
 
     return (
         <div className="importExport">
