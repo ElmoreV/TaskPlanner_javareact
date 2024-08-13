@@ -1,6 +1,53 @@
 # Interesting thoughts
 
+## What is a task or a goal?
+
+In this case, a task and a goal are synonymous.
+Let's make it more concrete:
+
+
+A goal is something that can either be
+- Finished
+- Or something that can be worked towards.
+
+## What is the difference between a goal or a task?
+
+There is **none**, but this needs some clarification.
+
 ## Properties of tasks
+
+### Completion
+
+A goal/task can be **finished** in a couple of ways.
+
+1. **Completed**: the conditions are all satisfied.
+2. **Impossible**: the conditions cannot be satisfied.
+3. **Irrelevant**: the conditions are not satisfied, but there is no purpose to satisfying the conditions.
+
+It is **unfinished** when it isn't finished.
+
+In view with supertasks/subtasks, we can make the lemma:
+
+***Lemma: if a goal has no supergoal/purpose, it cannot be irrelevant.***
+
+Proof:
+Take a goal *g*. If it has no supertasks, it has to have inherent purpose. If there is a purpose, by definition, it cannot be irrelevant.
+
+> ***Definition: a goal has purpose when it is***
+> - Unfinished
+> - Has inherent purpose or a supergoal with purpose.
+
+
+
+>***Lemma: if a goal has no inherent purpose, and if every of its supergoals is finished (either irrelevant, impossible or completed), then it must be finished (either completed, impossible or irrelevant).***
+>
+> Proof:  
+> Take a goal *g*. Assume it is not yet completed or impossible. If it doesn't have supergoals, it has no purpose, inherent or otherwise and will be irrelevant.
+> 
+> Now assume that the goal has at least one supergoal. Assume that it is relevant, possible and not completed. Then there should be a higher purpose, the condition can be satisfied, but the condition aren't yet. Since it has at least one supertask, it has no inherent purpose.
+
+
+### Progression.
 
 ### General overview
 
@@ -80,6 +127,9 @@ Description | Target-based | Threshold-based| Both |
 - Needs actions/processes to complete goal.
 - Fits very well with a deadline
 - Can either be all-or-nothing or percentages with subgoals or using some time/effort estimation.
+
+
+
 
 
 
@@ -226,6 +276,8 @@ TODO: How do I decompose progression vs. improvement?
 
 
 ### Progression (how to measure)
+
+The only way to measure the progression of a goal, is through subgoals/tasks
 
 #### TODO
 
@@ -731,3 +783,15 @@ A task might be skipped if:
 ## 7. Task management
 
 - Deleting/Sorting/editing tasks in general.
+
+# Open questions:
+
+- What is a task/goal exactly? What is it not?
+- What do we do with goals that can never finish? Never-ending goals? Continuous goals?
+- What do I mean with continuous goals/tasks vs. discrete goals/tasks?
+- Are activities isomorphic with goals? Are there goals that cannot be tasks? Are there tasks that cannot be goals?
+- What are some things that can be proven about goals?
+- What makes sense to worry about?
+- Why is this all important? Why do planning and scheduling?
+- Is a direct dependency always a subtask?
+- How to measure progress, if you don't need to complete all subtasks to complete a goal (all roads lead to Rome/there's more than one way to skin a cat)
