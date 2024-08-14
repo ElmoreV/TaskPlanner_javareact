@@ -26,6 +26,17 @@ A goal/task can be **finished** in a couple of ways.
 
 It is **unfinished** when it isn't finished.
 
+### Supergoals/subgoals
+
+ Every goal *g* can have a supergoal $S$, where completing goal *g* will complete the conditions needed to satisfy *S*. Goal *g* can be called a subgoal of $S$.
+
+A goal *g* is called a subgoal of *S*, when *S* is a supergoal of *g*.
+
+A supergoal forms the purpose, the why of a goal. The subgoal shows a possible implementation or task to complete the goal. The idea is that if the supergoal is divided entirely in a set of subgoals, the completion of all subgoals will lead to the supergoals completion.
+This is not true when there are multiple paths to completion.
+
+### Finishedness and super/subtasks
+
 In view with supertasks/subtasks, we can make the lemma:
 
 ***Lemma: if a goal has no supergoal/purpose, it cannot be irrelevant.***
@@ -53,14 +64,12 @@ Take a goal *g*. If it has no supertasks, it has to have inherent purpose. If th
 > ***Lemma: Goals that are have no inherent purpose, shouldn't be marked irrelevant.***
 >
 > - there is no other way for a goal to become irrelevant
-> - ???
+> - the goal can actually become irrelevant if it turns out that the goal doesn't work towards the unfinished supergoals.
 
 Statements:
 
 - If a goal isn't finished or impossible, and all its supergoals are finished, then the goal becomes irrelevant.
 - If a goal has no supergoals, it can only become irrelevant, if it loses its inherent purpose.
-
-
 
 
 ### Progression.
