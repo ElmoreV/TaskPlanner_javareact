@@ -35,16 +35,32 @@ Take a goal *g*. If it has no supertasks, it has to have inherent purpose. If th
 
 > ***Definition: a goal has purpose when it is***
 > - Unfinished
-> - Has inherent purpose or a supergoal with purpose.
+> - Has either inherent purpose or at least one supergoal with purpose.
 
-
-
->***Lemma: if a goal has no inherent purpose, and if every of its supergoals is finished (either irrelevant, impossible or completed), then it must be finished (either completed, impossible or irrelevant).***
+>***Lemma: if a goal*** 
+> - ***has no inherent purpose***
+> - ***and is not yet completed or impossible***
+> - ***and if every of its supergoals is finished (either irrelevant, impossible or completed)***
+> 
+> ***then the goal becomes irrelevant.***
 >
 > Proof:  
-> Take a goal *g*. Assume it is not yet completed or impossible. If it doesn't have supergoals, it has no purpose, inherent or otherwise and will be irrelevant.
+> Take a goal *g*. It is not yet completed or impossible. If it doesn't have supergoals, it has no purpose. It also does not have inherent purpose. Then it becomes irrelevant.
 > 
-> Now assume that the goal has at least one supergoal. Assume that it is relevant, possible and not completed. Then there should be a higher purpose, the condition can be satisfied, but the condition aren't yet. Since it has at least one supertask, it has no inherent purpose.
+> Now assume that the goal *g* has at least one supergoal and is unfinished, but has no inherent purpose. Then goal *g* can only have purpose when it has at least one supergoal with a purpose. 
+>
+
+> ***Lemma: Goals that are have no inherent purpose, shouldn't be marked irrelevant.***
+>
+> - there is no other way for a goal to become irrelevant
+> - ???
+
+Statements:
+
+- If a goal isn't finished or impossible, and all its supergoals are finished, then the goal becomes irrelevant.
+- If a goal has no supergoals, it can only become irrelevant, if it loses its inherent purpose.
+
+
 
 
 ### Progression.
@@ -795,3 +811,5 @@ A task might be skipped if:
 - Why is this all important? Why do planning and scheduling?
 - Is a direct dependency always a subtask?
 - How to measure progress, if you don't need to complete all subtasks to complete a goal (all roads lead to Rome/there's more than one way to skin a cat)
+- How do correlations between tasks work?
+- Wat is de transitiviteit tussen taken/supertaken/subtaken?
