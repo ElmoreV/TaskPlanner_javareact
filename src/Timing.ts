@@ -10,9 +10,9 @@ const showTasksDueIn = (tasks, now: Date, timeIntervalInSeconds: number) => {
 
 const isTaskDueIn = (task, now: Date, timeIntervalInSeconds: number) => {
     let dueTime = now.setSeconds(now.getSeconds() + timeIntervalInSeconds)
-    if (task.dueTime === undefined)
+    if (task.transitiveDueTime === undefined)
         return false
-    return task.dueTime < dueTime
+    return task.transitiveDueTime < dueTime
 }
 
 const convertDueDateNameToSeconds = (dueDateName) => {
