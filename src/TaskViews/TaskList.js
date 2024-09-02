@@ -45,11 +45,13 @@ const isNewTask = (task, allSubTaskIds) => {
     return task.topics.length == 0 && !allSubTaskIds.includes(task.id)
 }
 
-const isTaskVisible = (task, hideCompletedItems, showRepeatedOnly) => {
+const isTaskVisible = (task, hideCompletedItems, showRepeatedOnly, dueInSeconds) => {
     return (
         (!((task.completed || (task.finishStatus !== undefined && task.finishStatus !== FinishedState.NotFinished))
             && hideCompletedItems))
-        && (task.repeated || !showRepeatedOnly))
+        && (task.repeated || !showRepeatedOnly)
+        && (!dueIn || isTaskDueIn(task, new Date(), dueInSeconds))
+    )
 }
 
 const recursiveShowTask = (topic, superTask, task, tasks,
@@ -358,6 +360,11 @@ const TaskList = (props) => {
             />Show repeated tasks only</label>
             <button className="fold_all" onClick={handleFoldAll} >Fold all</button>
             <button className="unfold_all" onClick={handleUnfoldAll} >Unfold all</button>
+            <select id="topic" name="topic" aria-label="Choose a discussion topic">
+                <option value="">Select topic</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+            </select>
             <ul key='root_topics'>
                 {showTasksWithoutTopics(
                     topics, tasks,
