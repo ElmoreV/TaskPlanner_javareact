@@ -422,6 +422,8 @@ const TaskList = (props) => {
                 <option value="4day">4 day</option>
                 <option value="1week">1 week</option>
                 <option value="2week">2 weeks</option>
+                <option value="3week">3 weeks</option>
+                <option value="1month">1 month</option>
             </select>
             <ul key='root_topics'>
                 {showTasksWithoutTopics(
