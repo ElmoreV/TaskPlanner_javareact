@@ -755,6 +755,20 @@ Maybe just start with the easy ones:
 - Every x days
 - x days after last completion
 
+### Deadlines/due dates
+
+They should propagate to the higher level tasks in the tree view
+(supergoal needs to be tended to in min(dueDate of all subgoals))
+
+It seems like we almost need to compile some tree variables from the system.
+
+Calculations:
+
+- Transient due dates
+- Transient relevance/impossibility.
+
+Maybe when a task itself (or a topic) doesn't match a filter, then make it a minimal layout, and make the relevant tasks big.
+
 
 # What would the perfect UI look like?
 
