@@ -114,12 +114,16 @@ const getSetTaskNameFunc = (setTasks, tasks, id) => {
     return setTaskName;
 }
 
-const setTaskDue = (setTasks, tasks, taskId: number, duetime: Date) => {
-    const newTasks = [...tasks]
-    let taskToChange = newTasks.find(task => task.id === taskId)
-    taskToChange.dueTime = duetime
-    setTasks(newTasks)
+const getSetTaskDueTime = (setTasks, tasks, id: number) => {
+    const setTaskDueTime = (dueTime: Date) => {
+        const newTasks = [...tasks]
+        const taskToChange = newTasks.find((task) => task.id === id);
+        taskToChange.dueTime = dueTime;
+        setTasks(newTasks);
+    }
+    return setTaskDueTime;
 }
+
 
 
 
@@ -132,4 +136,4 @@ export { getPlanTaskForWeek };
 export { getSetTaskNameFunc };
 export { getSetTaskFinishStatus };
 export { getToggleFoldTask };
-export { setTaskDue };
+export { getSetTaskDueTime };

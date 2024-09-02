@@ -12,7 +12,7 @@ import {
     getSetTaskNameFunc,
     getSetTaskFinishStatus,
     getToggleFoldTask,
-} from "../Tasks/TaskModifyFuncGens.js";
+} from "../Tasks/TaskModifyFuncGens.ts";
 
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
 

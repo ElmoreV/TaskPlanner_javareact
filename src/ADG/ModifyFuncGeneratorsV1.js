@@ -17,7 +17,7 @@ import {
     removeTaskInstanceFromTopic,
     removeTaskInstanceFromTask,
 } from '../ADG/ModifyTaskTopicAdgElements';
-import { getPlanTaskForWeek } from '../Tasks/TaskModifyFuncGens';
+import { getPlanTaskForWeek } from '../Tasks/TaskModifyFuncGens.ts';
 
 // Now need four functions
 // Move from task in topic to subtask in task

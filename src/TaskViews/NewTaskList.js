@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import PlannedTask from "./PlannedTask.js"
-import { getSetTaskNameFunc } from "../Tasks/TaskModifyFuncGens.js";
+import { getSetTaskNameFunc } from "../Tasks/TaskModifyFuncGens.ts";
 import { getAddTaskWithoutTopic } from "../ADG/ModifyFuncGeneratorsV1.js";
 
 class SelectedNewTask {

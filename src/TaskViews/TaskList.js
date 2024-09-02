@@ -23,7 +23,8 @@ import {
     getSetTaskFinishStatus,
     getUnplanTask,
     getToggleFoldTask,
-} from '../Tasks/TaskModifyFuncGens.js'
+    getSetTaskDueTime,
+} from '../Tasks/TaskModifyFuncGens.ts'
 import {
     getToggleFold,
     getSetTopicNameFunc,
@@ -31,7 +32,7 @@ import {
     getFoldAll
 } from '../Topics/TopicModifyFuncGens.js'
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
-import { isTaskDueIn } from '../Timing.ts';
+import { isTaskDueIn, convertDueDateNameToSeconds } from '../Timing.ts';
 
 class SelectedCategoryTask {
     constructor(taskId, topicId, topicViewIndex, superTaskId) {
@@ -111,6 +112,7 @@ const recursiveShowTask = (topic, superTask, task, tasks,
                     setTasks={setTasks}
                     tasks={tasks}
                     unfolded={task.unfolded}
+                    setDueTime={getSetTaskDueTime(setTasks, tasks, task.id)}
 
                 />
             </li >
@@ -313,26 +315,6 @@ const TaskList = (props) => {
 
     }
 
-    const convertDueDateNameToSeconds = (dueDateName) => {
-        switch (dueDateName) {
-            case 'none':
-                return undefined
-            case '30min':
-                return 30 * 60
-            case '2hrs':
-                return 2 * 60 * 60
-            case '8hrs':
-                return 8 * 60 * 60
-            case '1day':
-                return 24 * 60 * 60
-            case '4day':
-                return 4 * 24 * 60 * 60
-            case '1week':
-                return 7 * 24 * 60 * 60
-            default:
-                return undefined
-        }
-    }
 
     const onDueDateChange = (event) => {
         let dueDateName = event.target.value
@@ -400,6 +382,7 @@ const TaskList = (props) => {
                 <option value="1day">1 day</option>
                 <option value="4day">4 day</option>
                 <option value="1week">1 week</option>
+                <option value="2week">2 weeks</option>
             </select>
             <ul key='root_topics'>
                 {showTasksWithoutTopics(

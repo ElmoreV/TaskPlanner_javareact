@@ -4,6 +4,7 @@ import TaskContent from '../Tasks/TaskContent.js'
 import React from 'react';
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
 import { translateLastCompletedDatetime } from '../Tasks/TaskHelperFuncs.js';
+import { convertDueDateNameToSeconds, getFutureDate } from '../Timing.ts';
 
 const Task = (props) => {
     const { id, name, setTaskName, deleteTask,
@@ -19,6 +20,7 @@ const Task = (props) => {
         taskTopics,
         addSubTask, hasSubTasks,
         fancy,
+        setDueTime,
     } = props;
     // console.debug("Rendering Task: " + name)
     const folded_symbol = '>';
@@ -156,6 +158,12 @@ const Task = (props) => {
         unplan()
     }
 
+    const onDueDateChange = (event) => {
+        let dueDateName = event.target.value
+        console.log("Setting due date")
+        setDueTime(getFutureDate(convertDueDateNameToSeconds(dueDateName)))
+    }
+
 
     let class_str = 'task'
     // Completion has precedence over planned
@@ -267,6 +275,7 @@ const Task = (props) => {
         duplicateDragHandlers={duplicateDragHandlers}
         fancy={fancy}
         topicCount={taskTopics.length}
+        onDueDateChange={onDueDateChange}
     />);
 }
 
