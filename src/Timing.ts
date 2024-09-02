@@ -15,9 +15,5 @@ const isTaskDueIn = (task, now: Date, timeIntervalInSeconds: number) => {
     return task.dueTime < dueTime
 }
 
-const setTaskDue = (setTasks, tasks, taskId: number, duetime: Date) => {
-    const newTasks = [...tasks]
-    let taskToChange = newTasks.find(task => task.id === taskId)
-    taskToChange.dueTime = duetime
-    setTasks(newTasks)
-}
+
+export { isTaskDueIn, showTasksDueIn }

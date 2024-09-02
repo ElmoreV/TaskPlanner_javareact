@@ -31,6 +31,7 @@ import {
     getFoldAll
 } from '../Topics/TopicModifyFuncGens.js'
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
+import { isTaskDueIn } from '../Timing.ts';
 
 class SelectedCategoryTask {
     constructor(taskId, topicId, topicViewIndex, superTaskId) {
@@ -50,7 +51,7 @@ const isTaskVisible = (task, hideCompletedItems, showRepeatedOnly, dueInSeconds)
         (!((task.completed || (task.finishStatus !== undefined && task.finishStatus !== FinishedState.NotFinished))
             && hideCompletedItems))
         && (task.repeated || !showRepeatedOnly)
-        && (!dueIn || isTaskDueIn(task, new Date(), dueInSeconds))
+        && (!dueInSeconds || isTaskDueIn(task, new Date(), dueInSeconds))
     )
 }
 
@@ -58,7 +59,7 @@ const recursiveShowTask = (topic, superTask, task, tasks,
     topics,
     setTasks,
     selectedTasks, setSelectedTasks,
-    hideCompletedItems, showRepeatedOnly,
+    hideCompletedItems, showRepeatedOnly, dueInSeconds,
     fancy
 ) => {
     // 1. Show task
@@ -120,11 +121,12 @@ const recursiveShowTask = (topic, superTask, task, tasks,
                         {tasks
                             // .map(t=>{console.log("Hi, I'm a subtask"+t);return t})
                             .filter(subTask => task.subTaskIds.includes(subTask.id))
-                            .filter((subTask) => isTaskVisible(subTask, hideCompletedItems, showRepeatedOnly))
+                            .filter((subTask) => isTaskVisible(subTask, hideCompletedItems, showRepeatedOnly, dueInSeconds))
                             // TODO: ordering of subtasks
                             .map(subTask => (
                                 recursiveShowTask(null, task, subTask, tasks, topics, setTasks,
-                                    selectedTasks, setSelectedTasks, hideCompletedItems, showRepeatedOnly, fancy))
+                                    selectedTasks, setSelectedTasks,
+                                    hideCompletedItems, showRepeatedOnly, dueInSeconds, fancy))
                             )
                         }
                     </ul>
@@ -135,7 +137,7 @@ const recursiveShowTask = (topic, superTask, task, tasks,
 }
 
 const showTasksWithoutTopics = (topics, tasks, setTopics, setTasks, selectedTasks, setSelectedTasks,
-    hideCompletedItems, showRepeatedOnly,
+    hideCompletedItems, showRepeatedOnly, dueInSeconds,
     fancy, allSubTaskIds
 ) => {
     // const findTopicViewIdx = (topicId, task) => {
@@ -149,7 +151,8 @@ const showTasksWithoutTopics = (topics, tasks, setTopics, setTasks, selectedTask
             // .slice(0).sort((taskA, taskB) => { return findTopicViewIdx(topic.id, taskA) - findTopicViewIdx(topic.id, taskB) })
             .map((task) => (
                 recursiveShowTask(null, null, task, tasks, topics, setTasks,
-                    selectedTasks, setSelectedTasks, hideCompletedItems, showRepeatedOnly, fancy)
+                    selectedTasks, setSelectedTasks,
+                    hideCompletedItems, showRepeatedOnly, dueInSeconds, fancy)
             ))
 
         }
@@ -160,7 +163,7 @@ const recursiveShowTopic = (topic, tasks,
     setTopics, topics,
     setTasks,
     selectedTasks, setSelectedTasks,
-    hideCompletedItems, showRepeatedOnly,
+    hideCompletedItems, showRepeatedOnly, dueInSeconds,
     fancy
 ) => {
     // 1. Show topic
@@ -207,17 +210,18 @@ const recursiveShowTopic = (topic, tasks,
                 setTopics, topics,
                 setTasks,
                 selectedTasks, setSelectedTasks,
-                hideCompletedItems, showRepeatedOnly,
+                hideCompletedItems, showRepeatedOnly, dueInSeconds,
                 fancy)
         ))}</ul>
         <ul key={topic.id + '_tasks'}>
             {topic.unfolded && tasks
                 .filter((task) => task.topics.includes(topic.id))
-                .filter((task) => isTaskVisible(task, hideCompletedItems, showRepeatedOnly))
+                .filter((task) => isTaskVisible(task, hideCompletedItems, showRepeatedOnly, dueInSeconds))
                 .slice(0).sort((taskA, taskB) => { return findTopicViewIdx(topic.id, taskA) - findTopicViewIdx(topic.id, taskB) })
                 .map(task => (
                     recursiveShowTask(topic, null, task, tasks, topics, setTasks,
-                        selectedTasks, setSelectedTasks, hideCompletedItems, showRepeatedOnly, fancy))
+                        selectedTasks, setSelectedTasks,
+                        hideCompletedItems, showRepeatedOnly, dueInSeconds, fancy))
                 )
             }
         </ul></div>
@@ -228,14 +232,14 @@ const showTopics = (topics, tasks,
     setTopics,
     setTasks,
     selectedTasks, setSelectedTasks,
-    hideCompletedItems, showRepeatedOnly,
+    hideCompletedItems, showRepeatedOnly, dueInSeconds,
     fancy) => {
     console.info('Re-rendering task list')
     return topics.map((topic) => (recursiveShowTopic(topic, tasks,
         setTopics, topics,
         setTasks,
         selectedTasks, setSelectedTasks,
-        hideCompletedItems, showRepeatedOnly,
+        hideCompletedItems, showRepeatedOnly, dueInSeconds,
         fancy)))
 }
 const addTaskToSelection = (selectedTasks, setSelectedTasks, taskId, topicId, topicViewIndex, superTaskId) => {
@@ -256,7 +260,7 @@ const TaskList = (props) => {
 
     const [hideCompletedItems, setHideCompletedItems] = useState(true)
     const [showRepeatedOnly, setShowRepeatedOnly] = useState(false)
-
+    const [dueTimeInSeconds, setDueTimeInSeconds] = useState(undefined)
     const [selectedTasks, setSelectedTasks] = useState([])
     const [runOnce, setRunOnce] = useState(false)
 
@@ -307,6 +311,34 @@ const TaskList = (props) => {
         let unfoldAll = getUnfoldAll(setTopics, topics)
         topics.map(topic => unfoldAll(topic.id))
 
+    }
+
+    const convertDueDateNameToSeconds = (dueDateName) => {
+        switch (dueDateName) {
+            case 'none':
+                return undefined
+            case '30min':
+                return 30 * 60
+            case '2hrs':
+                return 2 * 60 * 60
+            case '8hrs':
+                return 8 * 60 * 60
+            case '1day':
+                return 24 * 60 * 60
+            case '4day':
+                return 4 * 24 * 60 * 60
+            case '1week':
+                return 7 * 24 * 60 * 60
+            default:
+                return undefined
+        }
+    }
+
+    const onDueDateChange = (event) => {
+        let dueDateName = event.target.value
+        console.log(dueDateName)
+        console.log(convertDueDateNameToSeconds(dueDateName))
+        setDueTimeInSeconds(convertDueDateNameToSeconds(dueDateName))
     }
 
 
@@ -360,17 +392,21 @@ const TaskList = (props) => {
             />Show repeated tasks only</label>
             <button className="fold_all" onClick={handleFoldAll} >Fold all</button>
             <button className="unfold_all" onClick={handleUnfoldAll} >Unfold all</button>
-            <select id="topic" name="topic" aria-label="Choose a discussion topic">
-                <option value="">Select topic</option>
-                <option value="html">HTML</option>
-                <option value="css">CSS</option>
+            <select id="select_due_date" name="due_date" onChange={onDueDateChange}>
+                <option value="none">Select due time interval</option>
+                <option value="30min">30 minutes</option>
+                <option value="2hrs">2 hours</option>
+                <option value="8hrs">8 hours</option>
+                <option value="1day">1 day</option>
+                <option value="4day">4 day</option>
+                <option value="1week">1 week</option>
             </select>
             <ul key='root_topics'>
                 {showTasksWithoutTopics(
                     topics, tasks,
                     setTopics, setTasks,
                     selectedTasks, setSelectedTasks,
-                    hideCompletedItems, showRepeatedOnly,
+                    hideCompletedItems, showRepeatedOnly, dueTimeInSeconds,
                     fancy,
                     allSubTaskIds,
                 )}
@@ -378,7 +414,7 @@ const TaskList = (props) => {
                     setTopics,
                     setTasks,
                     selectedTasks, setSelectedTasks,
-                    hideCompletedItems, showRepeatedOnly,
+                    hideCompletedItems, showRepeatedOnly, dueTimeInSeconds,
                     fancy)}
             </ul>
             <button onClick={() => testFunction()}>Test Function</button>
