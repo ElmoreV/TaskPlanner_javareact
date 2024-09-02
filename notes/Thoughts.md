@@ -61,7 +61,7 @@ Take a goal *g*. If it has no supertasks, it has to have inherent purpose. If th
 > Now assume that the goal *g* has at least one supergoal and is unfinished, but has no inherent purpose. Then goal *g* can only have purpose when it has at least one supergoal with a purpose. 
 >
 
-> ***Lemma: Goals that are have no inherent purpose, shouldn't be marked irrelevant.***
+> ***Lemma: Goals that have no inherent purpose, shouldn't be marked irrelevant.***
 >
 > - there is no other way for a goal to become irrelevant
 > - the goal can actually become irrelevant if it turns out that the goal doesn't work towards the unfinished supergoals.
@@ -70,6 +70,8 @@ Statements:
 
 - If a goal isn't finished or impossible, and all its supergoals are finished, then the goal becomes irrelevant.
 - If a goal has no supergoals, it can only become irrelevant, if it loses its inherent purpose.
+
+It can of course happen that a supergoal changes, and THEN the subgoal does not help towards the progress of the supergoal and THEN the subgoal can of course become irrelevant.
 
 
 ### Progression.
@@ -479,6 +481,23 @@ This are the most abstract topics that are available. There seems to be a bit of
 
 ### Planning
 
+Observations:
+
+1. It seems like planning a task/goal is also planning to work on the supergoal.
+2. However, planning a supergoal, does not necessarily mean that all subgoals are planned.
+3. So priorization is basically choosing the subgoal(s) that best achieve the goal.
+4. And planning supergoals is less precise than planning subgoals.
+
+For the example:
+
+- Do 1h of exercise this week
+  - Spend 1h in the gym
+  - Do 1h of walking in the park
+  - Do Yoga for 1 hour
+
+So planning "Do 1h of exercise this week" is worse prioritized than "Do 1h of walking in the park."
+
+Not entirely sure yet what this means in the design.
 
 ### Scheduling
 
