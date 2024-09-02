@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import TaskContent from '../Tasks/TaskContent.js'
 import React from 'react';
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
-import { translateLastCompletedDatetime } from '../Tasks/TaskHelperFuncs.js';
+import { translateLastCompletedDatetime, translateTimeDifference } from '../Tasks/TaskHelperFuncs.js';
 import { convertDueDateNameToSeconds, getFutureDate } from '../Timing.ts';
 
 const Task = (props) => {
@@ -20,7 +20,7 @@ const Task = (props) => {
         taskTopics,
         addSubTask, hasSubTasks,
         fancy,
-        setDueTime,
+        setDueTime, currentDueTime,
     } = props;
     // console.debug("Rendering Task: " + name)
     const folded_symbol = '>';
@@ -161,6 +161,7 @@ const Task = (props) => {
     const onDueDateChange = (event) => {
         let dueDateName = event.target.value
         console.log("Setting due date")
+        if (dueDateName === 'noChange') { return }
         setDueTime(getFutureDate(convertDueDateNameToSeconds(dueDateName)))
     }
 
@@ -181,6 +182,14 @@ const Task = (props) => {
             margin: "0px"
         }
     }
+    let dueTimeStr: String | undefined = undefined
+    if (currentDueTime) {
+        dueTimeStr = translateTimeDifference(currentDueTime)
+        console.log("Due time str")
+        console.log(currentDueTime)
+        console.log(dueTimeStr)
+    }
+
 
     const toggleEdit = () => {
         setIsEditing(true);
@@ -276,6 +285,7 @@ const Task = (props) => {
         fancy={fancy}
         topicCount={taskTopics.length}
         onDueDateChange={onDueDateChange}
+        currentDueDateStr={dueTimeStr}
     />);
 }
 

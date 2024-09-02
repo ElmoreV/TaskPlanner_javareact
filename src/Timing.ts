@@ -35,11 +35,11 @@ const convertDueDateNameToSeconds = (dueDateName) => {
             return 2 * 7 * 24 * 60 * 60
         case '4week':
             return 4 * 7 * 24 * 60 * 60
-        case '1months':
+        case '1month':
             return 31 * 24 * 60 * 60
-        case '2months':
+        case '2month':
             return 61 * 24 * 60 * 60
-        case '3months':
+        case '3month':
             return 92 * 24 * 60 * 60
         default:
             return undefined

@@ -113,7 +113,7 @@ const recursiveShowTask = (topic, superTask, task, tasks,
                     tasks={tasks}
                     unfolded={task.unfolded}
                     setDueTime={getSetTaskDueTime(setTasks, tasks, task.id)}
-
+                    currentDueTime={task.dueTime}
                 />
             </li >
             {
@@ -376,6 +376,7 @@ const TaskList = (props) => {
             <button className="unfold_all" onClick={handleUnfoldAll} >Unfold all</button>
             <select id="select_due_date" name="due_date" onChange={onDueDateChange}>
                 <option value="none">Select due time interval</option>
+                <option value="setDueDate"></option>
                 <option value="30min">30 minutes</option>
                 <option value="2hrs">2 hours</option>
                 <option value="8hrs">8 hours</option>

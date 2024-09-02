@@ -37,11 +37,11 @@ const TaskContent = (props) => {
         fancy,
         topicCount,
         onDueDateChange,
+        currentDueDateStr,
     } = props;
     console.debug(`Rendering TaskContent ${name}`)
     // let taskFinishStatus = FinishedState.Irrelevant;
     // let completed = (taskFinishStatus == Finished.Completed)
-
     let styles = fancy ? fancyStyles : simpleStyles;
 
     // Applying dynamic class names based on the classStr prop
@@ -93,17 +93,19 @@ const TaskContent = (props) => {
                     {spawnNewTask && (<button className={styles.taskSpawn} onClick={captureClick(spawnNewTask)}>Spawn</button>)}
                     {addSubTask && (<button className={styles.taskSpawn} onClick={captureClick(addSubTask)}>Add subtask</button>)}
                     {<select id="select_due_date" name="due_date" onChange={onDueDateChange}>
-                        <option value="none">Select when task is due</option>
-                        <option value="2hrs">2 hours</option>
-                        <option value="8hrs">8 hours</option>
-                        <option value="1day">1 day</option>
-                        <option value="4day">4 day</option>
-                        <option value="1week">1 week</option>
-                        <option value="2week">2 weeks</option>
-                        <option value="4week">4 weeks</option>
-                        <option value="1month">1 month</option>
-                        <option value="2month">2 months</option>
-                        <option value="3month">3 months</option>
+                        {currentDueDateStr &&
+                            (<option value='default'>{currentDueDateStr}</option>)}
+                        <option value="none">Due in:</option>
+                        <option value="2hrs">In 2 hours</option>
+                        <option value="8hrs">In 8 hours</option>
+                        <option value="1day">In 1 day</option>
+                        <option value="4day">In 4 day</option>
+                        <option value="1week">In 1 week</option>
+                        <option value="2week">In 2 weeks</option>
+                        <option value="4week">In 4 weeks</option>
+                        <option value="1month">In 1 month</option>
+                        <option value="2month">In 2 months</option>
+                        <option value="3month">In 3 months</option>
                     </select>}
                 </div>
             </div>
