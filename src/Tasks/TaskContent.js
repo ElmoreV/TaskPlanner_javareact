@@ -92,7 +92,7 @@ const TaskContent = (props) => {
                     {taskFinishStatus == FinishedState.NotFinished && !scheduled && scheduleTask && (<button className={styles.taskSchedule} onClick={captureClick(scheduleTask)}>Unscheduled</button>)}
                     {spawnNewTask && (<button className={styles.taskSpawn} onClick={captureClick(spawnNewTask)}>Spawn</button>)}
                     {addSubTask && (<button className={styles.taskSpawn} onClick={captureClick(addSubTask)}>Add subtask</button>)}
-                    {<select id="select_due_date" name="due_date" onChange={onDueDateChange}>
+                    {onDueDateChange && (<select id="select_due_date" name="due_date" onChange={onDueDateChange}>
                         {currentDueDateStr &&
                             (<option value='default'>{currentDueDateStr}</option>)}
                         <option value="none">Due in:</option>
@@ -106,7 +106,7 @@ const TaskContent = (props) => {
                         <option value="1month">In 1 month</option>
                         <option value="2month">In 2 months</option>
                         <option value="3month">In 3 months</option>
-                    </select>}
+                    </select>)}
                 </div>
             </div>
 

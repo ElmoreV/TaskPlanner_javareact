@@ -150,6 +150,8 @@ const showTasksWithoutTopics = (topics, tasks, setTopics, setTasks, selectedTask
     return (<div key="div_tasks_no_topic">
         {tasks
             .filter((task) => isNewTask(task, allSubTaskIds))
+            .filter((subTask) => isTaskVisible(subTask, hideCompletedItems, showRepeatedOnly, dueInSeconds))
+
             // .slice(0).sort((taskA, taskB) => { return findTopicViewIdx(topic.id, taskA) - findTopicViewIdx(topic.id, taskB) })
             .map((task) => (
                 recursiveShowTask(null, null, task, tasks, topics, setTasks,
