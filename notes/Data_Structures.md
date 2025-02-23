@@ -105,3 +105,197 @@ There are different actions that are performed, that would need to be optimized.
 ## Storage
 
 - Optimize for size and git version ability
+
+
+## Migration of data structure v1 to v2
+
+V1:
+```javascript
+//v1
+  const [topics, setTopics] = useState([
+    {
+      name: "Maintenance", id: 1, unfolded: false, subtopics: [
+        { name: "Replace", id: 11, unfolded: false, subtopics: [] },
+        { name: "Repair", id: 12, unfolded: false, subtopics: [] },
+        { name: "Document", id: 13, unfolded: true, subtopics: [] }
+
+      ]
+    },
+    {
+      name: "Creativity", id: 2, unfolded: false, subtopics: [
+        { name: "Writing", id: 21, unfolded: false, subtopics: [] }
+      ]
+    }
+
+  ]);
+
+  const [tasks, setTasks] = useState([
+    {
+      name: "Repair bicycle", id: 0, topics: [12], topicViewIndices: [1], completed: true,
+      finishStatus: FinishedState.Completed,
+      thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 1,
+      subTaskIds: [], unfolded: true
+    },
+    {
+      name: "Write Cover Letter", id: 1, topics: [21, 13], topicViewIndices: [1, 1], completed: false,
+      finishStatus: FinishedState.NotFinished,
+      thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 0,
+      subTaskIds: [0], unfolded: true
+    },
+    {
+      name: "Check tax return", id: 2, topics: [1], topicViewIndices: [3], completed: false,
+      finishStatus: FinishedState.NotFinished,
+      thisWeek: true, repeated: false, scheduled: true, weekOrderIndex: 2,
+      subTaskIds: [1], unfolded: true
+    },
+    {
+      name: "Create a NASS server", id: 5, topics: [1], topicViewIndices: [2], completed: false,
+      finishStatus: FinishedState.NotFinished,
+      thisWeek: false, repeated: true, scheduled: false, weekOrderIndex: 0,
+      subTaskIds: [2], unfolded: true
+    },
+  ])
+
+```
+
+V2:
+```javascript
+//v2
+  const [tags, setTags] = useState({
+    1:{
+        id:1,
+        name: "Maintenance",
+        unfolded: false,
+        childTagIds: [11,12,13] // order is important for render order
+        parentTagIds: [] // order is not important
+    },
+    11:{
+        id:11,
+        name: "Replace",
+        unfolded: false,
+        childTagIds: []
+        parentTagIds: [1]
+    },    
+    12:{
+        id:12,
+        name: "Repair",
+        unfolded: false,
+        childTagIds: []
+        parentTagIds: [1]
+    },  
+    13:{  
+        id:13,
+        name: "Document",
+        unfolded: true,
+        childTagIds: []
+        parentTagIds: [1]
+    },
+    2:{  
+        id:2,
+        name: "Creativity",
+        unfolded: false,
+        childTagIds: [21]
+        parentTagIds: []
+    },  
+    21:{  
+        id:21,
+        name: "Writing",
+        unfolded: false,
+        childTagIds: []
+        parentTagIds: [2]
+    },  
+  })
+
+  const [tasks, setTasks] = useState({
+    0:{
+      id: 0,
+      name: "Replace bicycle",
+      finishStatus: FinishedState.Completed,
+      completed: true,
+      thisWeek: false,
+      scheduled: false,
+      repeated: false,
+      unfolded: true,
+      childTaskIds: [],
+      parentTaskIds: [1],
+    },
+    1:{
+      id: 1,
+      name: "Write Cover Letter",
+      finishStatus: FinishedState.NotFinished,
+      completed: false,
+      thisWeek: false,
+      scheduled: false,
+      repeated: false,
+      unfolded: true,
+      childTaskIds: [0], // Order is important for render order
+      parentTaskIds: [2], // order is not important (yet)
+    },
+    2:{
+      id: 2,
+      name: "Check tax return",
+      finishStatus: FinishedState.NotFinished,
+      completed: false,
+      thisWeek: true,
+      scheduled: true,
+      repeated: false,
+      unfolded: true,
+      childTaskIds: [1],
+      parentTaskIds: [],
+    },
+    5:{
+      id: 5,
+      name: "Create a NASS server",
+      finishStatus: FinishedState.NotFinished,
+      completed: false,
+      thisWeek: true,
+      scheduled: false,
+      repeated: false,
+      unfolded: true,
+      childTaskIds: [2],
+      parentTaskIds: [],
+    },
+  })
+
+// tagTasks[tag_id] = [task_id1, task_id2, task_id3]
+// order is important!
+const [tagTasks, setTagTasks] = useState([
+  { 1: [5,2],
+    2: [],
+    11: [],
+    12: [0],
+    13: [1],
+    21: [1],
+  }
+])
+
+const [weekTaskIdList, setWeekTaskIdList] = useState([])
+
+
+const [tasks, setTasks] = useState([
+    {
+      name: "Repair bicycle", id: 0, topics: [12], topicViewIndices: [1], completed: true,
+      finishStatus: FinishedState.Completed,
+      thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 1,
+      subTaskIds: [], unfolded: true
+    },
+    {
+      name: "Write Cover Letter", id: 1, topics: [21, 13], topicViewIndices: [1, 1], completed: false,
+      finishStatus: FinishedState.NotFinished,
+      thisWeek: false, repeated: false, scheduled: false, weekOrderIndex: 0,
+      subTaskIds: [0], unfolded: true
+    },
+    {
+      name: "Check tax return", id: 2, topics: [1], topicViewIndices: [3], completed: false,
+      finishStatus: FinishedState.NotFinished,
+      thisWeek: true, repeated: false, scheduled: true, weekOrderIndex: 2,
+      subTaskIds: [1], unfolded: true
+    },
+    {
+      name: "Create a NASS server", id: 5, topics: [1], topicViewIndices: [2], completed: false,
+      finishStatus: FinishedState.NotFinished,
+      thisWeek: false, repeated: true, scheduled: false, weekOrderIndex: 0,
+      subTaskIds: [2], unfolded: true
+    },
+  ])
+```
