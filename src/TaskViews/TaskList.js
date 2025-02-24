@@ -16,15 +16,15 @@ import {
     sanitizeTopicOrderIndex,
 } from '../ADG/ModifyFuncGeneratorsV1.js'
 import {
-    getCompleteTask,
-    getToggleRepeatTask,
-    getPlanTaskForWeek,
-    getSetTaskNameFunc,
-    getSetTaskFinishStatus,
-    getUnplanTask,
-    getToggleFoldTask,
-    getSetTaskDueTime,
-} from '../Tasks/TaskModifyFuncGens.ts'
+    getCompleteTaskV1,
+    getToggleRepeatTaskV1,
+    getPlanTaskForWeekV1,
+    getSetTaskNameFuncV1,
+    getSetTaskFinishStatusV1,
+    getUnplanTaskV1,
+    getToggleFoldTaskV1,
+    getSetTaskDueTimeV1,
+} from '../Tasks/TaskModifyFuncGensV1.ts'
 import {
     getToggleFold,
     getSetTopicNameFunc,
@@ -88,19 +88,19 @@ const recursiveShowTask = (topic, superTask, task, tasks,
                     repeated={task.repeated}
                     taskTopics={task.topics}
                     taskLastCompletion={task.lastFinished}
-                    setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
+                    setTaskFinishStatus={getSetTaskFinishStatusV1(setTasks, tasks, task.id)}
                     currentTopicViewIndex={topic && findTopicViewIdx(topic.id, task)}
                     currentTopicName={topic && topic.name}
                     currentTopicId={topic && topic.id}
                     currentSuperTaskId={superTask && superTask.id}
-                    setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
+                    setTaskName={getSetTaskNameFuncV1(setTasks, tasks, task.id)}
                     deleteTask={getDeleteTask(setTasks, tasks, task.id)}
                     addSubTask={getAddNewSubTask(setTasks, tasks, task.id)}
                     hasSubTasks={task.subTaskIds && task.subTaskIds.length > 0}
-                    completeTask={getCompleteTask(setTasks, tasks, task.id)}
-                    plan={getPlanTaskForWeek(setTasks, tasks, task.id)}
-                    unplan={getUnplanTask(setTasks, tasks, task.id)}
-                    toggleRepeatTask={getToggleRepeatTask(setTasks, tasks, task.id)}
+                    completeTask={getCompleteTaskV1(setTasks, tasks, task.id)}
+                    plan={getPlanTaskForWeekV1(setTasks, tasks, task.id)}
+                    unplan={getUnplanTaskV1(setTasks, tasks, task.id)}
+                    toggleRepeatTask={getToggleRepeatTaskV1(setTasks, tasks, task.id)}
                     addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, topic && findTopicViewIdx(topic.id, task), superTask && superTask.id)}
                     deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, superTask && superTask.id)}
                     selected={selectedTasks.find((st) => (st.taskId == task.id && (!topic || st.topicId == topic.id) && (!superTask || st.superTaskId == superTask.id))) ? true : false}
@@ -108,11 +108,11 @@ const recursiveShowTask = (topic, superTask, task, tasks,
                     moveTasks={getMoveTasks(topics, tasks, setTasks)}
                     duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
                     fancy={fancy}
-                    toggleFold={getToggleFoldTask(setTasks, tasks)}
+                    toggleFold={getToggleFoldTaskV1(setTasks, tasks)}
                     setTasks={setTasks}
                     tasks={tasks}
                     unfolded={task.unfolded}
-                    setDueTime={getSetTaskDueTime(setTasks, tasks, task.id)}
+                    setDueTime={getSetTaskDueTimeV1(setTasks, tasks, task.id)}
                     currentDueTime={task.dueTime}
                 />
             </li >

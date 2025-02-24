@@ -7,7 +7,7 @@ import Theme from "./Theme";
 import { FinishedState } from './Tasks/TaskInterfaces.tsx';
 import AddTaskView from './TaskViews/NewTaskList.js';
 import { initialTasksV1, initialTopicsV1 } from './InitialState_V1.ts';
-import { convert_v1_to_v2, convert_v2_to_v1 } from './Converters/UpdateV1ToV2.ts';
+import { convert_v1_to_v2, convert_v2_to_v1, ensureRoundtripStability } from './Converters/UpdateV1ToV2.ts';
 import { initialTags, initialTasks, initialPlannedTaskIdList, initialTagTasks } from './InitialState_V2.ts';
 
 // 1. Go through all tasks and search if their .supertasks list contains [task.id] N*E(M) , E(M) is avg of supertasks per task
@@ -43,6 +43,16 @@ function App() {
 
   const onMakeFancyChange = () => {
     setFancy(!fancy)
+  }
+
+  const onTest2 = () => {
+    ensureRoundtripStability(tasks, topics)
+    const { newTaskMap, newTagMap, newTagTaskMap, newPlannedTaskIds } = convert_v1_to_v2(tasks, topics)
+    const res2 = convert_v2_to_v1(newTaskMap, newTagMap, newTagTaskMap, newPlannedTaskIds)
+    const { topicsV1, tasksV1 } = res2
+    setTopics(topicsV1)
+    setTasks(tasksV1)
+
   }
 
   const onDarkModeChange = () => {
@@ -115,6 +125,7 @@ function App() {
           className="form-check-input"
           defaultChecked={debugMode}
         />Debug Mode</label>
+        <button onClick={onTest2}>Test2</button>
       </div>
     </Theme>
   );

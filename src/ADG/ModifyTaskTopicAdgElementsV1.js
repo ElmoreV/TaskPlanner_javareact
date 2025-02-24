@@ -4,7 +4,7 @@ The elementary functions
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx'
 import { getFreeTaskId } from '../Topics/TopicHelper.js'
 
-const generateEmptyTask = (tasks) => {
+const generateEmptyTaskV1 = (tasks) => {
     let newId = getFreeTaskId(tasks)
     console.debug(`Generate empty task ${newId}`)
     let newTask = {
@@ -23,7 +23,7 @@ const generateEmptyTask = (tasks) => {
     return newTask
 }
 
-const addOrphanTasktoTaskList = (tasks, task) => {
+const addOrphanTasktoTaskListV1 = (tasks, task) => {
     console.info(`Add task with id ${task.id} to tasks`)
     let newTasks = [...tasks]
     newTasks.push(task)
@@ -37,7 +37,7 @@ const addOrphanTasktoTaskList = (tasks, task) => {
 // Does not check if the task is well-shaped (same length taskIds as topicViewIndices)
 // Assumes there is only one instance of a task in every topic
 // Returns a shallow copy with the changed tasks 
-const insertTaskInstanceIntoTopic = (tasks, taskId, topicId, topicViewIndex) => {
+const insertTaskInstanceIntoTopicV1 = (tasks, taskId, topicId, topicViewIndex) => {
     console.info(`Insert task instance with task.id: ${taskId} into topic with id: ${topicId} at view index ${topicViewIndex}`)
 
     if (topicViewIndex === undefined) {
@@ -65,7 +65,7 @@ const insertTaskInstanceIntoTopic = (tasks, taskId, topicId, topicViewIndex) => 
 // Does not check if supertask exists
 // Assumes task ids are unique
 // Returns a shallow copy with the changed tasks 
-const insertTaskInstanceIntoTask = (tasks, subTaskId, superTaskId) => {
+const insertTaskInstanceIntoTaskV1 = (tasks, subTaskId, superTaskId) => {
     console.info(`Insert task instance with task.id: ${subTaskId} into (super)task with id: ${superTaskId}`)
     //TODO: add taskViewIndices
 
@@ -87,7 +87,7 @@ const insertTaskInstanceIntoTask = (tasks, subTaskId, superTaskId) => {
 // Assumes tha taskId exists in the tasks
 // Assumes the topicViewIndices are all positive (and more assumptions)
 // 
-const removeTaskInstanceFromTopic = (tasks, taskId, topicId) => {
+const removeTaskInstanceFromTopicV1 = (tasks, taskId, topicId) => {
     console.info(`Removing task instance with task.id: ${taskId} from topic with id: ${topicId}`)
 
     let newTasks = [...tasks]
@@ -115,7 +115,7 @@ const removeTaskInstanceFromTopic = (tasks, taskId, topicId) => {
 // Assumes tha taskId exists in the tasks
 // Assumes the topicViewIndices are all positive (and more assumptions)
 // 
-const removeTaskInstanceFromTask = (tasks, taskId, superTaskId) => {
+const removeTaskInstanceFromTaskV1 = (tasks, taskId, superTaskId) => {
     console.debug(`Removing task instance with task.id: ${taskId} from task with id: ${superTaskId}`)
 
     let newTasks = [...tasks]
@@ -130,7 +130,7 @@ const removeTaskInstanceFromTask = (tasks, taskId, superTaskId) => {
 
 
 // Pretty much no assumptions.
-const deleteEntireTask = (tasks, taskId) => {
+const deleteEntireTaskV1 = (tasks, taskId) => {
     let newTasks = [...tasks]
     newTasks = newTasks.filter(task => (task.id !== taskId))
     // Remove this id from subtasks
@@ -146,10 +146,10 @@ const deleteEntireTask = (tasks, taskId) => {
 
 
 
-export { generateEmptyTask }
-export { addOrphanTasktoTaskList }
-export { insertTaskInstanceIntoTopic }
-export { removeTaskInstanceFromTopic }
-export { insertTaskInstanceIntoTask }
-export { removeTaskInstanceFromTask }
-export { deleteEntireTask }
+export { generateEmptyTaskV1 }
+export { addOrphanTasktoTaskListV1 }
+export { insertTaskInstanceIntoTopicV1 }
+export { removeTaskInstanceFromTopicV1 }
+export { insertTaskInstanceIntoTaskV1 }
+export { removeTaskInstanceFromTaskV1 }
+export { deleteEntireTaskV1 }

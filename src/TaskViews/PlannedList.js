@@ -6,13 +6,13 @@ import {
     getSpawnNewTask,
 } from '../ADG/ModifyFuncGeneratorsV1.js';
 import {
-    getCompleteTask,
-    getScheduleTask,
-    getUnplanTask,
-    getSetTaskNameFunc,
-    getSetTaskFinishStatus,
-    getToggleFoldTask,
-} from "../Tasks/TaskModifyFuncGens.ts";
+    getCompleteTaskV1,
+    getScheduleTaskV1,
+    getUnplanTaskV1,
+    getSetTaskNameFuncV1,
+    getSetTaskFinishStatusV1,
+    getToggleFoldTaskV1,
+} from "../Tasks/TaskModifyFuncGensV1.ts";
 
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
 
@@ -50,17 +50,17 @@ const recursiveShowPlannedTask = (task, superTask, setTasks, tasks,
                 selected={selectedTasks.find((st) => (st.taskId == task.id && st.weekOrderIndex == task.weekOrderIndex)) ? true : false}
                 selectedTasks={selectedTasks}
 
-                setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
-                setTaskFinishStatus={getSetTaskFinishStatus(setTasks, tasks, task.id)}
-                completeTask={getCompleteTask(setTasks, tasks, task.id)}
-                scheduleTask={getScheduleTask(setTasks, tasks, task.id)}
-                unplan={getUnplanTask(setTasks, tasks, task.id)}
+                setTaskName={getSetTaskNameFuncV1(setTasks, tasks, task.id)}
+                setTaskFinishStatus={getSetTaskFinishStatusV1(setTasks, tasks, task.id)}
+                completeTask={getCompleteTaskV1(setTasks, tasks, task.id)}
+                scheduleTask={getScheduleTaskV1(setTasks, tasks, task.id)}
+                unplan={getUnplanTaskV1(setTasks, tasks, task.id)}
                 // currentTopic = {task.topics[0]}
                 addToSelection={() => addTaskToSelection(task.id, task.weekOrderIndex)}
                 deleteFromSelection={() => deleteTaskFromSelection(task.id, task.weekOrderIndex)}
                 changeWeekOrderIndex={getChangeWeekOrderIndex(setTasks, tasks)}
                 spawnNewTask={getSpawnNewTask(setTasks, tasks, task)}
-                toggleFold={getToggleFoldTask(setTasks, tasks)}
+                toggleFold={getToggleFoldTaskV1(setTasks, tasks)}
             />
             {
                 task.subTaskIds && task.subTaskIds.length > 0 && task.unfolded && (

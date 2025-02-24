@@ -1,7 +1,7 @@
 import { FinishedState } from "./TaskInterfaces.tsx";
 
 
-const getScheduleTask = (setTasks, tasks, id) => {
+const getScheduleTaskV1 = (setTasks, tasks, id) => {
     const scheduleTask = () => {
         const newTasks = [...tasks]
         const task_to_change = newTasks.find((task) => task.id === id);
@@ -11,7 +11,7 @@ const getScheduleTask = (setTasks, tasks, id) => {
     return scheduleTask;
 }
 
-const getToggleFoldTask = (setTasks, tasks) => {
+const getToggleFoldTaskV1 = (setTasks, tasks) => {
     const toggleFold = (id) => {
         const newTasks = [...tasks];
         let thisTask = newTasks.find(task => (task.id == id))
@@ -21,7 +21,7 @@ const getToggleFoldTask = (setTasks, tasks) => {
     return toggleFold;
 }
 
-const getToggleRepeatTask = (setTasks, tasks, id) => {
+const getToggleRepeatTaskV1 = (setTasks, tasks, id) => {
     const toggleRepeatTask = () => {
         const newTasks = [...tasks]
         const task_to_change = newTasks.find((task) => task.id === id);
@@ -32,7 +32,7 @@ const getToggleRepeatTask = (setTasks, tasks, id) => {
 }
 
 // For v1 data
-const getCompleteTask = (setTasks, tasks, id) => {
+const getCompleteTaskV1 = (setTasks, tasks, id) => {
     const completeTask = () => {
         const newTasks = [...tasks]
         const task_to_change = newTasks.find((task) => task.id === id);
@@ -47,7 +47,7 @@ const getCompleteTask = (setTasks, tasks, id) => {
     return completeTask;
 }
 
-const getSetTaskFinishStatus = (setTasks, tasks, id) => {
+const getSetTaskFinishStatusV1 = (setTasks, tasks, id) => {
     const setTaskFinishStatus = (status) => {
         const newTasks = [...tasks]
         const task_to_change = newTasks.find((task) => task.id === id);
@@ -62,7 +62,7 @@ const getSetTaskFinishStatus = (setTasks, tasks, id) => {
 
 
 // For v1 data
-const getPlanTaskForWeek = (setTasks, tasks, id) => {
+const getPlanTaskForWeekV1 = (setTasks, tasks, id) => {
     const planTaskForWeek = () => {
         let newTasks = [...tasks]
         const task_to_change = newTasks.find((task) => task.id === id);
@@ -82,7 +82,7 @@ const getPlanTaskForWeek = (setTasks, tasks, id) => {
 
 
 //v0
-const getUnplanTask = (setTasks, tasks, id) => {
+const getUnplanTaskV1 = (setTasks, tasks, id) => {
     const unplanTask = () => {
         let newTasks = [...tasks]
         const task_to_change = newTasks.find((task) => task.id === id);
@@ -104,7 +104,7 @@ const getUnplanTask = (setTasks, tasks, id) => {
 }
 
 // For v1 data
-const getSetTaskNameFunc = (setTasks, tasks, id) => {
+const getSetTaskNameFuncV1 = (setTasks, tasks, id) => {
     const setTaskName = (newTaskName) => {
         const newTasks = [...tasks]
         const task_to_change = newTasks.find((task) => task.id === id);
@@ -114,7 +114,7 @@ const getSetTaskNameFunc = (setTasks, tasks, id) => {
     return setTaskName;
 }
 
-const getSetTaskDueTime = (setTasks, tasks, id: number) => {
+const getSetTaskDueTimeV1 = (setTasks, tasks, id: number) => {
     const setTaskDueTime = (dueTime: Date) => {
         const newTasks = [...tasks]
         const taskToChange = newTasks.find((task) => task.id === id);
@@ -128,12 +128,12 @@ const getSetTaskDueTime = (setTasks, tasks, id: number) => {
 
 
 
-export { getCompleteTask };
-export { getScheduleTask };
-export { getToggleRepeatTask }
-export { getUnplanTask };
-export { getPlanTaskForWeek };
-export { getSetTaskNameFunc };
-export { getSetTaskFinishStatus };
-export { getToggleFoldTask };
-export { getSetTaskDueTime };
+export { getCompleteTaskV1 };
+export { getScheduleTaskV1 };
+export { getToggleRepeatTaskV1 }
+export { getUnplanTaskV1 };
+export { getPlanTaskForWeekV1 };
+export { getSetTaskNameFuncV1 };
+export { getSetTaskFinishStatusV1 };
+export { getToggleFoldTaskV1 };
+export { getSetTaskDueTimeV1 };

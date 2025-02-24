@@ -9,15 +9,14 @@ import {
     findTopicByTopicId,
 } from './FindItems'
 import {
-    addOrphanTasktoTaskList,
-    deleteEntireTask,
-    generateEmptyTask,
-    insertTaskInstanceIntoTask,
-    insertTaskInstanceIntoTopic,
-    removeTaskInstanceFromTopic,
-    removeTaskInstanceFromTask,
-} from '../ADG/ModifyTaskTopicAdgElements';
-import { getPlanTaskForWeek } from '../Tasks/TaskModifyFuncGens.ts';
+    addOrphanTasktoTaskListV1,
+    deleteEntireTaskV1,
+    generateEmptyTaskV1,
+    insertTaskInstanceIntoTaskV1,
+    insertTaskInstanceIntoTopicV1,
+    removeTaskInstanceFromTopicV1,
+    removeTaskInstanceFromTaskV1,
+} from './ModifyTaskTopicAdgElementsV1.js';
 
 // Now need four functions
 // Move from task in topic to subtask in task
@@ -93,9 +92,9 @@ const getMoveTasks = (topics, tasks, setTasks) => {
 
             // Removing from source location (task or topic)
             if (sourceTopicId) {
-                if (moveAllowed) { newTasks = removeTaskInstanceFromTopic(newTasks, taskId, sourceTopicId) }
+                if (moveAllowed) { newTasks = removeTaskInstanceFromTopicV1(newTasks, taskId, sourceTopicId) }
             } else if (sourceTaskId) {
-                if (moveAllowed) { newTasks = removeTaskInstanceFromTask(newTasks, taskId, sourceTaskId) }
+                if (moveAllowed) { newTasks = removeTaskInstanceFromTaskV1(newTasks, taskId, sourceTaskId) }
             } else {
                 console.warn(`No source (task or topic) defined for  ${taskId}.`)
                 // return
@@ -107,9 +106,9 @@ const getMoveTasks = (topics, tasks, setTasks) => {
                 if (taskTopics.topics.includes(targetTopicId)) {
                     console.info(`Task ${taskId} is already in topic ${targetTopicId}`)
 
-                    newTasks = removeTaskInstanceFromTopic(newTasks, taskId, targetTopicId)
+                    newTasks = removeTaskInstanceFromTopicV1(newTasks, taskId, targetTopicId)
                 }
-                newTasks = insertTaskInstanceIntoTopic(newTasks, taskId, targetTopicId, targetViewIndex)
+                newTasks = insertTaskInstanceIntoTopicV1(newTasks, taskId, targetTopicId, targetViewIndex)
 
             } else if (targetTaskId) {
                 // If task already in target supertask, remove it
@@ -118,7 +117,7 @@ const getMoveTasks = (topics, tasks, setTasks) => {
                     console.log(superTask)
                     if (superTask.subTaskIds && superTask.subTaskIds.includes(taskId)) {
                         console.info(`Task ${taskId} is already in supertask ${targetTaskId}`)
-                        newTasks = removeTaskInstanceFromTask(newTasks, taskId, targetTaskId)
+                        newTasks = removeTaskInstanceFromTaskV1(newTasks, taskId, targetTaskId)
                     }
                     // TODO: prevent a cycle to exist (task1<-task2<-task1<-task2<-...)    
                     if (superTask.subTaskIds === undefined) { superTask.subTaskIds = [] }
@@ -127,7 +126,7 @@ const getMoveTasks = (topics, tasks, setTasks) => {
                     console.log(alreadyExisting)
                     console.log(`Task ${taskId} already exists somewhere within task ${targetTaskId}`)
 
-                    newTasks = insertTaskInstanceIntoTask(newTasks, taskId, targetTaskId)
+                    newTasks = insertTaskInstanceIntoTaskV1(newTasks, taskId, targetTaskId)
                     console.log(superTask)
                 }
             }
@@ -158,7 +157,7 @@ const getDuplicateTask = (setTasks, tasks, topics) => {
                 console.info(`Task ${task_to_change.id} is already in topic ${targetTopicId}`)
                 return;
             }
-            newTasks = insertTaskInstanceIntoTopic(newTasks, taskId, targetTopicId, targetViewIndex)
+            newTasks = insertTaskInstanceIntoTopicV1(newTasks, taskId, targetTopicId, targetViewIndex)
 
         })
         setTasks(newTasks)
@@ -173,8 +172,8 @@ const getAddTaskWithoutTopic = (setTasks, tasks) => {
         // generate a new task
         // insert it into the new topic
         let newTasks = [...tasks]
-        let newTask = generateEmptyTask(newTasks)
-        newTasks = addOrphanTasktoTaskList(newTasks, newTask)
+        let newTask = generateEmptyTaskV1(newTasks)
+        newTasks = addOrphanTasktoTaskListV1(newTasks, newTask)
         setTasks(newTasks)
     }
     return addTaskWithoutTopic
@@ -192,9 +191,9 @@ const getAddTask = (setTasks, tasks, topics, topicId) => {
         if (!topic) {
             return
         }
-        let newTask = generateEmptyTask(newTasks)
-        newTasks = addOrphanTasktoTaskList(newTasks, newTask)
-        newTasks = insertTaskInstanceIntoTopic(newTasks, newTask.id, topicId, 1)
+        let newTask = generateEmptyTaskV1(newTasks)
+        newTasks = addOrphanTasktoTaskListV1(newTasks, newTask)
+        newTasks = insertTaskInstanceIntoTopicV1(newTasks, newTask.id, topicId, 1)
         setTasks(newTasks)
     }
     return addTask
@@ -215,10 +214,10 @@ const getAddNewSubTask = (setTasks, tasks, superTaskId) => {
         if (superTask.subTaskIds == undefined) {
             superTask.subTaskIds = []
         }
-        let newSubTask = generateEmptyTask(newTasks)
-        newTasks = addOrphanTasktoTaskList(newTasks, newSubTask)
+        let newSubTask = generateEmptyTaskV1(newTasks)
+        newTasks = addOrphanTasktoTaskListV1(newTasks, newSubTask)
 
-        newTasks = insertTaskInstanceIntoTask(newTasks, newSubTask.id, superTaskId)
+        newTasks = insertTaskInstanceIntoTaskV1(newTasks, newSubTask.id, superTaskId)
         setTasks(newTasks)
     }
     return addTask
@@ -228,7 +227,7 @@ const getAddNewSubTask = (setTasks, tasks, superTaskId) => {
 
 const getDeleteTask = (setTasks, tasks, id) => {
     const deleteTask = () => {
-        let newTasks = deleteEntireTask(tasks, id)
+        let newTasks = deleteEntireTaskV1(tasks, id)
         setTasks(newTasks);
     }
     return deleteTask;
@@ -607,7 +606,7 @@ const getDeleteTopic = (setTopics, topics, setTasks, tasks, topicId) => {
         tasksToRemove.forEach(task => {
             let overlappingIdList = idList.filter(topicIdToRemove => (task.topics.includes(topicIdToRemove)))
             overlappingIdList.forEach((id) => {
-                removeTaskInstanceFromTopic(newTasks, task.id, id)
+                removeTaskInstanceFromTopicV1(newTasks, task.id, id)
             })
         })
 
@@ -631,11 +630,11 @@ const getSpawnNewTask = (setTasks, tasks, sourceTask) => {
         // Just below the old source task in Topic View
         // And below the old source task in the Planned View
         let newTasks = [...tasks]
-        let spawnedTask = generateEmptyTask(tasks)
+        let spawnedTask = generateEmptyTaskV1(tasks)
         spawnedTask.name = sourceTask.name + ' spawn'
-        newTasks = addOrphanTasktoTaskList(newTasks, spawnedTask)
+        newTasks = addOrphanTasktoTaskListV1(newTasks, spawnedTask)
         sourceTask.topics.forEach((val, idx) => {
-            insertTaskInstanceIntoTopic(newTasks, spawnedTask.id, sourceTask.topics[idx], sourceTask.topicViewIndices[idx])
+            insertTaskInstanceIntoTopicV1(newTasks, spawnedTask.id, sourceTask.topics[idx], sourceTask.topicViewIndices[idx])
         })
 
         newTasks = newTasks.map((task) => {

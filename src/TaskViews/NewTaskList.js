@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import PlannedTask from "./PlannedTask.js"
-import { getSetTaskNameFunc } from "../Tasks/TaskModifyFuncGens.ts";
+import { getSetTaskNameFuncV1 } from "../Tasks/TaskModifyFuncGensV1.ts";
 import { getAddTaskWithoutTopic } from "../ADG/ModifyFuncGeneratorsV1.js";
 
 class SelectedNewTask {
@@ -68,7 +68,7 @@ const AddTaskView = (props) => {
                             topics={topics}
                             taskTopics={task.topics}
                             fancy={fancy}
-                            setTaskName={getSetTaskNameFunc(setTasks, tasks, task.id)}
+                            setTaskName={getSetTaskNameFuncV1(setTasks, tasks, task.id)}
                             clearSelection={clearSelection}
                             selected={selectedTasks.find((st) => (st.taskId == task.id && st.weekOrderIndex == task.weekOrderIndex)) ? true : false}
                             selectedTasks={selectedTasks}

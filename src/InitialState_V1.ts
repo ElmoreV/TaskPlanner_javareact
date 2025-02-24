@@ -29,7 +29,7 @@ const initialTasksV1 = [
         subTaskIds: [],
 
         thisWeek: false,
-        weekOrderIndex: 1,
+        weekOrderIndex: 0,
         topics: [12],
         topicViewIndices: [1],
     },
