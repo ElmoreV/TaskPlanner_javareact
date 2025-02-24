@@ -20,6 +20,10 @@ interface V1_Task {
     scheduled: boolean;
     weekOrderIndex: number;
     unfolded: boolean;
+
+    dueTime: Date;
+    transitiveDueTime: Date;
+    lastFinished: Date;
 }
 
 export { V1_Topic, V1_Task };

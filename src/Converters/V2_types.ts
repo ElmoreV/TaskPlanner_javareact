@@ -13,16 +13,19 @@ interface Task {
     id: number;
     name: string;
     finishStatus: FinishedState;
-    completed: boolean;
     scheduled: boolean;
     repeated: boolean;
     unfolded: boolean;
     childTaskIds: number[];
     parentTaskIds: number[];
+
+    dueTime: Date;
+    transitiveDueTime: Date;
+    lastFinished: Date;
 }
 
 
-type TagTasks = {
+type TagTasksMap = {
     [tagId: number]: number[]; // array of task IDs
 };
 
@@ -34,4 +37,4 @@ type TaskMap = {
 }
 
 
-export { Tag, Task, TagTasks, TagMap, TaskMap };
+export { Tag, Task, TagTasksMap, TagMap, TaskMap };

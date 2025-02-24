@@ -6,7 +6,9 @@ import ImportExport from './ImportExport';
 import Theme from "./Theme";
 import { FinishedState } from './Tasks/TaskInterfaces.tsx';
 import AddTaskView from './TaskViews/NewTaskList.js';
-import { initialTasks, initialTopics } from './InitialState.ts';
+import { initialTasksV1, initialTopicsV1 } from './InitialState_V1.ts';
+import { convert_v1_to_v2, convert_v2_to_v1 } from './Converters/UpdateV1ToV2.ts';
+import { initialTags, initialTasks, initialPlannedTaskIdList, initialTagTasks } from './InitialState_V2.ts';
 
 // 1. Go through all tasks and search if their .supertasks list contains [task.id] N*E(M) , E(M) is avg of supertasks per task
 // 2. Go through all tasks and search if the ids match one of the .subtasks List N*P P is # of subtasks in task
@@ -24,8 +26,8 @@ function App() {
   const [debugMode, setDebugMode] = useState(false)
 
   //v1
-  const [topics, setTopics] = useState(initialTopics);
-  const [tasks, setTasks] = useState(initialTasks)
+  const [topics, setTopics] = useState(initialTopicsV1);
+  const [tasks, setTasks] = useState(initialTasksV1)
 
   // const  [tasks, setTasks] = useState([])
   // Should use generation functions here, to make it immediately issueless

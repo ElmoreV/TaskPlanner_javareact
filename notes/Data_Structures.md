@@ -115,8 +115,8 @@ V1:
   const [topics, setTopics] = useState([
     {
       name: "Maintenance", id: 1, unfolded: false, subtopics: [
-        { name: "Replace", id: 11, unfolded: false, subtopics: [] },
         { name: "Repair", id: 12, unfolded: false, subtopics: [] },
+        { name: "Replace", id: 11, unfolded: false, subtopics: [] },
         { name: "Document", id: 13, unfolded: true, subtopics: [] }
 
       ]
@@ -166,7 +166,7 @@ V2:
         id:1,
         name: "Maintenance",
         unfolded: false,
-        childTagIds: [11,12,13] // order is important for render order
+        childTagIds: [12,11,13] // order is important for render order
         parentTagIds: [] // order is not important
     },
     11:{
