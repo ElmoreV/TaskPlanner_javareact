@@ -72,5 +72,3 @@ export { findSubtopicsByTopicIdV1 };
 export { findTasksByTopicIdV1 };
 export { findTaskByTaskIdV1 };
 export { findTopicsByTaskIdV1 };
-
-// export { findFirstTopicByNameR };

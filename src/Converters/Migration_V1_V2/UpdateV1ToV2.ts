@@ -1,9 +1,9 @@
 
 // Type definitions for Tags and Tasks
 
-import { FinishedState } from "../Tasks/TaskInterfaces.tsx";
-import { V1_Task, V1_Topic } from "./V1_types";
-import { TaskMap, TagMap, TagTasksMap, Task, Tag } from "./V2_types";
+import { FinishedState } from "../../Tasks/TaskInterfaces.tsx";
+import { V1_Task, V1_Topic } from "../V1_types";
+import { TaskMap, TagMap, TagTasksMap, Task, Tag } from "../V2_types";
 
 // Migration function
 export const convert_v1_to_v2 = (
@@ -98,7 +98,7 @@ export const convert_v1_to_v2 = (
     for (let tagId of Object.keys(newTagMap)) {
         if (inbetweenMap[tagId]) {
             newTagTaskMap[tagId] = inbetweenMap[tagId]
-                .reduce((acc, curr) => { return acc.concat(curr.id) }, [])
+                .reduce((acc: number[], curr) => { return acc.concat(curr.id) }, [])
         } else {
             newTagTaskMap[tagId] = []
         }
@@ -139,7 +139,7 @@ export const convert_v2_to_v1 = (tasksV2: TaskMap,
     // Step 2: Populate topic tree
     const generateTopicTree = (tagId: number) => {
         let tag = tagsV2[tagId]
-        let topic = {
+        let topic: V1_Topic = {
             id: tag.id,
             name: tag.name,
             unfolded: tag.unfolded,
@@ -213,7 +213,7 @@ export const convert_v2_to_v1 = (tasksV2: TaskMap,
     return { topicsV1, tasksV1 }
 }
 
-export const ensureRoundtripStability = (tasks, topics) => {
+export const ensureRoundtripStability = (tasks: V1_Task[], topics: V1_Topic[]) => {
     const { newTaskMap, newTagMap, newTagTaskMap, newPlannedTaskIds } = convert_v1_to_v2(tasks, topics)
     console.log(newTaskMap)
     console.log(newTagMap)
@@ -237,6 +237,10 @@ export const ensureRoundtripStability = (tasks, topics) => {
         let reviewTask = tasksV1.find((task) => task.id === taskId)
         if (reviewTask === undefined) {
             console.log("Task is missing: " + taskId)
+            return
+        }
+        if (refTask === undefined) {
+            console.log("This cannot happen: " + taskId)
             return
         }
         if (refTask.name !== reviewTask.name) {

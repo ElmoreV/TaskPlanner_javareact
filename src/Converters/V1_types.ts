@@ -21,9 +21,9 @@ interface V1_Task {
     weekOrderIndex: number;
     unfolded: boolean;
 
-    dueTime: Date;
-    transitiveDueTime: Date;
-    lastFinished: Date;
+    dueTime: Date | undefined;
+    transitiveDueTime: Date | undefined;
+    lastFinished: Date | undefined;
 }
 
 export { V1_Topic, V1_Task };

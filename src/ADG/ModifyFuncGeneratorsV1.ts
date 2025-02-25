@@ -661,8 +661,6 @@ const getSpawnNewTask = (setTasks: (tasks: V1_Task[]) => void, tasks: V1_Task[],
     return spawnNewTask
 }
 
-
-export default getAddTask;
 export { getDeleteTask };
 export { getDeleteTopic };
 export { getDuplicateTask };
