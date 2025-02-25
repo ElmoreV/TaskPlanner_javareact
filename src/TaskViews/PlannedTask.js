@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getTopicPathByTopicId } from '../Topics/TopicHelperV1.ts';
+import { getTopicPathByTopicIdV1 } from '../Topics/TopicHelperV1.ts';
 import TaskContent from '../Tasks/TaskContent.js'
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
 import { translateLastCompletedDatetime } from '../Tasks/TaskHelperFuncs.js';
@@ -168,7 +168,7 @@ const PlannedTask = (props) => {
         fullName += " / " + translateLastCompletedDatetime(taskLastCompletion)
     }
 
-    let topicPath = getTopicPathByTopicId(topics, taskTopics[0])
+    let topicPath = getTopicPathByTopicIdV1(topics, taskTopics[0])
 
     // Put focus on text editor when editing is enabled
     const inputRef = useRef(null);

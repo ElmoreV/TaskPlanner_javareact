@@ -3,10 +3,10 @@ The elementary functions
 */
 import { V1_Task } from '../Converters/V1_types.ts'
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx'
-import { getFreeTaskId } from '../Topics/TopicHelperV1.ts'
+import { getFreeTaskIdV1 } from '../Topics/TopicHelperV1.ts'
 
 const generateEmptyTaskV1 = (tasks: V1_Task[]) => {
-    let newId = getFreeTaskId(tasks)
+    let newId = getFreeTaskIdV1(tasks)
     console.debug(`Generate empty task ${newId}`)
     let newTask = {
         name: `New Task ${newId}!`,

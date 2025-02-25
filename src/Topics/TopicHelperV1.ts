@@ -1,25 +1,13 @@
 import {
     findTopicByTopicIdV1,
 } from '../ADG/FindItemsV1.ts'
+import { V1_Task, V1_Topic } from '../Converters/V1_types.ts';
 
-const find_topic_by_name_r = (topics, topic_name) => {
-    console.debug(topics);
-    for (let topic of topics) {
-        console.debug(topic.name);
-        if (topic.title === topic_name) {
-            console.debug('Fount it!');
-            return topic;
-        }
-        let topic_res = find_topic_by_name_r(topic.subtopics, topic_name);
-        if (topic_res) { console.debug('Bubble up'); return topic_res; }
-    }
-    return null;
-}
-
-const getFreeTaskId = (tasks) => {
+const getFreeTaskIdV1 = (tasks: V1_Task[]) => {
     return 1 + tasks.reduce((max_id, task) => Math.max(max_id, task.id), 0);
 }
 
+// Just any array?
 function isEqual(a, b) {
     if (a.length !== b.length) {
         return false;
@@ -42,53 +30,28 @@ function isEqual(a, b) {
 }
 
 
-const topicCompletelyContainsTasks = (topic, task) => {
-    // Check all topics and if the task is only contained in topic
-    // and/or its subtopics, we can return true
-    // We check this by checking the topics in the task, and seeing if all the topics are contained within
-    // the topic and its subtopics (recursively)
-    let included_topics = []
-    if (task.topics.includes(topic.title)) {
-        included_topics.append(topic.title)
-        if (isEqual(task.topics, included_topics)) { return true; }
-    }
-    // try all subtopics
-
-    included_topics.append(topic.subtopics.map((topic) => topicCompletelyContainsTasks(topic, task)))
-    console.log(included_topics)
-    if (isEqual(task.topics, included_topics)) { return true; }
-    return false;
-}
-
-const filterTopicsById_r = (topics, topicId) => {
+const disconnectTopicsByIdV1_r = (topics: V1_Topic[], topicId: number) => {
+    // Filter out any topic that is a subtopic of topicId, recursively
+    // And return a new array of topics that has all (sub)topics with id==topic_id filtered out,
     // 1. enumerate all subtopics that do not match id, and filter their subtopics
     // 2. filter all subtopics that do match id
     // 3. return the topics object as is, just with all topics with id==topic_id filtered out,
     // and all subtopics (or subsubtopics) with id==topic_id filtered out
     console.log(topics)
-    return topics.filter((topic) => topic.id !== topicId).map(
-        (topic) => { return { ...topic, subtopics: filterTopicsById_r(topic.subtopics, topicId) } }
+    return (topics
+        .filter((topic) => topic.id !== topicId) // all topics that do not match id
+        .map((topic) => {
+            return { ...topic, subtopics: disconnectTopicsByIdV1_r(topic.subtopics, topicId) }
+        }
+        )
     )
 }
 
-const filter_by_name_r = (topics, topic_name) => {
-    // 1. enumerate all subtopics that do not match name, and filter their subtopics
-    // 2. filter all subtopics that do match name
-    // 3. return the topics object as is, just with all topics with title==topic_name filtered out,
-    // and all subtopics (or subsubtopics) with title==topic_name filtered out
-    console.log(topics)
-    return topics.filter((topic) => topic.title !== topic_name).map(
-        (topic) => { return { ...topic, subtopics: filter_by_name_r(topic.subtopics, topic_name) } }
-    )
-}
-const find_topic_by_name = (topics, topic_name) => {
-    return find_topic_by_name_r(topics, topic_name);
-}
-const get_all_subtopics = (topic) => {
-    return topic.subtopics.map((subtopic) => get_all_subtopics(subtopic)).concat(topic);
+const get_all_subtopics_V1 = (topic: V1_Topic) => {
+    return topic.subtopics.map((subtopic) => get_all_subtopics_V1(subtopic)).concat(topic);
 }
 
-const isTaskInAnyTopic = (task, topics) => {
+const isTaskInAnyTopicV1 = (task: V1_Task, topics: V1_Topic[]) => {
     // check if the topic of the task in the
     // console.log("Before task.topics")
     // console.log(task.topics)
@@ -105,53 +68,25 @@ const isTaskInAnyTopic = (task, topics) => {
     return false;
 }
 
-const getLargestTopicKey = (topic) => {
+const getLargestTopicKeyV1 = (topic: V1_Topic) => {
     let max_id = Math.max(topic.id,
-        topic.subtopics.reduce((max_key, topic) => Math.max(max_key, getLargestTopicKey(topic)), 0));
-    console.log(max_id, topic.title)
+        topic.subtopics.reduce((max_key, topic) => Math.max(max_key, getLargestTopicKeyV1(topic)), 0));
     return max_id;
 }
-const getFreeTopicKey = (topics) => {
-    let max_id = 1 + topics.reduce((max_key, topic) => Math.max(max_key, getLargestTopicKey(topic)), 0);
+const getFreeTopicKeyV1 = (topics: V1_Topic[]) => {
+    let max_id = 1 + topics.reduce((max_key, topic) => Math.max(max_key, getLargestTopicKeyV1(topic)), 0);
     console.log(max_id)
     return max_id;
 }
 
-const getTopicTree_by_id_r = (topic, topic_id) => {
-    let found_topic_id = false;
-    let next_string = "";
-    if (topic.id == topic_id) {
-        next_string = topic.title
-        found_topic_id = true;
-    } else {
-        let strings = topic.subtopics.map((t) => getTopicTree_by_id_r(t, topic_id)).filter((s) => s.length > 0)
-        if (strings.length > 0) {
-            next_string = topic.title + '/' + strings[0]
-            found_topic_id = true;
-        }
-    }
-    if (!found_topic_id) {
-        return ""
-    } else {
-        return next_string
-    }
-}
-const getTopicTree_by_id = (topics, topic_id) => {
-    let strings = topics.map((t) => {
-        let s = getTopicTree_by_id_r(t, topic_id)
-        if (s.length > 0) { return t.title + '/' + s } else { return "" }
-    }).filter((s) => s.length > 0)
-    if (strings.length > 0) { return strings[0] } else { return "" }
-
-}
-const getTopicTree_by_name_r = (topic, topic_name) => {
+const getTopicTree_by_name_V1_r = (topic: V1_Topic, topic_name: string) => {
     let found_topic_id = false;
     let next_string = "";
     if (topic.name == topic_name) {
         next_string = topic.name
         found_topic_id = true;
     } else {
-        let strings = topic.subtopics.map((t) => getTopicTree_by_name_r(t, topic_name)).filter((s) => s.length > 0)
+        let strings = topic.subtopics.map((t) => getTopicTree_by_name_V1_r(t, topic_name)).filter((s) => s.length > 0)
         if (strings.length > 0) {
             next_string = topic.name + '/' + strings[0]
             found_topic_id = true;
@@ -163,14 +98,14 @@ const getTopicTree_by_name_r = (topic, topic_name) => {
         return next_string
     }
 }
-const getTopicTree_by_name = (topics, topic_name) => {
+const getTopicTree_by_name_V1 = (topics: V1_Topic[], topic_name: string) => {
     let strings = topics.map((t) =>
-        getTopicTree_by_name_r(t, topic_name)).filter((s) => s.length > 0)
+        getTopicTree_by_name_V1_r(t, topic_name)).filter((s) => s.length > 0)
     if (strings.length > 0) { return strings[0] } else { return "" }
 
 }
 
-const getTopicPathByTopicIdRecursive = (topic, topicId) => {
+const getTopicPathByTopicIdRecursive = (topic: V1_Topic, topicId: number) => {
     let foundTopicId = false;
     let nextString = "";
     if (topic.id == topicId) {
@@ -190,7 +125,7 @@ const getTopicPathByTopicIdRecursive = (topic, topicId) => {
     }
 }
 
-const getTopicPathByTopicId = (topics, topicId) => {
+const getTopicPathByTopicIdV1 = (topics: V1_Topic[], topicId: number) => {
     let strings = topics.map((t) =>
         getTopicPathByTopicIdRecursive(t, topicId)).filter((s) => s.length > 0)
     if (strings.length > 0) { return strings[0] } else { return "" }
@@ -203,28 +138,11 @@ const getTopicPathByTopicId = (topics, topicId) => {
 //     }
 // }
 
-const getTopicStats = (topics, tasks) => {
-    // topicStats = [
-    //     {
-    //     topicId= ...
-    //     totalTasks= ...
-    //     completedTasks= ...
-    //     plannedTasks= ...
-    //     totalRecursiveTasks =...
-    //     completedRecursiveTasks = ...
-    //     plannedRecursiveTasks = ...
-    // }
-    // 
-    // ]
-
-}
 
 
-export default getFreeTaskId;
-export { getFreeTaskId };
-export { getFreeTopicKey };
-export { isTaskInAnyTopic };
-export { filter_by_name_r };
-export { getTopicTree_by_name }
-export { getTopicPathByTopicId }
-export { filterTopicsById_r }
+export { getFreeTaskIdV1 };
+export { getFreeTopicKeyV1 };
+export { isTaskInAnyTopicV1 };
+export { getTopicTree_by_name_V1 }
+export { getTopicPathByTopicIdV1 }
+export { disconnectTopicsByIdV1_r }

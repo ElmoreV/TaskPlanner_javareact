@@ -1,7 +1,7 @@
 import { V1_Task, V1_Topic } from '../Converters/V1_types.ts';
 import {
-    getFreeTopicKey,
-    filterTopicsById_r,
+    getFreeTopicKeyV1,
+    disconnectTopicsByIdV1_r,
 } from '../Topics/TopicHelperV1.ts';
 import {
     findSupertopicByTopicIdV1,
@@ -601,7 +601,7 @@ const getDeleteTopic = (setTopics: (topics: V1_Topic[]) => void,
         let idList = findAllSubtopicIds(newTopics, topicId)
 
         // Filter out any topic that is a subtopic of topicId, recursively
-        newTopics = filterTopicsById_r(newTopics, topicId);
+        newTopics = disconnectTopicsByIdV1_r(newTopics, topicId);
 
         // Removing task instances
         let newTasks = [...tasks]
