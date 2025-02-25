@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PlannedTask from "./PlannedTask.js"
 import { getSetTaskNameFuncV1 } from "../Tasks/TaskModifyFuncGensV1.ts";
-import { getAddTaskWithoutTopic } from "../ADG/ModifyFuncGeneratorsV1.js";
+import { getAddTaskWithoutTopic } from "../ADG/ModifyFuncGeneratorsV1.ts";
 
 class SelectedNewTask {
     constructor(taskId, weekOrderIndex) {

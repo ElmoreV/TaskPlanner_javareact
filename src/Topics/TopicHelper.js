@@ -1,6 +1,6 @@
 import {
     findTopicByTopicIdV1,
-} from '../ADG/FindItemsV1'
+} from '../ADG/FindItemsV1.ts'
 
 const find_topic_by_name_r = (topics, topic_name) => {
     console.debug(topics);

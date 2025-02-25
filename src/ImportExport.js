@@ -1,10 +1,10 @@
-import { useState, useRef,useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import YAML from 'yaml';
 import {
     convert_old_topic_tasks_to_new_topic_tasks,
     convert_new_topic_tasks_to_old_topic_tasks
 } from './Converter';
-import { sanitizeWeekOrderIndex2 } from './ADG/ModifyFuncGeneratorsV1'
+import { sanitizeWeekOrderIndex2 } from './ADG/ModifyFuncGeneratorsV1.ts'
 import structuredClone from '@ungap/structured-clone'
 var hash = require('object-hash');
 
@@ -412,7 +412,7 @@ const ImportExport = (props) => {
         setSavedTopicHash(null)
         setTopics(old_topics)
         setTasks(old_tasks)
-        console.log ("Loading etc")
+        console.log("Loading etc")
 
         return 'succesful import'
 
@@ -524,11 +524,11 @@ const ImportExport = (props) => {
         mutatedSinceLoad = true
     }
     // Check only if the file has been saved before
-    if ((savedTaskHash && (taskHash !== savedTaskHash)) && (savedTopicHash && (topicHash !== savedTopicHash))) { 
+    if ((savedTaskHash && (taskHash !== savedTaskHash)) && (savedTopicHash && (topicHash !== savedTopicHash))) {
         mutatedSinceSave = true
     }
 
-    const isChanged = ( taskHash, topicHash) => {
+    const isChanged = (taskHash, topicHash) => {
 
         let mutatedSinceLoad = false
         let mutatedSinceSave = false
@@ -536,10 +536,10 @@ const ImportExport = (props) => {
             mutatedSinceLoad = true
         }
         // Check only if the file has been saved before
-        if ((savedTaskHash && (taskHash !== savedTaskHash)) && (savedTopicHash && (topicHash !== savedTopicHash))) { 
+        if ((savedTaskHash && (taskHash !== savedTaskHash)) && (savedTopicHash && (topicHash !== savedTopicHash))) {
             mutatedSinceSave = true
         }
-        console.log ("Mutated since load and save")
+        console.log("Mutated since load and save")
         console.log(mutatedSinceLoad)
         console.log(mutatedSinceSave)
         console.log(savedTaskHash)
@@ -558,7 +558,7 @@ const ImportExport = (props) => {
         }
     }
 
-    let hasChanges = isChanged(loadedTaskHash, taskHash,loadedTopicHash, topicHash,savedTaskHash, savedTopicHash)
+    let hasChanges = isChanged(loadedTaskHash, taskHash, loadedTopicHash, topicHash, savedTaskHash, savedTopicHash)
     if (!hasUnsavedChanges && hasChanges) {
         setHasUnsavedChanges(true)
     } else if (hasUnsavedChanges && !hasChanges) {
@@ -574,37 +574,37 @@ const ImportExport = (props) => {
     useEffect(() => {
         const handleBeforeUnload = (event) => {
             console.log("beforeunload")
-            console.log ("Mutated since load and save")
+            console.log("Mutated since load and save")
             console.log(savedTaskHash)
             console.log(savedTopicHash)
             console.log(loadedTaskHash)
             console.log(loadedTopicHash)
-            console.log(taskHash,topicHash)
+            console.log(taskHash, topicHash)
             let newTaskHash = calculateTaskHash(tasks)
             let newTopicHash = calculateTopicHash(topics)
             console.log("Recaclucalted")
-            console.log(newTaskHash,newTopicHash)
-            let hasChanges = isChanged( newTaskHash, newTopicHash)
+            console.log(newTaskHash, newTopicHash)
+            let hasChanges = isChanged(newTaskHash, newTopicHash)
             console.log(hasChanges)
             if (hasChanges) {
                 console.log("Changes")
                 const message = "You have unsaved changes. Are you sure you want to leave?";
                 event.returnValue = message;
                 return message;
-            } else{
+            } else {
                 console.log("No changes?")
                 const message = "The checking didn't work";
                 event.returnValue = message;
                 return message;
-            } 
+            }
         };
         console.log("adding listener")
         window.addEventListener('beforeunload', handleBeforeUnload);
-    
+
         return () => {
-          window.removeEventListener('beforeunload', handleBeforeUnload);
+            window.removeEventListener('beforeunload', handleBeforeUnload);
         };
-      }, []);
+    }, []);
 
     return (
         <div className="importExport">

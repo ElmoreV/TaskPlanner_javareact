@@ -4,7 +4,7 @@ import {
     getChangeWeekOrderIndex,
     sanitizeWeekOrderIndex,
     getSpawnNewTask,
-} from '../ADG/ModifyFuncGeneratorsV1.js';
+} from '../ADG/ModifyFuncGeneratorsV1.ts';
 import {
     getCompleteTaskV1,
     getScheduleTaskV1,
