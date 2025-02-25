@@ -4,10 +4,10 @@ import {
     filterTopicsById_r,
 } from '../Topics/TopicHelper';
 import {
-    findSupertopicByTopicId,
-    findTaskByTaskId,
-    findTopicByTopicId,
-} from './FindItems'
+    findSupertopicByTopicIdV1,
+    findTaskByTaskIdV1,
+    findTopicByTopicIdV1,
+} from './FindItemsV1.js'
 import {
     addOrphanTasktoTaskListV1,
     deleteEntireTaskV1,
@@ -26,7 +26,7 @@ import {
 
 const findTaskInSubTaskTree = (tasks, rootTaskId, subTaskId) => {
     if (rootTaskId === subTaskId) { return true; }
-    let rootTask = findTaskByTaskId(tasks, rootTaskId)
+    let rootTask = findTaskByTaskIdV1(tasks, rootTaskId)
     if (rootTask === undefined) {
         console.warn(`Searched for task with id ${rootTaskId} but could not find it.`)
         return false;
@@ -66,13 +66,13 @@ const getMoveTasks = (topics, tasks, setTasks) => {
         }
         let newTasks = [...tasks]
         if (targetTopicId) {
-            const targetTopic = findTopicByTopicId(topics, targetTopicId)
+            const targetTopic = findTopicByTopicIdV1(topics, targetTopicId)
             if (!targetTopic) {
                 console.warn(`Target topic ${targetTopicId} does not exist.`)
                 return
             }
         } else if (targetTaskId) {
-            const targetTask = findTaskByTaskId(tasks, targetTaskId)
+            const targetTask = findTaskByTaskIdV1(tasks, targetTaskId)
             if (!targetTask) {
                 console.warn(`Target super task ${targetTaskId} does not exist.`)
                 return
@@ -143,7 +143,7 @@ const getDuplicateTask = (setTasks, tasks, topics) => {
         // Convert single items to a list
         if (!Array.isArray(taskIds)) { taskIds = [taskIds] }
         if (targetViewIndex === undefined) { targetViewIndex = 1 }
-        const targetTopic = findTopicByTopicId(topics, targetTopicId)
+        const targetTopic = findTopicByTopicIdV1(topics, targetTopicId)
         if (!targetTopic) {
             console.warn(`Target topic ${targetTopicId} does not exist.`)
             return
@@ -187,7 +187,7 @@ const getAddTask = (setTasks, tasks, topics, topicId) => {
         // generate a new task
         // insert it into the new topic
         let newTasks = [...tasks]
-        const topic = findTopicByTopicId(topics, topicId)
+        const topic = findTopicByTopicIdV1(topics, topicId)
         if (!topic) {
             return
         }
@@ -207,7 +207,7 @@ const getAddNewSubTask = (setTasks, tasks, superTaskId) => {
         // Check if supertask belonging to superTaskId exists
         // Generate new (sub)task
         // insert it into (super)task
-        const superTask = findTaskByTaskId(tasks, superTaskId)
+        const superTask = findTaskByTaskIdV1(tasks, superTaskId)
         if (!superTask) {
             return
         }
@@ -244,9 +244,9 @@ const getMoveTopic = (setTopics, topics) => {
     const moveTopic = (source_id, target_id) => {
         console.info(`Moving topic ${source_id} to ${target_id}`)
         // Cannot move a topic into one of its sub(sub)topics
-        let source_topic = findTopicByTopicId(topics, source_id)
+        let source_topic = findTopicByTopicIdV1(topics, source_id)
         console.info(source_topic)
-        let is_sub_topic = findTopicByTopicId(source_topic.subtopics, target_id)
+        let is_sub_topic = findTopicByTopicIdV1(source_topic.subtopics, target_id)
         if (is_sub_topic) {
             console.log("Cannot move a topic to its own subtopic")
             return
@@ -254,10 +254,10 @@ const getMoveTopic = (setTopics, topics) => {
         // If the target topic is the sources topic direct supertopic, also don't do it
         // Find the super topic of the source topic
         let newTopics = [...topics];
-        let source_supertopic = findSupertopicByTopicId(newTopics, source_id)
+        let source_supertopic = findSupertopicByTopicIdV1(newTopics, source_id)
         if (!source_supertopic) {
             console.log("There is no supertopic. Is this a root topic?")
-            let target_topic = findTopicByTopicId(newTopics, target_id)
+            let target_topic = findTopicByTopicIdV1(newTopics, target_id)
             console.info(target_topic)
             console.info(source_supertopic)
             // Copy the topic into the new topic
@@ -273,7 +273,7 @@ const getMoveTopic = (setTopics, topics) => {
             return
 
         }
-        let target_topic = findTopicByTopicId(newTopics, target_id)
+        let target_topic = findTopicByTopicIdV1(newTopics, target_id)
         console.info(target_topic)
         console.info(source_supertopic)
         // Copy the topic into the new topic

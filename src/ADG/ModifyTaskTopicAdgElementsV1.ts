@@ -1,10 +1,11 @@
 /*
 The elementary functions
 */
+import { V1_Task } from '../Converters/V1_types.ts'
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx'
 import { getFreeTaskId } from '../Topics/TopicHelper.js'
 
-const generateEmptyTaskV1 = (tasks) => {
+const generateEmptyTaskV1 = (tasks: V1_Task[]) => {
     let newId = getFreeTaskId(tasks)
     console.debug(`Generate empty task ${newId}`)
     let newTask = {
@@ -23,7 +24,8 @@ const generateEmptyTaskV1 = (tasks) => {
     return newTask
 }
 
-const addOrphanTasktoTaskListV1 = (tasks, task) => {
+
+const addOrphanTasktoTaskListV1 = (tasks: V1_Task[], task: V1_Task) => {
     console.info(`Add task with id ${task.id} to tasks`)
     let newTasks = [...tasks]
     newTasks.push(task)
@@ -37,7 +39,7 @@ const addOrphanTasktoTaskListV1 = (tasks, task) => {
 // Does not check if the task is well-shaped (same length taskIds as topicViewIndices)
 // Assumes there is only one instance of a task in every topic
 // Returns a shallow copy with the changed tasks 
-const insertTaskInstanceIntoTopicV1 = (tasks, taskId, topicId, topicViewIndex) => {
+const insertTaskInstanceIntoTopicV1 = (tasks: V1_Task[], taskId: number, topicId: number, topicViewIndex?: number) => {
     console.info(`Insert task instance with task.id: ${taskId} into topic with id: ${topicId} at view index ${topicViewIndex}`)
 
     if (topicViewIndex === undefined) {
@@ -60,26 +62,21 @@ const insertTaskInstanceIntoTopicV1 = (tasks, taskId, topicId, topicViewIndex) =
     return newTasks
 }
 
+
 // Insert an existig subTask (even with no instances) into the current task (as supertask)
 // Does not check if subtask already exsists
 // Does not check if supertask exists
 // Assumes task ids are unique
 // Returns a shallow copy with the changed tasks 
-const insertTaskInstanceIntoTaskV1 = (tasks, subTaskId, superTaskId) => {
+const insertTaskInstanceIntoTaskV1 = (tasks: V1_Task[], subTaskId: number, superTaskId: number) => {
     console.info(`Insert task instance with task.id: ${subTaskId} into (super)task with id: ${superTaskId}`)
     //TODO: add taskViewIndices
 
     let newTasks = [...tasks]
-
     let superTask = newTasks.find((task) => (task.id == superTaskId))
-    // let subTask = newTasks.find((task) => (task.id === subTaskId))
-    console.log(superTask)
     superTask.subTaskIds.push(subTaskId)
-    console.log(superTask)
     return newTasks
 }
-
-
 
 
 // Assumes the viewIndices of all tasks exists
@@ -87,7 +84,7 @@ const insertTaskInstanceIntoTaskV1 = (tasks, subTaskId, superTaskId) => {
 // Assumes tha taskId exists in the tasks
 // Assumes the topicViewIndices are all positive (and more assumptions)
 // 
-const removeTaskInstanceFromTopicV1 = (tasks, taskId, topicId) => {
+const removeTaskInstanceFromTopicV1 = (tasks: V1_Task[], taskId: number, topicId: number) => {
     console.info(`Removing task instance with task.id: ${taskId} from topic with id: ${topicId}`)
 
     let newTasks = [...tasks]
@@ -110,12 +107,8 @@ const removeTaskInstanceFromTopicV1 = (tasks, taskId, topicId) => {
 }
 
 
-// Assumes the viewIndices of all tasks exists
-// Assumes the task is in the topic
 // Assumes tha taskId exists in the tasks
-// Assumes the topicViewIndices are all positive (and more assumptions)
-// 
-const removeTaskInstanceFromTaskV1 = (tasks, taskId, superTaskId) => {
+const removeTaskInstanceFromTaskV1 = (tasks: V1_Task[], taskId: number, superTaskId: number) => {
     console.debug(`Removing task instance with task.id: ${taskId} from task with id: ${superTaskId}`)
 
     let newTasks = [...tasks]
@@ -130,7 +123,7 @@ const removeTaskInstanceFromTaskV1 = (tasks, taskId, superTaskId) => {
 
 
 // Pretty much no assumptions.
-const deleteEntireTaskV1 = (tasks, taskId) => {
+const deleteEntireTaskV1 = (tasks: V1_Task[], taskId: number) => {
     let newTasks = [...tasks]
     newTasks = newTasks.filter(task => (task.id !== taskId))
     // Remove this id from subtasks
@@ -143,7 +136,6 @@ const deleteEntireTaskV1 = (tasks, taskId) => {
 
     return newTasks
 }
-
 
 
 export { generateEmptyTaskV1 }

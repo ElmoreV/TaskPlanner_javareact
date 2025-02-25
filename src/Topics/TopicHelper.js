@@ -1,7 +1,6 @@
 import {
-    findTopicByTopicId,
-    findTopicByTopicIdR
-} from '../ADG/FindItems'
+    findTopicByTopicIdV1,
+} from '../ADG/FindItemsV1'
 
 const find_topic_by_name_r = (topics, topic_name) => {
     console.debug(topics);
@@ -95,7 +94,7 @@ const isTaskInAnyTopic = (task, topics) => {
     // console.log(task.topics)
     task.topics = task.topics.filter((topicId) => {
         console.log(`Is topic ${topicId} in non-deleted topics ${topics}`)
-        return findTopicByTopicId(topics, topicId)
+        return findTopicByTopicIdV1(topics, topicId)
     })
     // console.log(`Resulting task.topics: ${task.topics}`)
     // console.log(task.topics)

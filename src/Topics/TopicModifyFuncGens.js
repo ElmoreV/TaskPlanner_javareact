@@ -1,4 +1,4 @@
-import { findTopicByTopicId } from '../ADG/FindItems'
+import { findTopicByTopicIdV1 } from '../ADG/FindItemsV1'
 
 //Recursive function to handle all toggles
 const toggleFold_r = (topics, id) => {
@@ -74,7 +74,7 @@ const getFoldAll = (setTopics, topics) => {
 const getSetTopicNameFunc = (setTopics, topics, id) => {
     const setTopicName = (newTopicName) => {
         const newTopics = [...topics];
-        const topic_to_change = findTopicByTopicId(topics, id);
+        const topic_to_change = findTopicByTopicIdV1(topics, id);
         topic_to_change.name = newTopicName;
         setTopics(newTopics);
     }
