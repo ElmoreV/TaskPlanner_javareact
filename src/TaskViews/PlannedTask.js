@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { getTopicPathByTopicId } from '../Topics/TopicHelper.js';
+import { getTopicPathByTopicId } from '../Topics/TopicHelperV1.ts';
 import TaskContent from '../Tasks/TaskContent.js'
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
 import { translateLastCompletedDatetime } from '../Tasks/TaskHelperFuncs.js';

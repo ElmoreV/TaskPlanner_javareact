@@ -2,7 +2,7 @@ import { V1_Task, V1_Topic } from '../Converters/V1_types.ts';
 import {
     getFreeTopicKey,
     filterTopicsById_r,
-} from '../Topics/TopicHelper.js';
+} from '../Topics/TopicHelperV1.ts';
 import {
     findSupertopicByTopicIdV1,
     findTaskByTaskIdV1,
