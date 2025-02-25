@@ -3,7 +3,7 @@ The elementary functions
 */
 import { TagTasksMap, Task, TaskMap } from '../Converters/V2_types.ts'
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx'
-import { getFreeTaskId } from '../Topics/TopicHelper.js'
+import { getFreeTaskId } from '../Topics/TopicHelperV1.js'
 
 const generateEmptyTaskV2 = (tasks) => {
     let newId = getFreeTaskId(tasks)

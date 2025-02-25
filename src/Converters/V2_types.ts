@@ -29,6 +29,11 @@ type TagTasksMap = {
     [tagId: number]: number[]; // array of task IDs
 };
 
+// Also the inverse of TagTasksMap
+type TaskTagsMap = {
+    [taskId: number]: number[]; // array of tag IDs
+}
+
 type TagMap = {
     [tagId: number]: Tag;
 };
@@ -37,4 +42,4 @@ type TaskMap = {
 }
 
 
-export { Tag, Task, TagTasksMap, TagMap, TaskMap };
+export { Tag, Task, TagTasksMap, TagMap, TaskMap, TaskTagsMap };
