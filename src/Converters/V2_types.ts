@@ -19,9 +19,9 @@ interface Task {
     childTaskIds: number[];
     parentTaskIds: number[];
 
-    dueTime: Date;
-    transitiveDueTime: Date;
-    lastFinished: Date;
+    dueTime: Date | undefined;
+    transitiveDueTime: Date | undefined;
+    lastFinished: Date | undefined;
 }
 
 
