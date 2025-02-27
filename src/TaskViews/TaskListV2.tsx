@@ -1,6 +1,9 @@
 import { useState, useEffect } from 'react';
 import React from 'react';
-import { TagMap, TagTasksMap, Task, TaskMap } from '../Converters/V2_types';
+import { TagMap, TagTasksMap, TaskMap } from '../Converters/V2_types';
+import Task from './Task.tsx';
+import Topic from './Topic.js';
+import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
 
 const TaskListV2 = (props: TaskListPropsV2) => {
     const { tagMap, setTagMap,
@@ -32,10 +35,54 @@ const TaskListV2 = (props: TaskListPropsV2) => {
         )
     }
 
+    const createTaskReactElement = (taskId: number, parentTaskId: number | undefined, parentTagId: number | undefined) => {
+        return (
+            <Task name={taskMap[taskId].name}
+                id={taskId}
+                completed={taskMap[taskId].finishStatus === FinishedState.Completed}
+                taskFinishStatus={taskMap[taskId].finishStatus}
+                // planned }
+                repeated={taskMap[taskId].repeated}
+                //
+                taskLastCompletion={taskMap[taskId].lastFinished}
+                //
+                taskTopics={[]}
+                fancy={true}
+            //
+            //
+            />
+
+        )
+    }
+
+    const createTagReactElement = (tagId: number) => {
+        return (
+            <Topic
+                name={tagMap[tagId].name}
+                id={tagMap[tagId].id}
+                unfolded={tagMap[tagId].unfolded}
+                // selectedTasks={selectedTasks}
+                // setTopicName={getSetTopicNameFunc(setTopics, topics, topic.id)}
+                // toggleFold={getToggleFold(setTopics, topics)}
+                // addSubTopic={getAddSubtopic(setTopics, topics, topic)}
+                // moveTopic={getMoveTopic(setTopics, topics)}
+                // addTask={getAddTask(setTasks, tasks, topics, topic.id)}
+                // moveTasks={getMoveTasks(topics, tasks, setTasks)}
+                // unfoldAll={getUnfoldAll(setTopics, topics)}
+                // foldAll={getFoldAll(setTopics, topics)}
+                // duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
+                // deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}
+                fancy={true}
+            />
+
+        )
+    }
+
     const recursiveShowTaskDAG = (taskId: number, parentTaskId: number | undefined, parentTagId: number | undefined) => {
         return (
             <li key={"tk-" + (parentTagId) + "-" + (parentTaskId) + "-" + taskId}>
-                Task: {taskId} : {taskMap[taskId].name}
+                {createTaskReactElement(taskId, parentTaskId, parentTagId)}
+                {/* Task: {taskId} : {taskMap[taskId].name} */}
             </li>
         )
     }
@@ -55,7 +102,7 @@ const TaskListV2 = (props: TaskListPropsV2) => {
         return (
             <div key={"div-tg-" + tagId}>
                 <li key={"tg-" + tagId}>
-                    Tag: {tagId}:{tagMap[tagId].name}
+                    {createTagReactElement(tagId)}
                 </li>
                 <ul key={"tg-" + tagId + '-tags'}>
                     {tagMap[tagId].childTagIds.map((childTagId) => {
@@ -75,7 +122,7 @@ const TaskListV2 = (props: TaskListPropsV2) => {
 
 
     return (
-        <div className='tag-task-dag' >
+        <div className='task-list' >
             <h1>Tag Task DAG </h1>
             <ul key='root-tags'>
                 {showUntaggedTasks()}
