@@ -81,6 +81,7 @@ const Task = (props) => {
         e.dataTransfer.setData('TaskId', id)
         console.info('Duplicate dragging task')
     }
+
     const handleDuplicateDragEnd = () => {
         isDuplicateDragging = false;
         console.info("Stop duplicate dragging task")
@@ -266,8 +267,8 @@ const Task = (props) => {
         inputRef={inputRef}
         isEditing={isEditing}
         toggleEdit={toggleEdit}
-        deleteTask={unselect(deleteTask)}
-        addSubTask={unselect(addSubTask)}
+        deleteTask={unselect(() => deleteTask(id))}
+        addSubTask={unselect(() => addSubTask(id))}
         completeTask={() => completeTask(id)}
         markTaskIrrelevant={markTaskIrrelevant}
         markTaskImpossible={markTaskImpossible}

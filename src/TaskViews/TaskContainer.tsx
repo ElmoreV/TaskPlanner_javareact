@@ -1,20 +1,17 @@
 import { memo, useCallback } from 'react'
 import {
-    getDeleteTask,
+    // getDeleteTask,
     getAddNewSubTask,
-    getDuplicateTask,
-    getMoveTasks,
+    // getDuplicateTask,
+    // getMoveTasks,
 } from '../ADG/ModifyFuncGeneratorsV1.ts'
 import {
-    getCompleteTaskV1,
-    getToggleRepeatTaskV1,
-    getPlanTaskForWeekV1,
-    getSetTaskNameFuncV1,
-    getSetTaskFinishStatusV1,
-    getUnplanTaskV1,
-    getToggleFoldTaskV1,
-    getSetTaskDueTimeV1,
-} from '../Tasks/TaskModifyFuncGensV1.ts'
+    deleteTaskV1Pure,
+    addNewSubtaskV1Pure,
+    duplicateTaskV1Pure,
+    moveTasksV1Pure,
+} from '../ADG/ModifyFuncGeneratorsV1Idempotent.ts'
+
 import Task from './Task.tsx'
 import {
     scheduleTaskV1Semipure,
@@ -26,7 +23,6 @@ import {
     setTaskDueTimeV1Semipure,
     completeTaskV1Semipure,
 } from '../Tasks/TaskModifyFuncGensV1Pure.ts'
-import { FinishedState } from '../Tasks/TaskInterfaces.tsx'
 import { V1_Task } from '../Converters/V1_types.ts'
 
 
@@ -59,6 +55,14 @@ const useCallbackify = (fn, setTasks) => {
         [fn, setTasks])
 }
 
+const useCallbackifyTopics = (fn, topics, setTasks) => {
+    return useCallback(
+        (...args) => {
+            return setTasks(oldTasks => fn(topics, oldTasks, ...args))
+        },
+        [fn, topics, setTasks])
+}
+
 // const useCallbackify = (fn, setTasks) => {
 //     return (...args) => { return setTasks(oldTasks => fn(oldTasks, ...args)) }
 // }
@@ -81,6 +85,12 @@ export default function TaskContainer(props) {
     const unplanTaskCallback = useCallbackify(unplanTaskV1Semipure, setTasks)
     const setTaskNameCallback = useCallbackify(setTaskNameV1Semipure, setTasks)
     const setTaskDueTimeCallback = useCallbackify(setTaskDueTimeV1Semipure, setTasks)
+    const deleteTask = useCallbackify(deleteTaskV1Pure, setTasks)
+    const addNewSubtask = useCallbackify(addNewSubtaskV1Pure, setTasks)
+
+
+    const moveTasks = useCallbackifyTopics(moveTasksV1Pure, topics, setTasks)
+    const duplicateTask = useCallbackifyTopics(duplicateTaskV1Pure, topics, setTasks)
 
     return (<Task name={task.name}
         id={task.id}
@@ -96,8 +106,8 @@ export default function TaskContainer(props) {
         currentTopicId={topic && topic.id}
         currentSuperTaskId={superTask && superTask.id}
         setTaskName={setTaskNameCallback}
-        // deleteTask={getDeleteTask(setTasks, tasks, task.id)}
-        // addSubTask={getAddNewSubTask(setTasks, tasks, task.id)}
+        deleteTask={deleteTask}
+        addSubTask={addNewSubtask}
         hasSubTasks={task.subTaskIds && task.subTaskIds.length > 0}
         completeTask={completeTaskCallback}
         plan={planTaskCallback}
@@ -108,7 +118,8 @@ export default function TaskContainer(props) {
         // selected={selectedTasks.find((st) => (st.taskId == task.id && (!topic || st.topicId == topic.id) && (!superTask || st.superTaskId == superTask.id))) ? true : false}
         // selectedTasks={selectedTasks}
         // moveTasks={getMoveTasks(topics, tasks, setTasks)}
-        // duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
+        moveTasks={moveTasks}
+        duplicateTask={duplicateTask}
         fancy={fancy}
         toggleFold={toggleFoldTaskCallback}
         setTasks={setTasks}
