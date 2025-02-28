@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import React from 'react';
 import { TagMap, TagTasksMap, TaskMap } from '../Converters/V2_types';
 import Task from './Task.tsx';
-import Topic from './Topic.js';
+import Topic from '../Topics/Topic.js';
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
 
 const TaskListV2 = (props: TaskListPropsV2) => {

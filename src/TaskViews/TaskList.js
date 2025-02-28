@@ -1,47 +1,17 @@
-import { useState, useEffect } from 'react';
-import Task from './Task.tsx'
-import Topic from './Topic.js';
 import React from 'react';
-// import Checkbox from './Checkbox'
+import { useState, useEffect } from 'react';
 import {
-    getDeleteTask,
-    getAddNewSubTask,
-    getDeleteTopic,
-    getDuplicateTask,
-    getMoveTopic,
-    getAddTask,
-    getAddSubtopic,
-    getMoveTasks,
     getAddTopic,
     sanitizeTopicOrderIndex,
 } from '../ADG/ModifyFuncGeneratorsV1.ts'
 import {
-    getCompleteTaskV1,
-    getToggleRepeatTaskV1,
-    getPlanTaskForWeekV1,
-    getSetTaskNameFuncV1,
-    getSetTaskFinishStatusV1,
-    getUnplanTaskV1,
-    getToggleFoldTaskV1,
-    getSetTaskDueTimeV1,
-} from '../Tasks/TaskModifyFuncGensV1.ts'
-import {
-    getToggleFold,
-    getSetTopicNameFunc,
     getUnfoldAll,
     getFoldAll
 } from '../Topics/TopicModifyFuncGens.js'
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
 import { isTaskDueIn, convertDueDateNameToSeconds } from '../Timing.ts';
-
-class SelectedCategoryTask {
-    constructor(taskId, topicId, topicViewIndex, superTaskId) {
-        this.taskId = taskId
-        this.topicId = topicId
-        this.topicViewIndex = topicViewIndex
-        this.superTaskId = superTaskId
-    }
-}
+import TopicContainer from '../Topics/TopicContainer.tsx';
+import TaskContainer from './TaskContainer.tsx';
 
 const isNewTask = (task, allSubTaskIds) => {
     return task.topics.length == 0 && !allSubTaskIds.includes(task.id)
@@ -55,18 +25,6 @@ const isTaskVisible = (task, hideCompletedItems, showRepeatedOnly, dueInSeconds)
         && (!dueInSeconds || isTaskDueIn(task, new Date(), dueInSeconds))
     )
 }
-
-const addTaskToSelection = (selectedTasks, setSelectedTasks, taskId, topicId, topicViewIndex, superTaskId) => {
-    let newSelectedTasks = [...selectedTasks]
-    newSelectedTasks.push(new SelectedCategoryTask(taskId, topicId, topicViewIndex, superTaskId))
-    setSelectedTasks(newSelectedTasks)
-}
-const deleteTaskFromSelection = (selectedTasks, setSelectedTasks, taskId, topicId, superTaskId) => {
-    let newSelectedTasks = [...selectedTasks]
-    newSelectedTasks = newSelectedTasks.filter((selTask) => !(selTask.taskId == taskId && selTask.topicId == topicId && selTask.superTaskId == superTaskId))
-    setSelectedTasks(newSelectedTasks)
-}
-
 
 const TaskList = (props) => {
     const { tasks, setTasks, topics, setTopics, fancy } = props;
@@ -83,7 +41,6 @@ const TaskList = (props) => {
         console.log(tasks)
         console.log(topics)
     }
-
 
     useEffect(() => {
         // Function to clear selection
@@ -107,27 +64,20 @@ const TaskList = (props) => {
     const onHideCompletedItemsChange = () => {
         setHideCompletedItems(!hideCompletedItems)
     }
+
     const onShowRepeatedOnlyChange = () => {
         setShowRepeatedOnly(!showRepeatedOnly)
     }
 
-    // const showTopics = () => {
-    //     console.info('Re-rendering task list')
-    //     let [topics2, tasks2] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks);
-    //     return topics2.map((topic) => (recursiveShowTopic(topic, tasks2)))
-    // }
     const handleFoldAll = () => {
         let foldAll = getFoldAll(setTopics, topics)
         topics.map(topic => foldAll(topic.id))
-
     }
 
     const handleUnfoldAll = () => {
         let unfoldAll = getUnfoldAll(setTopics, topics)
         topics.map(topic => unfoldAll(topic.id))
-
     }
-
 
     const onDueDateChange = (event) => {
         let dueDateName = event.target.value
@@ -136,79 +86,9 @@ const TaskList = (props) => {
         setDueTimeInSeconds(convertDueDateNameToSeconds(dueDateName))
     }
 
-
     const showTopics = () => {
         console.info('Re-rendering task list')
         return topics.map((topic) => (recursiveShowTopic(topic)))
-    }
-
-
-    const createTaskReactElement = (task, superTask, topic) => {
-        const findTopicViewIdx = (topicId, task) => {
-            return task.topicViewIndices[task.topics.findIndex(taskTopicId => taskTopicId == topicId)]
-        }
-
-        return (
-            <Task name={task.name}
-                id={task.id}
-                completed={task.completed}
-                taskFinishStatus={task.finishStatus}
-                planned={task.thisWeek}
-                repeated={task.repeated}
-                taskTopics={task.topics}
-                taskLastCompletion={task.lastFinished}
-                setTaskFinishStatus={getSetTaskFinishStatusV1(setTasks, tasks, task.id)}
-                currentTopicViewIndex={topic && findTopicViewIdx(topic.id, task)}
-                currentTopicName={topic && topic.name}
-                currentTopicId={topic && topic.id}
-                currentSuperTaskId={superTask && superTask.id}
-                setTaskName={getSetTaskNameFuncV1(setTasks, tasks, task.id)}
-                deleteTask={getDeleteTask(setTasks, tasks, task.id)}
-                addSubTask={getAddNewSubTask(setTasks, tasks, task.id)}
-                hasSubTasks={task.subTaskIds && task.subTaskIds.length > 0}
-                completeTask={getCompleteTaskV1(setTasks, tasks, task.id)}
-                plan={getPlanTaskForWeekV1(setTasks, tasks, task.id)}
-                unplan={getUnplanTaskV1(setTasks, tasks, task.id)}
-                toggleRepeatTask={getToggleRepeatTaskV1(setTasks, tasks, task.id)}
-                addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, topic && findTopicViewIdx(topic.id, task), superTask && superTask.id)}
-                deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, superTask && superTask.id)}
-                selected={selectedTasks.find((st) => (st.taskId == task.id && (!topic || st.topicId == topic.id) && (!superTask || st.superTaskId == superTask.id))) ? true : false}
-                selectedTasks={selectedTasks}
-                moveTasks={getMoveTasks(topics, tasks, setTasks)}
-                duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
-                fancy={fancy}
-                toggleFold={getToggleFoldTaskV1(setTasks, tasks)}
-                setTasks={setTasks}
-                tasks={tasks}
-                unfolded={task.unfolded}
-                setDueTime={getSetTaskDueTimeV1(setTasks, tasks, task.id)}
-                currentDueTime={task.dueTime}
-            />
-        )
-    }
-
-
-    const createTopicReactElement = (topic) => {
-
-        return (
-            <Topic
-                name={topic.name}
-                id={topic.id}
-                unfolded={topic.unfolded}
-                selectedTasks={selectedTasks}
-                setTopicName={getSetTopicNameFunc(setTopics, topics, topic.id)}
-                toggleFold={getToggleFold(setTopics, topics)}
-                addSubTopic={getAddSubtopic(setTopics, topics, topic)}
-                moveTopic={getMoveTopic(setTopics, topics)}
-                addTask={getAddTask(setTasks, tasks, topics, topic.id)}
-                moveTasks={getMoveTasks(topics, tasks, setTasks)}
-                unfoldAll={getUnfoldAll(setTopics, topics)}
-                foldAll={getFoldAll(setTopics, topics)}
-                duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
-                deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}
-                fancy={fancy}
-            />
-        )
     }
 
     const recursiveShowTopic = (topic) => {
@@ -217,7 +97,6 @@ const TaskList = (props) => {
         // 3. Show all tasks
 
         // Do not show subtopics when Topic is folded
-
         const findTopicViewIdx = (topicId, task) => {
             return task.topicViewIndices[task.topics.findIndex(taskTopicId => taskTopicId == topicId)]
         }
@@ -232,7 +111,14 @@ const TaskList = (props) => {
         //          Tasks inside of topic
         return (<div key={'div_' + topic.id}>
             <li key={topic.id}>
-                {createTopicReactElement(topic)}
+                <TopicContainer
+                    topic={topic}
+                    tasks={tasks}
+                    setTasks={setTasks}
+                    topics={topics}
+                    setTopics={setTopics}
+                    selectedTasks={selectedTasks}
+                    fancy={fancy} />
             </li>
             <ul key={topic.id + '_topics'}>{topic.unfolded && topic.subtopics.map((subtopic) => (
                 recursiveShowTopic(subtopic)
@@ -250,11 +136,9 @@ const TaskList = (props) => {
         )
     }
 
-
     const recursiveShowTask = (topic, superTask, task) => {
         // 1. Show task
         // 2. Show all subtasks
-
 
         // Return the following HTML structure
         //  <>
@@ -266,11 +150,19 @@ const TaskList = (props) => {
         return (
             <>
                 <li key={(topic && topic.id) + "-" + (superTask && superTask.id) + ' - ' + task.id}>
-                    {createTaskReactElement(task, superTask, topic)}
+                    <TaskContainer
+                        task={task}
+                        topic={topic}
+                        superTask={superTask}
+                        tasks={tasks}
+                        setTasks={setTasks}
+                        topics={topics}
+                        selectedTasks={selectedTasks}
+                        setSelectedTasks={setSelectedTasks}
+                        fancy={fancy} />
                 </li >
                 {
                     task.subTaskIds && task.subTaskIds.length > 0 && task.unfolded && (
-
                         <ul>
                             {tasks
                                 // .map(t=>{console.log("Hi, I'm a subtask"+t);return t})
@@ -289,25 +181,16 @@ const TaskList = (props) => {
     }
 
     const showTasksWithoutTopics = (allSubTaskIds) => {
-        // const findTopicViewIdx = (topicId, task) => {
-        //     return task.topicViewIndices[task.topics.findIndex(taskTopicId => taskTopicId == topicId)]
-        // }
-
-
         return (<div key="div_tasks_no_topic">
             {tasks
                 .filter((task) => isNewTask(task, allSubTaskIds))
                 .filter((subTask) => isTaskVisible(subTask, hideCompletedItems, showRepeatedOnly, dueTimeInSeconds))
-
-                // .slice(0).sort((taskA, taskB) => { return findTopicViewIdx(topic.id, taskA) - findTopicViewIdx(topic.id, taskB) })
                 .map((task) => (
                     recursiveShowTask(null, null, task)
                 ))
-
             }
         </div>)
     }
-
 
     let allSuperTasks = tasks.filter((task) => task.subTaskIds && task.subTaskIds.length > 0)
     let allSubTaskIds = allSuperTasks.reduce((acc, task) => {
@@ -349,7 +232,6 @@ const TaskList = (props) => {
             console.log(task.transitiveDueTime)
         })
     }
-
 
     if (needTransitiveUpdate) {
         console.log("Updating transitive ADG data")

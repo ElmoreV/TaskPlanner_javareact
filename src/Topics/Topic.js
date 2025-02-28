@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import TopicContent from '../Topics/TopicContent';
 const Topic = (props) => {
@@ -218,4 +218,4 @@ Topic.propTypes = {
     addTask: PropTypes.func.isRequired
 };
 
-export default Topic;
+export default memo(Topic);

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, memo } from 'react';
 import PropTypes from 'prop-types';
 import TaskContent from '../Tasks/TaskContent.js'
 import React from 'react';
@@ -36,16 +36,16 @@ const Task = (props) => {
 
     // let repeated = true
     const markTaskIrrelevant = () => {
-        if (taskFinishStatus == FinishedState.Irrelevant) { setTaskFinishStatus(FinishedState.NotFinished) }
+        if (taskFinishStatus == FinishedState.Irrelevant) { setTaskFinishStatus(id, FinishedState.NotFinished) }
         else {
-            setTaskFinishStatus(FinishedState.Irrelevant)
+            setTaskFinishStatus(id, FinishedState.Irrelevant)
         }
     }
 
     const markTaskImpossible = () => {
-        if (taskFinishStatus == FinishedState.Impossible) { setTaskFinishStatus(FinishedState.NotFinished) }
+        if (taskFinishStatus == FinishedState.Impossible) { setTaskFinishStatus(id, FinishedState.NotFinished) }
         else {
-            setTaskFinishStatus(FinishedState.Impossible)
+            setTaskFinishStatus(id, FinishedState.Impossible)
         }
     }
 
@@ -301,4 +301,4 @@ Task.propTypes = {
 };
 
 
-export default Task;
+export default memo(Task);
