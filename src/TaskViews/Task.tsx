@@ -16,7 +16,7 @@ const Task = (props) => {
         currentSuperTaskId,
         repeated, toggleRepeatTask, taskLastCompletion,
         selectedTasks, addToSelection, deleteFromSelection, selected,
-        duplicateTask, setTasks, tasks,
+        duplicateTask,
         taskTopics,
         addSubTask, hasSubTasks,
         fancy,
@@ -51,7 +51,7 @@ const Task = (props) => {
 
     const handleChange = (e) => {
         console.info(e.target.value);
-        setTaskName(e.target.value);
+        setTaskName(id, e.target.value);
     }
 
     const handleDragStart = (e) => {
@@ -64,7 +64,7 @@ const Task = (props) => {
         e.dataTransfer.setData("SuperTaskId", currentSuperTaskId)
         console.info('Dragging task')
         console.log("Inside dragging task")
-        console.log(tasks)
+        // console.log(tasks)
     }
     const handleDragEnd = () => {
         //TODO: how is this event still called when dropping duplicate?
@@ -86,6 +86,7 @@ const Task = (props) => {
         console.info("Stop duplicate dragging task")
         setIsDragging(false)
     }
+
     const handleToggleFold = () => {
         if (!isEditing) {
             toggleFold(id);
@@ -98,7 +99,7 @@ const Task = (props) => {
         console.info('drop')
         var type = e.dataTransfer.getData("Type")
         console.log("Inside upper drop")
-        console.log(tasks)
+        // console.log(tasks)
 
         if (type == "Task") {
             var task_id = Number(e.dataTransfer.getData("TaskId"))
@@ -151,18 +152,11 @@ const Task = (props) => {
         e.target.setAttribute('draggedOver', false);
     }
 
-    const moveToWeek = () => {
-        plan()
-    }
-    const moveOutOfWeek = () => {
-        unplan()
-    }
-
     const onDueDateChange = (event) => {
         let dueDateName = event.target.value
         console.log("Setting due date")
         if (dueDateName === 'noChange') { return }
-        setDueTime(getFutureDate(convertDueDateNameToSeconds(dueDateName)))
+        setDueTime(id, getFutureDate(convertDueDateNameToSeconds(dueDateName)))
     }
 
 
@@ -225,8 +219,10 @@ const Task = (props) => {
 
     const captureClick = (func) => {
         const wrapper = (e) => {
-            e.stopPropagation()
-            return func()
+            if (func) {
+                e.stopPropagation()
+                return func()
+            }
         }
         return wrapper
     }
@@ -272,15 +268,15 @@ const Task = (props) => {
         toggleEdit={toggleEdit}
         deleteTask={unselect(deleteTask)}
         addSubTask={unselect(addSubTask)}
-        completeTask={completeTask}
+        completeTask={() => completeTask(id)}
         markTaskIrrelevant={markTaskIrrelevant}
         markTaskImpossible={markTaskImpossible}
         taskFinishStatus={(taskFinishStatus ? taskFinishStatus : (completed ? FinishedState.Completed : FinishedState.NotFinished))}
         planned={planned}
-        plan={moveToWeek}
-        unplan={moveOutOfWeek}
+        plan={() => { plan(id) }}
+        unplan={() => { unplan(id) }}
         repeated={repeated}
-        toggleRepeatTask={toggleRepeatTask}
+        toggleRepeatTask={() => { toggleRepeatTask(id) }}
         duplicateDragHandlers={duplicateDragHandlers}
         fancy={fancy}
         topicCount={taskTopics.length}

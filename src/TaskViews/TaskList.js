@@ -12,6 +12,7 @@ import { FinishedState } from '../Tasks/TaskInterfaces.tsx';
 import { isTaskDueIn, convertDueDateNameToSeconds } from '../Timing.ts';
 import TopicContainer from '../Topics/TopicContainer.tsx';
 import TaskContainer from './TaskContainer.tsx';
+import { convert_v1_to_v2 } from '../Converters/Migration_V1_V2/UpdateV1ToV2.ts';
 
 const isNewTask = (task, allSubTaskIds) => {
     return task.topics.length == 0 && !allSubTaskIds.includes(task.id)
@@ -154,7 +155,6 @@ const TaskList = (props) => {
                         task={task}
                         topic={topic}
                         superTask={superTask}
-                        tasks={tasks}
                         setTasks={setTasks}
                         topics={topics}
                         selectedTasks={selectedTasks}

@@ -16,8 +16,18 @@ import {
     getSetTaskDueTimeV1,
 } from '../Tasks/TaskModifyFuncGensV1.ts'
 import Task from './Task.tsx'
-import { setTaskFinishStatusV1Semipure } from '../Tasks/TaskModifyFuncGensV1Pure.ts'
+import {
+    scheduleTaskV1Semipure,
+    setTaskFinishStatusV1Semipure, toggleFoldTaskV1Semipure,
+    toggleRepeatTaskV1Semipure,
+    planTaskForWeekV1Semipure,
+    unplanTaskV1Semipure,
+    setTaskNameV1Semipure,
+    setTaskDueTimeV1Semipure,
+    completeTaskV1Semipure,
+} from '../Tasks/TaskModifyFuncGensV1Pure.ts'
 import { FinishedState } from '../Tasks/TaskInterfaces.tsx'
+import { V1_Task } from '../Converters/V1_types.ts'
 
 
 class SelectedCategoryTask {
@@ -44,33 +54,33 @@ const deleteTaskFromSelection = (selectedTasks, setSelectedTasks, taskId, topicI
 const useCallbackify = (fn, setTasks) => {
     return useCallback(
         (...args) => {
-            setTasks(oldTasks => fn(oldTasks, ...args))
+            return setTasks(oldTasks => fn(oldTasks, ...args))
         },
         [fn, setTasks])
 }
 
+// const useCallbackify = (fn, setTasks) => {
+//     return (...args) => { return setTasks(oldTasks => fn(oldTasks, ...args)) }
+// }
 
 
-export default memo(function TaskContainer(props) {
-    const { task, topic, superTask, tasks, setTasks, topics, selectedTasks, setSelectedTasks, fancy, } = props;
 
-    const findTopicViewIdx = (topicId, task) => {
+export default function TaskContainer(props) {
+    const { task, topic, superTask, setTasks, topics, selectedTasks, setSelectedTasks, fancy, } = props;
+
+    const findTopicViewIdx = (topicId: number, task: V1_Task) => {
         return task.topicViewIndices[task.topics.findIndex(taskTopicId => taskTopicId == topicId)]
     }
 
-
-    // const setTaskFinishStatusCallback = useCallback(
-    //     (taskId: number, status: FinishedState) => {
-    //         setTasks(oldTasks => setTaskFinishStatusV1Semipure(oldTasks, taskId, status))
-    //     },
-    //     [setTasks, setTaskFinishStatusV1Semipure]
-    // )
+    const scheduleTaskCallback = useCallbackify(scheduleTaskV1Semipure, setTasks)
+    const toggleFoldTaskCallback = useCallbackify(toggleFoldTaskV1Semipure, setTasks)
+    const toggleRepeatTaskCallback = useCallbackify(toggleRepeatTaskV1Semipure, setTasks)
+    const completeTaskCallback = useCallbackify(completeTaskV1Semipure, setTasks)
     const setTaskFinishStatusCallback = useCallbackify(setTaskFinishStatusV1Semipure, setTasks)
-    const setTaskNameCallback = useCallbackify(setTaskFinishStatusV1Semipure, setTasks)
-
-
-
-
+    const planTaskCallback = useCallbackify(planTaskForWeekV1Semipure, setTasks)
+    const unplanTaskCallback = useCallbackify(unplanTaskV1Semipure, setTasks)
+    const setTaskNameCallback = useCallbackify(setTaskNameV1Semipure, setTasks)
+    const setTaskDueTimeCallback = useCallbackify(setTaskDueTimeV1Semipure, setTasks)
 
     return (<Task name={task.name}
         id={task.id}
@@ -85,26 +95,26 @@ export default memo(function TaskContainer(props) {
         currentTopicName={topic && topic.name}
         currentTopicId={topic && topic.id}
         currentSuperTaskId={superTask && superTask.id}
-        setTaskName={getSetTaskNameFuncV1(setTasks, tasks, task.id)}
-        deleteTask={getDeleteTask(setTasks, tasks, task.id)}
-        addSubTask={getAddNewSubTask(setTasks, tasks, task.id)}
+        setTaskName={setTaskNameCallback}
+        // deleteTask={getDeleteTask(setTasks, tasks, task.id)}
+        // addSubTask={getAddNewSubTask(setTasks, tasks, task.id)}
         hasSubTasks={task.subTaskIds && task.subTaskIds.length > 0}
-        completeTask={getCompleteTaskV1(setTasks, tasks, task.id)}
-        plan={getPlanTaskForWeekV1(setTasks, tasks, task.id)}
-        unplan={getUnplanTaskV1(setTasks, tasks, task.id)}
-        toggleRepeatTask={getToggleRepeatTaskV1(setTasks, tasks, task.id)}
-        addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, topic && findTopicViewIdx(topic.id, task), superTask && superTask.id)}
-        deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, superTask && superTask.id)}
-        selected={selectedTasks.find((st) => (st.taskId == task.id && (!topic || st.topicId == topic.id) && (!superTask || st.superTaskId == superTask.id))) ? true : false}
-        selectedTasks={selectedTasks}
-        moveTasks={getMoveTasks(topics, tasks, setTasks)}
-        duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
+        completeTask={completeTaskCallback}
+        plan={planTaskCallback}
+        unplan={unplanTaskCallback}
+        toggleRepeatTask={toggleRepeatTaskCallback}
+        // addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, topic && findTopicViewIdx(topic.id, task), superTask && superTask.id)}
+        // deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, superTask && superTask.id)}
+        // selected={selectedTasks.find((st) => (st.taskId == task.id && (!topic || st.topicId == topic.id) && (!superTask || st.superTaskId == superTask.id))) ? true : false}
+        // selectedTasks={selectedTasks}
+        // moveTasks={getMoveTasks(topics, tasks, setTasks)}
+        // duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
         fancy={fancy}
-        toggleFold={getToggleFoldTaskV1(setTasks, tasks)}
+        toggleFold={toggleFoldTaskCallback}
         setTasks={setTasks}
-        tasks={tasks}
+        // tasks={tasks}
         unfolded={task.unfolded}
-        setDueTime={getSetTaskDueTimeV1(setTasks, tasks, task.id)}
+        setDueTime={setTaskDueTimeCallback}
         currentDueTime={task.dueTime}
     />)
-})
+}

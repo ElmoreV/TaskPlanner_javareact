@@ -9,7 +9,7 @@ const Topic = (props) => {
         moveTopic, duplicateTask,
         fancy,
     } = props;
-    console.debug("Rendering Topic")
+    // console.debug("Rendering Topic")
     const folded_symbol = '>';
     const unfolded_symbol = 'v';
 

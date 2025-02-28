@@ -2,99 +2,164 @@ import { V1_Task } from "../Converters/V1_types.ts";
 import { FinishedState } from "./TaskInterfaces.tsx";
 
 const scheduleTaskV1Semipure = (tasks: V1_Task[], id: number) => {
-    const newTasks = [...tasks]
-    const taskToChange = newTasks.find((task) => task.id === id);
-    if (taskToChange === undefined) { return newTasks; }
-    taskToChange.scheduled = !taskToChange.scheduled;
-    return newTasks;
+    return tasks.map(task => {
+        if (task.id === id) {
+            return {
+                ...task,
+                scheduled: !task.scheduled,
+            };
+        }
+        return task;
+    });
+    // This below code is not idempotent, leaving it here for reference.
+    // This causes a bug, where possibly react does the function twice
+    // to test if I'm being nice and creating idempotent functions.
+
+    // const newTasks = [...tasks]
+    // const taskToChange = newTasks.find((task) => task.id === id);
+    // if (taskToChange === undefined) { return newTasks; }
+    // taskToChange.scheduled = !taskToChange.scheduled;
+    // return newTasks;
 }
 
 const toggleFoldTaskV1Semipure = (tasks: V1_Task[], id: number) => {
-    const newTasks = [...tasks];
-    let taskToChange = newTasks.find(task => (task.id == id))
-    if (taskToChange === undefined) { return newTasks; }
-    taskToChange.unfolded = !taskToChange.unfolded
-    return newTasks;
+    console.log("Running toggle fold")
+    return tasks.map(task => {
+        if (task.id === id) {
+            return {
+                ...task,
+                unfolded: !task.unfolded,
+            };
+        }
+        return task;
+    });
 }
 
 const toggleRepeatTaskV1Semipure = (tasks: V1_Task[], id: number) => {
-    const newTasks = [...tasks]
-    const taskToChange = newTasks.find((task) => task.id === id);
-    if (taskToChange === undefined) { return newTasks; }
-    taskToChange.repeated = !taskToChange.repeated;
-    return newTasks;
+    return tasks.map((task) => {
+        if (task.id === id) {
+            return {
+                ...task,
+                repeated: !task.repeated,
+            }
+        }
+        return task
+    })
 }
 
 const completeTaskV1Semipure = (tasks: V1_Task[], id: number) => {
-    const newTasks = [...tasks]
-    const taskToChange = newTasks.find((task) => task.id === id);
-    if (taskToChange === undefined) { return newTasks; }
-    taskToChange.completed = !taskToChange.completed;
-    if (taskToChange.completed) {
-        taskToChange.finishStatus = FinishedState.Completed
-        taskToChange.lastFinished = new Date().toISOString()
+    return tasks.map(task => {
+        if (task.id === id) {
+            if (task.completed) {
+                return {
+                    ...task,
+                    completed: !task.completed,
+                    finishStatus: FinishedState.NotFinished,
+                };
+            } else {
+                return {
+                    ...task,
+                    completed: !task.completed,
+                    finishStatus: FinishedState.Completed,
+                    lastFinished: new Date().toISOString()
+                };
+            }
+        }
+        return task; // unchanged tasks keep their original object reference
     }
-    else { taskToChange.finishStatus = FinishedState.NotFinished }
-    return newTasks;
+    )
 }
 
 const setTaskFinishStatusV1Semipure = (tasks: V1_Task[], id: number, status: FinishedState) => {
-    const newTasks = [...tasks]
-    const taskToChange = newTasks.find((task) => task.id === id);
-    if (taskToChange === undefined) { return newTasks; }
-    taskToChange.finishStatus = status;
-    if (status !== FinishedState.NotFinished) {
-        taskToChange.lastFinished = new Date().toISOString()
-    }
-    return newTasks;
+    return tasks.map(task => {
+        if (task.id === id) {
+            if (status !== FinishedState.NotFinished) {
+                return {
+                    ...task,
+                    finishStatus: status,
+                    lastFinished: new Date().toISOString()
+                }
+            } else {
+                return {
+                    ...task,
+                    finishStatus: status,
+                }
+            }
+        }
+        return task
+    })
 }
 
 const planTaskForWeekV1Semipure = (tasks: V1_Task[], id: number) => {
-    let newTasks = [...tasks]
-    const taskToChange = newTasks.find((task) => task.id === id);
-    if (taskToChange === undefined) { return newTasks; }
-
-    // modify
-    newTasks = newTasks.map((task) => {
-        if (task.thisWeek) { task.weekOrderIndex += 1 };
-        return task
+    return tasks.map(task => {
+        if (task.id === id) {
+            return {
+                ...task,
+                thisWeek: true,
+                weekOrderIndex: 1,
+            }
+        }
+        if (task.thisWeek) {
+            return {
+                ...task,
+                weekOrderIndex: task.weekOrderIndex + 1,
+            }
+        } else {
+            return task
+        }
     })
-    taskToChange.thisWeek = true;
-    taskToChange.weekOrderIndex = 1;
-    return newTasks;
 }
 
 const unplanTaskV1Semipure = (tasks: V1_Task[], id: number) => {
-    let newTasks = [...tasks]
-    const taskToChange = newTasks.find((task) => task.id === id);
-    if (taskToChange === undefined) { return newTasks; }
+    const taskToChange = tasks.find(task => task.id === id)
+    const taskToRemoveOrderIndex = taskToChange?.weekOrderIndex
 
-    taskToChange.thisWeek = false;
-    newTasks = newTasks.map((task) => {
-        if (task.thisWeek && task.weekOrderIndex >= taskToChange.weekOrderIndex) {
-            task.weekOrderIndex -= 1
-        };
-        return task
+    return tasks.map(task => {
+        if (task.id === id) {
+            return {
+                ...task,
+                thisWeek: false,
+                weekOrderIndex: 0,
+            }
+        }
+        // modify
+        if (task.thisWeek && task.weekOrderIndex >= taskToRemoveOrderIndex) {
+            return {
+                ...task,
+                weekOrderIndex: task.weekOrderIndex - 1,
+            }
+        } else {
+            return task
+        }
     })
-    taskToChange.weekOrderIndex = 0;
-    return newTasks;
 }
 
 const setTaskNameV1Semipure = (tasks: V1_Task[], id: number, newTaskName: string) => {
-    const newTasks = [...tasks]
-    const taskToChange = newTasks.find((task) => task.id === id);
-    if (taskToChange === undefined) { return newTasks; }
-
-    taskToChange.name = newTaskName;
-    return newTasks;
+    return tasks.map(task => {
+        if (task.id === id) {
+            return {
+                ...task,
+                name: newTaskName,
+            }
+        }
+        else {
+            return task
+        }
+    })
 }
 
 const setTaskDueTimeV1Semipure = (tasks: V1_Task[], id: number, dueTime: Date) => {
-    const newTasks = [...tasks]
-    const taskToChange = newTasks.find((task) => task.id === id);
-    if (taskToChange === undefined) { return newTasks; }
-    taskToChange.dueTime = dueTime;
-    return newTasks;
+    return tasks.map(task => {
+        if (task.id === id) {
+            return {
+                ...task,
+                dueTime: dueTime,
+            }
+        }
+        else {
+            return task
+        }
+    })
 }
 
 
