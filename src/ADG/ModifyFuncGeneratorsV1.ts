@@ -291,8 +291,8 @@ const getAddTopic = (setTopics: (topics: V1_Topic[]) => void, topics: V1_Topic[]
     const addTopic = () => {
         let newTopics = [...topics];
         const addedTopic = {
-            name: `New Topic ${getFreeTopicKey(topics)}`,
-            id: getFreeTopicKey(topics),
+            name: `New Topic ${getFreeTopicKeyV1(topics)}`,
+            id: getFreeTopicKeyV1(topics),
             unfolded: true,
             subtopics: []
         }
@@ -331,8 +331,8 @@ const getAddSubtopic = (setTopics: (topics: V1_Topic[]) => void, topics: V1_Topi
         console.log(topics)
         let newTopics = [...topics]
         const addedTopic = {
-            name: `New Topic ${getFreeTopicKey(topics)}`,
-            id: getFreeTopicKey(topics),
+            name: `New Topic ${getFreeTopicKeyV1(topics)}`,
+            id: getFreeTopicKeyV1(topics),
             unfolded: true,
             subtopics: []
         }

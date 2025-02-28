@@ -1,6 +1,6 @@
 import { V1_Task, V1_Topic } from '../Converters/V1_types.js';
 import {
-    getFreeTopicKey,
+    getFreeTopicKeyV1,
     filterTopicsById_r,
 } from '../Topics/TopicHelperV1.js';
 import {
@@ -22,7 +22,7 @@ import {
 
 
 import {
-    getFreeTopicKey,
+    getFreeTopicKeyV1,
     isTaskInAnyTopic,
     filterTopicsById_r,
 } from '../Topics/TopicHelperV1.js';
@@ -330,8 +330,8 @@ const getAddTopic = (setTopics: (topics: V1_Topic[]) => void, topics: V1_Topic[]
     const addTopic = () => {
         let newTopics = [...topics];
         const addedTopic = {
-            name: `New Topic ${getFreeTopicKey(topics)}`,
-            id: getFreeTopicKey(topics),
+            name: `New Topic ${getFreeTopicKeyV1(topics)}`,
+            id: getFreeTopicKeyV1(topics),
             unfolded: true,
             subtopics: []
         }
@@ -370,8 +370,8 @@ const getAddSubtopic = (setTopics: (topics: V1_Topic[]) => void, topics: V1_Topi
         console.log(topics)
         let newTopics = [...topics]
         const addedTopic = {
-            name: `New Topic ${getFreeTopicKey(topics)}`,
-            id: getFreeTopicKey(topics),
+            name: `New Topic ${getFreeTopicKeyV1(topics)}`,
+            id: getFreeTopicKeV1(topics),
             unfolded: true,
             subtopics: []
         }

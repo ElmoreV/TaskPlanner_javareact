@@ -21,6 +21,7 @@ const getToggleFoldTaskV1 = (setTasks, tasks) => {
     return toggleFold;
 }
 
+
 const getToggleRepeatTaskV1 = (setTasks, tasks, id) => {
     const toggleRepeatTask = () => {
         const newTasks = [...tasks]
