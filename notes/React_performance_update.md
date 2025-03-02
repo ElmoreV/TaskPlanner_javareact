@@ -198,6 +198,22 @@ const updateTaskCallback = useCallback(
 
 
 
+## Next level: changing the state of Tasks, but using the Topics state for the calculation
+
+This causes a problem, since:
+
+1. The `cachedFunction = useCallback(setTasks((oldTasks)=> (calculateNewTasks(oldTasks,curTopics)), [setTasks, topics])` will be regenerated every time that topics changes (or setTopics is called).
+2. The function `cachedFunction` is passed to the subcomponent as a prop
+3. The subcomponent is memoized, so if a prop is changed, it is rerendered  
+4. So every time that topics changes/setTopics is called, the Task subcomponent is re-rendered. 
+
+Solutions to this would either:
+1. Prevent regeneration of the `cachedFunction`
+ when topics is changed
+ 	1. Combine tasks and topics into a single combined state/store
+2. Prevent passing cachedFunction to the subcomponent
+	1. Pass cachedfunction to a separate/lighter-weight subcomponent instead
+	2. Only enter the task props
 
 ## Other ideas from Mr. GPT
 
