@@ -17,7 +17,15 @@ import Topic from './Topic.js';
 
 
 export default memo(function TopicContainer(props) {
-    const { topic, tasks, setTasks, topics, setTopics, selectedTasks, fancy } = props;
+    const { topic, appData, setAppData,selectedTasks, fancy } = props;
+
+    const { topics, tasks } = appData;
+    const setTasks = (newTasks) => {
+      setAppData({ tasks: newTasks, ...appData });
+    };
+    const setTopics = (newTopics) => {
+      setAppData({ topics: newTopics, ...appData });
+    };
 
     return (<Topic
         name={topic.name}

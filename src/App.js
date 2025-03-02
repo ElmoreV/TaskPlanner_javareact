@@ -12,6 +12,11 @@ import { initialTags, initialTasks, initialPlannedTaskIdList, initialTagTasks } 
 // 1. Go through all tasks and search if their .supertasks list contains [task.id] N*E(M) , E(M) is avg of supertasks per task
 // 2. Go through all tasks and search if the ids match one of the .subtasks List N*P P is # of subtasks in task
 
+// type AppData = {
+//   topics: V1_Topic[];
+//   tasks: V1_Task[];
+// }
+
 
 function App() {
   console.debug("Rendering App")
@@ -25,8 +30,14 @@ function App() {
   const [debugMode, setDebugMode] = useState(false)
 
   //v1
-  const [topics, setTopics] = useState(initialTopicsV1);
-  const [tasks, setTasks] = useState(initialTasksV1)
+  const [appData, setAppData] = useState({
+    topics: initialTopicsV1,
+    tasks: initialTasksV1,
+  }
+  );
+
+  // const [topics, setTopics] = useState(initialTopicsV1);
+  // const [tasks, setTasks] = useState(initialTasksV1)
 
   // const  [tasks, setTasks] = useState([])
   // Should use generation functions here, to make it immediately issueless
@@ -45,13 +56,11 @@ function App() {
   }
 
   const onTest2 = () => {
-    ensureRoundtripStability(tasks, topics)
-    const { newTaskMap, newTagMap, newTagTaskMap, newPlannedTaskIds } = convert_v1_to_v2(tasks, topics)
+    ensureRoundtripStability(appData.tasks, appData.topics)
+    const { newTaskMap, newTagMap, newTagTaskMap, newPlannedTaskIds } = convert_v1_to_v2(appData.tasks, appData.topics)
     const res2 = convert_v2_to_v1(newTaskMap, newTagMap, newTagTaskMap, newPlannedTaskIds)
     const { topicsV1, tasksV1 } = res2
-    setTopics(topicsV1)
-    setTasks(tasksV1)
-
+    setAppData({ topics: topicsV1, tasks: tasksV1 })
   }
 
   const onDarkModeChange = () => {
@@ -70,31 +79,23 @@ function App() {
         <div className="contents">
 
           <ImportExport
-            tasks={tasks}
-            topics={topics}
-            setTasks={setTasks}
-            setTopics={setTopics} />
+            appData={appData}
+            setAppData={setAppData} />
           <ViewSelector
             viewSetter={setView} />
           {view === VIEW_ADD_TASKS && <AddTaskView
-            tasks={tasks}
-            setTasks={setTasks}
-            topics={topics}
-            setTopics={setTopics}
+            appData={appData}
+            setAppData={setAppData}
             fancy={fancy}
           />}
           {view === VIEW_ALL_TASKS && <TaskList
-            tasks={tasks}
-            setTasks={setTasks}
-            topics={topics}
-            setTopics={setTopics}
+            appData = {appData}
+            setAppData = {setAppData}
             fancy={fancy}
           />}
           {view === VIEW_PLANNED_TASKS && <PlannedList
-            tasks={tasks}
-            setTasks={setTasks}
-            topics={topics}
-            setTopics={setTopics}
+            appData={appData}
+            setAppData={setAppData}
             fancy={fancy}
           />}
           {view === VIEW_DAILY_PLANNING}

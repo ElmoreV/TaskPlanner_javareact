@@ -86,7 +86,11 @@ const recursiveShowPlannedTask = (task, superTask, setTasks, tasks,
 }
 
 const PlannedList = (props) => {
-    const { tasks, setTasks, topics, setTopics, fancy } = props;
+    const { appData, setAppData, fancy } = props;
+    const { topics, tasks } = appData;
+    const setTasks = (newTasks) => {
+      setAppData({ tasks: newTasks, ...appData });
+    };
     console.debug("Rendering PlannedList")
 
     const [hideCompletedItems, setHideCompletedItems] = useState(true)

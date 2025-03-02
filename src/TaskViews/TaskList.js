@@ -28,7 +28,14 @@ const isTaskVisible = (task, hideCompletedItems, showRepeatedOnly, dueInSeconds)
 }
 
 const TaskList = (props) => {
-    const { tasks, setTasks, topics, setTopics, fancy } = props;
+  const { appData, setAppData, fancy } = props;
+  const { topics, tasks } = appData;
+  const setTasks = (newTasks) => {
+    setAppData({ tasks: newTasks, ...appData });
+  };
+  const setTopics = (newTopics) => {
+    setAppData({ topics: newTopics, ...appData });
+  };
     console.debug("Rendering TaskList")
 
     const [hideCompletedItems, setHideCompletedItems] = useState(true)
@@ -114,10 +121,8 @@ const TaskList = (props) => {
             <li key={topic.id}>
                 <TopicContainer
                     topic={topic}
-                    tasks={tasks}
-                    setTasks={setTasks}
-                    topics={topics}
-                    setTopics={setTopics}
+                    appData={appData}
+                    setAppData={setAppData}
                     selectedTasks={selectedTasks}
                     fancy={fancy} />
             </li>
@@ -155,8 +160,7 @@ const TaskList = (props) => {
                         task={task}
                         topic={topic}
                         superTask={superTask}
-                        setTasks={setTasks}
-                        topics={topics}
+                        setAppData={setAppData}
                         selectedTasks={selectedTasks}
                         setSelectedTasks={setSelectedTasks}
                         fancy={fancy} />

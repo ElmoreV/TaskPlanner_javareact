@@ -10,7 +10,8 @@ var hash = require('object-hash');
 
 const ImportExport = (props) => {
     console.debug("Rendering ImportExport")
-    const { tasks, topics, setTasks, setTopics } = props;
+    const { appData, setAppData } = props;
+    const { topics, tasks } = appData;
 
     const [taskHash, setTaskHash] = useState(null)
     const [topicHash, setTopicHash] = useState(null)
@@ -284,9 +285,7 @@ const ImportExport = (props) => {
 
         // Extract tasks
 
-
-        setTopics(res2);
-        setTasks(importedTasks);
+        setAppData({ topics: res2, tasks: importedTasks });
     }
 
     /*
@@ -410,8 +409,7 @@ const ImportExport = (props) => {
         setLoadedTopicHash(newTopicHash)
         setSavedTaskHash(null)
         setSavedTopicHash(null)
-        setTopics(old_topics)
-        setTasks(old_tasks)
+        setAppData({ topics: old_topics, tasks: old_tasks })
         console.log("Loading etc")
 
         return 'succesful import'

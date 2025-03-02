@@ -11,7 +11,11 @@ class SelectedNewTask {
 
 
 const AddTaskView = (props) => {
-    const { tasks, setTasks, topics, setTopics, fancy } = props;
+    const { appData, setAppData, fancy } = props;
+    const { topics, tasks } = appData;
+    const setTasks = (newTasks) => {
+      setAppData({ tasks: newTasks, ...appData });
+    };
     console.debug("Rendering AddTaskView")
 
     const [selectedTasks, setSelectedTasks] = useState([])

@@ -47,50 +47,55 @@ const deleteTaskFromSelection = (selectedTasks, setSelectedTasks, taskId, topicI
     setSelectedTasks(newSelectedTasks)
 }
 
-const useCallbackify = (fn, setTasks) => {
-    return useCallback(
-        (...args) => {
-            return setTasks(oldTasks => fn(oldTasks, ...args))
-        },
-        [fn, setTasks])
-}
+const useCallbackify = (fn, setAppData) => {
+  return useCallback(
+    (...args) => {
+      return setAppData((oldAppData) => {
+        return {
+          tasks: fn(oldAppData.tasks, ...args),
+          topics: oldAppData.topics,
+        }})
+    },
+    [fn, setAppData]
+  );
+};
 
-const useCallbackifyTopics = (fn, topics, setTasks) => {
-    return useCallback(
-        (...args) => {
-            return setTasks(oldTasks => fn(topics, oldTasks, ...args))
-        },
-        [fn, topics, setTasks])
-}
-
-// const useCallbackify = (fn, setTasks) => {
-//     return (...args) => { return setTasks(oldTasks => fn(oldTasks, ...args)) }
-// }
-
-
+const useCallbackifyTopics = (fn, setAppData) => {
+  return useCallback(
+    (...args) => {
+      return setAppData((oldAppData) => {
+        return {
+          tasks: fn(oldAppData.topics, oldAppData.tasks, ...args),
+          topics: oldAppData.topics,
+        };
+      });
+    },
+    [fn, setAppData]
+  );
+};
 
 export default function TaskContainer(props) {
-    const { task, topic, superTask, setTasks, topics, selectedTasks, setSelectedTasks, fancy, } = props;
+    const { task, topic, superTask, setAppData, topics, selectedTasks, setSelectedTasks, fancy, } = props;
 
     const findTopicViewIdx = (topicId: number, task: V1_Task) => {
         return task.topicViewIndices[task.topics.findIndex(taskTopicId => taskTopicId == topicId)]
     }
 
-    const scheduleTaskCallback = useCallbackify(scheduleTaskV1Semipure, setTasks)
-    const toggleFoldTaskCallback = useCallbackify(toggleFoldTaskV1Semipure, setTasks)
-    const toggleRepeatTaskCallback = useCallbackify(toggleRepeatTaskV1Semipure, setTasks)
-    const completeTaskCallback = useCallbackify(completeTaskV1Semipure, setTasks)
-    const setTaskFinishStatusCallback = useCallbackify(setTaskFinishStatusV1Semipure, setTasks)
-    const planTaskCallback = useCallbackify(planTaskForWeekV1Semipure, setTasks)
-    const unplanTaskCallback = useCallbackify(unplanTaskV1Semipure, setTasks)
-    const setTaskNameCallback = useCallbackify(setTaskNameV1Semipure, setTasks)
-    const setTaskDueTimeCallback = useCallbackify(setTaskDueTimeV1Semipure, setTasks)
-    const deleteTask = useCallbackify(deleteTaskV1Pure, setTasks)
-    const addNewSubtask = useCallbackify(addNewSubtaskV1Pure, setTasks)
+    const scheduleTaskCallback = useCallbackify(scheduleTaskV1Semipure, setAppData)
+    const toggleFoldTaskCallback = useCallbackify(toggleFoldTaskV1Semipure, setAppData)
+    const toggleRepeatTaskCallback = useCallbackify(toggleRepeatTaskV1Semipure, setAppData)
+    const completeTaskCallback = useCallbackify(completeTaskV1Semipure, setAppData)
+    const setTaskFinishStatusCallback = useCallbackify(setTaskFinishStatusV1Semipure, setAppData)
+    const planTaskCallback = useCallbackify(planTaskForWeekV1Semipure, setAppData)
+    const unplanTaskCallback = useCallbackify(unplanTaskV1Semipure, setAppData)
+    const setTaskNameCallback = useCallbackify(setTaskNameV1Semipure, setAppData)
+    const setTaskDueTimeCallback = useCallbackify(setTaskDueTimeV1Semipure, setAppData)
+    const deleteTask = useCallbackify(deleteTaskV1Pure, setAppData)
+    const addNewSubtask = useCallbackify(addNewSubtaskV1Pure, setAppData)
 
 
-    const moveTasks = useCallbackifyTopics(moveTasksV1Pure, topics, setTasks)
-    const duplicateTask = useCallbackifyTopics(duplicateTaskV1Pure, topics, setTasks)
+    const moveTasks = useCallbackifyTopics(moveTasksV1Pure, setAppData)
+    const duplicateTask = useCallbackifyTopics(duplicateTaskV1Pure, setAppData)
 
     return (<Task name={task.name}
         id={task.id}
@@ -122,8 +127,6 @@ export default function TaskContainer(props) {
         duplicateTask={duplicateTask}
         fancy={fancy}
         toggleFold={toggleFoldTaskCallback}
-        setTasks={setTasks}
-        // tasks={tasks}
         unfolded={task.unfolded}
         setDueTime={setTaskDueTimeCallback}
         currentDueTime={task.dueTime}
