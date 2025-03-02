@@ -75,7 +75,7 @@ const Topic = (props) => {
       console.debug(oldTopicName); // name???
       console.debug(name);
       console.info(
-        `Dropped task with id ${task_id} with old topic id ${oldTopicId} on topic with id ${id}`,
+        `Dropped task with id ${task_id} with old topic id ${oldTopicId} on topic with id ${id}`
       );
 
       let taskIds = [];
@@ -90,7 +90,7 @@ const Topic = (props) => {
       if (selectedTasks && selectedTasks.length > 0) {
         selectedTasks.forEach((st) => {
           console.info(
-            `Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${id}`,
+            `Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${id}`
           );
           taskIds.push(st.taskId);
           oldTopicIds.push(st.topicId);
@@ -104,20 +104,20 @@ const Topic = (props) => {
     } else if (type == "Topic") {
       let source_id = Number(e.dataTransfer.getData("id"));
       console.info(
-        `Dropped topic with id ${source_id} on this topic with id ${id}`,
+        `Dropped topic with id ${source_id} on this topic with id ${id}`
       );
       moveTopic(source_id, id);
     } else if (type == "TaskDuplicate") {
       var task_id = Number(e.dataTransfer.getData("TaskId"));
       console.info(
-        `Duplicate dropped task with id ${task_id} on this topic with id ${id}`,
+        `Duplicate dropped task with id ${task_id} on this topic with id ${id}`
       );
       let taskIds = [];
       taskIds.push(task_id);
       if (selectedTasks && selectedTasks.length > 0) {
         selectedTasks.forEach((st) => {
           console.info(
-            `Duplicating task with id ${st.taskId} to topic with id ${id}`,
+            `Duplicating task with id ${st.taskId} to topic with id ${id}`
           );
           taskIds.push(st.taskId);
         });
@@ -126,7 +126,7 @@ const Topic = (props) => {
       duplicateTask(taskIds, id);
     } else {
       console.info(
-        "On a topic, you can only drop another topic or a task (not something else)",
+        "On a topic, you can only drop another topic or a task (not something else)"
       );
     }
   };
@@ -221,7 +221,7 @@ const Topic = (props) => {
     <>
       <TopicContent
         name={name}
-        handleToggleFold={handleToggleFold}
+        handleToggleFold={toggleFold ? handleToggleFold : undefined}
         dragHandlers={dragHandlers}
         dropHandlers={dropHandlers}
         textEditHandlers={{
@@ -233,10 +233,10 @@ const Topic = (props) => {
         isEditing={isEditing}
         inputRef={inputRef}
         toggleEdit={toggleEdit}
-        handleAddTaskClick={handleAddTaskClick}
-        handleAddTopicClick={handleAddTopicClick}
-        handleDeleteClick={handleDeleteClick}
-        handleFoldDoubleClick={handleFoldDoubleClick}
+        handleAddTaskClick={addTask ? handleAddTaskClick : undefined}
+        handleAddTopicClick={addSubTopic ? handleAddTopicClick : undefined}
+        handleDeleteClick={deleteTopic ? handleDeleteClick : undefined}
+        handleFoldDoubleClick={foldAll ? handleFoldDoubleClick : undefined}
         fancy={fancy}
       />
     </>
@@ -247,9 +247,9 @@ Topic.propTypes = {
   name: PropTypes.string.isRequired,
   setTopicName: PropTypes.func.isRequired,
   id: PropTypes.number.isRequired,
-  toggleFold: PropTypes.func.isRequired,
+  // toggleFold: PropTypes.func.isRequired,
   unfolded: PropTypes.bool.isRequired,
-  addTask: PropTypes.func.isRequired,
+  // addTask: PropTypes.func.isRequired,
 };
 
 export default Topic;

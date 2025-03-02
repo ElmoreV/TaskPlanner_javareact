@@ -44,15 +44,24 @@ const TopicContent = (props) => {
         )}
       </div>
       <div className={styles.buttonList}>
-        <button className={styles.topicAddTask} onClick={handleAddTaskClick}>
-          Add task
-        </button>
-        <button className={styles.topicAddTopic} onClick={handleAddTopicClick}>
-          Add topic
-        </button>
-        <button className={styles.topicDelete} onClick={handleDeleteClick}>
-          Delete
-        </button>
+        {handleAddTaskClick && (
+          <button className={styles.topicAddTask} onClick={handleAddTaskClick}>
+            Add task
+          </button>
+        )}
+        {handleAddTopicClick && (
+          <button
+            className={styles.topicAddTopic}
+            onClick={handleAddTopicClick}
+          >
+            Add topic
+          </button>
+        )}
+        {handleDeleteClick && (
+          <button className={styles.topicDelete} onClick={handleDeleteClick}>
+            Delete
+          </button>
+        )}
       </div>
     </div>
   );
