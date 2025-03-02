@@ -1,10 +1,5 @@
 import { memo, useCallback } from "react";
-import {
-  // getDeleteTask,
-  getAddNewSubTask,
-  // getDuplicateTask,
-  // getMoveTasks,
-} from "../ADG/ModifyFuncGeneratorsV1.ts";
+
 import {
   deleteTaskV1Pure,
   addNewSubtaskV1Pure,
@@ -37,7 +32,6 @@ class SelectedCategoryTask {
 
 const addTaskToSelection = (
   selectedTasks,
-  setSelectedTasks,
   taskId,
   topicId,
   topicViewIndex,
@@ -47,11 +41,10 @@ const addTaskToSelection = (
   newSelectedTasks.push(
     new SelectedCategoryTask(taskId, topicId, topicViewIndex, superTaskId),
   );
-  setSelectedTasks(newSelectedTasks);
+  return newSelectedTasks;
 };
 const deleteTaskFromSelection = (
   selectedTasks,
-  setSelectedTasks,
   taskId,
   topicId,
   superTaskId,
@@ -65,7 +58,18 @@ const deleteTaskFromSelection = (
         selTask.superTaskId == superTaskId
       ),
   );
-  setSelectedTasks(newSelectedTasks);
+  return newSelectedTasks;
+};
+
+const useCallbackifySelectedTasks = (fn, setSeelctedTasks) => {
+  return useCallback(
+    (...args) => {
+      return setSeelctedTasks((oldSelectedTasks) => {
+        return fn(oldSelectedTasks, ...args);
+      });
+    },
+    [fn, setSeelctedTasks],
+  );
 };
 
 const useCallbackify = (fn, setAppData) => {
@@ -150,6 +154,14 @@ export default function TaskContainer(props) {
   const moveTasks = useCallbackifyTopics(moveTasksV1Pure, setAppData);
   const duplicateTask = useCallbackifyTopics(duplicateTaskV1Pure, setAppData);
 
+  const addTaskToSelectionCallback = useCallbackifySelectedTasks(
+    addTaskToSelection,
+    setSelectedTasks,
+  );
+  const deleteTaskFromSelectionCallback = useCallbackifySelectedTasks(
+    deleteTaskFromSelection,
+    setSelectedTasks,
+  );
   return (
     <Task
       name={task.name}
@@ -173,11 +185,21 @@ export default function TaskContainer(props) {
       plan={planTaskCallback}
       unplan={unplanTaskCallback}
       toggleRepeatTask={toggleRepeatTaskCallback}
+      addToSelection={addTaskToSelectionCallback}
+      deleteFromSelection={deleteTaskFromSelectionCallback}
+      selected={
+        selectedTasks.find(
+          (st) =>
+            st.taskId == task.id &&
+            (!topic || st.topicId == topic.id) &&
+            (!superTask || st.superTaskId == superTask.id),
+        )
+          ? true
+          : false
+      }
+      selectedTasks={selectedTasks}
       // addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, topic && findTopicViewIdx(topic.id, task), superTask && superTask.id)}
       // deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, superTask && superTask.id)}
-      // selected={selectedTasks.find((st) => (st.taskId == task.id && (!topic || st.topicId == topic.id) && (!superTask || st.superTaskId == superTask.id))) ? true : false}
-      // selectedTasks={selectedTasks}
-      // moveTasks={getMoveTasks(topics, tasks, setTasks)}
       moveTasks={moveTasks}
       duplicateTask={duplicateTask}
       fancy={fancy}

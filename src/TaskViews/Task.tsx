@@ -239,7 +239,12 @@ const Task = (props) => {
     setIsEditing(true);
     // TODO: Should actually clear the entire selection maybe?
     if (selected) {
-      deleteFromSelection();
+      deleteFromSelection(
+        selectedTasks,
+        id,
+        currentTopicId,
+        currentSuperTaskId,
+      );
     }
     setIsDraggingAllowed(false);
     // inputRef.current.focus()
@@ -280,7 +285,12 @@ const Task = (props) => {
   const unselect = (func) => {
     const wrapper = (e) => {
       if (selected) {
-        deleteFromSelection();
+        deleteFromSelection(
+          selectedTasks,
+          id,
+          currentTopicId,
+          currentSuperTaskId,
+        );
       }
       return func();
     };
@@ -308,8 +318,26 @@ const Task = (props) => {
     onClick: captureClick(() => {}),
   };
   const selectHandlers = selected
-    ? { onClick: captureClick(deleteFromSelection) }
-    : { onClick: captureClick(addToSelection) };
+    ? {
+        onClick: captureClick(() =>
+          deleteFromSelection(
+            selectedTasks,
+            id,
+            currentTopicId,
+            currentSuperTaskId,
+          ),
+        ),
+      }
+    : {
+        onClick: captureClick(() =>
+          addToSelection(
+            id,
+            currentTopicId,
+            currentTopicViewIndex,
+            currentSuperTaskId,
+          ),
+        ),
+      };
   let fullName = name;
   if (
     (taskFinishStatus !== FinishedState.Impossible ||
