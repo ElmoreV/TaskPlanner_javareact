@@ -1,7 +1,6 @@
-
 export enum FinishedState {
-    NotFinished,
-    Completed,
-    Irrelevant,
-    Impossible
+  NotFinished,
+  Completed,
+  Irrelevant,
+  Impossible,
 }

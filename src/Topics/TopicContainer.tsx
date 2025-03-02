@@ -1,47 +1,48 @@
-import { memo } from 'react'
+import { memo } from "react";
 import {
-    getDeleteTopic,
-    getDuplicateTask,
-    getMoveTopic,
-    getAddTask,
-    getAddSubtopic,
-    getMoveTasks,
-} from '../ADG/ModifyFuncGeneratorsV1.ts'
+  getDeleteTopic,
+  getDuplicateTask,
+  getMoveTopic,
+  getAddTask,
+  getAddSubtopic,
+  getMoveTasks,
+} from "../ADG/ModifyFuncGeneratorsV1.ts";
 import {
-    getToggleFold,
-    getSetTopicNameFunc,
-    getUnfoldAll,
-    getFoldAll
-} from '../Topics/TopicModifyFuncGens.js'
-import Topic from './Topic.js';
-
+  getToggleFold,
+  getSetTopicNameFunc,
+  getUnfoldAll,
+  getFoldAll,
+} from "../Topics/TopicModifyFuncGens.js";
+import Topic from "./Topic.js";
 
 export default memo(function TopicContainer(props) {
-    const { topic, appData, setAppData,selectedTasks, fancy } = props;
+  const { topic, appData, setAppData, selectedTasks, fancy } = props;
 
-    const { topics, tasks } = appData;
-    const setTasks = (newTasks) => {
-      setAppData({ tasks: newTasks, ...appData });
-    };
-    const setTopics = (newTopics) => {
-      setAppData({ topics: newTopics, ...appData });
-    };
+  const { topics, tasks } = appData;
+  const setTasks = (newTasks) => {
+    setAppData({ tasks: newTasks, ...appData });
+  };
+  const setTopics = (newTopics) => {
+    setAppData({ topics: newTopics, ...appData });
+  };
 
-    return (<Topic
-        name={topic.name}
-        id={topic.id}
-        unfolded={topic.unfolded}
-        selectedTasks={selectedTasks}
-        setTopicName={getSetTopicNameFunc(setTopics, topics, topic.id)}
-        toggleFold={getToggleFold(setTopics, topics)}
-        addSubTopic={getAddSubtopic(setTopics, topics, topic)}
-        moveTopic={getMoveTopic(setTopics, topics)}
-        addTask={getAddTask(setTasks, tasks, topics, topic.id)}
-        moveTasks={getMoveTasks(topics, tasks, setTasks)}
-        unfoldAll={getUnfoldAll(setTopics, topics)}
-        foldAll={getFoldAll(setTopics, topics)}
-        duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
-        deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}
-        fancy={fancy}
-    />)
-})
+  return (
+    <Topic
+      name={topic.name}
+      id={topic.id}
+      unfolded={topic.unfolded}
+      selectedTasks={selectedTasks}
+      setTopicName={getSetTopicNameFunc(setTopics, topics, topic.id)}
+      toggleFold={getToggleFold(setTopics, topics)}
+      addSubTopic={getAddSubtopic(setTopics, topics, topic)}
+      moveTopic={getMoveTopic(setTopics, topics)}
+      addTask={getAddTask(setTasks, tasks, topics, topic.id)}
+      moveTasks={getMoveTasks(topics, tasks, setTasks)}
+      unfoldAll={getUnfoldAll(setTopics, topics)}
+      foldAll={getFoldAll(setTopics, topics)}
+      duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
+      deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}
+      fancy={fancy}
+    />
+  );
+});

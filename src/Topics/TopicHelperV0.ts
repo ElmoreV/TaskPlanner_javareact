@@ -42,7 +42,6 @@
 //     return true;
 // }
 
-
 // const topicCompletelyContainsTasks = (topic, task) => {
 //     // Check all topics and if the task is only contained in topic
 //     // and/or its subtopics, we can return true
@@ -219,7 +218,6 @@
 //     // ]
 
 // }
-
 
 // export { getFreeTaskIdV0 };
 // export { getFreeTopicKeyV0 };
