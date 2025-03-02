@@ -33,12 +33,12 @@ function AppV2() {
 
   const [debugMode, setDebugMode] = useState(false);
 
-  const [tagMap, setTagMap] = useState(initialTags);
-  const [taskMap, setTaskMap] = useState(initialTasks);
-  const [tagTaskMap, setTagTaskMap] = useState(initialTagTasks);
-  const [plannedTaskIdList, setPlannedTaskIdList] = useState(
-    initialPlannedTaskIdList,
-  );
+  const [appData, setAppData] = useState({
+    tagMap: initialTags,
+    taskMap: initialTasks,
+    tagTasksMap: initialTagTasks,
+    plannedTaskIdList: initialPlannedTaskIdList,
+  });
 
   const [view, setView] = useState(VIEW_ALL_TASKS);
   const [fancy, setFancy] = useState(true);
@@ -75,12 +75,9 @@ function AppV2() {
           />} */}
           {view === VIEW_ALL_TASKS && (
             <TaskListV2
-              tagMap={tagMap}
-              setTagMap={setTagMap}
-              taskMap={taskMap}
-              setTaskMap={setTaskMap}
-              tagTaskMap={tagTaskMap}
-              setTagTaskMap={setTagTaskMap}
+              appData={appData}
+              setAppData={setAppData}
+              fancy={fancy}
             />
           )}
           {/* {view === VIEW_PLANNED_TASKS && <PlannedList

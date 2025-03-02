@@ -1,22 +1,41 @@
 import { useState, useEffect } from "react";
 import React from "react";
-import { TagMap, TagTasksMap, TaskMap } from "../Converters/V2_types";
+import {
+  TagMap,
+  TagTasksMap,
+  TaskMap,
+  TaskTagsMap,
+} from "../Converters/V2_types";
 import Task from "./Task.tsx";
 import Topic from "../Topics/Topic.js";
 import { FinishedState } from "../Tasks/TaskInterfaces.tsx";
+import TaskContainerV2 from "../Tasks/TaskContainerV2.tsx";
 
 const TaskListV2 = (props: TaskListPropsV2) => {
-  const { tagMap, setTagMap, taskMap, setTaskMap, tagTaskMap, setTagTaskMap } =
-    props;
+  const { appData, setAppData, fancy } = props;
+  const { tagMap, taskMap, tagTasksMap, plannedTaskIdList } = appData;
+
+  // Invert the tagTaskMap
+  // So that we have
+  // taskTagsMap[taskId] = [tagId1, tagId2, ...]
+  const taskTagsMap: TaskTagsMap = {};
+  for (const tagId in tagTasksMap) {
+    for (const taskId of tagTasksMap[tagId]) {
+      if (!taskTagsMap[taskId]) {
+        taskTagsMap[taskId] = [];
+      }
+      taskTagsMap[taskId].push(Number(tagId));
+    }
+  }
 
   const showUntaggedTasks = () => {
     // 1. Find all tasks that are not tagged
     // 2. Find all of those that are 'root' tasks (no supertasks)
     // 2. Show them (and their subtasks)
     let taggedTaskIds = new Set<number>();
-
-    for (const tagId in tagTaskMap) {
-      const taskIds = tagTaskMap[tagId];
+    return <div key="untagged-tasks"></div>;
+    for (const tagId in tagTasksMap) {
+      const taskIds = tagTasksMap[tagId];
       taskIds.forEach((tid) => taggedTaskIds.add(tid));
     }
 
@@ -38,20 +57,15 @@ const TaskListV2 = (props: TaskListPropsV2) => {
     parentTagId: number | undefined,
   ) => {
     return (
-      <Task
-        name={taskMap[taskId].name}
-        id={taskId}
-        completed={taskMap[taskId].finishStatus === FinishedState.Completed}
-        taskFinishStatus={taskMap[taskId].finishStatus}
-        // planned }
-        repeated={taskMap[taskId].repeated}
-        //
-        taskLastCompletion={taskMap[taskId].lastFinished}
-        //
-        taskTopics={[]}
-        fancy={true}
-        //
-        //
+      <TaskContainerV2
+        appData={appData}
+        setAppData={setAppData}
+        taskId={taskId}
+        taskTagsMap={taskTagsMap}
+        parentTaskId={parentTaskId}
+        currentTagId={parentTagId}
+        currentTagName={parentTagId && tagMap[parentTagId].name}
+        fancy={fancy}
       />
     );
   };
@@ -109,7 +123,7 @@ const TaskListV2 = (props: TaskListPropsV2) => {
           })}
         </ul>
         <ul key={"tg-" + tagId + "-tasks"}>
-          {tagTaskMap[tagId].map((taskId) =>
+          {tagTasksMap[tagId].map((taskId) =>
             recursiveShowTaskDAG(taskId, undefined, tagId),
           )}
         </ul>
@@ -128,13 +142,17 @@ const TaskListV2 = (props: TaskListPropsV2) => {
   );
 };
 
-interface TaskListPropsV2 {
+interface AppData {
   tagMap: TagMap;
-  setTagMap: (tagMap: TagMap) => void;
   taskMap: TaskMap;
-  setTaskMap: (taskMap: TaskMap) => void;
-  tagTaskMap: TagTasksMap;
-  setTagTaskMap: (tagTaskMap: TagTasksMap) => void;
+  tagTasksMap: TagTasksMap;
+  plannedTaskIdList: number[];
+}
+
+interface TaskListPropsV2 {
+  appData: AppData;
+  setAppData: (appData: AppData) => void;
+  fancy: boolean;
 }
 
 export { TaskListV2 };

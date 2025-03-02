@@ -131,6 +131,9 @@ const Task = (props) => {
     // console.log(tasks)
 
     if (type == "Task") {
+      if (!moveTasks) {
+        return;
+      }
       var task_id = Number(e.dataTransfer.getData("TaskId"));
       var oldTopicId = Number(e.dataTransfer.getData("TopicId"));
       var oldSuperTaskId = Number(e.dataTransfer.getData("SuperTaskId"));
@@ -167,6 +170,9 @@ const Task = (props) => {
         );
       }
     } else if (type == "TaskDuplicate") {
+      if (!duplicateTask) {
+        return;
+      }
       var taskId = Number(e.dataTransfer.getData("TaskId"));
       console.info(
         `Duplicate dropped task with id ${taskId} on this topic with id ${currentTopicId}`,
@@ -371,9 +377,9 @@ const Task = (props) => {
       inputRef={inputRef}
       isEditing={isEditing}
       toggleEdit={toggleEdit}
-      deleteTask={unselect(() => deleteTask(id))}
-      addSubTask={unselect(() => addSubTask(id))}
-      completeTask={() => completeTask(id)}
+      deleteTask={deleteTask && unselect(() => deleteTask(id))}
+      addSubTask={addSubTask && unselect(() => addSubTask(id))}
+      completeTask={completeTask && (() => completeTask(id))}
       markTaskIrrelevant={markTaskIrrelevant}
       markTaskImpossible={markTaskImpossible}
       taskFinishStatus={
