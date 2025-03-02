@@ -252,4 +252,4 @@ Topic.propTypes = {
   addTask: PropTypes.func.isRequired,
 };
 
-export default memo(Topic);
+export default Topic;

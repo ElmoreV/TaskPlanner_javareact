@@ -37,10 +37,10 @@ const TaskList = (props) => {
   const { appData, setAppData, fancy } = props;
   const { topics, tasks } = appData;
   const setTasks = (newTasks) => {
-    setAppData({ tasks: newTasks, ...appData });
+    setAppData({ ...appData, tasks: newTasks });
   };
   const setTopics = (newTopics) => {
-    setAppData({ topics: newTopics, ...appData });
+    setAppData({ ...appData, topics: newTopics });
   };
   console.debug("Rendering TaskList");
 

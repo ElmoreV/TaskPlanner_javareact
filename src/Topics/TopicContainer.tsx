@@ -15,16 +15,17 @@ import {
 } from "../Topics/TopicModifyFuncGens.js";
 import Topic from "./Topic.js";
 
-export default memo(function TopicContainer(props) {
+export default function TopicContainer(props) {
   const { topic, appData, setAppData, selectedTasks, fancy } = props;
-
   const { topics, tasks } = appData;
   const setTasks = (newTasks) => {
-    setAppData({ tasks: newTasks, ...appData });
+    setAppData({ ...appData, tasks: newTasks });
   };
   const setTopics = (newTopics) => {
-    setAppData({ topics: newTopics, ...appData });
+    setAppData({ ...appData, topics: newTopics });
   };
+
+  // TODO: useCallbackify all topic modification functions (but maybe later)
 
   return (
     <Topic
@@ -45,4 +46,4 @@ export default memo(function TopicContainer(props) {
       fancy={fancy}
     />
   );
-});
+}
