@@ -3,10 +3,10 @@ The elementary functions
 */
 import { TagTasksMap, Task, TaskMap } from "../Converters/V2_types.ts";
 import { FinishedState } from "../Tasks/TaskInterfaces.tsx";
-import { getFreeTaskId } from "../Topics/TopicHelperV1.js";
+import { getFreeTaskIdV2 } from "../Topics/TopicHelperV2.ts";
 
-const generateEmptyTaskV2 = (tasks) => {
-  let newId = getFreeTaskId(tasks);
+const generateEmptyTaskV2 = (tasks: TaskMap) => {
+  let newId = getFreeTaskIdV2(tasks);
   console.debug(`Generate empty task ${newId}`);
   let newTask: Task = {
     id: newId,
@@ -121,9 +121,10 @@ const removeTaskInstanceFromTaskV2 = (
 // Pretty much no assumptions.
 const deleteEntireTaskV2 = (
   taskMap: TaskMap,
-  tagTaskMap: TagTasksMap,
+  tagTasksMap: TagTasksMap,
   taskId: number,
 ) => {
+
   let newTaskMap = { ...taskMap };
   let taskToDelete = newTaskMap[taskId];
   // Remove this id from child tasks and parent tasks
@@ -143,12 +144,12 @@ const deleteEntireTaskV2 = (
   delete newTaskMap[taskId];
 
   // Remove this id from the tagTaskMap
-  let newTagTaskMap = { ...tagTaskMap };
-  Object.entries(newTagTaskMap).forEach(([tagId, taskIds]) => {
-    let newTaskIds = taskIds.filter((taskId) => taskId !== taskId);
-    tagTaskMap[tagId] = newTaskIds;
+  let newTagTasksMap = { ...tagTasksMap };
+  Object.entries(newTagTasksMap).forEach(([tagId, taskIds]) => {
+    let newTaskIds = taskIds.filter((curTaskId) => curTaskId !== taskId);
+    newTagTasksMap[tagId] = newTaskIds;
   });
-  return { newTaskMap, newTagTaskMap };
+  return { newTaskMap, newTagTasksMap };
 };
 
 export { generateEmptyTaskV2 };
