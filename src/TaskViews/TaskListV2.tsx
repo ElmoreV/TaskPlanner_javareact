@@ -6,15 +6,13 @@ import {
   TaskMap,
   TaskTagsMap,
 } from "../Converters/V2_types";
-import Task from "./Task.tsx";
-import Topic from "../Topics/Topic.js";
-import { FinishedState } from "../Tasks/TaskInterfaces.tsx";
 import TaskContainerV2 from "../Tasks/TaskContainerV2.tsx";
+import TagContainer from "../Tags/TagContainerV2.tsx";
 
 const TaskListV2 = (props: TaskListPropsV2) => {
+  console.debug("Rendering TaskListV2");
   const { appData, setAppData, fancy } = props;
   const { tagMap, taskMap, tagTasksMap, plannedTaskIdList } = appData;
-
   // Invert the tagTaskMap
   // So that we have
   // taskTagsMap[taskId] = [tagId1, tagId2, ...]
@@ -45,7 +43,7 @@ const TaskListV2 = (props: TaskListPropsV2) => {
           .filter((tid) => !taggedTaskIds.has(Number(tid)))
           .filter((tid) => taskMap[tid].parentTaskIds.length === 0)
           .map((taskId) =>
-            recursiveShowTaskDAG(Number(taskId), undefined, undefined),
+            recursiveShowTaskDAG(Number(taskId), undefined, undefined)
           )}
       </div>
     );
@@ -54,7 +52,7 @@ const TaskListV2 = (props: TaskListPropsV2) => {
   const createTaskReactElement = (
     taskId: number,
     parentTaskId: number | undefined,
-    parentTagId: number | undefined,
+    parentTagId: number | undefined
   ) => {
     return (
       <TaskContainerV2
@@ -72,36 +70,37 @@ const TaskListV2 = (props: TaskListPropsV2) => {
 
   const createTagReactElement = (tagId: number) => {
     return (
-      <Topic
-        name={tagMap[tagId].name}
-        id={tagMap[tagId].id}
-        unfolded={tagMap[tagId].unfolded}
-        // selectedTasks={selectedTasks}
-        // setTopicName={getSetTopicNameFunc(setTopics, topics, topic.id)}
-        // toggleFold={getToggleFold(setTopics, topics)}
-        // addSubTopic={getAddSubtopic(setTopics, topics, topic)}
-        // moveTopic={getMoveTopic(setTopics, topics)}
-        // addTask={getAddTask(setTasks, tasks, topics, topic.id)}
-        // moveTasks={getMoveTasks(topics, tasks, setTasks)}
-        // unfoldAll={getUnfoldAll(setTopics, topics)}
-        // foldAll={getFoldAll(setTopics, topics)}
-        // duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
-        // deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}
-        fancy={true}
-      />
+      <TagContainer tagId={tagId} appData={appData} setAppData={setAppData} />
     );
   };
 
   const recursiveShowTaskDAG = (
     taskId: number,
     parentTaskId: number | undefined,
-    parentTagId: number | undefined,
+    parentTagId: number | undefined
   ) => {
+    // 1. Show task
+    // 2. Show all subtasks
+
+    // Return the following HTML structure
+    //  <>
+    //      <li tag.id - parentTask.id - task id>
+    //      <Task>
+    //      <ul>
+    //          subtasks
+    //
     return (
-      <li key={"tk-" + parentTagId + "-" + parentTaskId + "-" + taskId}>
-        {createTaskReactElement(taskId, parentTaskId, parentTagId)}
-        {/* Task: {taskId} : {taskMap[taskId].name} */}
-      </li>
+      <>
+        <li key={`tk-${parentTagId}-${parentTaskId}-${taskId}`}>
+          {createTaskReactElement(taskId, parentTaskId, parentTagId)}
+        </li>
+        <ul key={`tk-${parentTagId}-${parentTaskId}-${taskId}-subtasks`}>
+          {taskMap[taskId].unfolded &&
+            taskMap[taskId].childTaskIds.map((childTaskId) =>
+              recursiveShowTaskDAG(childTaskId, taskId, parentTagId)
+            )}
+        </ul>
+      </>
     );
   };
 
@@ -114,18 +113,32 @@ const TaskListV2 = (props: TaskListPropsV2) => {
   };
 
   const recursiveShowTagDAG = (tagId: number) => {
+    // 1. Show topic
+    // 2. Show all subtopics (and their subtopics and tasks)
+    // 3. Show all tasks
+
+    // Return the following HTML structure
+    //  <div div_topic_id>
+    //      <li>
+    //          <Topic>
+    //      <ul>
+    //          Other subtopics
+    //      <ul>
+    //          Tasks inside of topic
     return (
       <div key={"div-tg-" + tagId}>
         <li key={"tg-" + tagId}>{createTagReactElement(tagId)}</li>
         <ul key={"tg-" + tagId + "-tags"}>
-          {tagMap[tagId].childTagIds.map((childTagId) => {
-            return recursiveShowTagDAG(childTagId);
-          })}
+          {tagMap[tagId].unfolded &&
+            tagMap[tagId].childTagIds.map((childTagId) => {
+              return recursiveShowTagDAG(childTagId);
+            })}
         </ul>
         <ul key={"tg-" + tagId + "-tasks"}>
-          {tagTasksMap[tagId].map((taskId) =>
-            recursiveShowTaskDAG(taskId, undefined, tagId),
-          )}
+          {tagMap[tagId].unfolded &&
+            tagTasksMap[tagId].map((taskId) =>
+              recursiveShowTaskDAG(taskId, undefined, tagId)
+            )}
         </ul>
       </div>
     );
@@ -138,6 +151,7 @@ const TaskListV2 = (props: TaskListPropsV2) => {
         {showUntaggedTasks()}
         {showTagDAG()}
       </ul>
+      <button onClick={() => console.log(appData)}>Test Function</button>
     </div>
   );
 };

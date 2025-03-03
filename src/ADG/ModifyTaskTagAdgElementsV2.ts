@@ -3,7 +3,7 @@ The elementary functions
 */
 import { TagTasksMap, Task, TaskMap } from "../Converters/V2_types.ts";
 import { FinishedState } from "../Tasks/TaskInterfaces.tsx";
-import { getFreeTaskIdV2 } from "../Topics/TopicHelperV2.ts";
+import { getFreeTaskIdV2 } from "../Tags/TagHelperV2.ts";
 
 const generateEmptyTaskV2 = (tasks: TaskMap) => {
   let newId = getFreeTaskIdV2(tasks);
@@ -124,7 +124,6 @@ const deleteEntireTaskV2 = (
   tagTasksMap: TagTasksMap,
   taskId: number,
 ) => {
-
   let newTaskMap = { ...taskMap };
   let taskToDelete = newTaskMap[taskId];
   // Remove this id from child tasks and parent tasks
