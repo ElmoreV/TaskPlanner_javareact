@@ -70,7 +70,7 @@ const findTaskByTaskIdV1 = (tasks: V1_Task[], taskId: number) => {
 const findTopicsByTaskIdV1 = (
   tasks: V1_Task[],
   topics: V1_Topic[],
-  taskId: number,
+  taskId: number
 ) => {
   let task = findTaskByTaskIdV1(tasks, taskId);
   topics = task.topics.map((topicId) => findTopicByTopicIdV1(topics, topicId));

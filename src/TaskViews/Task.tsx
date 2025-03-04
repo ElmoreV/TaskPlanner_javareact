@@ -138,7 +138,7 @@ const Task = (props) => {
       var oldTopicId = Number(e.dataTransfer.getData("TopicId"));
       var oldSuperTaskId = Number(e.dataTransfer.getData("SuperTaskId"));
       console.info(
-        `Dropped task with id ${task_id} with old topic id ${oldTopicId} on task (id:${id}) within topic with id ${currentTopicId}`,
+        `Dropped task with id ${task_id} with old topic id ${oldTopicId} on task (id:${id}) within topic with id ${currentTopicId}`
       );
       // console.info(changeTopic)
       let taskIds = [];
@@ -151,7 +151,7 @@ const Task = (props) => {
       if (selectedTasks && selectedTasks.length > 0) {
         selectedTasks.forEach((st) => {
           console.info(
-            `Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${currentTopicId}`,
+            `Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${currentTopicId}`
           );
           taskIds.push(st.taskId);
           oldTopicIds.push(st.topicId);
@@ -166,7 +166,7 @@ const Task = (props) => {
           oldSuperTaskIds,
           currentTopicId,
           currentTopicViewIndex,
-          currentSuperTaskId,
+          currentSuperTaskId
         );
       }
     } else if (type == "TaskDuplicate") {
@@ -175,14 +175,14 @@ const Task = (props) => {
       }
       var taskId = Number(e.dataTransfer.getData("TaskId"));
       console.info(
-        `Duplicate dropped task with id ${taskId} on this topic with id ${currentTopicId}`,
+        `Duplicate dropped task with id ${taskId} on this topic with id ${currentTopicId}`
       );
       let taskIds = [];
       taskIds.push(taskId);
       if (selectedTasks && selectedTasks.length > 0) {
         selectedTasks.forEach((st) => {
           console.info(
-            `Duplicating task with id ${st.taskId} to topic with id ${currentTopicId}`,
+            `Duplicating task with id ${st.taskId} to topic with id ${currentTopicId}`
           );
           taskIds.push(st.taskId);
         });
@@ -249,7 +249,7 @@ const Task = (props) => {
         selectedTasks,
         id,
         currentTopicId,
-        currentSuperTaskId,
+        currentSuperTaskId
       );
     }
     setIsDraggingAllowed(false);
@@ -295,7 +295,7 @@ const Task = (props) => {
           selectedTasks,
           id,
           currentTopicId,
-          currentSuperTaskId,
+          currentSuperTaskId
         );
       }
       return func();
@@ -330,8 +330,8 @@ const Task = (props) => {
             selectedTasks,
             id,
             currentTopicId,
-            currentSuperTaskId,
-          ),
+            currentSuperTaskId
+          )
         ),
       }
     : {
@@ -340,8 +340,8 @@ const Task = (props) => {
             id,
             currentTopicId,
             currentTopicViewIndex,
-            currentSuperTaskId,
-          ),
+            currentSuperTaskId
+          )
         ),
       };
   let fullName = name;

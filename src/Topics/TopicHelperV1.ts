@@ -72,8 +72,8 @@ const getLargestTopicKeyV1 = (topic: V1_Topic) => {
     topic.id,
     topic.subtopics.reduce(
       (max_key, topic) => Math.max(max_key, getLargestTopicKeyV1(topic)),
-      0,
-    ),
+      0
+    )
   );
   return max_id;
 };
@@ -82,7 +82,7 @@ const getFreeTopicKeyV1 = (topics: V1_Topic[]) => {
     1 +
     topics.reduce(
       (max_key, topic) => Math.max(max_key, getLargestTopicKeyV1(topic)),
-      0,
+      0
     );
   console.log(max_id);
   return max_id;

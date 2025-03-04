@@ -94,17 +94,17 @@ const PlannedTask = (props) => {
 
     var sourceTaskId = Number(e.dataTransfer.getData("taskId"));
     var sourceWeekOrderIndex = Number(
-      e.dataTransfer.getData("sourceWeekOrderIndex"),
+      e.dataTransfer.getData("sourceWeekOrderIndex")
     );
     console.log(
-      `Dropping from task with id=${sourceTaskId} with weekIndex=${sourceWeekOrderIndex} on task with id=${taskKey} with weekIndex=${currentWeekOrderIndex}`,
+      `Dropping from task with id=${sourceTaskId} with weekIndex=${sourceWeekOrderIndex} on task with id=${taskKey} with weekIndex=${currentWeekOrderIndex}`
     );
     sourceTaskIds.push(sourceTaskId);
     sourceWeekOrderIndidces.push(sourceWeekOrderIndex);
     if (selectedTasks && selectedTasks.length > 0) {
       selectedTasks.forEach((st) => {
         console.info(
-          `Changing weekOrderIdx of task with id ${st.taskId} from wOrderIdx ${st.weekOrderIndex} to wOrderIdx ${currentWeekOrderIndex}`,
+          `Changing weekOrderIdx of task with id ${st.taskId} from wOrderIdx ${st.weekOrderIndex} to wOrderIdx ${currentWeekOrderIndex}`
         );
         sourceTaskIds.push(st.taskId);
         sourceWeekOrderIndidces.push(st.weekOrderIndex);
@@ -114,7 +114,7 @@ const PlannedTask = (props) => {
       changeWeekOrderIndex(
         sourceTaskIds,
         sourceWeekOrderIndidces,
-        currentWeekOrderIndex,
+        currentWeekOrderIndex
       );
     }
     clearSelection();

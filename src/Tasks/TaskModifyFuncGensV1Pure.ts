@@ -72,7 +72,7 @@ const completeTaskV1Semipure = (tasks: V1_Task[], id: number) => {
 const setTaskFinishStatusV1Semipure = (
   tasks: V1_Task[],
   id: number,
-  status: FinishedState,
+  status: FinishedState
 ) => {
   return tasks.map((task) => {
     if (task.id === id) {
@@ -140,7 +140,7 @@ const unplanTaskV1Semipure = (tasks: V1_Task[], id: number) => {
 const setTaskNameV1Semipure = (
   tasks: V1_Task[],
   id: number,
-  newTaskName: string,
+  newTaskName: string
 ) => {
   return tasks.map((task) => {
     if (task.id === id) {
@@ -157,7 +157,7 @@ const setTaskNameV1Semipure = (
 const setTaskDueTimeV1Semipure = (
   tasks: V1_Task[],
   id: number,
-  dueTime: Date,
+  dueTime: Date
 ) => {
   return tasks.map((task) => {
     if (task.id === id) {

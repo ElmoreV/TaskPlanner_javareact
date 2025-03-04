@@ -15,7 +15,7 @@ const tagToggleFoldV2 = (tagMap: TagMap, tagId: number): TagMap => {
 const setTagNameV2 = (
   tagMap: TagMap,
   tagId: number,
-  newName: string,
+  newName: string
 ): TagMap => {
   return {
     ...tagMap,

@@ -7,7 +7,7 @@ const getFreeTaskIdV2 = (taskMap: TaskMap) => {
     1 +
     Object.keys(taskMap).reduce(
       (maxId, taskId) => Math.max(maxId, Number(taskId)),
-      0,
+      0
     )
   );
 };
@@ -16,10 +16,10 @@ const disconnectChildTagsByIdV2 = (tagMap: TagMap, tagId: number) => {
   // Removes all connections to tagId from all (other) tags
   Object.values(tagMap).forEach((tag) => {
     tag.childTagIds = tag.childTagIds.filter(
-      (childTagId) => childTagId !== tagId,
+      (childTagId) => childTagId !== tagId
     );
     tag.parentTagIds = tag.parentTagIds.filter(
-      (parentTagId) => parentTagId !== tagId,
+      (parentTagId) => parentTagId !== tagId
     );
   });
 };
@@ -31,7 +31,7 @@ const getAllDescendantTagsV2 = (tagMap: TagMap, tagId: number): Tag[] => {
   return [
     tag,
     ...tag.childTagIds.flatMap((childTagId) =>
-      getAllDescendantTagsV2(tagMap, childTagId),
+      getAllDescendantTagsV2(tagMap, childTagId)
     ),
   ];
 };
@@ -103,8 +103,8 @@ const getLargestTopicKeyV1 = (topic: V1_Topic) => {
     topic.id,
     topic.subtopics.reduce(
       (max_key, topic) => Math.max(max_key, getLargestTopicKeyV1(topic)),
-      0,
-    ),
+      0
+    )
   );
   return max_id;
 };
@@ -113,7 +113,7 @@ const getFreeTopicKeyV1 = (topics: V1_Topic[]) => {
     1 +
     topics.reduce(
       (max_key, topic) => Math.max(max_key, getLargestTopicKeyV1(topic)),
-      0,
+      0
     );
   console.log(max_id);
   return max_id;

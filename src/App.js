@@ -69,7 +69,7 @@ function App() {
       newTaskMap,
       newTagMap,
       newTagTaskMap,
-      newPlannedTaskIds,
+      newPlannedTaskIds
     );
     const { topicsV1, tasksV1 } = res2;
     setAppData({ topics: topicsV1, tasks: tasksV1 });

@@ -78,7 +78,7 @@ const getPlanTaskForWeekV1 = (setTasks, tasks, id) => {
         if (task.thisWeek) {
           return [task.name, task.weekOrderIndex];
         }
-      }),
+      })
     );
     setTasks(newTasks);
   };
@@ -107,7 +107,7 @@ const getUnplanTaskV1 = (setTasks, tasks, id) => {
         if (task.thisWeek) {
           return [task.name, task.weekOrderIndex];
         }
-      }),
+      })
     );
     setTasks(newTasks);
   };

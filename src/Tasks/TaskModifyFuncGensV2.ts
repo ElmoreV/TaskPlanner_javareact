@@ -49,7 +49,7 @@ const completeTaskV2 = (taskMap: TaskMap, id: number): TaskMap => {
 const setTaskFinishStatusV2 = (
   taskMap: TaskMap,
   id: number,
-  status: FinishedState,
+  status: FinishedState
 ): TaskMap => {
   return {
     ...taskMap,
@@ -75,7 +75,7 @@ const unplanTaskV2 = (plannedTaskIdList: number[], id: number): number[] => {
 const setTaskNameV2 = (
   taskMap: TaskMap,
   id: number,
-  newTaskName: string,
+  newTaskName: string
 ): TaskMap => {
   return {
     ...taskMap,
@@ -89,7 +89,7 @@ const setTaskNameV2 = (
 const setTaskDueTimeV2 = (
   taskMap: TaskMap,
   id: number,
-  dueTime: Date,
+  dueTime: Date
 ): TaskMap => {
   return {
     ...taskMap,

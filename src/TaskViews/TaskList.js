@@ -19,7 +19,7 @@ const isTaskVisible = (
   task,
   hideCompletedItems,
   showRepeatedOnly,
-  dueInSeconds,
+  dueInSeconds
 ) => {
   return (
     !(
@@ -149,8 +149,8 @@ const TaskList = (props) => {
                   task,
                   hideCompletedItems,
                   showRepeatedOnly,
-                  dueTimeInSeconds,
-                ),
+                  dueTimeInSeconds
+                )
               )
               .slice(0)
               .sort((taskA, taskB) => {
@@ -207,8 +207,8 @@ const TaskList = (props) => {
                   subTask,
                   hideCompletedItems,
                   showRepeatedOnly,
-                  dueTimeInSeconds,
-                ),
+                  dueTimeInSeconds
+                )
               )
               // TODO: ordering of subtasks
               .map((subTask) => recursiveShowTask(null, task, subTask))}
@@ -228,8 +228,8 @@ const TaskList = (props) => {
               subTask,
               hideCompletedItems,
               showRepeatedOnly,
-              dueTimeInSeconds,
-            ),
+              dueTimeInSeconds
+            )
           )
           .map((task) => recursiveShowTask(null, null, task))}
       </div>
@@ -237,7 +237,7 @@ const TaskList = (props) => {
   };
 
   let allSuperTasks = tasks.filter(
-    (task) => task.subTaskIds && task.subTaskIds.length > 0,
+    (task) => task.subTaskIds && task.subTaskIds.length > 0
   );
   let allSubTaskIds = allSuperTasks.reduce((acc, task) => {
     acc = acc.concat(task.subTaskIds);
@@ -280,7 +280,7 @@ const TaskList = (props) => {
       console.log(task.name);
       task.transitiveDueTime = safe_min(
         task.dueTime,
-        updateTransitiveDueDate_r(task.subTaskIds),
+        updateTransitiveDueDate_r(task.subTaskIds)
       );
       console.log(task.dueTime);
       console.log(task.transitiveDueTime);
@@ -304,12 +304,12 @@ const TaskList = (props) => {
   const checkForDuplicateIds = (tasks) => {
     let taskIdCount = new Array();
     tasks.forEach((task, idx) =>
-      taskIdCount[idx] ? (taskIdCount[idx] += 1) : (taskIdCount[idx] = 1),
+      taskIdCount[idx] ? (taskIdCount[idx] += 1) : (taskIdCount[idx] = 1)
     );
     taskIdCount.forEach((count, taskId) => {
       if (taskIdCount > 1) {
         console.warn(
-          `task (id:${taskId}) has ${count} tasks associated with it:`,
+          `task (id:${taskId}) has ${count} tasks associated with it:`
         );
         console.warn(tasks.filter((task) => task.id == taskId));
       }

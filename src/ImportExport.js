@@ -121,13 +121,13 @@ const ImportExport = (props) => {
         // console.log('@ indent level 0')
         YAMLstr = YAMLstr.concat(
           " ".repeat(4 * indent_level),
-          `'${topic.name}':\n`,
+          `'${topic.name}':\n`
         );
       } else {
         YAMLstr = YAMLstr.concat(
           " ".repeat(4 * indent_level),
           "- ",
-          `'${topic.name}':\n`,
+          `'${topic.name}':\n`
         );
       }
       // Add all tasks in this subtopic to the YAML
@@ -136,14 +136,14 @@ const ImportExport = (props) => {
         let task = relevant_tasks[j];
         YAMLstr = YAMLstr.concat(
           " ".repeat(4 * (indent_level + 1)),
-          `- '${task.name}'\n`,
+          `- '${task.name}'\n`
         );
       }
       // Do the same for all the subtopics
       // Add
       if (topic.subtopics.length > 0) {
         YAMLstr = YAMLstr.concat(
-          buildYAML_r(topic.subtopics, tasks, indent_level + 1),
+          buildYAML_r(topic.subtopics, tasks, indent_level + 1)
         );
       }
     }
@@ -263,7 +263,7 @@ const ImportExport = (props) => {
                 console.debug(typeof subnode);
                 console.debug(subnode + "  loop");
                 importedTopics = importedTopics.concat(
-                  importNewTopic_r(subnode),
+                  importNewTopic_r(subnode)
                 );
                 console.debug("End recurse loop");
               }
@@ -321,13 +321,13 @@ const ImportExport = (props) => {
         MarkdownStr = MarkdownStr.concat(
           "\n",
           "#".repeat(indent_level + 1),
-          ` ${topic.name}:\n\n`,
+          ` ${topic.name}:\n\n`
         );
       } else {
         MarkdownStr = MarkdownStr.concat(
           "\n",
           "#".repeat(indent_level + 1),
-          ` ${topic.name}:\n\n`,
+          ` ${topic.name}:\n\n`
         );
       }
       // Add all tasks in this subtopic to the Markdown
@@ -341,7 +341,7 @@ const ImportExport = (props) => {
       // Add
       if (topic.subtopics.length > 0) {
         MarkdownStr = MarkdownStr.concat(
-          buildMarkdownRecursive(topic.subtopics, tasks, indent_level + 1),
+          buildMarkdownRecursive(topic.subtopics, tasks, indent_level + 1)
         );
       }
     }
@@ -386,7 +386,7 @@ const ImportExport = (props) => {
     const jsonContent = JSON.stringify(
       { topics: new_topics, tasks: new_tasks },
       null,
-      2,
+      2
     );
     const blob = new Blob([jsonContent], { type: "application/json" });
     var a = document.createElement("a");
@@ -417,7 +417,7 @@ const ImportExport = (props) => {
       console.log("converting imported v0 to v1 format");
       [old_topics, old_tasks] = convert_old_topic_tasks_to_new_topic_tasks(
         uploadedData.topics,
-        uploadedData.tasks,
+        uploadedData.tasks
       );
     }
     let newTaskHash = calculateTaskHash(tasks);
@@ -500,7 +500,7 @@ const ImportExport = (props) => {
     const jsonContent = JSON.stringify(
       { topics: new_topics, tasks: new_tasks },
       null,
-      2,
+      2
     );
     const jsonBlob = new Blob([jsonContent], { type: "application/json" });
     const MarkdownContent = buildMarkdownRecursive(topics, tasks, 0);
@@ -589,7 +589,7 @@ const ImportExport = (props) => {
     loadedTopicHash,
     topicHash,
     savedTaskHash,
-    savedTopicHash,
+    savedTopicHash
   );
   if (!hasUnsavedChanges && hasChanges) {
     setHasUnsavedChanges(true);

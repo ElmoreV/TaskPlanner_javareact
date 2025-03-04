@@ -35,11 +35,11 @@ const addTaskToSelection = (
   taskId,
   topicId,
   topicViewIndex,
-  superTaskId,
+  superTaskId
 ) => {
   let newSelectedTasks = [...selectedTasks];
   newSelectedTasks.push(
-    new SelectedCategoryTask(taskId, topicId, topicViewIndex, superTaskId),
+    new SelectedCategoryTask(taskId, topicId, topicViewIndex, superTaskId)
   );
   return newSelectedTasks;
 };
@@ -47,7 +47,7 @@ const deleteTaskFromSelection = (
   selectedTasks,
   taskId,
   topicId,
-  superTaskId,
+  superTaskId
 ) => {
   let newSelectedTasks = [...selectedTasks];
   newSelectedTasks = newSelectedTasks.filter(
@@ -56,7 +56,7 @@ const deleteTaskFromSelection = (
         selTask.taskId == taskId &&
         selTask.topicId == topicId &&
         selTask.superTaskId == superTaskId
-      ),
+      )
   );
   return newSelectedTasks;
 };
@@ -68,7 +68,7 @@ const useCallbackifySelectedTasks = (fn, setSeelctedTasks) => {
         return fn(oldSelectedTasks, ...args);
       });
     },
-    [fn, setSeelctedTasks],
+    [fn, setSeelctedTasks]
   );
 };
 
@@ -82,7 +82,7 @@ const useCallbackify = (fn, setAppData) => {
         };
       });
     },
-    [fn, setAppData],
+    [fn, setAppData]
   );
 };
 
@@ -96,7 +96,7 @@ const useCallbackifyTopics = (fn, setAppData) => {
         };
       });
     },
-    [fn, setAppData],
+    [fn, setAppData]
   );
 };
 
@@ -120,33 +120,33 @@ export default function TaskContainer(props) {
 
   const scheduleTaskCallback = useCallbackify(
     scheduleTaskV1Semipure,
-    setAppData,
+    setAppData
   );
   const toggleFoldTaskCallback = useCallbackify(
     toggleFoldTaskV1Semipure,
-    setAppData,
+    setAppData
   );
   const toggleRepeatTaskCallback = useCallbackify(
     toggleRepeatTaskV1Semipure,
-    setAppData,
+    setAppData
   );
   const completeTaskCallback = useCallbackify(
     completeTaskV1Semipure,
-    setAppData,
+    setAppData
   );
   const setTaskFinishStatusCallback = useCallbackify(
     setTaskFinishStatusV1Semipure,
-    setAppData,
+    setAppData
   );
   const planTaskCallback = useCallbackify(
     planTaskForWeekV1Semipure,
-    setAppData,
+    setAppData
   );
   const unplanTaskCallback = useCallbackify(unplanTaskV1Semipure, setAppData);
   const setTaskNameCallback = useCallbackify(setTaskNameV1Semipure, setAppData);
   const setTaskDueTimeCallback = useCallbackify(
     setTaskDueTimeV1Semipure,
-    setAppData,
+    setAppData
   );
   const deleteTask = useCallbackify(deleteTaskV1Pure, setAppData);
   const addNewSubtask = useCallbackify(addNewSubtaskV1Pure, setAppData);
@@ -156,11 +156,11 @@ export default function TaskContainer(props) {
 
   const addTaskToSelectionCallback = useCallbackifySelectedTasks(
     addTaskToSelection,
-    setSelectedTasks,
+    setSelectedTasks
   );
   const deleteTaskFromSelectionCallback = useCallbackifySelectedTasks(
     deleteTaskFromSelection,
-    setSelectedTasks,
+    setSelectedTasks
   );
   return (
     <Task
@@ -192,7 +192,7 @@ export default function TaskContainer(props) {
           (st) =>
             st.taskId == task.id &&
             (!topic || st.topicId == topic.id) &&
-            (!superTask || st.superTaskId == superTask.id),
+            (!superTask || st.superTaskId == superTask.id)
         )
           ? true
           : false

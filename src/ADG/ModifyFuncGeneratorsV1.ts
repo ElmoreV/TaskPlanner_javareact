@@ -27,7 +27,7 @@ import {
 const findTaskInSubTaskTree: (
   tasks: V1_Task[],
   rootTaskId: number,
-  subTaskId: number,
+  subTaskId: number
 ) => boolean = (tasks, rootTaskId, subTaskId) => {
   if (rootTaskId === subTaskId) {
     return true;
@@ -35,7 +35,7 @@ const findTaskInSubTaskTree: (
   let rootTask = findTaskByTaskIdV1(tasks, rootTaskId);
   if (rootTask === undefined) {
     console.warn(
-      `Searched for task with id ${rootTaskId} but could not find it.`,
+      `Searched for task with id ${rootTaskId} but could not find it.`
     );
     return false;
   }
@@ -57,7 +57,7 @@ const findTaskInSubTaskTree: (
 const getMoveTasks = (
   topics: V1_Topic[],
   tasks: V1_Task[],
-  setTasks: (tasks: V1_Task[]) => void,
+  setTasks: (tasks: V1_Task[]) => void
 ) => {
   // taskIds here is the id of the task
   // sourceTopicIds is the topic-object where the task came from
@@ -69,7 +69,7 @@ const getMoveTasks = (
     sourceTaskIds: number[],
     targetTopicId: number,
     targetViewIndex: number,
-    targetTaskId: number,
+    targetTaskId: number
   ) => {
     // Validation checks + defaults
 
@@ -84,13 +84,13 @@ const getMoveTasks = (
     }
     if (sourceTaskIds.length != taskIds.length) {
       console.error(
-        "The length of the taskIds and sourceTopicIds should be the same",
+        "The length of the taskIds and sourceTopicIds should be the same"
       );
       return;
     }
     if (sourceTaskIds.length != taskIds.length) {
       console.error(
-        "The length of the taskIds and sourceTopicIds should be the same",
+        "The length of the taskIds and sourceTopicIds should be the same"
       );
       return;
     }
@@ -109,7 +109,7 @@ const getMoveTasks = (
       }
     } else {
       console.warn(
-        "Either targetTaskId or targetTopicId needs to be specified.",
+        "Either targetTaskId or targetTopicId needs to be specified."
       );
     }
 
@@ -123,7 +123,7 @@ const getMoveTasks = (
       }
       if (!moveAllowed) {
         console.warn(
-          `Move of task id ${taskId} to task with id ${targetTaskId} is not allowed: task already in target task subtree.`,
+          `Move of task id ${taskId} to task with id ${targetTaskId} is not allowed: task already in target task subtree.`
         );
       }
 
@@ -133,7 +133,7 @@ const getMoveTasks = (
           newTasks = removeTaskInstanceFromTopicV1(
             newTasks,
             taskId,
-            sourceTopicId,
+            sourceTopicId
           );
         }
       } else if (sourceTaskId) {
@@ -141,7 +141,7 @@ const getMoveTasks = (
           newTasks = removeTaskInstanceFromTaskV1(
             newTasks,
             taskId,
-            sourceTaskId,
+            sourceTaskId
           );
         }
       } else {
@@ -158,14 +158,14 @@ const getMoveTasks = (
           newTasks = removeTaskInstanceFromTopicV1(
             newTasks,
             taskId,
-            targetTopicId,
+            targetTopicId
           );
         }
         newTasks = insertTaskInstanceIntoTopicV1(
           newTasks,
           taskId,
           targetTopicId,
-          targetViewIndex,
+          targetViewIndex
         );
       } else if (targetTaskId) {
         // If task already in target supertask, remove it
@@ -174,12 +174,12 @@ const getMoveTasks = (
           console.log(superTask);
           if (superTask.subTaskIds && superTask.subTaskIds.includes(taskId)) {
             console.info(
-              `Task ${taskId} is already in supertask ${targetTaskId}`,
+              `Task ${taskId} is already in supertask ${targetTaskId}`
             );
             newTasks = removeTaskInstanceFromTaskV1(
               newTasks,
               taskId,
-              targetTaskId,
+              targetTaskId
             );
           }
           // TODO: prevent a cycle to exist (task1<-task2<-task1<-task2<-...)
@@ -190,17 +190,17 @@ const getMoveTasks = (
           let alreadyExisting = findTaskInSubTaskTree(
             tasks,
             targetTaskId,
-            taskId,
+            taskId
           );
           console.log(alreadyExisting);
           console.log(
-            `Task ${taskId} already exists somewhere within task ${targetTaskId}`,
+            `Task ${taskId} already exists somewhere within task ${targetTaskId}`
           );
 
           newTasks = insertTaskInstanceIntoTaskV1(
             newTasks,
             taskId,
-            targetTaskId,
+            targetTaskId
           );
           console.log(superTask);
         }
@@ -214,12 +214,12 @@ const getMoveTasks = (
 const getDuplicateTask = (
   setTasks: (tasks: V1_Task[]) => void,
   tasks: V1_Task[],
-  topics: V1_Topic[],
+  topics: V1_Topic[]
 ) => {
   const duplicateTask = (
     taskIds: number[],
     targetTopicId: number,
-    targetViewIndex: number,
+    targetViewIndex: number
   ) => {
     // Validation checks + defaults
     // Convert single items to a list
@@ -241,7 +241,7 @@ const getDuplicateTask = (
       const task_to_change = newTasks.find((task) => task.id == taskId);
       if (task_to_change.topics.includes(targetTopicId)) {
         console.info(
-          `Task ${task_to_change.id} is already in topic ${targetTopicId}`,
+          `Task ${task_to_change.id} is already in topic ${targetTopicId}`
         );
         return;
       }
@@ -249,7 +249,7 @@ const getDuplicateTask = (
         newTasks,
         taskId,
         targetTopicId,
-        targetViewIndex,
+        targetViewIndex
       );
     });
     setTasks(newTasks);
@@ -259,7 +259,7 @@ const getDuplicateTask = (
 
 const getAddTaskWithoutTopic = (
   setTasks: (tasks: V1_Task[]) => void,
-  tasks: V1_Task[],
+  tasks: V1_Task[]
 ) => {
   const addTaskWithoutTopic = () => {
     // Check if topic belonging to topicId exists
@@ -278,7 +278,7 @@ const getAddTask = (
   setTasks: (tasks: V1_Task[]) => void,
   tasks: V1_Task[],
   topics: V1_Topic[],
-  topicId: number,
+  topicId: number
 ) => {
   const addTask = () => {
     // Check if topic belonging to topicId exists
@@ -301,7 +301,7 @@ const getAddTask = (
 const getAddNewSubTask = (
   setTasks: (tasks: V1_Task[]) => void,
   tasks: V1_Task[],
-  superTaskId: number,
+  superTaskId: number
 ) => {
   const addTask = () => {
     let newTasks = [...tasks];
@@ -321,7 +321,7 @@ const getAddNewSubTask = (
     newTasks = insertTaskInstanceIntoTaskV1(
       newTasks,
       newSubTask.id,
-      superTaskId,
+      superTaskId
     );
     setTasks(newTasks);
   };
@@ -331,7 +331,7 @@ const getAddNewSubTask = (
 const getDeleteTask = (
   setTasks: (tasks: V1_Task[]) => void,
   tasks: V1_Task[],
-  id: number,
+  id: number
 ) => {
   const deleteTask = () => {
     let newTasks = deleteEntireTaskV1(tasks, id);
@@ -347,7 +347,7 @@ const getDeleteTask = (
 // Both for v0 and v1 data
 const getMoveTopic = (
   setTopics: (topics: V1_Topic[]) => void,
-  topics: V1_Topic[],
+  topics: V1_Topic[]
 ) => {
   const moveTopic = (source_id, target_id) => {
     console.info(`Moving topic ${source_id} to ${target_id}`);
@@ -377,7 +377,7 @@ const getMoveTopic = (
     }
     if (source_supertopic.id == target_id) {
       console.log(
-        "Will not move a topic to its direct supertopic. It does nothing",
+        "Will not move a topic to its direct supertopic. It does nothing"
       );
       return;
     }
@@ -388,7 +388,7 @@ const getMoveTopic = (
     target_topic.subtopics.push(source_topic);
     // Delete the topic out of its current spot
     source_supertopic.subtopics = source_supertopic.subtopics.filter(
-      (t) => t.id != source_topic.id,
+      (t) => t.id != source_topic.id
     );
     setTopics(newTopics);
   };
@@ -397,7 +397,7 @@ const getMoveTopic = (
 
 const getAddTopic = (
   setTopics: (topics: V1_Topic[]) => void,
-  topics: V1_Topic[],
+  topics: V1_Topic[]
 ) => {
   const addTopic = () => {
     let newTopics = [...topics];
@@ -418,7 +418,7 @@ const getAddTopic = (
 const addSubtopic_r = (
   topic: V1_Topic,
   superTopic: V1_Topic,
-  newSubTopic: V1_Topic,
+  newSubTopic: V1_Topic
 ) => {
   if (topic.id == superTopic.id) {
     //Add subtopic here
@@ -429,7 +429,7 @@ const addSubtopic_r = (
     return {
       ...topic,
       subtopics: topic.subtopics.map((topic) =>
-        addSubtopic_r(topic, superTopic, newSubTopic),
+        addSubtopic_r(topic, superTopic, newSubTopic)
       ),
     };
   }
@@ -438,7 +438,7 @@ const addSubtopic_r = (
 const getAddSubtopic = (
   setTopics: (topics: V1_Topic[]) => void,
   topics: V1_Topic[],
-  superTopic: V1_Topic,
+  superTopic: V1_Topic
 ) => {
   // console.log("Creating add subtopic")
   // console.log(topic);
@@ -461,7 +461,7 @@ const getAddSubtopic = (
     // recurse through newTopics
     // and return the changed topic if it is the right topic
     newTopics = newTopics.map((topic_r) =>
-      addSubtopic_r(topic_r, superTopic, addedTopic),
+      addSubtopic_r(topic_r, superTopic, addedTopic)
     );
     setTopics(newTopics);
   };
@@ -475,7 +475,7 @@ const getAddSubtopic = (
 const checkValidTopicOrderIndex = (topics: V1_Topic[], tasks: V1_Task[]) => {
   // Every task needs to have as many topicOrderIndices as they have topics
   const getWrongTasks = tasks.filter(
-    (task) => task.topicViewIndices === undefined,
+    (task) => task.topicViewIndices === undefined
   );
   if (getWrongTasks.length > 0) {
     console.warn("There are tasks that don't have topicViewIndices");
@@ -483,11 +483,11 @@ const checkValidTopicOrderIndex = (topics: V1_Topic[], tasks: V1_Task[]) => {
     return false;
   }
   let getWrongTasks2 = tasks.filter(
-    (task) => task.topics.length != task.topicViewIndices.length,
+    (task) => task.topics.length != task.topicViewIndices.length
   );
   if (getWrongTasks2.length > 0) {
     console.warn(
-      "There are tasks that don't have the same amount of topicViewIndices as topics",
+      "There are tasks that don't have the same amount of topicViewIndices as topics"
     );
     console.warn(getWrongTasks2);
     return false;
@@ -499,7 +499,7 @@ const checkValidTopicOrderIndex = (topics: V1_Topic[], tasks: V1_Task[]) => {
 const sanitizeTopicOrderIndex = (
   topics: V1_Topic[],
   tasks: V1_Task[],
-  setTasks: (tasks: V1_Task[]) => void,
+  setTasks: (tasks: V1_Task[]) => void
 ) => {
   let newTasks = [...tasks];
   if (checkValidTopicOrderIndex(topics, tasks)) {
@@ -513,10 +513,10 @@ const sanitizeTopicOrderIndex = (
       newTasks = sanitize_r(topic.subtopics, newTasks);
       // are there tasks in this topic?
       let tasksInTopic = newTasks.filter((task) =>
-        task.topics.includes(topic.id),
+        task.topics.includes(topic.id)
       );
       console.debug(
-        `Tasks ${tasksInTopic.map((t) => t.name)} in topic ${topic.name}`,
+        `Tasks ${tasksInTopic.map((t) => t.name)} in topic ${topic.name}`
       );
       // if there are tasks in this topic, give them an order index
       nextOrderVal = 0;
@@ -524,7 +524,7 @@ const sanitizeTopicOrderIndex = (
         let reduceFn: (
           acc: number[],
           topicId: number,
-          idx: number,
+          idx: number
         ) => number[] = (acc, topicId, idx) =>
           topicId === topic.id ? [...acc, idx] : acc;
         let idcs = task.topics.reduce(reduceFn, []);
@@ -554,14 +554,14 @@ const sanitizeTopicOrderIndex = (
 const checkValidWeekOrderIndex = (tasks: V1_Task[]) => {
   // Check if there are undefined values
   const getWrongTasks = tasks.filter(
-    (task) => task.weekOrderIndex == undefined,
+    (task) => task.weekOrderIndex == undefined
   );
   if (getWrongTasks.length > 0) {
     return false;
   }
   // Check if the values are not 0 for tasks where task.thisWeek=false
   const getWrongTasks2 = tasks.filter(
-    (task) => !task.thisWeek && task.weekOrderIndex != 0,
+    (task) => !task.thisWeek && task.weekOrderIndex != 0
   );
   if (getWrongTasks2.length > 0) {
     return false;
@@ -569,7 +569,7 @@ const checkValidWeekOrderIndex = (tasks: V1_Task[]) => {
   // TODO: sdf
   // Check if the values are not exactly 1,2,3,4,....
   const getWrongTasks3 = tasks.filter(
-    (task) => task.thisWeek && task.weekOrderIndex < 1,
+    (task) => task.thisWeek && task.weekOrderIndex < 1
   );
   if (getWrongTasks3.length > 0) {
     return false;
@@ -611,7 +611,7 @@ const sanitizeWeekOrderIndex2 = (tasks: V1_Task[]) => {
 
 const sanitizeWeekOrderIndex = (
   setTasks: (tasks: V1_Task[]) => void,
-  tasks: V1_Task[],
+  tasks: V1_Task[]
 ) => {
   let newTasks = [...tasks];
   if (checkValidWeekOrderIndex(tasks)) {
@@ -638,12 +638,12 @@ const sanitizeWeekOrderIndex = (
 // TODO: make this way nicer. This feels wacked.
 const getChangeWeekOrderIndex = (
   setTasks: (tasks: V1_Task[]) => void,
-  tasks: V1_Task[],
+  tasks: V1_Task[]
 ) => {
   const changeWeekOrderIndex = (
     taskIds: number[],
     sourceWeekOrderIndices: number[],
-    targetWeekOrderIndex: number,
+    targetWeekOrderIndex: number
   ) => {
     console.log(taskIds, sourceWeekOrderIndices, targetWeekOrderIndex);
 
@@ -660,7 +660,7 @@ const getChangeWeekOrderIndex = (
     zipped = zipped.sort((a, b) => a[1] - b[1]);
     // Remove duplicate task Ids
     zipped = zipped.filter(
-      (el, idx, self) => self.findIndex((t) => t[0] === el[0]) === idx,
+      (el, idx, self) => self.findIndex((t) => t[0] === el[0]) === idx
     );
     // Exclude any tasks that are the target
     zipped = zipped.filter((el) => el[1] !== targetWeekOrderIndex);
@@ -670,11 +670,11 @@ const getChangeWeekOrderIndex = (
 
     let newTasks = [...tasks];
     console.log(
-      newTasks.filter((t) => t.thisWeek).map((t) => [t.name, t.weekOrderIndex]),
+      newTasks.filter((t) => t.thisWeek).map((t) => [t.name, t.weekOrderIndex])
     );
 
     let tasksBeforeTarget = sourceWeekOrderIndices.filter(
-      (idx) => idx < targetWeekOrderIndex,
+      (idx) => idx < targetWeekOrderIndex
     ).length;
     let direction = 0;
 
@@ -685,10 +685,10 @@ const getChangeWeekOrderIndex = (
       newTasks = newTasks.map((task) => {
         // Count the number of tasks that are marked to move that are  this task
         let tasksBefore = sourceWeekOrderIndices.filter(
-          (idx) => idx < task.weekOrderIndex,
+          (idx) => idx < task.weekOrderIndex
         ).length;
         let tasksAfter = sourceWeekOrderIndices.filter(
-          (idx) => idx > task.weekOrderIndex,
+          (idx) => idx > task.weekOrderIndex
         ).length;
         // Move all tasks squeezed, which aren't marked to move
         if (task.thisWeek && !taskIds.includes(task.id)) {
@@ -707,10 +707,10 @@ const getChangeWeekOrderIndex = (
       newTasks = newTasks.map((task) => {
         // Count the number of tasks that are marked to move that are before this task
         let tasksBefore = sourceWeekOrderIndices.filter(
-          (idx) => idx <= task.weekOrderIndex,
+          (idx) => idx <= task.weekOrderIndex
         ).length;
         let tasksAfter = sourceWeekOrderIndices.filter(
-          (idx) => idx > task.weekOrderIndex,
+          (idx) => idx > task.weekOrderIndex
         ).length;
         if (task.thisWeek && !taskIds.includes(task.id)) {
           if (task.weekOrderIndex <= targetWeekOrderIndex) {
@@ -724,11 +724,11 @@ const getChangeWeekOrderIndex = (
       direction = -tasksBeforeTarget + 1;
     }
     console.log(
-      newTasks.filter((t) => t.thisWeek).map((t) => [t.name, t.weekOrderIndex]),
+      newTasks.filter((t) => t.thisWeek).map((t) => [t.name, t.weekOrderIndex])
     );
 
     const tasks_to_change = newTasks.filter((task) =>
-      taskIds.includes(task.id),
+      taskIds.includes(task.id)
     );
     const tasks_to_change_indices = tasks_to_change.map((task, idx) => idx);
 
@@ -741,7 +741,7 @@ const getChangeWeekOrderIndex = (
     });
 
     console.log(
-      newTasks.filter((t) => t.thisWeek).map((t) => [t.name, t.weekOrderIndex]),
+      newTasks.filter((t) => t.thisWeek).map((t) => [t.name, t.weekOrderIndex])
     );
 
     setTasks(newTasks);
@@ -755,7 +755,7 @@ const getChangeWeekOrderIndex = (
 const findAllSubtopicIds_r = (
   topics: V1_Topic[],
   topicId: number,
-  inside: boolean,
+  inside: boolean
 ) => {
   let idList: number[] = [];
   topics.forEach((topic) => {
@@ -763,12 +763,12 @@ const findAllSubtopicIds_r = (
     if (inside || topicId === topic.id) {
       idList.push(topic.id);
       idList = idList.concat(
-        findAllSubtopicIds_r(topic.subtopics, topicId, true),
+        findAllSubtopicIds_r(topic.subtopics, topicId, true)
       );
     } else {
       // Or go deeper to find it
       idList = idList.concat(
-        findAllSubtopicIds_r(topic.subtopics, topicId, false),
+        findAllSubtopicIds_r(topic.subtopics, topicId, false)
       );
     }
   });
@@ -785,7 +785,7 @@ const getDeleteTopic = (
   topics: V1_Topic[],
   setTasks: (tasks: V1_Task[]) => void,
   tasks: V1_Task[],
-  topicId: number,
+  topicId: number
 ) => {
   const deleteTopic = () => {
     let newTopics = [...topics];
@@ -804,14 +804,14 @@ const getDeleteTopic = (
     let newTasks = [...tasks];
     // Filter tasks that have overlap in idList and task.topics
     let tasksToRemove = newTasks.filter((task) =>
-      task.topics.some((taskTopicId) => idList.includes(taskTopicId)),
+      task.topics.some((taskTopicId) => idList.includes(taskTopicId))
     );
 
     // For every task, find the task instances that are to be removed
     // and remove them
     tasksToRemove.forEach((task) => {
       let overlappingIdList = idList.filter((topicIdToRemove) =>
-        task.topics.includes(topicIdToRemove),
+        task.topics.includes(topicIdToRemove)
       );
       overlappingIdList.forEach((id) => {
         removeTaskInstanceFromTopicV1(newTasks, task.id, id);
@@ -821,13 +821,13 @@ const getDeleteTopic = (
     // Filter out tasks without instances (not inside any topic OR in any supertask)
     let subTaskIds = newTasks.reduce(
       (acc, curr) => acc.concat(curr.subTaskIds),
-      [],
+      []
     );
     newTasks = newTasks.filter(
-      (task) => task.topics.length > 0 || subTaskIds.includes(task.id),
+      (task) => task.topics.length > 0 || subTaskIds.includes(task.id)
     );
     console.info(
-      "Length of tasks before deletion/length of tasks after deletion",
+      "Length of tasks before deletion/length of tasks after deletion"
     );
     console.info(tasks.length + " -> " + newTasks.length);
 
@@ -840,7 +840,7 @@ const getDeleteTopic = (
 const getSpawnNewTask = (
   setTasks: (tasks: V1_Task[]) => void,
   tasks: V1_Task[],
-  sourceTask: V1_Task,
+  sourceTask: V1_Task
 ) => {
   const spawnNewTask = () => {
     // From the source task
@@ -856,7 +856,7 @@ const getSpawnNewTask = (
         newTasks,
         spawnedTask.id,
         sourceTask.topics[idx],
-        sourceTask.topicViewIndices[idx],
+        sourceTask.topicViewIndices[idx]
       );
     });
 

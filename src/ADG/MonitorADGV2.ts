@@ -3,7 +3,7 @@ import { TagMap, TagTasksMap, TaskMap } from "../Converters/V2_types";
 export const getStatisticsV2 = (
   tagMap: TagMap,
   tagTaskMap: TagTasksMap,
-  taskMap: TaskMap,
+  taskMap: TaskMap
 ) => {
   // topicStats = [
   //     {

@@ -167,7 +167,7 @@ const convert_relational_to_topic_tasks = (
   topic_table,
   topic_subtopic_table,
   task_table,
-  topic_task_interaction_table,
+  topic_task_interaction_table
 ) => {
   // relational to new topic tasks
   return;
@@ -203,7 +203,7 @@ const convert_topic_tasks_to_relational = (topics, tasks) => {
     subtopics.map((st) => {
       console.log(st);
       topic_subtopic_table.topic_id = topic_subtopic_table.topic_id.concat(
-        subtopic.id,
+        subtopic.id
       );
       topic_subtopic_table.subtopic_id =
         topic_subtopic_table.subtopic_id.concat(st.id);

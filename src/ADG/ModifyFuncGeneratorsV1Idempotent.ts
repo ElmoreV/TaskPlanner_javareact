@@ -27,7 +27,7 @@ import {
 const findTaskInSubTaskTree: (
   tasks: V1_Task[],
   rootTaskId: number,
-  subTaskId: number,
+  subTaskId: number
 ) => boolean = (tasks, rootTaskId, subTaskId) => {
   if (rootTaskId === subTaskId) {
     return true;
@@ -35,7 +35,7 @@ const findTaskInSubTaskTree: (
   let rootTask = findTaskByTaskIdV1(tasks, rootTaskId);
   if (rootTask === undefined) {
     console.warn(
-      `Searched for task with id ${rootTaskId} but could not find it.`,
+      `Searched for task with id ${rootTaskId} but could not find it.`
     );
     return false;
   }
@@ -62,7 +62,7 @@ const moveTasksV1Pure = (
   sourceTaskIds: number[],
   targetTopicId: number,
   targetViewIndex: number,
-  targetTaskId: number,
+  targetTaskId: number
 ) => {
   // taskIds here is the id of the task
   // sourceTopicIds is the topic-object where the task came from
@@ -81,13 +81,13 @@ const moveTasksV1Pure = (
   }
   if (sourceTaskIds.length != taskIds.length) {
     console.error(
-      "The length of the taskIds and sourceTopicIds should be the same",
+      "The length of the taskIds and sourceTopicIds should be the same"
     );
     return;
   }
   if (sourceTaskIds.length != taskIds.length) {
     console.error(
-      "The length of the taskIds and sourceTopicIds should be the same",
+      "The length of the taskIds and sourceTopicIds should be the same"
     );
     return;
   }
@@ -118,7 +118,7 @@ const moveTasksV1Pure = (
     }
     if (!moveAllowed) {
       console.warn(
-        `Move of task id ${taskId} to task with id ${targetTaskId} is not allowed: task already in target task subtree.`,
+        `Move of task id ${taskId} to task with id ${targetTaskId} is not allowed: task already in target task subtree.`
       );
     }
 
@@ -128,7 +128,7 @@ const moveTasksV1Pure = (
         newTasks = removeTaskInstanceFromTopicV1(
           newTasks,
           taskId,
-          sourceTopicId,
+          sourceTopicId
         );
       }
     } else if (sourceTaskId) {
@@ -149,14 +149,14 @@ const moveTasksV1Pure = (
         newTasks = removeTaskInstanceFromTopicV1(
           newTasks,
           taskId,
-          targetTopicId,
+          targetTopicId
         );
       }
       newTasks = insertTaskInstanceIntoTopicV1(
         newTasks,
         taskId,
         targetTopicId,
-        targetViewIndex,
+        targetViewIndex
       );
     } else if (targetTaskId) {
       // If task already in target supertask, remove it
@@ -165,12 +165,12 @@ const moveTasksV1Pure = (
         console.log(superTask);
         if (superTask.subTaskIds && superTask.subTaskIds.includes(taskId)) {
           console.info(
-            `Task ${taskId} is already in supertask ${targetTaskId}`,
+            `Task ${taskId} is already in supertask ${targetTaskId}`
           );
           newTasks = removeTaskInstanceFromTaskV1(
             newTasks,
             taskId,
-            targetTaskId,
+            targetTaskId
           );
         }
         // TODO: prevent a cycle to exist (task1<-task2<-task1<-task2<-...)
@@ -181,11 +181,11 @@ const moveTasksV1Pure = (
         let alreadyExisting = findTaskInSubTaskTree(
           tasks,
           targetTaskId,
-          taskId,
+          taskId
         );
         console.log(alreadyExisting);
         console.log(
-          `Task ${taskId} already exists somewhere within task ${targetTaskId}`,
+          `Task ${taskId} already exists somewhere within task ${targetTaskId}`
         );
 
         newTasks = insertTaskInstanceIntoTaskV1(newTasks, taskId, targetTaskId);
@@ -201,7 +201,7 @@ const duplicateTaskV1Pure = (
   tasks: V1_Task[],
   taskIds: number[],
   targetTopicId: number,
-  targetViewIndex: number,
+  targetViewIndex: number
 ) => {
   // Validation checks + defaults
   // Convert single items to a list
@@ -223,7 +223,7 @@ const duplicateTaskV1Pure = (
     const task_to_change = newTasks.find((task) => task.id == taskId);
     if (task_to_change.topics.includes(targetTopicId)) {
       console.info(
-        `Task ${task_to_change.id} is already in topic ${targetTopicId}`,
+        `Task ${task_to_change.id} is already in topic ${targetTopicId}`
       );
       return tasks;
     }
@@ -231,7 +231,7 @@ const duplicateTaskV1Pure = (
       newTasks,
       taskId,
       targetTopicId,
-      targetViewIndex,
+      targetViewIndex
     );
   });
   return newTasks;

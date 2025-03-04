@@ -41,10 +41,10 @@ const insertTaskInstanceIntoTopicV1 = (
   tasks: V1_Task[],
   taskId: number,
   topicId: number,
-  topicViewIndex?: number,
+  topicViewIndex?: number
 ) => {
   console.info(
-    `Insert task instance with task.id: ${taskId} into topic with id: ${topicId} at view index ${topicViewIndex}`,
+    `Insert task instance with task.id: ${taskId} into topic with id: ${topicId} at view index ${topicViewIndex}`
   );
 
   if (topicViewIndex === undefined) {
@@ -57,7 +57,7 @@ const insertTaskInstanceIntoTopicV1 = (
   //Shift up all tasks at or above the topicOrderIndex
   tasksInTopic.forEach((taskInTopic) => {
     let topicIdx = taskInTopic.topics.findIndex(
-      (taskTopicId) => topicId == taskTopicId,
+      (taskTopicId) => topicId == taskTopicId
     );
     if (taskInTopic.topicViewIndices[topicIdx] >= topicViewIndex) {
       taskInTopic.topicViewIndices[topicIdx] =
@@ -78,10 +78,10 @@ const insertTaskInstanceIntoTopicV1 = (
 const insertTaskInstanceIntoTaskV1 = (
   tasks: V1_Task[],
   subTaskId: number,
-  superTaskId: number,
+  superTaskId: number
 ) => {
   console.info(
-    `Insert task instance with task.id: ${subTaskId} into (super)task with id: ${superTaskId}`,
+    `Insert task instance with task.id: ${subTaskId} into (super)task with id: ${superTaskId}`
   );
   //TODO: add taskViewIndices
 
@@ -99,24 +99,24 @@ const insertTaskInstanceIntoTaskV1 = (
 const removeTaskInstanceFromTopicV1 = (
   tasks: V1_Task[],
   taskId: number,
-  topicId: number,
+  topicId: number
 ) => {
   console.info(
-    `Removing task instance with task.id: ${taskId} from topic with id: ${topicId}`,
+    `Removing task instance with task.id: ${taskId} from topic with id: ${topicId}`
   );
 
   let newTasks = [...tasks];
   let tasksInTopic = newTasks.filter((task) => task.topics.includes(topicId));
   let thisTask = newTasks.find((task) => task.id === taskId);
   let topicIdIdx = thisTask.topics.findIndex(
-    (taskTopicId) => taskTopicId === topicId,
+    (taskTopicId) => taskTopicId === topicId
   );
   let topicViewIndex = thisTask.topicViewIndices[topicIdIdx];
 
   //Shift down all tasks at or above the topicOrderIndex
   tasksInTopic.forEach((taskInTopic) => {
     let topicIdx = taskInTopic.topics.find(
-      (taskTopicId) => topicId === taskTopicId,
+      (taskTopicId) => topicId === taskTopicId
     );
     if (taskInTopic.topicViewIndices[topicIdx] > topicViewIndex) {
       taskInTopic.topicViewIndices[topicIdx] -= 1;
@@ -132,17 +132,17 @@ const removeTaskInstanceFromTopicV1 = (
 const removeTaskInstanceFromTaskV1 = (
   tasks: V1_Task[],
   taskId: number,
-  superTaskId: number,
+  superTaskId: number
 ) => {
   console.debug(
-    `Removing task instance with task.id: ${taskId} from task with id: ${superTaskId}`,
+    `Removing task instance with task.id: ${taskId} from task with id: ${superTaskId}`
   );
 
   let newTasks = [...tasks];
   let superTask = newTasks.find((task) => task.id === superTaskId);
   // let subTask = newTasks.find((task) => (task.id === taskId))
   let subTaskIdIdx = superTask.subTaskIds.findIndex(
-    (subTaskId) => subTaskId === taskId,
+    (subTaskId) => subTaskId === taskId
   );
 
   // Remove subTask

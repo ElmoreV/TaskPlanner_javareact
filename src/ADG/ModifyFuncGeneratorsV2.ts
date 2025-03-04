@@ -24,7 +24,7 @@ const createEmptyTagV2 = (tagMap: TagMap): Tag => {
 const addChildTagV2 = (
   tagMap: TagMap,
   tagTasksMap: TagTasksMap,
-  tagId: number,
+  tagId: number
 ): { newTagMap: TagMap; newTagTasksMap: TagTasksMap } => {
   console.log(`Creating new ChildTag to tag ${tagId}`);
   const newTag = createEmptyTagV2(tagMap);
@@ -47,7 +47,7 @@ const addChildTagV2 = (
 const deleteTagV2 = (
   tagMap: TagMap,
   tagTasksMap: TagTasksMap,
-  tagId: number,
+  tagId: number
 ): { newTagMap: TagMap; newTagTasksMap: TagTasksMap } => {
   // (so they have a different link to the tag DAG)
   // Remove all tag ids to remove from the tagMap and tagTasksMap
@@ -64,8 +64,8 @@ const deleteTagV2 = (
     (tag) =>
       tag.parentTagIds.length == 0 || // no parent tag, should not happen
       tag.parentTagIds.every((parentTagId) =>
-        descendantTagIds.includes(parentTagId),
-      ),
+        descendantTagIds.includes(parentTagId)
+      )
   );
   return { newTagMap, newTagTasksMap };
 };

@@ -11,7 +11,7 @@ export const convert_v1_to_v2 = (tasksV1: V1_Task[], topicsV1: V1_Topic[]) => {
 
   const traverseTopics = (
     topics: V1_Topic[],
-    parentTagId: number | undefined,
+    parentTagId: number | undefined
   ) => {
     // recursive function to traverse the topics
     topics.forEach((topic) => {
@@ -98,7 +98,7 @@ export const convert_v1_to_v2 = (tasksV1: V1_Task[], topicsV1: V1_Topic[]) => {
         (acc: number[], curr) => {
           return acc.concat(curr.id);
         },
-        [],
+        []
       );
     } else {
       newTagTaskMap[tagId] = [];
@@ -130,7 +130,7 @@ export const convert_v2_to_v1 = (
   tasksV2: TaskMap,
   tagsV2: TagMap,
   tagTasksV2: TagTasksMap,
-  plannedTaskIdListV2: number[],
+  plannedTaskIdListV2: number[]
 ) => {
   //////////////////// Generate topics //////////////////
   // Step 1: find root topics
@@ -212,7 +212,7 @@ export const convert_v2_to_v1 = (
 
 export const ensureRoundtripStability = (
   tasks: V1_Task[],
-  topics: V1_Topic[],
+  topics: V1_Topic[]
 ) => {
   const { newTaskMap, newTagMap, newTagTaskMap, newPlannedTaskIds } =
     convert_v1_to_v2(tasks, topics);
@@ -224,7 +224,7 @@ export const ensureRoundtripStability = (
     newTaskMap,
     newTagMap,
     newTagTaskMap,
-    newPlannedTaskIds,
+    newPlannedTaskIds
   );
   const { topicsV1, tasksV1 } = res2;
   console.log(topicsV1);
@@ -251,7 +251,7 @@ export const ensureRoundtripStability = (
     }
     if (refTask.name !== reviewTask.name) {
       console.log(
-        "Task names are different: " + refTask.name + " vs " + reviewTask.name,
+        "Task names are different: " + refTask.name + " vs " + reviewTask.name
       );
     }
     if (refTask.topics.length !== reviewTask.topics.length) {
@@ -259,7 +259,7 @@ export const ensureRoundtripStability = (
         "Task topics are different lenghts: " +
           refTask.topics.length +
           " vs " +
-          reviewTask.topics.length,
+          reviewTask.topics.length
       );
     }
     if (refTask.topics.length !== reviewTask.topics.length) {
@@ -267,7 +267,7 @@ export const ensureRoundtripStability = (
         "Task topics are different lenghts: " +
           refTask.topics.length +
           " vs " +
-          reviewTask.topics.length,
+          reviewTask.topics.length
       );
     } else if (
       !refTask.topics.every((value) => reviewTask.topics.includes(value))
@@ -276,7 +276,7 @@ export const ensureRoundtripStability = (
         "Task topics have different elements: " +
           refTask.topics +
           " vs " +
-          reviewTask.topics,
+          reviewTask.topics
       );
     }
 
@@ -287,7 +287,7 @@ export const ensureRoundtripStability = (
         "Task topics are different lenghts: " +
           refTask.topics.length +
           " vs " +
-          reviewTask.topics.length,
+          reviewTask.topics.length
       );
     }
     // else if (!refTask.topicViewIndices.every(value => reviewTask.topicViewIndices.includes(value))) {
@@ -301,18 +301,18 @@ export const ensureRoundtripStability = (
         "Task subTaskIds are different lenghts: " +
           refTask.subTaskIds.length +
           " vs " +
-          reviewTask.subTaskIds.length,
+          reviewTask.subTaskIds.length
       );
     } else if (
       !refTask.subTaskIds.every((value) =>
-        reviewTask.subTaskIds.includes(value),
+        reviewTask.subTaskIds.includes(value)
       )
     ) {
       console.log(
         "Task subTaskIds have different elements: " +
           refTask.subTaskIds +
           " vs " +
-          reviewTask.subTaskIds,
+          reviewTask.subTaskIds
       );
     }
     if (
@@ -324,7 +324,7 @@ export const ensureRoundtripStability = (
         "Task thisWeek are different: " +
           refTask.thisWeek +
           " vs " +
-          reviewTask.thisWeek,
+          reviewTask.thisWeek
       );
     }
     if (refTask.weekOrderIndex !== reviewTask.weekOrderIndex) {
@@ -332,7 +332,7 @@ export const ensureRoundtripStability = (
         "Task weekOrderIndex are different: " +
           refTask.weekOrderIndex +
           " vs " +
-          reviewTask.weekOrderIndex,
+          reviewTask.weekOrderIndex
       );
     }
     if (
@@ -343,7 +343,7 @@ export const ensureRoundtripStability = (
         "Task finishStatus are different: " +
           refTask.finishStatus +
           " vs " +
-          reviewTask.finishStatus,
+          reviewTask.finishStatus
       );
     } else if (
       refTask.finishStatus === undefined &&
@@ -357,7 +357,7 @@ export const ensureRoundtripStability = (
           "Task finishStatus are different: " +
             refTask.finishStatus +
             " vs " +
-            reviewTask.finishStatus,
+            reviewTask.finishStatus
         );
       }
     }
@@ -372,7 +372,7 @@ export const ensureRoundtripStability = (
         "Task repeated are different: " +
           refTask.repeated +
           " vs " +
-          reviewTask.repeated,
+          reviewTask.repeated
       );
     }
     if (refTask.scheduled !== reviewTask.scheduled) {
@@ -380,7 +380,7 @@ export const ensureRoundtripStability = (
         "Task scheduled are different: " +
           refTask.scheduled +
           " vs " +
-          reviewTask.scheduled,
+          reviewTask.scheduled
       );
     }
     if (refTask.unfolded !== reviewTask.unfolded) {
@@ -388,7 +388,7 @@ export const ensureRoundtripStability = (
         "Task unfolded are different: " +
           refTask.unfolded +
           " vs " +
-          reviewTask.unfolded,
+          reviewTask.unfolded
       );
     }
     if (refTask.dueTime !== reviewTask.dueTime) {
@@ -396,7 +396,7 @@ export const ensureRoundtripStability = (
         "Task dueTime are different: " +
           refTask.dueTime +
           " vs " +
-          reviewTask.dueTime,
+          reviewTask.dueTime
       );
     }
     if (refTask.transitiveDueTime !== reviewTask.transitiveDueTime) {
@@ -404,7 +404,7 @@ export const ensureRoundtripStability = (
         "Task transitiveDueTime are different: " +
           refTask.transitiveDueTime +
           " vs " +
-          reviewTask.transitiveDueTime,
+          reviewTask.transitiveDueTime
       );
     }
     if (refTask.lastFinished !== reviewTask.lastFinished) {
@@ -412,7 +412,7 @@ export const ensureRoundtripStability = (
         "Task lastFinished are different: " +
           refTask.lastFinished +
           " vs " +
-          reviewTask.lastFinished,
+          reviewTask.lastFinished
       );
     }
   });

@@ -43,7 +43,7 @@ const AddTaskView = (props) => {
     let newSelectedTasks = [...selectedTasks];
     newSelectedTasks = newSelectedTasks.filter(
       (selTask) =>
-        !(selTask.taskId == taskId && selTask.weekOrderIndex == weekOrderIndex),
+        !(selTask.taskId == taskId && selTask.weekOrderIndex == weekOrderIndex)
     );
     setSelectedTasks(newSelectedTasks);
   };
@@ -56,7 +56,7 @@ const AddTaskView = (props) => {
   };
 
   let allSuperTasks = tasks.filter(
-    (task) => task.subTaskIds && task.subTaskIds.length > 0,
+    (task) => task.subTaskIds && task.subTaskIds.length > 0
   );
   let allSubTaskIds = allSuperTasks.reduce((acc, task) => {
     acc = acc.concat(task.subTaskIds);
@@ -84,7 +84,7 @@ const AddTaskView = (props) => {
                 selectedTasks.find(
                   (st) =>
                     st.taskId == task.id &&
-                    st.weekOrderIndex == task.weekOrderIndex,
+                    st.weekOrderIndex == task.weekOrderIndex
                 )
                   ? true
                   : false

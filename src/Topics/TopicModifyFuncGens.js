@@ -34,7 +34,7 @@ const unfoldAll_r = (topic, topicId, shouldUnfold) => {
     }
   }
   topic.subtopics.forEach((subtopic) =>
-    unfoldAll_r(subtopic, topicId, shouldUnfold),
+    unfoldAll_r(subtopic, topicId, shouldUnfold)
   );
 };
 
@@ -59,7 +59,7 @@ const foldAll_r = (topic, topicId, shouldFold) => {
     }
   }
   topic.subtopics.forEach((subtopic) =>
-    foldAll_r(subtopic, topicId, shouldFold),
+    foldAll_r(subtopic, topicId, shouldFold)
   );
 };
 

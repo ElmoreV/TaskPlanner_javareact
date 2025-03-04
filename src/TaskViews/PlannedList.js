@@ -36,7 +36,7 @@ const recursiveShowPlannedTask = (
   selectedTasks,
   topics,
   fancy,
-  isVisible,
+  isVisible
 ) => {
   console.log("Task recusrive planning " + task.name);
   return (
@@ -59,7 +59,7 @@ const recursiveShowPlannedTask = (
         selected={
           selectedTasks.find(
             (st) =>
-              st.taskId == task.id && st.weekOrderIndex == task.weekOrderIndex,
+              st.taskId == task.id && st.weekOrderIndex == task.weekOrderIndex
           )
             ? true
             : false
@@ -98,8 +98,8 @@ const recursiveShowPlannedTask = (
                 selectedTasks,
                 topics,
                 fancy,
-                isVisible,
-              ),
+                isVisible
+              )
             )}
         </ul>
       )}
@@ -144,7 +144,7 @@ const PlannedList = (props) => {
     let newSelectedTasks = [...selectedTasks];
     newSelectedTasks = newSelectedTasks.filter(
       (selTask) =>
-        !(selTask.taskId == taskId && selTask.weekOrderIndex == weekOrderIndex),
+        !(selTask.taskId == taskId && selTask.weekOrderIndex == weekOrderIndex)
     );
     setSelectedTasks(newSelectedTasks);
   };
@@ -163,7 +163,7 @@ const PlannedList = (props) => {
           task.finishStatus !== FinishedState.NotFinished)) &&
       task.thisWeek
         ? { ...task, thisWeek: false, scheduled: false }
-        : task,
+        : task
     );
     setTasks(newTasks);
   };
@@ -189,7 +189,7 @@ const PlannedList = (props) => {
         // if (isVisible(task)) { return acc.concat(task.name, '\n') } else { return acc }
 
         // isVisible(task) ? acc.concat(task.name, '\n') : null
-        "",
+        ""
       );
     console.log(taskList);
     navigator.clipboard.writeText(taskList);
@@ -238,8 +238,8 @@ const PlannedList = (props) => {
               selectedTasks,
               topics,
               fancy,
-              isVisible,
-            ),
+              isVisible
+            )
           )}
       </ul>
     </div>

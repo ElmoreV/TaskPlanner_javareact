@@ -42,10 +42,10 @@ const insertTaskInstanceIntoTagV2 = (
   tagTaskMap: TagTasksMap,
   taskId: number,
   tagId: number,
-  tagOrderIndex?: number,
+  tagOrderIndex?: number
 ) => {
   console.info(
-    `Insert task instance with task.id: ${taskId} into topic with id: ${tagId} at view index ${tagOrderIndex}`,
+    `Insert task instance with task.id: ${taskId} into topic with id: ${tagId} at view index ${tagOrderIndex}`
   );
 
   if (tagOrderIndex === undefined) {
@@ -66,10 +66,10 @@ const insertTaskInstanceIntoTagV2 = (
 const insertTaskInstanceIntoTaskV2 = (
   taskMap: TaskMap,
   subTaskId: number,
-  superTaskId: number,
+  superTaskId: number
 ) => {
   console.info(
-    `Insert task instance with task.id: ${subTaskId} into (super)task with id: ${superTaskId}`,
+    `Insert task instance with task.id: ${subTaskId} into (super)task with id: ${superTaskId}`
   );
   let newTaskMap = { ...taskMap };
   let superTask = newTaskMap[superTaskId];
@@ -85,10 +85,10 @@ const insertTaskInstanceIntoTaskV2 = (
 const removeTaskInstanceFromTagV2 = (
   tagTaskMap: TagTasksMap,
   taskId: number,
-  tagId: number,
+  tagId: number
 ) => {
   console.info(
-    `Removing task instance with task.id: ${taskId} from topic with id: ${tagId}`,
+    `Removing task instance with task.id: ${taskId} from topic with id: ${tagId}`
   );
   let newTagTaskMap = { ...tagTaskMap };
   let taskIdList = newTagTaskMap[tagId];
@@ -101,19 +101,19 @@ const removeTaskInstanceFromTagV2 = (
 const removeTaskInstanceFromTaskV2 = (
   taskMap: TaskMap,
   taskId: number,
-  superTaskId: number,
+  superTaskId: number
 ) => {
   console.debug(
-    `Removing task instance with task.id: ${taskId} from task with id: ${superTaskId}`,
+    `Removing task instance with task.id: ${taskId} from task with id: ${superTaskId}`
   );
   let newTaskMap = { ...taskMap };
   let superTask = newTaskMap[superTaskId];
   let subTask = newTaskMap[taskId];
   superTask.childTaskIds = superTask.childTaskIds.filter(
-    (childTaskId) => childTaskId !== taskId,
+    (childTaskId) => childTaskId !== taskId
   );
   subTask.parentTaskIds = subTask.parentTaskIds.filter(
-    (parentTaskId) => parentTaskId !== superTaskId,
+    (parentTaskId) => parentTaskId !== superTaskId
   );
   return newTaskMap;
 };
@@ -122,7 +122,7 @@ const removeTaskInstanceFromTaskV2 = (
 const deleteEntireTaskV2 = (
   taskMap: TaskMap,
   tagTasksMap: TagTasksMap,
-  taskId: number,
+  taskId: number
 ) => {
   let newTaskMap = { ...taskMap };
   let taskToDelete = newTaskMap[taskId];
@@ -130,13 +130,13 @@ const deleteEntireTaskV2 = (
   taskToDelete.childTaskIds.forEach((childTaskId) => {
     let childTask = newTaskMap[childTaskId];
     childTask.parentTaskIds = childTask.parentTaskIds.filter(
-      (parentTaskId) => parentTaskId !== taskId,
+      (parentTaskId) => parentTaskId !== taskId
     );
   });
   taskToDelete.parentTaskIds.forEach((parentTaskId) => {
     let parentTask = newTaskMap[parentTaskId];
     parentTask.childTaskIds = parentTask.childTaskIds.filter(
-      (childTaskId) => childTaskId !== taskId,
+      (childTaskId) => childTaskId !== taskId
     );
   });
   // Remove the task from the taskMap
