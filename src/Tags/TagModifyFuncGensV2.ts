@@ -2,7 +2,7 @@
 
 import { TagMap } from "../Converters/V2_types";
 
-const tagToggleFoldV2 = (tagMap: TagMap, tagId:number): TagMap => {
+const tagToggleFoldV2 = (tagMap: TagMap, tagId: number): TagMap => {
   return {
     ...tagMap,
     [tagId]: {
@@ -12,7 +12,11 @@ const tagToggleFoldV2 = (tagMap: TagMap, tagId:number): TagMap => {
   };
 };
 
-const setTagNameV2 = (tagMap: TagMap, tagId:number, newName:string): TagMap => {
+const setTagNameV2 = (
+  tagMap: TagMap,
+  tagId: number,
+  newName: string,
+): TagMap => {
   return {
     ...tagMap,
     [tagId]: {
@@ -26,34 +30,33 @@ const unfoldAllDescendantsV2 = (tagMap: TagMap, rootTagId: number): TagMap => {
   console.log("Executing unfoldAllDescendantsV2");
   const unfold_r = (newTagMap, tagId) => {
     const tag = newTagMap[tagId];
-    if (tag.childTagIds.length >0) {
-      tag.childTagIds.forEach((childTagId) => unfold_r(newTagMap,childTagId))
+    if (tag.childTagIds.length > 0) {
+      tag.childTagIds.forEach((childTagId) => unfold_r(newTagMap, childTagId));
     }
     tag.unfolded = true;
   };
-  const newTagMap = {...tagMap};
+  const newTagMap = { ...tagMap };
   console.log(newTagMap);
-  unfold_r(newTagMap,rootTagId);
+  unfold_r(newTagMap, rootTagId);
   console.log(newTagMap);
   return newTagMap;
-}
+};
 
 const foldAllDescendantsV2 = (tagMap: TagMap, rootTagId: number): TagMap => {
   console.log("Executing foldAllDescendantsV2");
   const fold_r = (newTagMap, tagId) => {
     const tag = newTagMap[tagId];
-    if (tag.childTagIds.length >0) {
-      tag.childTagIds.forEach((childTagId) => fold_r(newTagMap,childTagId))
+    if (tag.childTagIds.length > 0) {
+      tag.childTagIds.forEach((childTagId) => fold_r(newTagMap, childTagId));
     }
     tag.unfolded = false;
   };
-  const newTagMap = {...tagMap};
-  fold_r(newTagMap,rootTagId);
+  const newTagMap = { ...tagMap };
+  fold_r(newTagMap, rootTagId);
   return newTagMap;
-}
-
+};
 
 export { tagToggleFoldV2 };
-export {setTagNameV2};
-export {unfoldAllDescendantsV2};
-export {foldAllDescendantsV2};
+export { setTagNameV2 };
+export { unfoldAllDescendantsV2 };
+export { foldAllDescendantsV2 };

@@ -1,6 +1,6 @@
 import { findTopicByTopicIdV1 } from "../ADG/FindItemsV1.ts";
 import { V1_Task, V1_Topic } from "../Converters/V1_types.ts";
-import { TaskMap, TagMap, TagTasksMap } from "../Converters/V2_types.ts";
+import { TaskMap, TagMap, TagTasksMap, Tag } from "../Converters/V2_types.ts";
 
 const getFreeTaskIdV2 = (taskMap: TaskMap) => {
   return (
@@ -24,7 +24,7 @@ const disconnectChildTagsByIdV2 = (tagMap: TagMap, tagId: number) => {
   });
 };
 
-const getAllDescendantTagsV2 = (tagMap: TagMap, tagId: number) => {
+const getAllDescendantTagsV2 = (tagMap: TagMap, tagId: number): Tag[] => {
   // Return all child tags, all grandchildren, etc.
   const tag = tagMap[tagId];
   if (tag === undefined) return [];
@@ -183,6 +183,8 @@ const getTopicPathByTopicIdV1 = (topics: V1_Topic[], topicId: number) => {
     return "";
   }
 };
+
+export { getAllDescendantTagsV2 };
 
 // const generateDefaultTask = (tasks,id,topic,completed,planned,repeated){
 //     let newTask = {
