@@ -1,5 +1,5 @@
 import { Tag, TagMap, TagTasksMap } from "../Converters/V2_types.js";
-import { getAllDescendantTagsV2 } from "../Tags/TagHelperV2.js";
+import { getAllDescendantTagsV2 } from "../Tags/TagHelperV2.ts";
 
 const getFreeTagIdV2 = (tagMap: TagMap): number => {
   let maxId = 1;
