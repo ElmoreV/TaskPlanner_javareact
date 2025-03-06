@@ -1,7 +1,7 @@
 import {
-  convert_old_topic_tasks_to_new_topic_tasks,
-  convert_new_topic_tasks_to_old_topic_tasks,
-} from "../Converter";
+  convert_v1_to_v0,
+  convert_v0_to_v1,
+} from "../Converters/Migration_V0_V1/UpdateV0ToV1.ts";
 import {
   checkVersionV0orV1,
   Version,
@@ -21,10 +21,10 @@ export const parseJSON = (jsonStr) => {
   console.log("Version of input is " + versionToString(version));
   if (version === Version.V0) {
     console.log("converting imported v0 to v1 format");
-    [old_topics, old_tasks] = convert_old_topic_tasks_to_new_topic_tasks(
+    [old_topics, old_tasks] = convert_v0_to_v1(
       uploadedData.topics,
       uploadedData.tasks
     );
   }
-  return {  old_topics,  old_tasks };
+  return { old_topics, old_tasks };
 };
