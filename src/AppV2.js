@@ -65,6 +65,8 @@ function AppV2() {
 
       <div className="App">
         <div className="contents">
+          {/* <ImportExport appData={appData} setAppData={setAppData} /> */}
+
           <ViewSelector viewSetter={setView} />
           {/* {view === VIEW_ADD_TASKS && <AddTaskView
             tasks={tasks}

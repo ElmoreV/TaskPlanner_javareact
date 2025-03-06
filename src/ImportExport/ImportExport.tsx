@@ -11,12 +11,22 @@ import { buildMarkdownRecursive, exportMarkdown } from "./FormatAsMarkdown.ts";
 import { parseJSON } from "./ParseJSON.ts";
 import { parseYAML } from "./ParseYAML.ts";
 import { exportJSON } from "./SaveAsJSON.ts";
+import {
+  getVersionOfAppData,
+  Version,
+  versionToString,
+} from "./VersionDeterminer.ts";
 
 const ImportExport = (props) => {
   console.debug("Rendering ImportExport");
-  const { appData, setAppData } = props;
+  const { appData, setAppData, preferredVersion } = props;
+  // This value will be used to determine the version of the exported data
+  let curPreferredVersion =
+    preferredVersion === undefined ? Version.V1 : preferredVersion;
+  let curVersion = getVersionOfAppData(appData);
+  console.log("Current version is " + versionToString(curVersion));
+  console.log("Preferred version is " + versionToString(curPreferredVersion));
   const { topics, tasks } = appData;
-
   const [taskHash, setTaskHash] = useState(null);
   const [topicHash, setTopicHash] = useState(null);
   const [loadedTaskHash, setLoadedTaskHash] = useState(null);
