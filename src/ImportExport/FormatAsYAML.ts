@@ -1,3 +1,5 @@
+import { saveFile } from "./LoadFile.ts";
+
 export const buildYAML_r = (subtopics, tasks, indent_level) => {
   // '''
   // Export as
@@ -58,15 +60,5 @@ export const exportYAML = (topics, tasks, fileNameRef) => {
   //         - Task3
   // '''
   const YAMLcontent = buildYAML_r(topics, tasks, 0);
-  const blob = new Blob([YAMLcontent], { type: "text/yaml" });
-  var a = document.createElement("a");
-  a.href = window.URL.createObjectURL(blob);
-  if (fileNameRef.current.length > 0) {
-    console.log(fileNameRef.current);
-    // a.download = fileInputRef.split(".")[0]
-    a.download = fileNameRef.current + ".yaml";
-  } else {
-    a.download = "tasks_topics.yaml";
-  }
-  a.click();
+  saveFile(YAMLcontent, "text/yaml", fileNameRef.current, ".yaml");
 };

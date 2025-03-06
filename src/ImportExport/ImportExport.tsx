@@ -35,9 +35,9 @@ const ImportExport = (props) => {
   const [savedTopicHash, setSavedTopicHash] = useState(null);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
-  const fileInputRef = useRef(null);
-  const fileNameRef = useRef("");
-  const fileNameRefComplete = useRef("");
+  const fileInputRef = useRef(null); // reference to the file input element
+  const fileNameRef = useRef(""); // filename without extension (after the last "." it's removed)
+  const fileNameRefComplete = useRef(""); // complete file name
 
   const handleExportYAMLClick = () => {
     exportYAML(topics, tasks, fileNameRef);
@@ -55,7 +55,6 @@ const ImportExport = (props) => {
     exportJSON(topics, tasks, fileNameRef);
   };
 
-  // console.log(tasks[0].topics.includes(topics[0].title))
   const importjson = (jsonStr) => {
     const { old_topics: topics, old_tasks: tasks } = parseJSON(jsonStr);
     let newTaskHash = calculateTaskHash(tasks);
@@ -71,53 +70,55 @@ const ImportExport = (props) => {
     return "succesful import";
   };
 
+  const parseFile = (fileContent, fileType, fileName) => {
+    console.log("file loaded now parsing");
+    console.log(fileType);
+    if (fileType == "application/json") {
+      // JSON
+      try {
+        console.info(importjson(fileContent));
+      } catch (e) {
+        console.error("Uploaded file is not JSON enough.", e);
+      }
+    } else if (fileName.split(".").at(-1) == "yaml") {
+      // YAML
+      try {
+        const YAMLstr = fileContent;
+        const { parsedTopics, parsedTasks } = parseYAML(YAMLstr);
+        console.log("Parsed tasks,topics from YAML");
+        console.log(parsedTopics);
+        console.log(parsedTasks);
+        setAppData({ topics: parsedTopics, tasks: parsedTasks });
+      } catch (e) {
+        console.error("Uploaded file is not YAML enough.", e);
+      }
+    } else {
+      // OTHER
+      console.warn("File Type not recognized");
+      console.warn(fileName.split(".").at(-1));
+    }
+  };
+
   const handleFileToUpload = (e) => {
     console.log("upload start");
     if (e.target.files) {
       var file = e.target.files[0];
     }
-    console.log("file?");
-    console.log();
     if (file) {
+      console.log(`Loading file / name ${file.name} / type ${file.type}.`);
       fileNameRef.current = file.name.substring(0, file.name.lastIndexOf("."));
       fileNameRefComplete.current = file.name;
 
-      console.log(fileNameRef.current);
       const reader = new FileReader();
       reader.onload = (evt) => {
         if (!evt.target) {
           console.error("File reader didn't load");
           return;
         } else if (evt.target.result == null) {
-          console.error("File reader didn't load");
+          console.error("File reader has empty contents");
           return;
         }
-        console.log("file loaded now parsing");
-        console.log(file.type);
-        if (file.type == "application/json") {
-          // JSON
-          try {
-            console.info(importjson(evt.target.result));
-          } catch (e) {
-            console.error("Uploaded file is not JSON enough.", e);
-          }
-        } else if (file.name.split(".").at(-1) == "yaml") {
-          // YAML
-          try {
-            const YAMLstr = evt.target.result;
-            const { parsedTopics, parsedTasks } = parseYAML(YAMLstr);
-            console.log("Parsed tasks,topics from YAML");
-            console.log(parsedTopics);
-            console.log(parsedTasks);
-            setAppData({ topics: parsedTopics, tasks: parsedTasks });
-          } catch (e) {
-            console.error("Uploaded file is not YAML enough.", e);
-          }
-        } else {
-          // OTHER
-          console.warn("File Type not recognized");
-          console.warn(file.name.split(".").at(-1));
-        }
+        parseFile(evt.target.result, file.type, file.name);
       };
       console.log("start reading");
 
