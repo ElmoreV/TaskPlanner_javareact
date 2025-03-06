@@ -3,10 +3,19 @@ import YAML from "yaml";
 import {
   convert_old_topic_tasks_to_new_topic_tasks,
   convert_new_topic_tasks_to_old_topic_tasks,
-} from "./Converter";
-import { sanitizeWeekOrderIndex2 } from "./ADG/ModifyFuncGeneratorsV1.ts";
-import structuredClone from "@ungap/structured-clone";
-var hash = require("object-hash");
+} from "../Converter";
+import {
+  checkVersionV0orV1,
+  versionToString,
+  Version,
+} from "./VersionDeterminer.ts";
+import {
+  calculateHash,
+  calculateTaskHash,
+  calculateTopicHash,
+} from "./DataMutationChecks.ts";
+import { buildYAML_r } from "./FormatAsYAML.ts";
+import { buildMarkdownRecursive } from "./FormatAsMarkdown.ts";
 
 const ImportExport = (props) => {
   console.debug("Rendering ImportExport");
@@ -24,132 +33,12 @@ const ImportExport = (props) => {
   const fileInputRef = useRef(null);
   const fileNameRef = useRef("");
   const fileNameRefComplete = useRef("");
-  const inputVersion = (tasks, topics) => {
-    console.debug(tasks.length);
-    console.debug("taskName" in tasks[0]);
-    console.debug(topics.length);
-    console.debug("title" in topics[0]);
-    if (
-      (tasks.length > 0 && "taskName" in tasks[0]) ||
-      (topics.length > 0 && "title" in topics[0])
-    ) {
-      return "v0";
-    } else {
-      return "v1";
-    }
-  };
-
-  /*
-    ///////////
-    ////// Calculating hash
-    ///////////////
-    */
-  const calculateTaskHash = (tasks) => {
-    // Strip unimportant stuff
-    // Topics: folded/unfolded
-    // Otherwise everything is important?
-    // The tasks need to be sorted on id
-    let newTasks = structuredClone(tasks);
-    newTasks = sanitizeWeekOrderIndex2(newTasks);
-    let fixedTasks = newTasks
-      .sort((a, b) => a.id > b.id)
-      .map((task) => {
-        return {
-          name: task.name,
-          id: task.id,
-          topics: task.topics.sort(),
-          completed: task.completed ? true : false,
-          thisWeek: task.thisWeek ? true : false,
-          repeated: task.repeated ? true : false,
-          scheduled: task.scheduled ? true : false,
-          weekOrderIndex:
-            task.thisWeek && task.weekOrderIndex > 0 ? task.weekOrderIndex : 0,
-        };
-      });
-    let taskHash = hash(fixedTasks);
-    console.log(`Calculated hash of tasks: ${taskHash}`);
-    // The topics need to be sorted on id
-    return taskHash;
-  };
-
-  const calculateTopicHash = (topics) => {
-    // Strip unimportant stuff
-    // Topics: folded/unfolded
-    // Otherwise everything is important?
-    // The tasks need to be sorted on id
-    let newTopics = structuredClone(topics);
-    const fixTopics = (topicList) => {
-      let fixedTopicList = topicList
-        .sort((a, b) => a.id > b.id)
-        .map((topic) => {
-          // return a new topic wihtout the unfolded
-          return {
-            name: topic.name,
-            id: topic.id,
-            subtopics: fixTopics(topic.subtopics),
-          };
-        });
-      return fixedTopicList;
-    };
-    let topicHash = hash(fixTopics(newTopics));
-
-    console.log(`Calculated hash of topics: ${topicHash}`);
-    // The topics need to be sorted on id
-    return topicHash;
-  };
-
-  const calculateHash = (tasks, topics) => {
-    setTaskHash(calculateTaskHash(tasks));
-    setTopicHash(calculateTopicHash(topics));
-  };
 
   /*
     /////////////
     ///// YAML
     ////////////////////
     */
-
-  const buildYAML_r = (subtopics, tasks, indent_level) => {
-    let YAMLstr = "";
-    console.debug(YAMLstr);
-    // console.log(subtopics)
-    for (let i = 0; i < subtopics.length; i++) {
-      // Add topic name as key
-      let topic = subtopics[i];
-      if (indent_level == 0) {
-        // console.log(subtopics)
-        // console.log('@ indent level 0')
-        YAMLstr = YAMLstr.concat(
-          " ".repeat(4 * indent_level),
-          `'${topic.name}':\n`
-        );
-      } else {
-        YAMLstr = YAMLstr.concat(
-          " ".repeat(4 * indent_level),
-          "- ",
-          `'${topic.name}':\n`
-        );
-      }
-      // Add all tasks in this subtopic to the YAML
-      let relevant_tasks = tasks.filter((t) => t.topics.includes(topic.id));
-      for (let j = 0; j < relevant_tasks.length; j++) {
-        let task = relevant_tasks[j];
-        YAMLstr = YAMLstr.concat(
-          " ".repeat(4 * (indent_level + 1)),
-          `- '${task.name}'\n`
-        );
-      }
-      // Do the same for all the subtopics
-      // Add
-      if (topic.subtopics.length > 0) {
-        YAMLstr = YAMLstr.concat(
-          buildYAML_r(topic.subtopics, tasks, indent_level + 1)
-        );
-      }
-    }
-
-    return YAMLstr;
-  };
 
   const exportYAML = () => {
     // '''
@@ -308,47 +197,6 @@ const ImportExport = (props) => {
     ////////////////////////////////////
     */
 
-  const buildMarkdownRecursive = (subtopics, tasks, indent_level) => {
-    let MarkdownStr = "";
-    console.debug(MarkdownStr);
-    // console.log(subtopics)
-    for (let i = 0; i < subtopics.length; i++) {
-      // Add topic name as key
-      let topic = subtopics[i];
-      if (indent_level == 0) {
-        // console.log(subtopics)
-        // console.log('@ indent level 0')
-        MarkdownStr = MarkdownStr.concat(
-          "\n",
-          "#".repeat(indent_level + 1),
-          ` ${topic.name}:\n\n`
-        );
-      } else {
-        MarkdownStr = MarkdownStr.concat(
-          "\n",
-          "#".repeat(indent_level + 1),
-          ` ${topic.name}:\n\n`
-        );
-      }
-      // Add all tasks in this subtopic to the Markdown
-      let relevant_tasks = tasks.filter((t) => t.topics.includes(topic.id));
-      for (let j = 0; j < relevant_tasks.length; j++) {
-        let task = relevant_tasks[j];
-        let completedSymbol = task.completed ? "[x]" : "[ ]";
-        MarkdownStr = MarkdownStr.concat(`- ${completedSymbol} ${task.name}\n`);
-      }
-      // Do the same for all the subtopics
-      // Add
-      if (topic.subtopics.length > 0) {
-        MarkdownStr = MarkdownStr.concat(
-          buildMarkdownRecursive(topic.subtopics, tasks, indent_level + 1)
-        );
-      }
-    }
-
-    return MarkdownStr;
-  };
-
   const exportMarkdown = () => {
     let [new_topics, new_tasks] = [topics, tasks];
     const MarkdownContent = buildMarkdownRecursive(topics, tasks, 0);
@@ -411,9 +259,9 @@ const ImportExport = (props) => {
     // Sanitize input
 
     // Version rectification
-    let version = inputVersion(old_tasks, old_topics);
-    console.log("Version of input is " + version.toString());
-    if (version == "v0") {
+    let version = checkVersionV0orV1(old_tasks, old_topics);
+    console.log("Version of input is " + versionToString(version));
+    if (version === Version.V1) {
       console.log("converting imported v0 to v1 format");
       [old_topics, old_tasks] = convert_old_topic_tasks_to_new_topic_tasks(
         uploadedData.topics,
@@ -492,6 +340,7 @@ const ImportExport = (props) => {
     //     [new_topics, new_tasks] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
     // }
     // Pretty print json (with 2 spaces as space parameter)
+
     setSavedTaskHash(calculateTaskHash(tasks));
     setSavedTopicHash(calculateTopicHash(topics));
     setTaskHash(calculateTaskHash(tasks));
@@ -597,10 +446,6 @@ const ImportExport = (props) => {
     setHasUnsavedChanges(false);
   }
 
-  const handleBrowseClick = () => {
-    // Trigger the file input click
-    fileInputRef.current.click();
-  };
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
@@ -638,6 +483,13 @@ const ImportExport = (props) => {
     };
   }, []);
 
+
+  const handleBrowseClick = () => {
+    // The browse button is visible, and the file input is hidden
+    // So we need to trigger the file input click ourselves
+    fileInputRef.current.click();
+  };
+
   return (
     <div className="importExport">
       <button onClick={exportjson}>Save as JSON</button>
@@ -653,7 +505,16 @@ const ImportExport = (props) => {
       <br />
       <button onClick={exportAll}> Export All [JSON+Markdown]</button>
       <br />
-      <button onClick={() => calculateHash(tasks, topics)}> Calc Hash </button>
+      <button
+        onClick={() => {
+          const [taskHash, topicHash] = calculateHash(tasks, topics);
+          setTaskHash(taskHash);
+          setTopicHash(topicHash);
+        }}
+      >
+        {" "}
+        Calc Hash{" "}
+      </button>
       <br />
       <input
         type="file"
