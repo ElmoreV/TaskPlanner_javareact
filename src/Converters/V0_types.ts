@@ -1,29 +1,18 @@
 import { FinishedState } from "../Tasks/TaskInterfaces";
 
-interface V1_Topic {
+interface V0_Topic {
   title: string;
   id: number;
   unfolded: boolean;
-  subtopics: V1_Topic[];
+  subtopics: V0_Topic[];
 }
 
-interface V1_Task {
-  name: string;
-  id: number;
-  topics: number[];
-  topicViewIndices: number[];
-  subTaskIds: number[];
+interface V0_Task {
+  taskName: string;
+  key: number;
+  topics: string[]; // matched to topic.title
   completed: boolean;
-  finishStatus: FinishedState;
   thisWeek: boolean;
-  repeated: boolean;
-  scheduled: boolean;
-  weekOrderIndex: number;
-  unfolded: boolean;
-
-  dueTime: Date | undefined;
-  transitiveDueTime: Date | undefined;
-  lastFinished: Date | undefined;
 }
 
-export { V1_Topic, V1_Task };
+export { V0_Topic, V0_Task };
