@@ -18,6 +18,17 @@ export const versionToString = (version: Version): string => {
   }
 };
 
+export const getVersionOfAppData = (appData): Version => {
+  if ("tasks" in appData && "topics" in appData) {
+    // it must be v0 or v1
+    const { tasks, topics } = appData;
+    return checkVersionV0orV1(tasks, topics);
+  } else if ("taskMap" in appData && "tagMap" in appData) {
+    return Version.V2;
+  }
+  return Version.UNKNOWN;
+};
+
 export const checkVersionV0orV1 = (tasks, topics): Version => {
   console.debug(tasks.length);
   console.debug("taskName" in tasks[0]);
@@ -31,4 +42,12 @@ export const checkVersionV0orV1 = (tasks, topics): Version => {
   } else {
     return Version.V1;
   }
+};
+
+const getVersionOfImportedJSON = (jsonStr: string): Version => {
+  // Not implemented yet
+  // will be dependent on some metadata
+  // like metadata.version
+  // but if that's not there, we need to check it the old way.
+  return Version.UNKNOWN;
 };
