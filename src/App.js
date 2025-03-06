@@ -2,7 +2,7 @@ import ViewSelector from "./ViewSelector";
 import TaskList from "./TaskViews/TaskList.js";
 import PlannedList from "./TaskViews/PlannedList.js";
 import { useState } from "react";
-import ImportExport from "./ImportExport/ImportExport.js";
+import ImportExport from "./ImportExport/ImportExport.tsx";
 import Theme from "./Theme";
 import AddTaskView from "./TaskViews/NewTaskList.js";
 import { initialTasksV1, initialTopicsV1 } from "./InitialState_V1.ts";

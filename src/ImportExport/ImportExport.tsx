@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import YAML from "yaml";
 import {
   calculateHash,
   calculateTaskHash,
@@ -76,6 +75,13 @@ const ImportExport = (props) => {
       console.log(fileNameRef.current);
       const reader = new FileReader();
       reader.onload = (evt) => {
+        if (!evt.target) {
+          console.error("File reader didn't load");
+          return;
+        } else if (evt.target.result == null) {
+          console.error("File reader didn't load");
+          return;
+        }
         console.log("file loaded now parsing");
         console.log(file.type);
         if (file.type == "application/json") {
@@ -89,7 +95,7 @@ const ImportExport = (props) => {
           // YAML
           try {
             const YAMLstr = evt.target.result;
-            const [parsedTopics, parsedTasks] = parseYAML(YAMLstr);
+            const { parsedTopics, parsedTasks } = parseYAML(YAMLstr);
             console.log("Parsed tasks,topics from YAML");
             console.log(parsedTopics);
             console.log(parsedTasks);
@@ -99,8 +105,8 @@ const ImportExport = (props) => {
           }
         } else {
           // OTHER
-          console.warning("File Type not recognized");
-          console.warning(file.name.split(".").at(-1));
+          console.warn("File Type not recognized");
+          console.warn(file.name.split(".").at(-1));
         }
       };
       console.log("start reading");
@@ -190,9 +196,16 @@ const ImportExport = (props) => {
       console.log(taskHash, topicHash);
       let newTaskHash = calculateTaskHash(tasks);
       let newTopicHash = calculateTopicHash(topics);
-      console.log("Recaclucalted");
+      console.log("Recaclculated");
       console.log(newTaskHash, newTopicHash);
-      let hasChanges = isChanged(newTaskHash, newTopicHash);
+      let hasChanges = isChanged(
+        newTaskHash,
+        newTopicHash,
+        loadedTaskHash,
+        loadedTopicHash,
+        savedTaskHash,
+        savedTopicHash
+      );
       console.log(hasChanges);
       if (hasChanges) {
         console.log("Changes");
@@ -245,7 +258,7 @@ const ImportExport = (props) => {
       <br />
       <button
         onClick={() => {
-          const [taskHash, topicHash] = calculateHash(tasks, topics);
+          const { taskHash, topicHash } = calculateHash(tasks, topics);
           setTaskHash(taskHash);
           setTopicHash(topicHash);
         }}
