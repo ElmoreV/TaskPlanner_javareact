@@ -109,7 +109,7 @@ const TagV2 = (props) => {
       console.info(
         `Dropped topic with id ${source_id} on this topic with id ${id}`
       );
-      moveTopic(source_id, id);
+      moveTopic(source_id, undefined, id);
     } else if (type == "TaskDuplicate") {
       var task_id = Number(e.dataTransfer.getData("TaskId"));
       console.info(
@@ -152,7 +152,7 @@ const TagV2 = (props) => {
 
   const handleAddTaskClick = (e) => {
     e.stopPropagation();
-    addTask();
+    addTask(id);
   };
   const handleAddTopicClick = (e) => {
     e.stopPropagation();

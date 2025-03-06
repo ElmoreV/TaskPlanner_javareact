@@ -8,6 +8,7 @@ import {
 } from "../Converters/V2_types";
 import TaskContainerV2 from "../Tasks/TaskContainerV2.tsx";
 import TagContainer from "../Tags/TagContainerV2.tsx";
+import { generateEmptyTagV2 } from "../Tags/TagHelperV2.ts";
 
 const TaskListV2 = (props: TaskListPropsV2) => {
   console.debug("Rendering TaskListV2");
@@ -143,9 +144,39 @@ const TaskListV2 = (props: TaskListPropsV2) => {
       </div>
     );
   };
+  // const addRootTag = (tagMap: TagMap) => {
+  //   console.log("Adding root tag");
+  //   const newTagMap = { ...tagMap };
+  //   const newTag = generateEmptyTagV2(newTagMap);
+  //   newTagMap[newTag.id] = newTag;
+  //   // return {newTagMap;
+  // };
+
+  const addRootTagCallback = () => {
+    setAppData((oldAppData: AppData) => {
+      const newTag = generateEmptyTagV2(oldAppData.tagMap);
+      console.log(newTag);
+      console.log(oldAppData.tagMap);
+      console.log(oldAppData.tagTasksMap);
+      console.log({ ...oldAppData.tagTasksMap, [newTag.id]: [] });
+      return {
+        ...oldAppData,
+        tagMap: {
+          ...oldAppData.tagMap,
+          [newTag.id]: newTag,
+        },
+        tagTasksMap: { ...oldAppData.tagTasksMap, [newTag.id]: [] },
+      };
+    });
+  };
+
+  // TODO: add due filter
+  // TODO: hide completed filter
+  // TODO: show repeated only filter
 
   return (
     <div className="task-list">
+      <button onClick={addRootTagCallback}> Add new root tag </button>
       <h1>Tag Task DAG </h1>
       <ul key="root-tags">
         {showUntaggedTasks()}

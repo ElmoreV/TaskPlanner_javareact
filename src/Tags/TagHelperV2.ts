@@ -12,6 +12,26 @@ const getFreeTaskIdV2 = (taskMap: TaskMap) => {
   );
 };
 
+const getFreeTagIdV2 = (tagMap: TagMap): number => {
+  let maxId = 1;
+  for (const tagId in tagMap) {
+    if (Number(tagId) > maxId) {
+      maxId = Number(tagId);
+    }
+  }
+  return maxId + 1;
+};
+
+const generateEmptyTagV2 = (tagMap: TagMap): Tag => {
+  return {
+    id: getFreeTagIdV2(tagMap),
+    name: `New Tag ${getFreeTagIdV2(tagMap)}`,
+    unfolded: true,
+    childTagIds: [],
+    parentTagIds: [],
+  };
+};
+
 const disconnectChildTagsByIdV2 = (tagMap: TagMap, tagId: number) => {
   // Removes all connections to tagId from all (other) tags
   Object.values(tagMap).forEach((tag) => {
@@ -45,6 +65,7 @@ const isTaskInAnyTagV2 = (tagTaskMap: TagTasksMap, taskId: number) => {
 
 export { getFreeTaskIdV2 };
 export { disconnectChildTagsByIdV2 };
+export { generateEmptyTagV2 };
 
 // export { getFreeTopicKeyV1 };
 // export { isTaskInAnyTopicV1 };

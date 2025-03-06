@@ -88,12 +88,7 @@ const getMoveTasks = (
       );
       return;
     }
-    if (sourceTaskIds.length != taskIds.length) {
-      console.error(
-        "The length of the taskIds and sourceTopicIds should be the same"
-      );
-      return;
-    }
+
     let newTasks = [...tasks];
     if (targetTopicId) {
       const targetTopic = findTopicByTopicIdV1(topics, targetTopicId);

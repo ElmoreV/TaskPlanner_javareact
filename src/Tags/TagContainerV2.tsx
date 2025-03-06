@@ -7,7 +7,12 @@ import {
   unfoldAllDescendantsV2,
   foldAllDescendantsV2,
 } from "./TagModifyFuncGensV2.ts";
-import { addChildTagV2 } from "../ADG/ModifyFuncGeneratorsV2.ts";
+import {
+  addChildTagV2,
+  createTaskInTagV2,
+  moveTagToTagV2,
+  moveTasksToTagV2,
+} from "../ADG/ModifyFuncGeneratorsV2.ts";
 interface AppData {
   tagMap: TagMap;
   taskMap: TaskMap;
@@ -34,7 +39,24 @@ const useCallbackifyTags = (fn, setAppData) => {
     [fn, setAppData]
   );
 };
+
 const useCallbackifyTagTasks = (fn, setAppData) => {
+  return useCallback(
+    (...args) => {
+      return setAppData((appData: AppData) => {
+        const newTagTasksMap = fn(appData.tagTasksMap, ...args);
+
+        return {
+          ...appData,
+          tagTasksMap: newTagTasksMap,
+        };
+      });
+    },
+    [fn, setAppData]
+  );
+};
+
+const useCallbackifyTagsTagTasks = (fn, setAppData) => {
   return useCallback(
     (...args) => {
       return setAppData((appData: AppData) => {
@@ -46,6 +68,26 @@ const useCallbackifyTagTasks = (fn, setAppData) => {
         return {
           ...appData,
           tagMap: newTagMap,
+          tagTasksMap: newTagTasksMap,
+        };
+      });
+    },
+    [fn, setAppData]
+  );
+};
+
+const useCallbackifyTasksTagTasks = (fn, setAppData) => {
+  return useCallback(
+    (...args) => {
+      return setAppData((appData: AppData) => {
+        const { newTagTasksMap, newTaskMap } = fn(
+          appData.tagTasksMap,
+          appData.taskMap,
+          ...args
+        );
+        return {
+          ...appData,
+          taskMap: newTaskMap,
           tagTasksMap: newTagTasksMap,
         };
       });
@@ -66,7 +108,20 @@ export default function TagContainer(props) {
     setAppData
   );
   const foldAllCallback = useCallbackifyTags(foldAllDescendantsV2, setAppData);
-  const addChildTagCallback = useCallbackifyTagTasks(addChildTagV2, setAppData);
+  const addChildTagCallback = useCallbackifyTagsTagTasks(
+    addChildTagV2,
+    setAppData
+  );
+  const createTaskInTagCallback = useCallbackifyTasksTagTasks(
+    createTaskInTagV2,
+    setAppData
+  );
+  const moveTagToTagCallback = useCallbackifyTags(moveTagToTagV2, setAppData);
+  const moveTasksToTagCallback = useCallbackifyTagTasks(
+    moveTasksToTagV2,
+    setAppData
+  );
+
   return (
     <Tag
       name={tag.name}
@@ -75,12 +130,12 @@ export default function TagContainer(props) {
       setTagName={setTagNameCallback}
       toggleFold={toggleFoldCallBack}
       addSubTopic={addChildTagCallback}
-      //   moveTopic={getMoveTopic(setTopics, topics)}
+      moveTopic={moveTagToTagCallback}
       unfoldAll={unfoldAllCallBack}
       foldAll={foldAllCallback}
       //   selectedTasks={selectedTasks}
-      //   addTask={getAddTask(setTasks, tasks, topics, topic.id)}
-      //   moveTasks={getMoveTasks(topics, tasks, setTasks)}
+      addTask={createTaskInTagCallback}
+      moveTasks={moveTasksToTagCallback}
       //   duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
       //   deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}
       fancy={fancy}
