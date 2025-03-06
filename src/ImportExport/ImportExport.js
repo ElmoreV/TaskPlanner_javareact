@@ -1,21 +1,16 @@
 import { useState, useRef, useEffect } from "react";
 import YAML from "yaml";
 import {
-  convert_old_topic_tasks_to_new_topic_tasks,
-  convert_new_topic_tasks_to_old_topic_tasks,
-} from "../Converter";
-import {
-  checkVersionV0orV1,
-  versionToString,
-  Version,
-} from "./VersionDeterminer.ts";
-import {
   calculateHash,
   calculateTaskHash,
   calculateTopicHash,
+  isChanged,
+  mutatedSince,
 } from "./DataMutationChecks.ts";
 import { buildYAML_r } from "./FormatAsYAML.ts";
 import { buildMarkdownRecursive } from "./FormatAsMarkdown.ts";
+import { parseJSON } from "./ParseJSON.ts";
+import { parseYAML } from "./ParseYAML.ts";
 
 const ImportExport = (props) => {
   console.debug("Rendering ImportExport");
@@ -66,129 +61,8 @@ const ImportExport = (props) => {
   };
 
   const importYAML = (YAMLstr) => {
-    // Expected:
-    // - Name: '
-    console.log("Parsing YAML");
-    console.info(YAMLstr);
-    let res = YAML.parse(YAMLstr);
-    console.info(res);
-    let importedTasks = [];
-    let importedTopics = [];
-    const getFreeImportedTaskKey = () => {
-      return (
-        1 +
-        importedTasks.reduce((max_key, task) => Math.max(max_key, task.key), 0)
-      );
-    };
-    let usedKeys = [0];
-
-    const getFreeImportedTopicKey = () => {
-      let max_id = 1 + Math.max(...usedKeys);
-      usedKeys = usedKeys.concat(max_id);
-      // console.log(max_id)
-      return max_id;
-    };
-    const importNewTask = (name, superTopic) => {
-      // TODO: check if a taskName already exists
-      // And duplicates will be fused (add topics together)
-      let newTask = {
-        taskName: name,
-        key: getFreeImportedTaskKey(),
-        topics: [superTopic],
-        complete: false,
-      };
-      importedTasks = importedTasks.concat(newTask);
-    };
-    const importNewTopic_r = (node) => {
-      // Go through all objects in list
-      // if mapping: is subtopic
-      // if scalar/item: is tasks
-      console.debug("New call of import");
-      console.debug(node);
-      let newTopics = [];
-      // let newTopic = {
-      //     id:getFreeImportedTopicKey(),
-      //     title:'Hello',
-      //     unfolded:true,
-      //     subtopics:[]
-      // }
-      // let importedTopics = []
-      console.debug("Enumerate properties");
-      for (var key in node) {
-        let newTopic = {
-          id: getFreeImportedTopicKey(),
-          title: "Hello",
-          unfolded: true,
-          subtopics: [],
-        };
-        let importedTopics = [];
-        console.debug("Key: ");
-        console.debug(key);
-        newTopic.title = key;
-        let val = node[key];
-        console.debug("Val:");
-        console.debug(val);
-        if (typeof val === "string") {
-          // Add new tasks
-          console.debug("New task found head" + val);
-          importNewTask(val, key);
-        } else {
-          if (val instanceof Array) {
-            // It's an empty task list, ignore
-            console.debug("List found head");
-            for (let i = 0; i < val.length; i++) {
-              let subnode = val[i];
-              console.debug("Subnode is");
-              console.debug(subnode);
-              if (typeof subnode === "string") {
-                // Add new tasks
-                console.debug("New task found loop" + subnode);
-                importNewTask(subnode, key);
-              } else if (subnode instanceof Array) {
-                // It's an empty task list, ignore
-                console.debug("Empty list found  loop");
-              } else {
-                // It's an object/subtopic
-                console.debug(typeof subnode);
-                console.debug(subnode + "  loop");
-                importedTopics = importedTopics.concat(
-                  importNewTopic_r(subnode)
-                );
-                console.debug("End recurse loop");
-              }
-            }
-          } else {
-            // It's an object/subtopic
-            console.debug(typeof val);
-            console.debug(val + " head");
-            importedTopics = importedTopics.concat(importNewTopic_r(val));
-            console.debug("End recurse head");
-          }
-        }
-        newTopic.subtopics = importedTopics;
-        console.debug("new topic:");
-        console.debug(newTopic);
-
-        newTopics = newTopics.concat(newTopic);
-      }
-      console.debug("new topics/ret_obj:");
-      console.debug(newTopics);
-      return newTopics;
-
-      // newTopic.subtopics = importedTopics
-      // console.log(newTopic)
-      // return newTopic
-    };
-    let res2 = importNewTopic_r(res);
-    console.debug("Result");
-    console.debug(res2);
-    console.debug(importedTasks);
-    // Extract topics?
-    // Go through the YAML tree
-
-    // Extract tasks
-
-    setAppData({ topics: res2, tasks: importedTasks });
+    const [parsedTopics, parsedTasks] = parseYAML(YAMLstr);
+    setAppData({ topics: parsedTopics, tasks: parsedTasks });
   };
 
   /*
@@ -251,23 +125,7 @@ const ImportExport = (props) => {
 
   // console.log(tasks[0].topics.includes(topics[0].title))
   const importjson = (jsonStr) => {
-    const uploadedData = JSON.parse(jsonStr);
-    // As loaded (may be new format, may be old format)
-    // setTopics(uploadedData.topics);
-    // setTasks(uploadedData.tasks);
-    let [old_topics, old_tasks] = [uploadedData.topics, uploadedData.tasks];
-    // Sanitize input
-
-    // Version rectification
-    let version = checkVersionV0orV1(old_tasks, old_topics);
-    console.log("Version of input is " + versionToString(version));
-    if (version === Version.V1) {
-      console.log("converting imported v0 to v1 format");
-      [old_topics, old_tasks] = convert_old_topic_tasks_to_new_topic_tasks(
-        uploadedData.topics,
-        uploadedData.tasks
-      );
-    }
+    const [topics, tasks] = parseJSON(jsonStr);
     let newTaskHash = calculateTaskHash(tasks);
     let newTopicHash = calculateTopicHash(topics);
     setTaskHash(newTaskHash);
@@ -276,9 +134,8 @@ const ImportExport = (props) => {
     setLoadedTopicHash(newTopicHash);
     setSavedTaskHash(null);
     setSavedTopicHash(null);
-    setAppData({ topics: old_topics, tasks: old_tasks });
+    setAppData({ topics: topics, tasks: tasks });
     console.log("Loading etc");
-
     return "succesful import";
   };
   // const [file,setFile] = useState(null);
@@ -330,6 +187,7 @@ const ImportExport = (props) => {
       return "tasks_topics" + extension;
     }
   };
+
   const exportAll = () => {
     console.log("Test");
 
@@ -377,66 +235,11 @@ const ImportExport = (props) => {
     setTopicHash(calculateTopicHash(topics));
   }
 
-  let mutatedSinceLoad = false;
-  let mutatedSinceSave = false;
-  if (
-    (loadedTaskHash && taskHash !== loadedTaskHash) ||
-    (loadedTopicHash && topicHash !== loadedTopicHash)
-  ) {
-    mutatedSinceLoad = true;
-  }
-  // Check only if the file has been saved before
-  if (
-    savedTaskHash &&
-    taskHash !== savedTaskHash &&
-    savedTopicHash &&
-    topicHash !== savedTopicHash
-  ) {
-    mutatedSinceSave = true;
-  }
-
-  const isChanged = (taskHash, topicHash) => {
-    let mutatedSinceLoad = false;
-    let mutatedSinceSave = false;
-    if (
-      (loadedTaskHash && taskHash !== loadedTaskHash) ||
-      (loadedTopicHash && topicHash !== loadedTopicHash)
-    ) {
-      mutatedSinceLoad = true;
-    }
-    // Check only if the file has been saved before
-    if (
-      savedTaskHash &&
-      taskHash !== savedTaskHash &&
-      savedTopicHash &&
-      topicHash !== savedTopicHash
-    ) {
-      mutatedSinceSave = true;
-    }
-    console.log("Mutated since load and save");
-    console.log(mutatedSinceLoad);
-    console.log(mutatedSinceSave);
-    console.log(savedTaskHash);
-    console.log(savedTopicHash);
-    console.log(loadedTaskHash);
-    console.log(loadedTopicHash);
-    console.log(taskHash);
-    console.log(topicHash);
-
-    if (!savedTaskHash && mutatedSinceLoad) {
-      return true;
-    } else if (savedTaskHash && mutatedSinceSave) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
   let hasChanges = isChanged(
-    loadedTaskHash,
     taskHash,
-    loadedTopicHash,
     topicHash,
+    loadedTaskHash,
+    loadedTopicHash,
     savedTaskHash,
     savedTopicHash
   );
@@ -445,7 +248,6 @@ const ImportExport = (props) => {
   } else if (hasUnsavedChanges && !hasChanges) {
     setHasUnsavedChanges(false);
   }
-
 
   useEffect(() => {
     const handleBeforeUnload = (event) => {
@@ -483,13 +285,19 @@ const ImportExport = (props) => {
     };
   }, []);
 
-
   const handleBrowseClick = () => {
     // The browse button is visible, and the file input is hidden
     // So we need to trigger the file input click ourselves
     fileInputRef.current.click();
   };
-
+  const [mutatedSinceLoad, mutatedSinceSave] = mutatedSince(
+    taskHash,
+    topicHash,
+    loadedTaskHash,
+    loadedTopicHash,
+    savedTaskHash,
+    savedTopicHash
+  );
   return (
     <div className="importExport">
       <button onClick={exportjson}>Save as JSON</button>

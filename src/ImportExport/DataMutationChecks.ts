@@ -67,3 +67,66 @@ export const calculateHash = (tasks, topics) => {
     topicHash: calculateTopicHash(topics),
   };
 };
+
+export const mutatedSince = (
+  taskHash,
+  topicHash,
+  loadedTaskHash,
+  loadedTopicHash,
+  savedTaskHash,
+  savedTopicHash
+) => {
+  let mutatedSinceLoad = false;
+  let mutatedSinceSave = false;
+  if (
+    (loadedTaskHash && taskHash !== loadedTaskHash) ||
+    (loadedTopicHash && topicHash !== loadedTopicHash)
+  ) {
+    mutatedSinceLoad = true;
+  }
+  // Check only if the file has been saved before
+  if (
+    savedTaskHash &&
+    taskHash !== savedTaskHash &&
+    savedTopicHash &&
+    topicHash !== savedTopicHash
+  ) {
+    mutatedSinceSave = true;
+  }
+  return { mutatedSinceLoad, mutatedSinceSave };
+};
+
+export const isChanged = (
+  taskHash,
+  topicHash,
+  loadedTaskHash,
+  loadedTopicHash,
+  savedTaskHash,
+  savedTopicHash
+) => {
+  let [mutatedSinceLoad, mutatedSinceSave] = mutatedSince(
+    taskHash,
+    topicHash,
+    loadedTaskHash,
+    loadedTopicHash,
+    savedTaskHash,
+    savedTopicHash
+  );
+  console.log("Mutated since load and save");
+  console.log(mutatedSinceLoad);
+  console.log(mutatedSinceSave);
+  console.log(savedTaskHash);
+  console.log(savedTopicHash);
+  console.log(loadedTaskHash);
+  console.log(loadedTopicHash);
+  console.log(taskHash);
+  console.log(topicHash);
+
+  if (!savedTaskHash && mutatedSinceLoad) {
+    return true;
+  } else if (savedTaskHash && mutatedSinceSave) {
+    return true;
+  } else {
+    return false;
+  }
+};
