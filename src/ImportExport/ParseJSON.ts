@@ -19,11 +19,12 @@ export const parseJSON = (jsonStr) => {
   // Version rectification
   let version = checkVersionV0orV1(old_tasks, old_topics);
   console.log("Version of input is " + versionToString(version));
-  if (version === Version.V1) {
+  if (version === Version.V0) {
     console.log("converting imported v0 to v1 format");
     [old_topics, old_tasks] = convert_old_topic_tasks_to_new_topic_tasks(
       uploadedData.topics,
       uploadedData.tasks
     );
   }
+  return {  old_topics,  old_tasks };
 };

@@ -1,4 +1,12 @@
 export const buildYAML_r = (subtopics, tasks, indent_level) => {
+  // '''
+  // Export as
+  // - Topic:
+  //     - SubTopic:
+  //         - Task1
+  //         - Task2
+  //         - Task3
+  // '''
   let YAMLstr = "";
   console.debug(YAMLstr);
   // console.log(subtopics)
@@ -38,4 +46,27 @@ export const buildYAML_r = (subtopics, tasks, indent_level) => {
   }
 
   return YAMLstr;
+};
+
+export const exportYAML = (topics, tasks, fileNameRef) => {
+  // '''
+  // Export as
+  // - Topic:
+  //     - SubTopic:
+  //         - Task1
+  //         - Task2
+  //         - Task3
+  // '''
+  const YAMLcontent = buildYAML_r(topics, tasks, 0);
+  const blob = new Blob([YAMLcontent], { type: "text/yaml" });
+  var a = document.createElement("a");
+  a.href = window.URL.createObjectURL(blob);
+  if (fileNameRef.current.length > 0) {
+    console.log(fileNameRef.current);
+    // a.download = fileInputRef.split(".")[0]
+    a.download = fileNameRef.current + ".yaml";
+  } else {
+    a.download = "tasks_topics.yaml";
+  }
+  a.click();
 };

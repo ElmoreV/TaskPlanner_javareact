@@ -7,10 +7,11 @@ import {
   isChanged,
   mutatedSince,
 } from "./DataMutationChecks.ts";
-import { buildYAML_r } from "./FormatAsYAML.ts";
-import { buildMarkdownRecursive } from "./FormatAsMarkdown.ts";
+import { exportYAML } from "./FormatAsYAML.ts";
+import { buildMarkdownRecursive, exportMarkdown } from "./FormatAsMarkdown.ts";
 import { parseJSON } from "./ParseJSON.ts";
 import { parseYAML } from "./ParseYAML.ts";
+import { exportJSON } from "./SaveAsJSON.ts";
 
 const ImportExport = (props) => {
   console.debug("Rendering ImportExport");
@@ -29,103 +30,25 @@ const ImportExport = (props) => {
   const fileNameRef = useRef("");
   const fileNameRefComplete = useRef("");
 
-  /*
-    /////////////
-    ///// YAML
-    ////////////////////
-    */
-
-  const exportYAML = () => {
-    // '''
-    // Export as
-    // - Topic:
-    //     - SubTopic:
-    //         - Task1
-    //         - Task2
-    //         - Task3
-    // '''
-    // const YAML =
-    // console.log('Starting Yaml building')
-    const YAMLcontent = buildYAML_r(topics, tasks, 0);
-    const blob = new Blob([YAMLcontent], { type: "text/yaml" });
-    var a = document.createElement("a");
-    a.href = window.URL.createObjectURL(blob);
-    if (fileNameRef.current.length > 0) {
-      console.log(fileNameRef.current);
-      // a.download = fileInputRef.split(".")[0]
-      a.download = fileNameRef.current + ".yaml";
-    } else {
-      a.download = "tasks_topics.yaml";
-    }
-    a.click();
+  const handleExportYAMLClick = () => {
+    exportYAML(topics, tasks, fileNameRef);
   };
 
-  const importYAML = (YAMLstr) => {
-    const [parsedTopics, parsedTasks] = parseYAML(YAMLstr);
-    setAppData({ topics: parsedTopics, tasks: parsedTasks });
+  const handleExportMarkdownClick = () => {
+    exportMarkdown(topics, tasks, fileNameRef);
   };
 
-  /*
-    /////////////////////////////////////
-    //////////// Markdown
-    ////////////////////////////////////
-    */
-
-  const exportMarkdown = () => {
-    let [new_topics, new_tasks] = [topics, tasks];
-    const MarkdownContent = buildMarkdownRecursive(topics, tasks, 0);
-    const blob = new Blob([MarkdownContent], { type: "text/markdown" });
-    var a = document.createElement("a");
-    a.href = window.URL.createObjectURL(blob);
-    if (fileNameRef.current.length > 0) {
-      console.log(fileNameRef.current);
-      // a.download = fileInputRef.split(".")[0]
-      a.download = fileNameRef.current + ".md";
-    } else {
-      a.download = "tasks_topics.md";
-    }
-    a.click();
-  };
-
-  /*
-    ///////////////////////////////////
-    ///////////// JSON
-    //////////////////////////////////////
-    */
-  const exportjson = () => {
-    let [new_topics, new_tasks] = [topics, tasks];
-    // Check if v0 format, or v1 format
-    // if (inputVersion(new_topics, new_tasks) == 'v0') {
-    //     console.log('Converting internal v0 format to v1');
-    //     [new_topics, new_tasks] = convert_old_topic_tasks_to_new_topic_tasks(topics, tasks)
-    // }
-    // Pretty print json (with 2 spaces as space parameter)
+  const handleSaveAsJSONClick = () => {
     setSavedTaskHash(calculateTaskHash(tasks));
     setSavedTopicHash(calculateTopicHash(topics));
     setTaskHash(calculateTaskHash(tasks));
     setTopicHash(calculateTopicHash(topics));
-
-    const jsonContent = JSON.stringify(
-      { topics: new_topics, tasks: new_tasks },
-      null,
-      2
-    );
-    const blob = new Blob([jsonContent], { type: "application/json" });
-    var a = document.createElement("a");
-    a.href = window.URL.createObjectURL(blob);
-    if (fileNameRef.current.length > 0) {
-      console.log(fileNameRef.current);
-      // a.download = fileInputRef.split(".")[0]
-      a.download = fileNameRef.current + ".json";
-    } else {
-      a.download = "tasks_topics.json";
-    }
-    a.click();
+    exportJSON(topics, tasks, fileNameRef);
   };
 
   // console.log(tasks[0].topics.includes(topics[0].title))
   const importjson = (jsonStr) => {
-    const [topics, tasks] = parseJSON(jsonStr);
+    const { old_topics: topics, old_tasks: tasks } = parseJSON(jsonStr);
     let newTaskHash = calculateTaskHash(tasks);
     let newTopicHash = calculateTopicHash(topics);
     setTaskHash(newTaskHash);
@@ -138,12 +61,10 @@ const ImportExport = (props) => {
     console.log("Loading etc");
     return "succesful import";
   };
-  // const [file,setFile] = useState(null);
 
   const handleFileToUpload = (e) => {
     console.log("upload start");
     if (e.target.files) {
-      // setFile(e.target.files[0]);
       var file = e.target.files[0];
     }
     console.log("file?");
@@ -151,31 +72,40 @@ const ImportExport = (props) => {
     if (file) {
       fileNameRef.current = file.name.substring(0, file.name.lastIndexOf("."));
       fileNameRefComplete.current = file.name;
+
       console.log(fileNameRef.current);
       const reader = new FileReader();
       reader.onload = (evt) => {
         console.log("file loaded now parsing");
         console.log(file.type);
         if (file.type == "application/json") {
+          // JSON
           try {
             console.info(importjson(evt.target.result));
           } catch (e) {
             console.error("Uploaded file is not JSON enough.", e);
           }
         } else if (file.name.split(".").at(-1) == "yaml") {
+          // YAML
           try {
-            console.log(importYAML(evt.target.result));
+            const YAMLstr = evt.target.result;
+            const [parsedTopics, parsedTasks] = parseYAML(YAMLstr);
+            console.log("Parsed tasks,topics from YAML");
+            console.log(parsedTopics);
+            console.log(parsedTasks);
+            setAppData({ topics: parsedTopics, tasks: parsedTasks });
           } catch (e) {
             console.error("Uploaded file is not YAML enough.", e);
           }
         } else {
+          // OTHER
           console.warning("File Type not recognized");
           console.warning(file.name.split(".").at(-1));
         }
       };
       console.log("start reading");
 
-      reader.readAsText(file);
+      reader.readAsText(file); // This runs onload
     }
   };
 
@@ -290,7 +220,7 @@ const ImportExport = (props) => {
     // So we need to trigger the file input click ourselves
     fileInputRef.current.click();
   };
-  const [mutatedSinceLoad, mutatedSinceSave] = mutatedSince(
+  const { mutatedSinceLoad, mutatedSinceSave } = mutatedSince(
     taskHash,
     topicHash,
     loadedTaskHash,
@@ -300,7 +230,7 @@ const ImportExport = (props) => {
   );
   return (
     <div className="importExport">
-      <button onClick={exportjson}>Save as JSON</button>
+      <button onClick={handleSaveAsJSONClick}>Save as JSON</button>
       <br />
       {savedTaskHash
         ? mutatedSinceSave
@@ -308,8 +238,8 @@ const ImportExport = (props) => {
           : "Unchanged"
         : "Not saved yet"}
 
-      {/* <button onClick={exportYAML}>Export as YAML</button> */}
-      <button onClick={exportMarkdown}> Export as Markdown</button>
+      {/* <button onClick={handleExportYAMLClick}>Export as YAML</button> */}
+      <button onClick={handleExportMarkdownClick}> Export as Markdown</button>
       <br />
       <button onClick={exportAll}> Export All [JSON+Markdown]</button>
       <br />

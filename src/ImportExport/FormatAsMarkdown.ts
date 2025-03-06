@@ -1,3 +1,9 @@
+/*
+/////////////////////////////////////
+//////////// Markdown
+////////////////////////////////////
+*/
+
 export const buildMarkdownRecursive = (subtopics, tasks, indent_level) => {
   let MarkdownStr = "";
   console.debug(MarkdownStr);
@@ -37,4 +43,19 @@ export const buildMarkdownRecursive = (subtopics, tasks, indent_level) => {
   }
 
   return MarkdownStr;
+};
+
+export const exportMarkdown = (topics, tasks, fileNameRef) => {
+  const MarkdownContent = buildMarkdownRecursive(topics, tasks, 0);
+  const blob = new Blob([MarkdownContent], { type: "text/markdown" });
+  var a = document.createElement("a");
+  a.href = window.URL.createObjectURL(blob);
+  if (fileNameRef.current.length > 0) {
+    console.log(fileNameRef.current);
+    // a.download = fileInputRef.split(".")[0]
+    a.download = fileNameRef.current + ".md";
+  } else {
+    a.download = "tasks_topics.md";
+  }
+  a.click();
 };

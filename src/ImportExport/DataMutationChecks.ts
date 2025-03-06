@@ -104,7 +104,7 @@ export const isChanged = (
   savedTaskHash,
   savedTopicHash
 ) => {
-  let [mutatedSinceLoad, mutatedSinceSave] = mutatedSince(
+  let { mutatedSinceLoad, mutatedSinceSave } = mutatedSince(
     taskHash,
     topicHash,
     loadedTaskHash,
