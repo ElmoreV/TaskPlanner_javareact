@@ -1,10 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import {
-  calculateHash,
-  calculateTaskHash,
-  calculateTopicHash,
-  isChanged,
-  mutatedSince,
+  calculateAppDataHash,
+  isAppDataChanged,
+  mutatedAppDataSince,
+  AppDataV1,
 } from "./DataMutationChecks.ts";
 import { exportYAML } from "./FormatAsYAML.ts";
 import { buildMarkdownRecursive, exportMarkdown } from "./FormatAsMarkdown.ts";
@@ -26,13 +25,13 @@ const ImportExport = (props) => {
   let curVersion = getVersionOfAppData(appData);
   console.log("Current version is " + versionToString(curVersion));
   console.log("Preferred version is " + versionToString(curPreferredVersion));
-  const { topics, tasks } = appData;
-  const [taskHash, setTaskHash] = useState(null);
-  const [topicHash, setTopicHash] = useState(null);
-  const [loadedTaskHash, setLoadedTaskHash] = useState(null);
-  const [loadedTopicHash, setLoadedTopicHash] = useState(null);
-  const [savedTaskHash, setSavedTaskHash] = useState(null);
-  const [savedTopicHash, setSavedTopicHash] = useState(null);
+
+  const [appDataHash, setAppDataHash] = useState<string | null>(null);
+  const [loadedAppDataHash, setLoadedAppDataHash] = useState<string | null>(
+    null
+  );
+  const [savedAppDataHash, setSavedAppDataHash] = useState<string | null>(null);
+
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   const fileInputRef = useRef(null); // reference to the file input element
@@ -40,32 +39,33 @@ const ImportExport = (props) => {
   const fileNameRefComplete = useRef(""); // complete file name
 
   const handleExportYAMLClick = () => {
-    exportYAML(topics, tasks, fileNameRef);
+    exportYAML(appData.topics, appData.tasks, fileNameRef);
   };
 
   const handleExportMarkdownClick = () => {
-    exportMarkdown(topics, tasks, fileNameRef);
+    exportMarkdown(appData.topics, appData.tasks, fileNameRef);
   };
 
   const handleSaveAsJSONClick = () => {
-    setSavedTaskHash(calculateTaskHash(tasks));
-    setSavedTopicHash(calculateTopicHash(topics));
-    setTaskHash(calculateTaskHash(tasks));
-    setTopicHash(calculateTopicHash(topics));
-    exportJSON(topics, tasks, fileNameRef);
+    const appDataHash = calculateAppDataHash(appData);
+    setSavedAppDataHash(appDataHash);
+    setAppDataHash(appDataHash);
+    exportJSON(appData.topics, appData.tasks, fileNameRef);
   };
 
   const importjson = (jsonStr) => {
-    const { old_topics: topics, old_tasks: tasks } = parseJSON(jsonStr);
-    let newTaskHash = calculateTaskHash(tasks);
-    let newTopicHash = calculateTopicHash(topics);
-    setTaskHash(newTaskHash);
-    setTopicHash(newTopicHash);
-    setLoadedTaskHash(newTaskHash);
-    setLoadedTopicHash(newTopicHash);
-    setSavedTaskHash(null);
-    setSavedTopicHash(null);
-    setAppData({ topics: topics, tasks: tasks });
+    const { old_topics, old_tasks } = parseJSON(jsonStr);
+
+    let newAppData: AppDataV1 = {
+      topics: old_topics,
+      tasks: old_tasks,
+    };
+    const newAppDataHash = calculateAppDataHash(newAppData);
+
+    setAppDataHash(newAppDataHash);
+    setLoadedAppDataHash(newAppDataHash);
+    setSavedAppDataHash(null);
+    setAppData(appData);
     console.log("Loading etc");
     return "succesful import";
   };
@@ -138,7 +138,6 @@ const ImportExport = (props) => {
   const exportAll = () => {
     console.log("Test");
 
-    let [new_topics, new_tasks] = [topics, tasks];
     // Check if v0 format, or v1 format
     // if (inputVersion(new_topics, new_tasks) == 'v0') {
     //     console.log('Converting internal v0 format to v1');
@@ -146,18 +145,17 @@ const ImportExport = (props) => {
     // }
     // Pretty print json (with 2 spaces as space parameter)
 
-    setSavedTaskHash(calculateTaskHash(tasks));
-    setSavedTopicHash(calculateTopicHash(topics));
-    setTaskHash(calculateTaskHash(tasks));
-    setTopicHash(calculateTopicHash(topics));
+    const appDataHash = calculateAppDataHash(appData);
+    setAppDataHash(appDataHash);
+    setSavedAppDataHash(appDataHash);
 
-    const jsonContent = JSON.stringify(
-      { topics: new_topics, tasks: new_tasks },
-      null,
-      2
-    );
+    const jsonContent = JSON.stringify(appData, null, 2);
     const jsonBlob = new Blob([jsonContent], { type: "application/json" });
-    const MarkdownContent = buildMarkdownRecursive(topics, tasks, 0);
+    const MarkdownContent = buildMarkdownRecursive(
+      appData.topics,
+      appData.tasks,
+      0
+    );
     const markdownBlob = new Blob([MarkdownContent], { type: "text/markdown" });
     // const YAMLcontent = buildYAML_r(topics, tasks, 0)
     // const yamlBlob = new Blob([YAMLcontent], { type: "text/yaml" });
@@ -176,20 +174,16 @@ const ImportExport = (props) => {
     }
     document.body.removeChild(a);
   };
-
-  if (taskHash == null) {
-    setTaskHash(calculateTaskHash(tasks));
-    setTopicHash(calculateTopicHash(topics));
+  if (appDataHash == null) {
+    setAppDataHash(calculateAppDataHash(appData));
   }
 
-  let hasChanges = isChanged(
-    taskHash,
-    topicHash,
-    loadedTaskHash,
-    loadedTopicHash,
-    savedTaskHash,
-    savedTopicHash
+  let hasChanges = isAppDataChanged(
+    appDataHash,
+    loadedAppDataHash,
+    savedAppDataHash
   );
+
   if (!hasUnsavedChanges && hasChanges) {
     setHasUnsavedChanges(true);
   } else if (hasUnsavedChanges && !hasChanges) {
@@ -200,22 +194,17 @@ const ImportExport = (props) => {
     const handleBeforeUnload = (event) => {
       console.log("beforeunload");
       console.log("Mutated since load and save");
-      console.log(savedTaskHash);
-      console.log(savedTopicHash);
-      console.log(loadedTaskHash);
-      console.log(loadedTopicHash);
-      console.log(taskHash, topicHash);
-      let newTaskHash = calculateTaskHash(tasks);
-      let newTopicHash = calculateTopicHash(topics);
-      console.log("Recaclculated");
-      console.log(newTaskHash, newTopicHash);
-      let hasChanges = isChanged(
-        newTaskHash,
-        newTopicHash,
-        loadedTaskHash,
-        loadedTopicHash,
-        savedTaskHash,
-        savedTopicHash
+      console.log(appDataHash);
+      console.log(loadedAppDataHash);
+      console.log(savedAppDataHash);
+      let newAppDataHash = calculateAppDataHash(appData);
+
+      console.log("Recalculated hash");
+      console.log(newAppDataHash);
+      let hasChanges = isAppDataChanged(
+        newAppDataHash,
+        loadedAppDataHash,
+        savedAppDataHash
       );
       console.log(hasChanges);
       if (hasChanges) {
@@ -237,26 +226,24 @@ const ImportExport = (props) => {
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
     };
-  }, []);
+  });
 
   const handleBrowseClick = () => {
     // The browse button is visible, and the file input is hidden
     // So we need to trigger the file input click ourselves
     fileInputRef.current.click();
   };
-  const { mutatedSinceLoad, mutatedSinceSave } = mutatedSince(
-    taskHash,
-    topicHash,
-    loadedTaskHash,
-    loadedTopicHash,
-    savedTaskHash,
-    savedTopicHash
+  const { mutatedSinceLoad, mutatedSinceSave } = mutatedAppDataSince(
+    appDataHash,
+    loadedAppDataHash,
+    savedAppDataHash
   );
+
   return (
     <div className="importExport">
       <button onClick={handleSaveAsJSONClick}>Save as JSON</button>
       <br />
-      {savedTaskHash
+      {savedAppDataHash
         ? mutatedSinceSave
           ? "Unsaved changes"
           : "Unchanged"
@@ -269,9 +256,8 @@ const ImportExport = (props) => {
       <br />
       <button
         onClick={() => {
-          const { taskHash, topicHash } = calculateHash(tasks, topics);
-          setTaskHash(taskHash);
-          setTopicHash(topicHash);
+          const appDataHash = calculateAppDataHash(appData);
+          setAppDataHash(appDataHash);
         }}
       >
         {" "}
@@ -288,7 +274,7 @@ const ImportExport = (props) => {
       <br />
       <input type="text" value={fileNameRefComplete.current} readOnly />
       <br />
-      {loadedTaskHash
+      {loadedAppDataHash
         ? mutatedSinceLoad
           ? "Changed since load"
           : "Unchanged since load"
@@ -296,5 +282,4 @@ const ImportExport = (props) => {
     </div>
   );
 };
-
 export default ImportExport;

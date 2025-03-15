@@ -1,5 +1,9 @@
 import structuredClone from "@ungap/structured-clone";
 import { sanitizeWeekOrderIndex2 } from "../ADG/ModifyFuncGeneratorsV1.ts";
+import { getVersionOfAppData, Version } from "./VersionDeterminer.ts";
+import { TaskMap, TagMap, TagTasksMap } from "../Converters/V2_types.ts";
+import { V1_Task, V1_Topic } from "../Converters/V1_types.ts";
+import { V0_Task, V0_Topic } from "../Converters/V0_types.ts";
 var hash = require("object-hash");
 
 /*
@@ -7,7 +11,84 @@ var hash = require("object-hash");
     ////// Calculating hash
     ///////////////
     */
-export const calculateTaskHash = (tasks) => {
+
+interface AppDataV0 {
+  version: Version | undefined;
+  tasks: V0_Task[];
+  topics: V0_Topic[];
+}
+export interface AppDataV1 {
+  version: Version | undefined;
+  tasks: V1_Task[];
+  topics: V1_Topic[];
+}
+interface AppDataV2 {
+  version: Version | undefined;
+  taskMap: TaskMap;
+  tagMap: TagMap;
+  tagTasksMap: TagTasksMap;
+  plannedTaskIdList: number[];
+}
+
+type AppData = AppDataV0 | AppDataV1 | AppDataV2;
+
+export const calculateAppDataHash = (appData: AppData): string => {
+  const appDataVersion = getVersionOfAppData(appData);
+  if (appDataVersion === Version.V1) {
+    let appDataV1: AppDataV1 = appData;
+    const { taskHash, topicHash } = calculateV1Hash(
+      appDataV1.tasks,
+      appDataV1.topics
+    );
+    return hash({ taskHash, topicHash });
+    //  calculateHash(appData.tasks, appData.topics);
+  }
+  return "";
+};
+
+export const isAppDataChanged = (
+  appDataHash: string | null,
+  loadedAppDataHash: string | null,
+  savedAppDataHash: string | null
+) => {
+  let { mutatedSinceLoad, mutatedSinceSave } = mutatedAppDataSince(
+    appDataHash,
+    loadedAppDataHash,
+    savedAppDataHash
+  );
+  console.log(`Mutated since load: ${mutatedSinceLoad}`);
+  console.log(`Mutated since save: ${mutatedSinceSave}`);
+  console.log(`Saved app data hash: ${savedAppDataHash}`);
+  console.log(`Loaded app data hash: ${loadedAppDataHash}`);
+  console.log(`Current app data hash: ${appDataHash}`);
+
+  if (!savedAppDataHash && mutatedSinceLoad) {
+    return true;
+  } else if (savedAppDataHash && mutatedSinceSave) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+export const mutatedAppDataSince = (
+  appDataHash: string | null,
+  loadedAppDataHash: string | null,
+  savedAppDataHash: string | null
+) => {
+  let mutatedSinceLoad = false;
+  let mutatedSinceSave = false;
+  if (loadedAppDataHash && appDataHash !== loadedAppDataHash) {
+    mutatedSinceLoad = true;
+  }
+  // Check only if the file has been saved before
+  if (savedAppDataHash && appDataHash !== savedAppDataHash) {
+    mutatedSinceSave = true;
+  }
+  return { mutatedSinceLoad, mutatedSinceSave };
+};
+
+export const calculateTaskV1Hash = (tasks: V1_Task[]): string => {
   // Strip unimportant stuff
   // Topics: folded/unfolded
   // Otherwise everything is important?
@@ -35,7 +116,7 @@ export const calculateTaskHash = (tasks) => {
   return taskHash;
 };
 
-export const calculateTopicHash = (topics) => {
+export const calculateTopicV1Hash = (topics: V1_Topic[]): string => {
   // Strip unimportant stuff
   // Topics: folded/unfolded
   // Otherwise everything is important?
@@ -61,20 +142,26 @@ export const calculateTopicHash = (topics) => {
   return topicHash;
 };
 
-export const calculateHash = (tasks, topics) => {
+export const calculateV1Hash = (
+  tasks: V1_Task[],
+  topics: V1_Topic[]
+): {
+  taskHash: string;
+  topicHash: string;
+} => {
   return {
-    taskHash: calculateTaskHash(tasks),
-    topicHash: calculateTopicHash(topics),
+    taskHash: calculateTaskV1Hash(tasks),
+    topicHash: calculateTopicV1Hash(topics),
   };
 };
 
 export const mutatedSince = (
-  taskHash,
-  topicHash,
-  loadedTaskHash,
-  loadedTopicHash,
-  savedTaskHash,
-  savedTopicHash
+  taskHash: string | undefined,
+  topicHash: string | undefined,
+  loadedTaskHash: string | undefined,
+  loadedTopicHash: string | undefined,
+  savedTaskHash: string | undefined,
+  savedTopicHash: string | undefined
 ) => {
   let mutatedSinceLoad = false;
   let mutatedSinceSave = false;
