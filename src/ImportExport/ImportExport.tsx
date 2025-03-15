@@ -65,7 +65,7 @@ const ImportExport = (props) => {
     setAppDataHash(newAppDataHash);
     setLoadedAppDataHash(newAppDataHash);
     setSavedAppDataHash(null);
-    setAppData(appData);
+    setAppData(newAppData);
     console.log("Loading etc");
     return "succesful import";
   };
