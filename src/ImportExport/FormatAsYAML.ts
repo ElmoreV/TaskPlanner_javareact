@@ -1,6 +1,18 @@
+import { AppData, AppDataV1 } from "./DataMutationChecks.ts";
 import { saveFile } from "./LoadFile.ts";
+import { Version, versionToString } from "./VersionDeterminer.ts";
 
-export const buildYAML_r = (subtopics, tasks, indent_level) => {
+export const exportYAML = (appData: AppData, fileNameRef, version: Version) => {
+  if (version === Version.V1) {
+    const appDataV1: AppDataV1 = appData as AppDataV1;
+    const YAMLcontent = buildYAMLfromV1(appDataV1.topics, appDataV1.tasks);
+    saveFile(YAMLcontent, "text/yaml", fileNameRef.current, ".yaml");
+  } else {
+    console.error("Cannot export YAML with this version: " + versionToString(version));
+  }
+};
+
+export const buildYAMLFromV1_r = (subtopics, tasks, indent_level) => {
   // '''
   // Export as
   // - Topic:
@@ -42,7 +54,7 @@ export const buildYAML_r = (subtopics, tasks, indent_level) => {
     // Add
     if (topic.subtopics.length > 0) {
       YAMLstr = YAMLstr.concat(
-        buildYAML_r(topic.subtopics, tasks, indent_level + 1)
+        buildYAMLFromV1_r(topic.subtopics, tasks, indent_level + 1)
       );
     }
   }
@@ -50,7 +62,7 @@ export const buildYAML_r = (subtopics, tasks, indent_level) => {
   return YAMLstr;
 };
 
-export const exportYAML = (topics, tasks, fileNameRef) => {
+export const buildYAMLfromV1 = (topics, tasks) => {
   // '''
   // Export as
   // - Topic:
@@ -59,6 +71,6 @@ export const exportYAML = (topics, tasks, fileNameRef) => {
   //         - Task2
   //         - Task3
   // '''
-  const YAMLcontent = buildYAML_r(topics, tasks, 0);
-  saveFile(YAMLcontent, "text/yaml", fileNameRef.current, ".yaml");
+  const YAMLcontent = buildYAMLFromV1_r(topics, tasks, 0);
+  return YAMLcontent;
 };

@@ -6,7 +6,7 @@ import {
   AppDataV1,
 } from "./DataMutationChecks.ts";
 import { exportYAML } from "./FormatAsYAML.ts";
-import { buildMarkdownRecursive, exportMarkdown } from "./FormatAsMarkdown.ts";
+import { buildMarkdownfromV1, exportMarkdown } from "./FormatAsMarkdown.ts";
 import { parseJSON } from "./ParseJSON.ts";
 import { parseYAML } from "./ParseYAML.ts";
 import { exportJSON } from "./SaveAsJSON.ts";
@@ -39,18 +39,18 @@ const ImportExport = (props) => {
   const fileNameRefComplete = useRef(""); // complete file name
 
   const handleExportYAMLClick = () => {
-    exportYAML(appData.topics, appData.tasks, fileNameRef);
+    exportYAML(appData, fileNameRef, Version.V1);
   };
 
   const handleExportMarkdownClick = () => {
-    exportMarkdown(appData.topics, appData.tasks, fileNameRef);
+    exportMarkdown(appData, fileNameRef, Version.V1);
   };
 
   const handleSaveAsJSONClick = () => {
     const appDataHash = calculateAppDataHash(appData);
     setSavedAppDataHash(appDataHash);
     setAppDataHash(appDataHash);
-    exportJSON(appData.topics, appData.tasks, fileNameRef);
+    exportJSON(appData, fileNameRef, Version.V1);
   };
 
   const importjson = (jsonStr) => {
@@ -151,11 +151,7 @@ const ImportExport = (props) => {
 
     const jsonContent = JSON.stringify(appData, null, 2);
     const jsonBlob = new Blob([jsonContent], { type: "application/json" });
-    const MarkdownContent = buildMarkdownRecursive(
-      appData.topics,
-      appData.tasks,
-      0
-    );
+    const MarkdownContent = buildMarkdownfromV1(appData.topics, appData.tasks);
     const markdownBlob = new Blob([MarkdownContent], { type: "text/markdown" });
     // const YAMLcontent = buildYAML_r(topics, tasks, 0)
     // const yamlBlob = new Blob([YAMLcontent], { type: "text/yaml" });

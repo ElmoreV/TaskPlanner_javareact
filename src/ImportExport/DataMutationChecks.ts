@@ -30,7 +30,7 @@ interface AppDataV2 {
   plannedTaskIdList: number[];
 }
 
-type AppData = AppDataV0 | AppDataV1 | AppDataV2;
+export type AppData = AppDataV0 | AppDataV1 | AppDataV2;
 
 export const calculateAppDataHash = (appData: AppData): string => {
   const appDataVersion = getVersionOfAppData(appData);

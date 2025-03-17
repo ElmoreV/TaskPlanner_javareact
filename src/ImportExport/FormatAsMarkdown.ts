@@ -1,12 +1,31 @@
-/*
-/////////////////////////////////////
-//////////// Markdown
-////////////////////////////////////
-*/
-
+import { AppData, AppDataV1 } from "./DataMutationChecks.ts";
 import { saveFile } from "./LoadFile.ts";
+import { Version, versionToString } from "./VersionDeterminer.ts";
 
-export const buildMarkdownRecursive = (subtopics, tasks, indent_level) => {
+export const exportMarkdown = (
+  appData: AppData,
+  fileNameRef,
+  version: Version
+) => {
+  if (version === Version.V1) {
+    const appDataV1: AppDataV1 = appData as AppDataV1;
+    const MarkdownContent = buildMarkdownfromV1(
+      appDataV1.topics,
+      appDataV1.tasks
+    );
+    saveFile(MarkdownContent, "text/markdown", fileNameRef.current, ".md");
+  } else {
+    console.error(
+      "Cannot export Markdown with this version: " + versionToString(version)
+    );
+  }
+};
+
+export const buildMarkdownFromV1Recursive = (
+  subtopics,
+  tasks,
+  indent_level
+) => {
   let MarkdownStr = "";
   console.debug(MarkdownStr);
   // console.log(subtopics)
@@ -39,7 +58,7 @@ export const buildMarkdownRecursive = (subtopics, tasks, indent_level) => {
     // Add
     if (topic.subtopics.length > 0) {
       MarkdownStr = MarkdownStr.concat(
-        buildMarkdownRecursive(topic.subtopics, tasks, indent_level + 1)
+        buildMarkdownFromV1Recursive(topic.subtopics, tasks, indent_level + 1)
       );
     }
   }
@@ -47,7 +66,7 @@ export const buildMarkdownRecursive = (subtopics, tasks, indent_level) => {
   return MarkdownStr;
 };
 
-export const exportMarkdown = (topics, tasks, fileNameRef) => {
-  const MarkdownContent = buildMarkdownRecursive(topics, tasks, 0);
-  saveFile(MarkdownContent, "text/markdown", fileNameRef.current, ".md");
+export const buildMarkdownfromV1 = (topics, tasks) => {
+  const MarkdownContent = buildMarkdownFromV1Recursive(topics, tasks, 0);
+  return MarkdownContent;
 };
