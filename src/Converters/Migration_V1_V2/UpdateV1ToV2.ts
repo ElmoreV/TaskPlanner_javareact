@@ -1,11 +1,16 @@
 // Type definitions for Tags and Tasks
 
+import { AppDataV1, AppDataV2 } from "../../ImportExport/DataMutationChecks.ts";
+import { Version } from "../../ImportExport/VersionDeterminer.ts";
 import { FinishedState } from "../../Tasks/TaskInterfaces.tsx";
 import { V1_Task, V1_Topic } from "../V1_types";
 import { TaskMap, TagMap, TagTasksMap, Task, Tag } from "../V2_types";
 
 // Migration function
-export const convert_v1_to_v2 = (tasksV1: V1_Task[], topicsV1: V1_Topic[]) => {
+export const convert_v1_to_v2 = (
+  tasksV1: V1_Task[],
+  topicsV1: V1_Topic[]
+): AppDataV2 => {
   // Flatten the topics into a list of Tags
   let newTagMap: TagMap = {};
 
@@ -61,7 +66,7 @@ export const convert_v1_to_v2 = (tasksV1: V1_Task[], topicsV1: V1_Topic[]) => {
   // Collects all topics/tags in the Task
   // data and create a map with Task ordering
   // as given in topicViewIndices.
-  let newTagTaskMap: TagTasksMap = {};
+  let newTagTasksMap: TagTasksMap = {};
   // First collect all tasks for a given topic (v1)/tag (v2)
   // Then order them.
   let inbetweenMap = {};
@@ -94,14 +99,14 @@ export const convert_v1_to_v2 = (tasksV1: V1_Task[], topicsV1: V1_Topic[]) => {
   // Loop through all tags, either extract the ids, or create an empty list.
   for (let tagId of Object.keys(newTagMap)) {
     if (inbetweenMap[tagId]) {
-      newTagTaskMap[tagId] = inbetweenMap[tagId].reduce(
+      newTagTasksMap[tagId] = inbetweenMap[tagId].reduce(
         (acc: number[], curr) => {
           return acc.concat(curr.id);
         },
         []
       );
     } else {
-      newTagTaskMap[tagId] = [];
+      newTagTasksMap[tagId] = [];
     }
   }
 
@@ -118,10 +123,11 @@ export const convert_v1_to_v2 = (tasksV1: V1_Task[], topicsV1: V1_Topic[]) => {
     .map((task) => task.taskId); // extract task id
 
   return {
-    newTaskMap,
-    newTagMap,
-    newTagTaskMap,
-    newPlannedTaskIds,
+    version: Version.V2,
+    taskMap: newTaskMap,
+    tagMap: newTagMap,
+    tagTasksMap: newTagTasksMap, // notice naming matches the interface
+    plannedTaskIdList: newPlannedTaskIds,
   };
 };
 
@@ -131,7 +137,7 @@ export const convert_v2_to_v1 = (
   tagsV2: TagMap,
   tagTasksV2: TagTasksMap,
   plannedTaskIdListV2: number[]
-) => {
+): AppDataV1 => {
   //////////////////// Generate topics //////////////////
   // Step 1: find root topics
   let rootTopics = Object.values(tagsV2)
@@ -207,26 +213,34 @@ export const convert_v2_to_v1 = (
     }
   });
 
-  return { topicsV1, tasksV1 };
+  return {
+    version: Version.V1,
+    topics: topicsV1,
+    tasks: tasksV1,
+  };
 };
 
 export const ensureRoundtripStability = (
   tasks: V1_Task[],
   topics: V1_Topic[]
 ) => {
-  const { newTaskMap, newTagMap, newTagTaskMap, newPlannedTaskIds } =
-    convert_v1_to_v2(tasks, topics);
+  const {
+    taskMap: newTaskMap,
+    tagMap: newTagMap,
+    tagTasksMap: newTagTasksMap,
+    plannedTaskIdList: newPlannedTaskIds,
+  } = convert_v1_to_v2(tasks, topics);
   console.log(newTaskMap);
   console.log(newTagMap);
-  console.log(newTagTaskMap);
+  console.log(newTagTasksMap);
   console.log(newPlannedTaskIds);
   const res2 = convert_v2_to_v1(
     newTaskMap,
     newTagMap,
-    newTagTaskMap,
+    newTagTasksMap,
     newPlannedTaskIds
   );
-  const { topicsV1, tasksV1 } = res2;
+  const { topics: topicsV1, tasks: tasksV1 } = res2;
   console.log(topicsV1);
   console.log(tasksV1);
   // compare if there are differences between tasks and tasksV1, and topics and topicsV1

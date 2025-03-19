@@ -45,9 +45,22 @@ export const checkVersionV0orV1 = (tasks, topics): Version => {
 };
 
 const getVersionOfImportedJSON = (jsonStr: string): Version => {
-  // Not implemented yet
-  // will be dependent on some metadata
-  // like metadata.version
-  // but if that's not there, we need to check it the old way.
+  const importedData = JSON.parse(jsonStr);
+  if ("version" in importedData) {
+    if (importedData.version === Version.V0) {
+      return Version.V0;
+    } else if (importedData.version === Version.V1) {
+      return Version.V1;
+    } else if (importedData.version === Version.V2) {
+      return Version.V2;
+    }
+  } else {
+    // try to infer it
+    if ("taskMap" in importedData && "tagMap" in importedData) {
+      return Version.V2;
+    } else if ("tasks" in importedData && "topics" in importedData) {
+      return checkVersionV0orV1(importedData.tasks, importedData.topics);
+    }
+  }
   return Version.UNKNOWN;
 };

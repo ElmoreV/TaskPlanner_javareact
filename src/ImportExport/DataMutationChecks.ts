@@ -22,7 +22,8 @@ export interface AppDataV1 {
   tasks: V1_Task[];
   topics: V1_Topic[];
 }
-interface AppDataV2 {
+
+export interface AppDataV2 {
   version: Version | undefined;
   taskMap: TaskMap;
   tagMap: TagMap;
@@ -35,7 +36,7 @@ export type AppData = AppDataV0 | AppDataV1 | AppDataV2;
 export const calculateAppDataHash = (appData: AppData): string => {
   const appDataVersion = getVersionOfAppData(appData);
   if (appDataVersion === Version.V1) {
-    let appDataV1: AppDataV1 = appData;
+    let appDataV1: AppDataV1 = appData as AppDataV1;
     const { taskHash, topicHash } = calculateV1Hash(
       appDataV1.tasks,
       appDataV1.topics

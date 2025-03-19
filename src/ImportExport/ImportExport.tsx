@@ -18,14 +18,20 @@ import {
 
 const ImportExport = (props) => {
   console.debug("Rendering ImportExport");
-  const { appData, setAppData, preferredVersion } = props;
+  const { appData, setAppData, importAsVersion } = props;
   // This value will be used to determine the version of the exported data
-  let curPreferredVersion =
-    preferredVersion === undefined ? Version.V1 : preferredVersion;
-  let curVersion = getVersionOfAppData(appData);
-  console.log("Current version is " + versionToString(curVersion));
-  console.log("Preferred version is " + versionToString(curPreferredVersion));
+  let curImportAsVersion =
+    importAsVersion === undefined ? Version.V1 : importAsVersion;
 
+  let curVersion = getVersionOfAppData(appData);
+  console.log("Loaded version is " + versionToString(curVersion));
+  console.log(
+    "Importing data as version: " + versionToString(curImportAsVersion)
+  );
+
+  const [selectedExportVersion, setSelectedExportVersion] = useState<Version>(
+    Version.V1
+  );
   const [appDataHash, setAppDataHash] = useState<string | null>(null);
   const [loadedAppDataHash, setLoadedAppDataHash] = useState<string | null>(
     null
@@ -50,16 +56,13 @@ const ImportExport = (props) => {
     const appDataHash = calculateAppDataHash(appData);
     setSavedAppDataHash(appDataHash);
     setAppDataHash(appDataHash);
-    exportJSON(appData, fileNameRef, Version.V1);
+    exportJSON(appData, fileNameRef, selectedExportVersion);
   };
 
   const importjson = (jsonStr) => {
-    const { old_topics, old_tasks } = parseJSON(jsonStr);
+    const newAppData = parseJSON(jsonStr);
 
-    let newAppData: AppDataV1 = {
-      topics: old_topics,
-      tasks: old_tasks,
-    };
+
     const newAppDataHash = calculateAppDataHash(newAppData);
 
     setAppDataHash(newAppDataHash);
@@ -235,8 +238,32 @@ const ImportExport = (props) => {
     savedAppDataHash
   );
 
+  const handleVersionChange = (e) => {
+    console.log(e.target.value);
+    const map = {
+      1: Version.V0,
+      2: Version.V1,
+      3: Version.V2,
+    };
+    console.log(map[e.target.value]);
+    setSelectedExportVersion(map[e.target.value]);
+  };
+
   return (
     <div className="importExport">
+      <div>
+        <label htmlFor="exportVersionSelect">Export Version: </label>
+        <select
+          id="exportVersionSelect"
+          onChange={handleVersionChange}
+          value={selectedExportVersion}
+        >
+          <option value={Version.V0}>Version 0</option>
+          <option value={Version.V1}>Version 1</option>
+          <option value={Version.V2}>Version 2</option>
+        </select>
+      </div>
+      <br />
       <button onClick={handleSaveAsJSONClick}>Save as JSON</button>
       <br />
       {savedAppDataHash

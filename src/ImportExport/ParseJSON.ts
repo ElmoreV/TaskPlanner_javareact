@@ -2,13 +2,14 @@ import {
   convert_v1_to_v0,
   convert_v0_to_v1,
 } from "../Converters/Migration_V0_V1/UpdateV0ToV1.ts";
+import { AppDataV1 } from "./DataMutationChecks.ts";
 import {
   checkVersionV0orV1,
   Version,
   versionToString,
 } from "./VersionDeterminer.ts";
 
-export const parseJSON = (jsonStr) => {
+export const parseJSON = (jsonStr): AppDataV1 => {
   const uploadedData = JSON.parse(jsonStr);
   // As loaded (may be new format, may be old format)
   // setTopics(uploadedData.topics);
@@ -26,5 +27,5 @@ export const parseJSON = (jsonStr) => {
       uploadedData.tasks
     );
   }
-  return { old_topics, old_tasks };
+  return { version: Version.V1, topics: old_topics, tasks: old_tasks };
 };
