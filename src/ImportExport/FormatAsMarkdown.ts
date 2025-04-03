@@ -1,6 +1,7 @@
-import { AppData, AppDataV1 } from "./DataMutationChecks.ts";
+import { AppData, AppDataV1 } from "../Structure/AppDataTypes.ts";
 import { saveFile } from "./LoadFile.ts";
-import { Version, versionToString } from "./VersionDeterminer.ts";
+import { Version } from "../Structure/Versions.ts";
+import { versionToString } from "./VersionDeterminer.ts";
 
 export const exportMarkdown = (
   appData: AppData,

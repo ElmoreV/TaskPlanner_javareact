@@ -1,6 +1,6 @@
 import { memo, useCallback } from "react";
 import Tag from "./TagV2.tsx";
-import { TagMap, TagTasksMap, TaskMap } from "../Converters/V2_types";
+import { TagMap, TagTasksMap, TaskMap } from "../Structure/V2_types.ts";
 import {
   tagToggleFoldV2,
   setTagNameV2,

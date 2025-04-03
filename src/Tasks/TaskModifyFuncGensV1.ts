@@ -1,4 +1,4 @@
-import { FinishedState } from "./TaskInterfaces.tsx";
+import { FinishedState } from "../Structure/TaskInterfaces.tsx";
 
 const getScheduleTaskV1 = (setTasks, tasks, id) => {
   const scheduleTask = () => {

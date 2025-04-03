@@ -1,9 +1,4 @@
-export enum Version {
-  UNKNOWN,
-  V0,
-  V1,
-  V2,
-}
+import { Version } from "../Structure/Versions.ts";
 
 export const versionToString = (version: Version): string => {
   switch (version) {

@@ -14,7 +14,7 @@ import {
   getToggleFoldTaskV1,
 } from "../Tasks/TaskModifyFuncGensV1.ts";
 
-import { FinishedState } from "../Tasks/TaskInterfaces.tsx";
+import { FinishedState } from "../Structure/TaskInterfaces.tsx";
 
 // TODO: add the topic name to the bar
 

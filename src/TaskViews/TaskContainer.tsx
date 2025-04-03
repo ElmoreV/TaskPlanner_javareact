@@ -19,7 +19,7 @@ import {
   setTaskDueTimeV1Semipure,
   completeTaskV1Semipure,
 } from "../Tasks/TaskModifyFuncGensV1Pure.ts";
-import { V1_Task } from "../Converters/V1_types.ts";
+import { V1_Task } from "../Structure/V1_types.ts";
 
 class SelectedCategoryTask {
   constructor(taskId, topicId, topicViewIndex, superTaskId) {

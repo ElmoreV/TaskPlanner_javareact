@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import PropTypes from "prop-types";
 import { getTopicPathByTopicIdV1 } from "../Topics/TopicHelperV1.ts";
 import TaskContent from "../Tasks/TaskContent.js";
-import { FinishedState } from "../Tasks/TaskInterfaces.tsx";
+import { FinishedState } from "../Structure/TaskInterfaces.tsx";
 import { translateLastCompletedDatetime } from "../Tasks/TaskHelperFuncs.js";
 
 const PlannedTask = (props) => {

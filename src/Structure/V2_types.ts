@@ -1,4 +1,4 @@
-import { FinishedState } from "../Tasks/TaskInterfaces";
+import { FinishedState } from "./TaskInterfaces";
 
 // And the other data structures to hold them.
 interface Tag {

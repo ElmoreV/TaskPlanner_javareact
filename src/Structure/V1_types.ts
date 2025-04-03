@@ -1,4 +1,4 @@
-import { FinishedState } from "../Tasks/TaskInterfaces";
+import { FinishedState } from "./TaskInterfaces";
 
 interface V1_Topic {
   name: string;

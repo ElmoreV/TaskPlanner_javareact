@@ -1,4 +1,4 @@
-import { Tag, TagMap, TagTasksMap, TaskMap } from "../Converters/V2_types.js";
+import { Tag, TagMap, TagTasksMap, TaskMap } from "../Structure/V2_types.js";
 import { getAllDescendantTagsV2 } from "../Tags/TagHelperV2.ts";
 import { generateEmptyTaskV2 } from "./ModifyTaskTagAdgElementsV2.ts";
 

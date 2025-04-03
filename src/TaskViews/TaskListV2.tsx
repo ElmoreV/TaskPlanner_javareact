@@ -5,7 +5,7 @@ import {
   TagTasksMap,
   TaskMap,
   TaskTagsMap,
-} from "../Converters/V2_types";
+} from "../Structure/V2_types.ts";
 import TaskContainerV2 from "../Tasks/TaskContainerV2.tsx";
 import TagContainer from "../Tags/TagContainerV2.tsx";
 import { generateEmptyTagV2 } from "../Tags/TagHelperV2.ts";

@@ -1,5 +1,5 @@
-import { TagMap, TagTasksMap, TaskMap } from "./Converters/V2_types.ts";
-import { FinishedState } from "./Tasks/TaskInterfaces.tsx";
+import { TagMap, TagTasksMap, TaskMap } from "./Structure/V2_types.ts";
+import { FinishedState } from "./Structure/TaskInterfaces.tsx";
 
 const initialTags: TagMap = {
   1: {

@@ -1,4 +1,4 @@
-import { V1_Task, V1_Topic } from "../Converters/V1_types.ts";
+import { V1_Task, V1_Topic } from "../Structure/V1_types.ts";
 import {
   getFreeTopicKeyV1,
   disconnectTopicsByIdV1_r,

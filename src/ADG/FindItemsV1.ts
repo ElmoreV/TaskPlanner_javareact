@@ -1,4 +1,4 @@
-import { V1_Task, V1_Topic } from "../Converters/V1_types";
+import { V1_Task, V1_Topic } from "../Structure/V1_types";
 
 const findTopicByTopicIdV1R = (topics: V1_Topic[], topic_key: number) => {
   // console.debug(topics);

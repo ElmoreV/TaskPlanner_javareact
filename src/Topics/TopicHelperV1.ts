@@ -1,5 +1,5 @@
 import { findTopicByTopicIdV1 } from "../ADG/FindItemsV1.ts";
-import { V1_Task, V1_Topic } from "../Converters/V1_types.ts";
+import { V1_Task, V1_Topic } from "../Structure/V1_types.ts";
 
 const getFreeTaskIdV1 = (tasks: V1_Task[]) => {
   return 1 + tasks.reduce((max_id, task) => Math.max(max_id, task.id), 0);

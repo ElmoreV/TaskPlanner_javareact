@@ -2,13 +2,10 @@ import {
   convert_v1_to_v2,
   convert_v2_to_v1,
 } from "../Converters/Migration_V1_V2/UpdateV1ToV2.ts";
-import { AppData, AppDataV1, AppDataV2 } from "./DataMutationChecks.ts";
+import { AppData, AppDataV1, AppDataV2 } from "../Structure/AppDataTypes.ts";
 import { saveFile } from "./LoadFile.ts";
-import {
-  getVersionOfAppData,
-  Version,
-  versionToString,
-} from "./VersionDeterminer.ts";
+import { Version } from "../Structure/Versions.ts";
+import { getVersionOfAppData, versionToString } from "./VersionDeterminer.ts";
 
 export const exportJSON = (
   appData: AppData,

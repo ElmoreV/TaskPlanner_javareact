@@ -1,9 +1,11 @@
 import structuredClone from "@ungap/structured-clone";
 import { sanitizeWeekOrderIndex2 } from "../ADG/ModifyFuncGeneratorsV1.ts";
-import { getVersionOfAppData, Version } from "./VersionDeterminer.ts";
-import { TaskMap, TagMap, TagTasksMap } from "../Converters/V2_types.ts";
-import { V1_Task, V1_Topic } from "../Converters/V1_types.ts";
-import { V0_Task, V0_Topic } from "../Converters/V0_types.ts";
+import { getVersionOfAppData } from "./VersionDeterminer.ts";
+import { Version } from "../Structure/Versions.ts";
+import { TaskMap, TagMap, TagTasksMap } from "../Structure/V2_types.ts";
+import { V1_Task, V1_Topic } from "../Structure/V1_types.ts";
+import { V0_Task, V0_Topic } from "../Structure/V0_types.ts";
+import { AppData, AppDataV1, AppDataV2 } from "../Structure/AppDataTypes.ts";
 var hash = require("object-hash");
 
 /*
@@ -11,27 +13,6 @@ var hash = require("object-hash");
     ////// Calculating hash
     ///////////////
     */
-
-interface AppDataV0 {
-  version: Version | undefined;
-  tasks: V0_Task[];
-  topics: V0_Topic[];
-}
-export interface AppDataV1 {
-  version: Version | undefined;
-  tasks: V1_Task[];
-  topics: V1_Topic[];
-}
-
-export interface AppDataV2 {
-  version: Version | undefined;
-  taskMap: TaskMap;
-  tagMap: TagMap;
-  tagTasksMap: TagTasksMap;
-  plannedTaskIdList: number[];
-}
-
-export type AppData = AppDataV0 | AppDataV1 | AppDataV2;
 
 export const calculateAppDataHash = (appData: AppData): string => {
   const appDataVersion = getVersionOfAppData(appData);

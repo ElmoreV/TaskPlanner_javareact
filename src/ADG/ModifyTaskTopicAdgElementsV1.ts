@@ -1,8 +1,8 @@
 /*
 The elementary functions
 */
-import { V1_Task } from "../Converters/V1_types.ts";
-import { FinishedState } from "../Tasks/TaskInterfaces.tsx";
+import { V1_Task } from "../Structure/V1_types.ts";
+import { FinishedState } from "../Structure/TaskInterfaces.tsx";
 import { getFreeTaskIdV1 } from "../Topics/TopicHelperV1.ts";
 
 const generateEmptyTaskV1 = (tasks: V1_Task[]) => {

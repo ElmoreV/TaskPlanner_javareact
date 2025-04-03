@@ -3,18 +3,14 @@ import {
   calculateAppDataHash,
   isAppDataChanged,
   mutatedAppDataSince,
-  AppDataV1,
 } from "./DataMutationChecks.ts";
 import { exportYAML } from "./FormatAsYAML.ts";
 import { buildMarkdownfromV1, exportMarkdown } from "./FormatAsMarkdown.ts";
 import { parseJSON } from "./ParseJSON.ts";
 import { parseYAML } from "./ParseYAML.ts";
 import { exportJSON } from "./SaveAsJSON.ts";
-import {
-  getVersionOfAppData,
-  Version,
-  versionToString,
-} from "./VersionDeterminer.ts";
+import { getVersionOfAppData, versionToString } from "./VersionDeterminer.ts";
+import { Version } from "../Structure/Versions.ts";
 
 const ImportExport = (props) => {
   console.debug("Rendering ImportExport");
@@ -61,7 +57,6 @@ const ImportExport = (props) => {
 
   const importjson = (jsonStr) => {
     const newAppData = parseJSON(jsonStr);
-
 
     const newAppDataHash = calculateAppDataHash(newAppData);
 

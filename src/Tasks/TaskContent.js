@@ -5,7 +5,7 @@
 import React from "react";
 import fancyStyles from "./TaskContentFancy.module.css";
 import simpleStyles from "./TaskContentSimple.module.css";
-import { FinishedState } from "./TaskInterfaces.tsx";
+import { FinishedState } from "../Structure/TaskInterfaces.tsx";
 
 const captureClick = (func) => {
   const wrapper = (e) => {

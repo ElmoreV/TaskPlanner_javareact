@@ -1,5 +1,5 @@
-import { V1_Task } from "../Converters/V1_types.ts";
-import { FinishedState } from "./TaskInterfaces.tsx";
+import { V1_Task } from "../Structure/V1_types.ts";
+import { FinishedState } from "../Structure/TaskInterfaces.tsx";
 
 const scheduleTaskV1Semipure = (tasks: V1_Task[], id: number) => {
   return tasks.map((task) => {

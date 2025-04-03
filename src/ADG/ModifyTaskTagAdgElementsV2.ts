@@ -1,8 +1,8 @@
 /*
 The elementary functions
 */
-import { TagTasksMap, Task, TaskMap } from "../Converters/V2_types.ts";
-import { FinishedState } from "../Tasks/TaskInterfaces.tsx";
+import { TagTasksMap, Task, TaskMap } from "../Structure/V2_types.ts";
+import { FinishedState } from "../Structure/TaskInterfaces.tsx";
 import { getFreeTaskIdV2 } from "../Tags/TagHelperV2.ts";
 
 const generateEmptyTaskV2 = (tasks: TaskMap) => {

@@ -12,13 +12,13 @@ import {
   setTaskDueTimeV2,
   completeTaskV2,
 } from "../Tasks/TaskModifyFuncGensV2.ts";
-import { FinishedState } from "./TaskInterfaces.tsx";
+import { FinishedState } from "../Structure/TaskInterfaces.tsx";
 import {
   TagMap,
   TagTasksMap,
   TaskMap,
   TaskTagsMap,
-} from "../Converters/V2_types.ts";
+} from "../Structure/V2_types.ts";
 import { deleteEntireTaskV2 } from "../ADG/ModifyTaskTagAdgElementsV2.ts";
 
 const useCallbackifyTasks = (fn, setAppData) => {

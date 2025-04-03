@@ -1,5 +1,5 @@
-import { V0_Task, V0_Topic } from "../V0_types";
-import { V1_Task, V1_Topic } from "../V1_types";
+import { V0_Task, V0_Topic } from "../../Structure/V0_types";
+import { V1_Task, V1_Topic } from "../../Structure/V1_types";
 
 // 25.02.2024 Topic Tasks (choice between id and key is not important
 // let's use id, because they're internal)

@@ -1,4 +1,4 @@
-import { FinishedState } from "./Tasks/TaskInterfaces.tsx";
+import { FinishedState } from "./Structure/TaskInterfaces.tsx";
 
 const initialTopicsV1 = [
   {

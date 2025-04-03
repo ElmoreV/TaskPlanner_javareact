@@ -1,6 +1,6 @@
 // // import { findTopicByTopicIdV1 } from "../ADG/FindItemsV1.ts";
 
-import { TagMap } from "../Converters/V2_types";
+import { TagMap } from "../Structure/V2_types";
 
 const tagToggleFoldV2 = (tagMap: TagMap, tagId: number): TagMap => {
   return {

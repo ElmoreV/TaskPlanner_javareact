@@ -1,6 +1,7 @@
-import { AppData, AppDataV1 } from "./DataMutationChecks.ts";
+import { AppData, AppDataV1 } from "../Structure/AppDataTypes.ts";
 import { saveFile } from "./LoadFile.ts";
-import { Version, versionToString } from "./VersionDeterminer.ts";
+import { Version } from "../Structure/Versions.ts";
+import { versionToString } from "./VersionDeterminer.ts";
 
 export const exportYAML = (appData: AppData, fileNameRef, version: Version) => {
   if (version === Version.V1) {
@@ -8,7 +9,9 @@ export const exportYAML = (appData: AppData, fileNameRef, version: Version) => {
     const YAMLcontent = buildYAMLfromV1(appDataV1.topics, appDataV1.tasks);
     saveFile(YAMLcontent, "text/yaml", fileNameRef.current, ".yaml");
   } else {
-    console.error("Cannot export YAML with this version: " + versionToString(version));
+    console.error(
+      "Cannot export YAML with this version: " + versionToString(version)
+    );
   }
 };
 

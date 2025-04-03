@@ -1,5 +1,5 @@
-import { TaskMap } from "../Converters/V2_types.ts";
-import { FinishedState } from "./TaskInterfaces.tsx";
+import { TaskMap } from "../Structure/V2_types.ts";
+import { FinishedState } from "../Structure/TaskInterfaces.tsx";
 
 // All functions below are idempotent
 // e.g. the original function like

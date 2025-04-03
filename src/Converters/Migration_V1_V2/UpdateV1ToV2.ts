@@ -1,10 +1,16 @@
 // Type definitions for Tags and Tasks
 
-import { AppDataV1, AppDataV2 } from "../../ImportExport/DataMutationChecks.ts";
-import { Version } from "../../ImportExport/VersionDeterminer.ts";
-import { FinishedState } from "../../Tasks/TaskInterfaces.tsx";
-import { V1_Task, V1_Topic } from "../V1_types";
-import { TaskMap, TagMap, TagTasksMap, Task, Tag } from "../V2_types";
+import { AppDataV1, AppDataV2 } from "../../Structure/AppDataTypes.ts";
+import { Version } from "../../Structure/Versions.ts";
+import { FinishedState } from "../../Structure/TaskInterfaces.tsx";
+import { V1_Task, V1_Topic } from "../../Structure/V1_types.ts";
+import {
+  TaskMap,
+  TagMap,
+  TagTasksMap,
+  Task,
+  Tag,
+} from "../../Structure/V2_types.ts";
 
 // Migration function
 export const convert_v1_to_v2 = (

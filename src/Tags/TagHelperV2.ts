@@ -1,6 +1,6 @@
 import { findTopicByTopicIdV1 } from "../ADG/FindItemsV1.ts";
-import { V1_Task, V1_Topic } from "../Converters/V1_types.ts";
-import { TaskMap, TagMap, TagTasksMap, Tag } from "../Converters/V2_types.ts";
+import { V1_Task, V1_Topic } from "../Structure/V1_types.ts";
+import { TaskMap, TagMap, TagTasksMap, Tag } from "../Structure/V2_types.ts";
 
 const getFreeTaskIdV2 = (taskMap: TaskMap) => {
   return (
