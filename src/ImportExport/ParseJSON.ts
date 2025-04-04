@@ -2,27 +2,46 @@ import {
   convert_v1_to_v0,
   convert_v0_to_v1,
 } from "../Converters/Migration_V0_V1/UpdateV0ToV1.ts";
+import { convert_v2_to_v1 } from "../Converters/Migration_V1_V2/UpdateV1ToV2.ts";
 import { AppDataV1 } from "../Structure/AppDataTypes.ts";
 import { Version } from "../Structure/Versions.ts";
-import { checkVersionV0orV1, versionToString } from "./VersionDeterminer.ts";
+import {
+  checkVersionV0orV1,
+  getVersionOfAppData,
+  versionToString,
+} from "./VersionDeterminer.ts";
 
 export const parseJSON = (jsonStr): AppDataV1 => {
-  const uploadedData = JSON.parse(jsonStr);
+  let importedData = JSON.parse(jsonStr);
+
+  let importedVersion = getVersionOfAppData(importedData);
+  console.log(
+    "Version of imported data is " + versionToString(importedVersion)
+  );
+  if (importedVersion === Version.V0) {
+    importedData = convert_v0_to_v1(importedData.topics, importedData.tasks);
+    console.log(
+      "Version of converted data is " + versionToString(importedVersion)
+    );
+  } else if (importedVersion === Version.V1) {
+    // no conversion needed
+  } else if (importedVersion === Version.V2) {
+    importedData = convert_v2_to_v1(
+      importedData.taskMap,
+      importedData.tagMap,
+      importedData.tagTasksMap,
+      importedData.plannedTaskIdList
+    );
+    console.log(
+      "Version of converted data is " + versionToString(importedVersion)
+    );
+  }
   // As loaded (may be new format, may be old format)
   // setTopics(uploadedData.topics);
   // setTasks(uploadedData.tasks);
-  let [old_topics, old_tasks] = [uploadedData.topics, uploadedData.tasks];
   // Sanitize input
 
   // Version rectification
-  let version = checkVersionV0orV1(old_tasks, old_topics);
-  console.log("Version of input is " + versionToString(version));
-  if (version === Version.V0) {
-    console.log("converting imported v0 to v1 format");
-    [old_topics, old_tasks] = convert_v0_to_v1(
-      uploadedData.topics,
-      uploadedData.tasks
-    );
-  }
-  return { version: Version.V1, topics: old_topics, tasks: old_tasks };
+  importedData.version = Version.V1;
+  return importedData;
 };
