@@ -2,9 +2,10 @@
 // Leave any logic out of the contents component
 // Instead, make it a prop of the TaskContent
 
-import React from "react";
+import React, { useState } from "react";
 import fancyStyles from "./TaskContentFancy.module.css";
 import simpleStyles from "./TaskContentSimple.module.css";
+import splitButtonStyles from "./SplitButton.module.css";
 import { FinishedState } from "../Structure/TaskInterfaces.tsx";
 
 const captureClick = (func) => {
@@ -114,32 +115,12 @@ const TaskContent = (props) => {
               Delete task
             </button>
           )}
-          {taskFinishStatus == FinishedState.NotFinished && completeTask && (
-            <button
-              className={styles.taskComplete}
-              onClick={captureClick(completeTask)}
-            >
-              Complete
-            </button>
-          )}
-          {taskFinishStatus == FinishedState.NotFinished &&
-            markTaskIrrelevant && (
-              <button
-                className={styles.taskMarkIrrelevant}
-                onClick={captureClick(markTaskIrrelevant)}
-              >
-                Irrel
-              </button>
-            )}
-          {taskFinishStatus == FinishedState.NotFinished &&
-            markTaskImpossible && (
-              <button
-                className={styles.taskMarkImpossible}
-                onClick={captureClick(markTaskImpossible)}
-              >
-                Imposs
-              </button>
-            )}
+          <FinishTaskSplitButton
+            completeTask={completeTask}
+            markTaskIrrelevant={markTaskIrrelevant}
+            markTaskImpossible={markTaskImpossible}
+            taskFinishStatus={taskFinishStatus}
+          />
           {taskFinishStatus == FinishedState.NotFinished &&
             unplan &&
             planned && (
@@ -162,32 +143,7 @@ const TaskContent = (props) => {
                 Plan{" "}
               </button>
             )}
-          {taskFinishStatus == FinishedState.Completed && completeTask && (
-            <button
-              className={styles.taskComplete}
-              onClick={captureClick(completeTask)}
-            >
-              Decomplete
-            </button>
-          )}
-          {taskFinishStatus == FinishedState.Irrelevant &&
-            markTaskIrrelevant && (
-              <button
-                className={styles.taskMarkIrrelevant}
-                onClick={captureClick(markTaskIrrelevant)}
-              >
-                Rele
-              </button>
-            )}
-          {taskFinishStatus == FinishedState.Impossible &&
-            markTaskImpossible && (
-              <button
-                className={styles.taskMarkImpossible}
-                onClick={captureClick(markTaskImpossible)}
-              >
-                Possib
-              </button>
-            )}
+
           {toggleRepeatTask && repeated && (
             <button
               className={styles.makeRepeated}
@@ -266,6 +222,99 @@ const TaskContent = (props) => {
           )}
         </div>
       </div>
+    </div>
+  );
+};
+
+const FinishTaskSplitButton = (props) => {
+  // props
+  const {
+    completeTask,
+    markTaskIrrelevant,
+    markTaskImpossible,
+    taskFinishStatus,
+  } = props;
+  // open and close dropdown
+  const [open, setOpen] = useState(false);
+  const toggleDropdown = () => {
+    setOpen((prevOpen) => !prevOpen);
+  };
+  let defaultAction;
+  let defaultText;
+  switch (taskFinishStatus) {
+    case FinishedState.Completed:
+      defaultAction = completeTask;
+      defaultText = "Decomplete";
+      break;
+
+    case FinishedState.Irrelevant:
+      defaultAction = markTaskIrrelevant;
+      defaultText = "Relevant";
+      break;
+
+    case FinishedState.Impossible:
+      defaultAction = markTaskImpossible;
+      defaultText = "Possible";
+      break;
+
+    default:
+      defaultAction = completeTask;
+      defaultText = "Complete";
+      break;
+  }
+
+  // Final dom structure
+  // <default (complete) button>
+  // <dropdown button>
+  //   <dropdown menu>
+  return (
+    <div className={splitButtonStyles.splitButtonContainer}>
+      <div
+        style={{
+          display: "inline flex",
+          border: "none",
+          padding: "0",
+          margin: "0",
+        }}
+      >
+        <button
+          onClick={captureClick(defaultAction)}
+          style={{
+            // border: "solid",
+            borderRadius: "0",
+          }}
+        >
+          {defaultText}
+        </button>
+        <button
+          onClick={toggleDropdown}
+          style={{
+            borderLeft: "none",
+            // borderLeft: "solid 1px #000",
+            borderRadius: "0 10px 10px 0",
+            margin: "0",
+          }}
+        >
+          ▼
+        </button>
+      </div>
+      {open && (
+        <ul className={splitButtonStyles.dropdownMenu}>
+          {taskFinishStatus !== FinishedState.Completed &&
+            taskFinishStatus !== FinishedState.NotFinished &&
+            completeTask && (
+              <li onClick={captureClick(completeTask)}>Complete</li>
+            )}
+          {taskFinishStatus !== FinishedState.Irrelevant &&
+            markTaskIrrelevant && (
+              <li onClick={captureClick(markTaskIrrelevant)}>Irrelevant</li>
+            )}
+          {taskFinishStatus !== FinishedState.Impossible &&
+            markTaskImpossible && (
+              <li onClick={captureClick(markTaskImpossible)}>Impossible</li>
+            )}
+        </ul>
+      )}
     </div>
   );
 };

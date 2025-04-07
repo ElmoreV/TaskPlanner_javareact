@@ -1,0 +1,26 @@
+/* TaskStatusButton.module.css */
+.splitButtonContainer {
+  display: inline;
+}
+
+
+.dropdownMenu {
+    background-color: white;
+    margin: 0 10px 0 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-radius: 0 0px 10px 0;
+}
+
+.dropdownMenu li {
+  padding: 2px 5px;
+  cursor: pointer;
+} 
+
+.dropdownMenu li:hover {
+  background-color: var(--color-secondary-hover);
+} 
+
+.dropdownMenu::before {
+  content: none !important;
+}

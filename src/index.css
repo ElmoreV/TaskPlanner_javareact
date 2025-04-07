@@ -226,7 +226,7 @@ ul {
 }
 
 /* Vertical guidelines for nested lists */
-ul ul::before {
+.task-list ul ul::before {
   content: '';
   position: absolute;
   top: 2px;
