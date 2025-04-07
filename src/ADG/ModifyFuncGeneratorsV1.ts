@@ -403,8 +403,7 @@ const getAddTopic = (
       unfolded: true,
       subtopics: [],
     };
-    newTopics.push(addedTopic);
-    console.debug(newTopics);
+    newTopics.unshift(addedTopic);
     setTopics(newTopics);
   };
   return addTopic;
