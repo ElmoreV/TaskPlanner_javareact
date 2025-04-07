@@ -1,11 +1,6 @@
-/* TaskStatusButton.module.css */
-.splitButtonContainer {
-  display: inline;
-}
-
 
 .dropdownMenu {
-    background-color: white;
+    background-color: white; 
     margin: 0 10px 0 0;
     padding: 0;
     border: 1px solid #ccc;
