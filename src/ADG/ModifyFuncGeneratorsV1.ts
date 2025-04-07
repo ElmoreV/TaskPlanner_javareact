@@ -1,3 +1,4 @@
+import { AppDataV1 } from "../Structure/AppDataTypes.ts";
 import { V1_Task, V1_Topic } from "../Structure/V1_types.ts";
 import {
   getFreeTopicKeyV1,
@@ -776,14 +777,12 @@ const findAllSubtopicIds = (topics: V1_Topic[], topicId: number) => {
 
 // For v1 data
 const getDeleteTopic = (
-  setTopics: (topics: V1_Topic[]) => void,
-  topics: V1_Topic[],
-  setTasks: (tasks: V1_Task[]) => void,
-  tasks: V1_Task[],
+  setAppData: (appData: AppDataV1) => void,
+  appData: AppDataV1,
   topicId: number
 ) => {
   const deleteTopic = () => {
-    let newTopics = [...topics];
+    let newTopics = [...appData.topics];
     // 1. Find all topic ids that will be removed
     // 2. Remove topic id and its subtopics from topics
     // 3. Remove the topic ids from all relevant tasks
@@ -791,12 +790,10 @@ const getDeleteTopic = (
 
     // Find all topic ids that will be removed
     let idList = findAllSubtopicIds(newTopics, topicId);
-
     // Filter out any topic that is a subtopic of topicId, recursively
     newTopics = disconnectTopicsByIdV1_r(newTopics, topicId);
-
     // Removing task instances
-    let newTasks = [...tasks];
+    let newTasks = [...appData.tasks];
     // Filter tasks that have overlap in idList and task.topics
     let tasksToRemove = newTasks.filter((task) =>
       task.topics.some((taskTopicId) => idList.includes(taskTopicId))
@@ -814,7 +811,7 @@ const getDeleteTopic = (
     });
 
     // Filter out tasks without instances (not inside any topic OR in any supertask)
-    let subTaskIds = newTasks.reduce(
+    let subTaskIds = newTasks.reduce<number[]>(
       (acc, curr) => acc.concat(curr.subTaskIds),
       []
     );
@@ -824,10 +821,9 @@ const getDeleteTopic = (
     console.info(
       "Length of tasks before deletion/length of tasks after deletion"
     );
-    console.info(tasks.length + " -> " + newTasks.length);
+    console.info(appData.tasks.length + " -> " + newTasks.length);
 
-    setTopics(newTopics);
-    setTasks(newTasks);
+    setAppData({ ...appData, topics: newTopics, tasks: newTasks });
   };
   return deleteTopic;
 };

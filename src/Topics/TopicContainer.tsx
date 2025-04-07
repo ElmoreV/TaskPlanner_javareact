@@ -42,7 +42,7 @@ export default function TopicContainer(props) {
       unfoldAll={getUnfoldAll(setTopics, topics)}
       foldAll={getFoldAll(setTopics, topics)}
       duplicateTask={getDuplicateTask(setTasks, tasks, topics)}
-      deleteTopic={getDeleteTopic(setTopics, topics, setTasks, tasks, topic.id)}
+      deleteTopic={getDeleteTopic(setAppData, appData, topic.id)}
       fancy={fancy}
     />
   );
