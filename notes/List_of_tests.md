@@ -6,7 +6,7 @@ This is a list of tests that I should run in the UI to check the compatibility.
 
 - [x] Add task on a tag, creates a new task in that tag, on the top of the existing task list.
 - [x] Add tag on a tag, creates a new tag in that tag, on the top of the existing tag list.
-- [ ] Add root ropic will create a new root tag on the top of the existing root tag list.
+- [x] Add root ropic will create a new root tag on the top of the existing root tag list.
 
 ## Read
 

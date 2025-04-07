@@ -49,6 +49,10 @@ const deleteTaskFromSelection = (
   topicId,
   superTaskId
 ) => {
+  console.log(
+    `Deleting task ${taskId}, ${topicId}, ${superTaskId} from selection`
+  );
+  console.log(selectedTasks);
   let newSelectedTasks = [...selectedTasks];
   newSelectedTasks = newSelectedTasks.filter(
     (selTask) =>
@@ -58,17 +62,21 @@ const deleteTaskFromSelection = (
         selTask.superTaskId == superTaskId
       )
   );
+  console.log(
+    `New selection after deleting task ${taskId}, ${topicId}, ${superTaskId}`
+  );
+  console.log(newSelectedTasks);
   return newSelectedTasks;
 };
 
-const useCallbackifySelectedTasks = (fn, setSeelctedTasks) => {
+const useCallbackifySelectedTasks = (fn, setSelectedTasks) => {
   return useCallback(
     (...args) => {
-      return setSeelctedTasks((oldSelectedTasks) => {
+      return setSelectedTasks((oldSelectedTasks) => {
         return fn(oldSelectedTasks, ...args);
       });
     },
-    [fn, setSeelctedTasks]
+    [fn, setSelectedTasks]
   );
 };
 

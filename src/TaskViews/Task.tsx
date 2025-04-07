@@ -122,76 +122,83 @@ const Task = (props) => {
     }
   };
 
+  const handleTaskDrop = (e) => {
+    if (!moveTasks) {
+      return;
+    }
+    var task_id = Number(e.dataTransfer.getData("TaskId"));
+    var oldTopicId = Number(e.dataTransfer.getData("TopicId"));
+    var oldSuperTaskId = Number(e.dataTransfer.getData("SuperTaskId"));
+    console.info(
+      `Dropped task with id ${task_id} with old topic id ${oldTopicId} on task (id:${id}) within topic with id ${currentTopicId}`
+    );
+    // console.info(changeTopic)
+    let taskIds = [];
+    let oldTopicIds = [];
+    let oldSuperTaskIds = [];
+    taskIds.push(task_id);
+    oldTopicIds.push(oldTopicId);
+    oldSuperTaskIds.push(oldSuperTaskId);
+    console.info(selectedTasks);
+    if (selectedTasks && selectedTasks.length > 0) {
+      selectedTasks.forEach((st) => {
+        console.info(
+          `Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${currentTopicId}`
+        );
+        taskIds.push(st.taskId);
+        oldTopicIds.push(st.topicId);
+        oldSuperTaskIds.push(st.superTaskId);
+      });
+    }
+
+    if (moveTasks) {
+      moveTasks(
+        taskIds,
+        oldTopicIds,
+        oldSuperTaskIds,
+        currentTopicId,
+        currentTopicViewIndex,
+        currentSuperTaskId
+      );
+    }
+  };
+
+  const handleTaskDuplicateDrop = (e) => {
+    if (!duplicateTask) {
+      return;
+    }
+    var taskId = Number(e.dataTransfer.getData("TaskId"));
+    console.info(
+      `Duplicate dropped task with id ${taskId} on this topic with id ${currentTopicId}`
+    );
+    let taskIds = [];
+    taskIds.push(taskId);
+    if (selectedTasks && selectedTasks.length > 0) {
+      selectedTasks.forEach((st) => {
+        console.info(
+          `Duplicating task with id ${st.taskId} to topic with id ${currentTopicId}`
+        );
+        taskIds.push(st.taskId);
+      });
+    }
+    duplicateTask(taskIds, currentTopicId, currentTopicViewIndex);
+  };
+
   const handleDrop = (e) => {
     e.preventDefault();
     e.target.setAttribute("draggedOver", false);
-    console.info("drop");
+    console.info("Dropping on a task");
     var type = e.dataTransfer.getData("Type");
-    console.log("Inside upper drop");
-    // console.log(tasks)
 
     if (type == "Task") {
-      if (!moveTasks) {
-        return;
-      }
-      var task_id = Number(e.dataTransfer.getData("TaskId"));
-      var oldTopicId = Number(e.dataTransfer.getData("TopicId"));
-      var oldSuperTaskId = Number(e.dataTransfer.getData("SuperTaskId"));
-      console.info(
-        `Dropped task with id ${task_id} with old topic id ${oldTopicId} on task (id:${id}) within topic with id ${currentTopicId}`
-      );
-      // console.info(changeTopic)
-      let taskIds = [];
-      let oldTopicIds = [];
-      let oldSuperTaskIds = [];
-      taskIds.push(task_id);
-      oldTopicIds.push(oldTopicId);
-      oldSuperTaskIds.push(oldSuperTaskId);
-      console.info(selectedTasks);
-      if (selectedTasks && selectedTasks.length > 0) {
-        selectedTasks.forEach((st) => {
-          console.info(
-            `Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${currentTopicId}`
-          );
-          taskIds.push(st.taskId);
-          oldTopicIds.push(st.topicId);
-          oldSuperTaskIds.push(st.superTaskId);
-        });
-      }
-
-      if (moveTasks) {
-        moveTasks(
-          taskIds,
-          oldTopicIds,
-          oldSuperTaskIds,
-          currentTopicId,
-          currentTopicViewIndex,
-          currentSuperTaskId
-        );
-      }
+      handleTaskDrop(e);
     } else if (type == "TaskDuplicate") {
-      if (!duplicateTask) {
-        return;
-      }
-      var taskId = Number(e.dataTransfer.getData("TaskId"));
-      console.info(
-        `Duplicate dropped task with id ${taskId} on this topic with id ${currentTopicId}`
-      );
-      let taskIds = [];
-      taskIds.push(taskId);
-      if (selectedTasks && selectedTasks.length > 0) {
-        selectedTasks.forEach((st) => {
-          console.info(
-            `Duplicating task with id ${st.taskId} to topic with id ${currentTopicId}`
-          );
-          taskIds.push(st.taskId);
-        });
-      }
-      duplicateTask(taskIds, currentTopicId, currentTopicViewIndex);
+      handleTaskDuplicateDrop(e);
     } else {
       console.info("On a task, you can only drop another task (not a topic)");
     }
   };
+
   const handleDragOver = (e) => {
     e.preventDefault();
     // this is not perfect, because I always want the <div class='task'> to be the target..
@@ -245,12 +252,7 @@ const Task = (props) => {
     setIsEditing(true);
     // TODO: Should actually clear the entire selection maybe?
     if (selected) {
-      deleteFromSelection(
-        selectedTasks,
-        id,
-        currentTopicId,
-        currentSuperTaskId
-      );
+      deleteFromSelection(id, currentTopicId, currentSuperTaskId);
     }
     setIsDraggingAllowed(false);
     // inputRef.current.focus()
@@ -291,12 +293,7 @@ const Task = (props) => {
   const unselect = (func) => {
     const wrapper = (e) => {
       if (selected) {
-        deleteFromSelection(
-          selectedTasks,
-          id,
-          currentTopicId,
-          currentSuperTaskId
-        );
+        deleteFromSelection(id, currentTopicId, currentSuperTaskId);
       }
       return func();
     };
@@ -326,12 +323,7 @@ const Task = (props) => {
   const selectHandlers = selected
     ? {
         onClick: captureClick(() =>
-          deleteFromSelection(
-            selectedTasks,
-            id,
-            currentTopicId,
-            currentSuperTaskId
-          )
+          deleteFromSelection(id, currentTopicId, currentSuperTaskId)
         ),
       }
     : {
