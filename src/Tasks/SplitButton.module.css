@@ -9,7 +9,7 @@
 
 /*The default button; the Default in  (Default|v)*/
 .splitButtonDefault {
-  border-radius: 5px 0 0 5px;
+  border-radius: 5px 0 0 0px;
 }
 
 /* The dropdown button; the v in (Default|v) */
