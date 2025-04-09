@@ -8,7 +8,7 @@ import { getUnfoldAll, getFoldAll } from "../Topics/TopicModifyFuncGens.js";
 import { FinishedState } from "../Structure/TaskInterfaces.tsx";
 import { isTaskDueIn, convertDueDateNameToSeconds } from "../Timing.ts";
 import TopicContainer from "../Topics/TopicContainer.tsx";
-import TaskContainer from "./TaskContainer.tsx";
+import TaskContainer from "../Tasks/TaskContainer.tsx";
 import { convert_v1_to_v2 } from "../Converters/Migration_V1_V2/UpdateV1ToV2.ts";
 
 const isNewTask = (task, allSubTaskIds) => {

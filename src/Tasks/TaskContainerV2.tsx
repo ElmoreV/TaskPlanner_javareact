@@ -1,6 +1,6 @@
 import { memo, useCallback } from "react";
 
-import Task from "../TaskViews/Task.tsx";
+import Task from "../Tasks/Task.tsx";
 import {
   scheduleTaskV2,
   setTaskFinishStatusV2,

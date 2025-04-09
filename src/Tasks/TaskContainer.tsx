@@ -18,7 +18,7 @@ import {
   setTaskNameV1Semipure,
   setTaskDueTimeV1Semipure,
   completeTaskV1Semipure,
-} from "../Tasks/TaskModifyFuncGensV1Pure.ts";
+} from "./TaskModifyFuncGensV1Pure.ts";
 import { V1_Task } from "../Structure/V1_types.ts";
 
 class SelectedCategoryTask {

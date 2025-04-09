@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect, memo } from "react";
 import PropTypes from "prop-types";
-import TaskContent from "../Tasks/TaskContent.js";
+import TaskContent from "./TaskContent.js";
 import React from "react";
 import { FinishedState } from "../Structure/TaskInterfaces.tsx";
 import {
   translateLastCompletedDatetime,
   translateTimeDifference,
-} from "../Tasks/TaskHelperFuncs.js";
+} from "./TaskHelperFuncs.js";
 import { convertDueDateNameToSeconds, getFutureDate } from "../Timing.ts";
 
 const Task = (props) => {
