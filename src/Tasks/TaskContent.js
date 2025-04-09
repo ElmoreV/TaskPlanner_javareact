@@ -269,31 +269,16 @@ const FinishTaskSplitButton = (props) => {
   //   <dropdown menu>
   return (
     <div className={splitButtonStyles.splitButtonContainer}>
-      <div
-        style={{
-          display: "inline flex",
-          border: "none",
-          padding: "0",
-          margin: "0",
-        }}
-      >
+      <div className={splitButtonStyles.splitButton}>
         <button
           onClick={captureClick(defaultAction)}
-          style={{
-            // border: "solid",
-            borderRadius: "0",
-          }}
+          className={splitButtonStyles.splitButtonDefault}
         >
           {defaultText}
         </button>
         <button
           onClick={toggleDropdown}
-          style={{
-            borderLeft: "none",
-            // borderLeft: "solid 1px #000",
-            borderRadius: "0 10px 10px 0",
-            margin: "0",
-          }}
+          className={splitButtonStyles.splitButtonDropdown}
         >
           ▼
         </button>
