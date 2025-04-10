@@ -235,9 +235,7 @@ const Task = (props) => {
   let selectStyle = {};
   if (selected) {
     selectStyle = {
-      borderStyle: "dashed",
-      borderWidth: "2px",
-      margin: "0px",
+      outline: "dashed 2px",
     };
   }
   let dueTimeStr: String | undefined = undefined;
