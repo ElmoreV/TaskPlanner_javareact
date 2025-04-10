@@ -67,7 +67,6 @@ const TaskContent = (props) => {
       <div
         className={taskClassNames}
         style={selectStyle}
-        onDoubleClick={toggleEdit}
         {...selectHandlers}
         {...dragHandlers}
         {...dropHandlers}
@@ -93,7 +92,7 @@ const TaskContent = (props) => {
                 ref={inputRef}
               />
             ) : (
-              <span>{name}</span>
+              <span onDoubleClick={toggleEdit}>{name}</span>
             )}
           </span>
           {topicPath && <span className={styles.topicPath}>{topicPath}</span>}
@@ -277,7 +276,7 @@ const FinishTaskSplitButton = (props) => {
           {defaultText}
         </button>
         <button
-          onClick={toggleDropdown}
+          onClick={captureClick(toggleDropdown)}
           className={splitButtonStyles.splitButtonDropdown}
         >
           ▼

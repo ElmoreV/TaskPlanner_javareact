@@ -235,7 +235,7 @@ const Task = (props) => {
   let selectStyle = {};
   if (selected) {
     selectStyle = {
-      outline: "dashed 2px",
+      outline: "dashed 2px", // border affects the total size of the element
     };
   }
   let dueTimeStr: String | undefined = undefined;
