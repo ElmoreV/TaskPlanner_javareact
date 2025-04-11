@@ -40,12 +40,32 @@ Fold/unfold tag
 
 ## Modifying tasks
 
-- Dragging task to task
-- Dragging task to tag
-- Duplicate drag task to tag
-- Dragging tag to tag
-- Dragging task to root tag list
-- Dragging tag to root tag list
+- [x] Dragging task to task (inside a tag)
+  - [x] if the task is not yet in the target tag, will move the task inside the target tag, just above the task on which it was dropped.
+  - [x] if the task already has a duplicate in the target tag, will remove the task instance from the source tag.
+- [x] Dragging task to tag
+  - [x] if the task is not yet in the target tag, will move the task inside the target tag, at the top of the list
+  - [x] if the task already has a duplicate in the target tag, will remove the task instance from the source tag.
+- [ ] Dragging task to task (as a subtask in a task)
+  - [x] if the task is not yet in the target supertask, will move the task inside the target supertask, just above the task on which it was dropped.
+  - [ ] if the task already has a duplicate in the target supertask, will remove the task instance from the source.
+- [ ] Dragging subtask to subtask
+  - [ ] if the subtask is not yet in the target task, will move the subtask inside the target subtask, just above the subtask on which it was dropped.
+  - [ ] if the subtask already has a duplicate in the target task, will do nothing
+- Duplicate drag task to tag will
+
+  - [x] if the task is not yet in the target tag, will duplicate the task inside the target tag, at the top of the list
+  - [x] if the task already has a duplicate in the target tag, will do nothing
+
+- [ ] Duplicate drag task to task (inside a tag) will:
+  - [x] if the task is not yet in the target tag, will duplicate the task inside the target tag, just above the task on which it was dropped.
+  - [ ] if the task already has a duplicate in the target tag, will do nothing
+- Duplicate drag task to subtask
+- [x] Dragging tag to tag will
+  - [x] if the tag is a supertag of the target tag, will not move the tag
+  - [x] if the tag is not in the target tag, will move the tag inside the target tag, at the end of the list
+- [ ] Dragging task to root tag list
+- [ ] Dragging tag to root tag list
 
 ## Selection
 
