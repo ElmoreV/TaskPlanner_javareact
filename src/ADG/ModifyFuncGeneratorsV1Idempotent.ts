@@ -201,7 +201,8 @@ const duplicateTaskV1Pure = (
   tasks: V1_Task[],
   taskIds: number[],
   targetTopicId: number,
-  targetViewIndex: number
+  targetViewIndex: number,
+  targetSuperTaskId: number
 ) => {
   // Validation checks + defaults
   // Convert single items to a list
@@ -211,28 +212,66 @@ const duplicateTaskV1Pure = (
   if (targetViewIndex === undefined) {
     targetViewIndex = 1;
   }
-  const targetTopic = findTopicByTopicIdV1(topics, targetTopicId);
-  if (!targetTopic) {
-    console.warn(`Target topic ${targetTopicId} does not exist.`);
+  if (targetTopicId === undefined && targetSuperTaskId === undefined) {
+    console.warn("No target topic or supertask specified");
     return tasks;
+  }
+  let targetTopic;
+  let targetSuperTask: V1_Task | undefined;
+  if (targetTopicId) {
+    targetTopic = findTopicByTopicIdV1(topics, targetTopicId);
+    if (!targetTopic) {
+      console.warn(`Target topic ${targetTopicId} does not exist.`);
+      return tasks;
+    }
+  } else if (targetSuperTaskId) {
+    targetSuperTask = findTaskByTaskIdV1(tasks, targetSuperTaskId);
+    if (!targetSuperTask) {
+      console.warn(`Target super task ${targetSuperTaskId} does not exist.`);
+      return tasks;
+    }
   }
 
   // Copy tasks
   let newTasks = [...tasks];
   taskIds.forEach((taskId) => {
     const task_to_change = newTasks.find((task) => task.id == taskId);
-    if (task_to_change.topics.includes(targetTopicId)) {
-      console.info(
-        `Task ${task_to_change.id} is already in topic ${targetTopicId}`
-      );
+    if (!task_to_change) {
+      console.warn(`Task ${taskId} does not exist`);
       return tasks;
     }
-    newTasks = insertTaskInstanceIntoTopicV1(
-      newTasks,
-      taskId,
-      targetTopicId,
-      targetViewIndex
-    );
+    if (targetTopicId) {
+      if (task_to_change.topics.includes(targetTopicId)) {
+        console.info(
+          `Task ${task_to_change.id} is already in topic ${targetTopicId}`
+        );
+        return tasks;
+      }
+      newTasks = insertTaskInstanceIntoTopicV1(
+        newTasks,
+        taskId,
+        targetTopicId,
+        targetViewIndex
+      );
+    } else if (targetSuperTaskId) {
+      // add task to top of supertask
+      targetSuperTask = findTaskByTaskIdV1(newTasks, targetSuperTaskId);
+      let moveAllowed = !findTaskInSubTaskTree(
+        newTasks,
+        targetSuperTaskId,
+        taskId
+      );
+      if (!moveAllowed) {
+        console.warn(
+          `Move of task id ${taskId} to task with id ${targetSuperTaskId} is not allowed: task already in target task subtree.`
+        );
+        return tasks;
+      }
+      targetSuperTask.subTaskIds.unshift(taskId);
+    } else {
+      console.warn("No target topic or supertask specified");
+      return tasks;
+    }
   });
   return newTasks;
 };

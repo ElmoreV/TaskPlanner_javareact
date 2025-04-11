@@ -130,7 +130,7 @@ const Task = (props) => {
     var oldTopicId = Number(e.dataTransfer.getData("TopicId"));
     var oldSuperTaskId = Number(e.dataTransfer.getData("SuperTaskId"));
     console.info(
-      `Dropped task with id ${task_id} with old topic id ${oldTopicId} on task (id:${id}) within topic with id ${currentTopicId}`
+      `Dropped task with id ${task_id} with old topic id ${oldTopicId}/ old supertask id ${oldSuperTaskId} on task (id:${id}) within topic with id ${currentTopicId}/ supertask with id ${currentSuperTaskId}`
     );
     // console.info(changeTopic)
     let taskIds = [];
@@ -169,7 +169,7 @@ const Task = (props) => {
     }
     var taskId = Number(e.dataTransfer.getData("TaskId"));
     console.info(
-      `Duplicate dropped task with id ${taskId} on this topic with id ${currentTopicId}`
+      `Duplicate dropped task with id ${taskId} on this topic with id ${currentTopicId}/the supertask with id ${currentSuperTaskId}`
     );
     let taskIds = [];
     taskIds.push(taskId);
@@ -181,7 +181,12 @@ const Task = (props) => {
         taskIds.push(st.taskId);
       });
     }
-    duplicateTask(taskIds, currentTopicId, currentTopicViewIndex);
+    duplicateTask(
+      taskIds,
+      currentTopicId,
+      currentTopicViewIndex,
+      currentSuperTaskId
+    );
   };
 
   const handleDrop = (e) => {
