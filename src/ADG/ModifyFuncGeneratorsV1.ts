@@ -8,6 +8,7 @@ import {
   findSupertopicByTopicIdV1,
   findTaskByTaskIdV1,
   findTopicByTopicIdV1,
+  isTaskInSubTaskTree,
 } from "./FindItemsV1.ts";
 import {
   addOrphanTasktoTaskListV1,
@@ -24,32 +25,6 @@ import {
 // Move from task in subtask to subtask in other task
 // Move from task in subtask to task in topic
 // Move from task in topic to task in topic
-const findTaskInSubTaskTree: (
-  tasks: V1_Task[],
-  rootTaskId: number,
-  taskIdToSearch: number
-) => boolean = (tasks, rootTaskId, taskIdToSearch) => {
-  if (rootTaskId === taskIdToSearch) {
-    return true;
-  }
-  let rootTask = findTaskByTaskIdV1(tasks, rootTaskId);
-  if (rootTask === undefined) {
-    console.warn(
-      `Searched for task with id ${rootTaskId} but could not find it.`
-    );
-    return false;
-  }
-  if (rootTask.subTaskIds === undefined) {
-    console.warn(`the task ${rootTaskId} has no subTaskIds`);
-    return false;
-  } else if (rootTask.subTaskIds.includes(taskIdToSearch)) {
-    return true;
-  } else {
-    return rootTask.subTaskIds
-      .map((st) => findTaskInSubTaskTree(tasks, st, taskIdToSearch))
-      .reduce((acc, curr) => (curr ? acc || curr : acc), false);
-  }
-};
 
 const getMoveTasks = (
   topics: V1_Topic[],
@@ -111,7 +86,7 @@ const getMoveTasks = (
       let sourceTaskId = sourceTaskIds[idx];
       let moveAllowed = true;
       if (targetTaskId) {
-        moveAllowed = !findTaskInSubTaskTree(tasks, targetTaskId, taskId);
+        moveAllowed = !isTaskInSubTaskTree(tasks, targetTaskId, taskId);
       }
       if (!moveAllowed) {
         console.warn(
@@ -179,7 +154,7 @@ const getMoveTasks = (
             superTask.subTaskIds = [];
           }
           console.log(superTask);
-          let alreadyExisting = findTaskInSubTaskTree(
+          let alreadyExisting = isTaskInSubTaskTree(
             tasks,
             targetTaskId,
             taskId
