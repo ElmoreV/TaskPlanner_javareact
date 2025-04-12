@@ -199,9 +199,9 @@ const TaskList = (props) => {
         </li>
         {task.subTaskIds && task.subTaskIds.length > 0 && task.unfolded && (
           <ul>
-            {tasks
-              // .map(t=>{console.log("Hi, I'm a subtask"+t);return t})
-              .filter((subTask) => task.subTaskIds.includes(subTask.id))
+            {task.subTaskIds
+              .map((subTaskId) => tasks.find((task) => task.id == subTaskId))
+              .filter((subTask) => subTask !== undefined)
               .filter((subTask) =>
                 isTaskVisible(
                   subTask,
@@ -210,7 +210,6 @@ const TaskList = (props) => {
                   dueTimeInSeconds
                 )
               )
-              // TODO: ordering of subtasks
               .map((subTask) => recursiveShowTask(null, task, subTask))}
           </ul>
         )}
