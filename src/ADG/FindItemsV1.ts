@@ -77,6 +77,33 @@ const findTopicsByTaskIdV1 = (
   return topics;
 };
 
+export const isTaskInSubTaskTree: (
+  tasks: V1_Task[],
+  rootTaskId: number,
+  taskIdToSearch: number
+) => boolean = (tasks, rootTaskId, taskIdToSearch) => {
+  if (rootTaskId === taskIdToSearch) {
+    return true;
+  }
+  let rootTask = findTaskByTaskIdV1(tasks, rootTaskId);
+  if (rootTask === undefined) {
+    console.warn(
+      `Searched for task with id ${rootTaskId} but could not find it.`
+    );
+    return false;
+  }
+  if (rootTask.subTaskIds === undefined) {
+    console.warn(`the task ${rootTaskId} has no subTaskIds`);
+    return false;
+  } else if (rootTask.subTaskIds.includes(taskIdToSearch)) {
+    return true;
+  } else {
+    return rootTask.subTaskIds
+      .map((st) => isTaskInSubTaskTree(tasks, st, taskIdToSearch))
+      .reduce((acc, curr) => (curr ? acc || curr : acc), false);
+  }
+};
+
 export { findTopicByTopicIdV1 };
 export { findTopicByTopicIdV1R };
 export { findSupertopicByTopicIdV1 };

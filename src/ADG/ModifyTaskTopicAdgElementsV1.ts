@@ -83,12 +83,39 @@ const insertTaskInstanceIntoTaskV1 = (
   console.info(
     `Insert task instance with task.id: ${subTaskId} into (super)task with id: ${superTaskId}`
   );
-  //TODO: add taskViewIndices
-
   let newTasks = [...tasks];
   let superTask = newTasks.find((task) => task.id == superTaskId);
-  superTask.subTaskIds.push(subTaskId);
+  superTask?.subTaskIds.unshift(subTaskId);
   return newTasks;
+};
+
+// Insert an existig subTask (even with no instances) into the current task (as supertask)
+// Does not check if subtask already exsists
+// Does not check if supertask exists
+// Assumes task ids are unique
+// Returns a shallow copy with the changed tasks
+const insertTaskInstanceIntoTaskV1Idempotent = (
+  tasks: V1_Task[],
+  subTaskId: number,
+  superTaskId: number
+) => {
+  console.info(
+    `Insert task instance with task.id: ${subTaskId} into (super)task with id: ${superTaskId}`
+  );
+  let superTask = tasks.find((task) => task.id == superTaskId);
+  if (superTask === undefined) {
+    console.warn(`Supertask ${superTaskId} does not exist`);
+    return tasks;
+  }
+  return tasks.map((task) => {
+    if (task.id === superTaskId) {
+      return {
+        ...task,
+        subTaskIds: [subTaskId, ...task.subTaskIds],
+      };
+    }
+    return task;
+  });
 };
 
 // Assumes the viewIndices of all tasks exists
@@ -172,5 +199,6 @@ export { addOrphanTasktoTaskListV1 };
 export { insertTaskInstanceIntoTopicV1 };
 export { removeTaskInstanceFromTopicV1 };
 export { insertTaskInstanceIntoTaskV1 };
+export { insertTaskInstanceIntoTaskV1Idempotent };
 export { removeTaskInstanceFromTaskV1 };
 export { deleteEntireTaskV1 };
