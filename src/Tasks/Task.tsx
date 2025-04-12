@@ -158,7 +158,8 @@ const Task = (props) => {
         oldSuperTaskIds,
         currentTopicId,
         currentTopicViewIndex,
-        currentSuperTaskId
+        currentSuperTaskId,
+        id
       );
     }
   };
@@ -185,7 +186,8 @@ const Task = (props) => {
       taskIds,
       currentTopicId,
       currentTopicViewIndex,
-      currentSuperTaskId
+      currentSuperTaskId,
+      id
     );
   };
 
