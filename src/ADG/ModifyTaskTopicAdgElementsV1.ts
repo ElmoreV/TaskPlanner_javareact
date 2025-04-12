@@ -97,7 +97,8 @@ const insertTaskInstanceIntoTaskV1 = (
 const insertTaskInstanceIntoTaskV1Idempotent = (
   tasks: V1_Task[],
   subTaskId: number,
-  superTaskId: number
+  superTaskId: number,
+  superTaskViewIndex: number | undefined
 ) => {
   console.info(
     `Insert task instance with task.id: ${subTaskId} into (super)task with id: ${superTaskId}`
@@ -107,11 +108,22 @@ const insertTaskInstanceIntoTaskV1Idempotent = (
     console.warn(`Supertask ${superTaskId} does not exist`);
     return tasks;
   }
+  if (superTaskViewIndex === undefined) {
+    superTaskViewIndex = 0;
+  }
   return tasks.map((task) => {
     if (task.id === superTaskId) {
+      const effectiveSuperTaskViewIndex = Math.max(
+        Math.min(superTaskViewIndex, task.subTaskIds.length),
+        0
+      );
       return {
         ...task,
-        subTaskIds: [subTaskId, ...task.subTaskIds],
+        subTaskIds: [
+          ...task.subTaskIds.slice(0, effectiveSuperTaskViewIndex),
+          subTaskId,
+          ...task.subTaskIds.slice(effectiveSuperTaskViewIndex),
+        ],
       };
     }
     return task;

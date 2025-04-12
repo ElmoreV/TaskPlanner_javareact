@@ -88,7 +88,10 @@ const moveTasksV1Pure = (
     let sourceTaskId = sourceSuperTaskIds[idx];
     let moveAllowed = true;
     if (targetSuperTaskId) {
-      moveAllowed = !isTaskInSubTaskTree(tasks, targetSuperTaskId, taskId);
+      // This is actually not the right check.
+      // Something like moving task A into  Task1 should be possible
+      // even if TaskA in Task2 in Task1
+      moveAllowed = true; //!isTaskInSubTaskTree(tasks, targetSuperTaskId, taskId);
     }
     if (!moveAllowed) {
       console.warn(
@@ -150,7 +153,10 @@ const moveTasksV1Pure = (
       newTasks = insertTaskInstanceIntoTaskV1Idempotent(
         newTasks,
         taskId,
-        targetSuperTaskId
+        targetSuperTaskId,
+        superTask.subTaskIds.findIndex(
+          (subTaskId) => subTaskId === targetTaskId
+        )
       );
       console.log(superTask);
     }
@@ -274,7 +280,8 @@ const addNewSubtaskV1Pure = (tasks: V1_Task[], superTaskId: number) => {
   newTasks = insertTaskInstanceIntoTaskV1Idempotent(
     newTasks,
     newSubTask.id,
-    superTaskId
+    superTaskId,
+    superTask.subTaskIds.findIndex((subTaskId) => subTaskId === targetTaskId)
   );
   return newTasks;
 };
