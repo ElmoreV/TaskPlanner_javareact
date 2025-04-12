@@ -24,13 +24,12 @@ import {
 // Move from task in subtask to subtask in other task
 // Move from task in subtask to task in topic
 // Move from task in topic to task in topic
-
 const findTaskInSubTaskTree: (
   tasks: V1_Task[],
   rootTaskId: number,
-  subTaskId: number
-) => boolean = (tasks, rootTaskId, subTaskId) => {
-  if (rootTaskId === subTaskId) {
+  taskIdToSearch: number
+) => boolean = (tasks, rootTaskId, taskIdToSearch) => {
+  if (rootTaskId === taskIdToSearch) {
     return true;
   }
   let rootTask = findTaskByTaskIdV1(tasks, rootTaskId);
@@ -40,17 +39,14 @@ const findTaskInSubTaskTree: (
     );
     return false;
   }
-  console.log("rootTask");
-  console.log(rootTask);
   if (rootTask.subTaskIds === undefined) {
-    console.log("undefined ret");
+    console.warn(`the task ${rootTaskId} has no subTaskIds`);
     return false;
-  } else if (rootTask.subTaskIds.includes(subTaskId)) {
-    console.log(`${rootTask.subTaskIds} and ${subTaskId}`);
+  } else if (rootTask.subTaskIds.includes(taskIdToSearch)) {
     return true;
   } else {
     return rootTask.subTaskIds
-      .map((st) => findTaskInSubTaskTree(tasks, st, subTaskId))
+      .map((st) => findTaskInSubTaskTree(tasks, st, taskIdToSearch))
       .reduce((acc, curr) => (curr ? acc || curr : acc), false);
   }
 };
