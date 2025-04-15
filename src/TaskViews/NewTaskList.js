@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import PlannedTask from "./PlannedTask.js";
+import PlannedTask from "../Tasks/PlannedTask.js";
 import { getSetTaskNameFuncV1 } from "../Tasks/TaskModifyFuncGensV1.ts";
 import { getAddTaskWithoutTopic } from "../ADG/ModifyFuncGeneratorsV1.ts";
 
