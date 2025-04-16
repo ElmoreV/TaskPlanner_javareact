@@ -1,4 +1,5 @@
 import { findTopicByTopicIdV1 } from "../ADG/FindItemsV1.ts";
+import { AppDataV1 } from "../Structure/AppDataTypes.ts";
 
 //Recursive function to handle all toggles
 const toggleFold_r = (topics, id) => {
@@ -25,6 +26,9 @@ const getToggleFold = (setTopics, topics) => {
 };
 
 const unfoldAll_r = (topic, topicId, shouldUnfold) => {
+  // topic: current topic to (possibly) unfold
+  // topicId: id of the root topic to unfold (and all descendants)
+
   if (shouldUnfold == true) {
     topic.unfolded = true;
   } else {
@@ -36,6 +40,24 @@ const unfoldAll_r = (topic, topicId, shouldUnfold) => {
   topic.subtopics.forEach((subtopic) =>
     unfoldAll_r(subtopic, topicId, shouldUnfold)
   );
+};
+
+export const unfoldAllTasksTopics = (appData) => {
+  const newTasks = appData.tasks.map((task) => {
+    return {
+      ...task,
+      unfolded: true,
+    };
+  });
+
+  // this is not idempotent
+  let newTopics = [...appData.topics];
+  newTopics.map((topic) => unfoldAll_r(topic, topic.id, true));
+  return {
+    ...appData,
+    topics: newTopics,
+    tasks: newTasks,
+  };
 };
 
 const getUnfoldAll = (setTopics, topics) => {
@@ -61,6 +83,24 @@ const foldAll_r = (topic, topicId, shouldFold) => {
   topic.subtopics.forEach((subtopic) =>
     foldAll_r(subtopic, topicId, shouldFold)
   );
+};
+
+export const foldAllTasksTopics = (appData) => {
+  const newTasks = appData.tasks.map((task) => {
+    return {
+      ...task,
+      unfolded: false,
+    };
+  });
+
+  // this is not idempotent
+  let newTopics = [...appData.topics];
+  newTopics.map((topic) => foldAll_r(topic, topic.id, true));
+  return {
+    ...appData,
+    topics: newTopics,
+    tasks: newTasks,
+  };
 };
 
 const getFoldAll = (setTopics, topics) => {

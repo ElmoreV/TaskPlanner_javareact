@@ -4,7 +4,10 @@ import {
   getAddTopic,
   sanitizeTopicOrderIndex,
 } from "../ADG/ModifyFuncGeneratorsV1.ts";
-import { getUnfoldAll, getFoldAll } from "../Topics/TopicModifyFuncGens.js";
+import {
+  unfoldAllTasksTopics,
+  foldAllTasksTopics,
+} from "../Topics/TopicModifyFuncGens.js";
 import { FinishedState } from "../Structure/TaskInterfaces.tsx";
 import { isTaskDueIn, convertDueDateNameToSeconds } from "../Timing.ts";
 import TopicContainer from "../Topics/TopicContainer.tsx";
@@ -84,13 +87,13 @@ const TaskList = (props) => {
   };
 
   const handleFoldAll = () => {
-    let foldAll = getFoldAll(setTopics, topics);
-    topics.map((topic) => foldAll(topic.id));
+    let newAppData = foldAllTasksTopics(appData);
+    setAppData(newAppData);
   };
 
   const handleUnfoldAll = () => {
-    let unfoldAll = getUnfoldAll(setTopics, topics);
-    topics.map((topic) => unfoldAll(topic.id));
+    let newAppData = unfoldAllTasksTopics(appData);
+    setAppData(newAppData);
   };
 
   const onDueDateChange = (event) => {
