@@ -1,15 +1,8 @@
-import {
-  convert_v1_to_v0,
-  convert_v0_to_v1,
-} from "../Converters/Migration_V0_V1/UpdateV0ToV1.ts";
+import { convert_v0_to_v1 } from "../Converters/Migration_V0_V1/UpdateV0ToV1.ts";
 import { convert_v2_to_v1 } from "../Converters/Migration_V1_V2/UpdateV1ToV2.ts";
 import { AppDataV1 } from "../Structure/AppDataTypes.ts";
 import { Version } from "../Structure/Versions.ts";
-import {
-  checkVersionV0orV1,
-  getVersionOfAppData,
-  versionToString,
-} from "./VersionDeterminer.ts";
+import { getVersionOfAppData, versionToString } from "./VersionDeterminer.ts";
 
 export const parseJSON = (jsonStr): AppDataV1 => {
   let importedData = JSON.parse(jsonStr);

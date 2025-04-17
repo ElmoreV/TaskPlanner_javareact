@@ -45,11 +45,13 @@ jobs:
         env:
           CI: false
         run: ${{ steps.detect-package-manager.outputs.runner }} npm run build
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+      # Upload artifcts for deployment, see https://github.com/actions/upload-pages-artifact
+      - name: Upload static files as artifact
+        id: deployment
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./build
-  # Deployment job
+  # Deployment job, see https://github.com/actions/deploy-pages for details
   deploy:
     environment:
       name: github-pages
@@ -59,4 +61,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v3
+        uses: actions/deploy-pages@v4
