@@ -1,8 +1,7 @@
 {
   "name": "tutorial",
   "version": "0.1.0",
-  "homepage2": "https://elmorev.github.io/TaskPlanner_javareact/",
-  "homepage": "http://localhost:3000/",
+  "homepage": "https://elmorev.github.io/TaskPlanner_javareact/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
