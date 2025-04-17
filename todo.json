@@ -8,7 +8,7 @@
         {
           "name": "Database interaction",
           "id": 3,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Migration to schema.v1",
@@ -40,7 +40,7 @@
         {
           "name": "Per Topic View",
           "id": 4,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Aesthetic",
@@ -79,7 +79,7 @@
         {
           "name": "Weekly Tasks View",
           "id": 5,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Aesthetic",
@@ -104,13 +104,13 @@
         {
           "name": "Daily Task View",
           "id": 6,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
           "name": "General",
           "id": 7,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Project management",
@@ -148,7 +148,7 @@
         {
           "name": "Timing",
           "id": 31,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Impossibilities",
@@ -173,7 +173,7 @@
         {
           "name": "Priority module",
           "id": 36,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         }
       ]
@@ -181,12 +181,12 @@
     {
       "name": "Constraints",
       "id": 2,
-      "unfolded": true,
+      "unfolded": false,
       "subtopics": [
         {
           "name": "UX/UI",
           "id": 15,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Release 1 (feature freeze)",
@@ -199,7 +199,7 @@
         {
           "name": "Maintainability",
           "id": 16,
-          "unfolded": false,
+          "unfolded": true,
           "subtopics": [
             {
               "name": "Error handling",
@@ -221,7 +221,7 @@
                 {
                   "name": "Specific regression tests",
                   "id": 52,
-                  "unfolded": true,
+                  "unfolded": false,
                   "subtopics": []
                 }
               ]
@@ -237,7 +237,7 @@
         {
           "name": "Performance",
           "id": 20,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
@@ -251,7 +251,7 @@
     {
       "name": "Bugs/issues",
       "id": 12,
-      "unfolded": false,
+      "unfolded": true,
       "subtopics": []
     },
     {
@@ -262,18 +262,18 @@
         {
           "name": "Development",
           "id": 53,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": []
         },
         {
           "name": "Major/crashes/bugs",
           "id": 44,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Reduce cognitive load",
               "id": 54,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             }
           ]
@@ -281,12 +281,12 @@
         {
           "name": "Relaying information",
           "id": 45,
-          "unfolded": true,
+          "unfolded": false,
           "subtopics": [
             {
               "name": "Filtering",
               "id": 48,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             }
           ]
@@ -297,15 +297,9 @@
           "unfolded": true,
           "subtopics": [
             {
-              "name": "Too long to drag a task from the top to the bottom - 18m ",
-              "id": 49,
-              "unfolded": true,
-              "subtopics": []
-            },
-            {
               "name": "Missing data structure",
               "id": 50,
-              "unfolded": true,
+              "unfolded": false,
               "subtopics": []
             }
           ]
@@ -335,7 +329,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "\"Add task\" button",
@@ -347,7 +342,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "\"Add task\" icon",
@@ -358,7 +354,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "\"Delete task\" button",
@@ -370,7 +367,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "\"Delete task\" icon",
@@ -381,7 +379,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "\"Task completion\" button",
@@ -393,7 +392,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "(relational.tasks/topics) to (tasks,topics).v1",
@@ -404,7 +404,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "(task,topics).v1 to (tasks,topics).v0",
@@ -416,7 +417,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "(tasks,topics).v0 to (task,topics).v1",
@@ -428,7 +430,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         3
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "(tasks,topics).v1 to (hierarchical.topics+tasks)",
@@ -439,7 +442,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         4
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "(tasks,topics).v1 to (relational.tasks/topics)",
@@ -451,7 +455,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         5
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add a button to mark the task as completed",
@@ -463,7 +468,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add a way to add the task to the current Weekly View",
@@ -475,7 +481,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         3
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add a way to easier move/duplicate tasks to far-away topics (better drag handling or cut/copy/paste)",
@@ -486,7 +493,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add ability to peek into a list of folded topics",
@@ -497,7 +505,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add button to clear weekly view",
@@ -509,7 +518,8 @@
       "completed": false,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add button to clear all completed items",
@@ -521,7 +531,8 @@
       "completed": true,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add comments to tasks/topics",
@@ -532,7 +543,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add detection of JSON.v0 and JSON.v1 format",
@@ -544,7 +556,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add hyperlink suport to tasks/topics",
@@ -555,7 +568,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add icon (> or V) for drop down and collapse",
@@ -567,7 +581,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add the completion of a task into the YAML",
@@ -578,7 +593,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add/deleting/modifying task",
@@ -589,7 +605,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add/modify topic",
@@ -600,7 +617,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Adding/deleting/modifying tasks",
@@ -612,7 +630,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Adding/deleting/modifying topics",
@@ -624,7 +643,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow export of tasks as JSON",
@@ -636,7 +656,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow export of tasks as YAML",
@@ -648,7 +669,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         3
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow for subtasks",
@@ -659,7 +681,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow hovering over topics to unfold them",
@@ -670,7 +693,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow import of tasks as JSON",
@@ -682,7 +706,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         4
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow import of tasks as YAML",
@@ -694,7 +719,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         5
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow import/export in both topic and weekly view",
@@ -706,7 +732,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         6
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow keyboard-only mode",
@@ -717,7 +744,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         3
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow new subtopics to be created",
@@ -729,7 +757,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         4
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow reordering the weekly view tasks",
@@ -741,7 +770,8 @@
       "completed": true,
       "topicViewIndices": [
         3
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow root topics to be created",
@@ -753,7 +783,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         5
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow tasks to have dependencies",
@@ -764,7 +795,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow tasks to have multiplpe dependenceis",
@@ -775,7 +807,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow the topics to drop down and collapse",
@@ -787,7 +820,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Animate collapse and dropdown",
@@ -798,7 +832,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Automatic demotion (less important, was too long ago)",
@@ -809,7 +844,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Automatic promotion (more important, deadline nears)",
@@ -820,7 +856,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Change schema terminology to id,name,...",
@@ -832,7 +869,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Check against duplicate keys",
@@ -843,7 +881,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Check against missing optional parameters (completed etc.)",
@@ -854,7 +893,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Check against missing required parameters (taskName, key)",
@@ -865,7 +905,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Choose better color schemes for tasks and topics",
@@ -876,7 +917,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         4
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Choose better color schemes for the feedback (drag/drop) events",
@@ -887,7 +929,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         5
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Conversion",
@@ -898,7 +941,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Convert to TypeScript",
@@ -909,7 +953,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Create a history of updates (create undo button)",
@@ -920,7 +965,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         3
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Create a new text-based output, that is based on YAML",
@@ -931,7 +977,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         7
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Create a way to remove task from weekly View",
@@ -944,7 +991,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         6
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Create different settings for the text/markdown based output (keep indent, show completed, show planned, and more?)",
@@ -955,7 +1003,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         8
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Create simple example tasks/topics",
@@ -967,7 +1016,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Create this Todo-list in the TaskPlanner",
@@ -979,7 +1029,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Default example",
@@ -991,7 +1042,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Delete topic",
@@ -1002,7 +1054,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         3
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Design good way to limit task text in the task box",
@@ -1015,7 +1068,8 @@
         3
       ],
       "completed": true,
-      "finishStatus": 1
+      "finishStatus": 1,
+      "subTaskIds": []
     },
     {
       "name": "Detection of JSON or YAML at import ",
@@ -1027,7 +1081,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         9
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Dragging: make outline of dragged-over-task/topic fat",
@@ -1038,7 +1093,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         4
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Editable task names",
@@ -1050,7 +1106,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         7
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Enable autoformatting",
@@ -1062,7 +1119,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Enable dark mode",
@@ -1073,7 +1131,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Export the weekly list as a txt file (with condensed topic information)",
@@ -1084,7 +1143,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         10
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Export/Import",
@@ -1096,7 +1156,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         3
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Find a way to add task/topic id into the YAML",
@@ -1107,7 +1168,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         11
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Formally enabling all possibilities (what are all possibilities of repetition?)",
@@ -1118,7 +1180,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Gitify this project",
@@ -1130,7 +1193,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Have tasks show up under the right topic",
@@ -1142,7 +1206,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Have topics and subtopics show up",
@@ -1154,7 +1219,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         3
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Hide completed tasks",
@@ -1166,7 +1232,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         4
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Import/export",
@@ -1177,7 +1244,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         4
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Improve collapse and dropdown icon",
@@ -1188,7 +1256,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         5
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Instant",
@@ -1199,7 +1268,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "List all the tasks that are planned for this week",
@@ -1211,7 +1281,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Make Topics draggeable to the Root Topic list",
@@ -1222,7 +1293,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Make tasks draggeable to other task lists",
@@ -1234,7 +1306,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Make tasks importable from Weekly View",
@@ -1245,7 +1318,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Make the tasks to have a good width. Naive: text-cutoff",
@@ -1257,7 +1331,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         6
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Make topic name editable (doubleclick)",
@@ -1269,7 +1344,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         8
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Make visible which Tasks are planned for this week",
@@ -1281,7 +1357,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         5
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Minimize empty topics",
@@ -1292,7 +1369,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         6
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Multiple dependencies can be OR or AND dependencies",
@@ -1303,7 +1381,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not before, not during, not after (deadline)",
@@ -1314,7 +1393,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Open tasks/topics to have a task/topic card",
@@ -1325,7 +1405,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         4
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Prettify text input for tasks",
@@ -1336,7 +1417,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         7
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Prettify the output JSON to make it more git-friendly",
@@ -1348,7 +1430,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         12
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Prioritize (order control)",
@@ -1359,7 +1442,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Properly handle escaped characters in YAML",
@@ -1370,7 +1454,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Refactor ModifyingFunctionGenerators into smaller files",
@@ -1382,7 +1467,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Refactor the TaskList.js into smaller files",
@@ -1395,7 +1481,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Remember the name of the loaded file (so that it does not need to be renamed on every save)",
@@ -1407,7 +1494,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         6
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Remove the empty lists from the YAML-export",
@@ -1419,7 +1507,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Remove the yellow from the color-scheme for drag and drop (unreadable)",
@@ -1431,7 +1520,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Rendering",
@@ -1443,7 +1533,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         4
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Save output in markdown",
@@ -1455,7 +1546,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         13
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Scheduling",
@@ -1466,7 +1558,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Search engine for tasks/topics",
@@ -1477,7 +1570,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         5
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Show how many tasks are completed/planned/open in a topic",
@@ -1488,7 +1582,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         7
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Standardize variable, function and classnames (underscore,etc.)",
@@ -1499,7 +1594,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Task.js",
@@ -1511,7 +1607,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         5
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Test tasks with empty string",
@@ -1522,7 +1619,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         3
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Text edit should not lag, but it does now",
@@ -1535,7 +1633,8 @@
       "thisWeek": false,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Time span",
@@ -1546,7 +1645,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Topic.js",
@@ -1558,7 +1658,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         6
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Topics with the same name give weird bugs",
@@ -1570,7 +1671,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         4
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Understand FileReader",
@@ -1581,7 +1683,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Understand testing framework (jest)",
@@ -1593,7 +1696,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         5
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Understand useRef",
@@ -1604,7 +1708,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "When enter is pressed: finish editing",
@@ -1616,7 +1721,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         6
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "When text doubleclicked: focus immediately on text input",
@@ -1628,7 +1734,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         7
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "YAML cannot handle single quotes",
@@ -1639,7 +1746,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         5
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Remember the choice for HideCompletedItems for a View",
@@ -1650,7 +1758,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add ability too peek into folded topics",
@@ -1661,7 +1770,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         7
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Show topics in a shortened way if possible.",
@@ -1672,7 +1782,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         8
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Prevent movement of topics after folding/unfolding + screen height change",
@@ -1683,7 +1794,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         9
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow to find all duplicates of a task at first task",
@@ -1694,7 +1806,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         10
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "(Duplicate) dragging tasks should not be a 2-step process (make it easier to go to the right spot)",
@@ -1705,7 +1818,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         11
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Ability to ony show repeated AND completed tasks",
@@ -1716,7 +1830,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         8
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Ability to (duplicate) drag multiple tasks/topics at once",
@@ -1729,7 +1844,8 @@
       "topicViewIndices": [
         8,
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Ability to partially complete a task",
@@ -1740,7 +1856,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         4
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Adding a task (when only showing repeated tasks) should add a repeated task",
@@ -1751,7 +1868,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         12
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Have the new root topic button available everywhere on the page",
@@ -1762,7 +1880,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         13
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Improve navigation during drag-sorting the list",
@@ -1775,7 +1894,8 @@
       "topicViewIndices": [
         5,
         14
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Delete button should be next to duplicate button",
@@ -1786,7 +1906,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         15
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Plan button, complete button and repeat button should be next to each other",
@@ -1798,7 +1919,8 @@
       "topicViewIndices": [
         16
       ],
-      "completed": true
+      "completed": true,
+      "subTaskIds": []
     },
     {
       "name": "Make tasks draggeable to topics",
@@ -1811,7 +1933,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         3
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Make topics draggable to other topics",
@@ -1824,7 +1947,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         4
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Allow deletion of Topics",
@@ -1837,7 +1961,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         9
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Make Tasks duplicatable to multiple topics",
@@ -1850,7 +1975,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         5
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "List the topic(s) +subtopic(s) that the task belongs to",
@@ -1863,7 +1989,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "When creating a new topic, leave it unfolded",
@@ -1878,7 +2005,8 @@
       "topicViewIndices": [
         6,
         17
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add a way to hide the completed items",
@@ -1891,7 +2019,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Export the weekly list as a txt file (without topic information)",
@@ -1904,7 +2033,8 @@
       "completed": true,
       "topicViewIndices": [
         14
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add a repeated tag to tasks",
@@ -1917,7 +2047,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Enable filtering on repeated tasks (to uncomplete them manually)",
@@ -1932,7 +2063,8 @@
       "topicViewIndices": [
         3,
         9
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add 'Is Repeated Task' button",
@@ -1945,7 +2077,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         10
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add a color to indicate 'Blocked externally' (waiting for response)",
@@ -1956,7 +2089,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         10
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Ability to mark a task 'Blocked externally' (waiting for response)",
@@ -1967,7 +2101,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         11
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add a color to indicate 'Impossible'",
@@ -1978,7 +2113,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         11
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Ability to mark a task 'Impossible'",
@@ -1989,7 +2125,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         12
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Isolate logic from content output as much as possible",
@@ -2000,7 +2137,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Isolate content output from visualization as much as possible",
@@ -2011,7 +2149,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         3
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Make the sorting of the weekly planning not change the topic view order - 1M",
@@ -2021,9 +2160,10 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        7
+        9
       ],
-      "completed": true
+      "completed": true,
+      "subTaskIds": []
     },
     {
       "name": "Hide completed items is not saved when changing views: 1m",
@@ -2033,8 +2173,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        22
-      ]
+        23
+      ],
+      "subTaskIds": []
     },
     {
       "name": "The data is lost when something in react is changed - 1M",
@@ -2044,8 +2185,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        9
-      ]
+        11
+      ],
+      "subTaskIds": []
     },
     {
       "name": "When showing only uncompleted/repeated tasks: minimize/remove/concatenate topic (paths) that are irrelevant/empty - 3m",
@@ -2055,8 +2197,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        33
-      ]
+        35
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not clearly seeing on what level a task is exactly (maybe needs guidance lines?) -2m+",
@@ -2067,9 +2210,13 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        47,
-        7
-      ]
+        50,
+        9
+      ],
+      "subTaskIds": [
+        345
+      ],
+      "unfolded": true
     },
     {
       "name": "Not being able to peek in a list of folded topics: 2m",
@@ -2079,8 +2226,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        49
-      ]
+        52
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not being able to just have a list of all tasks (with filters): 2m",
@@ -2090,8 +2238,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        10
-      ]
+        11
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not being able to see statistics of the topic in the topic view - 2m",
@@ -2101,8 +2250,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        51
-      ]
+        54
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Ability to hide planned items in Topic View - 2m",
@@ -2113,20 +2263,22 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        15,
-        5
-      ]
+        16,
+        7
+      ],
+      "subTaskIds": []
     },
     {
-      "name": "Filtering is not available when in the middle of a large list - 5m",
+      "name": "Filtering is not available when in the middle of a large list - 7m",
       "id": 186,
       "topics": [
         48
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        8
-      ]
+        9
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not being able to show only repeated and only completed tasks: 2m",
@@ -2136,8 +2288,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        19
-      ]
+        20
+      ],
+      "subTaskIds": []
     },
     {
       "name": "There is a missing intent to progress towards a goal, but the task is not 'working on ... for 2 hours' but just 'finish this', and I make it repeated, which is also not the right way to do it.   'Working towards xx for 2 hours' is a subtask of 'Finish xx', so it should be fixed with subtasks - 2m",
@@ -2147,8 +2300,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        57
-      ]
+        60
+      ],
+      "subTaskIds": []
     },
     {
       "name": "The weekly view doesn't show all the topics of all task instances at hand: 1m",
@@ -2158,8 +2312,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        68
-      ]
+        74
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not being able to see what is scheduled and what not in the topic view - 1m",
@@ -2169,8 +2324,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        28
-      ]
+        29
+      ],
+      "subTaskIds": []
     },
     {
       "name": "After folding/unfolding, the mouse is not over the same topic anymore: 5m",
@@ -2180,8 +2336,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        31
-      ]
+        33
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not being able to search for a task (search bar) - 1m",
@@ -2191,8 +2348,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        71
-      ]
+        77
+      ],
+      "subTaskIds": []
     },
     {
       "name": "When I add a new root topics, do I want to add it at the end or the front? Do I want it in focus? - 1m",
@@ -2202,8 +2360,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        72
-      ]
+        78
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Missing a way to sort the tasks by some other order (e.g. topic) temporarily - 1m",
@@ -2213,8 +2372,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        74
-      ]
+        80
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not being able to duplicate-drag tasks to other topics without stopping midway/taking a long time/being annoyed: 3m",
@@ -2224,8 +2384,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        47
-      ]
+        67
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Adding a task, while only showing repeated tasks, should add a repeated task: 3m",
@@ -2235,8 +2396,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        49
-      ]
+        69
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Dragging on the planning list has the wrong visual feedback when dragging downwards - 3m",
@@ -2246,74 +2408,57 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        55
-      ]
+        75
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Make dragging hide all other tasks instead (but it's not ideal, it still is annoying)",
       "id": 207,
-      "topics": [
-        49
-      ],
+      "topics": [],
       "weekOrderIndex": 0,
-      "topicViewIndices": [
-        5
-      ]
+      "topicViewIndices": [],
+      "subTaskIds": []
     },
     {
       "name": "Manually sort the tasks one level down each time",
       "id": 208,
-      "topics": [
-        49
-      ],
+      "topics": [],
       "weekOrderIndex": 0,
-      "topicViewIndices": [
-        6
-      ]
+      "topicViewIndices": [],
+      "subTaskIds": []
     },
     {
       "name": "Open folded topics by hovering over the topic",
       "id": 209,
-      "topics": [
-        49
-      ],
+      "topics": [],
       "weekOrderIndex": 0,
-      "topicViewIndices": [
-        7
-      ]
+      "topicViewIndices": [],
+      "subTaskIds": []
     },
     {
       "name": "Maybe do a .. hide all tasks or something",
       "id": 210,
-      "topics": [
-        49
-      ],
+      "topics": [],
       "weekOrderIndex": 0,
-      "topicViewIndices": [
-        8
-      ]
+      "topicViewIndices": [],
+      "subTaskIds": []
     },
     {
       "name": "Main issue, I cannot scroll during dragging",
       "id": 211,
-      "topics": [
-        49
-      ],
+      "topics": [],
       "weekOrderIndex": 0,
-      "topicViewIndices": [
-        9
-      ]
+      "topicViewIndices": [],
+      "subTaskIds": []
     },
     {
       "name": "Read: https://blog.logrocket.com/ux-design/organizing-categorizing-content-information-architecture/",
       "id": 212,
-      "topics": [
-        49
-      ],
+      "topics": [],
       "weekOrderIndex": 0,
-      "topicViewIndices": [
-        3
-      ]
+      "topicViewIndices": [],
+      "subTaskIds": []
     },
     {
       "name": "When sorting all the new tasks - giving them a place - it was hard to find my way around. 2m",
@@ -2323,19 +2468,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        73
-      ]
-    },
-    {
-      "name": "Text editing tends to lag/slow down if you type more - 7m",
-      "id": 215,
-      "topics": [
-        46
+        93
       ],
-      "weekOrderIndex": 0,
-      "topicViewIndices": [
-        77
-      ]
+      "subTaskIds": []
     },
     {
       "name": "Dragging does suddenly stop if using a laptop drag. Maybe edge of screen? - 2m",
@@ -2345,8 +2480,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        79
-      ]
+        99
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Selection also unselects when stopping dragging, which is also unexpected - 2m",
@@ -2356,9 +2492,10 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        71
+        91
       ],
-      "completed": true
+      "completed": true,
+      "subTaskIds": []
     },
     {
       "name": "I'm doing the same process/ collection of tasks over and over, make them quickly plannable - 3m",
@@ -2369,7 +2506,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         21
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not being able to make a new root topic when the button is not in view: 1m",
@@ -2379,8 +2517,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        115
-      ]
+        136
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Delete and duplicate should be near each other. Completed and repeated should be near each other: 1m",
@@ -2390,8 +2529,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        113
-      ]
+        134
+      ],
+      "subTaskIds": []
     },
     {
       "name": "There is no easy way to deduplicate a duplicated task - 2m",
@@ -2401,8 +2541,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        111
-      ]
+        120
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Dragging a task (in planned list) below the entire list, should put it at the bottom. - 1m",
@@ -2412,8 +2553,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        103
-      ]
+        124
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Inability to add comments to a (repeating) task       Missing information: what time range has been checked  -1m",
@@ -2424,7 +2566,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         26
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "No possibility to create a new task in the planned list/Spontaneous ideas that should be categorized later -2m",
@@ -2434,8 +2577,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        63
-      ]
+        83
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Cannot split a task into multiple tasks in the weekly list - 1m",
@@ -2445,8 +2589,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        117
-      ]
+        138
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Cannot uncomplete/plan multiple selected items at once -1m",
@@ -2456,8 +2601,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        118
-      ]
+        139
+      ],
+      "subTaskIds": []
     },
     {
       "name": "The week planning is missing from the MarkDown - 7m",
@@ -2468,7 +2614,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         7
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "After saving a new document in .json, it does not remember the file name to save to the .yaml and .md files - 1m",
@@ -2479,7 +2626,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         15
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not being able to complete tasks on the weekly view: 1 - gefixt",
@@ -2490,8 +2638,9 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        141
-      ]
+        162
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not being able to clear all completed items from the weekly list: 2M - gefixt",
@@ -2502,8 +2651,9 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        20
-      ]
+        21
+      ],
+      "subTaskIds": []
     },
     {
       "name": " Not being able to remove items from the weekly list on the weekly list: 4m - gefixt",
@@ -2514,8 +2664,9 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        53
-      ]
+        73
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not being able to edit task text on the weekly view - 3m - gefixt",
@@ -2526,8 +2677,9 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        62
-      ]
+        82
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not being able to mark a weekly task as 'planned in the daily view (or locally)' - 4m - gefixt",
@@ -2538,8 +2690,9 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        44
-      ]
+        45
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Having to rename the file every time it is saved (the filename is not remembered on load): 11 - gefixt",
@@ -2551,7 +2704,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         6
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not being able to load the file from the weekly list: 1 - gefixt",
@@ -2563,7 +2717,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         17
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "The weekly view names are too large and go to the next line (but don't make the task bigger): 5m - gefixt",
@@ -2574,8 +2729,9 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        27
-      ]
+        29
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Topic view task text is too long: 3m - gefixt (opnieuw)",
@@ -2586,8 +2742,9 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        61
-      ]
+        81
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not seeing the repeated tasks: 2 -gefixt",
@@ -2598,8 +2755,9 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        58
-      ]
+        61
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Fearing to lose a task by not being able to make it repeatable: 3 - gefixt",
@@ -2611,7 +2769,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         22
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not being able to extract the text from the Weekly View (export or Copy): 4M - gefixt",
@@ -2623,7 +2782,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         5
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "not showing that the json is not up to date. 5m - gefixt      Make hash at load, and during handling (so undoing a thing will reset it to load state).     Can I make the load order-independent? Maybe sort the tasks by id, and the topics... should be ordered? Except for the subtopics-order. Also by ID.",
@@ -2635,7 +2795,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         9
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Bug: source_supertopic is undefined in moveTopic - 1M- gefixt",
@@ -2646,8 +2807,9 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        10
-      ]
+        12
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Not being able to drag multiple items at once in the topic view - 16m - gefixt",
@@ -2659,7 +2821,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         5
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "ot being able to drag multiple items at once in the planned view - 30m - gefixt",
@@ -2671,7 +2834,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "In the weekly view: hide completed tasks is always unchecked - 2m - gefixt",
@@ -2682,8 +2846,9 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        20
-      ]
+        21
+      ],
+      "subTaskIds": []
     },
     {
       "name": "No dark mode - 1m -gefixt",
@@ -2694,8 +2859,9 @@
       "completed": true,
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        77
-      ]
+        83
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Needing to save the markdown, yaml and json all separately - 30m - gefixt?",
@@ -2707,7 +2873,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         0
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Cannot partially add a markdown/json file to a topic (create the tree there from the json/merge two jsons) - 1m",
@@ -2718,7 +2885,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         21
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Cannot export the tree within a topic  - 0m",
@@ -2729,7 +2897,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         27
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Topic text is not handled right and makes the buttons go crazy - 1m",
@@ -2739,10 +2908,11 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        78
+        84
       ],
       "completed": true,
-      "finishStatus": 1
+      "finishStatus": 1,
+      "subTaskIds": []
     },
     {
       "name": "The UI does not look professional -1m",
@@ -2752,8 +2922,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        81
-      ]
+        87
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Adding processes as tasks (this is again a type of supertask/subtask) - 2m",
@@ -2764,7 +2935,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         24
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Track different activities (need daily planning + completion timings) - 1m",
@@ -2775,7 +2947,8 @@
       "weekOrderIndex": 0,
       "topicViewIndices": [
         31
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add browser tab icon - 1m",
@@ -2785,8 +2958,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        82
-      ]
+        88
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add name of file to Tab Name -2m",
@@ -2796,8 +2970,9 @@
       ],
       "weekOrderIndex": 0,
       "topicViewIndices": [
-        63
-      ]
+        66
+      ],
+      "subTaskIds": []
     },
     {
       "name": "The Dark Mode does not work correctly -1m",
@@ -2806,9 +2981,13 @@
         45
       ],
       "topicViewIndices": [
-        84
+        90
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "completed": true,
+      "finishStatus": 1,
+      "lastFinished": "2024-05-27T19:53:35.138Z",
+      "subTaskIds": []
     },
     {
       "name": "There needs to be some feedback on when something was done (an event log) /Adding processes as tasks (this is again a type of supertask/subtask) - 1m",
@@ -2817,9 +2996,10 @@
         46
       ],
       "topicViewIndices": [
-        148
+        169
       ],
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Need an easier way to show task/topic information (id/viewIndex/weekIndex) - 4m",
@@ -2828,13 +3008,14 @@
         53
       ],
       "topicViewIndices": [
-        2
+        3
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Need an identifier for which version we are working with (date, commit, version, dev or production) - 3m",
@@ -2843,80 +3024,18 @@
         53
       ],
       "topicViewIndices": [
-        5
+        6
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "After dragging, the selection is sometimes not shown, even though it is still selected -6m",
       "id": 266,
-      "topics": [
-        45
-      ],
-      "topicViewIndices": [
-        26
-      ],
-      "completed": false,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Moving a task to the same topic should keep the same topic",
-      "id": 261,
-      "topics": [
-        52
-      ],
-      "topicViewIndices": [
-        2
-      ],
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Moving a duplicated task to the second duplicated task, should deduplicate the task",
-      "id": 262,
-      "topics": [
-        52
-      ],
-      "topicViewIndices": [
-        3
-      ],
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Tasks A and B both have duplicates in Topic 1 and Topic 2. Selecting task A1 and B2 and moving to topic C should leave A2 and B1 alone",
-      "id": 263,
-      "topics": [
-        52
-      ],
-      "topicViewIndices": [
-        4
-      ],
-      "weekOrderIndex": 0
-    },
-    {
-      "name": " Kan moeilijk veel bestanden in een rij na elkaar selecteren. Als ze verspreid zijn is het prima. -3m",
-      "id": 267,
-      "topics": [
-        46
-      ],
-      "topicViewIndices": [
-        59
-      ],
-      "completed": false,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Hyperlinks die niet werken/in te korten zijn - 5m",
-      "id": 270,
       "topics": [
         45
       ],
@@ -2927,7 +3046,76 @@
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "Moving a task to the same topic should keep the same topic",
+      "id": 261,
+      "topics": [
+        52
+      ],
+      "topicViewIndices": [
+        2
+      ],
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "Moving a duplicated task to the second duplicated task, should deduplicate the task",
+      "id": 262,
+      "topics": [
+        52
+      ],
+      "topicViewIndices": [
+        3
+      ],
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "Tasks A and B both have duplicates in Topic 1 and Topic 2. Selecting task A1 and B2 and moving to topic C should leave A2 and B1 alone",
+      "id": 263,
+      "topics": [
+        52
+      ],
+      "topicViewIndices": [
+        4
+      ],
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": " Kan moeilijk veel bestanden in een rij na elkaar selecteren. Als ze verspreid zijn is het prima. -3m",
+      "id": 267,
+      "topics": [
+        46
+      ],
+      "topicViewIndices": [
+        79
+      ],
+      "completed": false,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "Hyperlinks die niet werken/in te korten zijn - 5m",
+      "id": 270,
+      "topics": [
+        45
+      ],
+      "topicViewIndices": [
+        30
+      ],
+      "completed": false,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Dat ik niet meteen een taak aan de bovenkant heb, maar aan de onderkant van de topic list, als ik Add Task doe - 7m",
@@ -2936,13 +3124,14 @@
         46
       ],
       "topicViewIndices": [
-        21
+        22
       ],
       "completed": true,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "It does not make sense to be able to plan/schedule a completed items. - 2m",
@@ -2952,14 +3141,17 @@
         46
       ],
       "topicViewIndices": [
-        60,
-        98
+        63,
+        118
       ],
-      "completed": false,
+      "completed": true,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "finishStatus": 1,
+      "lastFinished": "2024-05-27T19:54:13.339Z",
+      "subTaskIds": []
     },
     {
       "name": "Kan niet een lijst van bullet points importeren in een topic - 4m+",
@@ -2974,7 +3166,8 @@
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": " Changing view automatically doesn't remember Hide completed Tasks setting - 1m",
@@ -2983,13 +3176,14 @@
         48
       ],
       "topicViewIndices": [
-        27
+        28
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": " Maybe show the whole list in increments of 10? Or logarithmically, with 10 being the lowest step?  I'm a bit overwhelmed when I see a group of 30 tasks after another. - 3m",
@@ -2998,13 +3192,14 @@
         45
       ],
       "topicViewIndices": [
-        35
+        37
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": " Dragging items sometimes ends up in the gap between the tasks - 2m",
@@ -3013,13 +3208,14 @@
         46
       ],
       "topicViewIndices": [
-        83
+        103
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": " Completed items are still scheduled. - 2m",
@@ -3028,13 +3224,16 @@
         46
       ],
       "topicViewIndices": [
-        82
+        102
       ],
-      "completed": false,
+      "completed": true,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "finishStatus": 1,
+      "lastFinished": "2024-05-27T19:52:16.820Z",
+      "subTaskIds": []
     },
     {
       "name": " Need easy way to show completed and repeated tasks (to uncomplete them) - 3m",
@@ -3043,13 +3242,14 @@
         48
       ],
       "topicViewIndices": [
-        9
+        10
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "The order of tasks in the MarkDown file should reflect the ordering inside the topoic view -0m",
@@ -3064,7 +3264,8 @@
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Ability to create a task on the Weekly List - 1m",
@@ -3073,13 +3274,14 @@
         46
       ],
       "topicViewIndices": [
-        100
+        121
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Sometimes a new task will not be inserted at the absolute top -3m",
@@ -3088,13 +3290,14 @@
         44
       ],
       "topicViewIndices": [
-        14
+        18
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Manage the text widths on the task bars",
@@ -3109,7 +3312,8 @@
       ],
       "scheduled": false,
       "completed": true,
-      "finishStatus": 1
+      "finishStatus": 1,
+      "subTaskIds": []
     },
     {
       "name": "Cannot create dependencies between task completions (auto->IKEA/recept bedenken->boodschappen) - 4m ",
@@ -3124,7 +3328,8 @@
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Would like to monitor the progression of tasks over time (new tasks added, tasks completed, tasks scheduled, repeated tasks newly planned) -1m",
@@ -3133,13 +3338,14 @@
         45
       ],
       "topicViewIndices": [
-        89
+        95
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Selection in the weekly list gets unselected after dragging completes - 1m",
@@ -3148,13 +3354,14 @@
         46
       ],
       "topicViewIndices": [
-        150
+        171
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "- The order of selected tasks should be kept locally coherent (so same topic Id then the source Indices should be ordered) - 2m",
@@ -3163,28 +3370,30 @@
         46
       ],
       "topicViewIndices": [
-        96
+        116
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
-      "name": "- Should not be able to delete non-empty topics. - 1M",
+      "name": "- Should not be able to willy-nilly delete non-empty topics. - 1M",
       "id": 295,
       "topics": [
         44
       ],
       "topicViewIndices": [
-        12
+        15
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Cannot filter out irrelevant items (already planned, completed, repeatable but it's not yet time, blocked, irrelevant) - 1m",
@@ -3199,22 +3408,24 @@
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
-      "name": "Visual bug: selected tasks are not outline after dragging completes in the topic view - 1m",
+      "name": "Visual bug: selected tasks are not outline after dragging completes in the topic view - 5m",
       "id": 297,
       "topics": [
         44
       ],
       "topicViewIndices": [
-        15
+        17
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Create an easier way to debug (debug mode with more information directly on screen) - 3m",
@@ -3223,13 +3434,14 @@
         53
       ],
       "topicViewIndices": [
-        3
+        4
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Deprecate the YAML format - 1m",
@@ -3244,7 +3456,8 @@
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Cannot merge topics together -1m",
@@ -3253,13 +3466,14 @@
         46
       ],
       "topicViewIndices": [
-        152
+        176
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Should have ability that adds a task INSIDE of another task - 1m",
@@ -3268,17 +3482,84 @@
         46
       ],
       "topicViewIndices": [
-        110
+        131
+      ],
+      "completed": true,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "finishStatus": 1,
+      "lastFinished": "2024-05-27T19:52:30.437Z",
+      "subTaskIds": []
+    },
+    {
+      "name": "When planning things from topic view to weekly view, the order in the weekly view is shifted from the topic view- 1m",
+      "id": 303,
+      "topics": [
+        45
+      ],
+      "topicViewIndices": [
+        92
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
-      "name": "When planning things from topic view to weekly view, the order in the weekly view is shifted from the topic view- 1m",
-      "id": 303,
+      "name": "I cannot plan mutliple tasks at once - 1m",
+      "id": 304,
+      "topics": [
+        45
+      ],
+      "topicViewIndices": [
+        91
+      ],
+      "completed": false,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "There is no way to fold a topic without going all the way to the top -1m+",
+      "id": 305,
+      "topics": [
+        45
+      ],
+      "topicViewIndices": [
+        73
+      ],
+      "completed": false,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "Clicking Uncomplete->Plan to redo a Repeated task should be renamed - 4m",
+      "id": 306,
+      "topics": [
+        45
+      ],
+      "topicViewIndices": [
+        34
+      ],
+      "completed": false,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "Cannot mark a task as \"verifying completion\" (you think it's complete, but checking takes time/by 3rd party) - 1m",
+      "id": 307,
       "topics": [
         45
       ],
@@ -3289,67 +3570,8 @@
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "I cannot plan mutliple tasks at once - 1m",
-      "id": 304,
-      "topics": [
-        45
-      ],
-      "topicViewIndices": [
-        85
-      ],
-      "completed": false,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "There is no way to fold a topic without going all the way to the top -1m+",
-      "id": 305,
-      "topics": [
-        45
-      ],
-      "topicViewIndices": [
-        67
-      ],
-      "completed": false,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Clicking Uncomplete->Plan to redo a Repeated task should be renamed - 4m",
-      "id": 306,
-      "topics": [
-        45
-      ],
-      "topicViewIndices": [
-        32
-      ],
-      "completed": false,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Cannot mark a task as \"verifying completion\" (you think it's complete, but checking takes time/by 3rd party) - 1m",
-      "id": 307,
-      "topics": [
-        45
-      ],
-      "topicViewIndices": [
-        80
-      ],
-      "completed": false,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "It doesn't check that your file is changed before closing the window - 1m",
@@ -3364,7 +3586,8 @@
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "It doesn't automatically show you that your file is changed and unsaved when you change something - 3m",
@@ -3379,7 +3602,8 @@
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Have just a list of tasks, that we can put filters on (basically the weekly list is a list with filter: planned=True)",
@@ -3391,7 +3615,8 @@
       "thisWeek": false,
       "topicViewIndices": [
         20
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Completed + repeated + ready to do again should be easier to find -2m",
@@ -3400,13 +3625,14 @@
         45
       ],
       "topicViewIndices": [
-        48
+        51
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Completed are almost same color as not yet planned/scheduled with a night filter - 1m",
@@ -3415,13 +3641,14 @@
         45
       ],
       "topicViewIndices": [
-        87
+        93
       ],
       "completed": false,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Missing button for deleting just a task instance and not the whole task - 1m",
@@ -3430,14 +3657,15 @@
         46
       ],
       "topicViewIndices": [
-        151
+        175
       ],
       "completed": false,
       "finishStatus": 0,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Cannot order the subtopics - 2m",
@@ -3446,14 +3674,15 @@
         46
       ],
       "topicViewIndices": [
-        99
+        119
       ],
       "completed": false,
       "finishStatus": 0,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "When having more than 500+ tasks, it gets difficult to manage - information overload (maybe only show first 2 of every topic?)- 1M",
@@ -3462,46 +3691,41 @@
         44
       ],
       "topicViewIndices": [
-        13
+        16
       ],
       "completed": false,
       "finishStatus": 0,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Maybe add a way to type and click (duplicate towards)?",
       "id": 315,
-      "topics": [
-        49
-      ],
-      "topicViewIndices": [
-        2
-      ],
+      "topics": [],
+      "topicViewIndices": [],
       "completed": false,
       "finishStatus": 0,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Maybe allow to right click and select \"Duplicate selected tasks here\"?",
       "id": 316,
-      "topics": [
-        49
-      ],
-      "topicViewIndices": [
-        1
-      ],
+      "topics": [],
+      "topicViewIndices": [],
       "completed": false,
       "finishStatus": 0,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Cannot add a schedule to a repeated item - 1m",
@@ -3517,7 +3741,8 @@
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "You should select a task and 'Go to Topic View/Planned View' as an action - 2m",
@@ -3526,17 +3751,18 @@
         45
       ],
       "topicViewIndices": [
-        64
+        70
       ],
       "completed": false,
       "finishStatus": 0,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
-      "name": " - Does not show exactly what the last time of saving/loading/modification was. (Can be a table with: Last saved: ... , Last modified: ..., Last loaded ... -2m",
+      "name": " - Does not show exactly what the last time of saving/loading/modification was. (Can be a table with: Last saved: ... , Last modified: ..., Last loaded ... -3m",
       "id": 319,
       "topics": [
         47
@@ -3549,7 +3775,8 @@
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Should be able to add a link to a certain task - 1m",
@@ -3558,30 +3785,33 @@
         45
       ],
       "topicViewIndices": [
-        90
+        96
       ],
       "completed": false,
       "finishStatus": 0,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
-      "name": "The topic text width will mess up the whole layout if the text is too long - 1m",
+      "name": "The topic text width will mess up the whole layout if the text is too long - 4m",
       "id": 321,
       "topics": [
         45
       ],
       "topicViewIndices": [
-        88
+        94
       ],
-      "completed": false,
-      "finishStatus": 0,
+      "completed": true,
+      "finishStatus": 1,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "lastFinished": "2024-05-27T19:53:21.938Z",
+      "subTaskIds": []
     },
     {
       "name": "I'm also missing positively correlated tasks (completing one makes the other easier) - 1m",
@@ -3590,146 +3820,19 @@
         50
       ],
       "topicViewIndices": [
-        20
+        33
       ],
       "completed": false,
       "finishStatus": 0,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Reduce cognitive load - 2M",
       "id": 323,
-      "topics": [
-        54
-      ],
-      "topicViewIndices": [
-        4
-      ],
-      "completed": false,
-      "finishStatus": 0,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Add an index/list number to the planned list - 1m",
-      "id": 324,
-      "topics": [
-        45
-      ],
-      "topicViewIndices": [
-        66
-      ],
-      "completed": false,
-      "finishStatus": 0,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Cannot add a task in the middle/at the end of a list - 1m",
-      "id": 325,
-      "topics": [
-        46
-      ],
-      "topicViewIndices": [
-        114
-      ],
-      "completed": false,
-      "finishStatus": 0,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Repeated tasks do not show when the next time should happen - 1m",
-      "id": 326,
-      "topics": [
-        45
-      ],
-      "topicViewIndices": [
-        65
-      ],
-      "completed": false,
-      "finishStatus": 0,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Filter repeated items that are completed and should not be done in a while ",
-      "id": 327,
-      "topics": [
-        48
-      ],
-      "topicViewIndices": [
-        23
-      ],
-      "completed": false,
-      "finishStatus": 0,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Filter all tasks that are currently in Waiting or Blocked",
-      "id": 328,
-      "topics": [
-        48
-      ],
-      "topicViewIndices": [
-        24
-      ],
-      "completed": false,
-      "finishStatus": 0,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Filter all tasks that are currently \"Testing for completion\" ",
-      "id": 329,
-      "topics": [
-        48
-      ],
-      "topicViewIndices": [
-        25
-      ],
-      "completed": false,
-      "finishStatus": 0,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "I should be warned when I make a duplicate task - 1m",
-      "id": 330,
-      "topics": [
-        46
-      ],
-      "topicViewIndices": [
-        1
-      ],
-      "completed": false,
-      "finishStatus": 0,
-      "thisWeek": false,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 0
-    },
-    {
-      "name": "Block out anything irrelevant",
-      "id": 331,
       "topics": [
         54
       ],
@@ -3741,7 +3844,144 @@
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "Add an index/list number to the planned list - 1m",
+      "id": 324,
+      "topics": [
+        45
+      ],
+      "topicViewIndices": [
+        72
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "Cannot add a task in the middle/at the end of a list - 1m",
+      "id": 325,
+      "topics": [
+        46
+      ],
+      "topicViewIndices": [
+        135
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "Repeated tasks do not show when the next time should happen - 1m",
+      "id": 326,
+      "topics": [
+        45
+      ],
+      "topicViewIndices": [
+        71
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "Filter repeated items that are completed and should not be done in a while ",
+      "id": 327,
+      "topics": [
+        48
+      ],
+      "topicViewIndices": [
+        24
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "Filter all tasks that are currently in Waiting or Blocked",
+      "id": 328,
+      "topics": [
+        48
+      ],
+      "topicViewIndices": [
+        25
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "Filter all tasks that are currently \"Testing for completion\" ",
+      "id": 329,
+      "topics": [
+        48
+      ],
+      "topicViewIndices": [
+        26
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "I should be warned when I make a duplicate task - 1m",
+      "id": 330,
+      "topics": [
+        46
+      ],
+      "topicViewIndices": [
+        173
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "Block out anything irrelevant",
+      "id": 331,
+      "topics": [
+        54
+      ],
+      "topicViewIndices": [
+        4
+      ],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Hierarchical/supertasks in planned list would reduce cognitive load by a lot (add Grooming instead of each substep)",
@@ -3750,14 +3990,15 @@
         54
       ],
       "topicViewIndices": [
-        1
+        3
       ],
       "completed": false,
       "finishStatus": 0,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "When looking through the system when it's filtered, it's easy to forget the state of the filtering (better feedback on filtering) - 1m",
@@ -3766,14 +4007,15 @@
         48
       ],
       "topicViewIndices": [
-        29
+        30
       ],
       "completed": false,
       "finishStatus": 0,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 0
+      "weekOrderIndex": 0,
+      "subTaskIds": []
     },
     {
       "name": "Remove YAML export",
@@ -3790,7 +4032,8 @@
       "repeated": false,
       "scheduled": false,
       "weekOrderIndex": 0,
-      "lastFinished": "2024-05-09T14:03:31.748Z"
+      "lastFinished": "2024-05-09T14:03:31.748Z",
+      "subTaskIds": []
     },
     {
       "name": "Add Github links",
@@ -3807,7 +4050,8 @@
       "repeated": false,
       "scheduled": false,
       "weekOrderIndex": 0,
-      "lastFinished": "2024-05-09T14:02:29.280Z"
+      "lastFinished": "2024-05-09T14:02:29.280Z",
+      "subTaskIds": []
     },
     {
       "name": "Archive minimal layout",
@@ -3824,7 +4068,8 @@
       "repeated": false,
       "scheduled": false,
       "weekOrderIndex": 0,
-      "lastFinished": "2024-05-09T14:04:00.316Z"
+      "lastFinished": "2024-05-09T14:04:00.316Z",
+      "subTaskIds": []
     },
     {
       "name": "Change default tasks",
@@ -3841,7 +4086,8 @@
       "repeated": false,
       "scheduled": false,
       "weekOrderIndex": 0,
-      "lastFinished": "2024-05-09T13:51:46.718Z"
+      "lastFinished": "2024-05-09T13:51:46.718Z",
+      "subTaskIds": []
     },
     {
       "name": "Add version to export/saved files - 1M",
@@ -3850,14 +4096,203 @@
         53
       ],
       "topicViewIndices": [
-        1
+        2
       ],
       "completed": false,
       "finishStatus": 0,
       "thisWeek": false,
       "repeated": false,
       "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -17m",
+      "id": 203,
+      "topics": [
+        50
+      ],
+      "weekOrderIndex": 0,
+      "topicViewIndices": [
+        12
+      ],
+      "thisWeek": false,
+      "subTaskIds": []
+    },
+    {
+      "name": "Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 15m",
+      "id": 213,
+      "topics": [
+        50,
+        48,
+        54
+      ],
+      "weekOrderIndex": 0,
+      "topicViewIndices": [
+        16,
+        0,
+        5
+      ],
+      "thisWeek": false,
+      "subTaskIds": []
+    },
+    {
+      "name": "I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -20m ",
+      "id": 189,
+      "topics": [
+        46
+      ],
+      "weekOrderIndex": 0,
+      "topicViewIndices": [
+        42
+      ],
+      "thisWeek": false,
+      "subTaskIds": []
+    },
+    {
+      "name": "Add guidance lines",
+      "id": 345,
+      "topics": [],
+      "topicViewIndices": [],
+      "subTaskIds": [],
+      "completed": true,
+      "finishStatus": 1,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "lastFinished": "2024-05-27T19:54:39.606Z"
+    },
+    {
+      "name": "Visual bug: overscrolling upwards/downwards give a small white margin in dark mode - 1m",
+      "id": 346,
+      "topics": [
+        44
+      ],
+      "topicViewIndices": [
+        22
+      ],
+      "subTaskIds": [],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
       "weekOrderIndex": 0
+    },
+    {
+      "name": "Bug: editing name of completed item with timestamp messes up the whole name - 1M",
+      "id": 347,
+      "topics": [
+        44
+      ],
+      "topicViewIndices": [
+        14
+      ],
+      "subTaskIds": [],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Selection is not unselected after dragging into folded topic (you can't see the selection) - 1m",
+      "id": 348,
+      "topics": [
+        45
+      ],
+      "topicViewIndices": [
+        97
+      ],
+      "subTaskIds": [],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Cannot plan (bulk edit) the entire selection at once - 1m",
+      "id": 349,
+      "topics": [
+        46
+      ],
+      "topicViewIndices": [
+        172
+      ],
+      "subTaskIds": [],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Does not show the completion time as (x minutes/days) ago - 3m",
+      "id": 350,
+      "topics": [
+        45
+      ],
+      "topicViewIndices": [
+        49
+      ],
+      "subTaskIds": [],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Does not show repeated tasks within supertasks when \"Show only repeated tasks\" is on. - 1m",
+      "id": 351,
+      "topics": [
+        48
+      ],
+      "topicViewIndices": [
+        1
+      ],
+      "subTaskIds": [],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
+    },
+    {
+      "name": "Er is geen Undo knop - 4M",
+      "id": 275,
+      "topics": [
+        44
+      ],
+      "topicViewIndices": [
+        7
+      ],
+      "completed": false,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0,
+      "subTaskIds": []
+    },
+    {
+      "name": "Text editing tends to lag/slow down if you type more - 17m",
+      "id": 215,
+      "topics": [
+        46
+      ],
+      "weekOrderIndex": 1,
+      "topicViewIndices": [
+        66
+      ],
+      "thisWeek": true,
+      "subTaskIds": []
     },
     {
       "name": "Fix Browse button/input to button element",
@@ -3873,8 +4308,9 @@
       "thisWeek": true,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 1,
-      "lastFinished": "2024-05-09T16:35:07.380Z"
+      "weekOrderIndex": 2,
+      "lastFinished": "2024-05-09T16:35:07.380Z",
+      "subTaskIds": []
     },
     {
       "name": "Fix Topic text width",
@@ -3885,12 +4321,14 @@
       "topicViewIndices": [
         3
       ],
-      "completed": false,
-      "finishStatus": 0,
+      "completed": true,
+      "finishStatus": 1,
       "thisWeek": true,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 2
+      "weekOrderIndex": 3,
+      "lastFinished": "2024-05-27T19:55:29.091Z",
+      "subTaskIds": []
     },
     {
       "name": "Improve the saving/modified/loading messaging",
@@ -3906,7 +4344,8 @@
       "thisWeek": true,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 3
+      "weekOrderIndex": 4,
+      "subTaskIds": []
     },
     {
       "name": "Add icons instead of buttons (with alt text and labels)",
@@ -3922,7 +4361,8 @@
       "thisWeek": true,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 4
+      "weekOrderIndex": 5,
+      "subTaskIds": []
     },
     {
       "name": "Improve layout",
@@ -3933,12 +4373,14 @@
       "topicViewIndices": [
         10
       ],
-      "completed": false,
-      "finishStatus": 0,
+      "completed": true,
+      "finishStatus": 1,
       "thisWeek": true,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 5
+      "weekOrderIndex": 6,
+      "lastFinished": "2024-05-27T19:55:33.357Z",
+      "subTaskIds": []
     },
     {
       "name": "Fix/remove dark mode",
@@ -3954,8 +4396,9 @@
       "thisWeek": true,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 6,
-      "lastFinished": "2024-05-09T16:35:09.514Z"
+      "weekOrderIndex": 7,
+      "lastFinished": "2024-05-09T16:35:09.514Z",
+      "subTaskIds": []
     },
     {
       "name": "Keep a list of UX issues when manually testing/using the software",
@@ -3966,11 +4409,12 @@
       ],
       "repeated": true,
       "thisWeek": true,
-      "weekOrderIndex": 7,
+      "weekOrderIndex": 8,
       "topicViewIndices": [
         6,
         23
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "It does not feel right to Complete or Delete tasks that are just irrelevant (due to not necessary, deadline, no resources, etc.) - 20m",
@@ -3978,14 +4422,15 @@
       "topics": [
         50
       ],
-      "weekOrderIndex": 8,
+      "weekOrderIndex": 9,
       "thisWeek": true,
       "topicViewIndices": [
         6
       ],
       "scheduled": false,
       "completed": true,
-      "finishStatus": 1
+      "finishStatus": 1,
+      "subTaskIds": []
     },
     {
       "name": "Repeated tasks do not show last completion/cannot retain information about when the next time would be -31m+",
@@ -3993,14 +4438,15 @@
       "topics": [
         45
       ],
-      "weekOrderIndex": 9,
+      "weekOrderIndex": 10,
       "thisWeek": true,
       "topicViewIndices": [
-        15
+        17
       ],
       "completed": true,
       "finishStatus": 1,
-      "lastFinished": "2024-05-08T15:24:47.401Z"
+      "lastFinished": "2024-05-08T15:24:47.401Z",
+      "subTaskIds": []
     },
     {
       "name": "There is no way to create a task and it's subtasks. Topics shouldn't be supertasks/goals. -20m",
@@ -4008,41 +4454,41 @@
       "topics": [
         50
       ],
-      "weekOrderIndex": 10,
+      "weekOrderIndex": 11,
       "topicViewIndices": [
         7
       ],
-      "thisWeek": true
-    },
-    {
-      "name": "Er is geen Undo knop - 4M",
-      "id": 275,
-      "topics": [
-        44
-      ],
-      "topicViewIndices": [
-        5
-      ],
-      "completed": false,
       "thisWeek": true,
-      "repeated": false,
-      "scheduled": false,
-      "weekOrderIndex": 11
+      "completed": true,
+      "finishStatus": 1,
+      "lastFinished": "2024-05-27T19:52:53.554Z",
+      "subTaskIds": []
     },
     {
       "name": "It takes a huge time to drag a task from the top to the bottom - 18m ",
       "id": 287,
       "topics": [
-        49
+        46
       ],
       "topicViewIndices": [
-        0
+        48
       ],
       "completed": false,
       "thisWeek": true,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 12
+      "weekOrderIndex": 12,
+      "subTaskIds": [
+        207,
+        208,
+        210,
+        209,
+        316,
+        211,
+        212,
+        315
+      ],
+      "unfolded": false
     },
     {
       "name": "Removing items from the planned list or completing an item, does not unschedule them - 14m",
@@ -4053,51 +4499,12 @@
       "weekOrderIndex": 13,
       "thisWeek": true,
       "topicViewIndices": [
-        16
+        17
       ],
       "scheduled": false,
       "completed": true,
-      "finishStatus": 1
-    },
-    {
-      "name": "There is no way to have a planned task (3x sport in a week) and complete/schedule it partially - 4m      e.g. sport_1 is completed, sport_2 missed deadline, sport_3 scheduled -17m",
-      "id": 203,
-      "topics": [
-        50
-      ],
-      "weekOrderIndex": 14,
-      "topicViewIndices": [
-        12
-      ],
-      "thisWeek": true
-    },
-    {
-      "name": "Cannot mark/filter a task as Blocked( (internally dependent or externally) or Waiting (for event/appointment) - 15m",
-      "id": 213,
-      "topics": [
-        50,
-        48,
-        54
-      ],
-      "weekOrderIndex": 15,
-      "topicViewIndices": [
-        16,
-        0,
-        3
-      ],
-      "thisWeek": true
-    },
-    {
-      "name": "I sometimes find a duplicate task that I made myself/The abiltiy to merge tasks?) -15m ",
-      "id": 189,
-      "topics": [
-        46
-      ],
-      "weekOrderIndex": 16,
-      "topicViewIndices": [
-        41
-      ],
-      "thisWeek": true
+      "finishStatus": 1,
+      "subTaskIds": []
     },
     {
       "name": "It is unclear where a duplicated task is already (is it already duplicated?) -12m",
@@ -4106,12 +4513,13 @@
         45,
         54
       ],
-      "weekOrderIndex": 17,
+      "weekOrderIndex": 14,
       "thisWeek": true,
       "topicViewIndices": [
-        18,
-        6
-      ]
+        20,
+        1
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Tasks/topics with the same id will mess up program - 2M",
@@ -4120,13 +4528,14 @@
         44
       ],
       "topicViewIndices": [
-        8
+        10
       ],
       "completed": false,
       "thisWeek": true,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 18
+      "weekOrderIndex": 15,
+      "subTaskIds": []
     },
     {
       "name": "Enter does not finish text input in planned list - 15m",
@@ -4134,12 +4543,13 @@
       "topics": [
         46
       ],
-      "weekOrderIndex": 19,
+      "weekOrderIndex": 16,
       "topicViewIndices": [
-        15
+        16
       ],
       "thisWeek": true,
-      "completed": true
+      "completed": true,
+      "subTaskIds": []
     },
     {
       "name": "Not being able to duplicate multiple tasks at once in Topic View (forgetting which tasks are already copied): 19m",
@@ -4147,12 +4557,13 @@
       "topics": [
         46
       ],
-      "weekOrderIndex": 20,
+      "weekOrderIndex": 17,
       "thisWeek": true,
       "topicViewIndices": [
-        14
+        15
       ],
-      "completed": true
+      "completed": true,
+      "subTaskIds": []
     },
     {
       "name": "Not being able to collapse or fold all the topics with one button - 27m",
@@ -4162,13 +4573,14 @@
         45
       ],
       "thisWeek": true,
-      "weekOrderIndex": 21,
+      "weekOrderIndex": 18,
       "topicViewIndices": [
         8,
         0
       ],
       "scheduled": true,
-      "completed": true
+      "completed": true,
+      "subTaskIds": []
     },
     {
       "name": "Add Ability to unfold a topic and all its subtopics in one go",
@@ -4176,13 +4588,14 @@
       "topics": [
         23
       ],
-      "weekOrderIndex": 22,
+      "weekOrderIndex": 19,
       "thisWeek": true,
       "topicViewIndices": [
         9
       ],
       "scheduled": true,
-      "completed": true
+      "completed": true,
+      "subTaskIds": []
     },
     {
       "name": "Ability to spawn follow-up tasks or subtask/necessary tasks on a task in the Weekly List from a task (Completing the task made another TODO) - 15m+",
@@ -4191,13 +4604,16 @@
         46
       ],
       "topicViewIndices": [
-        46
+        47
       ],
-      "completed": false,
+      "completed": true,
       "thisWeek": true,
       "repeated": false,
       "scheduled": false,
-      "weekOrderIndex": 23
+      "weekOrderIndex": 20,
+      "finishStatus": 1,
+      "lastFinished": "2024-05-27T19:52:00.670Z",
+      "subTaskIds": []
     },
     {
       "name": "Show all topics for a task with multiple topics",
@@ -4205,11 +4621,12 @@
       "topics": [
         40
       ],
-      "weekOrderIndex": 24,
+      "weekOrderIndex": 21,
       "thisWeek": true,
       "topicViewIndices": [
         3
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Text width on a narrow screen is not handled well (text width not respected) - 10m",
@@ -4217,13 +4634,14 @@
       "topics": [
         45
       ],
-      "weekOrderIndex": 25,
+      "weekOrderIndex": 22,
       "topicViewIndices": [
-        23
+        25
       ],
       "thisWeek": true,
       "completed": true,
-      "finishStatus": 1
+      "finishStatus": 1,
+      "subTaskIds": []
     },
     {
       "name": "Cannot order/sort the tasks/topics on the topic view - 21m",
@@ -4231,12 +4649,13 @@
       "topics": [
         50
       ],
-      "weekOrderIndex": 26,
+      "weekOrderIndex": 23,
       "thisWeek": true,
       "topicViewIndices": [
         4
       ],
-      "completed": true
+      "completed": true,
+      "subTaskIds": []
     },
     {
       "name": "Drag tasks to change the order in task list",
@@ -4245,11 +4664,12 @@
       "topics": [
         41
       ],
-      "weekOrderIndex": 27,
+      "weekOrderIndex": 24,
       "topicViewIndices": [
         6
       ],
-      "completed": true
+      "completed": true,
+      "subTaskIds": []
     },
     {
       "name": "Drag topics to sort them in the topic list",
@@ -4258,10 +4678,11 @@
         41
       ],
       "thisWeek": true,
-      "weekOrderIndex": 28,
+      "weekOrderIndex": 25,
       "topicViewIndices": [
         7
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "The task remembers the last time it has been completed",
@@ -4270,10 +4691,11 @@
         25
       ],
       "thisWeek": true,
-      "weekOrderIndex": 29,
+      "weekOrderIndex": 26,
       "topicViewIndices": [
         12
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Create minimal layout (dense/packed/not pretty)",
@@ -4281,12 +4703,13 @@
       "topics": [
         30
       ],
-      "weekOrderIndex": 30,
+      "weekOrderIndex": 27,
       "thisWeek": true,
       "completed": true,
       "topicViewIndices": [
         2
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Collect sensible moments to clear the task selection (click outside the task)",
@@ -4295,10 +4718,11 @@
         41
       ],
       "thisWeek": true,
-      "weekOrderIndex": 31,
+      "weekOrderIndex": 28,
       "topicViewIndices": [
         8
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Ability to select (multiple) tasks",
@@ -4307,13 +4731,14 @@
         29,
         41
       ],
-      "weekOrderIndex": 32,
+      "weekOrderIndex": 29,
       "thisWeek": true,
       "completed": true,
       "topicViewIndices": [
         9,
         9
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Add a way to remove the task from the weekly view on the weekly view",
@@ -4322,11 +4747,12 @@
       "topics": [
         39
       ],
-      "weekOrderIndex": 33,
+      "weekOrderIndex": 30,
       "completed": true,
       "topicViewIndices": [
         6
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Make the lists more readable",
@@ -4334,11 +4760,12 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 34,
+      "weekOrderIndex": 31,
       "thisWeek": true,
       "topicViewIndices": [
         18
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Show if the loaded json file has meaninfully changed",
@@ -4346,12 +4773,13 @@
       "topics": [
         7
       ],
-      "weekOrderIndex": 35,
+      "weekOrderIndex": 32,
       "thisWeek": true,
       "completed": true,
       "topicViewIndices": [
         1
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Make it easier to see the level at which you are at (guidance lines?)",
@@ -4359,11 +4787,15 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 36,
+      "weekOrderIndex": 33,
       "thisWeek": true,
       "topicViewIndices": [
         19
-      ]
+      ],
+      "subTaskIds": [],
+      "completed": true,
+      "finishStatus": 1,
+      "lastFinished": "2024-07-18T07:52:26.857Z"
     },
     {
       "name": "Add a way to mark a task as handled/scheduled (but not completed)",
@@ -4371,12 +4803,13 @@
       "topics": [
         39
       ],
-      "weekOrderIndex": 37,
+      "weekOrderIndex": 34,
       "thisWeek": true,
       "completed": true,
       "topicViewIndices": [
         7
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "If you save with a certain file name, remember this for use for later saving",
@@ -4384,12 +4817,13 @@
       "topics": [
         15
       ],
-      "weekOrderIndex": 38,
+      "weekOrderIndex": 35,
       "thisWeek": true,
       "topicViewIndices": [
         21
       ],
-      "completed": true
+      "completed": true,
+      "subTaskIds": []
     },
     {
       "name": "Find a way to save markdown, yaml and json all at the same time",
@@ -4398,11 +4832,12 @@
         15
       ],
       "thisWeek": true,
-      "weekOrderIndex": 39,
+      "weekOrderIndex": 36,
       "completed": true,
       "topicViewIndices": [
         22
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "PlannedTask.js",
@@ -4411,10 +4846,11 @@
         8
       ],
       "thisWeek": true,
-      "weekOrderIndex": 40,
+      "weekOrderIndex": 37,
       "topicViewIndices": [
         7
-      ]
+      ],
+      "subTaskIds": []
     },
     {
       "name": "Refactor the TaskBar (the actual visible part) from the interaction part (the list item with all handlers)",
@@ -4423,11 +4859,29 @@
         21
       ],
       "thisWeek": true,
-      "weekOrderIndex": 41,
+      "weekOrderIndex": 38,
       "completed": true,
       "topicViewIndices": [
         4
-      ]
+      ],
+      "subTaskIds": []
+    },
+    {
+      "name": "Add name of task list to export/saved files - 1M",
+      "id": 352,
+      "topics": [
+        53
+      ],
+      "topicViewIndices": [
+        1
+      ],
+      "subTaskIds": [],
+      "completed": false,
+      "finishStatus": 0,
+      "thisWeek": false,
+      "repeated": false,
+      "scheduled": false,
+      "weekOrderIndex": 0
     }
   ]
 }

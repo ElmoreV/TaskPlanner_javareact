@@ -1,6 +1,80 @@
 # Interesting thoughts
 
+## What is a task or a goal?
+
+In this case, a task and a goal are synonymous.
+Let's make it more concrete:
+
+
+A goal is something that can either be
+- Finished
+- Or something that can be worked towards.
+
+## What is the difference between a goal or a task?
+
+There is **none**, but this needs some clarification.
+
 ## Properties of tasks
+
+### Completion
+
+A goal/task can be **finished** in a couple of ways.
+
+1. **Completed**: the conditions are all satisfied.
+2. **Impossible**: the conditions cannot be satisfied.
+3. **Irrelevant**: the conditions are not satisfied, but there is no purpose to satisfying the conditions.
+
+It is **unfinished** when it isn't finished.
+
+### Supergoals/subgoals
+
+ Every goal *g* can have a supergoal $S$, where completing goal *g* will complete the conditions needed to satisfy *S*. Goal *g* can be called a subgoal of $S$.
+
+A goal *g* is called a subgoal of *S*, when *S* is a supergoal of *g*.
+
+A supergoal forms the purpose, the why of a goal. The subgoal shows a possible implementation or task to complete the goal. The idea is that if the supergoal is divided entirely in a set of subgoals, the completion of all subgoals will lead to the supergoals completion.
+This is not true when there are multiple paths to completion.
+
+### Finishedness and super/subtasks
+
+In view with supertasks/subtasks, we can make the lemma:
+
+***Lemma: if a goal has no supergoal/purpose, it cannot be irrelevant.***
+
+Proof:
+Take a goal *g*. If it has no supertasks, it has to have inherent purpose. If there is a purpose, by definition, it cannot be irrelevant.
+
+> ***Definition: a goal has purpose when it is***
+> - Unfinished
+> - Has either inherent purpose or at least one supergoal with purpose.
+
+>***Lemma: if a goal*** 
+> - ***has no inherent purpose***
+> - ***and is not yet completed or impossible***
+> - ***and if every of its supergoals is finished (either irrelevant, impossible or completed)***
+> 
+> ***then the goal becomes irrelevant.***
+>
+> Proof:  
+> Take a goal *g*. It is not yet completed or impossible. If it doesn't have supergoals, it has no purpose. It also does not have inherent purpose. Then it becomes irrelevant.
+> 
+> Now assume that the goal *g* has at least one supergoal and is unfinished, but has no inherent purpose. Then goal *g* can only have purpose when it has at least one supergoal with a purpose. 
+>
+
+> ***Lemma: Goals that have no inherent purpose, shouldn't be marked irrelevant.***
+>
+> - there is no other way for a goal to become irrelevant
+> - the goal can actually become irrelevant if it turns out that the goal doesn't work towards the unfinished supergoals.
+
+Statements:
+
+- If a goal isn't finished or impossible, and all its supergoals are finished, then the goal becomes irrelevant.
+- If a goal has no supergoals, it can only become irrelevant, if it loses its inherent purpose.
+
+It can of course happen that a supergoal changes, and THEN the subgoal does not help towards the progress of the supergoal and THEN the subgoal can of course become irrelevant.
+
+
+### Progression.
 
 ### General overview
 
@@ -80,6 +154,9 @@ Description | Target-based | Threshold-based| Both |
 - Needs actions/processes to complete goal.
 - Fits very well with a deadline
 - Can either be all-or-nothing or percentages with subgoals or using some time/effort estimation.
+
+
+
 
 
 
@@ -226,6 +303,8 @@ TODO: How do I decompose progression vs. improvement?
 
 
 ### Progression (how to measure)
+
+The only way to measure the progression of a goal, is through subgoals/tasks
 
 #### TODO
 
@@ -402,6 +481,23 @@ This are the most abstract topics that are available. There seems to be a bit of
 
 ### Planning
 
+Observations:
+
+1. It seems like planning a task/goal is also planning to work on the supergoal.
+2. However, planning a supergoal, does not necessarily mean that all subgoals are planned.
+3. So priorization is basically choosing the subgoal(s) that best achieve the goal.
+4. And planning supergoals is less precise than planning subgoals.
+
+For the example:
+
+- Do 1h of exercise this week
+  - Spend 1h in the gym
+  - Do 1h of walking in the park
+  - Do Yoga for 1 hour
+
+So planning "Do 1h of exercise this week" is worse prioritized than "Do 1h of walking in the park."
+
+Not entirely sure yet what this means in the design.
 
 ### Scheduling
 
@@ -658,3 +754,104 @@ In this case, there is also a difference between automatic task execution and ma
 Maybe just start with the easy ones:
 - Every x days
 - x days after last completion
+
+### Deadlines/due dates
+
+They should propagate to the higher level tasks in the tree view
+(supergoal needs to be tended to in min(dueDate of all subgoals))
+
+It seems like we almost need to compile some tree variables from the system.
+
+Calculations:
+
+- Transient due dates
+- Transient relevance/impossibility.
+
+Maybe when a task itself (or a topic) doesn't match a filter, then make it a minimal layout, and make the relevant tasks big.
+
+
+# What would the perfect UI look like?
+
+What task can you focus on?
+
+- Collecting tasks from another source
+- Importing tasks
+- Categorizing/tagging tasks
+- Generating subtasks
+- Evaluating/modifying tasks
+- Selecting tasks
+- Prioritising tasks
+- Updating task list with progress
+- Seeing everything you did in the past.
+- Time planning of tasks
+- Cleaning up task list.
+
+
+
+## 1. Collecting new tasks/importing new tasks (Current tree view/full view)
+
+- Have a way to quickly add new tasks
+- Have a way to quickly add a batch of new tasks
+
+## 2. Categorizing/tagging tasks (currently Tree view/full view)
+
+- Easy search for a tag/topic/task
+- Easily tag tasks
+- Easily categorize tasks
+
+- Especially categorize tasks without categories.
+
+
+## 3. Selecting tasks (current Tree view/full view + a bit of )
+
+- Needs to be able to filter really good and really quick.
+
+A task is ripe to be done when:
+
+1. It should be done after a certain time (like cleaning)
+2. It should be done before a certain time (e.g. deadline)
+2. It is important
+3. It is a task on which an important task is dependent.
+4. It is a subtask of an important task
+3. It is already scheduled (event)
+4. The conditions are right. (opportunity)
+4. It needs to be done, might as well do it now.
+5. There is just a want to do it. (interest)
+
+A task might be skipped if:
+
+1. It takes a lot of energy
+2. It takes a lot of time
+3. The conditions aren't right.
+3. It doesn't add something of value
+4. Something else has a higher priority
+5. It is impossible
+6. The task has changed/might change.
+
+## 4. Prioritising tasks
+
+## 5. Updating tasks/completing tasks (Currently list view)
+
+- When completed: update tasks/generate new tasks/etc. etc.
+- When conditions change/priorities change: change priorities
+
+## 6. Time planning tasks (Not implemented yet)
+
+
+## 7. Task management
+
+- Deleting/Sorting/editing tasks in general.
+
+# Open questions:
+
+- What is a task/goal exactly? What is it not?
+- What do we do with goals that can never finish? Never-ending goals? Continuous goals?
+- What do I mean with continuous goals/tasks vs. discrete goals/tasks?
+- Are activities isomorphic with goals? Are there goals that cannot be tasks? Are there tasks that cannot be goals?
+- What are some things that can be proven about goals?
+- What makes sense to worry about?
+- Why is this all important? Why do planning and scheduling?
+- Is a direct dependency always a subtask?
+- How to measure progress, if you don't need to complete all subtasks to complete a goal (all roads lead to Rome/there's more than one way to skin a cat)
+- How do correlations between tasks work?
+- Wat is de transitiviteit tussen taken/supertaken/subtaken?

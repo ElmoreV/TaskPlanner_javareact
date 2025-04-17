@@ -1,0 +1,46 @@
+
+/* The combination (Default|v) */
+.splitButton {
+  display: inline flex;
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+/*The default button; the Default in  (Default|v)*/
+.splitButtonDefault {
+  border-radius: 5px 0 0 0px;
+}
+
+/* The dropdown button; the v in (Default|v) */
+.splitButtonDropdown {
+  border-left: none;
+  border-radius: 0 10px 10px 0;
+  margin: 0;
+}
+
+
+.dropdownMenu {
+    background-color: white; 
+    margin: 0 10px 0 0; /* right has a margin so the rounding of the button matches the dropdown menu */
+    padding: 0;
+    border: 1px solid #ccc;
+    border-radius: 0 0px 10px 0; /* bottom right is curved, rest is not*/
+    transition:height 0.3s ease-in-out;
+}
+
+/* Each item in the dropdown menu */
+.dropdownMenu li {
+  padding: 2px 5px;
+  cursor: pointer;
+} 
+
+.dropdownMenu li:hover {
+  background-color: var(--color-secondary-hover);
+  transition-duration: 0.2s;
+} 
+
+/* Remove the guide lines in the ul::before */
+.dropdownMenu::before {
+  content: none !important;
+}
