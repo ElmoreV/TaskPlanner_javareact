@@ -14,19 +14,13 @@ import { Version } from "../Structure/Versions.ts";
 
 const ImportExport = (props) => {
   console.debug("Rendering ImportExport");
-  const { appData, setAppData, importAsVersion } = props;
-  // This value will be used to determine the version of the exported data
-  let curImportAsVersion =
-    importAsVersion === undefined ? Version.V1 : importAsVersion;
+  const { appData, setAppData } = props;
 
   let curVersion = getVersionOfAppData(appData);
   console.log("Loaded version is " + versionToString(curVersion));
-  console.log(
-    "Importing data as version: " + versionToString(curImportAsVersion)
-  );
 
   const [selectedExportVersion, setSelectedExportVersion] = useState<Version>(
-    Version.V1
+    Version.V2
   );
   const [appDataHash, setAppDataHash] = useState<string | null>(null);
   const [loadedAppDataHash, setLoadedAppDataHash] = useState<string | null>(
