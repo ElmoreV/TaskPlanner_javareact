@@ -4,6 +4,7 @@ import { getTopicPathByTopicId } from "../Topics/TopicHelper.js";
 import TaskContent from "../Tasks/TaskContent.js";
 import { FinishedState } from "../Tasks/TaskInterfaces.tsx";
 import { translateLastCompletedDatetime } from "../Tasks/TaskHelperFuncs.js";
+import ClipboardColumn from "./Clipboard.tsx";
 
 const ScheduledTaskView = (props) => {
   // 1. Show a list of tasks that are scheduled
@@ -13,6 +14,10 @@ const ScheduledTaskView = (props) => {
   return (
     <>
       <div className="taskList"></div>
+      <ClipboardColumn
+        clipboard={clipboard}
+        appData={appData}
+      ></ClipboardColumn>
     </>
   );
 };

@@ -1,4 +1,5 @@
-import React from "react";
+// TaskList.js
+
 import { useState, useEffect } from "react";
 import {
   getAddTopic,
@@ -13,7 +14,7 @@ import { isTaskDueIn, convertDueDateNameToSeconds } from "../Timing.ts";
 import TopicContainer from "../Topics/TopicContainer.tsx";
 import TaskContainer from "../Tasks/TaskContainer.tsx";
 import { convert_v1_to_v2 } from "../Converters/Migration_V1_V2/UpdateV1ToV2.ts";
-
+import ClipboardColumn from "./Clipboard.tsx";
 const isNewTask = (task, allSubTaskIds) => {
   return task.topics.length == 0 && !allSubTaskIds.includes(task.id);
 };
@@ -37,7 +38,7 @@ const isTaskVisible = (
 };
 
 const TaskList = (props) => {
-  const { appData, setAppData, fancy } = props;
+  const { appData, setAppData, fancy, clipboard, setClipboard } = props;
   const { topics, tasks } = appData;
   const setTasks = (newTasks) => {
     setAppData({ ...appData, tasks: newTasks });
@@ -320,7 +321,7 @@ const TaskList = (props) => {
   // checkForDuplicateIds(tasks)
 
   return (
-    <div className="task-list">
+    <div className="task-list" style={{ flex: "1 1 auto" }}>
       <button onClick={getAddTopic(setTopics, topics)}>
         {" "}
         Add New Root topic
@@ -365,10 +366,20 @@ const TaskList = (props) => {
         <option value="3week">3 weeks</option>
         <option value="1month">1 month</option>
       </select>
-      <ul key="root_topics">
-        {showTasksWithoutTopics(allSubTaskIds)}
-        {showTopics()}
-      </ul>
+      <div className="task-list-wrapper" style={{ display: "flex" }}>
+        <ul key="root_topics">
+          {showTasksWithoutTopics(allSubTaskIds)}
+          {showTopics()}
+        </ul>
+        <ClipboardColumn
+          clipboard={clipboard}
+          setClipboard={setClipboard}
+          appData={appData}
+          setAppData={setAppData}
+          fancy={fancy}
+        />
+      </div>
+
       <button onClick={() => testFunction()}>Test Function</button>
       <button onClick={() => setNeedTransitiveUpdate(true)}>
         Test ADG Update

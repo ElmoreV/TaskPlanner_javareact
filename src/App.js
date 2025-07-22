@@ -1,3 +1,5 @@
+// App.js
+
 import ViewSelector from "./ViewSelector";
 import TaskList from "./TaskViews/TaskList.js";
 import PlannedList from "./TaskViews/PlannedList.js";
@@ -17,7 +19,10 @@ import {
   initialPlannedTaskIdList,
   initialTagTasks,
 } from "./InitialState_V2.ts";
-
+import {
+  V1_emptyClipboardState,
+  V1_ClippedItem,
+} from "./Structure/V1_types.ts";
 // 1. Go through all tasks and search if their .supertasks list contains [task.id] N*E(M) , E(M) is avg of supertasks per task
 // 2. Go through all tasks and search if the ids match one of the .subtasks List N*P P is # of subtasks in task
 
@@ -56,6 +61,7 @@ function App() {
   const [view, setView] = useState(VIEW_ALL_TASKS);
   const [fancy, setFancy] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const [clipboard, setClipboard] = useState(V1_emptyClipboardState);
 
   const onMakeFancyChange = () => {
     setFancy(!fancy);
@@ -102,7 +108,13 @@ function App() {
             />
           )}
           {view === VIEW_ALL_TASKS && (
-            <TaskList appData={appData} setAppData={setAppData} fancy={fancy} />
+            <TaskList
+              appData={appData}
+              setAppData={setAppData}
+              fancy={fancy}
+              clipboard={clipboard}
+              setClipboard={setClipboard}
+            />
           )}
           {view === VIEW_PLANNED_TASKS && (
             <PlannedList
