@@ -1,3 +1,5 @@
+// ImportExport.tsx
+
 import { useState, useRef, useEffect } from "react";
 import {
   calculateAppDataHash,
@@ -29,6 +31,7 @@ const ImportExport = (props) => {
   const [savedAppDataHash, setSavedAppDataHash] = useState<string | null>(null);
 
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const fileInputRef = useRef(null); // reference to the file input element
   const fileNameRef = useRef(""); // filename without extension (after the last "." it's removed)
@@ -239,58 +242,74 @@ const ImportExport = (props) => {
   };
 
   return (
-    <div className="importExport">
-      <div>
-        <label htmlFor="exportVersionSelect">Export Version: </label>
-        <select
-          id="exportVersionSelect"
-          onChange={handleVersionChange}
-          value={selectedExportVersion}
-        >
-          <option value={Version.V0}>Version 0</option>
-          <option value={Version.V1}>Version 1</option>
-          <option value={Version.V2}>Version 2</option>
-        </select>
-      </div>
-      <br />
-      <button onClick={handleSaveAsJSONClick}>Save as JSON</button>
-      <br />
-      {savedAppDataHash
-        ? mutatedSinceSave
-          ? "Unsaved changes"
-          : "Unchanged"
-        : "Not saved yet"}
-
-      {/* <button onClick={handleExportYAMLClick}>Export as YAML</button> */}
-      <button onClick={handleExportMarkdownClick}> Export as Markdown</button>
-      <br />
-      <button onClick={exportAll}> Export All [JSON+Markdown]</button>
-      <br />
+    <div
+      className="importExport"
+      style={{ border: "solid 1px", padding: "10px" }}
+    >
       <button
-        onClick={() => {
-          const appDataHash = calculateAppDataHash(appData);
-          setAppDataHash(appDataHash);
-        }}
+        onClick={() => setIsOpen((prev) => !prev)}
+        style={{ marginBottom: "10px", width: "250px" }}
       >
-        {" "}
-        Calc Hash{" "}
+        {isOpen ? "Import / Export ▲" : "Import / Export ▼"}
       </button>
-      <br />
-      <input
-        type="file"
-        ref={fileInputRef}
-        style={{ display: "none" }}
-        onChange={handleFileToUpload}
-      />
-      <button onClick={handleBrowseClick}>Load file</button>
-      <br />
-      <input type="text" value={fileNameRefComplete.current} readOnly />
-      <br />
-      {loadedAppDataHash
-        ? mutatedSinceLoad
-          ? "Changed since load"
-          : "Unchanged since load"
-        : "Nothing loaded yet"}
+      {isOpen && (
+        <div>
+          <div>
+            <label htmlFor="exportVersionSelect">Export Version: </label>
+            <select
+              id="exportVersionSelect"
+              onChange={handleVersionChange}
+              value={selectedExportVersion}
+            >
+              <option value={Version.V0}>Version 0</option>
+              <option value={Version.V1}>Version 1</option>
+              <option value={Version.V2}>Version 2</option>
+            </select>
+          </div>
+          <br />
+          <button onClick={handleSaveAsJSONClick}>Save as JSON</button>
+          <br />
+          {savedAppDataHash
+            ? mutatedSinceSave
+              ? "Unsaved changes"
+              : "Unchanged"
+            : "Not saved yet"}
+
+          {/* <button onClick={handleExportYAMLClick}>Export as YAML</button> */}
+          <button onClick={handleExportMarkdownClick}>
+            {" "}
+            Export as Markdown
+          </button>
+          <br />
+          <button onClick={exportAll}> Export All [JSON+Markdown]</button>
+          <br />
+          <button
+            onClick={() => {
+              const appDataHash = calculateAppDataHash(appData);
+              setAppDataHash(appDataHash);
+            }}
+          >
+            {" "}
+            Calc Hash{" "}
+          </button>
+          <br />
+          <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: "none" }}
+            onChange={handleFileToUpload}
+          />
+          <button onClick={handleBrowseClick}>Load file</button>
+          <br />
+          <input type="text" value={fileNameRefComplete.current} readOnly />
+          <br />
+          {loadedAppDataHash
+            ? mutatedSinceLoad
+              ? "Changed since load"
+              : "Unchanged since load"
+            : "Nothing loaded yet"}
+        </div>
+      )}
     </div>
   );
 };
