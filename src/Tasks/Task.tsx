@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect, memo } from "react";
 import PropTypes from "prop-types";
-import TaskContent from "./TaskContent.js";
+import TaskContent from "./TaskContent.tsx";
 import React from "react";
 import { FinishedState } from "../Structure/TaskInterfaces.tsx";
 import {

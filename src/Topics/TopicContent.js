@@ -1,4 +1,4 @@
-import React from "react";
+//TopicContent.js
 import fancyStyles from "./TopicContentFancy.module.css";
 import simpleStyles from "./TopicContentSimple.module.css";
 
@@ -17,6 +17,8 @@ const TopicContent = (props) => {
     handleAddTaskClick,
     handleAddTopicClick,
     handleDeleteClick,
+    handleMoveSelectionClick,
+    selectionCount,
     fancy,
   } = props;
   console.debug(`Rendering TopicContent ${name}`);
@@ -44,6 +46,16 @@ const TopicContent = (props) => {
         )}
       </div>
       <div className={styles.buttonList}>
+        {handleMoveSelectionClick && (
+          <button
+            className={styles.topicMoveSelection}
+            onClick={handleMoveSelectionClick}
+          >
+            Move here
+            {typeof selectionCount === "number" ? ` (${selectionCount})` : ""}
+          </button>
+        )}
+
         {handleAddTaskClick && (
           <button className={styles.topicAddTask} onClick={handleAddTaskClick}>
             Add task

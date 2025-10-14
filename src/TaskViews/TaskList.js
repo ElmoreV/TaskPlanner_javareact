@@ -318,53 +318,94 @@ const TaskList = (props) => {
     });
   };
   // checkForDuplicateIds(tasks)
-
+  const onSelectionClear = () => {
+    setSelectedTasks([]);
+  };
   return (
     <div className="task-list">
-      <button onClick={getAddTopic(setTopics, topics)}>
-        {" "}
-        Add New Root topic
-      </button>
-      <br />
-      <label>
-        <input
-          type="checkbox"
-          name="HideCompletedItems"
-          onChange={onHideCompletedItemsChange}
-          className="form-check-input"
-          defaultChecked={hideCompletedItems}
-        />
-        Hide finished tasks
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          name="ShowRepeatedOnly"
-          onChange={onShowRepeatedOnlyChange}
-          className="form-check-input"
-          defaultChecked={setShowRepeatedOnly}
-        />
-        Show repeated tasks only
-      </label>
-      <button className="fold_all" onClick={handleFoldAll}>
-        Fold all
-      </button>
-      <button className="unfold_all" onClick={handleUnfoldAll}>
-        Unfold all
-      </button>
-      <select id="select_due_date" name="due_date" onChange={onDueDateChange}>
-        <option value="none">Select due time interval</option>
-        <option value="setDueDate"></option>
-        <option value="30min">30 minutes</option>
-        <option value="2hrs">2 hours</option>
-        <option value="8hrs">8 hours</option>
-        <option value="1day">1 day</option>
-        <option value="4day">4 day</option>
-        <option value="1week">1 week</option>
-        <option value="2week">2 weeks</option>
-        <option value="3week">3 weeks</option>
-        <option value="1month">1 month</option>
-      </select>
+      <div className="task-list-header">
+        {selectedTasks.length > 0 && (
+          <div
+            style={{
+              // top: "16px",
+              // left: "16px",
+              zIndex: 9999,
+              padding: "10px 14px",
+              borderRadius: "12px",
+              background: "rgba(0,0,0,0.85)",
+              color: "#fff",
+              boxShadow: "0 6px 20px rgba(0,0,0,0.25)",
+              display: "flex",
+              gap: "10px",
+              alignItems: "center",
+              pointerEvents: "auto", // clickable
+              userSelect: "none",
+            }}
+          >
+            <span>Selected {selectedTasks.length} tasks.</span>
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                onSelectionClear();
+              }}
+              style={{
+                background: "transparent",
+                border: "1px solid rgba(255,255,255,0.6)",
+                borderRadius: "8px",
+                padding: "4px 8px",
+                color: "#fff",
+                cursor: "pointer",
+              }}
+            >
+              Clear
+            </button>
+          </div>
+        )}
+        <button onClick={getAddTopic(setTopics, topics)}>
+          {" "}
+          Add main topic
+        </button>
+        <br />
+        <label>
+          <input
+            type="checkbox"
+            name="HideCompletedItems"
+            onChange={onHideCompletedItemsChange}
+            className="form-check-input"
+            defaultChecked={hideCompletedItems}
+          />
+          Hide finished tasks
+        </label>
+        <label>
+          <input
+            type="checkbox"
+            name="ShowRepeatedOnly"
+            onChange={onShowRepeatedOnlyChange}
+            className="form-check-input"
+            defaultChecked={showRepeatedOnly}
+          />
+          Show repeated tasks only
+        </label>
+        <button className="fold_all" onClick={handleFoldAll}>
+          Fold all
+        </button>
+        <button className="unfold_all" onClick={handleUnfoldAll}>
+          Unfold all
+        </button>
+        <select id="select_due_date" name="due_date" onChange={onDueDateChange}>
+          <option value="none">Select due time interval</option>
+          <option value="setDueDate"></option>
+          <option value="30min">30 minutes</option>
+          <option value="2hrs">2 hours</option>
+          <option value="8hrs">8 hours</option>
+          <option value="1day">1 day</option>
+          <option value="4day">4 day</option>
+          <option value="1week">1 week</option>
+          <option value="2week">2 weeks</option>
+          <option value="3week">3 weeks</option>
+          <option value="1month">1 month</option>
+        </select>
+      </div>
       <ul key="root_topics">
         {showTasksWithoutTopics(allSubTaskIds)}
         {showTopics()}

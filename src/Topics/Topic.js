@@ -1,3 +1,5 @@
+//Topic.js
+
 import { useState, useRef, useEffect, memo } from "react";
 import PropTypes from "prop-types";
 import TopicContent from "../Topics/TopicContent";
@@ -141,7 +143,8 @@ const Topic = (props) => {
     e.target.setAttribute("draggedOver", false);
   };
 
-  const handleToggleFold = () => {
+  const handleToggleFold = (e) => {
+    e.stopPropagation();
     if (!isEditing) {
       toggleFold(id);
     }
@@ -217,6 +220,31 @@ const Topic = (props) => {
     }
   }, [isEditing]); // Dependency array ensures this runs only when isEditing changes
 
+  const selectionCount =
+    selectedTasks && selectedTasks.length ? selectedTasks.length : 0;
+
+  const handleMoveSelectionClick = (e) => {
+    e.stopPropagation();
+    console.log("Inside handle move selection click");
+    let taskIds = [];
+    let oldTopicIds = [];
+    let oldSuperTaskIds = [];
+    console.log(selectedTasks);
+    if (selectedTasks && selectedTasks.length > 0) {
+      selectedTasks.forEach((st) => {
+        console.info(
+          `Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${id}`
+        );
+        taskIds.push(st.taskId);
+        oldTopicIds.push(st.topicId);
+        oldSuperTaskIds.push(st.superTaskId);
+      });
+    }
+    if (moveTasks) {
+      // Always move the tasks to the top (index = 1)
+      moveTasks(taskIds, oldTopicIds, oldSuperTaskIds, id, 1, null);
+    }
+  };
   return (
     <>
       <TopicContent
@@ -237,6 +265,10 @@ const Topic = (props) => {
         handleAddTopicClick={addSubTopic ? handleAddTopicClick : undefined}
         handleDeleteClick={deleteTopic ? handleDeleteClick : undefined}
         handleFoldDoubleClick={foldAll ? handleFoldDoubleClick : undefined}
+        handleMoveSelectionClick={
+          selectionCount ? handleMoveSelectionClick : undefined
+        }
+        selectionCount={selectionCount}
         fancy={fancy}
       />
     </>

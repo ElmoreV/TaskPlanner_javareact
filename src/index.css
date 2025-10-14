@@ -116,6 +116,24 @@ body {
   grid-row-gap: 30px;
 }
 
+.task-list-header {
+  position: sticky;
+  top: 0;                 /* sticks to the top edge of the scroll container */
+  z-index: 9998;            /* above list items */
+  background: var(--color-background);
+  padding: 10px 14px;
+  border-radius: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid rgba(0,0,0,0.15);
+  color: var(--color-primary);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.25); 
+  pointer-events: auto; 
+  user-select: none;
+}
+
+
 .task-list {
   max-width: 1000px;
   padding: 10px;
