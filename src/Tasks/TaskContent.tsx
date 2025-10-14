@@ -1,3 +1,4 @@
+//TaskContent.tsx
 // These are the contents of the TaskBar
 // Leave any logic out of the contents component
 // Instead, make it a prop of the TaskContent
