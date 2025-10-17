@@ -170,9 +170,14 @@ const TaskListV2 = (props: TaskListPropsV2) => {
     });
   };
 
+  /// Add filters
   // TODO: add due filter
   // TODO: hide completed filter
   // TODO: show repeated only filter
+
+  // Add selection mechanisms
+
+  // Add due date mechanisms
 
   return (
     <div className="task-list">

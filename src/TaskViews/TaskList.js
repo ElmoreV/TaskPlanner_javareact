@@ -14,7 +14,7 @@ import TopicContainer from "../Topics/TopicContainer.tsx";
 import TaskContainer from "../Tasks/TaskContainer.tsx";
 import { convert_v1_to_v2 } from "../Converters/Migration_V1_V2/UpdateV1ToV2.ts";
 
-const isNewTask = (task, allSubTaskIds) => {
+const isTaskWithoutTopic = (task, allSubTaskIds) => {
   return task.topics.length == 0 && !allSubTaskIds.includes(task.id);
 };
 
@@ -224,7 +224,7 @@ const TaskList = (props) => {
     return (
       <div key="div_tasks_no_topic">
         {tasks
-          .filter((task) => isNewTask(task, allSubTaskIds))
+          .filter((task) => isTaskWithoutTopic(task, allSubTaskIds))
           .filter((subTask) =>
             isTaskVisible(
               subTask,
