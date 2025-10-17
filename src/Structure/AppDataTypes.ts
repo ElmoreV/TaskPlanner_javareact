@@ -3,7 +3,7 @@ import { V1_Task, V1_Topic } from "../Structure/V1_types.ts";
 import { TaskMap, TagMap, TagTasksMap } from "../Structure/V2_types.ts";
 import { Version } from "../Structure/Versions.ts";
 
-interface AppDataV0 {
+export interface AppDataV0 {
   version: Version | undefined;
   tasks: V0_Task[];
   topics: V0_Topic[];

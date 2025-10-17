@@ -17,6 +17,7 @@ import {
   initialPlannedTaskIdList,
   initialTagTasks,
 } from "./InitialState_V2.ts";
+import { Version } from "./Structure/Versions.ts";
 
 // 1. Go through all tasks and search if their .supertasks list contains [task.id] N*E(M) , E(M) is avg of supertasks per task
 // 2. Go through all tasks and search if the ids match one of the .subtasks List N*P P is # of subtasks in task
@@ -92,7 +93,11 @@ function App() {
 
       <div className="App">
         <div className="contents">
-          <ImportExport appData={appData} setAppData={setAppData} />
+          <ImportExport
+            appData={appData}
+            setAppData={setAppData}
+            targetVersion={Version.V1}
+          />
           <ViewSelector viewSetter={setView} />
           {view === VIEW_ADD_TASKS && (
             <AddTaskView

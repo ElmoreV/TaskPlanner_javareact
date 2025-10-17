@@ -16,7 +16,7 @@ import { Version } from "../Structure/Versions.ts";
 
 const ImportExport = (props) => {
   console.debug("Rendering ImportExport");
-  const { appData, setAppData } = props;
+  const { appData, setAppData, targetVersion } = props;
 
   let curVersion = getVersionOfAppData(appData);
   console.log("Loaded version is " + versionToString(curVersion));
@@ -53,7 +53,7 @@ const ImportExport = (props) => {
   };
 
   const importjson = (jsonStr: string) => {
-    const newAppData = parseJSON(jsonStr);
+    const newAppData = parseJSON(jsonStr, targetVersion);
 
     const newAppDataHash = calculateAppDataHash(newAppData);
 
