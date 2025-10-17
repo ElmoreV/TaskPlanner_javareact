@@ -325,22 +325,26 @@ const Task = (props) => {
     onKeyDown: handleKeyDown,
     onClick: captureClick(() => {}),
   };
-  const selectHandlers = selected
-    ? {
-        onClick: captureClick(() =>
-          deleteFromSelection(id, currentTopicId, currentSuperTaskId)
-        ),
-      }
-    : {
-        onClick: captureClick(() =>
-          addToSelection(
-            id,
-            currentTopicId,
-            currentTopicViewIndex,
-            currentSuperTaskId
-          )
-        ),
-      };
+  let selectHandlers = undefined;
+  if (deleteFromSelection && addToSelection) {
+    selectHandlers = selected
+      ? {
+          onClick: captureClick(() =>
+            deleteFromSelection(id, currentTopicId, currentSuperTaskId)
+          ),
+        }
+      : {
+          onClick: captureClick(() =>
+            addToSelection(
+              id,
+              currentTopicId,
+              currentTopicViewIndex,
+              currentSuperTaskId
+            )
+          ),
+        };
+  }
+
   let fullName = name;
   if (
     (taskFinishStatus !== FinishedState.Impossible ||

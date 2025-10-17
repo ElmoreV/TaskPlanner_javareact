@@ -17,12 +17,15 @@ const TaskListV2 = (props: TaskListPropsV2) => {
   // Invert the tagTaskMap
   // So that we have
   // taskTagsMap[taskId] = [tagId1, tagId2, ...]
+  // to do this: initialize with empty array (1) and add tagIds to it (2)
   const taskTagsMap: TaskTagsMap = {};
+  for (const taskId in taskMap) {
+    if (!taskTagsMap[taskId]) {
+      taskTagsMap[taskId] = [];
+    }
+  }
   for (const tagId in tagTasksMap) {
     for (const taskId of tagTasksMap[tagId]) {
-      if (!taskTagsMap[taskId]) {
-        taskTagsMap[taskId] = [];
-      }
       taskTagsMap[taskId].push(Number(tagId));
     }
   }
@@ -32,7 +35,6 @@ const TaskListV2 = (props: TaskListPropsV2) => {
     // 2. Find all of those that are 'root' tasks (no supertasks)
     // 2. Show them (and their subtasks)
     let taggedTaskIds = new Set<number>();
-    return <div key="untagged-tasks"></div>;
     for (const tagId in tagTasksMap) {
       const taskIds = tagTasksMap[tagId];
       taskIds.forEach((tid) => taggedTaskIds.add(tid));
