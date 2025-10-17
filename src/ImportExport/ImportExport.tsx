@@ -52,7 +52,7 @@ const ImportExport = (props) => {
     exportJSON(appData, fileNameRef, selectedExportVersion);
   };
 
-  const importjson = (jsonStr) => {
+  const importjson = (jsonStr: string) => {
     const newAppData = parseJSON(jsonStr);
 
     const newAppDataHash = calculateAppDataHash(newAppData);

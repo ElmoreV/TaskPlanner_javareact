@@ -4,7 +4,7 @@ import { AppDataV1 } from "../Structure/AppDataTypes.ts";
 import { Version } from "../Structure/Versions.ts";
 import { getVersionOfAppData, versionToString } from "./VersionDeterminer.ts";
 
-export const parseJSON = (jsonStr): AppDataV1 => {
+export const parseJSON = (jsonStr: string): AppDataV1 => {
   let importedData = JSON.parse(jsonStr);
 
   let importedVersion = getVersionOfAppData(importedData);

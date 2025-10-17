@@ -1,4 +1,5 @@
 import YAML from "yaml";
+import { V1_Task, V1_Topic } from "../Structure/V1_types";
 export const parseYAML = (YAMLstr: string) => {
   // Expected:
   // - Name: '
@@ -6,7 +7,7 @@ export const parseYAML = (YAMLstr: string) => {
   console.info(YAMLstr);
   let res = YAML.parse(YAMLstr);
   console.info(res);
-  let parsedTasks = [];
+  let parsedTasks: V1_Task[] = [];
   let importedTopics = [];
   const getFreeImportedTaskKey = () => {
     return (
@@ -38,7 +39,7 @@ export const parseYAML = (YAMLstr: string) => {
     // if scalar/item: is tasks
     console.debug("New call of import");
     console.debug(node);
-    let newTopics = [];
+    let newTopics: V1_Topic[] = [];
     // let newTopic = {
     //     id:getFreeImportedTopicKey(),
     //     title:'Hello',
@@ -48,16 +49,16 @@ export const parseYAML = (YAMLstr: string) => {
     // let importedTopics = []
     console.debug("Enumerate properties");
     for (var key in node) {
-      let newTopic = {
+      let newTopic: V1_Topic = {
         id: getFreeImportedTopicKey(),
-        title: "Hello",
+        name: "Hello",
         unfolded: true,
         subtopics: [],
       };
-      let importedTopics = [];
+      let importedTopics: V1_Topic[] = [];
       console.debug("Key: ");
       console.debug(key);
-      newTopic.title = key;
+      newTopic.name = key;
       let val = node[key];
       console.debug("Val:");
       console.debug(val);

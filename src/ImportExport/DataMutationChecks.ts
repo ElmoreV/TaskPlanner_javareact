@@ -75,7 +75,7 @@ export const calculateTaskV1Hash = (tasks: V1_Task[]): string => {
   // Topics: folded/unfolded
   // Otherwise everything is important?
   // The tasks need to be sorted on id
-  let newTasks = structuredClone(tasks);
+  let newTasks: V1_Task[] = structuredClone(tasks);
   newTasks = sanitizeWeekOrderIndex2(newTasks);
   let fixedTasks = newTasks
     .sort((a, b) => a.id > b.id)
@@ -103,11 +103,11 @@ export const calculateTopicV1Hash = (topics: V1_Topic[]): string => {
   // Topics: folded/unfolded
   // Otherwise everything is important?
   // The tasks need to be sorted on id
-  let newTopics = structuredClone(topics);
-  const fixTopics = (topicList) => {
+  let newTopics: V1_Topic[] = structuredClone(topics);
+  const fixTopics = (topicList: V1_Topic[]) => {
     let fixedTopicList = topicList
       .sort((a, b) => a.id > b.id)
-      .map((topic) => {
+      .map((topic: V1_Topic) => {
         // return a new topic wihtout the unfolded
         return {
           name: topic.name,

@@ -2,6 +2,7 @@ import { AppData, AppDataV1 } from "../Structure/AppDataTypes.ts";
 import { saveFile } from "./LoadFile.ts";
 import { Version } from "../Structure/Versions.ts";
 import { versionToString } from "./VersionDeterminer.ts";
+import { V1_Task, V1_Topic } from "../Structure/V1_types.ts";
 
 export const exportYAML = (appData: AppData, fileNameRef, version: Version) => {
   if (version === Version.V1) {
@@ -15,7 +16,11 @@ export const exportYAML = (appData: AppData, fileNameRef, version: Version) => {
   }
 };
 
-export const buildYAMLFromV1_r = (subtopics, tasks, indent_level) => {
+export const buildYAMLFromV1_r = (
+  subtopics: V1_Topic[],
+  tasks: V1_Task[],
+  indent_level: number
+) => {
   // '''
   // Export as
   // - Topic:
@@ -65,7 +70,7 @@ export const buildYAMLFromV1_r = (subtopics, tasks, indent_level) => {
   return YAMLstr;
 };
 
-export const buildYAMLfromV1 = (topics, tasks) => {
+export const buildYAMLfromV1 = (topics: V1_Topic[], tasks: V1_Task[]) => {
   // '''
   // Export as
   // - Topic:
