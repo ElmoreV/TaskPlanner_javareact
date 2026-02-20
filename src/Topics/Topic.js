@@ -59,6 +59,85 @@ const Topic = (props) => {
     setTopicName(e.target.value);
   };
 
+  // const dropTasksBefore = () => {
+  // Are these useful?
+  // }
+  const dropTasksInside = () => {};
+  // const dropTasksAfter = () => {
+  // Are there useful?
+  // }
+
+  const handleTaskDrop = (e) => {
+    var task_id = Number(e.dataTransfer.getData("TaskId"));
+    var oldTopicName = e.dataTransfer.getData("TopicName");
+    var oldTopicId = Number(e.dataTransfer.getData("TopicId"));
+    var oldSuperTaskId = Number(e.dataTransfer.getData("SuperTaskId"));
+
+    console.debug(task_id);
+
+    console.debug(oldTopicName); // name???
+    console.debug(name);
+    console.info(
+      `Dropped task with id ${task_id} with old topic id ${oldTopicId} on topic with id ${id}`
+    );
+
+    let taskIds = [];
+    let oldTopicIds = [];
+    let oldSuperTaskIds = [];
+
+    taskIds.push(task_id);
+    oldTopicIds.push(oldTopicId);
+    oldSuperTaskIds.push(oldSuperTaskId);
+
+    console.log(selectedTasks);
+    if (selectedTasks && selectedTasks.length > 0) {
+      selectedTasks.forEach((st) => {
+        console.info(
+          `Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${id}`
+        );
+        taskIds.push(st.taskId);
+        oldTopicIds.push(st.topicId);
+        oldSuperTaskIds.push(st.superTaskId);
+      });
+    }
+    if (moveTasks) {
+      // Always move the tasks to the top (index = 1)
+      moveTasks(taskIds, oldTopicIds, oldSuperTaskIds, id, 1, null);
+    }
+  };
+
+  const handleTaskDuplicateDrop = (e) => {
+    //TODO:
+    var task_id = Number(e.dataTransfer.getData("TaskId"));
+    console.info(
+      `Duplicate dropped task with id ${task_id} on this topic with id ${id}`
+    );
+    let taskIds = [];
+    taskIds.push(task_id);
+    if (selectedTasks && selectedTasks.length > 0) {
+      selectedTasks.forEach((st) => {
+        console.info(
+          `Duplicating task with id ${st.taskId} to topic with id ${id}`
+        );
+        taskIds.push(st.taskId);
+      });
+    }
+
+    duplicateTask(taskIds, id);
+  };
+
+  // const dropTopicsBefore = () => {};
+  const dropTopicsInside = () => {};
+  // const dropTopicsAfter = () => {};
+
+  const handleTopicDrop = (e) => {
+    let source_id = Number(e.dataTransfer.getData("id"));
+    console.info(
+      `Dropped topic with id ${source_id} on this topic with id ${id}`
+    );
+    moveTopic(source_id, id);
+  };
+
   const handleDrop = (e) => {
     e.preventDefault();
     e.target.setAttribute("draggedOver", false);
@@ -67,65 +146,11 @@ const Topic = (props) => {
     var type = e.dataTransfer.getData("Type");
     console.info(type);
     if (type == "Task") {
-      var task_id = Number(e.dataTransfer.getData("TaskId"));
-      var oldTopicName = e.dataTransfer.getData("TopicName");
-      var oldTopicId = Number(e.dataTransfer.getData("TopicId"));
-      var oldSuperTaskId = Number(e.dataTransfer.getData("SuperTaskId"));
-
-      console.debug(task_id);
-
-      console.debug(oldTopicName); // name???
-      console.debug(name);
-      console.info(
-        `Dropped task with id ${task_id} with old topic id ${oldTopicId} on topic with id ${id}`
-      );
-
-      let taskIds = [];
-      let oldTopicIds = [];
-      let oldSuperTaskIds = [];
-
-      taskIds.push(task_id);
-      oldTopicIds.push(oldTopicId);
-      oldSuperTaskIds.push(oldSuperTaskId);
-
-      console.log(selectedTasks);
-      if (selectedTasks && selectedTasks.length > 0) {
-        selectedTasks.forEach((st) => {
-          console.info(
-            `Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${id}`
-          );
-          taskIds.push(st.taskId);
-          oldTopicIds.push(st.topicId);
-          oldSuperTaskIds.push(st.superTaskId);
-        });
-      }
-      if (moveTasks) {
-        // Always move the tasks to the top (index = 1)
-        moveTasks(taskIds, oldTopicIds, oldSuperTaskIds, id, 1, null);
-      }
+      handleTaskDrop(e);
     } else if (type == "Topic") {
-      let source_id = Number(e.dataTransfer.getData("id"));
-      console.info(
-        `Dropped topic with id ${source_id} on this topic with id ${id}`
-      );
-      moveTopic(source_id, id);
+      handleTopicDrop(e);
     } else if (type == "TaskDuplicate") {
-      var task_id = Number(e.dataTransfer.getData("TaskId"));
-      console.info(
-        `Duplicate dropped task with id ${task_id} on this topic with id ${id}`
-      );
-      let taskIds = [];
-      taskIds.push(task_id);
-      if (selectedTasks && selectedTasks.length > 0) {
-        selectedTasks.forEach((st) => {
-          console.info(
-            `Duplicating task with id ${st.taskId} to topic with id ${id}`
-          );
-          taskIds.push(st.taskId);
-        });
-      }
-
-      duplicateTask(taskIds, id);
+      handleTaskDuplicateDrop(e);
     } else {
       console.info(
         "On a topic, you can only drop another topic or a task (not something else)"
