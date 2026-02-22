@@ -3,6 +3,20 @@
 import { useState, useRef, useEffect, memo } from "react";
 import PropTypes from "prop-types";
 import TopicContent from "../Topics/TopicContent";
+
+function getDropZone(e) {
+  const rect = e.currentTarget.getBoundingClientRect();
+  // const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+  if (y < rect.height * 0.3) {
+    return "before";
+  } else if (y > rect.height * 0.7) {
+    return "after";
+  } else {
+    return "inside";
+  }
+}
+
 const Topic = (props) => {
   const {
     name,
@@ -127,20 +141,31 @@ const Topic = (props) => {
   };
 
   // const dropTopicsBefore = () => {};
-  const dropTopicsInside = () => {};
-  // const dropTopicsAfter = () => {};
-
-  const handleTopicDrop = (e) => {
+  const dropTopicsInside = (e) => {
     let source_id = Number(e.dataTransfer.getData("id"));
     console.info(
       `Dropped topic with id ${source_id} on this topic with id ${id}`
     );
     moveTopic(source_id, id);
   };
+  // const dropTopicsAfter = () => {};
+
+  const handleTopicDrop = (e) => {
+    const dropZone = getDropZone(e);
+
+    if (dropZone == "inside") {
+      dropTopicsInside(e);
+    } else if (dropZone == "after") {
+      // TODO:
+    } else if (dropZone == "before") {
+      // TODO:
+    } else {
+      console.warn("In handleTopicDrop, dropZone is invalid");
+    }
+  };
 
   const handleDrop = (e) => {
     e.preventDefault();
-    e.target.setAttribute("draggedOver", false);
     console.info("Drop on Topic");
     console.debug(e.target);
     var type = e.dataTransfer.getData("Type");
@@ -156,16 +181,17 @@ const Topic = (props) => {
         "On a topic, you can only drop another topic or a task (not something else)"
       );
     }
+    e.currentTarget.setAttribute("dropZone", null);
   };
   const handleDragOver = (e) => {
     e.preventDefault();
-
+    const dropZone = getDropZone(e);
+    e.currentTarget.setAttribute("dropZone", dropZone);
     // this is not perfect, because I always want the <div class='task'> to be the target..
-    e.target.setAttribute("draggedOver", true);
   };
   const handleDragLeave = (e) => {
     e.preventDefault();
-    e.target.setAttribute("draggedOver", false);
+    e.currentTarget.setAttribute("dropZone", null);
   };
 
   const handleToggleFold = (e) => {

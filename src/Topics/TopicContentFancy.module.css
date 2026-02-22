@@ -39,6 +39,30 @@
     z-index: 50;
 }
 
+.topic[dropZone="before"]{
+    padding-top: 7px;
+    padding-left: 20px;
+    border-top: 3px blue solid;
+    box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
+.topic[dropZone="inside"]{
+    padding-top: 7px;
+    padding-bottom:5px;
+    padding-left: 17px;
+    border-left: 3px blue solid;
+    border-top: 3px blue solid;
+    border-bottom: 5px blue solid;
+    box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
+.topic[dropZone="after"]{
+    padding-left: 20px;
+    padding-bottom: 5px;
+    border-bottom: 5px blue solid;
+    box-shadow: 3px 5px 5px 0px rgba(0, 0, 0, 0.4);
+}
+
 .buttonList {
     display: flex;
     flex-direction: row;
