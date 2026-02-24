@@ -21,7 +21,10 @@ const findTopicByTopicIdV1 = (topics: V1_Topic[], topic_key: number) => {
   return findTopicByTopicIdV1R(topics, topic_key);
 };
 
-const findSupertopicByTopicIdV1_r = (topic: V1_Topic, subtopicId: number) => {
+const findSupertopicByTopicIdV1_r = (
+  topic: V1_Topic,
+  subtopicId: number
+): V1_Topic | null => {
   // For every subtopic, see if it matches the id
   // otherwise, search through the subtopics of the subtopic
   for (let subtopic of topic.subtopics) {
