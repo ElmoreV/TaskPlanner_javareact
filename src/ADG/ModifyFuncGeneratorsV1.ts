@@ -316,40 +316,52 @@ const getMoveTopic = (
   setTopics: (topics: V1_Topic[]) => void,
   topics: V1_Topic[]
 ) => {
-  const moveTopic = (source_id, target_id) => {
+  const moveTopic = (source_id: number, target_id: number) => {
+    // source_id is the id of the topic to move
+    // target_id is the id of the topic to move the source_topic into
+    if (source_id === target_id) {
+      console.warn("Will not move a topic to itself");
+      return;
+    }
     console.info(`Moving topic ${source_id} to ${target_id}`);
     // Cannot move a topic into one of its sub(sub)topics
-    let source_topic = findTopicByTopicIdV1(topics, source_id);
+    let newTopics = [...topics];
+
+    let source_topic = findTopicByTopicIdV1(newTopics, source_id);
+    if (!source_topic) {
+      console.error(`Source topic ${source_id} does not exist.`);
+      return;
+    }
     console.info(source_topic);
+    let target_topic = findTopicByTopicIdV1(newTopics, target_id);
+    if (!target_topic) {
+      console.error(`Target topic ${target_id} does not exist.`);
+      return;
+    }
+    console.info(target_topic);
+
     let is_sub_topic = findTopicByTopicIdV1(source_topic.subtopics, target_id);
     if (is_sub_topic) {
       console.log("Cannot move a topic to its own subtopic");
       return;
     }
+
     // If the target topic is the sources topic direct supertopic, also don't do it
     // Find the super topic of the source topic
-    let newTopics = [...topics];
     let source_supertopic = findSupertopicByTopicIdV1(newTopics, source_id);
     if (!source_supertopic) {
-      console.log("There is no supertopic. Is this a root topic?");
-      let target_topic = findTopicByTopicIdV1(newTopics, target_id);
-      console.info(target_topic);
-      console.info(source_supertopic);
+      console.log("The source topic is a root topic.");
       // Copy the topic into the new topic
       target_topic.subtopics.push(source_topic);
       // Delete the topic out of its current spot
-      newTopics = newTopics.filter((t) => t.id != source_topic.id);
+      newTopics = newTopics.filter((t) => t.id !== source_topic.id);
       setTopics(newTopics);
       return;
     }
-    if (source_supertopic.id == target_id) {
-      console.log(
-        "Will not move a topic to its direct supertopic. It does nothing"
-      );
+    if (source_supertopic.id === target_id) {
+      console.log("Source topic already in target topic.");
       return;
     }
-    let target_topic = findTopicByTopicIdV1(newTopics, target_id);
-    console.info(target_topic);
     console.info(source_supertopic);
     // Copy the topic into the new topic
     target_topic.subtopics.push(source_topic);
@@ -360,6 +372,127 @@ const getMoveTopic = (
     setTopics(newTopics);
   };
   return moveTopic;
+};
+
+const getMoveTopicNextTo = (
+  setTopics: (topics: V1_Topic[]) => void,
+  topics: V1_Topic[]
+) => {
+  const moveTopicNextTo = (
+    source_id: number,
+    neighbour_id: number,
+    neighbour_type: "before" | "after"
+  ) => {
+    // source_id is the id of the topic to move
+    // target_id is the id of the topic to move the source_topic into
+    console.info(`Moving topic ${source_id} ${neighbour_type} ${neighbour_id}`);
+    let newTopics = [...topics];
+    if (source_id === neighbour_id) {
+      console.warn("Will not move a topic next to itself");
+      return;
+    }
+    let source_topic = findTopicByTopicIdV1(newTopics, source_id);
+    let neighbour_topic = findTopicByTopicIdV1(newTopics, neighbour_id);
+    if (!neighbour_topic || !source_topic) {
+      console.warn(`The source or target topic does not exist.`);
+      return;
+    }
+
+    let target_topic = findSupertopicByTopicIdV1(newTopics, neighbour_id);
+    let source_supertopic = findSupertopicByTopicIdV1(newTopics, source_id);
+
+    if (!target_topic) {
+      console.info(`Neighbour topic ${neighbour_id} is a root topic.`);
+      if (!source_supertopic) {
+        console.info(`Source topic ${source_id} is a root topic.`);
+        // both must be root topics
+        // reorder the source topic to the right spot
+        let source_index = newTopics.indexOf(source_topic);
+        newTopics.splice(source_index, 1);
+        let neighbour_index = newTopics.indexOf(neighbour_topic);
+        if (neighbour_type == "before") {
+          newTopics.splice(neighbour_index, 0, source_topic);
+        } else if (neighbour_type == "after") {
+          newTopics.splice(neighbour_index + 1, 0, source_topic);
+        }
+        setTopics(newTopics);
+        return;
+      }
+      // source supertopic is not root
+      let neighbour_index = newTopics.indexOf(neighbour_topic);
+      if (neighbour_type == "before") {
+        newTopics.splice(neighbour_index, 0, source_topic);
+      } else if (neighbour_type == "after") {
+        newTopics.splice(neighbour_index + 1, 0, source_topic);
+      }
+      // filter source topic from old supertopic
+      source_supertopic.subtopics = source_supertopic.subtopics.filter(
+        (t) => t.id != source_topic.id
+      );
+      setTopics(newTopics);
+      return;
+    }
+    let neighbour_index = target_topic.subtopics.indexOf(neighbour_topic);
+    let target_id = target_topic.id;
+
+    let is_sub_topic = findTopicByTopicIdV1(
+      source_topic.subtopics,
+      target_topic.id
+    );
+    // Cannot move a topic into one of its sub(sub)topics
+    if (is_sub_topic) {
+      console.log("Cannot move a topic to its own subtopic");
+      return;
+    }
+    // If the target topic is the sources topic direct supertopic, also don't do it
+    // Find the super topic of the source topic
+    if (!source_supertopic) {
+      console.log("The source topic is a root topic.");
+      console.info(target_topic);
+      console.info(source_supertopic);
+      // Copy the topic into the new topic
+      console.log(neighbour_index);
+      if (neighbour_type == "before") {
+        target_topic.subtopics.splice(neighbour_index, 0, source_topic);
+      } else if (neighbour_type == "after") {
+        target_topic.subtopics.splice(neighbour_index + 1, 0, source_topic);
+      }
+      // Delete the topic out of its current spot
+      newTopics = newTopics.filter((t) => t.id != source_topic.id);
+      setTopics(newTopics);
+      return;
+    }
+    if (source_supertopic.id == target_id) {
+      // Reorder the topics
+      let source_index = target_topic.subtopics.indexOf(source_topic);
+      target_topic.subtopics.splice(source_index, 1);
+      let corrected_index =
+        neighbour_index + Number(neighbour_index > source_index ? -1 : 0);
+      if (neighbour_type == "before") {
+        target_topic.subtopics.splice(corrected_index, 0, source_topic);
+      } else if (neighbour_type == "after") {
+        target_topic.subtopics.splice(corrected_index + 1, 0, source_topic);
+      }
+      setTopics(newTopics);
+      return;
+    }
+    // The normal situation: source topic is not in same topic as
+    // sibling topic and moves to it.
+    console.log(neighbour_index);
+    if (neighbour_type == "before") {
+      target_topic.subtopics.splice(neighbour_index, 0, source_topic);
+    } else if (neighbour_type == "after") {
+      target_topic.subtopics.splice(neighbour_index + 1, 0, source_topic);
+    }
+    console.info(target_topic);
+    console.info(source_supertopic);
+    // Delete the topic out of its current spot
+    source_supertopic.subtopics = source_supertopic.subtopics.filter(
+      (t) => t.id != source_topic.id
+    );
+    setTopics(newTopics);
+  };
+  return moveTopicNextTo;
 };
 
 const getAddTopic = (
@@ -843,6 +976,7 @@ export { getDeleteTask };
 export { getDeleteTopic };
 export { getDuplicateTask };
 export { getMoveTopic };
+export { getMoveTopicNextTo };
 export { getAddTask };
 export { getAddTopic };
 export { getAddSubtopic };
