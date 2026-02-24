@@ -5,6 +5,7 @@ import {
   getDeleteTopic,
   getDuplicateTask,
   getMoveTopic,
+  getMoveTopicNextTo,
   getAddTask,
   getAddSubtopic,
   getMoveTasks,
@@ -39,6 +40,7 @@ export default function TopicContainer(props) {
       toggleFold={getToggleFold(setTopics, topics)}
       addSubTopic={getAddSubtopic(setTopics, topics, topic)}
       moveTopic={getMoveTopic(setTopics, topics)}
+      moveTopicNextTo={getMoveTopicNextTo(setTopics, topics)}
       addTask={getAddTask(setTasks, tasks, topics, topic.id)}
       moveTasks={getMoveTasks(topics, tasks, setTasks)}
       unfoldAll={getUnfoldAll(setTopics, topics)}

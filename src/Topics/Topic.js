@@ -33,6 +33,7 @@ const Topic = (props) => {
     moveTasks,
     selectedTasks,
     moveTopic,
+    moveTopicNextTo,
     duplicateTask,
     fancy,
   } = props;
@@ -140,7 +141,13 @@ const Topic = (props) => {
     duplicateTask(taskIds, id);
   };
 
-  // const dropTopicsBefore = () => {};
+  const dropTopicsBefore = (e) => {
+    let source_id = Number(e.dataTransfer.getData("id"));
+    console.info(
+      `Dropped topic with id ${source_id} on this topic with id ${id}`
+    );
+    moveTopicNextTo(source_id, id, "before");
+  };
   const dropTopicsInside = (e) => {
     let source_id = Number(e.dataTransfer.getData("id"));
     console.info(
@@ -148,7 +155,13 @@ const Topic = (props) => {
     );
     moveTopic(source_id, id);
   };
-  // const dropTopicsAfter = () => {};
+  const dropTopicsAfter = (e) => {
+    let source_id = Number(e.dataTransfer.getData("id"));
+    console.info(
+      `Dropped topic with id ${source_id} on this topic with id ${id}`
+    );
+    moveTopicNextTo(source_id, id, "after");
+  };
 
   const handleTopicDrop = (e) => {
     const dropZone = getDropZone(e);
@@ -156,9 +169,9 @@ const Topic = (props) => {
     if (dropZone == "inside") {
       dropTopicsInside(e);
     } else if (dropZone == "after") {
-      // TODO:
+      dropTopicsAfter(e);
     } else if (dropZone == "before") {
-      // TODO:
+      dropTopicsBefore(e);
     } else {
       console.warn("In handleTopicDrop, dropZone is invalid");
     }
