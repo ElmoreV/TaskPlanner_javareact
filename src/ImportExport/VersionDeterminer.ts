@@ -26,9 +26,13 @@ export const getVersionOfAppData = (appData): Version => {
 
 export const checkVersionV0orV1 = (tasks, topics): Version => {
   console.debug(tasks.length);
-  console.debug("taskName" in tasks[0]);
+  if (tasks.length > 0) {
+    console.debug("taskName" in tasks[0]);
+  }
   console.debug(topics.length);
-  console.debug("title" in topics[0]);
+  if (topics.length > 0) {
+    console.debug("title" in topics[0]);
+  }
   if (
     (tasks.length > 0 && "taskName" in tasks[0]) ||
     (topics.length > 0 && "title" in topics[0])
