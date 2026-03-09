@@ -22,4 +22,14 @@ export interface AppDataV2 {
   plannedTaskIdList: number[];
 }
 
-export type AppData = AppDataV0 | AppDataV1 | AppDataV2;
+export interface AppDataV2_1 {
+  version: Version | undefined;
+  taskMap: TaskMap;
+  tagMap: TagMap;
+  tagTasksMap: TagTasksMap;
+  plannedTaskIdList: number[];
+  rootTagIds: number[];
+  rootTaskIds: number[];
+}
+
+export type AppData = AppDataV0 | AppDataV1 | AppDataV2 | AppDataV2_1;

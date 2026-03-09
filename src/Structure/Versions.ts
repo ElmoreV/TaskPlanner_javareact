@@ -3,4 +3,5 @@ export enum Version {
   V0,
   V1,
   V2,
+  V2_1,
 }
