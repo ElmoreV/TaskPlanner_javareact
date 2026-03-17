@@ -166,14 +166,18 @@ button {
   font: inherit;
 }
 
-button:hover {
+button:hover:not([disabled]) {
   background-color: var(--color-secondary-hover);
 }
 
-button:active {
+button:active:not([disabled]) {
   background-color: var(--color-secondary-active);
 }
 
+button[disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
 
 
 .view-select {

@@ -46,7 +46,7 @@ const TopicContent = (props) => {
         )}
       </div>
       <div className={styles.buttonList}>
-        {handleMoveSelectionClick && (
+        {handleMoveSelectionClick ? (
           <button
             className={styles.topicMoveSelection}
             onClick={handleMoveSelectionClick}
@@ -54,6 +54,8 @@ const TopicContent = (props) => {
             Move here
             {typeof selectionCount === "number" ? ` (${selectionCount})` : ""}
           </button>
+        ) : (
+          <button disabled>Move here (0)</button>
         )}
 
         {handleAddTaskClick && (
