@@ -181,7 +181,7 @@ const PlannedList = (props) => {
 
   const copyListToClipboard = () => {
     let taskList = tasks
-      .sort((taskA, taskB) => taskA.weekOrderIndex > taskB.weekOrderIndex)
+      .sort((taskA, taskB) => taskA.weekOrderIndex - taskB.weekOrderIndex)
       .reduce(
         (acc, task) =>
           isVisible(task, true) ? acc.concat(task.name, "\n") : acc,
@@ -223,7 +223,7 @@ const PlannedList = (props) => {
 
       <ul key="root_topics">
         {tasks
-          .sort((taskA, taskB) => taskA.weekOrderIndex > taskB.weekOrderIndex)
+          .sort((taskA, taskB) => taskA.weekOrderIndex - taskB.weekOrderIndex)
           .filter((task) => isVisible(task, true))
           .map((task) =>
             recursiveShowPlannedTask(
