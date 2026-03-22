@@ -110,10 +110,9 @@ const PlannedList = (props) => {
   const { appData, setAppData, fancy } = props;
   const { topics, tasks } = appData;
   const setTasks = (newTasks) => {
-    setAppData({ tasks: newTasks, ...appData });
+    setAppData((prevAppData) => ({ ...prevAppData, tasks: newTasks }));
   };
   console.debug("Rendering PlannedList");
-
   const [hideCompletedItems, setHideCompletedItems] = useState(true);
   const [hideScheduledItems, setHideScheduledItems] = useState(false);
   const [selectedTasks, setSelectedTasks] = useState([]);

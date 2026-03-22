@@ -1,3 +1,5 @@
+import structuredClone from "@ungap/structured-clone";
+
 import { AppDataV1 } from "../Structure/AppDataTypes.ts";
 import { V1_Task, V1_Topic } from "../Structure/V1_types.ts";
 import {
@@ -767,7 +769,7 @@ const getChangeWeekOrderIndex = (
     sourceWeekOrderIndices = zipped.map((el) => el[1]);
     console.log(taskIds, sourceWeekOrderIndices, targetWeekOrderIndex);
 
-    let newTasks = [...tasks];
+    let newTasks: V1_Task[] = structuredClone(tasks);
     console.log(
       newTasks.filter((t) => t.thisWeek).map((t) => [t.name, t.weekOrderIndex])
     );
@@ -782,6 +784,7 @@ const getChangeWeekOrderIndex = (
     if (targetWeekOrderIndex < sourceWeekOrderIndices[0]) {
       // Reorder all tasks squeezed between the source tasks and the target task
       newTasks = newTasks.map((task) => {
+        let newTask = structuredClone(task);
         // Count the number of tasks that are marked to move that are  this task
         let tasksBefore = sourceWeekOrderIndices.filter(
           (idx) => idx < task.weekOrderIndex
@@ -792,18 +795,19 @@ const getChangeWeekOrderIndex = (
         // Move all tasks squeezed, which aren't marked to move
         if (task.thisWeek && !taskIds.includes(task.id)) {
           if (task.weekOrderIndex >= targetWeekOrderIndex) {
-            task.weekOrderIndex += tasksAfter;
+            newTask.weekOrderIndex += tasksAfter;
           } else {
-            task.weekOrderIndex -= tasksBefore;
+            newTask.weekOrderIndex -= tasksBefore;
           }
         }
-        return task;
+        return newTask;
       });
 
       // If the target task is after the first source task, move all tasks between source tasks and target task down
     } else if (targetWeekOrderIndex > sourceWeekOrderIndices[0]) {
       // move all indices behind this target task
       newTasks = newTasks.map((task) => {
+        let newTask = structuredClone(task);
         // Count the number of tasks that are marked to move that are before this task
         let tasksBefore = sourceWeekOrderIndices.filter(
           (idx) => idx <= task.weekOrderIndex
@@ -813,12 +817,12 @@ const getChangeWeekOrderIndex = (
         ).length;
         if (task.thisWeek && !taskIds.includes(task.id)) {
           if (task.weekOrderIndex <= targetWeekOrderIndex) {
-            task.weekOrderIndex -= tasksBefore;
+            newTask.weekOrderIndex -= tasksBefore;
           } else {
-            task.weekOrderIndex += tasksAfter;
+            newTask.weekOrderIndex += tasksAfter;
           }
         }
-        return task;
+        return newTask;
       });
       direction = -tasksBeforeTarget + 1;
     }
@@ -838,10 +842,6 @@ const getChangeWeekOrderIndex = (
         tasks_to_change_indices[taskIds.indexOf(task.id)] +
         direction;
     });
-
-    console.log(
-      newTasks.filter((t) => t.thisWeek).map((t) => [t.name, t.weekOrderIndex])
-    );
 
     setTasks(newTasks);
   };
