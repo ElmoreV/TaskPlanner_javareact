@@ -78,7 +78,7 @@ export const calculateTaskV1Hash = (tasks: V1_Task[]): string => {
   let newTasks: V1_Task[] = structuredClone(tasks);
   newTasks = sanitizeWeekOrderIndex2(newTasks);
   let fixedTasks = newTasks
-    .sort((a, b) => a.id > b.id)
+    .sort((a, b) => a.id - b.id)
     .map((task) => {
       return {
         name: task.name,
@@ -106,7 +106,7 @@ export const calculateTopicV1Hash = (topics: V1_Topic[]): string => {
   let newTopics: V1_Topic[] = structuredClone(topics);
   const fixTopics = (topicList: V1_Topic[]) => {
     let fixedTopicList = topicList
-      .sort((a, b) => a.id > b.id)
+      .sort((a, b) => a.id - b.id)
       .map((topic: V1_Topic) => {
         // return a new topic wihtout the unfolded
         return {
