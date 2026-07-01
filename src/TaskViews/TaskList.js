@@ -325,37 +325,14 @@ const TaskList = (props) => {
     <div className="task-list">
       <div className="task-list-header">
         {selectedTasks.length > 0 && (
-          <div
-            style={{
-              // top: "16px",
-              // left: "16px",
-              zIndex: 9999,
-              padding: "10px 14px",
-              borderRadius: "12px",
-              background: "rgba(0,0,0,0.85)",
-              color: "#fff",
-              boxShadow: "0 6px 20px rgba(0,0,0,0.25)",
-              display: "flex",
-              gap: "10px",
-              alignItems: "center",
-              pointerEvents: "auto", // clickable
-              userSelect: "none",
-            }}
-          >
+          <div className="task-list-selection-notice">
             <span>Selected {selectedTasks.length} tasks.</span>
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 onSelectionClear();
               }}
-              style={{
-                background: "transparent",
-                border: "1px solid rgba(255,255,255,0.6)",
-                borderRadius: "8px",
-                padding: "4px 8px",
-                color: "#fff",
-                cursor: "pointer",
-              }}
+              className="clear-selection"
             >
               Clear
             </button>

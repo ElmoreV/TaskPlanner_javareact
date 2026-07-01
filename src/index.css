@@ -133,6 +133,30 @@ body {
   user-select: none;
 }
 
+.task-list-selection-notice{
+  /* // top: "16px", */
+  /* // left: "16px", */
+  z-index: 9999;
+  padding: 10px 14px;
+  border-radius: 12px; 
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  pointer-events: auto; /*// clickable */
+  user-select: none;
+}
+
+.clear-selection {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  padding: 4px 8px;
+  color: #fff;
+  cursor: pointer;
+}
 
 .task-list {
   max-width: 1000px;
