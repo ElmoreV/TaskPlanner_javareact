@@ -322,7 +322,9 @@ const TaskList = (props) => {
     setSelectedTasks([]);
   };
   return (
-    <div className="task-list">
+    <div
+      className={`task-list ${selectedTasks.length > 0 ? "has-selection" : ""}`}
+    >
       <div className="task-list-header">
         {selectedTasks.length > 0 && (
           <div className="task-list-selection-notice">

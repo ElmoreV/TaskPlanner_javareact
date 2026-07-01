@@ -165,6 +165,12 @@ body {
   grid-row: 3/5;
 }
 
+/* TODO: this is a hack to reverse the task list going down when selecting something
+when any layout element changes, this breaks*/
+.task-list.has-selection > ul {
+  margin-top: -17px;
+}
+
 
 .planned-list {
   max-width: 1000px;
