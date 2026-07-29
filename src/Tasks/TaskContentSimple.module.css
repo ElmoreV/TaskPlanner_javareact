@@ -75,6 +75,13 @@
     background: rgb(220, 149, 255);
 }
 
+.taskIncompleteParent {
+    max-width: 800px;
+    padding: 1px 10px 5px 10px;
+    margin: 1px 0;
+    background: rgb(255, 218, 139);
+}
+
 span.topicPath {
     float: right;
     max-width: 275px;

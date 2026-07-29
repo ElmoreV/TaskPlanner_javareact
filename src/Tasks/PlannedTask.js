@@ -174,6 +174,8 @@ const PlannedTask = (props) => {
     class_str = "taskImpossible";
   } else if (scheduled) {
     class_str = "taskPlanned";
+  } else if (hasSubTasks) {
+    class_str = "taskIncompleteParent";
   }
 
   let selectStyle = {};

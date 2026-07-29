@@ -25,6 +25,7 @@ const Task = (props) => {
     currentTopicId,
     moveTasks,
     currentTopicViewIndex,
+    scheduled,
     planned,
     plan,
     unplan,
@@ -235,8 +236,12 @@ const Task = (props) => {
     class_str = "taskImpossible";
   } else if (planned) {
     class_str = "taskPlanned";
+  } else if (scheduled) {
+    class_str = "taskPlanned";
   } else if (repeated) {
     class_str = "taskRepeated";
+  } else if (hasSubTasks) {
+    class_str = "taskIncompleteParent";
   }
 
   let selectStyle = {};

@@ -57,6 +57,8 @@ body {
   --color-task-planned2: rgb(155, 243, 255);
   --color-task-repeated1: rgb(209, 130, 248);
   --color-task-repeated2: rgb(145, 107, 253);
+  --color-task-parent1: rgb(231, 240, 201);
+  --color-task-parent2: rgb(234, 192, 141);
   --color-task-impossible1: rgb(252, 137, 137);
   --color-task-impossible2: rgb(230, 190, 190);
   --color-task-irrelevant2: rgb(234, 234, 234);
@@ -91,6 +93,8 @@ body {
   --color-task-planned2: rgb(24, 118, 134);
   --color-task-repeated1: rgb(99, 0, 144);
   --color-task-repeated2: rgb(31, 0, 117);
+  --color-task-parent1: rgb(122, 106, 86);
+  --color-task-parent2: rgb(103, 42, 18);
   --color-task-impossible1: rgb(119, 19, 19);
   --color-task-impossible2: rgb(77, 43, 43);
   --color-task-irrelevant1: rgb(48, 48, 48);

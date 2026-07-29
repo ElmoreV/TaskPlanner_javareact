@@ -178,6 +178,7 @@ export default function TaskContainer(props) {
       completed={task.completed}
       taskFinishStatus={task.finishStatus}
       planned={task.thisWeek}
+      scheduled={task.scheduled}
       repeated={task.repeated}
       taskTopics={task.topics}
       taskLastCompletion={task.lastFinished}
