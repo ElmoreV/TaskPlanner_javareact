@@ -122,37 +122,78 @@ const Task = (props) => {
       toggleFold(id);
     }
   };
+  function getDropZone(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+    // const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    if (y < rect.height * 0.4) {
+      return "before";
+    } else if (y > rect.height * 0.6) {
+      return "after";
+    } else {
+      return "inside";
+    }
+  }
 
   const handleTaskDrop = (e) => {
+    // A task is dragged and dropped in this task
+    const dropZone = getDropZone(e);
     if (!moveTasks) {
       return;
     }
+    const parseNumberData = (data: string): number | undefined => {
+      if (
+        data === "" ||
+        data === "null" ||
+        data === "undefined" ||
+        data === null ||
+        data === undefined
+      ) {
+        return undefined;
+      }
+      return Number(data);
+    };
+
+    // dragged task
     var task_id = Number(e.dataTransfer.getData("TaskId"));
-    var oldTopicId = Number(e.dataTransfer.getData("TopicId"));
-    var oldSuperTaskId = Number(e.dataTransfer.getData("SuperTaskId"));
+    var oldTopicId = parseNumberData(e.dataTransfer.getData("TopicId"));
+    var oldSuperTaskId = parseNumberData(e.dataTransfer.getData("SuperTaskId"));
     console.info(
       `Dropped task with id ${task_id} with old topic id ${oldTopicId}/ old supertask id ${oldSuperTaskId} on task (id:${id}) within topic with id ${currentTopicId}/ supertask with id ${currentSuperTaskId}`
     );
-    // console.info(changeTopic)
+    console.info(selectedTasks);
     let taskIds = [];
     let oldTopicIds = [];
     let oldSuperTaskIds = [];
-    taskIds.push(task_id);
-    oldTopicIds.push(oldTopicId);
-    oldSuperTaskIds.push(oldSuperTaskId);
-    console.info(selectedTasks);
     if (selectedTasks && selectedTasks.length > 0) {
       selectedTasks.forEach((st) => {
         console.info(
-          `Changing topic of task with id ${st.taskId} from topic with id ${st.topicId} to topic with id ${currentTopicId}`
+          `Changing location of task with id ${st.taskId} from topic with id ${st.topicId}/supertask with id ${st.superTaskId}`
         );
         taskIds.push(st.taskId);
-        oldTopicIds.push(st.topicId);
-        oldSuperTaskIds.push(st.superTaskId);
+        oldTopicIds.push(parseNumberData(st.topicId));
+        oldSuperTaskIds.push(parseNumberData(st.superTaskId));
       });
     }
+    // check if the task is already in the right location
+    const alreadyInSelection =
+      selectedTasks &&
+      selectedTasks.some(
+        (st) =>
+          st.taskId === task_id &&
+          parseNumberData(st.topicId) === oldTopicId &&
+          parseNumberData(st.superTaskId) === oldSuperTaskId
+      );
+    if (!alreadyInSelection) {
+      // prepend the task to the input arguments
+      taskIds.unshift(task_id);
+      oldTopicIds.unshift(oldTopicId);
+      oldSuperTaskIds.unshift(oldSuperTaskId);
+    }
 
-    if (moveTasks) {
+    console.log(taskIds, oldTopicIds, oldSuperTaskIds);
+
+    if (dropZone == "before") {
       moveTasks(
         taskIds,
         oldTopicIds,
@@ -160,12 +201,40 @@ const Task = (props) => {
         currentTopicId,
         currentTopicViewIndex,
         currentSuperTaskId,
-        id
+        id,
+        false
       );
+    } else if (dropZone == "inside") {
+      moveTasks(
+        taskIds,
+        oldTopicIds,
+        oldSuperTaskIds,
+        undefined,
+        undefined,
+        id,
+        undefined,
+        false
+      );
+    } else if (dropZone == "after") {
+      moveTasks(
+        taskIds,
+        oldTopicIds,
+        oldSuperTaskIds,
+        currentTopicId,
+        currentTopicViewIndex !== undefined
+          ? currentTopicViewIndex + 1
+          : undefined,
+        currentSuperTaskId,
+        id,
+        true
+      );
+    } else {
+      console.warn("In handleTaskDrop, dropZone is invalid");
     }
   };
 
   const handleTaskDuplicateDrop = (e) => {
+    // A task is duplicate dragged and dropped in this task
     if (!duplicateTask) {
       return;
     }
@@ -194,7 +263,6 @@ const Task = (props) => {
 
   const handleDrop = (e) => {
     e.preventDefault();
-    e.target.setAttribute("draggedOver", false);
     console.info("Dropping on a task");
     var type = e.dataTransfer.getData("Type");
 
@@ -205,16 +273,19 @@ const Task = (props) => {
     } else {
       console.info("On a task, you can only drop another task (not a topic)");
     }
+
+    e.target.setAttribute("dropZone", null);
   };
 
   const handleDragOver = (e) => {
     e.preventDefault();
     // this is not perfect, because I always want the <div class='task'> to be the target..
-    e.target.setAttribute("draggedOver", true);
+    const dropZone = getDropZone(e);
+    e.currentTarget.setAttribute("dropZone", dropZone);
   };
   const handleDragLeave = (e) => {
     e.preventDefault();
-    e.target.setAttribute("draggedOver", false);
+    e.target.setAttribute("dropZone", null);
   };
 
   const onDueDateChange = (event) => {

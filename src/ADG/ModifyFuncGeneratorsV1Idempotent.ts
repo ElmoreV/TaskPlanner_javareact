@@ -10,19 +10,22 @@ import {
   insertTaskInstanceIntoTaskV1Idempotent,
 } from "./ModifyTaskTopicAdgElementsV1.ts";
 
+type TaskInstanceLocation =
+  | { type: "task"; superTaskId: number }
+  | { type: "topic"; topicId: number };
+
 const moveTaskInstanceV1Pure = (
   tasks: V1_Task[],
   taskId: number,
-  sourceTopicId: number | undefined,
-  sourceTaskId: number | undefined,
-  targetSuperTaskId: number | undefined,
-  targetTopicId: number | undefined,
+  sourceLocation: TaskInstanceLocation,
+  targetLocation: TaskInstanceLocation,
   targetViewIndex: number | undefined,
-  targetTaskId: number | undefined
+  targetTaskId: number | undefined,
+  insertAfterSubtask: boolean | undefined
 ): { newTasks: V1_Task[]; success: boolean } => {
   let newTasks = [...tasks];
   let moveAllowed = true;
-  if (targetSuperTaskId) {
+  if (targetLocation.type === "task") {
     // TODO: This is actually not the right check.
     // Something like moving task A into  Task1 should be possible
     // even if TaskA in Task2 in Task1
@@ -30,52 +33,78 @@ const moveTaskInstanceV1Pure = (
   }
   if (!moveAllowed) {
     console.warn(
-      `Move of task id ${taskId} to task with id ${targetSuperTaskId} is not allowed: task already in target task subtree.`
+      `Move of task id ${taskId} to task with id ${targetLocation.superTaskId} is not allowed: task already in target task subtree.`
     );
     return { newTasks: tasks, success: false };
   }
 
   // Removing from source location (task or topic)
-  if (sourceTopicId !== undefined) {
-    // TODO: check if task is in topic
-    newTasks = removeTaskInstanceFromTopicV1(newTasks, taskId, sourceTopicId);
-  } else if (sourceTaskId !== undefined) {
+  if (sourceLocation.type === "topic") {
+    const sourceTask = newTasks.find((task) => task.id === taskId);
+    if (
+      sourceTask === undefined ||
+      !sourceTask.topics.includes(sourceLocation.topicId)
+    ) {
+      console.warn(
+        `Task ${taskId} is not in source topic ${sourceLocation.topicId}.`
+      );
+      return { newTasks: tasks, success: false };
+    }
+    newTasks = removeTaskInstanceFromTopicV1(
+      newTasks,
+      taskId,
+      sourceLocation.topicId
+    );
+  } else if (sourceLocation.type === "task") {
     // TODO: check if task is in task
-    newTasks = removeTaskInstanceFromTaskV1(newTasks, taskId, sourceTaskId);
-  } else {
-    console.warn(`No source (task or topic) defined for  ${taskId}.`);
-    return { newTasks: tasks, success: false };
+    newTasks = removeTaskInstanceFromTaskV1(
+      newTasks,
+      taskId,
+      sourceLocation.superTaskId
+    );
   }
   // Adding to destination location (task or topic)
-  if (targetTopicId !== undefined) {
+  if (targetLocation.type === "topic") {
     // If the task is already in the targetTopic, remove it
     let taskTopics = newTasks.find((task) => task.id == taskId);
-    if (taskTopics !== undefined && taskTopics.topics.includes(targetTopicId)) {
-      console.info(`Task ${taskId} is already in topic ${targetTopicId}`);
+    if (
+      taskTopics !== undefined &&
+      taskTopics.topics.includes(targetLocation.topicId)
+    ) {
+      console.info(
+        `Task ${taskId} is already in topic ${targetLocation.topicId}`
+      );
 
-      newTasks = removeTaskInstanceFromTopicV1(newTasks, taskId, targetTopicId);
+      newTasks = removeTaskInstanceFromTopicV1(
+        newTasks,
+        taskId,
+        targetLocation.topicId
+      );
     }
     newTasks = insertTaskInstanceIntoTopicV1(
       newTasks,
       taskId,
-      targetTopicId,
+      targetLocation.topicId,
       targetViewIndex
     );
-  } else if (targetSuperTaskId !== undefined) {
+  } else if (targetLocation.type === "task") {
     // If task already in target supertask, remove it
-    let superTask = newTasks.find((task) => task.id === targetSuperTaskId);
+    let superTask = newTasks.find(
+      (task) => task.id === targetLocation.superTaskId
+    );
+
     if (superTask === undefined) {
-      console.warn(`Supertask ${targetSuperTaskId} does not exist`);
+      console.warn(`Supertask ${targetLocation.superTaskId} does not exist`);
       return { newTasks: tasks, success: false };
     }
     if (superTask.subTaskIds && superTask.subTaskIds.includes(taskId)) {
       console.info(
-        `Task ${taskId} is already in supertask ${targetSuperTaskId}`
+        `Task ${taskId} is already in supertask ${targetLocation.superTaskId}`
       );
       newTasks = removeTaskInstanceFromTaskV1(
         newTasks,
         taskId,
-        targetSuperTaskId
+        targetLocation.superTaskId
       );
     }
     // TODO: prevent a cycle to exist (task1<-task2<-task1<-task2<-...)
@@ -87,8 +116,13 @@ const moveTaskInstanceV1Pure = (
     newTasks = insertTaskInstanceIntoTaskV1Idempotent(
       newTasks,
       taskId,
-      targetSuperTaskId,
-      superTask.subTaskIds.findIndex((subTaskId) => subTaskId === targetTaskId)
+      targetLocation.superTaskId,
+
+      targetTaskId === undefined
+        ? 0
+        : superTask.subTaskIds.findIndex(
+            (subTaskId) => subTaskId === targetTaskId
+          ) + (insertAfterSubtask ? 1 : 0)
     );
   }
   return { newTasks: newTasks, success: true };
@@ -105,10 +139,11 @@ const moveTasksV1Pure = (
   taskIds: number[],
   sourceTopicIds: (number | undefined)[],
   sourceSuperTaskIds: (number | undefined)[],
-  targetTopicId: number | undefined,
-  targetViewIndex: number | undefined,
-  targetSuperTaskId: number | undefined,
-  targetTaskId: number | undefined
+  targetTopicId: number | undefined | null,
+  targetViewIndex: number | undefined | null,
+  targetSuperTaskId: number | undefined | null,
+  targetTaskId: number | undefined | null,
+  insertAfterSubtask: boolean | undefined
 ): V1_Task[] => {
   // taskIds here is the id of the task
   // sourceTopicIds is the topic-object where the task came from
@@ -119,6 +154,12 @@ const moveTasksV1Pure = (
   if (!Array.isArray(taskIds)) {
     taskIds = [taskIds];
   }
+  // normalize all nulls to undefined
+  if (targetTopicId === null) targetTopicId = undefined;
+  if (targetViewIndex === null) targetViewIndex = undefined;
+  if (targetSuperTaskId === null) targetSuperTaskId = undefined;
+  if (targetTaskId === null) targetTaskId = undefined;
+
   if (!Array.isArray(sourceTopicIds)) {
     sourceTopicIds = [sourceTopicIds];
   }
@@ -156,34 +197,49 @@ const moveTasksV1Pure = (
     );
     return tasks;
   }
+  let targetLocation: TaskInstanceLocation;
+  if (targetTopicId !== undefined) {
+    targetLocation = { type: "topic", topicId: targetTopicId };
+  } else if (targetSuperTaskId !== undefined) {
+    targetLocation = { type: "task", superTaskId: targetSuperTaskId };
+  } else {
+    console.warn(`No target (task or topic) defined move.`);
+    return tasks;
+  }
 
   // go through all 'operations' 1-by-1
-  let allSuccess = true;
-  taskIds.forEach((taskId, idx) => {
-    if (!allSuccess) {
-      return;
+  let indices = taskIds.map((_, idx) => idx);
+  if (insertAfterSubtask) {
+    // to preserve order of selected tasks when inserting after
+    indices.reverse();
+  }
+  for (let idx of indices) {
+    const taskId = taskIds[idx];
+    let sourceLocation: TaskInstanceLocation;
+    if (sourceTopicIds[idx] !== undefined) {
+      sourceLocation = { type: "topic", topicId: sourceTopicIds[idx] };
+    } else if (sourceSuperTaskIds[idx] !== undefined) {
+      sourceLocation = { type: "task", superTaskId: sourceSuperTaskIds[idx] };
+    } else {
+      console.warn(`No source (task or topic) defined for  ${taskId}.`);
+      return tasks; //abort
     }
 
     let result = moveTaskInstanceV1Pure(
-          newTasks,
-          taskId,
-      sourceTopicIds[idx],
-      sourceSuperTaskIds[idx],
-      targetSuperTaskId,
-        targetTopicId,
+      newTasks,
+      taskId,
+      sourceLocation,
+      targetLocation,
       targetViewIndex,
-      targetTaskId
+      targetTaskId,
+      insertAfterSubtask
     );
     if (!result.success) {
-        allSuccess = false;
+      return tasks; //abort
     }
     newTasks = result.newTasks;
-  });
-  if (allSuccess) {
-  return newTasks;
-  } else {
-    return tasks;
   }
+  return newTasks;
 };
 
 const duplicateTaskV1Pure = (
