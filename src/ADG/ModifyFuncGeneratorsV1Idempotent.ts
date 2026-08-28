@@ -22,10 +22,10 @@ const moveTasksV1Pure = (
   taskIds: number[],
   sourceTopicIds: number[],
   sourceSuperTaskIds: number[],
-  targetTopicId: number,
-  targetViewIndex: number,
-  targetSuperTaskId: number,
-  targetTaskId: number
+  targetTopicId: number | undefined,
+  targetViewIndex: number | undefined,
+  targetSuperTaskId: number | undefined,
+  targetTaskId: number | undefined
 ): V1_Task[] => {
   // taskIds here is the id of the task
   // sourceTopicIds is the topic-object where the task came from
@@ -44,24 +44,24 @@ const moveTasksV1Pure = (
   }
   if (sourceSuperTaskIds.length != taskIds.length) {
     console.error(
-      "The length of the taskIds and sourceTopicIds should be the same"
+      "The length of the taskIds and sourceSuperTaskIds should be the same"
     );
     return tasks; // return unchanged tasks
   }
-  if (sourceSuperTaskIds.length != taskIds.length) {
+  if (sourceTopicIds.length != taskIds.length) {
     console.error(
       "The length of the taskIds and sourceTopicIds should be the same"
     );
     return tasks;
   }
   let newTasks = [...tasks];
-  if (targetTopicId) {
+  if (targetTopicId !== undefined) {
     const targetTopic = findTopicByTopicIdV1(topics, targetTopicId);
     if (!targetTopic) {
       console.warn(`Target topic ${targetTopicId} does not exist.`);
       return tasks;
     }
-  } else if (targetSuperTaskId) {
+  } else if (targetSuperTaskId !== undefined) {
     const targetTask = findTaskByTaskIdV1(tasks, targetSuperTaskId);
     if (!targetTask) {
       console.warn(`Target super task ${targetSuperTaskId} does not exist.`);
@@ -95,10 +95,10 @@ const moveTasksV1Pure = (
     }
 
     // Removing from source location (task or topic)
-    if (sourceTopicId) {
+    if (sourceTopicId !== undefined) {
       // TODO: check if task is in topic
       newTasks = removeTaskInstanceFromTopicV1(newTasks, taskId, sourceTopicId);
-    } else if (sourceTaskId) {
+    } else if (sourceTaskId !== undefined) {
       // TODO: check if task is in task
       newTasks = removeTaskInstanceFromTaskV1(newTasks, taskId, sourceTaskId);
     } else {
@@ -107,10 +107,13 @@ const moveTasksV1Pure = (
       return;
     }
     // Adding to destination location (task or topic)
-    if (targetTopicId) {
+    if (targetTopicId !== undefined) {
       // If the task is already in the targetTopic, remove it
       let taskTopics = newTasks.find((task) => task.id == taskId);
-      if (taskTopics.topics.includes(targetTopicId)) {
+      if (
+        taskTopics !== undefined &&
+        taskTopics.topics.includes(targetTopicId)
+      ) {
         console.info(`Task ${taskId} is already in topic ${targetTopicId}`);
 
         newTasks = removeTaskInstanceFromTopicV1(
@@ -125,7 +128,7 @@ const moveTasksV1Pure = (
         targetTopicId,
         targetViewIndex
       );
-    } else if (targetSuperTaskId) {
+    } else if (targetSuperTaskId !== undefined) {
       // If task already in target supertask, remove it
       let superTask = newTasks.find((task) => task.id === targetSuperTaskId);
       if (superTask === undefined) {
