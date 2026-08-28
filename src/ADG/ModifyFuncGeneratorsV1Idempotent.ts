@@ -10,6 +10,89 @@ import {
   insertTaskInstanceIntoTaskV1Idempotent,
 } from "./ModifyTaskTopicAdgElementsV1.ts";
 
+const moveTaskInstanceV1Pure = (
+  tasks: V1_Task[],
+  taskId: number,
+  sourceTopicId: number | undefined,
+  sourceTaskId: number | undefined,
+  targetSuperTaskId: number | undefined,
+  targetTopicId: number | undefined,
+  targetViewIndex: number | undefined,
+  targetTaskId: number | undefined
+): { newTasks: V1_Task[]; success: boolean } => {
+  let newTasks = [...tasks];
+  let moveAllowed = true;
+  if (targetSuperTaskId) {
+    // TODO: This is actually not the right check.
+    // Something like moving task A into  Task1 should be possible
+    // even if TaskA in Task2 in Task1
+    moveAllowed = true; //!isTaskInSubTaskTree(tasks, targetSuperTaskId, taskId);
+  }
+  if (!moveAllowed) {
+    console.warn(
+      `Move of task id ${taskId} to task with id ${targetSuperTaskId} is not allowed: task already in target task subtree.`
+    );
+    return { newTasks: tasks, success: false };
+  }
+
+  // Removing from source location (task or topic)
+  if (sourceTopicId !== undefined) {
+    // TODO: check if task is in topic
+    newTasks = removeTaskInstanceFromTopicV1(newTasks, taskId, sourceTopicId);
+  } else if (sourceTaskId !== undefined) {
+    // TODO: check if task is in task
+    newTasks = removeTaskInstanceFromTaskV1(newTasks, taskId, sourceTaskId);
+  } else {
+    console.warn(`No source (task or topic) defined for  ${taskId}.`);
+    return { newTasks: tasks, success: false };
+  }
+  // Adding to destination location (task or topic)
+  if (targetTopicId !== undefined) {
+    // If the task is already in the targetTopic, remove it
+    let taskTopics = newTasks.find((task) => task.id == taskId);
+    if (taskTopics !== undefined && taskTopics.topics.includes(targetTopicId)) {
+      console.info(`Task ${taskId} is already in topic ${targetTopicId}`);
+
+      newTasks = removeTaskInstanceFromTopicV1(newTasks, taskId, targetTopicId);
+    }
+    newTasks = insertTaskInstanceIntoTopicV1(
+      newTasks,
+      taskId,
+      targetTopicId,
+      targetViewIndex
+    );
+  } else if (targetSuperTaskId !== undefined) {
+    // If task already in target supertask, remove it
+    let superTask = newTasks.find((task) => task.id === targetSuperTaskId);
+    if (superTask === undefined) {
+      console.warn(`Supertask ${targetSuperTaskId} does not exist`);
+      return { newTasks: tasks, success: false };
+    }
+    if (superTask.subTaskIds && superTask.subTaskIds.includes(taskId)) {
+      console.info(
+        `Task ${taskId} is already in supertask ${targetSuperTaskId}`
+      );
+      newTasks = removeTaskInstanceFromTaskV1(
+        newTasks,
+        taskId,
+        targetSuperTaskId
+      );
+    }
+    // TODO: prevent a cycle to exist (task1<-task2<-task1<-task2<-...)
+
+    if (superTask.subTaskIds === undefined) {
+      superTask.subTaskIds = [];
+    }
+
+    newTasks = insertTaskInstanceIntoTaskV1Idempotent(
+      newTasks,
+      taskId,
+      targetSuperTaskId,
+      superTask.subTaskIds.findIndex((subTaskId) => subTaskId === targetTaskId)
+    );
+  }
+  return { newTasks: newTasks, success: true };
+};
 // Now need four functions
 // Move from task in topic to subtask in task
 // Move from task in subtask to subtask in other task
@@ -20,8 +103,8 @@ const moveTasksV1Pure = (
   topics: V1_Topic[],
   tasks: V1_Task[],
   taskIds: number[],
-  sourceTopicIds: number[],
-  sourceSuperTaskIds: number[],
+  sourceTopicIds: (number | undefined)[],
+  sourceSuperTaskIds: (number | undefined)[],
   targetTopicId: number | undefined,
   targetViewIndex: number | undefined,
   targetSuperTaskId: number | undefined,
@@ -77,89 +160,24 @@ const moveTasksV1Pure = (
   // go through all 'operations' 1-by-1
   let allSuccess = true;
   taskIds.forEach((taskId, idx) => {
-    let sourceTopicId = sourceTopicIds[idx];
-    let sourceTaskId = sourceSuperTaskIds[idx];
-    let moveAllowed = true;
-    if (targetSuperTaskId) {
-      // TODO: This is actually not the right check.
-      // Something like moving task A into  Task1 should be possible
-      // even if TaskA in Task2 in Task1
-      moveAllowed = true; //!isTaskInSubTaskTree(tasks, targetSuperTaskId, taskId);
-    }
-    if (!moveAllowed) {
-      console.warn(
-        `Move of task id ${taskId} to task with id ${targetSuperTaskId} is not allowed: task already in target task subtree.`
-      );
-      allSuccess = false;
+    if (!allSuccess) {
       return;
     }
 
-    // Removing from source location (task or topic)
-    if (sourceTopicId !== undefined) {
-      // TODO: check if task is in topic
-      newTasks = removeTaskInstanceFromTopicV1(newTasks, taskId, sourceTopicId);
-    } else if (sourceTaskId !== undefined) {
-      // TODO: check if task is in task
-      newTasks = removeTaskInstanceFromTaskV1(newTasks, taskId, sourceTaskId);
-    } else {
-      console.warn(`No source (task or topic) defined for  ${taskId}.`);
-      allSuccess = false;
-      return;
-    }
-    // Adding to destination location (task or topic)
-    if (targetTopicId !== undefined) {
-      // If the task is already in the targetTopic, remove it
-      let taskTopics = newTasks.find((task) => task.id == taskId);
-      if (
-        taskTopics !== undefined &&
-        taskTopics.topics.includes(targetTopicId)
-      ) {
-        console.info(`Task ${taskId} is already in topic ${targetTopicId}`);
-
-        newTasks = removeTaskInstanceFromTopicV1(
+    let result = moveTaskInstanceV1Pure(
           newTasks,
           taskId,
-          targetTopicId
-        );
-      }
-      newTasks = insertTaskInstanceIntoTopicV1(
-        newTasks,
-        taskId,
+      sourceTopicIds[idx],
+      sourceSuperTaskIds[idx],
+      targetSuperTaskId,
         targetTopicId,
-        targetViewIndex
-      );
-    } else if (targetSuperTaskId !== undefined) {
-      // If task already in target supertask, remove it
-      let superTask = newTasks.find((task) => task.id === targetSuperTaskId);
-      if (superTask === undefined) {
-        console.warn(`Supertask ${targetSuperTaskId} does not exist`);
+      targetViewIndex,
+      targetTaskId
+    );
+    if (!result.success) {
         allSuccess = false;
-        return;
-      }
-      if (superTask.subTaskIds && superTask.subTaskIds.includes(taskId)) {
-        console.info(
-          `Task ${taskId} is already in supertask ${targetSuperTaskId}`
-        );
-        newTasks = removeTaskInstanceFromTaskV1(
-          newTasks,
-          taskId,
-          targetSuperTaskId
-        );
-      }
-      // TODO: prevent a cycle to exist (task1<-task2<-task1<-task2<-...)
-      if (superTask.subTaskIds === undefined) {
-        superTask.subTaskIds = [];
-      }
-
-      newTasks = insertTaskInstanceIntoTaskV1Idempotent(
-        newTasks,
-        taskId,
-        targetSuperTaskId,
-        superTask.subTaskIds.findIndex(
-          (subTaskId) => subTaskId === targetTaskId
-        )
-      );
     }
+    newTasks = result.newTasks;
   });
   if (allSuccess) {
   return newTasks;
