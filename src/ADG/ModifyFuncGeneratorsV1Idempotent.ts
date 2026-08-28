@@ -26,7 +26,7 @@ const moveTasksV1Pure = (
   targetViewIndex: number,
   targetSuperTaskId: number,
   targetTaskId: number
-) => {
+): V1_Task[] => {
   // taskIds here is the id of the task
   // sourceTopicIds is the topic-object where the task came from
   // targetTopicId is the topic-object where the task is going to
@@ -46,34 +46,36 @@ const moveTasksV1Pure = (
     console.error(
       "The length of the taskIds and sourceTopicIds should be the same"
     );
-    return;
+    return tasks; // return unchanged tasks
   }
   if (sourceSuperTaskIds.length != taskIds.length) {
     console.error(
       "The length of the taskIds and sourceTopicIds should be the same"
     );
-    return;
+    return tasks;
   }
   let newTasks = [...tasks];
   if (targetTopicId) {
     const targetTopic = findTopicByTopicIdV1(topics, targetTopicId);
     if (!targetTopic) {
       console.warn(`Target topic ${targetTopicId} does not exist.`);
-      return;
+      return tasks;
     }
   } else if (targetSuperTaskId) {
     const targetTask = findTaskByTaskIdV1(tasks, targetSuperTaskId);
     if (!targetTask) {
       console.warn(`Target super task ${targetSuperTaskId} does not exist.`);
-      return;
+      return tasks;
     }
   } else {
     console.warn(
       "Either targetSuperTaskId or targetTopicId needs to be specified."
     );
+    return tasks;
   }
 
   // go through all 'operations' 1-by-1
+  let allSuccess = true;
   taskIds.forEach((taskId, idx) => {
     let sourceTopicId = sourceTopicIds[idx];
     let sourceTaskId = sourceSuperTaskIds[idx];
@@ -88,17 +90,21 @@ const moveTasksV1Pure = (
       console.warn(
         `Move of task id ${taskId} to task with id ${targetSuperTaskId} is not allowed: task already in target task subtree.`
       );
-      return tasks;
+      allSuccess = false;
+      return;
     }
 
     // Removing from source location (task or topic)
     if (sourceTopicId) {
+      // TODO: check if task is in topic
       newTasks = removeTaskInstanceFromTopicV1(newTasks, taskId, sourceTopicId);
     } else if (sourceTaskId) {
+      // TODO: check if task is in task
       newTasks = removeTaskInstanceFromTaskV1(newTasks, taskId, sourceTaskId);
     } else {
       console.warn(`No source (task or topic) defined for  ${taskId}.`);
-      return tasks;
+      allSuccess = false;
+      return;
     }
     // Adding to destination location (task or topic)
     if (targetTopicId) {
@@ -124,7 +130,8 @@ const moveTasksV1Pure = (
       let superTask = newTasks.find((task) => task.id === targetSuperTaskId);
       if (superTask === undefined) {
         console.warn(`Supertask ${targetSuperTaskId} does not exist`);
-        return tasks;
+        allSuccess = false;
+        return;
       }
       if (superTask.subTaskIds && superTask.subTaskIds.includes(taskId)) {
         console.info(
@@ -151,7 +158,11 @@ const moveTasksV1Pure = (
       );
     }
   });
+  if (allSuccess) {
   return newTasks;
+  } else {
+    return tasks;
+  }
 };
 
 const duplicateTaskV1Pure = (
