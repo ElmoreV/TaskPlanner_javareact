@@ -29,7 +29,7 @@ const ImportExport = (props) => {
     null
   );
   const [savedAppDataHash, setSavedAppDataHash] = useState<string | null>(null);
-
+  const [lastSavedOn, setLastSavedOn] = useState<Date | null>(null);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -49,6 +49,7 @@ const ImportExport = (props) => {
     const appDataHash = calculateAppDataHash(appData);
     setSavedAppDataHash(appDataHash);
     setAppDataHash(appDataHash);
+    setLastSavedOn(new Date());
     exportJSON(appData, fileNameRef, selectedExportVersion);
   };
 
@@ -60,6 +61,7 @@ const ImportExport = (props) => {
     setAppDataHash(newAppDataHash);
     setLoadedAppDataHash(newAppDataHash);
     setSavedAppDataHash(null);
+    setLastSavedOn(null);
     setAppData(newAppData);
     console.log("Loading etc");
     return "succesful import";
@@ -274,7 +276,7 @@ const ImportExport = (props) => {
               ? "Unsaved changes"
               : "Unchanged"
             : "Not saved yet"}
-
+          {lastSavedOn && <p>Last saved on {lastSavedOn.toLocaleString()}</p>}
           {/* <button onClick={handleExportYAMLClick}>Export as YAML</button> */}
           <button onClick={handleExportMarkdownClick}>
             {" "}
