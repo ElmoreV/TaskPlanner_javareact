@@ -49,7 +49,7 @@ function App() {
   // createNewRootTopic(topics,...)
   // should up generation functions here
 
-  const [view, setView] = useState(VIEW_ALL_TASKS);
+  const [view, setView] = useState(View.VIEW_ALL_TASKS);
   const [fancy, setFancy] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
 

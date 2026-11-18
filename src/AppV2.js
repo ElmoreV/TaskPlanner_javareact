@@ -36,7 +36,7 @@ function AppV2() {
     plannedTaskIdList: initialPlannedTaskIdList,
   });
 
-  const [view, setView] = useState(VIEW_ALL_TASKS);
+  const [view, setView] = useState(View.VIEW_ALL_TASKS);
   const [fancy, setFancy] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
 
