@@ -52,6 +52,14 @@ function App() {
   const [view, setView] = useState(View.VIEW_ALL_TASKS);
   const [fancy, setFancy] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const [filterSettingsByView, setFilterSettingsByView] = useState({});
+
+  const setFilterSettingsForView = (viewName, updateSettings) => {
+    setFilterSettingsByView((previous) => ({
+      ...previous,
+      [viewName]: updateSettings(previous[viewName]),
+    }));
+  };
 
   const onMakeFancyChange = () => {
     setFancy(!fancy);
@@ -99,6 +107,12 @@ function App() {
               appData={appData}
               setAppData={setAppData}
               fancy={fancy}
+              filterSettings={
+                filterSettingsByView[View.VIEW_ADD_TASKS]
+              }
+              setFilterSettings={(update) =>
+                setFilterSettingsForView(View.VIEW_ADD_TASKS, update)
+              }
             />
           )}
           {view === View.VIEW_ALL_TASKS && (
@@ -106,12 +120,25 @@ function App() {
               appData={appData}
               setAppData={setAppData}
               fancy={fancy}
+              filterSettings={
+                filterSettingsByView[View.VIEW_ALL_TASKS]
+              }
+              setFilterSettings={(update) =>
+                setFilterSettingsForView(View.VIEW_ALL_TASKS, update)
+              }
+            />
           )}
           {view === View.VIEW_PLANNED_TASKS && (
             <PlannedList
               appData={appData}
               setAppData={setAppData}
               fancy={fancy}
+              filterSettings={
+                filterSettingsByView[View.VIEW_PLANNED_TASKS]
+              }
+              setFilterSettings={(update) =>
+                setFilterSettingsForView(View.VIEW_PLANNED_TASKS, update)
+              }
             />
           )}
           {view === View.VIEW_DAILY_PLANNING}

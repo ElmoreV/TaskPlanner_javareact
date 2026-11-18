@@ -1,14 +1,12 @@
-//
 import { View } from "./Structure/View";
-///
 
 const ViewSelector = (props) => {
   const { viewSetter } = props;
   console.debug("Rendering ViewSelector");
 
-  const handleClick = (new_view) => {
-    const handleClicker = (e) => {
-      viewSetter(new_view);
+  const handleClick = (newView: View) => {
+    const handleClicker = () => {
+      viewSetter(newView);
     };
     return handleClicker;
   };

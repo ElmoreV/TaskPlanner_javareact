@@ -39,6 +39,14 @@ function AppV2() {
   const [view, setView] = useState(View.VIEW_ALL_TASKS);
   const [fancy, setFancy] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const [filterSettingsByView, setFilterSettingsByView] = useState({});
+
+  const setFilterSettingsForView = (viewName, updateSettings) => {
+    setFilterSettingsByView((previous) => ({
+      ...previous,
+      [viewName]: updateSettings(previous[viewName]),
+    }));
+  };
 
   const onMakeFancyChange = () => {
     setFancy(!fancy);
@@ -80,6 +88,10 @@ function AppV2() {
               appData={appData}
               setAppData={setAppData}
               fancy={fancy}
+              filterSettings={filterSettingsByView[View.VIEW_ALL_TASKS]}
+              setFilterSettings={(update) =>
+                setFilterSettingsForView(View.VIEW_ALL_TASKS, update)
+              }
             />
           )}
           {/* {view === View.VIEW_PLANNED_TASKS && <PlannedList
