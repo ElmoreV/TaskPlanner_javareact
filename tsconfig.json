@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+  "include": ["src/Filters/*.ts", "src/Filters/*.tsx"]
   }
 
 }
