@@ -8,36 +8,26 @@ import {
   unfoldAllTasksTopics,
   foldAllTasksTopics,
 } from "../Topics/TopicModifyFuncGens.js";
-import { FinishedState } from "../Structure/TaskInterfaces.tsx";
-import { isTaskDueIn, convertDueDateNameToSeconds } from "../Timing.ts";
+import FilterBar from "../Filters/FilterBar";
+import { useTaskFilter } from "../Filters/useTaskFilter";
 import TopicContainer from "../Topics/TopicContainer.tsx";
 import TaskContainer from "../Tasks/TaskContainer.tsx";
 import { convert_v1_to_v2 } from "../Converters/Migration_V1_V2/UpdateV1ToV2.ts";
+import { View } from "../Structure/View";
 
 const isTaskWithoutTopic = (task, allSubTaskIds) => {
   return task.topics.length == 0 && !allSubTaskIds.includes(task.id);
 };
 
-const isTaskVisible = (
-  task,
-  hideCompletedItems,
-  showRepeatedOnly,
-  dueInSeconds
-) => {
-  return (
-    !(
-      (task.completed ||
-        (task.finishStatus !== undefined &&
-          task.finishStatus !== FinishedState.NotFinished)) &&
-      hideCompletedItems
-    ) &&
-    (task.repeated || !showRepeatedOnly) &&
-    (!dueInSeconds || isTaskDueIn(task, new Date(), dueInSeconds))
-  );
-};
-
 const TaskList = (props) => {
-  const { appData, setAppData, fancy } = props;
+  const { appData, setAppData, fancy, filterSettings, setFilterSettings } =
+    props;
+  const taskFilter = useTaskFilter(
+    appData,
+    View.VIEW_ALL_TASKS,
+    filterSettings,
+    setFilterSettings
+  );
   const { topics, tasks } = appData;
   const setTasks = (newTasks) => {
     setAppData({ ...appData, tasks: newTasks });
@@ -47,9 +37,6 @@ const TaskList = (props) => {
   };
   console.debug("Rendering TaskList");
 
-  const [hideCompletedItems, setHideCompletedItems] = useState(true);
-  const [showRepeatedOnly, setShowRepeatedOnly] = useState(false);
-  const [dueTimeInSeconds, setDueTimeInSeconds] = useState(undefined);
   const [selectedTasks, setSelectedTasks] = useState([]);
   const [runOnce, setRunOnce] = useState(false);
   const [needTransitiveUpdate, setNeedTransitiveUpdate] = useState(true);
@@ -78,14 +65,6 @@ const TaskList = (props) => {
     };
   }, []); // Empty dependency array means this effect runs once on mount
 
-  const onHideCompletedItemsChange = () => {
-    setHideCompletedItems(!hideCompletedItems);
-  };
-
-  const onShowRepeatedOnlyChange = () => {
-    setShowRepeatedOnly(!showRepeatedOnly);
-  };
-
   const handleFoldAll = () => {
     let newAppData = foldAllTasksTopics(appData);
     setAppData(newAppData);
@@ -96,19 +75,13 @@ const TaskList = (props) => {
     setAppData(newAppData);
   };
 
-  const onDueDateChange = (event) => {
-    let dueDateName = event.target.value;
-    console.log(dueDateName);
-    console.log(convertDueDateNameToSeconds(dueDateName));
-    setDueTimeInSeconds(convertDueDateNameToSeconds(dueDateName));
-  };
-
   const showTopics = () => {
     console.info("Re-rendering task list");
     return topics.map((topic) => recursiveShowTopic(topic));
   };
 
   const recursiveShowTopic = (topic) => {
+    if (!taskFilter.isTagVisible(topic)) return null;
     // 1. Show topic
     // 2. Show all subtopics (and their subtopics and tasks)
     // 3. Show all tasks
@@ -147,14 +120,7 @@ const TaskList = (props) => {
           {topic.unfolded &&
             tasks
               .filter((task) => task.topics.includes(topic.id))
-              .filter((task) =>
-                isTaskVisible(
-                  task,
-                  hideCompletedItems,
-                  showRepeatedOnly,
-                  dueTimeInSeconds
-                )
-              )
+              .filter(taskFilter.isTaskVisible)
               .slice(0)
               .sort((taskA, taskB) => {
                 return (
@@ -205,14 +171,7 @@ const TaskList = (props) => {
             {task.subTaskIds
               .map((subTaskId) => tasks.find((task) => task.id == subTaskId))
               .filter((subTask) => subTask !== undefined)
-              .filter((subTask) =>
-                isTaskVisible(
-                  subTask,
-                  hideCompletedItems,
-                  showRepeatedOnly,
-                  dueTimeInSeconds
-                )
-              )
+              .filter(taskFilter.isTaskVisible)
               .map((subTask) => recursiveShowTask(null, task, subTask))}
           </ul>
         )}
@@ -225,14 +184,7 @@ const TaskList = (props) => {
       <div key="div_tasks_no_topic">
         {tasks
           .filter((task) => isTaskWithoutTopic(task, allSubTaskIds))
-          .filter((subTask) =>
-            isTaskVisible(
-              subTask,
-              hideCompletedItems,
-              showRepeatedOnly,
-              dueTimeInSeconds
-            )
-          )
+          .filter(taskFilter.isTaskVisible)
           .map((task) => recursiveShowTask(null, null, task))}
       </div>
     );
@@ -325,7 +277,7 @@ const TaskList = (props) => {
     <div
       className={`task-list ${selectedTasks.length > 0 ? "has-selection" : ""}`}
     >
-      <div className="task-list-header">
+      <FilterBar taskFilter={taskFilter}>
         {selectedTasks.length > 0 && (
           <div className="task-list-selection-notice">
             <span>Selected {selectedTasks.length} tasks.</span>
@@ -345,46 +297,13 @@ const TaskList = (props) => {
           Add main topic
         </button>
         <br />
-        <label>
-          <input
-            type="checkbox"
-            name="HideCompletedItems"
-            onChange={onHideCompletedItemsChange}
-            className="form-check-input"
-            defaultChecked={hideCompletedItems}
-          />
-          Hide finished tasks
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            name="ShowRepeatedOnly"
-            onChange={onShowRepeatedOnlyChange}
-            className="form-check-input"
-            defaultChecked={showRepeatedOnly}
-          />
-          Show repeated tasks only
-        </label>
         <button className="fold_all" onClick={handleFoldAll}>
           Fold all
         </button>
         <button className="unfold_all" onClick={handleUnfoldAll}>
           Unfold all
         </button>
-        <select id="select_due_date" name="due_date" onChange={onDueDateChange}>
-          <option value="none">Select due time interval</option>
-          <option value="setDueDate"></option>
-          <option value="30min">30 minutes</option>
-          <option value="2hrs">2 hours</option>
-          <option value="8hrs">8 hours</option>
-          <option value="1day">1 day</option>
-          <option value="4day">4 day</option>
-          <option value="1week">1 week</option>
-          <option value="2week">2 weeks</option>
-          <option value="3week">3 weeks</option>
-          <option value="1month">1 month</option>
-        </select>
-      </div>
+        </FilterBar>
       <ul key="root_topics">
         {showTasksWithoutTopics(allSubTaskIds)}
         {showTopics()}
