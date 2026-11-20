@@ -46,7 +46,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
   const tagMatchCriteria: TagMatchCriteria = settings.match.tags;
   const [tagPickerSearchText, setTagPickerSearchText] = useState("");
 
-  const setTaskMatchCriteria = (changes: Partial<TaskMatchCriteria>): void =>
+  const patchTaskMatchCriteria = (changes: Partial<TaskMatchCriteria>): void =>
     setFilterSettingsWithDefaults((previous) => ({
       ...previous,
       match: {
@@ -54,7 +54,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
         tasks: { ...previous.match.tasks, ...changes },
       },
     }));
-  const setTagMatchCriteria = (changes: Partial<TagMatchCriteria>): void =>
+  const patchTagMatchCriteria = (changes: Partial<TagMatchCriteria>): void =>
     setFilterSettingsWithDefaults((previous) => ({
       ...previous,
       match: {
@@ -68,7 +68,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
     : tagPickerSearchText;
   const setTagSearchText = (text: string): void => {
     if (features.includes("tagPathSearch"))
-      setTagMatchCriteria({ pathQuery: text });
+      patchTagMatchCriteria({ pathQuery: text });
     else setTagPickerSearchText(text);
   };
   const normalizedTagSearch = tagSearchText.trim().toLocaleLowerCase();
@@ -78,7 +78,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
       selectableTag.path.toLocaleLowerCase().includes(normalizedTagSearch)
   );
   const selectTagForFilter = (tagId: TagID): void => {
-    setTagMatchCriteria({
+    patchTagMatchCriteria({
       selectedIds: [...tagMatchCriteria.selectedIds, tagId],
       pathQuery: "",
     });
@@ -112,7 +112,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
           placeholder="Search tasks"
           value={taskMatchCriteria.text}
           onChange={(event) =>
-            setTaskMatchCriteria({ text: event.target.value })
+            patchTaskMatchCriteria({ text: event.target.value })
           }
         />
       )}
@@ -131,7 +131,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                 key={selectedTagId}
                 title={"Remove tag filter " + selectedTagName}
                 onClick={() =>
-                  setTagMatchCriteria({
+                  patchTagMatchCriteria({
                     selectedIds: tagMatchCriteria.selectedIds.filter(
                       (tagId) => tagId !== selectedTagId
                     ),
@@ -247,7 +247,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                 <select
                   value={taskMatchCriteria.repeated}
                   onChange={(event) =>
-                    setTaskMatchCriteria({
+                    patchTaskMatchCriteria({
                       repeated: event.target.value as FilterChoice,
                     })
                   }
@@ -264,7 +264,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                 <select
                   value={taskMatchCriteria.planned}
                   onChange={(event) =>
-                    setTaskMatchCriteria({
+                    patchTaskMatchCriteria({
                       planned: event.target.value as FilterChoice,
                     })
                   }
@@ -281,7 +281,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                 <select
                   value={taskMatchCriteria.scheduled}
                   onChange={(event) =>
-                    setTaskMatchCriteria({
+                    patchTaskMatchCriteria({
                       scheduled: event.target.value as FilterChoice,
                     })
                   }
@@ -303,7 +303,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                   }
                   onChange={(event) => {
                     const value = event.target.value;
-                    setTaskMatchCriteria({
+                    patchTaskMatchCriteria({
                       deadline:
                         value === "any" || value === "missing"
                           ? { kind: value }
@@ -330,7 +330,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                 <select
                   value={taskMatchCriteria.structure}
                   onChange={(event) =>
-                    setTaskMatchCriteria({
+                    patchTaskMatchCriteria({
                       structure: event.target.value as TaskStructure,
                     })
                   }
@@ -356,7 +356,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                 type="checkbox"
                 checked={tagMatchCriteria.includeSubtags}
                 onChange={(event) =>
-                  setTagMatchCriteria({
+                  patchTagMatchCriteria({
                     includeSubtags: event.target.checked,
                   })
                 }
@@ -368,7 +368,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
               <select
                 value={taskMatchCriteria.tagSource}
                 onChange={(event) =>
-                  setTaskMatchCriteria({
+                  patchTaskMatchCriteria({
                     tagSource: event.target
                       .value as TaskMatchCriteria["tagSource"],
                   })
@@ -385,7 +385,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                 type="checkbox"
                 checked={taskMatchCriteria.untaggedOnly}
                 onChange={(event) =>
-                  setTaskMatchCriteria({
+                  patchTaskMatchCriteria({
                     untaggedOnly: event.target.checked,
                   })
                 }

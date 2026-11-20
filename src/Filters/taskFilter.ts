@@ -251,7 +251,7 @@ export const filterTasks = (
       [...sources].flatMap((id) => tasksById.get(id)!.tagIds)
     );
   };
-  const dueInSeconds =
+  const deadlineFilterWindowSeconds =
     taskQuery.deadline.kind === "within"
       ? convertDueDateNameToSeconds(taskQuery.deadline.interval)
       : undefined;
@@ -261,7 +261,7 @@ export const filterTasks = (
         const effectiveTagIds = getEffectiveTagIds(task);
         const supertaskIds = taskLinks.parents.get(task.id)!;
         const subtaskIds = taskLinks.children.get(task.id)!;
-        const deadline =
+        const deadlineTimestamp =
           taskQuery.deadline.kind === "any"
             ? Infinity
             : getTransitiveDueTime(task.id, tasksById, taskLinks);
@@ -287,15 +287,18 @@ export const filterTasks = (
         )
           return false;
         if (taskQuery.untaggedOnly && effectiveTagIds.size > 0) return false;
-        if (taskQuery.deadline.kind === "missing" && deadline !== Infinity)
+        if (
+          taskQuery.deadline.kind === "missing" &&
+          deadlineTimestamp !== Infinity
+        )
           return false;
         if (
-          dueInSeconds &&
+          deadlineFilterWindowSeconds &&
           !isTaskDueIn(
-              { transitiveDueTime: deadline },
-              new Date(now),
-              dueInSeconds
-            )
+            { transitiveDueTime: deadlineTimestamp },
+            new Date(now),
+            deadlineFilterWindowSeconds
+          )
         )
           return false;
         if (
@@ -388,6 +391,8 @@ const getSelectableTags = (
   return tags.map((tag) => ({ id: tag.id, path: path(tag.id) }));
 };
 
+// Earliest deadline timestamp in milliseconds, including this task and its subtasks.
+// Infinity means no valid deadline was found.
 const getTransitiveDueTime = (
   id: TaskID,
   tasksById: ReadonlyMap<TaskID, FilterTask>,

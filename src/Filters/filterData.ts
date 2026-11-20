@@ -32,7 +32,14 @@ const getCommonTaskFields = (
   } else if ("completed" in task && task.completed) {
     status = FinishedState.Completed;
   }
-  return { ...task, status };
+  return {
+    id: task.id,
+    name: task.name,
+    status,
+    repeated: task.repeated,
+    scheduled: task.scheduled,
+    dueTime: task.dueTime,
+  };
 };
 
 export const adaptV1FilterData = ({
@@ -43,7 +50,8 @@ export const adaptV1FilterData = ({
   const visit = (topic: V1_Topic): void => {
     if (tags.some((tag) => tag.id === topic.id)) return;
     tags.push({
-      ...topic,
+      id: topic.id,
+      name: topic.name,
       childIds: (topic.subtopics || []).map((tag) => tag.id),
     });
     (topic.subtopics || []).forEach(visit);
@@ -76,7 +84,8 @@ export const adaptV2FilterData = ({
   const planned = new Set<TaskID>(plannedTaskIdList);
   return {
     tags: Object.values(tagMap).map((tag) => ({
-      ...tag,
+      id: tag.id,
+      name: tag.name,
       childIds: tag.childTagIds,
     })),
     tasks: Object.values(taskMap).map((task) => ({
