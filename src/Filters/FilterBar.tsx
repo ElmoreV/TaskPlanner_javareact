@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import type {
   FilterBarProps,
   FilterChoice,
@@ -45,6 +45,23 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
   const taskMatchCriteria: TaskMatchCriteria = settings.match.tasks;
   const tagMatchCriteria: TagMatchCriteria = settings.match.tags;
   const [tagPickerSearchText, setTagPickerSearchText] = useState("");
+  const filterBarRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const closePopupsOnOutsideClick = (event: MouseEvent): void => {
+      const clickTarget = event.target;
+      if (!(clickTarget instanceof Node)) return;
+      filterBarRef.current
+        ?.querySelectorAll<HTMLDetailsElement>("details[open]")
+        .forEach((popup) => {
+          if (!popup.contains(clickTarget)) popup.open = false;
+        });
+    };
+    // Capture clicks even when task controls stop them from bubbling.
+    document.addEventListener("click", closePopupsOnOutsideClick, true);
+    return () =>
+      document.removeEventListener("click", closePopupsOnOutsideClick, true);
+  }, []);
 
   const patchTaskMatchCriteria = (changes: Partial<TaskMatchCriteria>): void =>
     setFilterSettingsWithDefaults((previous) => ({
@@ -125,7 +142,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
     }));
 
   return (
-    <div className="task-list-header">
+    <div className="task-list-header" ref={filterBarRef}>
       {features.includes("taskSearch") && (
         <input
           type="search"
