@@ -106,10 +106,11 @@ const collectReachableIds = <ID extends TaskID | TagID>(
   return reachableIds;
 };
 
-const filterStatuses = (
+// Uses the complete normalized task graph, independently of filter settings.
+export const getTransitivelyIrrelevantTaskIds = (
   tasks: readonly FilterTask[],
-  taskLinks: GraphLinks<TaskID>
-): Map<TaskID, TaskFilterStatus> => {
+  taskLinks: GraphLinks<TaskID> = createGraphLinks<TaskID>(tasks)
+): Set<TaskID> => {
   const tasksById = new Map<TaskID, FilterTask>(
     tasks.map((task) => [task.id, task])
   );
@@ -137,28 +138,54 @@ const filterStatuses = (
       }
     }
   }
-  return new Map(
-    tasks.map((task) => {
-      let status: TaskFilterStatus;
+  const transitivelyIrrelevantTaskIds = new Set<TaskID>();
+  for (const task of tasks) {
+    if (
+      task.status === FinishedState.NotFinished &&
+      !relevantUnfinishedTaskIds.has(task.id)
+    ) {
+      transitivelyIrrelevantTaskIds.add(task.id);
+    }
+  }
+  return transitivelyIrrelevantTaskIds;
+};
+
+const filterStatuses = (
+  tasks: readonly FilterTask[],
+  taskLinks: GraphLinks<TaskID>
+): Map<TaskID, TaskFilterStatus> => {
+  const transitivelyIrrelevantTaskIds = getTransitivelyIrrelevantTaskIds(
+    tasks,
+    taskLinks
+  );
+  const statuses = new Map<TaskID, TaskFilterStatus>();
+
+  for (const task of tasks) {
       switch (task.status) {
         case FinishedState.Completed:
-          status = "completed";
+        statuses.set(task.id, "completed");
           break;
         case FinishedState.Irrelevant:
-          status = "irrelevant";
+        statuses.set(task.id, "irrelevant");
           break;
         case FinishedState.Impossible:
-          status = "impossible";
+        statuses.set(task.id, "impossible");
+        break;
+      case FinishedState.NotFinished:
+        if (transitivelyIrrelevantTaskIds.has(task.id)) {
+          statuses.set(task.id, "transitivelyIrrelevant");
+        } else {
+          statuses.set(task.id, "unfinished");
+        }
           break;
         default:
-          status = active.has(task.id)
-            ? "unfinished"
-            : "transitivelyIrrelevant";
+        // Preserve the previous handling of unknown imported status values.
+        statuses.set(task.id, "transitivelyIrrelevant");
       }
-      return [task.id, status];
-    })
-  );
 }
+
+  return statuses;
+};
 
 // No mutation of source data, assignments, persisted statuses or folding state.
 export function filterTasks(
