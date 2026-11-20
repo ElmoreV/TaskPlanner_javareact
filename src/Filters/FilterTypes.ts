@@ -127,12 +127,6 @@ export interface FilterViewConfig {
 }
 
 export interface FilterResult {
-  matchedTaskIds: ReadonlySet<TaskID>;
-  matchedTagIds: ReadonlySet<TagID>;
-  contextTaskIds: ReadonlySet<TaskID>;
-  contextTagIds: ReadonlySet<TagID>;
-  displayTaskIds: ReadonlySet<TaskID>;
-  displayTagIds: ReadonlySet<TagID>;
   selectableTags: readonly FilterTagWithPath[];
   isTaskVisible(task: Pick<FilterTask, "id">): boolean;
   isTagVisible(tag: Pick<FilterTag, "id">): boolean;

@@ -319,9 +319,6 @@ export const filterTasks = (
     collectReachableIds(matchedTaskIds, taskLinks.children).forEach((id) =>
       displayTaskIds.add(id)
     );
-  const contextTaskIds = new Set<TaskID>(
-    [...displayTaskIds].filter((id) => !matchedTaskIds.has(id))
-  );
 
   const tagSeeds = new Set<TagID>(matchedTagIds);
   tasks
@@ -336,20 +333,11 @@ export const filterTasks = (
       tagSeeds.add(id)
     );
   const relatedTags = collectReachableIds(tagSeeds, tagLinks.parents);
-  const contextTagIds = new Set<TagID>(
-    [...relatedTags].filter((id) => !matchedTagIds.has(id))
-  );
   const displayTagIds =
     settings.presentation.tags === "all"
       ? new Set<TagID>(tagsById.keys())
       : relatedTags;
   return {
-    matchedTaskIds,
-    matchedTagIds,
-    contextTaskIds,
-    contextTagIds,
-    displayTaskIds,
-    displayTagIds,
     selectableTags,
     isTaskVisible: (task) => displayTaskIds.has(task.id),
     isTagVisible: (tag) => displayTagIds.has(tag.id),
