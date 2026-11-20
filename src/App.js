@@ -54,10 +54,10 @@ function App() {
   const [darkMode, setDarkMode] = useState(false);
   const [filterSettingsByView, setFilterSettingsByView] = useState({});
 
-  const setFilterSettingsForView = (viewName, updateSettings) => {
+  const setCurrentViewFilterSettings = (updateSettings) => {
     setFilterSettingsByView((previous) => ({
       ...previous,
-      [viewName]: updateSettings(previous[viewName]),
+      [view]: updateSettings(previous[view]),
     }));
   };
 
@@ -107,12 +107,8 @@ function App() {
               appData={appData}
               setAppData={setAppData}
               fancy={fancy}
-              filterSettings={
-                filterSettingsByView[View.VIEW_ADD_TASKS]
-              }
-              setFilterSettings={(update) =>
-                setFilterSettingsForView(View.VIEW_ADD_TASKS, update)
-              }
+              filterSettings={filterSettingsByView[view]}
+              setFilterSettings={setCurrentViewFilterSettings}
             />
           )}
           {view === View.VIEW_ALL_TASKS && (
@@ -120,12 +116,8 @@ function App() {
               appData={appData}
               setAppData={setAppData}
               fancy={fancy}
-              filterSettings={
-                filterSettingsByView[View.VIEW_ALL_TASKS]
-              }
-              setFilterSettings={(update) =>
-                setFilterSettingsForView(View.VIEW_ALL_TASKS, update)
-              }
+              filterSettings={filterSettingsByView[view]}
+              setFilterSettings={setCurrentViewFilterSettings}
             />
           )}
           {view === View.VIEW_PLANNED_TASKS && (
@@ -133,12 +125,8 @@ function App() {
               appData={appData}
               setAppData={setAppData}
               fancy={fancy}
-              filterSettings={
-                filterSettingsByView[View.VIEW_PLANNED_TASKS]
-              }
-              setFilterSettings={(update) =>
-                setFilterSettingsForView(View.VIEW_PLANNED_TASKS, update)
-              }
+              filterSettings={filterSettingsByView[view]}
+              setFilterSettings={setCurrentViewFilterSettings}
             />
           )}
           {view === View.VIEW_DAILY_PLANNING}
