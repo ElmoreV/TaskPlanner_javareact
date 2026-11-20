@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { getEffectiveTagVisibility } from "./taskFilter";
 import type {
   FilterBarProps,
   FilterChoice,
@@ -9,6 +10,7 @@ import type {
   TaskStructure,
   DueInterval,
   TagID,
+TagVisibilityMode,
 } from "./FilterTypes";
 
 const statusLabels: Record<TaskFilterStatus, string> = {
@@ -46,7 +48,18 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
   const tagMatchCriteria: TagMatchCriteria = settings.match.tags;
   const [tagPickerSearchText, setTagPickerSearchText] = useState("");
   const filterBarRef = useRef<HTMLDivElement>(null);
-
+  const effectiveTagVisibility = getEffectiveTagVisibility(settings);
+  const hasTagSearch =
+    tagMatchCriteria.pathQuery.trim().length > 0 ||
+    tagMatchCriteria.selectedIds.length > 0;
+  const subtagContextDisabledReason =
+    effectiveTagVisibility === "all"
+      ? "All subtags are already shown."
+      : effectiveTagVisibility === "withVisibleTasks"
+        ? "Empty subtags are hidden."
+        : !hasTagSearch
+          ? "Search or select a tag to show its subtags."
+          : "";
   useEffect(() => {
     const closePopupsOnOutsideClick = (event: MouseEvent): void => {
       const clickTarget = event.target;
@@ -267,7 +280,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
         features.includes("taskStructure") ||
         features.includes("tagMatching")) && (
         <details>
-          <summary>Task options</summary>
+            <summary>Task filters</summary>
           <div className="filter-options">
             {features.includes("repeated") && (
               <label>
@@ -371,7 +384,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
             )}
             {features.includes("taskStructure") && (
               <label>
-                Task filters
+                  Task relation
                 <select
                   value={taskMatchCriteria.structure}
                   onChange={(event) =>
@@ -426,9 +439,10 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
         </details>
       )}
       {(features.includes("taskContext") ||
-        features.includes("tagContext")) && (
+        features.includes("tagContext") ||
+        features.includes("tagVisibility")) && (
         <details>
-          <summary>Additional results</summary>
+            <summary>Display</summary>
           <div className="filter-options">
             {features.includes("taskContext") && (
               <label>
@@ -452,11 +466,44 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                 </select>
               </label>
             )}
+              {features.includes("tagVisibility") && (
+                <label title={
+                  settings.presentation.tags === "automatic"
+                    ? effectiveTagVisibility === "all"
+                      ? "Currently showing all tags while browsing."
+                      : "Currently showing relevant tags while searching."
+                    : undefined
+                }>
+                  Show tags
+                  <select
+                    value={settings.presentation.tags}
+                    onChange={(event) => {
+                      const mode = event.target.value as TagVisibilityMode;
+                      setFilterSettingsWithDefaults((previous) => ({
+                        ...previous,
+                        presentation: { ...previous.presentation, tags: mode },
+                      }));
+                    }}
+                  >
+                    <option value="automatic">Automatic</option>
+                    <option value="all">All tags</option>
+                    <option value="relevant">Relevant tags</option>
+                    <option value="withVisibleTasks">
+                      Tags with visible tasks
+                  </option>
+                </select>
+              </label>
+            )}
             {features.includes("tagContext") && (
-              <label title="Also display subtags of matching tags. This does not change which tasks match your search.">
+              <label title={
+                    subtagContextDisabledReason ||
+                    "Also display subtags of matching tags. This does not change which tasks match your search."}>
                 <input
                   type="checkbox"
                   checked={settings.context.tags.includeSubtags}
+                    disabled={
+                      effectiveTagVisibility !== "relevant" || !hasTagSearch
+                    }
                   onChange={(event) => {
                     const checked = event.target.checked;
                     setFilterSettingsWithDefaults((previous) => ({
@@ -471,27 +518,6 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                 Show subtags in results
               </label>
             )}
-          </div>
-        </details>
-      )}
-      {features.includes("allTags") && (
-        <details>
-          <summary>Display</summary>
-          <div className="filter-options">
-            <label>
-              <input
-                type="checkbox"
-                checked={settings.presentation.tags === "all"}
-                onChange={(event) => {
-                  const showAllTags = event.target.checked;
-                  setFilterSettingsWithDefaults((previous) => ({
-                    ...previous,
-                    presentation: { tags: showAllTags ? "all" : "results" },
-                  }));
-                }}
-              />
-              Show all tags
-            </label>
           </div>
         </details>
       )}

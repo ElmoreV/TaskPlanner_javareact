@@ -30,13 +30,13 @@ export const FILTER_CONFIG_BY_VIEW: Partial<Record<View, FilterViewConfig>> = {
       "tagPathSearch",
       "taskContext",
       "tagContext",
-      "allTags",
+      "tagVisibility",
     ],
     defaults: createFilterSettings({
       match: {
         tasks: { statuses: ["unfinished", "transitivelyIrrelevant"] },
       },
-      presentation: { tags: "all" },
+      presentation: { tags: "automatic" },
     }),
   },
   [View.VIEW_PLANNED_TASKS]: {
@@ -114,7 +114,7 @@ const neutralizeUnsupportedSettings = (
   if (features.includes("tagContext"))
     effectiveSettings.context.tags.includeSubtags =
       settings.context.tags.includeSubtags;
-  if (features.includes("allTags"))
+  if (features.includes("tagVisibility"))
     effectiveSettings.presentation.tags = settings.presentation.tags;
   return effectiveSettings;
 };

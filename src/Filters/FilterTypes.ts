@@ -54,6 +54,11 @@ export type TaskFilterStatus =
   | "impossible"
   | "transitivelyIrrelevant";
 export type TaskContextMode = "none" | "ancestors" | "descendants" | "both";
+export type TagVisibilityMode =
+  | "automatic"
+  | "all"
+  | "relevant"
+  | "withVisibleTasks";
 export type TaskStructure =
   | "any"
   | "noSupertasks"
@@ -91,7 +96,7 @@ export interface FilterSettings {
     tasks: TaskContextMode;
     tags: { includeSubtags: boolean };
   };
-  presentation: { tags: "results" | "all" };
+  presentation: { tags: TagVisibilityMode };
 }
 
 export interface FilterSettingsOverrides {
@@ -119,7 +124,7 @@ export type FilterFeature =
   | "taskStructure"
   | "taskContext"
   | "tagContext"
-  | "allTags";
+  | "tagVisibility";
 export interface FilterViewConfig {
   features: readonly FilterFeature[];
   defaults: FilterSettings;

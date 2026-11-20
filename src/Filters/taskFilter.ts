@@ -14,6 +14,7 @@ import type {
   TaskMatchCriteria,
   TagMatchCriteria,
   TaskContextMode,
+  TagVisibilityMode,
 } from "./FilterTypes";
 
 const ALL_STATUSES: readonly TaskFilterStatus[] = [
@@ -53,8 +54,20 @@ export const createFilterSettings = (
       tasks: overrides.context?.tasks ?? "none",
       tags: { includeSubtags: false, ...overrides.context?.tags },
     },
-    presentation: { tags: "results", ...overrides.presentation },
+    presentation: { tags: "relevant", ...overrides.presentation },
   };
+};
+// Determine tag visibility when 'Show tags' in ´automatic´ mode
+export const getEffectiveTagVisibility = (
+  settings: FilterSettings
+): Exclude<TagVisibilityMode, "automatic"> => {
+  if (settings.presentation.tags !== "automatic")
+    return settings.presentation.tags;
+  const searching =
+    settings.match.tasks.text.trim().length > 0 ||
+    settings.match.tags.pathQuery.trim().length > 0 ||
+    settings.match.tags.selectedIds.length > 0;
+  return searching ? "relevant" : "all";
 };
 
 //Splits Blikje-Bier Kopennn! into
@@ -330,7 +343,11 @@ export const filterTasks = (
     settings.context.tasks
   );
 
-  const tagSeeds = new Set<TagID>(matchedTagIds);
+  // Strict visibility excludes empty tag matches and subtag context.
+  const tagVisibility = getEffectiveTagVisibility(settings);
+  const tagSeeds = new Set<TagID>(
+    tagVisibility === "withVisibleTasks" ? [] : matchedTagIds
+  );
   tasks
     .filter((task) => displayTaskIds.has(task.id))
     .forEach((task) => {
@@ -338,13 +355,13 @@ export const filterTasks = (
         if (tagsById.has(id)) tagSeeds.add(id);
       });
     });
-  if (settings.context.tags.includeSubtags)
+  if (tagVisibility === "relevant" && settings.context.tags.includeSubtags)
     collectReachableIds(matchedTagIds, tagLinks.children).forEach((id) =>
       tagSeeds.add(id)
     );
   const resultTagIds = collectReachableIds(tagSeeds, tagLinks.parents);
   const displayTagIds =
-    settings.presentation.tags === "all"
+    tagVisibility === "all"
       ? new Set<TagID>(tagsById.keys())
       : resultTagIds;
   return {
