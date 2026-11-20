@@ -210,18 +210,8 @@ export const filterTasks = (
   const tagQuery: TagMatchCriteria = settings.match.tags;
 
   const statuses = filterStatuses(tasks, taskLinks);
-  const path = (id: TagID, visited = new Set<TagID>()): string => {
-    if (visited.has(id)) return "";
-    visited.add(id);
-    const parent = tagLinks.parents.get(id)?.[0];
-    return [
-      parent === undefined ? "" : path(parent, visited),
-      tagsById.get(id)?.name,
-    ]
-      .filter(Boolean)
-      .join("/");
-  };
-  const selectableTags = tags.map((tag) => ({ ...tag, path: path(tag.id) }));
+
+  const selectableTags = getSelectableTags(tags, tagsById, tagLinks);
   const tagScope = (ids: Iterable<TagID>): Set<TagID> =>
     tagQuery.includeSubtags
       ? collectReachableIds(ids, tagLinks.children)
@@ -273,16 +263,7 @@ export const filterTasks = (
         const deadline =
           taskQuery.deadline.kind === "any"
             ? Infinity
-            : [...collectReachableIds([task.id], taskLinks.children)]
-              .map((id) => tasksById.get(id)!.dueTime)
-              .filter((date) => date !== undefined && date !== null)
-              .map((date) =>
-                date instanceof Date
-                  ? date.getTime()
-                  : new Date(date!).getTime()
-              )
-              .filter(Number.isFinite)
-              .reduce((earliest, date) => Math.min(earliest, date), Infinity);
+            : getTransitiveDueTime(task.id, tasksById, taskLinks);
         return (
           taskQuery.statuses.includes(statuses.get(task.id)!) &&
           matchesWords(task.name, taskQuery.text) &&
@@ -369,4 +350,40 @@ function getDisplayTaskIds(
     );
 
   return ids;
+}
+
+function getSelectableTags(
+  tags: readonly FilterTag[],
+  tagsById: Map<TagID, FilterTag>,
+  tagLinks: ReturnType<typeof createGraphLinks<TagID>>
+) {
+  const path = (id: TagID, visited = new Set<TagID>()): string => {
+    if (visited.has(id)) return "";
+    visited.add(id);
+    const parent = tagLinks.parents.get(id)?.[0];
+    return [
+      parent === undefined ? "" : path(parent, visited),
+      tagsById.get(id)?.name,
+    ]
+      .filter(Boolean)
+      .join("/");
+  };
+  return tags.map((tag) => ({ ...tag, path: path(tag.id) }));
+};
+
+function getTransitiveDueTime
+  (id: TaskID,
+    tasksById: Map<TaskID, FilterTask>,
+    taskLinks: ReturnType<typeof createGraphLinks<TaskID>>
+  ) {
+  return [...collectReachableIds([id], taskLinks.children)]
+    .map((id) => tasksById.get(id)!.dueTime)
+    .filter((date) => date !== undefined && date !== null)
+    .map((date) =>
+      date instanceof Date
+        ? date.getTime()
+        : new Date(date!).getTime()
+    )
+    .filter(Number.isFinite)
+    .reduce((earliest, date) => Math.min(earliest, date), Infinity);
 }
