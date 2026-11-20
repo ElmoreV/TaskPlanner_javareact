@@ -78,12 +78,32 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
       selectableTag.path.toLocaleLowerCase().includes(normalizedTagSearch)
   );
   const selectTagForFilter = (tagId: TagID): void => {
-    patchTagMatchCriteria({
-      selectedIds: [...tagMatchCriteria.selectedIds, tagId],
-      pathQuery: "",
-    });
+    setFilterSettingsWithDefaults((previous) => ({
+      ...previous,
+      match: {
+        ...previous.match,
+        tags: {
+          ...previous.match.tags,
+          selectedIds: [...previous.match.tags.selectedIds, tagId],
+          pathQuery: "",
+        },
+      },
+    }));
     setTagPickerSearchText("");
   };
+  const removeTagFromFilter = (tagId: TagID): void =>
+    setFilterSettingsWithDefaults((previous) => ({
+      ...previous,
+      match: {
+        ...previous.match,
+        tags: {
+          ...previous.match.tags,
+          selectedIds: previous.match.tags.selectedIds.filter(
+            (selectedTagId) => selectedTagId !== tagId
+          ),
+        },
+      },
+    }));
 
   const setStatusesChecked = (
     statuses: readonly TaskFilterStatus[],
@@ -130,13 +150,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                 type="button"
                 key={selectedTagId}
                 title={"Remove tag filter " + selectedTagName}
-                onClick={() =>
-                  patchTagMatchCriteria({
-                    selectedIds: tagMatchCriteria.selectedIds.filter(
-                      (tagId) => tagId !== selectedTagId
-                    ),
-                  })
-                }
+                onClick={() => removeTagFromFilter(selectedTagId)}
               >
                 {selectedTagName} ×
               </button>
