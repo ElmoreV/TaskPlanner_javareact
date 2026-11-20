@@ -7,7 +7,7 @@ import type {
   FilterSettingsOverrides,
   FilterTag,
   FilterTask,
-TagID,
+  TagID,
   TaskID,
   TaskFilterStatus,
   TaskMatchCriteria,
@@ -103,8 +103,8 @@ const collectReachableIds = <ID extends TaskID | TagID>(
       if (reachableIds.has(nextId)) continue;
       reachableIds.add(nextId);
       pendingIds.push(nextId);
-}
-}
+    }
+  }
   return reachableIds;
 };
 
@@ -163,14 +163,14 @@ const filterStatuses = (
   const statuses = new Map<TaskID, TaskFilterStatus>();
 
   for (const task of tasks) {
-      switch (task.status) {
-        case FinishedState.Completed:
+    switch (task.status) {
+      case FinishedState.Completed:
         statuses.set(task.id, "completed");
-          break;
-        case FinishedState.Irrelevant:
+        break;
+      case FinishedState.Irrelevant:
         statuses.set(task.id, "irrelevant");
-          break;
-        case FinishedState.Impossible:
+        break;
+      case FinishedState.Impossible:
         statuses.set(task.id, "impossible");
         break;
       case FinishedState.NotFinished:
@@ -179,12 +179,12 @@ const filterStatuses = (
         } else {
           statuses.set(task.id, "unfinished");
         }
-          break;
-        default:
+        break;
+      default:
         // Preserve the previous handling of unknown imported status values.
         statuses.set(task.id, "transitivelyIrrelevant");
-      }
-}
+    }
+  }
 
   return statuses;
 };
@@ -195,14 +195,20 @@ export const filterTasks = (
   settings: FilterSettings = createFilterSettings(),
   now: Date = new Date()
 ): FilterResult => {
-  const taskQuery: TaskMatchCriteria = settings.match.tasks;
-  const tagQuery: TagMatchCriteria = settings.match.tags;
+
+  // Filter index (shared)
   const tasksById = new Map<TaskID, FilterTask>(
     tasks.map((task) => [task.id, task])
   );
   const tagsById = new Map<TagID, FilterTag>(tags.map((tag) => [tag.id, tag]));
   const taskLinks = createGraphLinks<TaskID>(tasks);
   const tagLinks = createGraphLinks<TagID>(tags);
+
+
+
+  const taskQuery: TaskMatchCriteria = settings.match.tasks;
+  const tagQuery: TagMatchCriteria = settings.match.tags;
+
   const statuses = filterStatuses(tasks, taskLinks);
   const path = (id: TagID, visited = new Set<TagID>()): string => {
     if (visited.has(id)) return "";
@@ -227,6 +233,9 @@ export const filterTasks = (
       .filter((tag) => tag.path.toLocaleLowerCase().includes(pathQuery))
       .map((tag) => tag.id)
   );
+  ////////////
+  //// Tag matching
+  ////////////
   const hasSelectedTags = tagQuery.selectedIds.length > 0;
   const matchedTagIds = new Set<TagID>(
     tags
@@ -238,6 +247,10 @@ export const filterTasks = (
       )
       .map((tag) => tag.id)
   );
+
+  ////////////
+  //// Task matching
+  ////////////
   const tagsOf = (task: FilterTask): Set<TagID> => {
     const sources =
       taskQuery.tagSource === "taskAndSupertasks"
@@ -261,15 +274,15 @@ export const filterTasks = (
           taskQuery.deadline.kind === "any"
             ? Infinity
             : [...collectReachableIds([task.id], taskLinks.children)]
-                .map((id) => tasksById.get(id)!.dueTime)
-                .filter((date) => date !== undefined && date !== null)
-                .map((date) =>
-                  date instanceof Date
-                    ? date.getTime()
-                    : new Date(date!).getTime()
-                )
-                .filter(Number.isFinite)
-                .reduce((earliest, date) => Math.min(earliest, date), Infinity);
+              .map((id) => tasksById.get(id)!.dueTime)
+              .filter((date) => date !== undefined && date !== null)
+              .map((date) =>
+                date instanceof Date
+                  ? date.getTime()
+                  : new Date(date!).getTime()
+              )
+              .filter(Number.isFinite)
+              .reduce((earliest, date) => Math.min(earliest, date), Infinity);
         return (
           taskQuery.statuses.includes(statuses.get(task.id)!) &&
           matchesWords(task.name, taskQuery.text) &&
@@ -304,21 +317,15 @@ export const filterTasks = (
       .map((task) => task.id)
   );
 
-  const displayTaskIds = new Set<TaskID>(matchedTaskIds);
-  if (
-    settings.context.tasks === "ancestors" ||
-    settings.context.tasks === "both"
-  )
-    collectReachableIds(matchedTaskIds, taskLinks.parents).forEach((id) =>
-      displayTaskIds.add(id)
-    );
-  if (
-    settings.context.tasks === "descendants" ||
-    settings.context.tasks === "both"
-  )
-    collectReachableIds(matchedTaskIds, taskLinks.children).forEach((id) =>
-      displayTaskIds.add(id)
-    );
+  //////////////////////
+  //// Resolve visibility
+  //////////////////////
+
+  const displayTaskIds = getDisplayTaskIds(
+    matchedTaskIds,
+    taskLinks,
+    settings.context.tasks
+  );
 
   const tagSeeds = new Set<TagID>(matchedTagIds);
   tasks
@@ -343,3 +350,23 @@ export const filterTasks = (
     isTagVisible: (tag) => displayTagIds.has(tag.id),
   };
 };
+
+function getDisplayTaskIds(
+  matchedTaskIds: Set<TaskID>,
+  taskLinks: ReturnType<typeof createGraphLinks<TaskID>>,
+  mode: FilterSettings["context"]["tasks"]
+): Set<TaskID> {
+  const ids = new Set(matchedTaskIds);
+
+  if (mode === "ancestors" || mode === "both")
+    collectReachableIds(matchedTaskIds, taskLinks.parents).forEach((id) =>
+      ids.add(id)
+    );
+
+  if (mode === "descendants" || mode === "both")
+    collectReachableIds(matchedTaskIds, taskLinks.children).forEach((id) =>
+      ids.add(id)
+    );
+
+  return ids;
+}
