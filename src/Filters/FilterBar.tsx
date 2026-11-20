@@ -2,16 +2,14 @@ import React, { useState } from "react";
 import type {
   FilterBarProps,
   FilterChoice,
-  FilterSettings,
+  TaskMatchCriteria,
+  TagMatchCriteria,
   TaskFilterStatus,
   TaskContextMode,
   TaskStructure,
   DueInterval,
   TagID,
 } from "./FilterTypes";
-
-type TaskMatchCriteria = FilterSettings["match"]["tasks"];
-type TagMatchCriteria = FilterSettings["match"]["tags"];
 
 const statusLabels: Record<TaskFilterStatus, string> = {
   unfinished: "Unfinished",
@@ -47,8 +45,8 @@ export default function FilterBar({
     reset,
     selectableTags,
   } = taskFilter;
-  const taskMatchCriteria = settings.match.tasks;
-  const tagMatchCriteria = settings.match.tags;
+  const taskMatchCriteria: TaskMatchCriteria = settings.match.tasks;
+  const tagMatchCriteria: TagMatchCriteria = settings.match.tags;
   const [tagPickerSearchText, setTagPickerSearchText] = useState("");
 
   const setTaskMatchCriteria = (changes: Partial<TaskMatchCriteria>): void =>

@@ -10,6 +10,8 @@ import type {
 TagID,
   TaskID,
   TaskFilterStatus,
+  TaskMatchCriteria,
+  TagMatchCriteria,
 } from "./FilterTypes";
 
 export const ALL_STATUSES: readonly TaskFilterStatus[] = [
@@ -188,13 +190,13 @@ const filterStatuses = (
 };
 
 // No mutation of source data, assignments, persisted statuses or folding state.
-export function filterTasks(
+export const filterTasks = (
   { tasks, tags }: FilterData,
   settings: FilterSettings = createFilterSettings(),
   now: Date = new Date()
-): FilterResult {
-  const taskQuery = settings.match.tasks;
-  const tagQuery = settings.match.tags;
+): FilterResult => {
+  const taskQuery: TaskMatchCriteria = settings.match.tasks;
+  const tagQuery: TagMatchCriteria = settings.match.tags;
   const tasksById = new Map<TaskID, FilterTask>(
     tasks.map((task) => [task.id, task])
   );
@@ -352,4 +354,4 @@ export function filterTasks(
     isTaskVisible: (task) => displayTaskIds.has(task.id),
     isTagVisible: (tag) => displayTagIds.has(tag.id),
   };
-}
+};

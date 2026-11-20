@@ -65,24 +65,28 @@ export type DeadlineCondition =
   | { kind: "missing" }
   | { kind: "within"; interval: Exclude<DueInterval, "none"> };
 
+export interface TaskMatchCriteria {
+  text: string;
+  statuses: readonly TaskFilterStatus[];
+  repeated: FilterChoice;
+  planned: FilterChoice;
+  scheduled: FilterChoice;
+  structure: TaskStructure;
+  deadline: DeadlineCondition;
+  tagSource: "task" | "taskAndSupertasks";
+  untaggedOnly: boolean;
+}
+
+export interface TagMatchCriteria {
+  selectedIds: readonly TagID[];
+  pathQuery: string;
+  includeSubtags: boolean;
+}
+
 export interface FilterSettings {
   match: {
-    tasks: {
-      text: string;
-      statuses: readonly TaskFilterStatus[];
-      repeated: FilterChoice;
-      planned: FilterChoice;
-      scheduled: FilterChoice;
-      structure: TaskStructure;
-      deadline: DeadlineCondition;
-      tagSource: "task" | "taskAndSupertasks";
-      untaggedOnly: boolean;
-    };
-    tags: {
-      selectedIds: readonly TagID[];
-      pathQuery: string;
-      includeSubtags: boolean;
-    };
+    tasks: TaskMatchCriteria;
+    tags: TagMatchCriteria;
   };
   context: {
     tasks: TaskContextMode;
@@ -93,8 +97,8 @@ export interface FilterSettings {
 
 export interface FilterSettingsOverrides {
   match?: {
-    tasks?: Partial<FilterSettings["match"]["tasks"]>;
-    tags?: Partial<FilterSettings["match"]["tags"]>;
+    tasks?: Partial<TaskMatchCriteria>;
+    tags?: Partial<TagMatchCriteria>;
   };
   context?: {
     tasks?: TaskContextMode;
