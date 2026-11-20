@@ -166,7 +166,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
               <button
                 type="button"
                 key={selectedTagId}
-                title={"Remove tag filter " + selectedTagName}
+                title={"Remove tag from search: " + selectedTagName}
                 onClick={() => removeTagFromFilter(selectedTagId)}
               >
                 {selectedTagName} ×
@@ -175,11 +175,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
           })}
           <input
             type="search"
-            placeholder={
-              features.includes("tagPathSearch")
-                ? "Filter by tag path"
-                : "Find a tag"
-            }
+            placeholder="Search tags"
             value={tagSearchText}
             onChange={(event) => setTagSearchText(event.target.value)}
             onKeyDown={(event) => {
@@ -207,7 +203,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                   </button>
                 ))
               ) : (
-                <span>No matching tags.</span>
+                <span>No tags found.</span>
               )}
             </div>
           )}
@@ -268,9 +264,10 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
         features.includes("planned") ||
         features.includes("scheduled") ||
         features.includes("deadline") ||
-        features.includes("taskStructure")) && (
+        features.includes("taskStructure") ||
+        features.includes("tagMatching")) && (
         <details>
-          <summary>Task filters</summary>
+          <summary>Task options</summary>
           <div className="filter-options">
             {features.includes("repeated") && (
               <label>
@@ -320,6 +317,23 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                   <option value="any">All tasks</option>
                   <option value="yes">Scheduled only</option>
                   <option value="no">Unscheduled only</option>
+                </select>
+              </label>
+            )}
+            {features.includes("tagMatching") && (
+              <label>
+                Tags
+                <select
+                  value={taskMatchCriteria.tagged}
+                  onChange={(event) =>
+                    patchTaskMatchCriteria({
+                      tagged: event.target.value as FilterChoice,
+                    })
+                  }
+                >
+                  <option value="any">All tasks</option>
+                  <option value="yes">Tagged only</option>
+                  <option value="no">Untagged only</option>
                 </select>
               </label>
             )}
@@ -380,9 +394,9 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
       )}
       {features.includes("tagMatching") && (
         <details>
-          <summary>Tag filters</summary>
+          <summary>Tag options</summary>
           <div className="filter-options">
-            <label>
+            <label title="When you select a tag, also include tasks with any of its subtags, at any level.">
               <input
                 type="checkbox"
                 checked={tagMatchCriteria.includeSubtags}
@@ -392,36 +406,21 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                   })
                 }
               />
-              Include subtags in matching
-            </label>
-            <label>
-              Use tags from
-              <select
-                value={taskMatchCriteria.tagSource}
-                onChange={(event) =>
-                  patchTaskMatchCriteria({
-                    tagSource: event.target
-                      .value as TaskMatchCriteria["tagSource"],
-                  })
-                }
-              >
-                <option value="task">This task only</option>
-                <option value="taskAndSupertasks">
-                  This task and all its supertasks
-                </option>
-              </select>
+              Also include subtags
             </label>
             <label>
               <input
                 type="checkbox"
-                checked={taskMatchCriteria.untaggedOnly}
+                checked={taskMatchCriteria.tagSource === "taskAndSupertasks"}
                 onChange={(event) =>
                   patchTaskMatchCriteria({
-                    untaggedOnly: event.target.checked,
+                    tagSource: event.target.checked
+                      ? "taskAndSupertasks"
+                      : "task",
                   })
                 }
               />
-              Only untagged tasks
+              Also use tags from supertasks
             </label>
           </div>
         </details>
@@ -429,11 +428,11 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
       {(features.includes("taskContext") ||
         features.includes("tagContext")) && (
         <details>
-          <summary>Context</summary>
+          <summary>Related items</summary>
           <div className="filter-options">
             {features.includes("taskContext") && (
               <label>
-                Task context
+                Show tasks
                 <select
                   value={settings.context.tasks}
                   onChange={(event) => {
@@ -444,17 +443,17 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                     }));
                   }}
                 >
-                  <option value="none">Matches only</option>
-                  <option value="ancestors">Matches and all supertasks</option>
-                  <option value="descendants">Matches and all subtasks</option>
+                  <option value="none">Results only</option>
+                  <option value="ancestors">Results and all supertasks</option>
+                  <option value="descendants">Results and all subtasks</option>
                   <option value="both">
-                    Matches, all supertasks and all subtasks
+                    Results, all supertasks and all subtasks
                   </option>
                 </select>
               </label>
             )}
             {features.includes("tagContext") && (
-              <label>
+              <label title="Show subtags of the tags found by your search without adding tasks that use those subtags.">
                 <input
                   type="checkbox"
                   checked={settings.context.tags.includeSubtags}
@@ -469,7 +468,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                     }));
                   }}
                 />
-                Include subtags of matched tags
+                Show subtags in the tag list
               </label>
             )}
           </div>
@@ -477,7 +476,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
       )}
       {features.includes("allTags") && (
         <details>
-          <summary>Presentation</summary>
+          <summary>Display</summary>
           <div className="filter-options">
             <label>
               <input
@@ -503,7 +502,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
           setTagPickerSearchText("");
         }}
       >
-        Reset filters
+        Reset
       </button>
       {children && <div className="filter-actions">{children}</div>}
     </div>

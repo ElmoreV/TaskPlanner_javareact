@@ -73,7 +73,7 @@ export interface TaskMatchCriteria {
   structure: TaskStructure;
   deadline: DeadlineCondition;
   tagSource: "task" | "taskAndSupertasks";
-  untaggedOnly: boolean;
+  tagged: FilterChoice;
 }
 
 export interface TagMatchCriteria {

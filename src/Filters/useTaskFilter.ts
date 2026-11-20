@@ -105,8 +105,7 @@ const neutralizeUnsupportedSettings = (
     effectiveSettings.match.tags.pathQuery = settings.match.tags.pathQuery;
   if (features.includes("tagMatching")) {
     effectiveSettings.match.tasks.tagSource = settings.match.tasks.tagSource;
-    effectiveSettings.match.tasks.untaggedOnly =
-      settings.match.tasks.untaggedOnly;
+    effectiveSettings.match.tasks.tagged = settings.match.tasks.tagged;
     effectiveSettings.match.tags.includeSubtags =
       settings.match.tags.includeSubtags;
   }

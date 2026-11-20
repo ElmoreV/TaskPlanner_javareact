@@ -39,7 +39,7 @@ export const createFilterSettings = (
         structure: "any",
         deadline: { kind: "any" },
         tagSource: "task",
-        untaggedOnly: false,
+        tagged: "any",
         ...overrides.match?.tasks,
       },
       tags: {
@@ -286,7 +286,9 @@ export const filterTasks = (
           ![...effectiveTagIds].some((id) => pathMatchTagIds.has(id))
         )
           return false;
-        if (taskQuery.untaggedOnly && effectiveTagIds.size > 0) return false;
+        if (taskQuery.tagged === "yes" && effectiveTagIds.size === 0)
+          return false;
+        if (taskQuery.tagged === "no" && effectiveTagIds.size > 0) return false;
         if (
           taskQuery.deadline.kind === "missing" &&
           deadlineTimestamp !== Infinity
