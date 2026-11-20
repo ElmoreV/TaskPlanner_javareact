@@ -7,6 +7,7 @@ import type {
   TaskContextMode,
   TaskStructure,
   DueInterval,
+  TagID,
 } from "./FilterTypes";
 
 type TaskMatchCriteria = FilterSettings["match"]["tasks"];
@@ -81,7 +82,7 @@ export default function FilterBar({
       !tagMatchCriteria.selectedIds.includes(selectableTag.id) &&
       selectableTag.path.toLocaleLowerCase().includes(normalizedTagSearch)
   );
-  const selectTagForFilter = (tagId: number): void => {
+  const selectTagForFilter = (tagId: TagID): void => {
     setTagMatchCriteria({
       selectedIds: [...tagMatchCriteria.selectedIds, tagId],
       pathQuery: "",

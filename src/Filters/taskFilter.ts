@@ -7,6 +7,8 @@ import type {
   FilterSettingsOverrides,
   FilterTag,
   FilterTask,
+TagID,
+  TaskID,
   TaskFilterStatus,
 } from "./FilterTypes";
 
@@ -51,26 +53,31 @@ export function createFilterSettings(
   };
 }
 
+//Splits Blikje-Bier Kopennn! into
+// blikje,bier,kopennn
 const words = (text: string): string[] =>
   text
     .toLocaleLowerCase()
-    .split(/[^\p{L}\p{N}]+/u)
+    .split(/[^\p{L}\p{N}]+/u) // split on not unicode-letters-and-numbers
     .filter(Boolean);
 
+// Every word in query should be the beginning of a word in the name
+// so query = bli kop
+// will match Blikje-Bier Kopennnn!
 const matchesWords = (name: string, query: string): boolean =>
   words(query).every((term) =>
     words(name).some((word) => word.startsWith(term))
   );
 
-interface GraphLinks {
-  children: Map<number, number[]>;
-  parents: Map<number, number[]>;
+interface GraphLinks<ID extends TaskID | TagID> {
+  children: Map<ID, ID[]>;
+  parents: Map<ID, ID[]>;
 }
-function graphLinks(
-  records: readonly Pick<FilterTask | FilterTag, "id" | "childIds">[]
-): GraphLinks {
-  const children = new Map<number, number[]>(records.map(({ id }) => [id, []]));
-  const parents = new Map<number, number[]>(records.map(({ id }) => [id, []]));
+const createGraphLinks = <ID extends TaskID | TagID>(
+  records: readonly { id: ID; childIds: readonly ID[] }[]
+): GraphLinks<ID> => {
+  const children = new Map<ID, ID[]>(records.map(({ id }) => [id, []]));
+  const parents = new Map<ID, ID[]>(records.map(({ id }) => [id, []]));
   records.forEach((record) => {
     new Set(record.childIds || []).forEach((id) => {
       if (!parents.has(id)) return;
@@ -79,41 +86,57 @@ function graphLinks(
     });
   });
   return { children, parents };
-}
+};
 
-// Includes seeds; visiting each ID once handles shared paths and cycles.
-function reachable(
-  ids: Iterable<number>,
-  links: ReadonlyMap<number, readonly number[]>
-): Set<number> {
-  const result = new Set(ids);
-  result.forEach((id) =>
-    (links.get(id) || []).forEach((next) => result.add(next))
-  );
-  return result;
+// Includes the starting IDs and every ID reachable through the supplied direction.
+const collectReachableIds = <ID extends TaskID | TagID>(
+  startingIds: Iterable<ID>,
+  nextIdsById: ReadonlyMap<ID, readonly ID[]>
+): Set<ID> => {
+  const reachableIds = new Set(startingIds);
+  const pendingIds = [...reachableIds];
+  for (let index = 0; index < pendingIds.length; index++) {
+    const currentId = pendingIds[index];
+    for (const nextId of nextIdsById.get(currentId) ?? []) {
+      if (reachableIds.has(nextId)) continue;
+      reachableIds.add(nextId);
+      pendingIds.push(nextId);
 }
+}
+  return reachableIds;
+};
 
-function filterStatuses(
+const filterStatuses = (
   tasks: readonly FilterTask[],
-  links: GraphLinks
-): Map<number, TaskFilterStatus> {
-  const tasksById = new Map(tasks.map((task) => [task.id, task]));
-  const active = new Set(
+  taskLinks: GraphLinks<TaskID>
+): Map<TaskID, TaskFilterStatus> => {
+  const tasksById = new Map<TaskID, FilterTask>(
+    tasks.map((task) => [task.id, task])
+  );
+  // Start with unfinished tasks that have no supertasks.
+  const relevantUnfinishedTaskIds = new Set<TaskID>(
     tasks
       .filter(
         (task) =>
           task.status === FinishedState.NotFinished &&
-          !links.parents.get(task.id)!.length
+          taskLinks.parents.get(task.id)!.length === 0
       )
       .map((task) => task.id)
   );
   // Any uninterrupted unfinished parent path can rescue a shared child.
-  active.forEach((id) => {
-    links.children.get(id)!.forEach((childId) => {
-      if (tasksById.get(childId)!.status === FinishedState.NotFinished)
-        active.add(childId);
-    });
-  });
+  const pendingTaskIds = [...relevantUnfinishedTaskIds];
+  for (let index = 0; index < pendingTaskIds.length; index++) {
+    const taskId = pendingTaskIds[index];
+    for (const subtaskId of taskLinks.children.get(taskId)!) {
+      if (
+        tasksById.get(subtaskId)!.status === FinishedState.NotFinished &&
+        !relevantUnfinishedTaskIds.has(subtaskId)
+      ) {
+        relevantUnfinishedTaskIds.add(subtaskId);
+        pendingTaskIds.push(subtaskId);
+      }
+    }
+  }
   return new Map(
     tasks.map((task) => {
       let status: TaskFilterStatus;
@@ -145,12 +168,14 @@ export function filterTasks(
 ): FilterResult {
   const taskQuery = settings.match.tasks;
   const tagQuery = settings.match.tags;
-  const tasksById = new Map(tasks.map((task) => [task.id, task]));
-  const tagsById = new Map(tags.map((tag) => [tag.id, tag]));
-  const taskLinks = graphLinks(tasks);
-  const tagLinks = graphLinks(tags);
+  const tasksById = new Map<TaskID, FilterTask>(
+    tasks.map((task) => [task.id, task])
+  );
+  const tagsById = new Map<TagID, FilterTag>(tags.map((tag) => [tag.id, tag]));
+  const taskLinks = createGraphLinks<TaskID>(tasks);
+  const tagLinks = createGraphLinks<TagID>(tags);
   const statuses = filterStatuses(tasks, taskLinks);
-  const path = (id: number, visited = new Set<number>()): string => {
+  const path = (id: TagID, visited = new Set<TagID>()): string => {
     if (visited.has(id)) return "";
     visited.add(id);
     const parent = tagLinks.parents.get(id)?.[0];
@@ -162,8 +187,10 @@ export function filterTasks(
       .join("/");
   };
   const selectableTags = tags.map((tag) => ({ ...tag, path: path(tag.id) }));
-  const tagScope = (ids: Iterable<number>): Set<number> =>
-    tagQuery.includeSubtags ? reachable(ids, tagLinks.children) : new Set(ids);
+  const tagScope = (ids: Iterable<TagID>): Set<TagID> =>
+    tagQuery.includeSubtags
+      ? collectReachableIds(ids, tagLinks.children)
+      : new Set(ids);
   const selectedTags = tagScope(tagQuery.selectedIds);
   const pathQuery = tagQuery.pathQuery.trim().toLocaleLowerCase();
   const searchedTags = tagScope(
@@ -172,7 +199,7 @@ export function filterTasks(
       .map((tag) => tag.id)
   );
   const hasSelectedTags = tagQuery.selectedIds.length > 0;
-  const matchedTagIds = new Set(
+  const matchedTagIds = new Set<TagID>(
     tags
       .filter(
         (tag) =>
@@ -182,12 +209,12 @@ export function filterTasks(
       )
       .map((tag) => tag.id)
   );
-  const tagsOf = (task: FilterTask): Set<number> => {
+  const tagsOf = (task: FilterTask): Set<TagID> => {
     const sources =
       taskQuery.tagSource === "taskAndSupertasks"
-        ? reachable([task.id], taskLinks.parents)
+        ? collectReachableIds([task.id], taskLinks.parents)
         : [task.id];
-    return new Set(
+    return new Set<TagID>(
       [...sources].flatMap((id) => tasksById.get(id)?.tagIds || [])
     );
   };
@@ -195,7 +222,7 @@ export function filterTasks(
     taskQuery.deadline.kind === "within"
       ? convertDueDateNameToSeconds(taskQuery.deadline.interval)
       : undefined;
-  const matchedTaskIds = new Set(
+  const matchedTaskIds = new Set<TaskID>(
     tasks
       .filter((task) => {
         const memberships = tagsOf(task);
@@ -204,7 +231,7 @@ export function filterTasks(
         const deadline =
           taskQuery.deadline.kind === "any"
             ? Infinity
-            : [...reachable([task.id], taskLinks.children)]
+            : [...collectReachableIds([task.id], taskLinks.children)]
                 .map((id) => tasksById.get(id)!.dueTime)
                 .filter((date) => date !== undefined && date !== null)
                 .map((date) =>
@@ -248,26 +275,26 @@ export function filterTasks(
       .map((task) => task.id)
   );
 
-  const displayTaskIds = new Set(matchedTaskIds);
+  const displayTaskIds = new Set<TaskID>(matchedTaskIds);
   if (
     settings.context.tasks === "ancestors" ||
     settings.context.tasks === "both"
   )
-    reachable(matchedTaskIds, taskLinks.parents).forEach((id) =>
+    collectReachableIds(matchedTaskIds, taskLinks.parents).forEach((id) =>
       displayTaskIds.add(id)
     );
   if (
     settings.context.tasks === "descendants" ||
     settings.context.tasks === "both"
   )
-    reachable(matchedTaskIds, taskLinks.children).forEach((id) =>
+    collectReachableIds(matchedTaskIds, taskLinks.children).forEach((id) =>
       displayTaskIds.add(id)
     );
-  const contextTaskIds = new Set(
+  const contextTaskIds = new Set<TaskID>(
     [...displayTaskIds].filter((id) => !matchedTaskIds.has(id))
   );
 
-  const tagSeeds = new Set(matchedTagIds);
+  const tagSeeds = new Set<TagID>(matchedTagIds);
   tasks
     .filter((task) => displayTaskIds.has(task.id))
     .forEach((task) => {
@@ -276,16 +303,16 @@ export function filterTasks(
       });
     });
   if (settings.context.tags.includeSubtags)
-    reachable(matchedTagIds, tagLinks.children).forEach((id) =>
+    collectReachableIds(matchedTagIds, tagLinks.children).forEach((id) =>
       tagSeeds.add(id)
     );
-  const relatedTags = reachable(tagSeeds, tagLinks.parents);
-  const contextTagIds = new Set(
+  const relatedTags = collectReachableIds(tagSeeds, tagLinks.parents);
+  const contextTagIds = new Set<TagID>(
     [...relatedTags].filter((id) => !matchedTagIds.has(id))
   );
   const displayTagIds =
     settings.presentation.tags === "all"
-      ? new Set(tagsById.keys())
+      ? new Set<TagID>(tagsById.keys())
       : relatedTags;
   return {
     matchedTaskIds,

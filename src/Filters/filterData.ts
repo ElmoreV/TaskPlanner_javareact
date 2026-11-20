@@ -1,7 +1,13 @@
 import { FinishedState } from "../Structure/TaskInterfaces";
 import type { V1_Task, V1_Topic } from "../Structure/V1_types";
 import type { Task, TaskMap, TagMap, TagTasksMap } from "../Structure/V2_types";
-import type { FilterData, FilterTag, FilterTask } from "./FilterTypes";
+import type {
+  FilterData,
+  FilterTag,
+  FilterTask,
+  TagID,
+  TaskID,
+} from "./FilterTypes";
 
 export interface TopicFilterSource {
   tasks?: readonly V1_Task[];
@@ -11,7 +17,7 @@ export interface TagFilterSource {
   taskMap: TaskMap;
   tagMap: TagMap;
   tagTasksMap: TagTasksMap;
-  plannedTaskIdList?: readonly number[];
+  plannedTaskIdList?: readonly TaskID[];
 }
 export type FilterSource = TopicFilterSource | TagFilterSource;
 
@@ -58,14 +64,14 @@ export function fromTags({
   tagTasksMap,
   plannedTaskIdList = [],
 }: TagFilterSource): FilterData {
-  const memberships = new Map<number, number[]>();
+  const memberships = new Map<TaskID, TagID[]>();
   Object.entries(tagTasksMap).forEach(([tagId, taskIds]) => {
     taskIds.forEach((id) => {
       if (!memberships.has(id)) memberships.set(id, []);
       memberships.get(id)!.push(Number(tagId));
     });
   });
-  const planned = new Set(plannedTaskIdList);
+  const planned = new Set<TaskID>(plannedTaskIdList);
   return {
     tags: Object.values(tagMap).map((tag) => ({
       ...tag,

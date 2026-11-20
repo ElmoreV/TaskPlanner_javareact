@@ -2,13 +2,17 @@ import type { ReactNode } from "react";
 import type { FinishedState } from "../Structure/TaskInterfaces";
 import type { View } from "../Structure/View";
 
+// Readability aliases: IDs remain numbers in both storage formats.
+export type TaskID = number;
+export type TagID = number;
+
 // Common data consumed by the filter, independent of the app's storage format.
 export interface FilterTask {
-  id: number;
+  id: TaskID;
   name: string;
   status: FinishedState;
-  childIds: readonly number[];
-  tagIds: readonly number[];
+  childIds: readonly TaskID[];
+  tagIds: readonly TagID[];
   planned: boolean;
   repeated: boolean;
   scheduled: boolean;
@@ -16,9 +20,9 @@ export interface FilterTask {
 }
 
 export interface FilterTag {
-  id: number;
+  id: TagID;
   name: string;
-  childIds: readonly number[];
+  childIds: readonly TagID[];
 }
 
 export interface FilterData {
@@ -75,7 +79,7 @@ export interface FilterSettings {
       untaggedOnly: boolean;
     };
     tags: {
-      selectedIds: readonly number[];
+      selectedIds: readonly TagID[];
       pathQuery: string;
       includeSubtags: boolean;
     };
@@ -119,12 +123,12 @@ export interface FilterViewConfig {
 }
 
 export interface FilterResult {
-  matchedTaskIds: ReadonlySet<number>;
-  matchedTagIds: ReadonlySet<number>;
-  contextTaskIds: ReadonlySet<number>;
-  contextTagIds: ReadonlySet<number>;
-  displayTaskIds: ReadonlySet<number>;
-  displayTagIds: ReadonlySet<number>;
+  matchedTaskIds: ReadonlySet<TaskID>;
+  matchedTagIds: ReadonlySet<TagID>;
+  contextTaskIds: ReadonlySet<TaskID>;
+  contextTagIds: ReadonlySet<TagID>;
+  displayTaskIds: ReadonlySet<TaskID>;
+  displayTagIds: ReadonlySet<TagID>;
   selectableTags: readonly FilterTagWithPath[];
   isTaskVisible(task: Pick<FilterTask, "id">): boolean;
   isTagVisible(tag: Pick<FilterTag, "id">): boolean;
