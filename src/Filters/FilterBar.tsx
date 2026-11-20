@@ -22,7 +22,7 @@ const statusGroups: { label: string; statuses: TaskFilterStatus[] }[] = [
   { label: "Unfinished", statuses: ["unfinished", "transitivelyIrrelevant"] },
   { label: "Finished", statuses: ["irrelevant", "impossible", "completed"] },
 ];
-const intervals: Record<Exclude<DueInterval, "none">, string> = {
+const intervals: Record<DueInterval, string> = {
   "30min": "30 minutes",
   "2hrs": "2 hours",
   "8hrs": "8 hours",
@@ -34,10 +34,7 @@ const intervals: Record<Exclude<DueInterval, "none">, string> = {
   "1month": "1 month",
 };
 
-export default function FilterBar({
-  taskFilter,
-  children,
-}: FilterBarProps): JSX.Element {
+const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
   const {
     settings,
     features,
@@ -213,6 +210,7 @@ export default function FilterBar({
                   </label>
                   <div className="filter-status-subgroups">
                     {group.statuses
+                      // Ordinary unfinished tasks are represented by the group checkbox.
                       .filter((status) => status !== "unfinished")
                       .map((status) => (
                         <label key={status}>
@@ -311,7 +309,7 @@ export default function FilterBar({
                           ? { kind: value }
                           : {
                               kind: "within",
-                              interval: value as Exclude<DueInterval, "none">,
+                              interval: value as DueInterval,
                             },
                     });
                   }}
@@ -479,4 +477,6 @@ export default function FilterBar({
       {children && <div className="filter-actions">{children}</div>}
     </div>
   );
-}
+};
+
+export default FilterBar;

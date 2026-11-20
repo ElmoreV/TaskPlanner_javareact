@@ -1,6 +1,5 @@
 import type { ReactNode } from "react";
 import type { FinishedState } from "../Structure/TaskInterfaces";
-import type { View } from "../Structure/View";
 
 // Readability aliases: IDs remain numbers in both storage formats.
 export type TaskID = number;
@@ -30,13 +29,13 @@ export interface FilterData {
   tags: readonly FilterTag[];
 }
 
-export interface FilterTagWithPath extends FilterTag {
+export interface SelectableFilterTag {
+  id: TagID;
   path: string;
 }
 
 export type FilterChoice = "any" | "yes" | "no";
 export type DueInterval =
-  | "none"
   | "30min"
   | "2hrs"
   | "8hrs"
@@ -63,7 +62,7 @@ export type TaskStructure =
 export type DeadlineCondition =
   | { kind: "any" }
   | { kind: "missing" }
-  | { kind: "within"; interval: Exclude<DueInterval, "none"> };
+  | { kind: "within"; interval: DueInterval };
 
 export interface TaskMatchCriteria {
   text: string;
@@ -127,7 +126,7 @@ export interface FilterViewConfig {
 }
 
 export interface FilterResult {
-  selectableTags: readonly FilterTagWithPath[];
+  selectableTags: readonly SelectableFilterTag[];
   isTaskVisible(task: Pick<FilterTask, "id">): boolean;
   isTagVisible(tag: Pick<FilterTag, "id">): boolean;
 }
@@ -141,14 +140,9 @@ export interface TaskFilterController extends FilterResult {
   reset(): void;
 }
 
-export type FiltersByView = Partial<Record<View, FilterSettings>>;
 export type FilterSettingsSetter = (
   updateSettings: (previous: FilterSettings | undefined) => FilterSettings
 ) => void;
-export interface TaskFilterProps {
-  filterSettings: FilterSettings | undefined;
-  setFilterSettings: FilterSettingsSetter;
-}
 export interface FilterBarProps {
   taskFilter: TaskFilterController;
   children?: ReactNode;

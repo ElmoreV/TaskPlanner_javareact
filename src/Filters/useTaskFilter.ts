@@ -11,7 +11,7 @@ import type {
 } from "./FilterTypes";
 import { View } from "../Structure/View";
 
-const common: readonly FilterFeature[] = [
+const commonFilterFeatures: readonly FilterFeature[] = [
   "taskSearch",
   "status",
   "repeated",
@@ -22,9 +22,10 @@ const common: readonly FilterFeature[] = [
 ];
 
 export const FILTER_CONFIG_BY_VIEW: Partial<Record<View, FilterViewConfig>> = {
+  // Categorize (the legacy enum name says ALL_TASKS).
   [View.VIEW_ALL_TASKS]: {
     features: [
-      ...common,
+      ...commonFilterFeatures,
       "planned",
       "tagPathSearch",
       "taskContext",
@@ -39,7 +40,7 @@ export const FILTER_CONFIG_BY_VIEW: Partial<Record<View, FilterViewConfig>> = {
     }),
   },
   [View.VIEW_PLANNED_TASKS]: {
-    features: common,
+    features: commonFilterFeatures,
     defaults: createFilterSettings({
       match: {
         tasks: { statuses: ["unfinished", "transitivelyIrrelevant"] },
@@ -57,21 +58,32 @@ export const FILTER_CONFIG_BY_VIEW: Partial<Record<View, FilterViewConfig>> = {
     ],
     defaults: createFilterSettings(),
   },
+  // All tasks list used for tagging.
   [View.VIEW_TAG_ALL_TASKS]: {
-    features: [...common, "planned", "taskStructure", "taskContext"],
+    features: [
+      ...commonFilterFeatures,
+      "planned",
+      "taskStructure",
+      "taskContext",
+    ],
     defaults: createFilterSettings(),
   },
   [View.VIEW_TASK_GRAPH]: {
-    features: [...common, "planned", "taskStructure", "taskContext"],
+    features: [
+      ...commonFilterFeatures,
+      "planned",
+      "taskStructure",
+      "taskContext",
+    ],
     defaults: createFilterSettings(),
   },
 };
 
 // Hidden features must also be neutralized, regardless of stored values/defaults.
-function neutralizeUnsupportedSettings(
+const neutralizeUnsupportedSettings = (
   settings: FilterSettings,
   features: readonly FilterFeature[]
-): FilterSettings {
+): FilterSettings => {
   const effectiveSettings = createFilterSettings();
   if (features.includes("taskSearch"))
     effectiveSettings.match.tasks.text = settings.match.tasks.text;
@@ -106,16 +118,15 @@ function neutralizeUnsupportedSettings(
   if (features.includes("allTags"))
     effectiveSettings.presentation.tags = settings.presentation.tags;
   return effectiveSettings;
-}
+};
 
-export function useTaskFilter(
+export const useTaskFilter = (
   appData: FilterSource,
   view: View,
   filterSettings: FilterSettings | undefined,
-  setFilterSettings: FilterSettingsSetter,
-  config?: FilterViewConfig
-): TaskFilterController {
-  const viewConfig = config ?? FILTER_CONFIG_BY_VIEW[view];
+  setFilterSettings: FilterSettingsSetter
+): TaskFilterController => {
+  const viewConfig = FILTER_CONFIG_BY_VIEW[view];
   if (!viewConfig)
     throw new Error("View " + View[view] + " does not define filter features.");
   const normalizedFilterData = useMemo(
@@ -142,4 +153,4 @@ export function useTaskFilter(
       ),
     reset: () => setFilterSettings(() => viewConfig.defaults),
   };
-}
+};
