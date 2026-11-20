@@ -16,7 +16,7 @@ const statusLabels: Record<TaskFilterStatus, string> = {
   completed: "Completed",
   irrelevant: "Irrelevant",
   impossible: "Impossible",
-  transitivelyIrrelevant: "Transitively irrelevant",
+  transitivelyIrrelevant: "Automatically irrelevant",
 };
 const statusGroups: { label: string; statuses: TaskFilterStatus[] }[] = [
   { label: "Unfinished", statuses: ["unfinished", "transitivelyIrrelevant"] },
@@ -271,7 +271,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
           <div className="filter-options">
             {features.includes("repeated") && (
               <label>
-                Repeating
+                Repeats
                 <select
                   value={taskMatchCriteria.repeated}
                   onChange={(event) =>
@@ -322,7 +322,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
             )}
             {features.includes("tagMatching") && (
               <label>
-                Tags
+                Has tags
                 <select
                   value={taskMatchCriteria.tagged}
                   onChange={(event) =>
@@ -371,7 +371,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
             )}
             {features.includes("taskStructure") && (
               <label>
-                Task structure
+                Task filters
                 <select
                   value={taskMatchCriteria.structure}
                   onChange={(event) =>
@@ -394,7 +394,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
       )}
       {features.includes("tagMatching") && (
         <details>
-          <summary>Tag options</summary>
+          <summary>Tag matching</summary>
           <div className="filter-options">
             <label title="When you select a tag, also include tasks with any of its subtags, at any level.">
               <input
@@ -406,9 +406,9 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                   })
                 }
               />
-              Also include subtags
+              	Include tasks with subtags
             </label>
-            <label>
+            <label  title="When searching for a tag, also find tasks whose supertasks have that tag..">
               <input
                 type="checkbox"
                 checked={taskMatchCriteria.tagSource === "taskAndSupertasks"}
@@ -420,7 +420,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                   })
                 }
               />
-              Also use tags from supertasks
+              Also match tags on supertasks
             </label>
           </div>
         </details>
@@ -428,7 +428,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
       {(features.includes("taskContext") ||
         features.includes("tagContext")) && (
         <details>
-          <summary>Related items</summary>
+          <summary>Additional results</summary>
           <div className="filter-options">
             {features.includes("taskContext") && (
               <label>
@@ -453,7 +453,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
               </label>
             )}
             {features.includes("tagContext") && (
-              <label title="Show subtags of the tags found by your search without adding tasks that use those subtags.">
+              <label title="Also display subtags of matching tags. This does not change which tasks match your search.">
                 <input
                   type="checkbox"
                   checked={settings.context.tags.includeSubtags}
@@ -468,7 +468,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                     }));
                   }}
                 />
-                Show subtags in the tag list
+                Show subtags in results
               </label>
             )}
           </div>
@@ -502,7 +502,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
           setTagPickerSearchText("");
         }}
       >
-        Reset
+        Clear filters
       </button>
       {children && <div className="filter-actions">{children}</div>}
     </div>
