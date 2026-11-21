@@ -227,8 +227,6 @@ export const filterTasks = (
   const taskQuery: TaskMatchCriteria = settings.match.tasks;
   const tagQuery: TagMatchCriteria = settings.match.tags;
 
-  const filterStatusesByTaskId = getTaskFilterStatuses(tasks, taskLinks);
-
   // converts all known tags to the full-path format
   const selectableTags = getSelectableTags(tags, tagsById, tagLinks);
 
@@ -236,6 +234,11 @@ export const filterTasks = (
   // //// Tag matching
   // ////////////
 
+  //   tagScopes = [
+  //   Set {1, 2}, // Selected tag A and its subtags
+  //   Set {3, 4}, // Selected tag B and its subtags
+  //   Set {5, 6}, // Path-query matches
+  // ];
   const tagScopes = getTagScopes(
     tagQuery,
     tagLinks,
@@ -249,69 +252,89 @@ export const filterTasks = (
   ////////////
   //// Task matching
   ////////////
+  const filterStatusesByTaskId = getTaskFilterStatuses(tasks, taskLinks);
 
   const deadlineFilterWindowSeconds =
     taskQuery.deadline.kind === "within"
       ? convertDueDateNameToSeconds(taskQuery.deadline.interval)
       : undefined;
+
+
+
+  const checkIfTaskMatches = (
+    task: FilterTask,
+    taskQuery: TaskMatchCriteria,
+    taskLinks: GraphLinks<TaskID>,
+    tasksById: Map<TaskID, FilterTask>,
+    tagScopes: Set<TagID>[],
+    tagMatchModeSetting: TagMatchCriteria["matchMode"]
+  ): boolean => {
+    const effectiveTagIds = getEffectiveTagIds(
+      task,
+      taskQuery.tagSource,
+      taskLinks,
+      tasksById
+    );
+    const supertaskIds = taskLinks.parents.get(task.id)!;
+    const subtaskIds = taskLinks.children.get(task.id)!;
+    const deadlineTimestamp =
+      taskQuery.deadline.kind === "any"
+        ? Infinity
+        : getTransitiveDueTime(task.id, tasksById, taskLinks);
+    if (!taskQuery.statuses.includes(filterStatusesByTaskId.get(task.id)!))
+      return false;
+    if (!matchesWords(task.name, taskQuery.text)) return false;
+    if (
+      !TASK_FLAG_FILTERS.every(
+        (key) =>
+          taskQuery[key] === "any" ||
+          !!task[key] === (taskQuery[key] === "yes")
+      )
+    )
+      return false;
+    if (!taskMatchesTags(effectiveTagIds, tagScopes, tagMatchModeSetting)) return false;
+    if (taskQuery.tagged === "yes" && effectiveTagIds.size === 0)
+      return false;
+    if (taskQuery.tagged === "no" && effectiveTagIds.size > 0) return false;
+    if (
+      taskQuery.deadline.kind === "missing" &&
+      deadlineTimestamp !== Infinity
+    )
+      return false;
+    if (
+      deadlineFilterWindowSeconds &&
+      !isTaskDueIn(
+        { transitiveDueTime: deadlineTimestamp },
+        new Date(now),
+        deadlineFilterWindowSeconds
+      )
+    )
+      return false;
+    if (
+      (taskQuery.structure === "noSupertasks" ||
+        taskQuery.structure === "standalone") &&
+      supertaskIds.length > 0
+    )
+      return false;
+    if (
+      (taskQuery.structure === "noSubtasks" ||
+        taskQuery.structure === "standalone") &&
+      subtaskIds.length > 0
+    )
+      return false;
+    return true;
+  }
+
   const matchedTaskIds = new Set<TaskID>(
     tasks
-      .filter((task) => {
-        const effectiveTagIds = getEffectiveTagIds(
-          task, 
-          taskQuery.tagSource,
-          taskLinks,
-          tasksById
-        );
-        const supertaskIds = taskLinks.parents.get(task.id)!;
-        const subtaskIds = taskLinks.children.get(task.id)!;
-        const deadlineTimestamp =
-          taskQuery.deadline.kind === "any"
-            ? Infinity
-            : getTransitiveDueTime(task.id, tasksById, taskLinks);
-        if (!taskQuery.statuses.includes(filterStatusesByTaskId.get(task.id)!))
-          return false;
-        if (!matchesWords(task.name, taskQuery.text)) return false;
-        if (
-          !TASK_FLAG_FILTERS.every(
-            (key) =>
-              taskQuery[key] === "any" ||
-              !!task[key] === (taskQuery[key] === "yes")
-          )
-        )
-          return false;
-        if (!taskMatchesTags(effectiveTagIds, tagScopes,tagQuery.matchMode)) return false;
-        if (taskQuery.tagged === "yes" && effectiveTagIds.size === 0)
-          return false;
-        if (taskQuery.tagged === "no" && effectiveTagIds.size > 0) return false;
-        if (
-          taskQuery.deadline.kind === "missing" &&
-          deadlineTimestamp !== Infinity
-        )
-          return false;
-        if (
-          deadlineFilterWindowSeconds &&
-          !isTaskDueIn(
-            { transitiveDueTime: deadlineTimestamp },
-            new Date(now),
-            deadlineFilterWindowSeconds
-          )
-        )
-          return false;
-        if (
-          (taskQuery.structure === "noSupertasks" ||
-            taskQuery.structure === "standalone") &&
-          supertaskIds.length > 0
-        )
-          return false;
-        if (
-          (taskQuery.structure === "noSubtasks" ||
-            taskQuery.structure === "standalone") &&
-          subtaskIds.length > 0
-        )
-          return false;
-        return true;
-      })
+      .filter((task) => { checkIfTaskMatches(
+        task, 
+        taskQuery, 
+        taskLinks, 
+        tasksById, 
+        tagScopes, 
+        tagQuery.matchMode
+      ) })
       .map((task) => task.id)
   );
 
@@ -337,6 +360,7 @@ export const filterTasks = (
         if (tagsById.has(id)) tagSeeds.add(id);
       });
     });
+
   if (tagVisibility === "relevant" && settings.context.tags.includeSubtags)
     collectReachableIds(matchedTagIds, tagLinks.children).forEach((id) =>
       tagSeeds.add(id)
@@ -425,7 +449,7 @@ const getEffectiveTagIds = (task: FilterTask,
 
 const taskMatchesTags = (effectiveTagIds: ReadonlySet<TagID>,
   tagScopes: Set<TagID>[],
-  tagMatchModeSetting:TagMatchCriteria["matchMode"]
+  tagMatchModeSetting: TagMatchCriteria["matchMode"]
 ): boolean => {
   // Check whether a tasks satisfies the active tag conditions.
 
