@@ -1,11 +1,11 @@
 //taskFilter.ts
 import { FinishedState } from "../Structure/TaskInterfaces";
 import { convertDueDateNameToSeconds, isTaskDueIn } from "../Timing";
+import { createFilterSettings } from "./filterSettings";
 import type {
   FilterData,
   FilterResult,
   FilterSettings,
-  FilterSettingsOverrides,
   FilterTag,
   SelectableFilterTag,
   FilterTask,
@@ -18,49 +18,9 @@ import type {
   TagVisibilityMode,
 } from "./FilterTypes";
 
-const ALL_STATUSES: readonly TaskFilterStatus[] = [
-  "unfinished",
-  "completed",
-  "irrelevant",
-  "impossible",
-  "transitivelyIrrelevant",
-];
+
 const TASK_FLAG_FILTERS = ["repeated", "planned", "scheduled"] as const;
 
-
-export const createFilterSettings = (
-  overrides: FilterSettingsOverrides = {}
-): FilterSettings => {
-  // Note: a change here should update Filter-feature-settings.md
-  return {
-    match: {
-      tasks: {
-        text: "",
-        statuses: [...ALL_STATUSES],
-        repeated: "any",
-        planned: "any",
-        scheduled: "any",
-        structure: "any",
-        deadline: { kind: "any" },
-        tagSource: "task",
-        tagged: "any",
-        ...overrides.match?.tasks,
-      },
-      tags: {
-        selectedIds: [],
-        pathQuery: "",
-        includeSubtags: true,
-        matchMode: "every",
-        ...overrides.match?.tags,
-      },
-    },
-    context: {
-      tasks: overrides.context?.tasks ?? "none",
-      tags: { includeSubtags: false, ...overrides.context?.tags },
-    },
-    presentation: { tags: "relevant", ...overrides.presentation },
-  };
-};
 // Determine tag visibility when 'Show tags' in ´automatic´ mode
 export const getEffectiveTagVisibility = (
   settings: FilterSettings
