@@ -11,7 +11,8 @@ import type {
   TaskStructure,
   DueInterval,
   TagID,
-TagVisibilityMode,
+  TagVisibilityMode,
+  TagMatchMode,
 } from "./FilterTypes";
 
 const statusLabels: Record<TaskFilterStatus, string> = {
@@ -149,8 +150,8 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
           statuses: checked
             ? [...new Set([...previous.match.tasks.statuses, ...statuses])]
             : previous.match.tasks.statuses.filter(
-                (status) => !statuses.includes(status)
-              ),
+              (status) => !statuses.includes(status)
+            ),
         },
       },
     }));
@@ -169,60 +170,60 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
       )}
       {(features.includes("tagSelection") ||
         features.includes("tagPathSearch")) && (
-        <div className="filter-tag-picker">
-          {tagMatchCriteria.selectedIds.map((selectedTagId) => {
-            const selectedTag = selectableTags.find(
-              (selectableTag) => selectableTag.id === selectedTagId
-            );
-            const selectedTagName =
-              selectedTag?.path || "Unknown tag (" + selectedTagId + ")";
-            return (
-              <button
-                type="button"
-                key={selectedTagId}
-                title={"Remove tag from search: " + selectedTagName}
-                onClick={() => removeTagFromFilter(selectedTagId)}
-              >
-                {selectedTagName} ×
-              </button>
-            );
-          })}
-          <input
-            type="search"
-            placeholder="Search tags"
-            value={tagSearchText}
-            onChange={(event) => setTagSearchText(event.target.value)}
-            onKeyDown={(event) => {
-              if (event.key === "Escape") setTagSearchText("");
-              if (
-                event.key === "Enter" &&
-                features.includes("tagSelection") &&
-                tagSuggestions.length === 1
-              ) {
-                event.preventDefault();
-                selectTagForFilter(tagSuggestions[0].id);
-              }
-            }}
-          />
-          {features.includes("tagSelection") && normalizedTagSearch && (
-            <div className="filter-tag-suggestions">
-              {tagSuggestions.length ? (
-                tagSuggestions.map((selectableTag) => (
-                  <button
-                    type="button"
-                    key={selectableTag.id}
-                    onClick={() => selectTagForFilter(selectableTag.id)}
-                  >
-                    {selectableTag.path}
-                  </button>
-                ))
-              ) : (
-                <span>No tags found.</span>
-              )}
-            </div>
-          )}
-        </div>
-      )}
+          <div className="filter-tag-picker">
+            {tagMatchCriteria.selectedIds.map((selectedTagId) => {
+              const selectedTag = selectableTags.find(
+                (selectableTag) => selectableTag.id === selectedTagId
+              );
+              const selectedTagName =
+                selectedTag?.path || "Unknown tag (" + selectedTagId + ")";
+              return (
+                <button
+                  type="button"
+                  key={selectedTagId}
+                  title={"Remove tag from search: " + selectedTagName}
+                  onClick={() => removeTagFromFilter(selectedTagId)}
+                >
+                  {selectedTagName} ×
+                </button>
+              );
+            })}
+            <input
+              type="search"
+              placeholder="Search tags"
+              value={tagSearchText}
+              onChange={(event) => setTagSearchText(event.target.value)}
+              onKeyDown={(event) => {
+                if (event.key === "Escape") setTagSearchText("");
+                if (
+                  event.key === "Enter" &&
+                  features.includes("tagSelection") &&
+                  tagSuggestions.length === 1
+                ) {
+                  event.preventDefault();
+                  selectTagForFilter(tagSuggestions[0].id);
+                }
+              }}
+            />
+            {features.includes("tagSelection") && normalizedTagSearch && (
+              <div className="filter-tag-suggestions">
+                {tagSuggestions.length ? (
+                  tagSuggestions.map((selectableTag) => (
+                    <button
+                      type="button"
+                      key={selectableTag.id}
+                      onClick={() => selectTagForFilter(selectableTag.id)}
+                    >
+                      {selectableTag.path}
+                    </button>
+                  ))
+                ) : (
+                  <span>No tags found.</span>
+                )}
+              </div>
+            )}
+          </div>
+        )}
       {features.includes("status") && (
         <details>
           <summary>Status</summary>
@@ -280,193 +281,208 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
         features.includes("deadline") ||
         features.includes("taskStructure") ||
         features.includes("tagMatching")) && (
-        <details>
+          <details>
             <summary>Task filters</summary>
-          <div className="filter-options">
-            {features.includes("repeated") && (
-              <label>
-                Repeats
-                <select
-                  value={taskMatchCriteria.repeated}
-                  onChange={(event) =>
-                    patchTaskMatchCriteria({
-                      repeated: event.target.value as FilterChoice,
-                    })
-                  }
-                >
-                  <option value="any">All tasks</option>
-                  <option value="yes">Repeating only</option>
-                  <option value="no">Non-repeating only</option>
-                </select>
-              </label>
-            )}
-            {features.includes("planned") && (
-              <label>
-                Planned
-                <select
-                  value={taskMatchCriteria.planned}
-                  onChange={(event) =>
-                    patchTaskMatchCriteria({
-                      planned: event.target.value as FilterChoice,
-                    })
-                  }
-                >
-                  <option value="any">All tasks</option>
-                  <option value="yes">Planned only</option>
-                  <option value="no">Unplanned only</option>
-                </select>
-              </label>
-            )}
-            {features.includes("scheduled") && (
-              <label>
-                Scheduled
-                <select
-                  value={taskMatchCriteria.scheduled}
-                  onChange={(event) =>
-                    patchTaskMatchCriteria({
-                      scheduled: event.target.value as FilterChoice,
-                    })
-                  }
-                >
-                  <option value="any">All tasks</option>
-                  <option value="yes">Scheduled only</option>
-                  <option value="no">Unscheduled only</option>
-                </select>
-              </label>
-            )}
-            {features.includes("tagMatching") && (
-              <label>
-                Has tags
-                <select
-                  value={taskMatchCriteria.tagged}
-                  onChange={(event) =>
-                    patchTaskMatchCriteria({
-                      tagged: event.target.value as FilterChoice,
-                    })
-                  }
-                >
-                  <option value="any">All tasks</option>
-                  <option value="yes">Tagged only</option>
-                  <option value="no">Untagged only</option>
-                </select>
-              </label>
-            )}
-            {features.includes("deadline") && (
-              <label>
-                Deadline
-                <select
-                  value={
-                    taskMatchCriteria.deadline.kind === "within"
-                      ? taskMatchCriteria.deadline.interval
-                      : taskMatchCriteria.deadline.kind
-                  }
-                  onChange={(event) => {
-                    const value = event.target.value;
-                    patchTaskMatchCriteria({
-                      deadline:
-                        value === "any" || value === "missing"
-                          ? { kind: value }
-                          : {
+            <div className="filter-options">
+              {features.includes("repeated") && (
+                <label>
+                  Repeats
+                  <select
+                    value={taskMatchCriteria.repeated}
+                    onChange={(event) =>
+                      patchTaskMatchCriteria({
+                        repeated: event.target.value as FilterChoice,
+                      })
+                    }
+                  >
+                    <option value="any">All tasks</option>
+                    <option value="yes">Repeating only</option>
+                    <option value="no">Non-repeating only</option>
+                  </select>
+                </label>
+              )}
+              {features.includes("planned") && (
+                <label>
+                  Planned
+                  <select
+                    value={taskMatchCriteria.planned}
+                    onChange={(event) =>
+                      patchTaskMatchCriteria({
+                        planned: event.target.value as FilterChoice,
+                      })
+                    }
+                  >
+                    <option value="any">All tasks</option>
+                    <option value="yes">Planned only</option>
+                    <option value="no">Unplanned only</option>
+                  </select>
+                </label>
+              )}
+              {features.includes("scheduled") && (
+                <label>
+                  Scheduled
+                  <select
+                    value={taskMatchCriteria.scheduled}
+                    onChange={(event) =>
+                      patchTaskMatchCriteria({
+                        scheduled: event.target.value as FilterChoice,
+                      })
+                    }
+                  >
+                    <option value="any">All tasks</option>
+                    <option value="yes">Scheduled only</option>
+                    <option value="no">Unscheduled only</option>
+                  </select>
+                </label>
+              )}
+              {features.includes("tagMatching") && (
+                <label>
+                  Has tags
+                  <select
+                    value={taskMatchCriteria.tagged}
+                    onChange={(event) =>
+                      patchTaskMatchCriteria({
+                        tagged: event.target.value as FilterChoice,
+                      })
+                    }
+                  >
+                    <option value="any">All tasks</option>
+                    <option value="yes">Tagged only</option>
+                    <option value="no">Untagged only</option>
+                  </select>
+                </label>
+              )}
+              {features.includes("deadline") && (
+                <label>
+                  Deadline
+                  <select
+                    value={
+                      taskMatchCriteria.deadline.kind === "within"
+                        ? taskMatchCriteria.deadline.interval
+                        : taskMatchCriteria.deadline.kind
+                    }
+                    onChange={(event) => {
+                      const value = event.target.value;
+                      patchTaskMatchCriteria({
+                        deadline:
+                          value === "any" || value === "missing"
+                            ? { kind: value }
+                            : {
                               kind: "within",
                               interval: value as DueInterval,
                             },
-                    });
-                  }}
-                >
-                  <option value="any">Any deadline</option>
-                  <option value="missing">No deadline</option>
-                  {Object.entries(intervals).map(([value, label]) => (
-                    <option key={value} value={value}>
-                      Within {label}
-                    </option>
-                  ))}
-                </select>
-              </label>
-            )}
-            {features.includes("taskStructure") && (
-              <label>
+                      });
+                    }}
+                  >
+                    <option value="any">Any deadline</option>
+                    <option value="missing">No deadline</option>
+                    {Object.entries(intervals).map(([value, label]) => (
+                      <option key={value} value={value}>
+                        Within {label}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+              )}
+              {features.includes("taskStructure") && (
+                <label>
                   Task relation
+                  <select
+                    value={taskMatchCriteria.structure}
+                    onChange={(event) =>
+                      patchTaskMatchCriteria({
+                        structure: event.target.value as TaskStructure,
+                      })
+                    }
+                  >
+                    <option value="any">All tasks</option>
+                    <option value="noSupertasks">Without supertasks</option>
+                    <option value="noSubtasks">Without subtasks</option>
+                    <option value="standalone">
+                      Without supertasks or subtasks
+                    </option>
+                  </select>
+                </label>
+              )}
+            </div>
+          </details>
+        )}
+      {features.includes("tagMatching") && (
+          <details>
+            <summary>Tag matching</summary>
+            <div className="filter-options">
+              <label>
+                Show tasks that match
                 <select
-                  value={taskMatchCriteria.structure}
+                  value={tagMatchCriteria.matchMode}
                   onChange={(event) =>
-                    patchTaskMatchCriteria({
-                      structure: event.target.value as TaskStructure,
+                    patchTagMatchCriteria({
+                      matchMode: event.target.value as TagMatchMode,
                     })
                   }
                 >
-                  <option value="any">All tasks</option>
-                  <option value="noSupertasks">Without supertasks</option>
-                  <option value="noSubtasks">Without subtasks</option>
-                  <option value="standalone">
-                    Without supertasks or subtasks
-                  </option>
+                  <option value="every">Every tag</option>
+                  <option value="any">Any tag</option>
                 </select>
               </label>
-            )}
-          </div>
-        </details>
-      )}
-      {features.includes("tagMatching") && (
-        <details>
-          <summary>Tag matching</summary>
-          <div className="filter-options">
-            <label title="When you select a tag, also include tasks with any of its subtags, at any level.">
-              <input
-                type="checkbox"
-                checked={tagMatchCriteria.includeSubtags}
-                onChange={(event) =>
-                  patchTagMatchCriteria({
-                    includeSubtags: event.target.checked,
-                  })
-                }
-              />
-              	Include tasks with subtags
-            </label>
-            <label  title="When searching for a tag, also find tasks whose supertasks have that tag..">
-              <input
-                type="checkbox"
-                checked={taskMatchCriteria.tagSource === "taskAndSupertasks"}
-                onChange={(event) =>
-                  patchTaskMatchCriteria({
-                    tagSource: event.target.checked
-                      ? "taskAndSupertasks"
-                      : "task",
-                  })
-                }
-              />
-              Also match tags on supertasks
-            </label>
-          </div>
-        </details>
-      )}
+
+              <label title="When you select a tag, also include tasks with any of its subtags, at any level.">
+                <input
+                  type="checkbox"
+                  checked={tagMatchCriteria.includeSubtags}
+                  onChange={(event) =>
+                    patchTagMatchCriteria({
+                      includeSubtags: event.target.checked,
+                    })
+                  }
+                />
+                Include tasks with subtags
+              </label>
+              <label title="When searching for a tag, also find tasks whose supertasks have that tag..">
+                <input
+                  type="checkbox"
+                  checked={taskMatchCriteria.tagSource === "taskAndSupertasks"}
+                  onChange={(event) =>
+                    patchTaskMatchCriteria({
+                      tagSource: event.target.checked
+                        ? "taskAndSupertasks"
+                        : "task",
+                    })
+                  }
+                />
+                Also match tags on supertasks
+              </label>
+            </div>
+          </details>
+        )}
       {(features.includes("taskContext") ||
         features.includes("tagContext") ||
         features.includes("tagVisibility")) && (
-        <details>
+          <details>
             <summary>Display</summary>
-          <div className="filter-options">
-            {features.includes("taskContext") && (
-              <label>
-                Show tasks
-                <select
-                  value={settings.context.tasks}
-                  onChange={(event) => {
-                    const mode = event.target.value as TaskContextMode;
-                    setFilterSettingsWithDefaults((previous) => ({
-                      ...previous,
-                      context: { ...previous.context, tasks: mode },
-                    }));
-                  }}
-                >
-                  <option value="none">Results only</option>
-                  <option value="ancestors">Results and all supertasks</option>
-                  <option value="descendants">Results and all subtasks</option>
-                  <option value="both">
-                    Results, all supertasks and all subtasks
-                  </option>
-                </select>
-              </label>
-            )}
+            <div className="filter-options">
+              {features.includes("taskContext") && (
+                <label>
+                  Show tasks
+                  <select
+                    value={settings.context.tasks}
+                    onChange={(event) => {
+                      const mode = event.target.value as TaskContextMode;
+                      setFilterSettingsWithDefaults((previous) => ({
+                        ...previous,
+                        context: { ...previous.context, tasks: mode },
+                      }));
+                    }}
+                  >
+                    <option value="none">Results only</option>
+                    <option value="ancestors">Results and all supertasks</option>
+                    <option value="descendants">Results and all subtasks</option>
+                    <option value="both">
+                      Results, all supertasks and all subtasks
+                    </option>
+                  </select>
+                </label>
+              )}
               {features.includes("tagVisibility") && (
                 <label title={
                   settings.presentation.tags === "automatic"
@@ -491,37 +507,37 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
                     <option value="relevant">Relevant tags</option>
                     <option value="withVisibleTasks">
                       Tags with visible tasks
-                  </option>
-                </select>
-              </label>
-            )}
-            {features.includes("tagContext") && (
-              <label title={
-                    subtagContextDisabledReason ||
-                    "Also display subtags of matching tags. This does not change which tasks match your search."}>
-                <input
-                  type="checkbox"
-                  checked={settings.context.tags.includeSubtags}
+                    </option>
+                  </select>
+                </label>
+              )}
+              {features.includes("tagContext") && (
+                <label title={
+                  subtagContextDisabledReason ||
+                  "Also display subtags of matching tags. This does not change which tasks match your search."}>
+                  <input
+                    type="checkbox"
+                    checked={settings.context.tags.includeSubtags}
                     disabled={
                       effectiveTagVisibility !== "relevant" || !hasTagSearch
                     }
-                  onChange={(event) => {
-                    const checked = event.target.checked;
-                    setFilterSettingsWithDefaults((previous) => ({
-                      ...previous,
-                      context: {
-                        ...previous.context,
-                        tags: { includeSubtags: checked },
-                      },
-                    }));
-                  }}
-                />
-                Show subtags in results
-              </label>
-            )}
-          </div>
-        </details>
-      )}
+                    onChange={(event) => {
+                      const checked = event.target.checked;
+                      setFilterSettingsWithDefaults((previous) => ({
+                        ...previous,
+                        context: {
+                          ...previous.context,
+                          tags: { includeSubtags: checked },
+                        },
+                      }));
+                    }}
+                  />
+                  Show subtags in results
+                </label>
+              )}
+            </div>
+          </details>
+        )}
       <button
         type="button"
         onClick={() => {

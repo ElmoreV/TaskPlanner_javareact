@@ -82,10 +82,13 @@ export interface TaskMatchCriteria {
   tagged: FilterChoice;
 }
 
+export type TagMatchMode = "every"| "any";
+
 export interface TagMatchCriteria {
   selectedIds: readonly TagID[];
   pathQuery: string;
   includeSubtags: boolean;
+  matchMode: TagMatchMode;
 }
 
 export interface FilterSettings {

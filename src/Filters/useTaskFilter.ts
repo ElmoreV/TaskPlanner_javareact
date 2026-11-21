@@ -109,6 +109,7 @@ const neutralizeUnsupportedSettings = (
     effectiveSettings.match.tasks.tagged = settings.match.tasks.tagged;
     effectiveSettings.match.tags.includeSubtags =
       settings.match.tags.includeSubtags;
+    effectiveSettings.match.tags.matchMode = settings.match.tags.matchMode;
   }
   if (features.includes("taskContext"))
     effectiveSettings.context.tasks = settings.context.tasks;

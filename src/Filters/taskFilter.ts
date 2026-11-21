@@ -48,6 +48,7 @@ export const createFilterSettings = (
         selectedIds: [],
         pathQuery: "",
         includeSubtags: true,
+        matchMode: "every",
         ...overrides.match?.tags,
       },
     },
@@ -226,38 +227,48 @@ export const filterTasks = (
 
   const filterStatusesByTaskId = getTaskFilterStatuses(tasks, taskLinks);
 
+  // converts all known tags to the full-path format
   const selectableTags = getSelectableTags(tags, tagsById, tagLinks);
-  // tagScope: takes ids, and adds subtags to it if this is wished
+  // tagScope: takes ids, and adds subtags to the list it if this is wished
   const tagScope = (ids: Iterable<TagID>): Set<TagID> =>
     tagQuery.includeSubtags
       ? collectReachableIds(ids, tagLinks.children)
       : new Set(ids);
-  const selectedTagScopeIds = tagScope(tagQuery.selectedIds);
   const pathQuery = tagQuery.pathQuery.trim().toLocaleLowerCase();
-  const pathMatchTagIds = tagScope(
-    selectableTags
-      .filter((tag) => tag.path.toLocaleLowerCase().includes(pathQuery))
-      .map((tag) => tag.id)
-  );
-  ////////////
-  //// Tag matching
-  ////////////
-  const hasSelectedTags = tagQuery.selectedIds.length > 0;
+
+
+  // ////////////
+  // //// Tag matching
+  // ////////////
+
+  /// new code
+  // Outputs:
+//   tagScopes = [
+//   Set {1, 2}, // Selected tag A and its subtags
+//   Set {3, 4}, // Selected tag B and its subtags
+//   Set {5, 6}, // Path-query matches
+// ];
+  const tagScopes: Set<TagID>[] = [
+    ...tagQuery.selectedIds.map((id) => tagScope([id])),
+    ...(pathQuery ? [tagScope(selectableTags.filter(
+      (tag) =>
+        tag.path.toLocaleLowerCase().includes(pathQuery))
+      .map((tag) => tag.id)),] : []),];
+
+  // Matched tag ids will be {1,2,3,4,5,6} deduplicated
   const matchedTagIds = new Set<TagID>(
-    tags
-      .filter(
-        (tag) =>
-          (hasSelectedTags || pathQuery.length > 0) &&
-          (!hasSelectedTags || selectedTagScopeIds.has(tag.id)) &&
-          (!pathQuery || pathMatchTagIds.has(tag.id))
-      )
-      .map((tag) => tag.id)
+    tagScopes.flatMap((scope) => [...scope])
   );
+
 
   ////////////
   //// Task matching
   ////////////
   const getEffectiveTagIds = (task: FilterTask): Set<TagID> => {
+    // Calculates which tags are relevant for each task
+    // Example with tagSource=´and supertasks':
+    // Input: task 225, Tag 2026, subtask of task 113 with Tag 2025
+    // gives output: [id of tag 2026,id of tag 2025]
     const sources =
       taskQuery.tagSource === "taskAndSupertasks"
         ? collectReachableIds([task.id], taskLinks.parents)
@@ -266,6 +277,20 @@ export const filterTasks = (
       [...sources].flatMap((id) => tasksById.get(id)!.tagIds)
     );
   };
+  const taskMatchesTags = (effectiveTagIds: ReadonlySet<TagID>): boolean => {
+    // Check whether a tasks satisfies the active tag conditions.
+
+    // No tag conditions means no tag restriction.
+    if (tagScopes.length === 0) return true;
+
+    const matchesScope = (scope: ReadonlySet<TagID>): boolean =>
+      [...effectiveTagIds].some((id) => scope.has(id));
+
+    return tagQuery.matchMode === "any"
+      ? tagScopes.some(matchesScope)
+      : tagScopes.every(matchesScope);
+  };
+
   const deadlineFilterWindowSeconds =
     taskQuery.deadline.kind === "within"
       ? convertDueDateNameToSeconds(taskQuery.deadline.interval)
@@ -291,16 +316,7 @@ export const filterTasks = (
           )
         )
           return false;
-        if (
-          hasSelectedTags &&
-          ![...effectiveTagIds].some((id) => selectedTagScopeIds.has(id))
-        )
-          return false;
-        if (
-          pathQuery &&
-          ![...effectiveTagIds].some((id) => pathMatchTagIds.has(id))
-        )
-          return false;
+        if (!taskMatchesTags(effectiveTagIds)) return false;
         if (taskQuery.tagged === "yes" && effectiveTagIds.size === 0)
           return false;
         if (taskQuery.tagged === "no" && effectiveTagIds.size > 0) return false;
