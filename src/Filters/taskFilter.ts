@@ -231,54 +231,27 @@ export const filterTasks = (
 
   // converts all known tags to the full-path format
   const selectableTags = getSelectableTags(tags, tagsById, tagLinks);
-  // tagScope: takes ids, and adds subtags to the list it if this is wished
-  const tagScope = (ids: Iterable<TagID>): Set<TagID> =>
-    tagQuery.includeSubtags
-      ? collectReachableIds(ids, tagLinks.children)
-      : new Set(ids);
-  const pathQuery = tagQuery.pathQuery.trim().toLocaleLowerCase();
-
 
   // ////////////
   // //// Tag matching
   // ////////////
 
-  /// new code
-  // Outputs:
-  //   tagScopes = [
-  //   Set {1, 2}, // Selected tag A and its subtags
-  //   Set {3, 4}, // Selected tag B and its subtags
-  //   Set {5, 6}, // Path-query matches
-  // ];
-  const tagScopes: Set<TagID>[] = [
-    ...tagQuery.selectedIds.map((id) => tagScope([id])),
-    ...(pathQuery ? [tagScope(selectableTags.filter(
-      (tag) =>
-        tag.path.toLocaleLowerCase().includes(pathQuery))
-      .map((tag) => tag.id)),] : []),];
-
+  const tagScopes = getTagScopes(
+    tagQuery,
+    tagLinks,
+    selectableTags
+  )
   // Matched tag ids will be {1,2,3,4,5,6} deduplicated
   const matchedTagIds = new Set<TagID>(
     tagScopes.flatMap((scope) => [...scope])
   );
 
 
+
   ////////////
   //// Task matching
   ////////////
-  const getEffectiveTagIds = (task: FilterTask): Set<TagID> => {
-    // Calculates which tags are relevant for each task
-    // Example with tagSource=´and supertasks':
-    // Input: task 225, Tag 2026, subtask of task 113 with Tag 2025
-    // gives output: [id of tag 2026,id of tag 2025]
-    const sources =
-      taskQuery.tagSource === "taskAndSupertasks"
-        ? collectReachableIds([task.id], taskLinks.parents)
-        : [task.id];
-    return new Set<TagID>(
-      [...sources].flatMap((id) => tasksById.get(id)!.tagIds)
-    );
-  };
+
   const taskMatchesTags = (effectiveTagIds: ReadonlySet<TagID>): boolean => {
     // Check whether a tasks satisfies the active tag conditions.
 
@@ -300,7 +273,12 @@ export const filterTasks = (
   const matchedTaskIds = new Set<TaskID>(
     tasks
       .filter((task) => {
-        const effectiveTagIds = getEffectiveTagIds(task);
+        const effectiveTagIds = getEffectiveTagIds(
+          task, 
+          taskQuery.tagSource,
+          taskLinks,
+          tasksById
+        );
         const supertaskIds = taskLinks.parents.get(task.id)!;
         const subtaskIds = taskLinks.children.get(task.id)!;
         const deadlineTimestamp =
@@ -391,6 +369,36 @@ export const filterTasks = (
   };
 };
 
+
+const getTagScopes = (
+  tagQuery: TagMatchCriteria,
+  tagLinks: GraphLinks<TagID>,
+  selectableTags: readonly SelectableFilterTag[]
+): Set<TagID>[] => {
+  // Outputs:
+  //   tagScopes = [
+  //   Set {1, 2}, // Selected tag A and its subtags
+  //   Set {3, 4}, // Selected tag B and its subtags
+  //   Set {5, 6}, // Path-query matches
+  // ];
+
+  // tagScope: takes ids, and adds subtags to the list it if this is wished
+  const tagScope = (ids: Iterable<TagID>): Set<TagID> =>
+    tagQuery.includeSubtags
+      ? collectReachableIds(ids, tagLinks.children)
+      : new Set(ids);
+
+  const pathQuery = tagQuery.pathQuery.trim().toLocaleLowerCase();
+  const tagScopes: Set<TagID>[] = [
+    ...tagQuery.selectedIds.map((id) => tagScope([id])),
+    ...(pathQuery ? [tagScope(selectableTags.filter(
+      (tag) =>
+        tag.path.toLocaleLowerCase().includes(pathQuery))
+      .map((tag) => tag.id)),] : []),];
+  return tagScopes;
+}
+
+
 const getDisplayTaskIds = (
   matchedTaskIds: ReadonlySet<TaskID>,
   taskLinks: GraphLinks<TaskID>,
@@ -409,6 +417,26 @@ const getDisplayTaskIds = (
     );
 
   return ids;
+};
+
+
+const getEffectiveTagIds = (task: FilterTask,
+  tagSourceSetting: TaskMatchCriteria["tagSource"],
+  taskLinks: GraphLinks<TaskID>,
+  tasksById: Map<TaskID, FilterTask>
+
+): Set<TaskID> => {
+  // Calculates which tags are relevant for each task
+  // Example with tagSource=´and supertasks':
+  // Input: task 225, Tag 2026, subtask of task 113 with Tag 2025
+  // gives output: [id of tag 2026,id of tag 2025]
+  const sources =
+    tagSourceSetting === "taskAndSupertasks"
+      ? collectReachableIds([task.id], taskLinks.parents)
+      : [task.id];
+  return new Set<TagID>(
+    [...sources].flatMap((id) => tasksById.get(id)!.tagIds)
+  );
 };
 
 const getSelectableTags = (
