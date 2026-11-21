@@ -1,3 +1,4 @@
+//FilterTypes.ts
 import type { ReactNode } from "react";
 import type { FinishedState } from "../Structure/TaskInterfaces";
 

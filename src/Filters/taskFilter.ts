@@ -1,3 +1,4 @@
+//taskFilter.ts
 import { FinishedState } from "../Structure/TaskInterfaces";
 import { convertDueDateNameToSeconds, isTaskDueIn } from "../Timing";
 import type {
@@ -226,6 +227,7 @@ export const filterTasks = (
   const filterStatusesByTaskId = getTaskFilterStatuses(tasks, taskLinks);
 
   const selectableTags = getSelectableTags(tags, tagsById, tagLinks);
+  // tagScope: takes ids, and adds subtags to it if this is wished
   const tagScope = (ids: Iterable<TagID>): Set<TagID> =>
     tagQuery.includeSubtags
       ? collectReachableIds(ids, tagLinks.children)
@@ -396,9 +398,15 @@ const getSelectableTags = (
   tagsById: ReadonlyMap<TagID, FilterTag>,
   tagLinks: GraphLinks<TagID>
 ): SelectableFilterTag[] => {
+  // Converts tags to their full hierarchical paths.
+  // Example Input: {id: 3, name: "Frontend"} (meaning Work → Programming → Frontend )
+  // gives output { id: 3, path: "Work/Programming/Frontend" }.
   const path = (id: TagID, visited = new Set<TagID>()): string => {
+    // prevent recursion
     if (visited.has(id)) return "";
     visited.add(id);
+
+    // Tags have 0 (root tag) or 1 (subtag) parents
     const parent = tagLinks.parents.get(id)?.[0];
     return [
       parent === undefined ? "" : path(parent, visited),
