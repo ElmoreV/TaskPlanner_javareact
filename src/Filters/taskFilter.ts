@@ -327,7 +327,7 @@ export const filterTasks = (
 
   const matchedTaskIds = new Set<TaskID>(
     tasks
-      .filter((task) => { checkIfTaskMatches(
+      .filter((task) => { return checkIfTaskMatches(
         task, 
         taskQuery, 
         taskLinks, 
