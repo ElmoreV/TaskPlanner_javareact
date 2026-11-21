@@ -245,11 +245,11 @@ export const filterTasks = (
 
   /// new code
   // Outputs:
-//   tagScopes = [
-//   Set {1, 2}, // Selected tag A and its subtags
-//   Set {3, 4}, // Selected tag B and its subtags
-//   Set {5, 6}, // Path-query matches
-// ];
+  //   tagScopes = [
+  //   Set {1, 2}, // Selected tag A and its subtags
+  //   Set {3, 4}, // Selected tag B and its subtags
+  //   Set {5, 6}, // Path-query matches
+  // ];
   const tagScopes: Set<TagID>[] = [
     ...tagQuery.selectedIds.map((id) => tagScope([id])),
     ...(pathQuery ? [tagScope(selectableTags.filter(
@@ -436,13 +436,13 @@ const getSelectableTags = (
   return tags.map((tag) => ({ id: tag.id, path: path(tag.id) }));
 };
 
-// Earliest deadline timestamp in milliseconds, including this task and its subtasks.
-// Infinity means no valid deadline was found.
 const getTransitiveDueTime = (
   id: TaskID,
   tasksById: ReadonlyMap<TaskID, FilterTask>,
   taskLinks: GraphLinks<TaskID>
 ): number => {
+  // Earliest deadline timestamp in milliseconds, including this task and its subtasks.
+  // Infinity means no valid deadline was found.
   return [...collectReachableIds([id], taskLinks.children)]
     .map((id) => tasksById.get(id)!.dueTime)
     .filter((date) => date !== undefined && date !== null)

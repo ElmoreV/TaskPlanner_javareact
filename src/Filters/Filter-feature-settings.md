@@ -37,7 +37,7 @@
 
 **Shared controls:** `tagSelection` and `tagPathSearch` use the same **Search tags** input. With `tagPathSearch` active, typing updates `match.tags.pathQuery` immediately; without it, typing only searches suggestions locally, and selecting a suggestion updates `match.tags.selectedIds`.
 
-**Shared menu:** The **Tag matching** menu appears when *any* of `tagMatching`, `tagSelection`, or `tagPathSearch` is enabled. The **Task filters** menu and **Display** menu also group controls from multiple features; the feature column above identifies which feature governs each individual control.
+**Shared menu:** The **Task filters** menu and **Display** menu also group controls from multiple features; the feature column above identifies which feature governs each individual control.
 
 
 ## Default settings
@@ -46,9 +46,11 @@
 
 | View | Setting name (internal) | Deviating value (internal) |
 |---|---|---|
-| `VIEW_ALL_TASKS` | `match.tasks.statuses` | `["unfinished", "transitivelyIrrelevant"]` |
+| `VIEW_ALL_TASKS` | `match.tasks.statuses` | `["unfinished"]` |
+| `VIEW_ALL_TASKS` | `match.tasks.tagSource` | `taskAndSupertasks` |
+| `VIEW_ALL_TASKS` | `context.tasks` | `both` |
 | `VIEW_ALL_TASKS` | `presentation.tags` | `"automatic"` |
-| `VIEW_PLANNED_TASKS` | `match.tasks.statuses` | `["unfinished", "transitivelyIrrelevant"]` |
+| `VIEW_PLANNED_TASKS` | `match.tasks.statuses` | `["unfinished"]` |
 
 Views not listed here (`VIEW_ADD_TASKS`, `VIEW_TAG_ALL_TASKS`, and `VIEW_TASK_GRAPH`) have no deviations from the shared defaults.
 
@@ -65,12 +67,11 @@ Views not listed here (`VIEW_ADD_TASKS`, `VIEW_TAG_ALL_TASKS`, and `VIEW_TASK_GR
 | Settings involved | Interaction / potential conflict |
 | --- | --- |
 | `match.tasks.tagged = "no"` **and** a nonempty `match.tags.selectedIds` or `match.tags.pathQuery` | **Actual contradiction:** the task must have no *effective* tags, but the tag-selection/query condition requires at least one effective matching tag. No task can match both. |
-| `match.tags.includeSubtags` vs. `context.tags.includeSubtags` | These similarly named checkboxes do **different jobs**: **Include tasks with subtags** changes which *tasks* match; **Show subtags in results** adds *tags to the display* and does not change task matching. |
+| `match.tags.includeSubtags` vs. `context.tags.includeSubtags` | These similarly named checkboxes do **different jobs**: **Include tasks with subtags** changes which *tasks* match; **Show subtags in results** adds *tags to the display* and does not change task matching. match.tags.includeSubtags also expands displayed tag matches in Relevant mode. With its default true, subtags can appear even when **Show subtags in results** is unchecked.|
 | `context.tasks` vs. any task-matching setting | `ancestors`, `descendants`, or `both` adds related tasks to the display **even if those additional tasks fail the filters**. Only `none` limits visible tasks strictly to matches. |
 | `match.tasks.tagSource = "taskAndSupertasks"` + `match.tasks.tagged` or tag criteria | Tag checks use the task's own tags **plus** all supertasks' tags, including the **Has tags** setting. A task with no own tags can count as tagged. |
 | `presentation.tags` + `context.tags.includeSubtags` | **Show subtags in results** is enabled only when effective tag visibility is `relevant` **and** there is an active tag selection/query. In `all` or `withVisibleTasks` mode, this checkbox is disabled and does not add context subtags. |
 | `match.tags.matchMode = "every"` + `presentation.tags = "relevant"` | “Relevant tags” uses the **union of tags satisfying individual tag conditions**, plus tags of visible tasks and their ancestors. It can display tags even when **no task satisfies every condition**. Tag visibility does not mean the entire task filter matched. |
-| `tagSelection` / `tagPathSearch` without `tagMatching` in a hypothetical future view | The Tag matching menu **would still show** its three controls because of the UI's OR condition, but `neutralizeUnsupportedSettings()` would reset `matchMode`, `includeSubtags`, `tagSource`, and `tagged` unless `tagMatching` is enabled. **No currently configured view has this mismatch.** |
 | `presentation.tags = "withVisibleTasks"` + `match.tasks.tagSource = "taskAndSupertasks"` | Tags displayed by **Tags with visible tasks** are taken from the visible tasks' **direct** tag assignments (and tag ancestors), not from the inherited effective tag set used for matching. The list of displayed tags can therefore differ from tags used to match a task. |
 
 ### Useful rules of thumb
