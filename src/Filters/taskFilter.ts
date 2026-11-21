@@ -27,9 +27,11 @@ const ALL_STATUSES: readonly TaskFilterStatus[] = [
 ];
 const TASK_FLAG_FILTERS = ["repeated", "planned", "scheduled"] as const;
 
+
 export const createFilterSettings = (
   overrides: FilterSettingsOverrides = {}
 ): FilterSettings => {
+  // Note: a change here should update Filter-feature-settings.md
   return {
     match: {
       tasks: {

@@ -35,6 +35,7 @@ export interface SelectableFilterTag {
   path: string;
 }
 
+// Note: a change here should update Filter-feature-settings.md
 export type FilterChoice = "any" | "yes" | "no";
 export type DueInterval =
   | "30min"

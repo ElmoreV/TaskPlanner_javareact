@@ -155,7 +155,7 @@ const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
         },
       },
     }));
-
+  // Note: a change here should update Filter-feature-settings.md
   return (
     <div className="task-list-header" ref={filterBarRef}>
       {features.includes("taskSearch") && (

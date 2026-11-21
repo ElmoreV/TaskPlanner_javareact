@@ -24,6 +24,7 @@ const commonFilterFeatures: readonly FilterFeature[] = [
 
 export const FILTER_CONFIG_BY_VIEW: Partial<Record<View, FilterViewConfig>> = {
   // Categorize (the legacy enum name says ALL_TASKS).
+  // Note: a change here should update Filter-feature-settings.md
   [View.VIEW_ALL_TASKS]: {
     features: [
       ...commonFilterFeatures,
@@ -35,8 +36,11 @@ export const FILTER_CONFIG_BY_VIEW: Partial<Record<View, FilterViewConfig>> = {
     ],
     defaults: createFilterSettings({
       match: {
-        tasks: { statuses: ["unfinished", "transitivelyIrrelevant"] },
+        tasks: { statuses: ["unfinished"],
+          tagSource: "taskAndSupertasks"
+         },
       },
+      context: {tasks: "both"},
       presentation: { tags: "automatic" },
     }),
   },
@@ -44,7 +48,7 @@ export const FILTER_CONFIG_BY_VIEW: Partial<Record<View, FilterViewConfig>> = {
     features: commonFilterFeatures,
     defaults: createFilterSettings({
       match: {
-        tasks: { statuses: ["unfinished", "transitivelyIrrelevant"] },
+        tasks: { statuses: ["unfinished"] },
       },
     }),
   },
