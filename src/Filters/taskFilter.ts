@@ -246,25 +246,9 @@ export const filterTasks = (
     tagScopes.flatMap((scope) => [...scope])
   );
 
-
-
   ////////////
   //// Task matching
   ////////////
-
-  const taskMatchesTags = (effectiveTagIds: ReadonlySet<TagID>): boolean => {
-    // Check whether a tasks satisfies the active tag conditions.
-
-    // No tag conditions means no tag restriction.
-    if (tagScopes.length === 0) return true;
-
-    const matchesScope = (scope: ReadonlySet<TagID>): boolean =>
-      [...effectiveTagIds].some((id) => scope.has(id));
-
-    return tagQuery.matchMode === "any"
-      ? tagScopes.some(matchesScope)
-      : tagScopes.every(matchesScope);
-  };
 
   const deadlineFilterWindowSeconds =
     taskQuery.deadline.kind === "within"
@@ -296,7 +280,7 @@ export const filterTasks = (
           )
         )
           return false;
-        if (!taskMatchesTags(effectiveTagIds)) return false;
+        if (!taskMatchesTags(effectiveTagIds, tagScopes,tagQuery.matchMode)) return false;
         if (taskQuery.tagged === "yes" && effectiveTagIds.size === 0)
           return false;
         if (taskQuery.tagged === "no" && effectiveTagIds.size > 0) return false;
@@ -437,6 +421,23 @@ const getEffectiveTagIds = (task: FilterTask,
   return new Set<TagID>(
     [...sources].flatMap((id) => tasksById.get(id)!.tagIds)
   );
+};
+
+const taskMatchesTags = (effectiveTagIds: ReadonlySet<TagID>,
+  tagScopes: Set<TagID>[],
+  tagMatchModeSetting:TagMatchCriteria["matchMode"]
+): boolean => {
+  // Check whether a tasks satisfies the active tag conditions.
+
+  // No tag conditions means no tag restriction.
+  if (tagScopes.length === 0) return true;
+
+  const matchesScope = (scope: ReadonlySet<TagID>): boolean =>
+    [...effectiveTagIds].some((id) => scope.has(id));
+
+  return tagMatchModeSetting === "any"
+    ? tagScopes.some(matchesScope)
+    : tagScopes.every(matchesScope);
 };
 
 const getSelectableTags = (
