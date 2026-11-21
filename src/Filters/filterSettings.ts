@@ -1,5 +1,6 @@
+//filterSettings.ts
 import { View } from "../Structure/View";
-import { FilterFeature, FilterSettings, FilterSettingsOverrides, FilterViewConfig, TaskFilterStatus } from "./FilterTypes";
+import { FilterFeature, FilterSettings, FilterSettingsOverrides, FilterViewConfig, TagVisibilityMode, TaskFilterStatus } from "./FilterTypes";
 
 const ALL_STATUSES: readonly TaskFilterStatus[] = [
   "unfinished",
@@ -155,4 +156,18 @@ export const neutralizeUnsupportedSettings = (
   if (features.includes("tagVisibility"))
     effectiveSettings.presentation.tags = settings.presentation.tags;
   return effectiveSettings;
+};
+
+
+// Determine tag visibility when 'Show tags' in ´automatic´ mode
+export const getEffectiveTagVisibility = (
+  settings: FilterSettings
+): Exclude<TagVisibilityMode, "automatic"> => {
+  if (settings.presentation.tags !== "automatic")
+    return settings.presentation.tags;
+  const searching =
+    settings.match.tasks.text.trim().length > 0 ||
+    settings.match.tags.pathQuery.trim().length > 0 ||
+    settings.match.tags.selectedIds.length > 0;
+  return searching ? "relevant" : "all";
 };

@@ -1,6 +1,5 @@
 //FilterBar.tsx
 import React, { useEffect, useRef, useState } from "react";
-import { getEffectiveTagVisibility } from "./taskFilter";
 import type {
   FilterBarProps,
   FilterChoice,
@@ -14,6 +13,7 @@ import type {
   TagVisibilityMode,
   TagMatchMode,
 } from "./FilterTypes";
+import { getEffectiveTagVisibility } from "./filterSettings";
 
 const statusLabels: Record<TaskFilterStatus, string> = {
   unfinished: "Unfinished",
