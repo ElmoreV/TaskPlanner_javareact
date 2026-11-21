@@ -9,10 +9,24 @@ import {
 import TaskContainerV2 from "../Tasks/TaskContainerV2.tsx";
 import TagContainer from "../Tags/TagContainerV2.tsx";
 import { generateEmptyTagV2 } from "../Tags/TagHelperV2.ts";
+import FilterBar from "../Filters/FilterBar";
+import { useTaskFilter } from "../Filters/useTaskFilter";
+import type {
+  FilterSettings,
+  FilterSettingsSetter,
+} from "../Filters/FilterTypes";
+import { View } from "../Structure/View";
 
 const TaskListV2 = (props: TaskListPropsV2) => {
   console.debug("Rendering TaskListV2");
-  const { appData, setAppData, fancy } = props;
+  const { appData, setAppData, fancy, filterSettings, setFilterSettings } =
+    props;
+  const taskFilter = useTaskFilter(
+    appData,
+    View.VIEW_ALL_TASKS,
+    filterSettings,
+    setFilterSettings
+  );
   const { tagMap, taskMap, tagTasksMap, plannedTaskIdList } = appData;
   // Invert the tagTaskMap
   // So that we have
@@ -116,6 +130,7 @@ const TaskListV2 = (props: TaskListPropsV2) => {
   };
 
   const recursiveShowTagDAG = (tagId: number) => {
+    if (!taskFilter.isTagVisible(tagMap[tagId])) return null;
     // 1. Show topic
     // 2. Show all subtopics (and their subtopics and tasks)
     // 3. Show all tasks
@@ -183,7 +198,9 @@ const TaskListV2 = (props: TaskListPropsV2) => {
 
   return (
     <div className="task-list">
-      <button onClick={addRootTagCallback}> Add new root tag </button>
+      <FilterBar taskFilter={taskFilter}>
+        <button onClick={addRootTagCallback}> Add new root tag </button>
+      </FilterBar>
       <h1>Tag Task DAG </h1>
       <ul key="root-tags">
         {showUntaggedTasks()}
@@ -205,6 +222,8 @@ interface TaskListPropsV2 {
   appData: AppData;
   setAppData: (appData: AppData) => void;
   fancy: boolean;
+  filterSettings: FilterSettings;
+  setFilterSettings: FilterSettingsSetter;
 }
 
 export { TaskListV2 };
