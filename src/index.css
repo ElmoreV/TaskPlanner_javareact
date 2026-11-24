@@ -124,13 +124,20 @@ body {
   position: sticky;
   top: 0;                 /* sticks to the top edge of the scroll container */
   z-index: 9998;            /* above list items */
+
   background: var(--color-background);
   padding: 10px 14px;
   border-radius: 12px;
+
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
-  align-items: center;
+
+  min-height: 110px; /*hack to make the selection box not move all tasks down*/
+  box-sizing: border-box; /*makes border and padding part of minimum-height*/
+  align-content: flex-start; 
+
+  align-items: flex-start;
   border: 1px solid rgba(0,0,0,0.1);
   color: var(--color-primary);
   box-shadow: 0 3px 5px rgba(0,0,0,0.15); 
@@ -169,13 +176,6 @@ body {
   grid-column: 1 / 13;
   grid-row: 3/5;
 }
-
-/* TODO: this is a hack to reverse the task list going down when selecting something
-when any layout element changes, this breaks*/
-.task-list.has-selection > ul {
-  margin-top: -17px;
-}
-
 
 .planned-list {
   max-width: 1000px;
@@ -311,9 +311,10 @@ ul {
 /* Shared filter controls use the existing task-list-header appearance. */
 /* TODO: review all of the below */
 
-/* .task-list-header .filter-actions {
-  flex-basis: 100%;
-} */
+.task-list-header .filter-actions {
+  /* flex-basis: 100%; */
+  display:contents;
+}
 /* .task-list-header label {
   display: inline-flex;
   align-items: center;
