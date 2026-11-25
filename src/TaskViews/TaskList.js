@@ -157,6 +157,7 @@ const TaskList = (props) => {
           }
         >
           <TaskContainer
+view={View.VIEW_ALL_TASKS}
             task={task}
             topic={topic}
             superTask={superTask}
@@ -296,8 +297,7 @@ const TaskList = (props) => {
           {" "}
           Add main topic
         </button>
-        <br />
-        <button className="fold_all" onClick={handleFoldAll}>
+                <button className="fold_all" onClick={handleFoldAll}>
           Fold all
         </button>
         <button className="unfold_all" onClick={handleUnfoldAll}>

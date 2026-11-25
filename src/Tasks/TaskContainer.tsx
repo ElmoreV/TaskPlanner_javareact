@@ -21,6 +21,7 @@ import {
   completeTaskV1Semipure,
 } from "./TaskModifyFuncGensV1Pure.ts";
 import { V1_Task } from "../Structure/V1_types.ts";
+import { TASK_CONFIG_BY_VIEW } from "./taskSettings";
 
 class SelectedCategoryTask {
   constructor(taskId, topicId, topicViewIndex, superTaskId) {
@@ -111,6 +112,7 @@ const useCallbackifyTopics = (fn, setAppData) => {
 
 export default function TaskContainer(props) {
   const {
+view,
     task,
     topic,
     superTask,
@@ -120,6 +122,12 @@ export default function TaskContainer(props) {
     setSelectedTasks,
     fancy,
   } = props;
+
+  const viewConfig = TASK_CONFIG_BY_VIEW[view];
+  if (!viewConfig) {
+    throw new Error(`View ${view} does not define task features.`);
+  }
+  const { features } = viewConfig;
 
   const findTopicViewIdx = (topicId: number, task: V1_Task) => {
     return task.topicViewIndices[
@@ -181,22 +189,34 @@ export default function TaskContainer(props) {
       scheduled={task.scheduled}
       repeated={task.repeated}
       taskTopics={task.topics}
-      taskLastCompletion={task.lastFinished}
-      setTaskFinishStatus={setTaskFinishStatusCallback}
+      taskLastCompletion={
+        features.includes("lastCompletion") ? task.lastFinished : undefined
+}
+      setTaskFinishStatus={
+        features.includes("finishStatus") ? setTaskFinishStatusCallback : undefined
+}
       currentTopicViewIndex={topic && findTopicViewIdx(topic.id, task)}
       currentTopicName={topic && topic.name}
       currentTopicId={topic && topic.id}
       currentSuperTaskId={superTask && superTask.id}
-      setTaskName={setTaskNameCallback}
-      deleteTask={deleteTask}
-      addSubTask={addNewSubtask}
+      setTaskName={features.includes("rename") ? setTaskNameCallback : undefined}
+      deleteTask={features.includes("delete") ? deleteTask : undefined}
+      addSubTask={features.includes("addSubtask") ? addNewSubtask : undefined}
       hasSubTasks={task.subTaskIds && task.subTaskIds.length > 0}
-      completeTask={completeTaskCallback}
-      plan={planTaskCallback}
-      unplan={unplanTaskCallback}
-      toggleRepeatTask={toggleRepeatTaskCallback}
-      addToSelection={addTaskToSelectionCallback}
-      deleteFromSelection={deleteTaskFromSelectionCallback}
+      completeTask={
+        features.includes("complete") ? completeTaskCallback : undefined
+}
+      plan={features.includes("plan") ? planTaskCallback : undefined}
+      unplan={features.includes("plan") ? unplanTaskCallback : undefined}
+      toggleRepeatTask={
+        features.includes("repeat") ? toggleRepeatTaskCallback : undefined
+}
+      addToSelection={
+        features.includes("selection") ? addTaskToSelectionCallback : undefined
+}
+      deleteFromSelection={
+        features.includes("selection") ? deleteTaskFromSelectionCallback : undefined
+}
       selected={
         selectedTasks.find(
           (st) =>
@@ -210,12 +230,14 @@ export default function TaskContainer(props) {
       selectedTasks={selectedTasks}
       // addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, topic && findTopicViewIdx(topic.id, task), superTask && superTask.id)}
       // deleteFromSelection={() => deleteTaskFromSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, superTask && superTask.id)}
-      moveTasks={moveTasks}
-      duplicateTask={duplicateTask}
+      moveTasks={features.includes("move") ? moveTasks : undefined}
+      duplicateTask={features.includes("duplicate") ? duplicateTask : undefined}
       fancy={fancy}
-      toggleFold={toggleFoldTaskCallback}
+      toggleFold={
+        features.includes("fold") ? toggleFoldTaskCallback : undefined
+}
       unfolded={task.unfolded}
-      setDueTime={setTaskDueTimeCallback}
+      setDueTime={features.includes("deadline") ? setTaskDueTimeCallback : undefined}
       currentDueTime={task.dueTime}
     />
   );

@@ -381,14 +381,16 @@ const Task = (props) => {
     return wrapper;
   };
 
-  const dragHandlers = isDraggingAllowed
+  const dragHandlers =
+isDraggingAllowed && moveTasks
     ? {
         draggable: true,
         onDragStart: handleDragStart,
         onDragEnd: handleDragEnd,
       }
-    : {};
-  const dropHandlers = isDragging
+    : undefined;
+  const dropHandlers =
+isDragging || (!moveTasks && !duplicateTask)
     ? {}
     : {
         onDrop: handleDrop,
@@ -430,13 +432,14 @@ const Task = (props) => {
   ) {
     fullName += " / " + translateLastCompletedDatetime(taskLastCompletion);
   }
-  const duplicateDragHandlers = isDraggingAllowed
+  const duplicateDragHandlers =
+isDraggingAllowed && duplicateTask
     ? {
         draggable: true,
         onDragStart: handleDuplicateDragStart,
         onDragEnd: handleDuplicateDragEnd,
       }
-    : {};
+    : undefined;
 
   return (
     <TaskContent
@@ -453,12 +456,12 @@ const Task = (props) => {
       textEditHandlers={textEditHandlers}
       inputRef={inputRef}
       isEditing={isEditing}
-      toggleEdit={toggleEdit}
+      toggleEdit={setTaskName ? toggleEdit : undefined}
       deleteTask={deleteTask && unselect(() => deleteTask(id))}
       addSubTask={addSubTask && unselect(() => addSubTask(id))}
       completeTask={completeTask && (() => completeTask(id))}
-      markTaskIrrelevant={markTaskIrrelevant}
-      markTaskImpossible={markTaskImpossible}
+      markTaskIrrelevant={setTaskFinishStatus ? markTaskIrrelevant : undefined}
+      markTaskImpossible={setTaskFinishStatus ? markTaskImpossible : undefined}
       taskFinishStatus={
         taskFinishStatus
           ? taskFinishStatus
@@ -467,20 +470,29 @@ const Task = (props) => {
             : FinishedState.NotFinished
       }
       planned={planned}
-      plan={() => {
+      plan={
+        plan &&
+        (() => {
         plan(id);
-      }}
-      unplan={() => {
+      })
+}
+      unplan={
+        unplan &&
+        (() => {
         unplan(id);
-      }}
+      })
+}
       repeated={repeated}
-      toggleRepeatTask={() => {
+      toggleRepeatTask={
+        toggleRepeatTask &&
+        (() => {
         toggleRepeatTask(id);
-      }}
+      })
+}
       duplicateDragHandlers={duplicateDragHandlers}
       fancy={fancy}
       topicCount={taskTopics.length}
-      onDueDateChange={onDueDateChange}
+      onDueDateChange={setDueTime ? onDueDateChange : undefined}
       currentDueDateStr={dueTimeStr}
     />
   );
