@@ -154,7 +154,7 @@ const removeTaskInstanceFromTopicV1 = (
 
   //Shift down all tasks at or above the topicOrderIndex
   tasksInTopic.forEach((taskInTopic) => {
-    let topicIdx = taskInTopic.topics.find(
+    let topicIdx = taskInTopic.topics.findIndex(
       (taskTopicId) => topicId === taskTopicId
     );
     if (taskInTopic.topicViewIndices[topicIdx] > topicViewIndex) {
