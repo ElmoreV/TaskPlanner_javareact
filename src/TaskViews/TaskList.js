@@ -45,7 +45,6 @@ const TaskList = (props) => {
 
   const [selectedTasks, setSelectedTasks] = useState([]);
   const [runOnce, setRunOnce] = useState(false);
-  const [needTransitiveUpdate, setNeedTransitiveUpdate] = useState(true);
 
   const testFunction = () => {
     console.log(tasks);
@@ -211,49 +210,6 @@ const TaskList = (props) => {
     console.log("Running sanitize");
     sanitizeTopicOrderIndex(topics, tasks, setTasks);
     // setRunOnce(runOnce + 1)
-  }
-
-  const updateTransitiveDueDate_r = (subTaskIds) => {
-    return tasks
-      .filter((task) => subTaskIds.includes(task.id))
-      .reduce((acc, task) => {
-        let newDueTime = updateTransitiveDueDate_r(task.subTaskIds);
-        acc = safe_min(acc, task.dueTime);
-        acc = safe_min(acc, newDueTime);
-        console.log(acc);
-        return acc;
-      }, undefined);
-  };
-
-  const safe_min = (a, b) => {
-    if (a === undefined && b === undefined) {
-      return undefined;
-    }
-    if (a === undefined) {
-      return b;
-    }
-    if (b === undefined) {
-      return a;
-    }
-    return Math.min(a, b);
-  };
-
-  const updateTransitiveDueDate = () => {
-    tasks.forEach((task) => {
-      console.log(task.name);
-      task.transitiveDueTime = safe_min(
-        task.dueTime,
-        updateTransitiveDueDate_r(task.subTaskIds)
-      );
-      console.log(task.dueTime);
-      console.log(task.transitiveDueTime);
-    });
-  };
-
-  if (needTransitiveUpdate) {
-    console.log("Updating transitive ADG data");
-    updateTransitiveDueDate();
-    setNeedTransitiveUpdate(false);
   }
 
   // TODO: add duplicate id recognition and resolving

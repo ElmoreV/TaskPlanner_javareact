@@ -144,19 +144,54 @@ export const getDisplayTaskIds = (
 };
 
 
-export const getTransitiveDueTime = (
-  id: TaskID,
+export const getTransitiveDueTimes = (
   tasksById: ReadonlyMap<TaskID, FilterTask>,
   taskLinks: GraphLinks<TaskID>
-): number => {
-  // Earliest deadline timestamp in milliseconds, including this task and its subtasks.
-  // Infinity means no valid deadline was found.
-  return [...collectReachableIds([id], taskLinks.children)]
-    .map((id) => tasksById.get(id)!.dueTime)
-    .filter((date) => date !== undefined && date !== null)
-    .map((date) =>
-      date instanceof Date ? date.getTime() : new Date(date!).getTime()
-    )
-    .filter(Number.isFinite)
-    .reduce((earliest, date) => Math.min(earliest, date), Infinity);
+): Map<TaskID, number> => {
+  const dueTimes = new Map<TaskID, number>();
+  const remainingSubtaskCounts = new Map<TaskID, number>();
+  const readyTaskIds: TaskID[] = [];
+
+  // for each task:
+  // - validate task.dueTime
+  // - set to Infinity if weird 
+  // - marks tasks without subtasks for starting propagation.
+  for (const [id, task] of tasksById) {
+    // Parse strings/numbers as dates; null and undefined mean no deadline.
+    const timestamp = task.dueTime == null
+      ? Infinity
+      : task.dueTime instanceof Date
+        ? task.dueTime.getTime()
+        : new Date(task.dueTime).getTime();
+    // Ignore invalid dates; Infinity means no valid deadline was found.
+    dueTimes.set(id, Number.isFinite(timestamp) ? timestamp : Infinity);
+    // Graph links omit missing task references.
+    const subtaskCount = taskLinks.children.get(id)!.length;
+    remainingSubtaskCounts.set(id, subtaskCount);
+    // if the task has no subtasks, it is immediately ready
+    if (subtaskCount === 0) readyTaskIds.push(id);
+  }
+
+  // Propagate the due times of the tasks without subtasks upwards
+  // the readyTasksIds.length can change during the loop!
+  for (let index = 0; index < readyTaskIds.length; index++) {
+    // go through the ready tasks
+    const id = readyTaskIds[index];
+    const dueTime = dueTimes.get(id)!;
+    // for each supertask of the ready task
+    for (const supertaskId of taskLinks.parents.get(id)!) {
+      // propagate the dueTime
+      dueTimes.set(supertaskId, Math.min(
+        dueTimes.get(supertaskId)!, dueTime!
+      ));
+      // do remSubtaskCnt[superTaskId]-- 
+      const remaining = remainingSubtaskCounts.get(supertaskId)! - 1;
+      remainingSubtaskCounts.set(supertaskId, remaining);
+      if (remaining === 0) readyTaskIds.push(supertaskId);
+    }
+  }
+
+  if (readyTaskIds.length !== tasksById.size)
+    throw new Error("Cannot calculate effective due time: task relationships contain a cycle.");
+  return dueTimes;
 };

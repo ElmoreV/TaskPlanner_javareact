@@ -1,7 +1,7 @@
 //taskFilter.ts
 import { convertDueDateNameToSeconds, isTaskDueIn } from "../Timing";
 import { getTagPaths } from "../Tags/TagHelpers";
-import { collectReachableIds, createGraphLinks, getDisplayTaskIds, getTaskFilterStatuses, getTransitiveDueTime, GraphLinks } from "./filterGraph";
+import { collectReachableIds, createGraphLinks, getDisplayTaskIds, getTaskFilterStatuses, getTransitiveDueTimes, GraphLinks } from "./filterGraph";
 import { createFilterSettings, getEffectiveTagVisibility } from "./filterSettings";
 import type { TaskID, TagID } from "../Structure/IDs";
 import type {
@@ -85,9 +85,10 @@ export const filterTasks = (
     taskQuery.deadline.kind === "within"
       ? convertDueDateNameToSeconds(taskQuery.deadline.interval)
       : undefined;
-
-
-
+  // Calculate once per filtering pass; saved transitiveDueTime values are not refreshed.
+  const effectiveDeadlineTimestamps = taskQuery.deadline.kind === "any"
+    ? undefined
+    : getTransitiveDueTimes(tasksById, taskLinks);
   const checkIfTaskMatches = (
     task: FilterTask,
     taskQuery: TaskMatchCriteria,
@@ -104,10 +105,7 @@ export const filterTasks = (
     );
     const supertaskIds = taskLinks.parents.get(task.id)!;
     const subtaskIds = taskLinks.children.get(task.id)!;
-    const deadlineTimestamp =
-      taskQuery.deadline.kind === "any"
-        ? Infinity
-        : getTransitiveDueTime(task.id, tasksById, taskLinks);
+    const deadlineTimestamp = effectiveDeadlineTimestamps?.get(task.id) ?? Infinity;
     if (!taskQuery.statuses.includes(filterStatusesByTaskId.get(task.id)!))
       return false;
     if (!matchesWords(task.name, taskQuery.text)) return false;
@@ -131,6 +129,7 @@ export const filterTasks = (
     if (
       deadlineFilterWindowSeconds &&
       !isTaskDueIn(
+        // Temporary timestamp only; the saved task field may be stale or absent.
         { transitiveDueTime: deadlineTimestamp },
         new Date(now),
         deadlineFilterWindowSeconds
