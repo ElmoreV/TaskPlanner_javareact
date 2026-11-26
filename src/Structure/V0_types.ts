@@ -12,7 +12,7 @@ interface V0_Task {
   key: number;
   topics: string[]; // matched to topic.title
   completed: boolean;
-  thisWeek: boolean;
+  thisWeek: boolean; // true=planned
 }
 
 export { V0_Topic, V0_Task };

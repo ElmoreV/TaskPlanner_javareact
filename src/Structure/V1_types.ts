@@ -15,11 +15,11 @@ interface V1_Task {
   subTaskIds: number[];
   completed: boolean;
   finishStatus: FinishedState;
-  thisWeek: boolean;
-  repeated: boolean;
-  scheduled: boolean;
-  weekOrderIndex: number;
-  unfolded: boolean;
+  thisWeek: boolean; //true=planned
+  repeated: boolean; 
+  scheduled: boolean; //true = scheduled
+  weekOrderIndex: number; //order in the planned list
+  unfolded: boolean; 
 
   dueTime: Date | undefined;
   transitiveDueTime: Date | undefined;
