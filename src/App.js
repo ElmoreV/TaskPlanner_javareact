@@ -131,6 +131,16 @@ function App() {
           )}
           {view === View.VIEW_DAILY_PLANNING}
           {view === View.VIEW_COMPLETE_TASKS}
+          {view === View.VIEW_TAG_ALL_TASKS && (
+            <AllTasksList
+              appData={appData}
+              setAppData={setAppData}
+              fancy={fancy}
+              filterSettings={filterSettingsByView[view]}
+              setFilterSettings={setCurrentViewFilterSettings}
+            />
+          )}
+
           <div classStr="settingsUI">
             {/* <label><input
               type="checkbox"
