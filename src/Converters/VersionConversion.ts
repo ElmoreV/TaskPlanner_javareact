@@ -37,6 +37,7 @@ export const convertAppdata = (
     return appData;
   }
   if (targetVersion === currentVersion) {
+    // Task relationships pass through without a cycle check.
     console.log("Target version is the same as current version");
     console.log("Returning original data");
     appData.version = currentVersion;

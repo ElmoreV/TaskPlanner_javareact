@@ -75,6 +75,7 @@ const insertTaskInstanceIntoTopicV1 = (
 // Does not check if supertask exists
 // Assumes task ids are unique
 // Returns a shallow copy with the changed tasks
+// Caller must preserve the DAG; no cycle check here.
 const insertTaskInstanceIntoTaskV1 = (
   tasks: V1_Task[],
   subTaskId: number,
@@ -94,6 +95,7 @@ const insertTaskInstanceIntoTaskV1 = (
 // Does not check if supertask exists
 // Assumes task ids are unique
 // Returns a shallow copy with the changed tasks
+// Caller must preserve the DAG; no cycle check here.
 const insertTaskInstanceIntoTaskV1Idempotent = (
   tasks: V1_Task[],
   subTaskId: number,

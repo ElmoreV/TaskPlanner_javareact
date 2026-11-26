@@ -88,6 +88,7 @@ const getMoveTasks = (
       let sourceTaskId = sourceTaskIds[idx];
       let moveAllowed = true;
       if (targetTaskId) {
+        // Wrong direction for cycle prevention; failure only logs a warning.
         moveAllowed = !isTaskInSubTaskTree(tasks, targetTaskId, taskId);
       }
       if (!moveAllowed) {

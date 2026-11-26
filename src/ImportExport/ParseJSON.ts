@@ -7,6 +7,7 @@ export const parseJSON = (
   targetVersion: Version
 ): AppData | undefined => {
   let importedData = JSON.parse(jsonStr);
+  // Imported task relationships are not checked for cycles.
   let convertedAppData = convertAppdata(importedData, targetVersion);
   return convertedAppData;
 };

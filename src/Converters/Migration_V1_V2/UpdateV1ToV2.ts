@@ -123,7 +123,7 @@ export const convert_v1_to_v2 = (
   // and order them according to weekOrderIndex
   // How to handle collisions?
   const newPlannedTaskIds: number[] = tasksV1
-    .filter((task) => task.thisWeek) //Only take tasks that are planned
+    .filter((task) => task.thisWeek) //Only take tasks that are planned (thisWeek=true)
     .map((task) => ({
       taskId: task.id,
       order: task.weekOrderIndex,

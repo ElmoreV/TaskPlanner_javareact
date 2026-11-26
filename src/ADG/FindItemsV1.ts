@@ -18,6 +18,7 @@ export const createParentTaskPathLookupV1 = (
 
   // Calculate full paths only when requested, reusing shared ancestors and
   // repeated task rows for as long as the caller retains this lookup.
+  // Assumes a DAG; cycles make cached paths depend on lookup order.
   const cachedPaths = new Map<TaskID, string[]>();
   // Example: grandparent A -> parent B -> { id: 44, name: "I'm a leaf!" }.
   // getPaths(44) returns ["grandparent A/parent B"], excluding the leaf task's name.
@@ -28,10 +29,11 @@ export const createParentTaskPathLookupV1 = (
   ): string[] => {
     const cached = cachedPaths.get(taskId);
     if (cached !== undefined) return cached;
-    const branch = [...ancestors, taskId];
+    const currentPath = [...ancestors, taskId];
     const paths = (parentsById.get(taskId) || []).flatMap((parent) => {
-      if (branch.includes(parent.id)) return [];
-      const prefixes = getPaths(parent.id, branch);
+      // Stops cyclic traversal; does not validate relationships.
+      if (currentPath.includes(parent.id)) return [];
+      const prefixes = getPaths(parent.id, currentPath);
       return prefixes.length>0
         ? prefixes.map((prefix) => `${prefix}/${parent.name}`)
         : [parent.name];
@@ -127,6 +129,7 @@ const findTopicsByTaskIdV1 = (
   return topics;
 };
 
+// Assumes a DAG; no cycle guard.
 export const isTaskInSubTaskTree: (
   tasks: V1_Task[],
   rootTaskId: number,

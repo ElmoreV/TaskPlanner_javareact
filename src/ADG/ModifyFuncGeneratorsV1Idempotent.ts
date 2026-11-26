@@ -26,6 +26,7 @@ const moveTaskInstanceV1Pure = (
   let newTasks = [...tasks];
   let moveAllowed = true;
   if (targetLocation.type === "task") {
+    // Cycle prevention disabled; should check reachability from task to target.
     // TODO: This is actually not the right check.
     // Something like moving task A into  Task1 should be possible
     // even if TaskA in Task2 in Task1
@@ -302,6 +303,7 @@ const duplicateTaskV1Pure = (
       );
     } else if (targetSuperTaskId) {
       targetSuperTask = findTaskByTaskIdV1(newTasks, targetSuperTaskId);
+      // Cycle prevention disabled for this added relationship too.
       let moveAllowed = true; // !isTaskInSubTaskTree(
       //   newTasks,
       //   targetSuperTaskId,
