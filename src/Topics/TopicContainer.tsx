@@ -16,7 +16,7 @@ import {
   getUnfoldAll,
   getFoldAll,
 } from "../Topics/TopicModifyFuncGens.js";
-import Topic from "./Topic.js";
+import Topic from "./Topic.jsx";
 
 export default function TopicContainer(props) {
   const { topic, appData, setAppData, selectedTasks, fancy } = props;

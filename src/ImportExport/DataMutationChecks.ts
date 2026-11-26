@@ -6,7 +6,7 @@ import { TaskMap, TagMap, TagTasksMap } from "../Structure/V2_types.ts";
 import { V1_Task, V1_Topic } from "../Structure/V1_types.ts";
 import { V0_Task, V0_Topic } from "../Structure/V0_types.ts";
 import { AppData, AppDataV1, AppDataV2 } from "../Structure/AppDataTypes.ts";
-var hash = require("object-hash");
+import hash from "object-hash";
 
 /*
     ///////////

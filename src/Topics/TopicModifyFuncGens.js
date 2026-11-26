@@ -1,5 +1,4 @@
 import { findTopicByTopicIdV1 } from "../ADG/FindItemsV1.ts";
-import { AppDataV1 } from "../Structure/AppDataTypes.ts";
 
 //Recursive function to handle all toggles
 const toggleFold_r = (topics, id) => {

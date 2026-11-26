@@ -6,8 +6,10 @@
 .pnp.js
 
 # testing
+/.vite/
 /coverage
 /src/__tests__
+*.tsbuildinfo
 
 # production
 /build
@@ -25,3 +27,8 @@ yarn-error.log*
 
 # Ghostwriter
 *.backup
+
+#unused/previous package managers
+/package-lock.json
+/yarn.lock
+/pnpm-lock.yaml
