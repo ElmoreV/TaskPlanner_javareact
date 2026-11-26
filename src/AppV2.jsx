@@ -1,12 +1,10 @@
 import ViewSelector from "./ViewSelector";
-import TaskList from "./TaskViews/TaskList.js";
-import AllTasksList from "./TaskViews/AllTasksList";
-import TaskGraphView from "./TaskViews/TaskGraphView.js";
-import PlannedList from "./TaskViews/PlannedList.js";
+import TaskList from "./TaskViews/TaskList.jsx";
+import PlannedList from "./TaskViews/PlannedList.jsx";
 import { useState } from "react";
 import ImportExport from "./ImportExport/ImportExport.tsx";
 import Theme from "./Theme";
-import AddTaskView from "./TaskViews/NewTaskList.js";
+import AddTaskView from "./TaskViews/NewTaskList.jsx";
 import { initialTasksV1, initialTopicsV1 } from "./InitialState_V1.ts";
 import {
   convert_v1_to_v2,
@@ -19,37 +17,24 @@ import {
   initialPlannedTaskIdList,
   initialTagTasks,
 } from "./InitialState_V2.ts";
+import { TaskListV2 } from "./TaskViews/TaskListV2.tsx";
 import { Version } from "./Structure/Versions.ts";
 import { View } from "./Structure/View";
 
 // 1. Go through all tasks and search if their .supertasks list contains [task.id] N*E(M) , E(M) is avg of supertasks per task
 // 2. Go through all tasks and search if the ids match one of the .subtasks List N*P P is # of subtasks in task
 
-// type AppData = {
-//   topics: V1_Topic[];
-//   tasks: V1_Task[];
-// }
-
-function App() {
+function AppV2() {
   console.debug("Rendering App");
 
   const [debugMode, setDebugMode] = useState(false);
 
-  //v1
   const [appData, setAppData] = useState({
-    topics: initialTopicsV1,
-    tasks: initialTasksV1,
+    tagMap: initialTags,
+    taskMap: initialTasks,
+    tagTasksMap: initialTagTasks,
+    plannedTaskIdList: initialPlannedTaskIdList,
   });
-
-  // const [topics, setTopics] = useState(initialTopicsV1);
-  // const [tasks, setTasks] = useState(initialTasksV1)
-
-  // const  [tasks, setTasks] = useState([])
-  // Should use generation functions here, to make it immediately issueless
-
-  // const [topics,setTopics] = useState([])
-  // createNewRootTopic(topics,...)
-  // should up generation functions here
 
   const [view, setView] = useState(View.VIEW_ALL_TASKS);
   const [fancy, setFancy] = useState(true);
@@ -65,20 +50,6 @@ function App() {
 
   const onMakeFancyChange = () => {
     setFancy(!fancy);
-  };
-
-  const onTest2 = () => {
-    ensureRoundtripStability(appData.tasks, appData.topics);
-    const { newTaskMap, newTagMap, newTagTaskMap, newPlannedTaskIds } =
-      convert_v1_to_v2(appData.tasks, appData.topics);
-    const res2 = convert_v2_to_v1(
-      newTaskMap,
-      newTagMap,
-      newTagTaskMap,
-      newPlannedTaskIds
-    );
-    const { topicsV1, tasksV1 } = res2;
-    setAppData({ topics: topicsV1, tasks: tasksV1 });
   };
 
   const onDarkModeChange = () => {
@@ -101,55 +72,35 @@ function App() {
           <ImportExport
             appData={appData}
             setAppData={setAppData}
-            targetVersion={Version.V1}
+            targetVersion={Version.V2}
           />
-          <ViewSelector viewSetter={setView} />
-          {view === View.VIEW_ADD_TASKS && (
-            <AddTaskView
-              appData={appData}
-              setAppData={setAppData}
-              fancy={fancy}
-              filterSettings={filterSettingsByView[view]}
-              setFilterSettings={setCurrentViewFilterSettings}
-            />
-          )}
-          {view === View.VIEW_ALL_TASKS && (
-            <TaskList
-              appData={appData}
-              setAppData={setAppData}
-              fancy={fancy}
-              filterSettings={filterSettingsByView[view]}
-              setFilterSettings={setCurrentViewFilterSettings}
-            />
-          )}
-          {view === View.VIEW_PLANNED_TASKS && (
-            <PlannedList
-              appData={appData}
-              setAppData={setAppData}
-              fancy={fancy}
-              filterSettings={filterSettingsByView[view]}
-              setFilterSettings={setCurrentViewFilterSettings}
-            />
-          )}
-          {view === View.VIEW_DAILY_PLANNING}
-          {view === View.VIEW_COMPLETE_TASKS}
-{view === View.VIEW_TASK_GRAPH && (
-            <TaskGraphView
-              appData={appData}
-              filterSettings={filterSettingsByView[view]}
-              setFilterSettings={setCurrentViewFilterSettings}
-            />
-          )}
-          {view === View.VIEW_TAG_ALL_TASKS && (
-            <AllTasksList
-              appData={appData}
-              setAppData={setAppData}
-              fancy={fancy}
-              filterSettings={filterSettingsByView[view]}
-              setFilterSettings={setCurrentViewFilterSettings}
-            />
-          )}
 
+          <ViewSelector viewSetter={setView} />
+          {/* {view === View.VIEW_ADD_TASKS && <AddTaskView
+            tasks={tasks}
+            setTasks={setTasks}
+            topics={topics}
+            setTopics={setTopics}
+            fancy={fancy}
+          />} */}
+          {view === View.VIEW_ALL_TASKS && (
+            <TaskListV2
+              appData={appData}
+              setAppData={setAppData}
+              fancy={fancy}
+              filterSettings={filterSettingsByView[view]}
+              setFilterSettings={setCurrentViewFilterSettings}
+            />
+          )}
+          {/* {view === View.VIEW_PLANNED_TASKS && <PlannedList
+            tasks={tasks}
+            setTasks={setTasks}
+            topics={topics}
+            setTopics={setTopics}
+            fancy={fancy}
+          />}
+          {view === View.VIEW_DAILY_PLANNING}
+          {view === View.VIEW_COMPLETE_TASKS} */}
           <div classStr="settingsUI">
             {/* <label><input
               type="checkbox"
@@ -190,10 +141,9 @@ function App() {
           />
           Debug Mode
         </label>
-        <button onClick={onTest2}>Test2</button>
       </div>
     </Theme>
   );
 }
 
-export default App;
+export default AppV2;
