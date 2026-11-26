@@ -32,10 +32,10 @@ and it will start a server on localhost:3000
 
 ## Features
 
-- A by-topic view of all tasks. Tasks can be in multiple topic. Tasks can have subtasks. Topics can have subtopics.
-- A weekly view, where you can collect all tasks to be done this week. Can support tasks that are not visible in the by-topic view.
-- A daily view, where you can collect all tasks in a timed fashion. Can also support tasks not visible in the weekly and by-topic view.
-
+- A per-topic view of all tasks. Tasks can be in multiple topic. Tasks can have subtasks. Topics can have subtopics.
+- A planned view, where you can collect all tasks to be done this week. Can support tasks that are not visible in the per-topic view.
+- A schedule view, where you can schedule all planned tasks on a calendar. Can also support tasks not visible in the planned and per-topic view.
+- A list of all tasks, where you can easily look for groups of (sub)tasks that have certain attributes. Also pretty easy for tagging all tasks.
 
 ## Future plans
 
