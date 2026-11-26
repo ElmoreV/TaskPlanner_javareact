@@ -1,5 +1,6 @@
 import ViewSelector from "./ViewSelector";
 import TaskList from "./TaskViews/TaskList.js";
+import AllTasksList from "./TaskViews/AllTasksList";
 import PlannedList from "./TaskViews/PlannedList.js";
 import { useState } from "react";
 import ImportExport from "./ImportExport/ImportExport.tsx";
