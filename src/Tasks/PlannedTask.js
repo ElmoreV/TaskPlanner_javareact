@@ -222,6 +222,9 @@ const PlannedTask = (props) => {
     fullName += " / " + translateLastCompletedDatetime(taskLastCompletion);
   }
 
+  // note: this builds all paths for all topics, and just picks out this one
+  // horribly wasteful, whenever this view slows down, look here.
+  // and probably cache topicPaths at the start.
   let topicPath = getTopicPathByTopicIdV1(topics, taskTopics[0]);
 
   // Put focus on text editor when editing is enabled

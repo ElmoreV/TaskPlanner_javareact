@@ -1,5 +1,24 @@
 import { findTopicByTopicIdV1 } from "../ADG/FindItemsV1.ts";
 import { V1_Task, V1_Topic } from "../Structure/V1_types.ts";
+import { getTagPaths } from "../Tags/TagHelpers";
+import type { TagPathSource } from "../Tags/TagHelpers";
+
+export const getTopicRecordsV1 = (topics: readonly V1_Topic[]): TagPathSource[] => {
+  const records: TagPathSource[] = [];
+  const visitedIds = new Set<number> ();
+  const visit = (topic: V1_Topic): void => {
+    if (visitedIds.has(topic.id)) return;
+    visitedIds.add(topic.id);
+    records.push({
+      id: topic.id,
+      name: topic.name,
+      childIds: (topic.subtopics || []).map((subtopic: V1_Topic) => subtopic.id),
+    });
+    (topic.subtopics || []).forEach(visit);
+  };
+  topics.forEach(visit);
+  return records;
+};
 
 const getFreeTaskIdV1 = (tasks: V1_Task[]) => {
   return 1 + tasks.reduce((max_id, task) => Math.max(max_id, task.id), 0);
@@ -120,38 +139,9 @@ const getTopicTree_by_name_V1 = (topics: V1_Topic[], topic_name: string) => {
   }
 };
 
-const getTopicPathByTopicIdRecursive = (topic: V1_Topic, topicId: number) => {
-  let foundTopicId = false;
-  let nextString = "";
-  if (topic.id == topicId) {
-    nextString = topic.name;
-    foundTopicId = true;
-  } else {
-    let strings = topic.subtopics
-      .map((t) => getTopicPathByTopicIdRecursive(t, topicId))
-      .filter((s) => s.length > 0);
-    if (strings.length > 0) {
-      nextString = topic.name + "/" + strings[0];
-      foundTopicId = true;
-    }
-  }
-  if (!foundTopicId) {
-    return "";
-  } else {
-    return nextString;
-  }
-};
-
-const getTopicPathByTopicIdV1 = (topics: V1_Topic[], topicId: number) => {
-  let strings = topics
-    .map((t) => getTopicPathByTopicIdRecursive(t, topicId))
-    .filter((s) => s.length > 0);
-  if (strings.length > 0) {
-    return strings[0];
-  } else {
-    return "";
-  }
-};
+const getTopicPathByTopicIdV1 = (topics: V1_Topic[], topicId: number): string =>
+  getTagPaths(getTopicRecordsV1(topics)).find((topic) => topic.id === topicId)
+    ?.path ?? "";
 
 // const generateDefaultTask = (tasks,id,topic,completed,planned,repeated){
 //     let newTask = {

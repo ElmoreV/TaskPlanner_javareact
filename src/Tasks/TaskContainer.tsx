@@ -6,6 +6,7 @@ import {
   addNewSubtaskV1Pure,
   duplicateTaskV1Pure,
   moveTasksV1Pure,
+setTaskTopicV1Pure,
 } from "../ADG/ModifyFuncGeneratorsV1Idempotent.ts";
 
 import Task from "./Task.tsx";
@@ -170,6 +171,7 @@ view,
 
   const moveTasks = useCallbackifyTopics(moveTasksV1Pure, setAppData);
   const duplicateTask = useCallbackifyTopics(duplicateTaskV1Pure, setAppData);
+const setTaskTopicCallback = useCallbackifyTopics(setTaskTopicV1Pure, setAppData);
 
   const addTaskToSelectionCallback = useCallbackifySelectedTasks(
     addTaskToSelection,

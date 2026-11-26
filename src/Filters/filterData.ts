@@ -1,5 +1,6 @@
 //filterData.ts
 import { FinishedState } from "../Structure/TaskInterfaces";
+import { getTopicRecordsV1 } from "../Topics/TopicHelperV1";
 import type { V1_Task, V1_Topic } from "../Structure/V1_types";
 import type { Task, TaskMap, TagMap, TagTasksMap } from "../Structure/V2_types";
 import type { TaskID, TagID } from "../Structure/IDs";
@@ -7,7 +8,7 @@ import type {
   FilterData,
   FilterTag,
   FilterTask,
-  } from "./FilterTypes";
+} from "./FilterTypes";
 
 export interface V1FilterSource {
   tasks?: readonly V1_Task[];
@@ -47,19 +48,8 @@ export const adaptV1FilterData = ({
   tasks = [],
   topics = [],
 }: V1FilterSource): FilterData => {
-  const tags: FilterTag[] = [];
-  const visit = (topic: V1_Topic): void => {
-    if (tags.some((tag) => tag.id === topic.id)) return;
-    tags.push({
-      id: topic.id,
-      name: topic.name,
-      childIds: (topic.subtopics || []).map((tag) => tag.id),
-    });
-    (topic.subtopics || []).forEach(visit);
-  };
-  topics.forEach(visit);
   return {
-    tags,
+    tags: getTopicRecordsV1(topics) as FilterTag[],
     tasks: tasks.map((task) => ({
       ...getCommonTaskFields(task),
       childIds: (task.subTaskIds || []) as TaskID[],
@@ -77,7 +67,7 @@ export const adaptV2FilterData = ({
 }: V2FilterSource): FilterData => {
   const memberships = new Map<TaskID, TagID[]>();
   Object.entries(tagTasksMap).forEach(([tagId, taskIds]) => {
-(taskIds as TaskID[]).forEach((id) => {
+    (taskIds as TaskID[]).forEach((id) => {
       if (!memberships.has(id)) memberships.set(id, []);
       memberships.get(id)!.push(Number(tagId) as TagID);
     });

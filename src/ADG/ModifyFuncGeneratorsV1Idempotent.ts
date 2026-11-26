@@ -382,7 +382,31 @@ const deleteTaskV1Pure = (tasks: V1_Task[], id: number) => {
   return newTasks;
 };
 
+const setTaskTopicV1Pure = (
+  topics: V1_Topic[],
+  tasks: V1_Task[],
+  taskId: number,
+  topicId: number,
+  assigned: boolean
+): V1_Task[] => {
+  const task = findTaskByTaskIdV1(tasks, taskId);
+  if (!task || !findTopicByTopicIdV1(topics, topicId)) return tasks;
+  if (task.topics.includes(topicId) === assigned) return tasks;
+
+  // Atomic operations mutate task objects and membership arrays.
+  const nextTasks = tasks.map((entry) => ({
+    ...entry,
+    topics: [...entry.topics],
+    topicViewIndices: [...entry.topicViewIndices],
+  }));
+
+  return assigned
+    ? insertTaskInstanceIntoTopicV1(nextTasks, taskId, topicId, 1)
+    : removeTaskInstanceFromTopicV1(nextTasks, taskId, topicId);
+};
+
 export { deleteTaskV1Pure };
 export { duplicateTaskV1Pure };
 export { moveTasksV1Pure };
 export { addNewSubtaskV1Pure };
+export { setTaskTopicV1Pure };

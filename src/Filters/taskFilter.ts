@@ -1,5 +1,6 @@
 //taskFilter.ts
 import { convertDueDateNameToSeconds, isTaskDueIn } from "../Timing";
+import { getTagPaths } from "../Tags/TagHelpers";
 import { collectReachableIds, createGraphLinks, getDisplayTaskIds, getTaskFilterStatuses, getTransitiveDueTime, GraphLinks } from "./filterGraph";
 import { createFilterSettings, getEffectiveTagVisibility } from "./filterSettings";
 import type { TaskID, TagID } from "../Structure/IDs";
@@ -10,7 +11,7 @@ import type {
   FilterTag,
   SelectableFilterTag,
   FilterTask,
-    TaskMatchCriteria,
+  TaskMatchCriteria,
   TagMatchCriteria,
 } from "./FilterTypes";
 
@@ -53,7 +54,8 @@ export const filterTasks = (
   const tagQuery: TagMatchCriteria = settings.match.tags;
 
   // converts all known tags to the full-path format
-  const selectableTags = getSelectableTags(tags, tagsById, tagLinks);
+  // The storage-facing path helper preserves the IDs of these branded tags.
+  const selectableTags = getTagPaths(tags) as SelectableFilterTag[];
 
   // ////////////
   // //// Tag matching
@@ -267,29 +269,4 @@ const taskMatchesTags = (effectiveTagIds: ReadonlySet<TagID>,
   return tagMatchModeSetting === "any"
     ? tagScopes.some(matchesScope)
     : tagScopes.every(matchesScope);
-};
-
-const getSelectableTags = (
-  tags: readonly FilterTag[],
-  tagsById: ReadonlyMap<TagID, FilterTag>,
-  tagLinks: GraphLinks<TagID>
-): SelectableFilterTag[] => {
-  // Converts tags to their full hierarchical paths.
-  // Example Input: {id: 3, name: "Frontend"} (meaning Work → Programming → Frontend )
-  // gives output { id: 3, path: "Work/Programming/Frontend" }.
-  const path = (id: TagID, visited = new Set<TagID>()): string => {
-    // prevent recursion
-    if (visited.has(id)) return "";
-    visited.add(id);
-
-    // Tags have 0 (root tag) or 1 (subtag) parents
-    const parent = tagLinks.parents.get(id)?.[0];
-    return [
-      parent === undefined ? "" : path(parent, visited),
-      tagsById.get(id)?.name,
-    ]
-      .filter(Boolean)
-      .join("/");
-  };
-  return tags.map((tag) => ({ id: tag.id, path: path(tag.id) }));
 };
