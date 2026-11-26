@@ -1,16 +1,26 @@
 // Shows tasks that are due in the next timeIntervalInSeconds
-const showTasksDueIn = (tasks, now: Date, timeIntervalInSeconds: number) => {
+const showTasksDueIn = <T extends { dueTime?: Date | number }>(
+  tasks: T[],
+  now: Date,
+  timeIntervalInSeconds: number
+): T[] => {
   let dueTime = now.setSeconds(now.getSeconds() + timeIntervalInSeconds);
-  return tasks.filter((task) => task.dueTime && task.dueTime < dueTime);
+  return tasks.filter((task) => task.dueTime && Number(task.dueTime) < dueTime);
 };
 
-const isTaskDueIn = (task, now: Date, timeIntervalInSeconds: number) => {
+const isTaskDueIn = (
+  task: { transitiveDueTime?: Date | number },
+  now: Date,
+  timeIntervalInSeconds: number
+): boolean => {
   let dueTime = now.setSeconds(now.getSeconds() + timeIntervalInSeconds);
   if (task.transitiveDueTime === undefined) return false;
-  return task.transitiveDueTime < dueTime;
+  return Number(task.transitiveDueTime) < dueTime;
 };
 
-const convertDueDateNameToSeconds = (dueDateName) => {
+const convertDueDateNameToSeconds = (
+  dueDateName: string
+): number | undefined => {
   switch (dueDateName) {
     case "none":
       return undefined;
@@ -41,7 +51,7 @@ const convertDueDateNameToSeconds = (dueDateName) => {
   }
 };
 
-const getFutureDate = (seconds) => {
+const getFutureDate = (seconds: number): number => {
   let now = new Date();
   let dueTime = now.setSeconds(now.getSeconds() + seconds);
   return dueTime;
