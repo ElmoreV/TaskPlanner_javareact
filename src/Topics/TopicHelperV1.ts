@@ -1,5 +1,5 @@
-import { findTopicByTopicIdV1 } from "../ADG/FindItemsV1.ts";
-import { V1_Task, V1_Topic } from "../Structure/V1_types.ts";
+import { findTopicByTopicIdV1 } from "../ADG/FindItemsV1";
+import { V1_Task, V1_Topic } from "../Structure/V1_types";
 import { getTagPaths } from "../Tags/TagHelpers";
 import type { TagPathSource } from "../Tags/TagHelpers";
 
