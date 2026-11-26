@@ -15,6 +15,9 @@ import {
 } from "../Tasks/TaskModifyFuncGensV1.ts";
 
 import { FinishedState } from "../Structure/TaskInterfaces.tsx";
+import FilterBar from "../Filters/FilterBar";
+import { useTaskFilter } from "../Filters/useTaskFilter";
+import { View } from "../Structure/View";
 
 // TODO: add the topic name to the bar
 
@@ -107,14 +110,19 @@ const recursiveShowPlannedTask = (
 };
 
 const PlannedList = (props) => {
-  const { appData, setAppData, fancy } = props;
+  const { appData, setAppData, fancy, filterSettings, setFilterSettings } =
+    props;
+  const taskFilter = useTaskFilter(
+    appData,
+    View.VIEW_PLANNED_TASKS,
+    filterSettings,
+    setFilterSettings
+  );
   const { topics, tasks } = appData;
   const setTasks = (newTasks) => {
     setAppData((prevAppData) => ({ ...prevAppData, tasks: newTasks }));
   };
   console.debug("Rendering PlannedList");
-  const [hideCompletedItems, setHideCompletedItems] = useState(true);
-  const [hideScheduledItems, setHideScheduledItems] = useState(false);
   const [selectedTasks, setSelectedTasks] = useState([]);
 
   const clearSelection = () => {
@@ -147,12 +155,6 @@ const PlannedList = (props) => {
     setSelectedTasks(newSelectedTasks);
   };
 
-  const onHideCompletedItemsChange = () => {
-    setHideCompletedItems(!hideCompletedItems);
-  };
-  const onHideScheduledItemsChange = () => {
-    setHideScheduledItems(!hideScheduledItems);
-  };
   const onClearCompletedItems = () => {
     let newTasks = [...tasks];
     newTasks = newTasks.map((task) =>
@@ -166,16 +168,7 @@ const PlannedList = (props) => {
     setTasks(newTasks);
   };
   const isVisible = (task, checkWeek) => {
-    return (
-      !(
-        (task.completed ||
-          (task.finishStatus !== undefined &&
-            task.finishStatus !== FinishedState.NotFinished)) &&
-        hideCompletedItems
-      ) &&
-      !(task.scheduled && hideScheduledItems) &&
-      (task.thisWeek || !checkWeek)
-    );
+    return taskFilter.isTaskVisible(task) && (task.thisWeek || !checkWeek);
   };
 
   const copyListToClipboard = () => {
@@ -197,28 +190,10 @@ const PlannedList = (props) => {
 
   return (
     <div className="planned-list">
-      <button onClick={onClearCompletedItems}>Clear finished items</button>
-      <label>
-        <input
-          type="checkbox"
-          name="HideCompletedItems"
-          onChange={onHideCompletedItemsChange}
-          className="form-check-input"
-          defaultChecked={hideCompletedItems}
-        />
-        Hide finished tasks
-      </label>
-      <label>
-        <input
-          type="checkbox"
-          name="HideScheduledItems"
-          onChange={onHideScheduledItemsChange}
-          className="form-check-input"
-          defaultChecked={hideScheduledItems}
-        />
-        Hide scheduled tasks
-      </label>
-      <button onClick={copyListToClipboard}>Copy to clipboard</button>
+      <FilterBar taskFilter={taskFilter}>
+        <button onClick={onClearCompletedItems}>Clear finished items</button>
+        <button onClick={copyListToClipboard}>Copy to clipboard</button>
+      </FilterBar>
 
       <ul key="root_topics">
         {tasks
