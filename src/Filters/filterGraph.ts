@@ -1,6 +1,7 @@
 //filterGraph.ts
 import { FinishedState } from "../Structure/TaskInterfaces";
-import { TaskID, TagID, FilterTask, TaskFilterStatus, TaskContextMode } from "./FilterTypes";
+import { FilterTask, TaskFilterStatus, TaskContextMode } from "./FilterTypes";
+import type { TaskID, TagID } from "../Structure/IDs";
 
 export interface GraphLinks<ID extends TaskID | TagID> {
   children: ReadonlyMap<ID, readonly ID[]>;

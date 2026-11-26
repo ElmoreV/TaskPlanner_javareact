@@ -1,10 +1,7 @@
 //FilterTypes.ts
 import type { ReactNode } from "react";
 import type { FinishedState } from "../Structure/TaskInterfaces";
-
-// Readability aliases: IDs remain numbers in both storage formats.
-export type TaskID = number;
-export type TagID = number;
+import type { TaskID, TagID } from "../Structure/IDs";
 
 // Common data consumed by the filter, independent of the app's storage format.
 export interface FilterTask {

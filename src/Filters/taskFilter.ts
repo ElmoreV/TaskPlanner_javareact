@@ -2,6 +2,7 @@
 import { convertDueDateNameToSeconds, isTaskDueIn } from "../Timing";
 import { collectReachableIds, createGraphLinks, getDisplayTaskIds, getTaskFilterStatuses, getTransitiveDueTime, GraphLinks } from "./filterGraph";
 import { createFilterSettings, getEffectiveTagVisibility } from "./filterSettings";
+import type { TaskID, TagID } from "../Structure/IDs";
 import type {
   FilterData,
   FilterResult,
@@ -9,9 +10,7 @@ import type {
   FilterTag,
   SelectableFilterTag,
   FilterTask,
-  TagID,
-  TaskID,
-  TaskMatchCriteria,
+    TaskMatchCriteria,
   TagMatchCriteria,
 } from "./FilterTypes";
 
@@ -239,7 +238,7 @@ const getEffectiveTagIds = (task: FilterTask,
   taskLinks: GraphLinks<TaskID>,
   tasksById: Map<TaskID, FilterTask>
 
-): Set<TaskID> => {
+): Set<TagID> => {
   // Calculates which tags are relevant for each task
   // Example with tagSource=´and supertasks':
   // Input: task 225, Tag 2026, subtask of task 113 with Tag 2025

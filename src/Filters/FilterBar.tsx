@@ -9,10 +9,10 @@ import type {
   TaskContextMode,
   TaskStructure,
   DueInterval,
-  TagID,
-  TagVisibilityMode,
+    TagVisibilityMode,
   TagMatchMode,
 } from "./FilterTypes";
+import type { TagID } from "../Structure/IDs";
 import { getEffectiveTagVisibility } from "./filterSettings";
 
 const statusLabels: Record<TaskFilterStatus, string> = {

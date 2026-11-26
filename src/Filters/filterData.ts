@@ -2,13 +2,12 @@
 import { FinishedState } from "../Structure/TaskInterfaces";
 import type { V1_Task, V1_Topic } from "../Structure/V1_types";
 import type { Task, TaskMap, TagMap, TagTasksMap } from "../Structure/V2_types";
+import type { TaskID, TagID } from "../Structure/IDs";
 import type {
   FilterData,
   FilterTag,
   FilterTask,
-  TagID,
-  TaskID,
-} from "./FilterTypes";
+  } from "./FilterTypes";
 
 export interface V1FilterSource {
   tasks?: readonly V1_Task[];
@@ -18,11 +17,12 @@ export interface V2FilterSource {
   taskMap: TaskMap;
   tagMap: TagMap;
   tagTasksMap: TagTasksMap;
-  plannedTaskIdList?: readonly TaskID[];
+  plannedTaskIdList?: readonly number[];
 }
 export type FilterSource = V1FilterSource | V2FilterSource;
 
 // Only these adapters know how tasks, memberships and planning are stored.
+// Storage IDs are plain numbers; establish their brands at this input boundary.
 const getCommonTaskFields = (
   task: Task | V1_Task
 ): Omit<FilterTask, "childIds" | "tagIds" | "planned"> => {
@@ -34,7 +34,7 @@ const getCommonTaskFields = (
     status = FinishedState.Completed;
   }
   return {
-    id: task.id,
+    id: task.id as TaskID,
     name: task.name,
     status,
     repeated: task.repeated,
@@ -62,8 +62,8 @@ export const adaptV1FilterData = ({
     tags,
     tasks: tasks.map((task) => ({
       ...getCommonTaskFields(task),
-      childIds: task.subTaskIds || [],
-      tagIds: task.topics || [],
+      childIds: (task.subTaskIds || []) as TaskID[],
+      tagIds: (task.topics || []) as TagID[],
       planned: !!task.thisWeek,
     })),
   };
@@ -77,23 +77,23 @@ export const adaptV2FilterData = ({
 }: V2FilterSource): FilterData => {
   const memberships = new Map<TaskID, TagID[]>();
   Object.entries(tagTasksMap).forEach(([tagId, taskIds]) => {
-    taskIds.forEach((id) => {
+(taskIds as TaskID[]).forEach((id) => {
       if (!memberships.has(id)) memberships.set(id, []);
-      memberships.get(id)!.push(Number(tagId));
+      memberships.get(id)!.push(Number(tagId) as TagID);
     });
   });
-  const planned = new Set<TaskID>(plannedTaskIdList);
+  const planned = new Set<TaskID>(plannedTaskIdList as readonly TaskID[]);
   return {
     tags: Object.values(tagMap).map((tag) => ({
-      id: tag.id,
+      id: tag.id as TagID,
       name: tag.name,
-      childIds: tag.childTagIds,
+      childIds: tag.childTagIds as TagID[],
     })),
     tasks: Object.values(taskMap).map((task) => ({
       ...getCommonTaskFields(task),
-      childIds: task.childTaskIds,
-      tagIds: memberships.get(task.id) || [],
-      planned: planned.has(task.id),
+      childIds: task.childTaskIds as TaskID[],
+      tagIds: memberships.get(task.id as TaskID) || [],
+      planned: planned.has(task.id as TaskID),
     })),
   };
 };
