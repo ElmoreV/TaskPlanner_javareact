@@ -1,6 +1,7 @@
 import ViewSelector from "./ViewSelector";
 import TaskList from "./TaskViews/TaskList.js";
 import AllTasksList from "./TaskViews/AllTasksList";
+import TaskGraphView from "./TaskViews/TaskGraphView.js";
 import PlannedList from "./TaskViews/PlannedList.js";
 import { useState } from "react";
 import ImportExport from "./ImportExport/ImportExport.tsx";
@@ -132,6 +133,13 @@ function App() {
           )}
           {view === View.VIEW_DAILY_PLANNING}
           {view === View.VIEW_COMPLETE_TASKS}
+{view === View.VIEW_TASK_GRAPH && (
+            <TaskGraphView
+              appData={appData}
+              filterSettings={filterSettingsByView[view]}
+              setFilterSettings={setCurrentViewFilterSettings}
+            />
+          )}
           {view === View.VIEW_TAG_ALL_TASKS && (
             <AllTasksList
               appData={appData}
