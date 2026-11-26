@@ -9,6 +9,7 @@ export const exportJSON = (
   fileNameRef,
   asVersion: Version
 ) => {
+  // Export stored transitiveDueTime unchanged; it can be stale or absent.
   let appDataConverted = convertAppdata(appData, asVersion);
 
   if (asVersion === Version.V1) {

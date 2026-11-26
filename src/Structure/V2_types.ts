@@ -20,6 +20,7 @@ interface Task {
   parentTaskIds: number[]; //derived from childTaskIds
 
   dueTime: Date | undefined;
+  // Legacy field: no code recalculates and stores this value.
   transitiveDueTime: Date | undefined;
   lastFinished: Date | undefined;
 }

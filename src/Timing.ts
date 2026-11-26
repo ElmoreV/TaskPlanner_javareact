@@ -8,6 +8,7 @@ const showTasksDueIn = <T extends { dueTime?: Date | number }>(
   return tasks.filter((task) => task.dueTime && Number(task.dueTime) < dueTime);
 };
 
+// Pass a freshly calculated deadline; saved task.transitiveDueTime is no longer maintained.
 const isTaskDueIn = (
   task: { transitiveDueTime?: Date | number },
   now: Date,

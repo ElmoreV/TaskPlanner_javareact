@@ -22,6 +22,7 @@ export function areTasksEqualExceptIdAndName(task1, task2) {
     arraysEqual(task1.childTaskIds, task2.childTaskIds) &&
     arraysEqual(task1.parentTaskIds, task2.parentTaskIds) &&
     datesEqual(task1.dueTime, task2.dueTime) &&
+    // Stale legacy values can make otherwise equivalent tasks compare unequal.
     datesEqual(task1.transitiveDueTime, task2.transitiveDueTime) &&
     datesEqual(task1.lastFinished, task2.lastFinished)
   );
@@ -45,6 +46,7 @@ export function areTasksEqualExceptId(task1, task2) {
     arraysEqual(task1.childTaskIds, task2.childTaskIds) &&
     arraysEqual(task1.parentTaskIds, task2.parentTaskIds) &&
     datesEqual(task1.dueTime, task2.dueTime) &&
+    // Stale legacy values can make otherwise equivalent tasks compare unequal.
     datesEqual(task1.transitiveDueTime, task2.transitiveDueTime) &&
     datesEqual(task1.lastFinished, task2.lastFinished)
   );

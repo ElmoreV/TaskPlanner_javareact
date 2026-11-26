@@ -22,6 +22,7 @@ interface V1_Task {
   unfolded: boolean; 
 
   dueTime: Date | undefined;
+  // Legacy field: no code recalculates and stores this value.
   transitiveDueTime: Date | undefined;
   lastFinished: Date | undefined;
 }

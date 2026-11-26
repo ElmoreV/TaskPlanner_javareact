@@ -191,6 +191,7 @@ export const compareV1 = (
       );
       areEqual = false;
     }
+    // Compare preserved legacy values; effective deadlines are not written back.
     if (refTask.transitiveDueTime !== reviewTask.transitiveDueTime) {
       console.log(
         "Task transitiveDueTime are different: " +

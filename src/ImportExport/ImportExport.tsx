@@ -146,6 +146,7 @@ const ImportExport = (props) => {
     setAppDataHash(appDataHash);
     setSavedAppDataHash(appDataHash);
 
+    // Keep legacy transitiveDueTime as stored; it is no longer refreshed.
     const jsonContent = JSON.stringify(appData, null, 2);
     const jsonBlob = new Blob([jsonContent], { type: "application/json" });
     const MarkdownContent = buildMarkdownfromV1(appData.topics, appData.tasks);

@@ -62,7 +62,7 @@ export const convert_v1_to_v2 = (
       parentTaskIds: [],
 
       dueTime: task.dueTime,
-      transitiveDueTime: task.transitiveDueTime,
+      transitiveDueTime: task.transitiveDueTime, // Preserve legacy data; this deadline can be stale.
       lastFinished: task.lastFinished,
     };
   });
@@ -197,7 +197,7 @@ export const convert_v2_to_v1 = (
       topicViewIndices: [],
 
       dueTime: task.dueTime,
-      transitiveDueTime: task.transitiveDueTime,
+      transitiveDueTime: task.transitiveDueTime, // Preserve legacy data; this deadline can be stale.
       lastFinished: task.lastFinished,
     };
   });
