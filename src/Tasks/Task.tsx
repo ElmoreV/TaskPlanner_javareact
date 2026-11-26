@@ -452,7 +452,8 @@ isDraggingAllowed && duplicateTask
       foldingSymbol={
         hasSubTasks ? (unfolded ? unfolded_symbol : folded_symbol) : null
       }
-      toggleFold={hasSubTasks ? handleToggleFold : null}
+      toggleFold={hasSubTasks && toggleFold ? handleToggleFold : undefined}
+      unfolded={unfolded}
       textEditHandlers={textEditHandlers}
       inputRef={inputRef}
       isEditing={isEditing}
