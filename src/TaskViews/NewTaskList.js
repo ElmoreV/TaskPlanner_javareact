@@ -2,6 +2,9 @@ import { useState, useEffect } from "react";
 import PlannedTask from "../Tasks/PlannedTask.js";
 import { getSetTaskNameFuncV1 } from "../Tasks/TaskModifyFuncGensV1.ts";
 import { getAddTaskWithoutTopic } from "../ADG/ModifyFuncGeneratorsV1.ts";
+import FilterBar from "../Filters/FilterBar";
+import { useTaskFilter } from "../Filters/useTaskFilter";
+import { View } from "../Structure/View";
 
 class SelectedNewTask {
   constructor(taskId, weekOrderIndex) {
@@ -10,7 +13,14 @@ class SelectedNewTask {
 }
 
 const AddTaskView = (props) => {
-  const { appData, setAppData, fancy } = props;
+  const { appData, setAppData, fancy, filterSettings, setFilterSettings } =
+    props;
+  const taskFilter = useTaskFilter(
+    appData,
+    View.VIEW_ADD_TASKS,
+    filterSettings,
+    setFilterSettings
+  );
   const { topics, tasks } = appData;
   const setTasks = (newTasks) => {
     setAppData({ tasks: newTasks, ...appData });
@@ -64,12 +74,15 @@ const AddTaskView = (props) => {
   }, []);
   return (
     <div className="task-list">
-      <button onClick={getAddTaskWithoutTopic(setTasks, tasks)}>
-        Add task
-      </button>
+      <FilterBar taskFilter={taskFilter}>
+        <button onClick={getAddTaskWithoutTopic(setTasks, tasks)}>
+          Add task
+        </button>
+      </FilterBar>
       <ul>
         {tasks
           .filter((task) => isVisible(task))
+          .filter(taskFilter.isTaskVisible)
           .map((task) => (
             <PlannedTask
               taskName={task.name}
