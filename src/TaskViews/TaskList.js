@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import {
   getAddTopic,
   sanitizeTopicOrderIndex,
@@ -29,6 +29,12 @@ const TaskList = (props) => {
     setFilterSettings
   );
   const { topics, tasks } = appData;
+  // pre-creating a map by id saves a massive amount 
+  // of time during recursiveShow
+  const tasksById = useMemo(
+    () => new Map(tasks.map((task) => [task.id, task])),
+    [tasks]
+  );
   const setTasks = (newTasks) => {
     setAppData({ ...appData, tasks: newTasks });
   };
@@ -49,9 +55,11 @@ const TaskList = (props) => {
   useEffect(() => {
     // Function to clear selection
     const clearSelectionOnClickOutside = (event) => {
-      // if (selectedTasks.length > 0)
       console.log(selectedTasks);
-      setSelectedTasks([]);
+      // only force rerender when we actually reset the selection
+      setSelectedTasks(previous =>
+        previous.length === 0 ? previous : []
+      );
       // else
       //     console.log("Empty selection")
     };
@@ -157,7 +165,7 @@ const TaskList = (props) => {
           }
         >
           <TaskContainer
-view={View.VIEW_ALL_TASKS}
+            view={View.VIEW_ALL_TASKS}
             task={task}
             topic={topic}
             superTask={superTask}
@@ -170,7 +178,7 @@ view={View.VIEW_ALL_TASKS}
         {task.subTaskIds && task.subTaskIds.length > 0 && task.unfolded && (
           <ul>
             {task.subTaskIds
-              .map((subTaskId) => tasks.find((task) => task.id == subTaskId))
+              .map((subTaskId) => tasksById.get(subTaskId))
               .filter((subTask) => subTask !== undefined)
               .filter(taskFilter.isTaskVisible)
               .map((subTask) => recursiveShowTask(null, task, subTask))}
