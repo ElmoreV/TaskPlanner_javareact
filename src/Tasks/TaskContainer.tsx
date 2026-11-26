@@ -111,6 +111,7 @@ const useCallbackifyTopics = (fn, setAppData) => {
   );
 };
 
+// Do NOT add any defaults here, they will force a rerender of Task unnecessarily
 export default function TaskContainer(props) {
   const {
 view,
@@ -220,7 +221,8 @@ const setTaskTopicCallback = useCallbackifyTopics(setTaskTopicV1Pure, setAppData
         features.includes("selection") ? deleteTaskFromSelectionCallback : undefined
 }
       selected={
-        selectedTasks.find(
+features.includes("selection") &&
+        Boolean(selectedTasks.find(
           (st) =>
             st.taskId == task.id &&
             (!topic || st.topicId == topic.id) &&
@@ -228,6 +230,7 @@ const setTaskTopicCallback = useCallbackifyTopics(setTaskTopicV1Pure, setAppData
         )
           ? true
           : false
+)
       }
       selectedTasks={selectedTasks}
       // addToSelection={() => addTaskToSelection(selectedTasks, setSelectedTasks, task.id, topic && topic.id, topic && findTopicViewIdx(topic.id, task), superTask && superTask.id)}
