@@ -44,7 +44,7 @@ const Task = (props) => {
     fancy,
     setDueTime,
     currentDueTime,
-// Review the below
+    // Review the below
     parentTaskPaths,
     tags,
     selectableTags,
@@ -127,6 +127,19 @@ const Task = (props) => {
       toggleFold(id);
     }
   };
+
+  const duplicateDropTasksBefore = (e) => {
+    // TODO:
+  };
+
+  const duplicateDropTasksInside = (e) => {
+    // TODO:
+  };
+
+  const duplicateDropTasksAfter = (e) => {
+    // TODO:
+  };
+
   function getDropZone(e) {
     const rect = e.currentTarget.getBoundingClientRect();
     // const x = e.clientX - rect.left;
@@ -387,21 +400,21 @@ const Task = (props) => {
   };
 
   const dragHandlers =
-isDraggingAllowed && moveTasks
-    ? {
-        draggable: true,
-        onDragStart: handleDragStart,
-        onDragEnd: handleDragEnd,
-      }
-    : undefined;
+    isDraggingAllowed && moveTasks
+      ? {
+          draggable: true,
+          onDragStart: handleDragStart,
+          onDragEnd: handleDragEnd,
+        }
+      : undefined;
   const dropHandlers =
-isDragging || (!moveTasks && !duplicateTask)
-    ? {}
-    : {
-        onDrop: handleDrop,
-        onDragOver: handleDragOver,
-        onDragLeave: handleDragLeave,
-      };
+    isDragging || (!moveTasks && !duplicateTask)
+      ? {}
+      : {
+          onDrop: handleDrop,
+          onDragOver: handleDragOver,
+          onDragLeave: handleDragLeave,
+        };
   const textEditHandlers = {
     onChange: handleChange,
     onBlur: handleBlur,
@@ -438,13 +451,13 @@ isDragging || (!moveTasks && !duplicateTask)
     fullName += " / " + translateLastCompletedDatetime(taskLastCompletion);
   }
   const duplicateDragHandlers =
-isDraggingAllowed && duplicateTask
-    ? {
-        draggable: true,
-        onDragStart: handleDuplicateDragStart,
-        onDragEnd: handleDuplicateDragEnd,
-      }
-    : undefined;
+    isDraggingAllowed && duplicateTask
+      ? {
+          draggable: true,
+          onDragStart: handleDuplicateDragStart,
+          onDragEnd: handleDuplicateDragEnd,
+        }
+      : undefined;
 
   return (
     <TaskContent
@@ -479,27 +492,27 @@ isDraggingAllowed && duplicateTask
       plan={
         plan &&
         (() => {
-        plan(id);
-      })
-}
+          plan(id);
+        })
+      }
       unplan={
         unplan &&
         (() => {
-        unplan(id);
-      })
-}
+          unplan(id);
+        })
+      }
       repeated={repeated}
       toggleRepeatTask={
         toggleRepeatTask &&
         (() => {
-        toggleRepeatTask(id);
-      })
-}
+          toggleRepeatTask(id);
+        })
+      }
       duplicateDragHandlers={duplicateDragHandlers}
       fancy={fancy}
-            onDueDateChange={setDueTime ? onDueDateChange : undefined}
+      onDueDateChange={setDueTime ? onDueDateChange : undefined}
       currentDueDateStr={dueTimeStr}
-//Review the below
+      //Review the below
       topicCount={tags === undefined ? taskTopics.length : undefined}
       parentTaskPaths={parentTaskPaths}
       tags={tags}
