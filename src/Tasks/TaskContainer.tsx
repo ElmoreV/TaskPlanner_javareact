@@ -123,6 +123,10 @@ view,
     selectedTasks,
     setSelectedTasks,
     fancy,
+//Review the below
+    parentTaskPaths,
+    tags,
+    selectableTags,
   } = props;
 
   const viewConfig = TASK_CONFIG_BY_VIEW[view];
@@ -244,6 +248,15 @@ features.includes("selection") &&
       unfolded={task.unfolded}
       setDueTime={features.includes("deadline") ? setTaskDueTimeCallback : undefined}
       currentDueTime={task.dueTime}
+      // Review the below
+      parentTaskPaths={parentTaskPaths}
+      tags={tags}
+      selectableTags={selectableTags}
+      onTopicChange={
+        features.includes("tagEditing")
+          ? (topicId, assigned) => setTaskTopicCallback(task.id, topicId, assigned)
+          : undefined
+      }
     />
   );
 }

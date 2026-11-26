@@ -44,6 +44,11 @@ const Task = (props) => {
     fancy,
     setDueTime,
     currentDueTime,
+// Review the below
+    parentTaskPaths,
+    tags,
+    selectableTags,
+    onTopicChange,
   } = props;
   // console.debug("Rendering Task: " + name)
   const folded_symbol = ">";
@@ -492,9 +497,14 @@ isDraggingAllowed && duplicateTask
 }
       duplicateDragHandlers={duplicateDragHandlers}
       fancy={fancy}
-      topicCount={taskTopics.length}
-      onDueDateChange={setDueTime ? onDueDateChange : undefined}
+            onDueDateChange={setDueTime ? onDueDateChange : undefined}
       currentDueDateStr={dueTimeStr}
+//Review the below
+      topicCount={tags === undefined ? taskTopics.length : undefined}
+      parentTaskPaths={parentTaskPaths}
+      tags={tags}
+      selectableTags={selectableTags}
+      onTopicChange={onTopicChange}
     />
   );
 };

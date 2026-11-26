@@ -8,6 +8,8 @@ import fancyStyles from "./TaskContentFancy.module.css";
 import simpleStyles from "./TaskContentSimple.module.css";
 import splitButtonStyles from "./SplitButton.module.css";
 import { FinishedState } from "../Structure/TaskInterfaces.tsx";
+import TaskTags from "../Tags/TaskTags"; // review
+import contextStyles from "./TaskContext.module.css"; //review
 
 const captureClick = (func) => {
   const wrapper = (e) => {
@@ -52,8 +54,13 @@ const TaskContent = (props) => {
     topicCount,
     onDueDateChange,
     currentDueDateStr,
+    //review the below
+    parentTaskPaths,
+    tags,
+    selectableTags,
+    onTopicChange,
   } = props;
-  console.debug(`Rendering TaskContent ${name}`);
+//   console.debug(`Rendering TaskContent ${name}`);
   // let taskFinishStatus = FinishedState.Irrelevant;
   // let completed = (taskFinishStatus == Finished.Completed)
   let styles = fancy ? fancyStyles : simpleStyles;
@@ -97,7 +104,21 @@ const TaskContent = (props) => {
             )}
           </span>
           {topicPath && <span className={styles.topicPath}>{topicPath}</span>}
+{/* Review the below */}
+          {parentTaskPaths?.length > 0 && (
+            <span className={contextStyles.parents}>
+              {parentTaskPaths.join(", ")}
+            </span>
+          )}
         </div>
+{/* Review the below */}
+        {tags !== undefined && (
+          <TaskTags
+            tags={tags}
+            selectableTags={selectableTags}
+            onTopicChange={onTopicChange}
+          />
+        )}
         <div className={styles.buttonList}>
           {topicCount > 1 && <span>+{topicCount - 1} more</span>}
           {/* {topicCount>1 && (<button className={styles.taskComplete} onClick={()=>{}}>Delete copy</button>)} */}
