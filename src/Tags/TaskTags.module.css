@@ -1,0 +1,94 @@
+/* TODO: needs full review*/
+
+
+.tags {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  min-width: 0;
+}
+
+.chip,
+.addTag {
+  display: inline-block;
+  padding: 5px 11px;
+  border: 1px solid var(--color-guides, #ccc);
+  border-radius: 7px;
+  background: var(--color-secondary, #efefef);
+  color: var(--color-primary, #000);
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+.addTag {
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.editor {
+  position: relative;
+}
+
+.picker {
+  position: absolute;
+  z-index: 100;
+  top: calc(100% + 6px);
+  right: 0;
+  width: min(340px, 75vw);
+  box-sizing: border-box;
+  padding: 12px;
+  background: var(--color-background, #fafafa);
+  color: var(--color-primary, #000);
+  border: 1px solid var(--color-guides, #ccc);
+  border-radius: 8px;
+  box-shadow: 0 4px 16px #0003;
+}
+
+.picker > input {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+}
+
+.options {
+  max-height: 280px;
+  overflow: auto;
+  margin-bottom: 8px;
+}
+
+.option,
+.branch {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.option {
+  flex: 1;
+  min-width: 0;
+  padding: 5px 0;
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+
+.path {
+  display: block;
+  opacity: 0.7;
+}
+
+.tree {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tree .tree {
+  padding-left: 16px;
+}
+
+.expand,
+.spacer {
+  flex: 0 0 24px;
+  width: 24px;
+}

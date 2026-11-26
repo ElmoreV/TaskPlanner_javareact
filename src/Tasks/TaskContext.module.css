@@ -1,0 +1,42 @@
+/* TODO: needs full review*/
+
+
+/* These additions are enabled by tag data; other task views keep their layout. */
+.withTags,
+.withTags:hover,
+.withTags:active {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  max-width: none;
+  padding: 10px 14px;
+  position: static;
+  cursor: default;
+}
+
+.withTags:focus-within {
+  position: relative;
+  z-index: 60;
+}
+
+.withTags .text {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 220px;
+  min-width: 0;
+  width: auto;
+}
+
+.parents {
+  font-size: 0.8rem;
+  opacity: 0.75;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  .withTags .text {
+    flex-basis: calc(100% - 50px);
+  }
+}
