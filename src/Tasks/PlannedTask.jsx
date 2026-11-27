@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import PropTypes from "prop-types";
 import { getTopicPathByTopicIdV1 } from "../Topics/TopicHelperV1.ts";
 import TaskContent from "../Tasks/TaskContent.tsx";
 import { FinishedState } from "../Structure/TaskInterfaces.tsx";
@@ -275,14 +274,6 @@ const PlannedTask = (props) => {
       />
     </>
   );
-};
-
-PlannedTask.propTypes = {
-  taskName: PropTypes.string.isRequired,
-  setTaskName: PropTypes.func,
-  deleteTask: PropTypes.func,
-  completed: PropTypes.bool.isRequired,
-  completeTask: PropTypes.func,
 };
 
 export default PlannedTask;

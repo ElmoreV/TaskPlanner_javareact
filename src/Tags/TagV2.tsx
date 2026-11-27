@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, memo } from "react";
-import PropTypes from "prop-types";
 import TopicContent from "../Topics/TopicContent";
 const TagV2 = (props) => {
   const {
@@ -244,15 +243,6 @@ const TagV2 = (props) => {
       />
     </>
   );
-};
-
-TagV2.propTypes = {
-  name: PropTypes.string.isRequired,
-  setTagName: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
-  // toggleFold: PropTypes.func.isRequired,
-  unfolded: PropTypes.bool.isRequired,
-  // addTask: PropTypes.func.isRequired,
 };
 
 export default TagV2;

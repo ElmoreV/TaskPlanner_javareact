@@ -1,7 +1,6 @@
 //Topic.js
 
 import { useState, useRef, useEffect, memo } from "react";
-import PropTypes from "prop-types";
 import TopicContent from "../Topics/TopicContent";
 
 function getDropZone(e) {
@@ -337,15 +336,6 @@ const Topic = (props) => {
       />
     </>
   );
-};
-
-Topic.propTypes = {
-  name: PropTypes.string.isRequired,
-  setTopicName: PropTypes.func.isRequired,
-  id: PropTypes.number.isRequired,
-  // toggleFold: PropTypes.func.isRequired,
-  unfolded: PropTypes.bool.isRequired,
-  // addTask: PropTypes.func.isRequired,
 };
 
 export default Topic;

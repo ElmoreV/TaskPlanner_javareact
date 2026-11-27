@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from "react";
-import PropTypes from "prop-types";
 import { getTopicPathByTopicId } from "../Topics/TopicHelper.js";
 import TaskContent from "../Tasks/TaskContent.js";
 import { FinishedState } from "../Tasks/TaskInterfaces.tsx";

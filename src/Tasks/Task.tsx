@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect, memo } from "react";
-import PropTypes from "prop-types";
 import TaskContent from "./TaskContent.tsx";
 import React from "react";
 import { FinishedState } from "../Structure/TaskInterfaces.tsx";
@@ -520,17 +519,6 @@ const Task = (props) => {
       onTopicChange={onTopicChange}
     />
   );
-};
-
-Task.propTypes = {
-  name: PropTypes.string.isRequired,
-  setTaskName: PropTypes.func,
-  deleteTask: PropTypes.func,
-  completed: PropTypes.bool.isRequired,
-  completeTask: PropTypes.func,
-  id: PropTypes.number,
-  currentTopicId: PropTypes.number,
-  currentViewIdx: PropTypes.number,
 };
 
 export default memo(Task);
