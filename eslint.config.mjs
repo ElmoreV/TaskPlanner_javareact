@@ -22,10 +22,21 @@ export default defineConfig([
       parser: tseslint.parser,
       parserOptions: { ecmaFeatures: { jsx: true } },
     },
+    rules: {
+      "prefer-const": "warn",
+      "no-var": "warn",
+      "no-unused-vars": "warn",
+    },
   },
   {
     files: ["**/*.{ts,tsx}"],
     extends: [tseslint.configs.recommended],
+    rules: {
+      "prefer-const": "warn",
+      "no-var": "warn",
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "warn",
+    },
   },
   {
     files: ["src/**/*.{js,jsx,ts,tsx}"],
