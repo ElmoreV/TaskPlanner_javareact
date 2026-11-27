@@ -63,6 +63,8 @@ Run linting and the existing scoped TypeScript checks separately:
 
 ```sh
 bun run lint
+# Optional: apply automatic lint fixes (review the resulting diff).
+bun run lint:fix
 bun run typecheck
 bun run typecheck:strict
 ```
@@ -78,4 +80,4 @@ bun install --frozen-lockfile
 ## Deployment
 
 The GitHub Pages workflow uses Bun and uploads `build` on pushes to the `deploy` branch or a manual workflow run.
-The existing `bun run deploy` command also publishes `build` using gh-pages.
+GitHub Actions is the sole deployment mechanism. Push to the `deploy` branch to publish.
