@@ -38,7 +38,7 @@ const intervals: Record<DueInterval, string> = {
   "1month": "1 month",
 };
 
-const FilterBar = ({ taskFilter, children }: FilterBarProps): JSX.Element => {
+const FilterBar = ({ taskFilter, children }: FilterBarProps): React.JSX.Element => {
   const {
     settings,
     features,
