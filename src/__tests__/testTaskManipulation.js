@@ -1,5 +1,5 @@
 import structuredClone from "@ungap/structured-clone";
-import { getDeleteTopic } from "../ModifyFuncGeneratorsV1";
+import { getDeleteTopic } from "../ADG/ModifyFuncGeneratorsV1";
 
 //1. Prepare a tasks/topics example
 const tasks = [
@@ -97,7 +97,7 @@ it("deleteTopic_happy_path", () => {
   ]);
 });
 
-import { getAddSubtopic } from "../ModifyFuncGeneratorsV1";
+import { getAddSubtopic } from "../ADG/ModifyFuncGeneratorsV1";
 
 it("addSubtopic_good", () => {
   //Arrange

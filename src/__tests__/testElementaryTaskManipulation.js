@@ -1,10 +1,10 @@
 import structuredClone from "@ungap/structured-clone";
 import {
-  insertTaskInstanceIntoTopic,
-  removeTaskInstanceFromTopic,
-  generateEmptyTask,
-  deleteEntireTask,
-} from "../ModifyTaskTopicAdgElements";
+  insertTaskInstanceIntoTopicV1 as insertTaskInstanceIntoTopic,
+  removeTaskInstanceFromTopicV1 as removeTaskInstanceFromTopic,
+  generateEmptyTaskV1 as generateEmptyTask,
+  deleteEntireTaskV1 as deleteEntireTask,
+} from "../ADG/ModifyTaskTopicAdgElementsV1";
 
 //1. Prepare a tasks/topics example
 const tasks = [

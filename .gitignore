@@ -8,7 +8,6 @@
 # testing
 /.vite/
 /coverage
-/src/__tests__
 *.tsbuildinfo
 
 # production
