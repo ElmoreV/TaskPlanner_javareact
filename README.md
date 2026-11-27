@@ -34,7 +34,7 @@ The output is written to `build`, with the base path `/TaskPlanner_javareact/`.
 To preview the production build locally:
 
 ```sh
-bun --bun vite preview --port 3001
+bun run preview
 ```
 
 Open `http://localhost:3001/TaskPlanner_javareact/`.
@@ -59,11 +59,20 @@ The todo-list is self-hosted in the problem. In the future it will output a mark
 
 Jest remains available through `bun run test --watchAll=false --runInBand`.
 Vite builds do not run ESLint or TypeScript checking automatically.
-Run the existing scoped TypeScript checks separately:
+Run linting and the existing scoped TypeScript checks separately:
 
 ```sh
-bun node_modules/typescript/bin/tsc --project tsconfig.json
-bun node_modules/typescript/bin/tsc --project src/Filters/tsconfig.json
+bun run lint
+bun run typecheck
+bun run typecheck:strict
+```
+
+Linting uses standalone ESLint with JavaScript, JSX, TypeScript, TSX, and React Hooks/Compiler diagnostics. Existing diagnostics are reported without automatic fixes. Neither linting nor type checking is part of the production build or deployment workflow.
+
+To reproduce the locked installation:
+
+```sh
+bun install --frozen-lockfile
 ```
 
 ## Deployment
