@@ -7,6 +7,8 @@ const tasks = [
     name: "Fiets repareren",
     id: 0,
     topics: [12],
+    topicViewIndices: [1],
+    subTaskIds: [],
     completed: true,
     thisWeek: false,
   },
@@ -14,14 +16,26 @@ const tasks = [
     name: "Outer Wilds",
     id: 1,
     topics: [21, 1],
+    topicViewIndices: [1, 1],
+    subTaskIds: [],
     completed: false,
     thisWeek: false,
   },
-  { name: "Badkamer", id: 2, topics: [1], completed: true, thisWeek: false },
+  {
+    name: "Badkamer",
+    id: 2,
+    topics: [1],
+    topicViewIndices: [2],
+    subTaskIds: [],
+    completed: true,
+    thisWeek: false,
+  },
   {
     name: "Backup opruimen",
     id: 5,
     topics: [1],
+    topicViewIndices: [3],
+    subTaskIds: [],
     completed: false,
     thisWeek: false,
   },
@@ -53,6 +67,10 @@ var newTopics = structuredClone(topics);
 const setTopics = (newTopicsToSet) => {
   newTopics = newTopicsToSet;
 };
+const setAppData = ({ topics, tasks }) => {
+  setTopics(topics);
+  setTasks(tasks);
+};
 
 it("deleteTopic_invalid_topic_id", () => {
   //Arrange
@@ -62,7 +80,7 @@ it("deleteTopic_invalid_topic_id", () => {
   newTopics = structuredClone(topics);
   let invalidId = 240;
   //Act
-  getDeleteTopic(setTopics, freshTopics, setTasks, freshTasks, invalidId)();
+  getDeleteTopic(setAppData, { topics: freshTopics, tasks: freshTasks }, invalidId)();
   expect(newTopics).toEqual(topics);
   expect(newTasks).toEqual(tasks);
 });
@@ -76,7 +94,7 @@ it("deleteTopic_happy_path", () => {
   newTopics = structuredClone(topics);
   let validId = 1;
   //Act
-  getDeleteTopic(setTopics, freshTopics, setTasks, freshTasks, validId)();
+  getDeleteTopic(setAppData, { topics: freshTopics, tasks: freshTasks }, validId)();
   //Assert
   expect(newTopics).toEqual([
     {
@@ -91,6 +109,8 @@ it("deleteTopic_happy_path", () => {
       name: "Outer Wilds",
       id: 1,
       topics: [21],
+      topicViewIndices: [1],
+      subTaskIds: [],
       completed: false,
       thisWeek: false,
     },

@@ -482,6 +482,8 @@ test("the view selects actions independently of the app data updater", () => {
       view={View.VIEW_ALL_TASKS}
       task={task}
       setAppData={setAppData}
+      selectedTasks={[]}
+      setSelectedTasks={jest.fn()}
       fancy
     />
   );
